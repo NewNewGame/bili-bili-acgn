@@ -1,4 +1,10 @@
-﻿using BaseLib.Utils;
+//****************** 代码文件申明 ***********************
+//* 文件：TestCard
+//* 作者：wheat
+//* 创建时间：2026/03/26 10:51:00 星期四
+//* 描述：测试卡牌示例，用于验证卡牌基础流程与动态变量
+//*******************************************************
+using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;

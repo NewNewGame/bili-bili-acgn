@@ -1,4 +1,10 @@
-﻿using Godot.Bridge;
+﻿//****************** 代码文件申明 ***********************
+//* 文件：MainFile
+//* 作者：wheat
+//* 创建时间：2026/03/26 10:51:22 星期四
+//* 描述：主文件，用于初始化Mod
+//*******************************************************
+using Godot.Bridge;
 using HarmonyLib;
 using MegaCrit.Sts2.Core.Logging;
 using MegaCrit.Sts2.Core.Modding;

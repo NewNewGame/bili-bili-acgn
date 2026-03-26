@@ -1,4 +1,10 @@
-﻿using BaseLib.Abstracts;
+//****************** 代码文件申明 ***********************
+//* 文件：CardBaseModel
+//* 作者：wheat
+//* 创建时间：2026/03/26 10:51:00 星期四
+//* 描述：卡牌基类模型，提供卡牌图片路径等通用能力
+//*******************************************************
+using BaseLib.Abstracts;
 using BaseLib.Extensions;
 using BiliBiliACGN.BiliBiliACGNCode.Extensions;
 using MegaCrit.Sts2.Core.Entities.Cards;

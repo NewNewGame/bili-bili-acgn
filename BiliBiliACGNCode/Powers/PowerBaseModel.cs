@@ -1,4 +1,10 @@
-﻿using BaseLib.Abstracts;
+﻿//****************** 代码文件申明 ***********************
+//* 文件：PowerBaseModel
+//* 作者：wheat
+//* 创建时间：2026/03/26 10:51:27 星期四
+//* 描述：Power基类模型，提供Power图片路径等通用能力
+//*******************************************************
+using BaseLib.Abstracts;
 using BaseLib.Extensions;
 using BiliBiliACGN.BiliBiliACGNCode.Extensions;
 using Godot;

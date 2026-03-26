@@ -1,4 +1,10 @@
-﻿using BiliBiliACGN.BiliBiliACGNCode.Core;
+﻿//****************** 代码文件申明 ***********************
+//* 文件：StringExtensions
+//* 作者：wheat
+//* 创建时间：2026/03/26 10:49:02 星期四
+//* 描述：String拓展工具，用来方便路径获取
+//*******************************************************
+using BiliBiliACGN.BiliBiliACGNCode.Core;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Extensions;
 

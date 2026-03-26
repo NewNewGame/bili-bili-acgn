@@ -1,4 +1,10 @@
-﻿using BaseLib.Extensions;
+﻿//****************** 代码文件申明 ***********************
+//* 文件：DynamicVarBase
+//* 作者：wheat
+//* 创建时间：2026/03/26 10:47:02 星期四
+//* 描述：动态变量基类（攻击、防御、吸血、中毒）
+//*******************************************************
+using BaseLib.Extensions;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.DynamicVars;
