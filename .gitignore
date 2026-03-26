@@ -1,3 +1,36 @@
-# Godot 4+ specific ignores
+# Godot (general)
 .godot/
+.import/
+export.cfg
+export_presets.cfg
+
+# Godot Android export (generated)
 /android/
+
+# Mono / C# build outputs
+**/bin/
+**/obj/
+
+# C# / .NET tooling artifacts
+*.user
+*.suo
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.mdb
+*.opendb
+*.VC.db
+*.VC.VC.opendb
+
+# Rider / JetBrains
+.idea/
+
+# Visual Studio Code
+.vscode/
+
+# OS junk
+.DS_Store
+Thumbs.db
+Desktop.ini
