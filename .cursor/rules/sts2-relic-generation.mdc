@@ -1,0 +1,35 @@
+---
+description: STS2 遗物生成规范（RelicModel）
+alwaysApply: false
+---
+# 遗物生成规则（Relic）
+
+- 继承 `RelicBaseModel`，使用 `public sealed class`；必须声明 `Rarity`。
+- 数值与阈值放在 `CanonicalVars`（常见组合：`CardsVar`、`EnergyVar`、`PowerVar<T>`）。
+- 触发逻辑通过回调实现（如 `AfterCardPlayed`、`AfterDeath`、`BeforeSideTurnStart`），不要依赖隐式检测。
+- 存在计数器时，使用私有字段 + 属性封装，并在 setter 里调用 `UpdateDisplay()`/`InvokeDisplayAmountChanged()`。
+- 触发后统一做视觉反馈（如 `Flash()`），并将状态重置放在 `AfterCombatEnd` 或回合开始。
+- 需要联动牌堆/能量/能力时，优先使用 `CardPileCmd`、`PlayerCmd`、`PowerCmd` 命令链。
+
+```csharp
+public sealed class ExampleRelic : RelicBaseModel
+{
+    public override RelicRarity Rarity => RelicRarity.Uncommon;
+
+    protected override IEnumerable<DynamicVar> CanonicalVars => 
+    [
+        new EnergyVar(1),
+        new CardsVar(1)
+    ];
+
+    public override async Task AfterDeath(PlayerChoiceContext choiceContext, Creature target, bool wasRemovalPrevented, float deathAnimLength)
+    {
+        if (target.Side != base.Owner.Creature.Side)
+        {
+            Flash();
+            await PlayerCmd.GainEnergy(base.DynamicVars.Energy.BaseValue, base.Owner);
+            await CardPileCmd.Draw(choiceContext, base.DynamicVars.Cards.BaseValue, base.Owner);
+        }
+    }
+}
+```

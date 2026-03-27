@@ -17,13 +17,16 @@ using MegaCrit.Sts2.Core.Models.Powers;
 namespace BiliBiliACGN.BiliBiliACGNCode.Cards;
 
 [Pool(typeof(ColorlessCardPool))]
-public class TestPowerCard : CardBaseModel
+public sealed class TestPowerCard : CardBaseModel
 {
     // 基础耗能
     private const int energyCost = 0;
     // 卡牌类型
     private const CardType type = CardType.Power;
     
+    /// <summary>
+    /// 卡牌基础动态变量：施加能力的层数。
+    /// </summary>
     protected override IEnumerable<DynamicVar> CanonicalVars => [new DynamicVar("Power", 3m)];
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.Static(StaticHoverTip.Block)];
 
@@ -38,10 +41,20 @@ public class TestPowerCard : CardBaseModel
     public TestPowerCard() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary)
     {
     }
+    /// <summary>
+    /// 打出效果：触发施法动作并为自己施加 RagePower。
+    /// </summary>
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
-		await PowerCmd.Apply<RagePower>(base.Owner.Creature, base.DynamicVars["Power"].BaseValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<RagePower>(base.Owner.Creature, base.DynamicVars["Power"].BaseValue, base.Owner.Creature, this);
     }
 
+    /// <summary>
+    /// 升级效果：提升施加能力层数。
+    /// </summary>
+    protected override void OnUpgrade()
+    {
+        base.DynamicVars["Power"].UpgradeValueBy(1m);
+    }
 }
