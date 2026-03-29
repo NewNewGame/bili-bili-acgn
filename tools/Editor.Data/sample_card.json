@@ -28,12 +28,16 @@
       "actionType": "Damage",
       "valueBinding": "Damage",
       "value": 0,
+      "repeatCountBinding": "literal",
+      "repeatCountValue": 1,
       "notes": "伤害用动态变量 Damage（同 kind 第一条）"
     },
     {
       "actionType": "DrawCards",
       "valueBinding": "literal",
       "value": 1,
+      "repeatCountBinding": "literal",
+      "repeatCountValue": 1,
       "notes": "抽牌张数为固定 value"
     }
   ],

@@ -26,6 +26,18 @@ public sealed class CardPlayAction
     public decimal Value { get; set; }
 
     /// <summary>
+    /// 本条效果执行次数的来源：<c>literal</c> 使用 <see cref="RepeatCountValue"/>；否则为 <see cref="DynamicVarEntry.Kind"/>。
+    /// </summary>
+    [JsonPropertyName("repeatCountBinding")]
+    public string RepeatCountBinding { get; set; } = "literal";
+
+    /// <summary>
+    /// 当 <see cref="RepeatCountBinding"/> 为 <c>literal</c> 时的固定重复次数（≥0）；绑定变量时可为占位。
+    /// </summary>
+    [JsonPropertyName("repeatCountValue")]
+    public decimal RepeatCountValue { get; set; } = 1m;
+
+    /// <summary>
     /// 编辑器备注，不参与运行时逻辑。
     /// </summary>
     [JsonPropertyName("notes")]

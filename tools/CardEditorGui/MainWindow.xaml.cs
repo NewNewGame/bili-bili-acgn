@@ -30,9 +30,10 @@ public partial class MainWindow : Window
         InitializeComponent();
         DataContext = this;
         GridDynamicVars.ItemsSource = _dynamicVars;
-        ColPlayActionType.ItemsSource = new[] { "DrawCards", "Damage", "Discard", "Exhaust" };
+        ColPlayActionType.ItemsSource = new[] { "DrawCards", "Damage", "Block", "Discard", "Exhaust" };
         // DataGridComboBoxColumn 的 ItemsSource 在 XAML 中绑定常无法解析，必须在代码里挂 ObservableCollection
         ColPlayActionValueBinding.ItemsSource = PlayActionValueBindingOptions;
+        ColPlayActionRepeatBinding.ItemsSource = PlayActionValueBindingOptions;
         GridCardPlayActions.ItemsSource = _playActions;
         _dynamicVars.CollectionChanged += DynamicVars_CollectionChanged;
         FillComboDefaults();
@@ -86,6 +87,9 @@ public partial class MainWindow : Window
         var savedBindings = _playActions
             .Select(a => string.IsNullOrWhiteSpace(a.ValueBinding) ? "literal" : a.ValueBinding.Trim())
             .ToList();
+        var savedRepeatBindings = _playActions
+            .Select(a => string.IsNullOrWhiteSpace(a.RepeatCountBinding) ? "literal" : a.RepeatCountBinding.Trim())
+            .ToList();
 
         PlayActionValueBindingOptions.Clear();
         PlayActionValueBindingOptions.Add(new ValueBindingOption { Key = "literal", Display = "固定数值" });
@@ -110,6 +114,14 @@ public partial class MainWindow : Window
             if (!string.Equals(_playActions[i].ValueBinding, resolved, StringComparison.Ordinal))
             {
                 _playActions[i].ValueBinding = resolved;
+                changed = true;
+            }
+
+            var savedR = i < savedRepeatBindings.Count ? savedRepeatBindings[i] : "literal";
+            var resolvedR = savedR == "literal" || validKinds.Contains(savedR) ? savedR : "literal";
+            if (!string.Equals(_playActions[i].RepeatCountBinding, resolvedR, StringComparison.Ordinal))
+            {
+                _playActions[i].RepeatCountBinding = resolvedR;
                 changed = true;
             }
         }
@@ -207,12 +219,64 @@ public partial class MainWindow : Window
                     _playActions.Add(ClonePlayAction(a));
             }
             RebuildPlayActionValueBindingOptions();
+            foreach (var v in _dynamicVars)
+                EnsurePlayActionForDynamicVarKind(v.Kind);
         }
         finally
         {
             _suppressDirty = false;
             RefreshPersistedSnapshot();
         }
+    }
+
+    /// <summary>
+    /// kind 为 Damage/Block/Cards/Discard/Exhaust 时，若打出效果中尚无「操作类型 + 数值来源=该 kind」的一行，则自动追加。
+    /// </summary>
+    private void EnsurePlayActionForDynamicVarKind(string? kind)
+    {
+        var k = kind?.Trim() ?? "";
+        if (k.Length == 0)
+            return;
+        var actionType = MapDynamicVarKindToPlayActionType(k);
+        if (actionType == null)
+            return;
+        if (HasPlayActionLinkedToKind(k, actionType))
+            return;
+        _playActions.Add(new CardPlayAction
+        {
+            ActionType = actionType,
+            ValueBinding = k,
+            Value = 0m,
+            RepeatCountBinding = "literal",
+            RepeatCountValue = 1m,
+            Notes = null
+        });
+        RebuildPlayActionValueBindingOptions();
+        if (!_suppressDirty)
+            MarkDirty();
+    }
+
+    /// <summary>Cards → DrawCards，其余 kind 与操作类型同名。</summary>
+    private static string? MapDynamicVarKindToPlayActionType(string kindTrimmed)
+    {
+        if (kindTrimmed.Equals("Damage", StringComparison.OrdinalIgnoreCase))
+            return "Damage";
+        if (kindTrimmed.Equals("Block", StringComparison.OrdinalIgnoreCase))
+            return "Block";
+        if (kindTrimmed.Equals("Cards", StringComparison.OrdinalIgnoreCase))
+            return "DrawCards";
+        if (kindTrimmed.Equals("Discard", StringComparison.OrdinalIgnoreCase))
+            return "Discard";
+        if (kindTrimmed.Equals("Exhaust", StringComparison.OrdinalIgnoreCase))
+            return "Exhaust";
+        return null;
+    }
+
+    private bool HasPlayActionLinkedToKind(string kindTrimmed, string actionType)
+    {
+        return _playActions.Any(a =>
+            string.Equals(a.ActionType?.Trim(), actionType, StringComparison.OrdinalIgnoreCase) &&
+            string.Equals(a.ValueBinding?.Trim(), kindTrimmed, StringComparison.OrdinalIgnoreCase));
     }
 
     private void RefreshPersistedSnapshot()
@@ -253,13 +317,25 @@ public partial class MainWindow : Window
         };
     }
 
-    private static CardPlayAction ClonePlayAction(CardPlayAction a) => new()
+    private static CardPlayAction ClonePlayAction(CardPlayAction a)
     {
-        ActionType = a.ActionType,
-        ValueBinding = string.IsNullOrWhiteSpace(a.ValueBinding) ? "literal" : a.ValueBinding,
-        Value = a.Value,
-        Notes = a.Notes
-    };
+        var rbRaw = a.RepeatCountBinding;
+        var rb = string.IsNullOrWhiteSpace(rbRaw) ? "literal" : rbRaw.Trim();
+        var rv = a.RepeatCountValue;
+        // 旧 JSON 未包含 repeat 字段：binding 为 null 且 value 为 0 → 视为默认执行 1 次
+        if (rbRaw is null && rv == 0m)
+            rv = 1m;
+
+        return new CardPlayAction
+        {
+            ActionType = a.ActionType,
+            ValueBinding = string.IsNullOrWhiteSpace(a.ValueBinding) ? "literal" : a.ValueBinding,
+            Value = a.Value,
+            RepeatCountBinding = rb,
+            RepeatCountValue = rv,
+            Notes = a.Notes
+        };
+    }
 
     private static void SelectCombo(System.Windows.Controls.ComboBox box, string value)
     {
@@ -538,6 +614,7 @@ public partial class MainWindow : Window
             UpgradeValue = 0m,
             ValueProp = DynamicVarEntry.DefaultValuePropForKind(k)
         });
+        EnsurePlayActionForDynamicVarKind(k);
         MarkDirty();
         StatusText.Text = $"已添加动态变量: {k}";
         return true;
@@ -565,6 +642,7 @@ public partial class MainWindow : Window
     private void BtnAddVar_Click(object sender, RoutedEventArgs e)
     {
         _dynamicVars.Add(new DynamicVarEntry { Kind = "Damage", BaseValue = 1m, UpgradeValue = 0m });
+        EnsurePlayActionForDynamicVarKind("Damage");
         MarkDirty();
     }
 
@@ -577,13 +655,23 @@ public partial class MainWindow : Window
         }
         _dynamicVars.Remove(row);
         if (_dynamicVars.Count == 0)
+        {
             _dynamicVars.Add(new DynamicVarEntry { Kind = "Damage", BaseValue = 1m, UpgradeValue = 0m });
+            EnsurePlayActionForDynamicVarKind("Damage");
+        }
         MarkDirty();
     }
 
     private void BtnAddPlayAction_Click(object sender, RoutedEventArgs e)
     {
-        _playActions.Add(new CardPlayAction { ActionType = "DrawCards", ValueBinding = "literal", Value = 1m });
+        _playActions.Add(new CardPlayAction
+        {
+            ActionType = "DrawCards",
+            ValueBinding = "literal",
+            Value = 1m,
+            RepeatCountBinding = "literal",
+            RepeatCountValue = 1m
+        });
         MarkDirty();
     }
 
@@ -623,9 +711,10 @@ public partial class MainWindow : Window
             return;
         if (e.Column is not DataGridTextColumn col)
             return;
-        if (col.Header?.ToString() != "value")
-            return;
-        if (action.ValueBinding != "literal")
+        var header = col.Header?.ToString();
+        if (header == "value" && action.ValueBinding != "literal")
+            e.Cancel = true;
+        if (header == "重复次数" && action.RepeatCountBinding != "literal")
             e.Cancel = true;
     }
 
@@ -681,8 +770,11 @@ public partial class MainWindow : Window
         {
             if (e.EditAction == DataGridEditAction.Cancel)
                 return;
+            var rowItem = e.Row?.Item as DynamicVarEntry;
             Dispatcher.BeginInvoke(() =>
             {
+                if (rowItem != null)
+                    EnsurePlayActionForDynamicVarKind(rowItem.Kind);
                 RebuildPlayActionValueBindingOptions();
                 MarkDirty();
                 RefreshDescriptionPreview();

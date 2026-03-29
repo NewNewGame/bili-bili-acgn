@@ -34,6 +34,8 @@ public static class CardDefinitionModelComparer
                 ActionType = a.ActionType,
                 ValueBinding = a.ValueBinding,
                 Value = a.Value,
+                RepeatCountBinding = a.RepeatCountBinding,
+                RepeatCountValue = a.RepeatCountValue,
                 Notes = a.Notes
             }).ToList(),
             Notes = m.Notes
@@ -92,6 +94,12 @@ public static class CardDefinitionModelComparer
                     StringComparison.Ordinal))
                 return false;
             if (a[i].Value != b[i].Value) return false;
+            if (!string.Equals(
+                    string.IsNullOrWhiteSpace(a[i].RepeatCountBinding) ? "literal" : a[i].RepeatCountBinding.Trim(),
+                    string.IsNullOrWhiteSpace(b[i].RepeatCountBinding) ? "literal" : b[i].RepeatCountBinding.Trim(),
+                    StringComparison.Ordinal))
+                return false;
+            if (a[i].RepeatCountValue != b[i].RepeatCountValue) return false;
             if (!string.Equals(a[i].Notes ?? "", b[i].Notes ?? "", StringComparison.Ordinal)) return false;
         }
         return true;

@@ -1,8 +1,10 @@
 using System.Collections.Generic;
+using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Input;
+using CardEditor.Shared.Models;
 using Button = System.Windows.Controls.Button;
 
 namespace CardEditorGui;
@@ -25,6 +27,83 @@ public partial class MainWindow
         };
         TxtDescription.PreviewKeyDown += TxtDescription_PreviewKeyDown;
     }
+
+    private void BtnDescriptionAutoFromPlayActions_Click(object sender, RoutedEventArgs e)
+    {
+        if (_playActions.Count == 0)
+        {
+            System.Windows.MessageBox.Show("暂无打出效果，请先在「打出效果」表格中添加。", "提示",
+                MessageBoxButton.OK, MessageBoxImage.Information);
+            return;
+        }
+
+        var parts = new List<string>();
+        foreach (var a in _playActions)
+        {
+            var frag = FormatDescriptionFragmentFromPlayAction(a);
+            if (frag.Length > 0)
+                parts.Add(frag);
+        }
+
+        if (parts.Count == 0)
+        {
+            System.Windows.MessageBox.Show("无法生成描述：打出效果中的操作类型均不在支持范围内（Damage / Block / DrawCards / Discard / Exhaust）。", "提示",
+                MessageBoxButton.OK, MessageBoxImage.Information);
+            return;
+        }
+
+        TxtDescription.Text = string.Join("。", parts) + "。";
+        MarkDirty();
+        RefreshDescriptionPreview();
+    }
+
+    /// <summary>与打出效果表格一致：literal 输出数字，否则 <c>{kind:diff()}</c>。</summary>
+    private static string FormatDescriptionFragmentFromPlayAction(CardPlayAction a)
+    {
+        var actionType = (a.ActionType ?? "").Trim();
+        var valueToken = IsLiteralValueBinding(a.ValueBinding)
+            ? FormatLiteralDecimal(a.Value)
+            : BuildDiffPlaceholder(a.ValueBinding!.Trim());
+
+        var core = actionType switch
+        {
+            "Damage" => $"造成{valueToken}点伤害",
+            "Block" => $"获得{valueToken}点格挡",
+            "DrawCards" => $"抽{valueToken}张牌",
+            "Discard" => $"丢弃{valueToken}张牌",
+            "Exhaust" => $"消耗{valueToken}张牌",
+            _ => ""
+        };
+        if (core.Length == 0)
+            return "";
+
+        var repeat = FormatRepeatCountDescriptionSuffix(a);
+        return repeat.Length == 0 ? core : core + "，" + repeat;
+    }
+
+    private static string FormatRepeatCountDescriptionSuffix(CardPlayAction a)
+    {
+        if (IsLiteralValueBinding(a.RepeatCountBinding))
+        {
+            if (a.RepeatCountValue <= 1m)
+                return "";
+            return $"{FormatLiteralDecimal(a.RepeatCountValue)}次";
+        }
+
+        var src = (a.RepeatCountBinding ?? "").Trim();
+        return src.Length == 0 ? "" : $"{BuildDiffPlaceholder(src)}次";
+    }
+
+    private static bool IsLiteralValueBinding(string? binding) =>
+        string.IsNullOrWhiteSpace(binding) ||
+        string.Equals(binding.Trim(), "literal", StringComparison.OrdinalIgnoreCase);
+
+    private static string BuildDiffPlaceholder(string kind) => $"{{{kind}:diff()}}";
+
+    private static string FormatLiteralDecimal(decimal d) =>
+        d == decimal.Truncate(d)
+            ? ((int)d).ToString(CultureInfo.InvariantCulture)
+            : d.ToString("0.############", CultureInfo.InvariantCulture);
 
     private void RefreshDescriptionPreview()
     {
