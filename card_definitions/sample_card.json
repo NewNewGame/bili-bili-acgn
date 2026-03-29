@@ -1,6 +1,8 @@
 {
   "schemaVersion": 1,
   "className": "SampleCard",
+  "title": "示例卡牌",
+  "description": "示例：动态变量与打出效果。",
   "namespace": "BiliBiliACGN.BiliBiliACGNCode.Cards",
   "energyCost": 1,
   "cardType": "Attack",
@@ -12,12 +14,27 @@
     {
       "kind": "Damage",
       "baseValue": 6,
-      "valueProp": "Move"
+      "upgradeValue": 0
     },
     {
       "kind": "Cards",
-      "baseValue": 1
+      "baseValue": 1,
+      "upgradeValue": 0
     }
   ],
-  "notes": "\u7531 CardEditorCli init \u751F\u6210\u7684\u793A\u4F8B\uFF1B\u53EF\u5728\u6B64\u57FA\u7840\u4E0A\u6539\u6570\u503C\u540E\u4EA4\u7ED9\u4EE3\u7801\u751F\u6210\u5668\u3002"
+  "cardPlayActions": [
+    {
+      "actionType": "Damage",
+      "valueBinding": "Damage",
+      "value": 0,
+      "notes": "伤害用动态变量 Damage（同 kind 第一条）"
+    },
+    {
+      "actionType": "DrawCards",
+      "valueBinding": "literal",
+      "value": 1,
+      "notes": "抽牌张数为固定 value"
+    }
+  ],
+  "notes": "示例：finalValue = baseValue + upgradeValue（升级增量写在 upgradeValue）。cardPlayActions 为打出顺序效果。"
 }

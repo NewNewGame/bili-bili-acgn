@@ -13,6 +13,14 @@ public sealed class CardDefinition
     [JsonPropertyName("className")]
     public string ClassName { get; set; } = "";
 
+    /// <summary>卡牌显示名称（与 localization 中 title 对应）。</summary>
+    [JsonPropertyName("title")]
+    public string Title { get; set; } = "";
+
+    /// <summary>卡牌描述正文（与 localization 中 description 对应）。</summary>
+    [JsonPropertyName("description")]
+    public string? Description { get; set; }
+
     [JsonPropertyName("namespace")]
     public string Namespace { get; set; } = "BiliBiliACGN.BiliBiliACGNCode.Cards";
 
@@ -36,6 +44,10 @@ public sealed class CardDefinition
 
     [JsonPropertyName("dynamicVars")]
     public List<DynamicVarEntry> DynamicVars { get; set; } = [];
+
+    /// <summary>打出后按顺序执行的 CardPlayAction（牌面效果编排）。</summary>
+    [JsonPropertyName("cardPlayActions")]
+    public List<CardPlayAction> CardPlayActions { get; set; } = [];
 
     [JsonPropertyName("notes")]
     public string? Notes { get; set; }

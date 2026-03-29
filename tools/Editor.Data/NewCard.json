@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "className": "NewCard",
+  "namespace": "BiliBiliACGN.BiliBiliACGNCode.Cards",
+  "energyCost": 1,
+  "cardType": "Attack",
+  "rarity": "Common",
+  "targetType": "AnyEnemy",
+  "showInCardLibrary": true,
+  "poolTypeName": "ColorlessCardPool",
+  "dynamicVars": [
+    {
+      "kind": "Damage",
+      "baseValue": 6,
+      "upgradeValue": 0
+    }
+  ],
+  "cardPlayActions": [
+    {
+      "actionType": "DrawCards",
+      "valueBinding": "literal",
+      "value": 1
+    }
+  ]
+}
