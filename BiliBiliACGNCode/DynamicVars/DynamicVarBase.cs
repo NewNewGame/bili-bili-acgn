@@ -11,7 +11,7 @@ namespace BiliBiliACGN.BiliBiliACGNCode.DynamicVars;
 
 public abstract class DynamicVarBase : DynamicVar
 {
-    public static string Key => nameof(DynamicVarBase);
+    public const string Key = nameof(DynamicVarBase);
     public static readonly string LocKey = Key.ToUpperInvariant();
     
     public DynamicVarBase(decimal baseValue) : base(Key, baseValue)

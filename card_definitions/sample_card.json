@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "className": "SampleCard",
+  "namespace": "BiliBiliACGN.BiliBiliACGNCode.Cards",
+  "energyCost": 1,
+  "cardType": "Attack",
+  "rarity": "Common",
+  "targetType": "AnyEnemy",
+  "showInCardLibrary": true,
+  "poolTypeName": "ColorlessCardPool",
+  "dynamicVars": [
+    {
+      "kind": "Damage",
+      "baseValue": 6,
+      "valueProp": "Move"
+    },
+    {
+      "kind": "Cards",
+      "baseValue": 1
+    }
+  ],
+  "notes": "\u7531 CardEditorCli init \u751F\u6210\u7684\u793A\u4F8B\uFF1B\u53EF\u5728\u6B64\u57FA\u7840\u4E0A\u6539\u6570\u503C\u540E\u4EA4\u7ED9\u4EE3\u7801\u751F\u6210\u5668\u3002"
+}

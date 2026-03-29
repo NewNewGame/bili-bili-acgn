@@ -1,0 +1,40 @@
+---
+description: STS2 DynamicVar 生成规范
+globs: **/DynamicVars/**/*.cs
+alwaysApply: false
+---
+
+# DynamicVar 生成规则
+
+- 新变量类放在 `src/Core/DynamicVars/`，类名与文件名一致，默认使用 `public class XxxVar : DynamicVarBase`。
+- 约定提供 `Key` 常量；默认构造函数用 `: base("Name", value)`，可选再提供带 `name` 重载。
+- 只做“数值与预览”职责：`BaseValue/EnchantedValue/PreviewValue` 的维护放在 `UpdateCardPreview(...)`，不要在变量类里直接执行战斗结算命令。
+- 需要受附魔/全局修正影响时，在 `UpdateCardPreview` 中按顺序处理：
+  1) 先处理 `card.Enchantment` 的加减乘；
+  2) 再按 `runGlobalHooks` 调用对应 Hook（伤害用 `Hook.ModifyDamage`，格挡用 `Hook.ModifyBlock`，能力数值用 `Hook.ModifyPowerAmountGiven`）。
+- 计算型变量优先继承 `CalculatedVar`，并通过 `WithMultiplier(...)` + `GetBaseVar/GetExtraVar` 建模；不要在外部重复写同一套计算。
+- 新增“通用名称变量”后，同步评估是否需要在 `DynamicVarSet` 增加强类型访问器（如 `public CardsVar Cards => ...`）。
+- 若同一卡要放多个同类变量，必须传入自定义 `name`，避免 `DynamicVarSet` key 冲突。
+
+```csharp
+public class ExampleDamageVar : DynamicVarBase
+{
+    public ValueProp Props { get; }
+
+    public ExampleDamageVar(decimal value, ValueProp props) : base(defaultName, value) => Props = props;
+
+    public override void UpdateCardPreview(CardModel card, CardPreviewMode previewMode, Creature? target, bool runGlobalHooks)
+    {
+        decimal num = base.BaseValue;
+        if (card.Enchantment != null)
+        {
+            num += card.Enchantment.EnchantDamageAdditive(num, Props);
+            num *= card.Enchantment.EnchantDamageMultiplicative(num, Props);
+            if (!card.IsEnchantmentPreview) base.EnchantedValue = num;
+        }
+        if (runGlobalHooks)
+            num = Hook.ModifyDamage(card.Owner.RunState, card.CombatState, target, card.Owner.Creature, base.BaseValue, Props, card, ModifyDamageHookType.All, previewMode, out IEnumerable<AbstractModel> _);
+        base.PreviewValue = num;
+    }
+}
+```

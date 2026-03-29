@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net9.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <LangVersion>12.0</LangVersion>
+    <UseWPF>true</UseWPF>
+    <RootNamespace>CardEditorGui</RootNamespace>
+    <AssemblyName>CardEditorGui</AssemblyName>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CardEditor.Shared\CardEditor.Shared.csproj" />
+  </ItemGroup>
+</Project>
