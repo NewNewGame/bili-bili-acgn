@@ -32,16 +32,13 @@ public sealed class DamageCardPlayActionCodeEmitter : CardPlayActionCodeEmitterB
     private static string BuildDefaultSingleTargetDamage(string indent, string valueExpr, string repeatCount)
     {
         var inner = new StringBuilder();
-        inner.AppendLine($"{indent}if (cardPlay.Target != null)");
-        inner.AppendLine($"{indent}{{");
-        inner.AppendLine($"{indent}    await DamageCmd.Attack({valueExpr})");
+        inner.AppendLine($"{indent}await DamageCmd.Attack({valueExpr})");
         if(repeatCount != "1"){
-            inner.AppendLine($"{indent}    .WithHitCount({repeatCount})");
+            inner.AppendLine($"{indent}.WithHitCount({repeatCount})");
         }
-        inner.AppendLine($"{indent}        .FromCard(this)");
-        inner.AppendLine($"{indent}        .Targeting(cardPlay.Target)");
-        inner.AppendLine($"{indent}        .Execute(choiceContext);");
-        inner.Append($"{indent}}}");
+        inner.AppendLine($"{indent}    .FromCard(this)");
+        inner.AppendLine($"{indent}    .Targeting(cardPlay.Target)");
+        inner.AppendLine($"{indent}    .Execute(choiceContext);");
         return inner.ToString();
     }
     /// <summary>
@@ -54,16 +51,13 @@ public sealed class DamageCardPlayActionCodeEmitter : CardPlayActionCodeEmitterB
     private static string BuildAllEnemyDamage(string indent, string valueExpr, string repeatCount)
     {
         var inner = new StringBuilder();
-        inner.AppendLine($"{indent}if (cardPlay.Target != null)");
-        inner.AppendLine($"{indent}{{");
-        inner.AppendLine($"{indent}    await DamageCmd.Attack({valueExpr})");
+        inner.AppendLine($"{indent}await DamageCmd.Attack({valueExpr})");
         if(repeatCount != "1"){
             inner.AppendLine($"{indent}    .WithHitCount({repeatCount})");
         }
-        inner.AppendLine($"{indent}        .FromCard(this)");
-        inner.AppendLine($"{indent}        .TargetingAllOpponents(base.CombatState)");
-        inner.AppendLine($"{indent}        .Execute(choiceContext);");
-        inner.Append($"{indent}}}");
+        inner.AppendLine($"{indent}    .FromCard(this)");
+        inner.AppendLine($"{indent}    .TargetingAllOpponents(base.CombatState)");
+        inner.AppendLine($"{indent}    .Execute(choiceContext);");
         return inner.ToString();
     }
     /// <summary>
@@ -76,16 +70,13 @@ public sealed class DamageCardPlayActionCodeEmitter : CardPlayActionCodeEmitterB
     private static string BuildRandomEnemyDamage(string indent, string valueExpr, string repeatCount)
     {
         var inner = new StringBuilder();
-        inner.AppendLine($"{indent}if (cardPlay.Target != null)");
-        inner.AppendLine($"{indent}{{");
-        inner.AppendLine($"{indent}    await DamageCmd.Attack({valueExpr})");
+        inner.AppendLine($"{indent}await DamageCmd.Attack({valueExpr})");
         if(repeatCount != "1"){
             inner.AppendLine($"{indent}    .WithHitCount({repeatCount})");
         }
-        inner.AppendLine($"{indent}        .FromCard(this)");
-        inner.AppendLine($"{indent}        .TargetingRandomOpponents(base.CombatState, true)");
-        inner.AppendLine($"{indent}        .Execute(choiceContext);");
-        inner.Append($"{indent}}}");
+        inner.AppendLine($"{indent}    .FromCard(this)");
+        inner.AppendLine($"{indent}    .TargetingRandomOpponents(base.CombatState, true)");
+        inner.AppendLine($"{indent}    .Execute(choiceContext);");
         return inner.ToString();
     }
 }
