@@ -121,6 +121,7 @@ public partial class SettingsWindow : Window
             TxtCardLocalizationJsonPath.Text = dlg.FileName;
     }
 
+
     private void BtnAddPool_Click(object sender, RoutedEventArgs e)
     {
         var name = TxtNewPoolType.Text.Trim();

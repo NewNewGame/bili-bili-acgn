@@ -1,0 +1,163 @@
+<Window x:Class="CardEditorGui.KeywordLocalizationEditorWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Keywords 文本信息编辑器"
+        Height="720" Width="980"
+        MinHeight="520" MinWidth="760"
+        WindowStartupLocation="CenterOwner">
+    <DockPanel Margin="12">
+        <StatusBar DockPanel.Dock="Bottom">
+            <StatusBarItem>
+                <TextBlock x:Name="StatusText" Text="就绪" />
+            </StatusBarItem>
+        </StatusBar>
+
+        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="0,0,0,10">
+            <TextBlock VerticalAlignment="Center" Text="Keyword：" FontWeight="SemiBold" />
+            <TextBox x:Name="TxtKeyword" Width="160" Margin="8,0,8,0" />
+            <Button Content="搜索/读取" Width="96" Margin="0,0,8,0" Click="BtnSearch_Click" />
+            <Button Content="设置…" Width="72" Margin="0,0,12,0" Click="BtnSettings_Click" />
+            <TextBlock VerticalAlignment="Center" Foreground="Gray"
+                       Text="输入如 YYSY，然后读取/保存 card_keywords.json 的 title/description。" />
+        </StackPanel>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <GroupBox Grid.Row="0" Header="Title" Margin="0,0,0,10">
+                <DockPanel Margin="8">
+                    <TextBlock DockPanel.Dock="Left" VerticalAlignment="Center" Margin="0,4" Width="80" Text="Title" />
+                    <TextBox x:Name="TxtTitle" Margin="4" />
+                </DockPanel>
+            </GroupBox>
+
+            <GroupBox Grid.Row="1" Header="Description（支持 BBCode）" Margin="0,0,0,10">
+                <DockPanel Margin="8">
+                    <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="0,0,0,8">
+                        <Button Content="粗体" MinWidth="40" Margin="0,0,6,0" PreviewMouseDown="BbToolbar_PreviewMouseDown"
+                                Click="BbWrapTag_Click" Tag="b|b|[b]|[/b]" />
+                        <Button Content="斜体" MinWidth="40" Margin="0,0,6,0" PreviewMouseDown="BbToolbar_PreviewMouseDown"
+                                Click="BbWrapTag_Click" Tag="i|i|[i]|[/i]" />
+                        <Button Content="下划线" MinWidth="52" Margin="0,0,6,0" PreviewMouseDown="BbToolbar_PreviewMouseDown"
+                                Click="BbWrapTag_Click" Tag="u|u|[u]|[/u]" />
+                        <Button x:Name="BtnColorMenu" Content="颜色 ▾" MinWidth="52" Margin="0,0,6,0"
+                                PreviewMouseDown="BtnColorMenu_PreviewMouseDown">
+                            <Button.ContextMenu>
+                                <ContextMenu Closed="BbMenu_Closed">
+                                    <MenuItem Header="插入 [color=red]…" Click="BbInsertColorRed_Click" />
+                                    <Separator />
+                                    <MenuItem Header="颜色简写（色块）" IsEnabled="False" />
+                                    <MenuItem Click="BbExclusiveWrapTag_Click" Tag="[aqua]|[/aqua]|aqua">
+                                        <MenuItem.Header>
+                                            <StackPanel Orientation="Horizontal">
+                                                <Border Width="28" Height="28" CornerRadius="2" BorderBrush="#888" BorderThickness="1" Margin="2" Background="#40E0D0" />
+                                                <TextBlock Text="aqua" VerticalAlignment="Center" Margin="8,0,0,0" />
+                                            </StackPanel>
+                                        </MenuItem.Header>
+                                    </MenuItem>
+                                    <MenuItem Click="BbExclusiveWrapTag_Click" Tag="[blue]|[/blue]|blue">
+                                        <MenuItem.Header>
+                                            <StackPanel Orientation="Horizontal">
+                                                <Border Width="28" Height="28" CornerRadius="2" BorderBrush="#888" BorderThickness="1" Margin="2" Background="#1E90FF" />
+                                                <TextBlock Text="blue" VerticalAlignment="Center" Margin="8,0,0,0" />
+                                            </StackPanel>
+                                        </MenuItem.Header>
+                                    </MenuItem>
+                                    <MenuItem Click="BbExclusiveWrapTag_Click" Tag="[gold]|[/gold]|gold">
+                                        <MenuItem.Header>
+                                            <StackPanel Orientation="Horizontal">
+                                                <Border Width="28" Height="28" CornerRadius="2" BorderBrush="#888" BorderThickness="1" Margin="2" Background="#FFD700" />
+                                                <TextBlock Text="gold" VerticalAlignment="Center" Margin="8,0,0,0" />
+                                            </StackPanel>
+                                        </MenuItem.Header>
+                                    </MenuItem>
+                                    <MenuItem Click="BbExclusiveWrapTag_Click" Tag="[green]|[/green]|green">
+                                        <MenuItem.Header>
+                                            <StackPanel Orientation="Horizontal">
+                                                <Border Width="28" Height="28" CornerRadius="2" BorderBrush="#888" BorderThickness="1" Margin="2" Background="#32CD32" />
+                                                <TextBlock Text="green" VerticalAlignment="Center" Margin="8,0,0,0" />
+                                            </StackPanel>
+                                        </MenuItem.Header>
+                                    </MenuItem>
+                                    <MenuItem Click="BbExclusiveWrapTag_Click" Tag="[orange]|[/orange]|orange">
+                                        <MenuItem.Header>
+                                            <StackPanel Orientation="Horizontal">
+                                                <Border Width="28" Height="28" CornerRadius="2" BorderBrush="#888" BorderThickness="1" Margin="2" Background="#FF8C00" />
+                                                <TextBlock Text="orange" VerticalAlignment="Center" Margin="8,0,0,0" />
+                                            </StackPanel>
+                                        </MenuItem.Header>
+                                    </MenuItem>
+                                    <MenuItem Click="BbExclusiveWrapTag_Click" Tag="[pink]|[/pink]|pink">
+                                        <MenuItem.Header>
+                                            <StackPanel Orientation="Horizontal">
+                                                <Border Width="28" Height="28" CornerRadius="2" BorderBrush="#888" BorderThickness="1" Margin="2" Background="#FF69B4" />
+                                                <TextBlock Text="pink" VerticalAlignment="Center" Margin="8,0,0,0" />
+                                            </StackPanel>
+                                        </MenuItem.Header>
+                                    </MenuItem>
+                                    <MenuItem Click="BbExclusiveWrapTag_Click" Tag="[purple]|[/purple]|purple">
+                                        <MenuItem.Header>
+                                            <StackPanel Orientation="Horizontal">
+                                                <Border Width="28" Height="28" CornerRadius="2" BorderBrush="#888" BorderThickness="1" Margin="2" Background="#9B30FF" />
+                                                <TextBlock Text="purple" VerticalAlignment="Center" Margin="8,0,0,0" />
+                                            </StackPanel>
+                                        </MenuItem.Header>
+                                    </MenuItem>
+                                    <MenuItem Click="BbExclusiveWrapTag_Click" Tag="[red]|[/red]|red">
+                                        <MenuItem.Header>
+                                            <StackPanel Orientation="Horizontal">
+                                                <Border Width="28" Height="28" CornerRadius="2" BorderBrush="#888" BorderThickness="1" Margin="2" Background="#FF4500" />
+                                                <TextBlock Text="red" VerticalAlignment="Center" Margin="8,0,0,0" />
+                                            </StackPanel>
+                                        </MenuItem.Header>
+                                    </MenuItem>
+                                </ContextMenu>
+                            </Button.ContextMenu>
+                        </Button>
+                        <Button x:Name="BtnAnimationMenu" Content="动画 ▾" MinWidth="52" Margin="0,0,6,0"
+                                PreviewMouseDown="BtnAnimationMenu_PreviewMouseDown">
+                            <Button.ContextMenu>
+                                <ContextMenu Closed="BbMenu_Closed">
+                                    <MenuItem Header="ancient_banner" Click="BbExclusiveWrapTag_Click" Tag="[ancient_banner]|[/ancient_banner]|ancient_banner" />
+                                    <MenuItem Header="fade_in" Click="BbExclusiveWrapTag_Click" Tag="[fade_in]|[/fade_in]|fade_in" />
+                                    <MenuItem Header="fly_in" Click="BbExclusiveWrapTag_Click" Tag="[fly_in]|[/fly_in]|fly_in" />
+                                    <MenuItem Header="jitter" Click="BbExclusiveWrapTag_Click" Tag="[jitter]|[/jitter]|jitter" />
+                                    <MenuItem Header="sine" Click="BbExclusiveWrapTag_Click" Tag="[sine]|[/sine]|sine" />
+                                    <MenuItem Header="thinky_dots" Click="BbExclusiveWrapTag_Click" Tag="[thinky_dots]|[/thinky_dots]|thinky_dots" />
+                                </ContextMenu>
+                            </Button.ContextMenu>
+                        </Button>
+                        <Button Content="字体" MinWidth="40" Margin="0,0,6,0" PreviewMouseDown="BbToolbar_PreviewMouseDown"
+                                Click="BbWrapTag_Click" Tag="font|font|[font=Arial]|[/font]" />
+                        <Button Content="字号" MinWidth="40" Margin="0,0,6,0" PreviewMouseDown="BbToolbar_PreviewMouseDown"
+                                Click="BbWrapTag_Click" Tag="size|size|[size=24]|[/size]" />
+                    </StackPanel>
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" MinWidth="200" />
+                            <ColumnDefinition Width="6" />
+                            <ColumnDefinition Width="*" MinWidth="200" />
+                        </Grid.ColumnDefinitions>
+                        <TextBox x:Name="TxtDescription" Grid.Column="0" AcceptsReturn="True" TextWrapping="Wrap"
+                                 VerticalScrollBarVisibility="Auto" GotFocus="BbTextBox_GotFocus" />
+                        <GridSplitter Grid.Column="1" Width="6" HorizontalAlignment="Stretch" Background="#DDD" />
+                        <RichTextBox x:Name="RtbDescriptionPreview" Grid.Column="2" IsReadOnly="True"
+                                     VerticalScrollBarVisibility="Auto" BorderThickness="1"
+                                     FontFamily="Segoe UI" FontSize="12" />
+                    </Grid>
+                </DockPanel>
+            </GroupBox>
+
+            <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Content="保存到 keywords.json" Width="150" Margin="0,0,8,0" Click="BtnSave_Click" />
+                <Button Content="关闭" Width="88" IsCancel="True" Click="BtnClose_Click" />
+            </StackPanel>
+        </Grid>
+    </DockPanel>
+</Window>
+

@@ -33,6 +33,8 @@
                 <MenuItem Header="退出(_X)" Click="MenuExit_Click" />
             </MenuItem>
             <MenuItem Header="工具(_T)">
+                <MenuItem Header="Powers 文本信息编辑器(_P)…" Click="MenuPowerTextEditor_Click" />
+                <MenuItem Header="Keywords 文本信息编辑器(_K)…" Click="MenuKeywordTextEditor_Click" />
                 <MenuItem Header="管理打出效果模版(_M)…" Click="BtnManagePlayActionTemplates_Click" />
                 <Separator />
                 <MenuItem Header="设置(_E)..." Click="MenuSettings_Click" />

@@ -628,6 +628,16 @@ public partial class MainWindow : Window
         StatusText.Text = "已更新设置";
     }
 
+    private void MenuPowerTextEditor_Click(object sender, RoutedEventArgs e)
+    {
+        new PowerLocalizationEditorWindow { Owner = this }.ShowDialog();
+    }
+
+    private void MenuKeywordTextEditor_Click(object sender, RoutedEventArgs e)
+    {
+        new KeywordLocalizationEditorWindow { Owner = this }.ShowDialog();
+    }
+
     private void BtnManageTemplates_Click(object sender, RoutedEventArgs e)
     {
         var w = new DynamicVarTemplatesWindow(this);
