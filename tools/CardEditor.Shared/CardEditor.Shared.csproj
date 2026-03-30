@@ -5,5 +5,14 @@
     <Nullable>enable</Nullable>
     <LangVersion>12.0</LangVersion>
     <RootNamespace>CardEditor.Shared</RootNamespace>
+    <!-- 与仓库根目录 BiliBiliACGN.csproj 一致；生成时可覆盖：dotnet build -p:Sts2Dir=... -->
+    <Sts2Dir Condition="'$(Sts2Dir)' == ''">D:\SteamLibrary\steamapps\common\Slay the Spire 2</Sts2Dir>
+    <Sts2DataDir>$(Sts2Dir)\data_sts2_windows_x86_64</Sts2DataDir>
   </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="sts2">
+      <HintPath>$(Sts2DataDir)\sts2.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
 </Project>

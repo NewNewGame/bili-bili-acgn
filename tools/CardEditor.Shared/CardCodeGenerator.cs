@@ -3,6 +3,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using CardEditor.Shared.CardPlayActionEmit;
 using CardEditor.Shared.Models;
 
 namespace CardEditor.Shared;
@@ -174,33 +175,13 @@ public static class CardCodeGenerator
         var bv = FormatDecimal(v.BaseValue);
         return kl switch
         {
-            "damage" => $"new DamageVar({bv}m, {FormatValuePropForEmit(v.ValueProp, "damage")})",
-            "block" => $"new BlockVar({bv}m, {FormatValuePropForEmit(v.ValueProp, "block")})",
+            "damage" => $"new DamageVar({bv}m, {CardPlayActionEmitSyntax.FormatValuePropForEmit(v.ValueProp, "damage")})",
+            "block" => $"new BlockVar({bv}m, {CardPlayActionEmitSyntax.FormatValuePropForEmit(v.ValueProp, "block")})",
             "cards" => $"new CardsVar({(int)v.BaseValue})",
             "repeat" => $"new DynamicVar(\"Repeat\", {bv}m)",
             "power" => $"new DynamicVar(\"Power\", {bv}m)",
             _ => $"new DynamicVar(\"{EscapeCSharpString(kind)}\", {bv}m)"
         };
-    }
-
-    /// <summary>生成源码中的 <c>ValueProp</c> 表达式；<paramref name="kindLower"/> 为 damage/block 时在未设置标志时沿用原默认。</summary>
-    private static string FormatValuePropForEmit(ValueProp p, string kindLower)
-    {
-        if (p == ValueProp.None)
-        {
-            return kindLower switch
-            {
-                "damage" => "ValueProp.Move",
-                "block" => "ValueProp.Unpowered",
-                _ => "ValueProp.None"
-            };
-        }
-        var parts = new List<string>();
-        if (p.HasFlag(ValueProp.Move)) parts.Add("ValueProp.Move");
-        if (p.HasFlag(ValueProp.Unpowered)) parts.Add("ValueProp.Unpowered");
-        if (p.HasFlag(ValueProp.Unblockable)) parts.Add("ValueProp.Unblockable");
-        if (p.HasFlag(ValueProp.SkipHurtAnim)) parts.Add("ValueProp.SkipHurtAnim");
-        return parts.Count == 0 ? "ValueProp.None" : string.Join(" | ", parts);
     }
 
     private static string FormatDecimal(decimal d) =>
@@ -234,7 +215,7 @@ public static class CardCodeGenerator
         }
         if (hasBlock && !hasDamage && !hasCards)
         {
-            var blockVp = FormatValuePropForEmit(blockEntry?.ValueProp ?? ValueProp.None, "block");
+            var blockVp = CardPlayActionEmitSyntax.FormatValuePropForEmit(blockEntry?.ValueProp ?? ValueProp.None, "block");
             sb.AppendLine($"        await CreatureCmd.GainBlock(base.Owner, base.DynamicVars.Block.BaseValue, {blockVp}, null);");
         }
         if (!hasDamage && !hasCards && !hasBlock)
