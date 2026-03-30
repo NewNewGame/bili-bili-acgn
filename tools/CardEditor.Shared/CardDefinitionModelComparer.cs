@@ -32,6 +32,7 @@ public static class CardDefinitionModelComparer
             CardPlayActions = m.CardPlayActions.Select(a => new CardPlayAction
             {
                 ActionType = a.ActionType,
+                BuffType = a.BuffType,
                 ValueBinding = a.ValueBinding,
                 Value = a.Value,
                 RepeatCountBinding = a.RepeatCountBinding,
@@ -88,6 +89,7 @@ public static class CardDefinitionModelComparer
         for (var i = 0; i < a.Count; i++)
         {
             if (!string.Equals(a[i].ActionType, b[i].ActionType, StringComparison.Ordinal)) return false;
+            if (!string.Equals(a[i].BuffType?.Trim() ?? "", b[i].BuffType?.Trim() ?? "", StringComparison.Ordinal)) return false;
             if (!string.Equals(
                     string.IsNullOrWhiteSpace(a[i].ValueBinding) ? "literal" : a[i].ValueBinding.Trim(),
                     string.IsNullOrWhiteSpace(b[i].ValueBinding) ? "literal" : b[i].ValueBinding.Trim(),

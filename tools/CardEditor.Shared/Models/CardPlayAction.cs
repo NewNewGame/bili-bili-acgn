@@ -38,6 +38,12 @@ public sealed class CardPlayAction
     public decimal RepeatCountValue { get; set; } = 1m;
 
     /// <summary>
+    /// 当 <see cref="ActionType"/> 为 <c>Buff</c> 时的 BUFF 类型（来自设置中的 BUFF 选项）。
+    /// </summary>
+    [JsonPropertyName("buffType")]
+    public string? BuffType { get; set; }
+
+    /// <summary>
     /// 编辑器备注，不参与运行时逻辑。
     /// </summary>
     [JsonPropertyName("notes")]

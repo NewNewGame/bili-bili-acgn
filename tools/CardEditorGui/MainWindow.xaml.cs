@@ -19,6 +19,7 @@ public partial class MainWindow : Window
     private CardDefinition _persistedSnapshot = null!;
     private EditorSettings _settings = new();
     private readonly ObservableCollection<CardPoolEntry> _poolEntries = [];
+    private readonly ObservableCollection<BuffOptionEntry> _buffOptions = [];
     private readonly ObservableCollection<DynamicVarEntry> _dynamicVars = [];
     private readonly ObservableCollection<CardPlayAction> _playActions = [];
 
@@ -30,7 +31,10 @@ public partial class MainWindow : Window
         InitializeComponent();
         DataContext = this;
         GridDynamicVars.ItemsSource = _dynamicVars;
-        ColPlayActionType.ItemsSource = new[] { "DrawCards", "Damage", "Block", "Discard", "Exhaust" };
+        ColPlayActionType.ItemsSource = new[] { "DrawCards", "Damage", "Block", "Discard", "Exhaust", "Buff" };
+        ColPlayActionBuffType.ItemsSource = _buffOptions;
+        ColPlayActionBuffType.DisplayMemberPath = nameof(BuffOptionEntry.Name);
+        ColPlayActionBuffType.SelectedValuePath = nameof(BuffOptionEntry.Name);
         // DataGridComboBoxColumn 的 ItemsSource 在 XAML 中绑定常无法解析，必须在代码里挂 ObservableCollection
         ColPlayActionValueBinding.ItemsSource = PlayActionValueBindingOptions;
         ColPlayActionRepeatBinding.ItemsSource = PlayActionValueBindingOptions;
@@ -68,6 +72,10 @@ public partial class MainWindow : Window
 
         if (!File.Exists(CardPoolJson.GetDefaultFilePath()))
             CardPoolJson.SaveDefault(_poolEntries.Select(e => new CardPoolEntry { Name = e.Name, DisplayName = e.DisplayName }).ToList());
+
+        _buffOptions.Clear();
+        foreach (var b in BuffOptionsJson.LoadOrCreateDefault())
+            _buffOptions.Add(new BuffOptionEntry { Name = b.Name, Notes = b.Notes });
     }
 
     private string GetDialogInitialDirectory()
@@ -251,6 +259,7 @@ public partial class MainWindow : Window
         _playActions.Add(new CardPlayAction
         {
             ActionType = actionType,
+            BuffType = null,
             ValueBinding = k,
             Value = 0m,
             RepeatCountBinding = "literal",
@@ -354,6 +363,7 @@ public partial class MainWindow : Window
         return new CardPlayAction
         {
             ActionType = a.ActionType,
+            BuffType = string.IsNullOrWhiteSpace(a.BuffType) ? null : a.BuffType.Trim(),
             ValueBinding = string.IsNullOrWhiteSpace(a.ValueBinding) ? "literal" : a.ValueBinding,
             Value = a.Value,
             RepeatCountBinding = rb,
@@ -666,6 +676,7 @@ public partial class MainWindow : Window
         _playActions.Add(new CardPlayAction
         {
             ActionType = t,
+            BuffType = null,
             ValueBinding = "literal",
             Value = 1m,
             RepeatCountBinding = "literal",
@@ -789,6 +800,7 @@ public partial class MainWindow : Window
         _playActions.Add(new CardPlayAction
         {
             ActionType = "DrawCards",
+            BuffType = null,
             ValueBinding = "literal",
             Value = 1m,
             RepeatCountBinding = "literal",
@@ -825,6 +837,20 @@ public partial class MainWindow : Window
         _playActions.Move(i, i + 1);
         GridCardPlayActions.SelectedItem = row;
         MarkDirty();
+    }
+
+    private void BtnBuffOptions_Click(object sender, RoutedEventArgs e)
+    {
+        var w = new BuffOptionsWindow { Owner = this };
+        if (w.ShowDialog() != true)
+            return;
+
+        // 仅刷新 BUFF 选项，不影响其他设置。
+        _buffOptions.Clear();
+        foreach (var b in BuffOptionsJson.LoadOrCreateDefault())
+            _buffOptions.Add(new BuffOptionEntry { Name = b.Name, Notes = b.Notes });
+        GridCardPlayActions.Items.Refresh();
+        StatusText.Text = $"BUFF 选项已保存: {BuffOptionsJson.GetDefaultFilePath()}";
     }
 
     private void GridCardPlayActions_BeginningEdit(object sender, DataGridBeginningEditEventArgs e)

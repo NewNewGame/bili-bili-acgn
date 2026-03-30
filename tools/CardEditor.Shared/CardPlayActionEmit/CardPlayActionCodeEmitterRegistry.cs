@@ -12,6 +12,7 @@ public static class CardPlayActionCodeEmitterRegistry
     private static readonly CardPlayActionCodeEmitterBase[] AllArray =
     [
         new DamageCardPlayActionCodeEmitter(),
+        new BuffCardPlayActionCodeEmitter(),
         new BlockCardPlayActionCodeEmitter(),
         new DrawCardsCardPlayActionCodeEmitter(),
         new DiscardCardPlayActionCodeEmitter(),

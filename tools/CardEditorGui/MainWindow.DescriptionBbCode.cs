@@ -47,7 +47,7 @@ public partial class MainWindow
 
         if (parts.Count == 0)
         {
-            System.Windows.MessageBox.Show("无法生成描述：打出效果中的操作类型均不在支持范围内（Damage / Block / DrawCards / Discard / Exhaust）。", "提示",
+            System.Windows.MessageBox.Show("无法生成描述：打出效果中的操作类型均不在支持范围内（Damage / Block / DrawCards / Discard / Exhaust / Buff）。", "提示",
                 MessageBoxButton.OK, MessageBoxImage.Information);
             return;
         }
@@ -72,6 +72,7 @@ public partial class MainWindow
             "DrawCards" => $"抽{valueToken}张牌",
             "Discard" => $"丢弃{valueToken}张牌",
             "Exhaust" => $"消耗{valueToken}张牌",
+            "Buff" => $"施加{valueToken}层{(string.IsNullOrWhiteSpace(a.BuffType) ? "BUFF" : a.BuffType.Trim())}",
             _ => ""
         };
         if (core.Length == 0)

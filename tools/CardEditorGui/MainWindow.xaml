@@ -122,6 +122,7 @@
                         <WrapPanel DockPanel.Dock="Bottom" Margin="0,8,0,0">
                             <Button Content="添加操作" Width="88" Margin="0,0,8,8" Click="BtnAddPlayAction_Click" />
                             <Button Content="删除选中" Width="88" Margin="0,0,8,8" Click="BtnRemovePlayAction_Click" />
+                            <Button Content="BUFF配置" Width="88" Margin="0,0,8,8" Click="BtnBuffOptions_Click" />
                             <Button Content="模版管理" Width="88" Margin="0,0,8,8" Click="BtnManagePlayActionTemplates_Click" />
                             <Button Content="上移" Width="64" Margin="0,0,8,8" Click="BtnMovePlayActionUp_Click" />
                             <Button Content="下移" Width="64" Margin="0,0,8,8" Click="BtnMovePlayActionDown_Click" />
@@ -136,7 +137,11 @@
                                 <DataGridComboBoxColumn x:Name="ColPlayActionType"
                                                         Header="操作类型"
                                                         SelectedItemBinding="{Binding ActionType, UpdateSourceTrigger=PropertyChanged}"
-                                                        Width="150" />
+                                                        Width="120" />
+                                <DataGridComboBoxColumn x:Name="ColPlayActionBuffType"
+                                                        Header="BUFF类型"
+                                                        SelectedItemBinding="{Binding BuffType, UpdateSourceTrigger=PropertyChanged}"
+                                                        Width="140" />
                                 <DataGridComboBoxColumn x:Name="ColPlayActionValueBinding"
                                                         Header="数值来源"
                                                         SelectedValueBinding="{Binding ValueBinding, UpdateSourceTrigger=PropertyChanged}"
