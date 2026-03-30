@@ -1,21 +1,21 @@
 //****************** 代码文件申明 ***********************
-//* 文件：YYSYPower
+//* 文件：AngerPower
 //* 作者：wheat
 //* 创建时间：2026/03/29 星期日
-//* 描述：能力 有一说一
+//* 描述：能力 红温
 //*******************************************************
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.ValueProps;
+using MegaCrit.Sts2.Core.Entities.Creatures;
 using BaseLib.Extensions;
 using BiliBiliACGN.BiliBiliACGNCode.Cards;
-using MegaCrit.Sts2.Core.Entities.Creatures;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Powers;
 
-public sealed class YYSYPower : PowerBaseModel
+public sealed class AngerPower : PowerBaseModel
 {
-    protected override string customIconPath => "yysy";
+    protected override string customIconPath => "anger";
 
     public override PowerType Type => PowerType.Buff;
 
@@ -31,7 +31,7 @@ public sealed class YYSYPower : PowerBaseModel
 		{
 			return 0m;
 		}
-        if(cardSource.Keywords.Contains(CustomKeyWords.YYSY))
+        if(cardSource.Keywords.Contains(CustomKeyWords.Anger))
         {
             return base.Amount;
         }
