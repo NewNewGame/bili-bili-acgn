@@ -1,11 +1,10 @@
 using System.Text;
 using CardEditor.Shared.Models;
-using MegaCrit.Sts2.Core.Entities.Cards;
 
 namespace CardEditor.Shared.CardPlayActionEmit;
 
 /// <summary>
-/// 伤害打出效果。可通过 <see cref="CardPlayActionEmitContext.TargetType"/>（<see cref="MegaCrit.Sts2.Core.Entities.Cards.TargetType"/>）在 <see cref="GenerateCode"/> 内分支；
+/// 伤害打出效果。可按 <see cref="CardPlayActionEmitContext.PlayTargetType"/> 在 <see cref="GenerateCode"/> 内分支；
 /// 重复次数请在本方法内按需编写或调用 <see cref="CardPlayActionEmitSyntax.WrapWithRepeatLoop"/>，不在此强制套一层。
 /// </summary>
 public sealed class DamageCardPlayActionCodeEmitter : CardPlayActionCodeEmitterBase
@@ -15,14 +14,13 @@ public sealed class DamageCardPlayActionCodeEmitter : CardPlayActionCodeEmitterB
     protected override string GenerateCode(CardPlayAction action, CardPlayActionEmitContext context)
     {
         var indent = context.Indent;
-        var targetType = context.TargetType;
+        var tt = context.PlayTargetType;
         var v = CardPlayActionEmitSyntax.ValueExpression(action);
         var repeatCount = CardPlayActionEmitSyntax.RepeatCountExpression(action);
-        return targetType switch
+        return tt switch
         {
             TargetType.AllEnemies => BuildAllEnemyDamage(indent, v, repeatCount),
             TargetType.RandomEnemy => BuildRandomEnemyDamage(indent, v, repeatCount),
-            // 默认：需单目标的攻击（与 TestCard 等一致）；其它 TargetType 请在下方添加 case 自行编排。
             _ => BuildDefaultSingleTargetDamage(indent, v, repeatCount)
         };
     }

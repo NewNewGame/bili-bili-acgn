@@ -1,15 +1,14 @@
 using CardEditor.Shared.Models;
-using MegaCrit.Sts2.Core.Entities.Cards;
 
 namespace CardEditor.Shared.CardPlayActionEmit;
 
 /// <summary>
-/// <see cref="CardDefinition.TargetType"/> 字符串与运行时 <see cref="TargetType"/> 的对应（与 <see cref="CardCodeGenerator"/> 中名称一致）。
+/// <see cref="CardDefinition.TargetType"/> 字符串 → 编辑器 <see cref="TargetType"/>（与 <see cref="CardCodeGenerator"/> 中 MapTargetType 一致）。
 /// </summary>
 public static class CardTargetTypeMapping
 {
-    /// <summary>将 JSON / <see cref="CardDefinition.TargetType"/> 转为 sts2 枚举。</summary>
-    public static TargetType FromDefinitionString(string? targetType)
+    /// <summary>将 JSON / 编辑器中的 targetType 解析为 <see cref="TargetType"/>。</summary>
+    public static TargetType ParseFromDefinition(string? targetType)
     {
         var t = (targetType ?? "AnyEnemy").Trim();
         return t switch

@@ -47,7 +47,7 @@ public static class CardPlayActionEmitSyntax
 
     /// <summary>
     /// 若重复次数为 1 次且为 literal，不包循环；否则用 <c>for</c> 包裹 <paramref name="innerBody"/>。
-    /// 各 Emitter 按需调用；若需结合 <see cref="CardPlayActionEmitContext.TargetType"/> 等自定义重复结构，请在 <c>GenerateCode</c> 内自行编写循环，勿强制在末尾调用本方法。
+    /// 各 Emitter 按需调用；若需结合 <see cref="CardPlayActionEmitContext.PlayTargetType"/> 等自定义重复结构，请在 <c>GenerateCode</c> 内自行编写循环，勿强制在末尾调用本方法。
     /// </summary>
     public static string WrapWithRepeatLoop(CardPlayAction action, string innerBody, string indent)
     {

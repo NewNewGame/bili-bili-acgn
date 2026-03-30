@@ -15,9 +15,9 @@ public static class CardCodeGenerator
 {
     private static readonly CultureInfo ZhCn = new("zh-CN");
 
-    public const string RegionCardProperties = "Card properties";
-    public const string RegionCardPlayAction = "CardPlayAction";
-    public const string RegionOnUpgrade = "OnUpgrade";
+    public const string RegionCardProperties = "卡牌属性配置";
+    public const string RegionCardPlayAction = "卡牌打出效果";
+    public const string RegionOnUpgrade = "升级效果";
 
     private const string IndentClass = "    ";
     private const string IndentMethod = "        ";
@@ -66,7 +66,7 @@ public static class CardCodeGenerator
         sb.AppendLine($"namespace {ns};");
         sb.AppendLine();
         sb.AppendLine($"[Pool(typeof({pool}))]");
-        sb.AppendLine($"public sealed class {className} : BiliBiliACGN.BiliBiliACGNCode.Cards.CardBaseModel");
+        sb.AppendLine($"public sealed class {className} : CardBaseModel");
         sb.AppendLine("{");
         sb.AppendLine($"{IndentClass}#region {RegionCardProperties}");
         sb.Append(BuildCardPropertiesInner(def, className));
@@ -257,28 +257,29 @@ public static class CardCodeGenerator
     private static string BuildCardPropertiesInner(CardDefinition def, string className)
     {
         var sb = new StringBuilder();
-        sb.AppendLine($"        private const int energyCost = {def.EnergyCost};");
-        sb.AppendLine($"        private const CardType type = CardType.{MapCardType(def.CardType)};");
-        sb.AppendLine($"        private const CardRarity rarity = CardRarity.{MapRarity(def.Rarity)};");
-        sb.AppendLine($"        private const TargetType targetType = TargetType.{MapTargetType(def.TargetType)};");
-        sb.AppendLine($"        private const bool shouldShowInCardLibrary = {def.ShowInCardLibrary.ToString().ToLowerInvariant()};");
+        const string TAB = "    ";
+        sb.AppendLine($"{TAB}private const int energyCost = {def.EnergyCost};");
+        sb.AppendLine($"{TAB}private const CardType type = CardType.{MapCardType(def.CardType)};");
+        sb.AppendLine($"{TAB}private const CardRarity rarity = CardRarity.{MapRarity(def.Rarity)};");
+        sb.AppendLine($"{TAB}private const TargetType targetType = TargetType.{MapTargetType(def.TargetType)};");
+        sb.AppendLine($"{TAB}private const bool shouldShowInCardLibrary = {def.ShowInCardLibrary.ToString().ToLowerInvariant()};");
         sb.AppendLine();
-        sb.AppendLine("        /// <summary>");
-        sb.AppendLine("        /// 牌面动态变量配置。");
-        sb.AppendLine("        /// </summary>");
-        sb.AppendLine("        protected override IEnumerable<DynamicVar> CanonicalVars =>");
-        sb.AppendLine("        [");
+        sb.AppendLine($"{TAB}/// <summary>");
+        sb.AppendLine($"{TAB}/// 牌面动态变量配置。");
+        sb.AppendLine($"{TAB}/// </summary>");
+        sb.AppendLine($"{TAB}protected override IEnumerable<DynamicVar> CanonicalVars =>");
+        sb.AppendLine($"{TAB}[");
         var vars = def.DynamicVars.Count > 0
             ? def.DynamicVars
             : new List<DynamicVarEntry> { new() { Kind = "Damage", BaseValue = 1m, UpgradeValue = 0m } };
         for (var i = 0; i < vars.Count; i++)
         {
             var comma = i < vars.Count - 1 ? "," : "";
-            sb.AppendLine($"            {EmitCanonicalVar(vars[i])}{comma}");
+            sb.AppendLine($"{TAB}{TAB}{EmitCanonicalVar(vars[i])}{comma}");
         }
-        sb.AppendLine("        ];");
+        sb.AppendLine($"{TAB}];");
         sb.AppendLine();
-        sb.AppendLine($"        public {className}() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) {{ }}");
+        sb.AppendLine($"{TAB}public {className}() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) {{ }}");
         sb.AppendLine();
         return sb.ToString();
     }
@@ -368,21 +369,8 @@ public static class CardCodeGenerator
         _ => "Common"
     };
 
-    private static string MapTargetType(string s) => s.Trim() switch
-    {
-        "None" => "None",
-        "Self" => "Self",
-        "AnyEnemy" => "AnyEnemy",
-        "AllEnemies" => "AllEnemies",
-        "RandomEnemy" => "RandomEnemy",
-        "AnyPlayer" => "AnyPlayer",
-        "AnyAlly" => "AnyAlly",
-        "AllAllies" => "AllAllies",
-        "TargetedNoCreature" => "TargetedNoCreature",
-        "Osty" => "Osty",
-        "Player" => "AnyPlayer",
-        _ => "AnyEnemy"
-    };
+    private static string MapTargetType(string s) =>
+        CardTargetTypeMapping.ParseFromDefinition(s).ToString();
 
     private static string EmitCanonicalVar(DynamicVarEntry v)
     {
