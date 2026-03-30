@@ -9,13 +9,14 @@ namespace CardEditorGui;
 
 public partial class SettingsWindow : Window
 {
-    private readonly ObservableCollection<string> _poolTypes = [];
+    private readonly ObservableCollection<CardPoolEntry> _poolRows = [];
 
     public SettingsWindow()
     {
         InitializeComponent();
-        LstPoolTypes.ItemsSource = _poolTypes;
+        GridPools.ItemsSource = _poolRows;
         TxtSettingsPath.Text = EditorSettingsJson.GetDefaultSettingsPath();
+        TxtCardPoolPath.Text = CardPoolJson.GetDefaultFilePath();
         Loaded += (_, _) => LoadIntoUi(EditorSettingsJson.LoadOrCreateDefault());
     }
 
@@ -25,30 +26,25 @@ public partial class SettingsWindow : Window
         TxtDefaultSaveDirectory.Text = s.DefaultSaveDirectory ?? "";
         TxtDefaultCardScriptOutputDirectory.Text = s.DefaultCardScriptOutputDirectory ?? "";
         TxtCardLocalizationJsonPath.Text = s.CardLocalizationJsonPath ?? "";
-        _poolTypes.Clear();
-        foreach (var p in s.PoolTypeOptions)
+        _poolRows.Clear();
+        foreach (var e in CardPoolJson.LoadOrCreateDefault())
+            _poolRows.Add(new CardPoolEntry { Name = e.Name, DisplayName = e.DisplayName });
+        if (_poolRows.Count == 0)
         {
-            if (!string.IsNullOrWhiteSpace(p))
-                _poolTypes.Add(p.Trim());
+            foreach (var e in CardPoolCatalog.CloneDefaultPools())
+                _poolRows.Add(e);
         }
-        if (_poolTypes.Count == 0)
-            _poolTypes.Add("ColorlessCardPool");
     }
 
     private EditorSettings CollectFromUi()
     {
-        var pools = _poolTypes.Where(x => !string.IsNullOrWhiteSpace(x)).Select(x => x.Trim()).Distinct(StringComparer.Ordinal).ToList();
-        if (pools.Count == 0)
-            pools.Add("ColorlessCardPool");
-
         return new EditorSettings
         {
             SchemaVersion = 1,
             DefaultNamespace = TxtDefaultNamespace.Text.Trim(),
             DefaultSaveDirectory = TxtDefaultSaveDirectory.Text.Trim(),
             DefaultCardScriptOutputDirectory = TxtDefaultCardScriptOutputDirectory.Text.Trim(),
-            CardLocalizationJsonPath = TxtCardLocalizationJsonPath.Text.Trim(),
-            PoolTypeOptions = pools
+            CardLocalizationJsonPath = TxtCardLocalizationJsonPath.Text.Trim()
         };
     }
 
@@ -130,27 +126,28 @@ public partial class SettingsWindow : Window
         var name = TxtNewPoolType.Text.Trim();
         if (string.IsNullOrEmpty(name))
             return;
-        if (_poolTypes.Contains(name, StringComparer.Ordinal))
+        if (_poolRows.Any(x => string.Equals(x.Name?.Trim(), name, StringComparison.Ordinal)))
         {
             System.Windows.MessageBox.Show("列表中已有该项。", "提示", MessageBoxButton.OK, MessageBoxImage.Information);
             return;
         }
-        _poolTypes.Add(name);
+        var disp = TxtNewPoolDisplayName.Text.Trim();
+        _poolRows.Add(new CardPoolEntry { Name = name, DisplayName = string.IsNullOrEmpty(disp) ? null : disp });
         TxtNewPoolType.Clear();
-        LstPoolTypes.SelectedItem = name;
-        LstPoolTypes.ScrollIntoView(name);
+        TxtNewPoolDisplayName.Clear();
+        GridPools.SelectedItem = _poolRows[^1];
     }
 
     private void BtnRemovePool_Click(object sender, RoutedEventArgs e)
     {
-        if (LstPoolTypes.SelectedItem is not string sel)
+        if (GridPools.SelectedItem is not CardPoolEntry row)
         {
-            System.Windows.MessageBox.Show("请先选中一项。", "提示", MessageBoxButton.OK, MessageBoxImage.Information);
+            System.Windows.MessageBox.Show("请先选中一行。", "提示", MessageBoxButton.OK, MessageBoxImage.Information);
             return;
         }
-        _poolTypes.Remove(sel);
-        if (_poolTypes.Count == 0)
-            _poolTypes.Add("ColorlessCardPool");
+        _poolRows.Remove(row);
+        if (_poolRows.Count == 0)
+            _poolRows.Add(new CardPoolEntry { Name = "ColorlessCardPool", DisplayName = "无色牌" });
     }
 
     private void BtnOk_Click(object sender, RoutedEventArgs e)
@@ -171,6 +168,23 @@ public partial class SettingsWindow : Window
                     MessageBoxImage.Warning);
                 return;
             }
+
+            var names = new HashSet<string>(StringComparer.Ordinal);
+            foreach (var r in _poolRows)
+            {
+                var n = r.Name?.Trim() ?? "";
+                if (n.Length == 0)
+                {
+                    System.Windows.MessageBox.Show("卡池「类型名」不能为空。", "校验", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return;
+                }
+                if (!names.Add(n))
+                {
+                    System.Windows.MessageBox.Show($"重复的类型名：{n}", "校验", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return;
+                }
+            }
+
             var dir = settings.DefaultSaveDirectory;
             if (!string.IsNullOrEmpty(dir) && !Directory.Exists(dir))
             {
@@ -226,6 +240,7 @@ public partial class SettingsWindow : Window
                 }
             }
 
+            CardPoolJson.SaveDefault(_poolRows.Select(p => new CardPoolEntry { Name = p.Name, DisplayName = p.DisplayName }).ToList());
             EditorSettingsJson.SaveDefault(settings);
             DialogResult = true;
             Close();

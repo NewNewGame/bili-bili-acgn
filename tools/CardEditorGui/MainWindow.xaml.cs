@@ -18,7 +18,7 @@ public partial class MainWindow : Window
     /// <summary>最近一次从磁盘加载或成功保存后的卡牌数据，用于「保存并生成」时判断变更范围。</summary>
     private CardDefinition _persistedSnapshot = null!;
     private EditorSettings _settings = new();
-    private readonly ObservableCollection<string> _poolOptions = [];
+    private readonly ObservableCollection<CardPoolEntry> _poolEntries = [];
     private readonly ObservableCollection<DynamicVarEntry> _dynamicVars = [];
     private readonly ObservableCollection<CardPlayAction> _playActions = [];
 
@@ -52,16 +52,22 @@ public partial class MainWindow : Window
     private void LoadSettingsAndPools()
     {
         _settings = EditorSettingsJson.LoadOrCreateDefault();
-        _poolOptions.Clear();
-        foreach (var p in _settings.PoolTypeOptions)
+        _poolEntries.Clear();
+        foreach (var e in CardPoolJson.LoadOrCreateDefault())
+            _poolEntries.Add(new CardPoolEntry { Name = e.Name, DisplayName = e.DisplayName });
+        if (_poolEntries.Count == 0)
         {
-            if (!string.IsNullOrWhiteSpace(p))
-                _poolOptions.Add(p.Trim());
+            foreach (var e in CardPoolCatalog.CloneDefaultPools())
+                _poolEntries.Add(e);
         }
-        if (_poolOptions.Count == 0)
-            _poolOptions.Add("ColorlessCardPool");
 
-        CmbPoolType.ItemsSource = _poolOptions;
+        CmbPoolType.ItemsSource = null;
+        CmbPoolType.ItemsSource = _poolEntries;
+        CmbPoolType.DisplayMemberPath = nameof(CardPoolEntry.DisplayLabel);
+        CmbPoolType.SelectedValuePath = nameof(CardPoolEntry.Name);
+
+        if (!File.Exists(CardPoolJson.GetDefaultFilePath()))
+            CardPoolJson.SaveDefault(_poolEntries.Select(e => new CardPoolEntry { Name = e.Name, DisplayName = e.DisplayName }).ToList());
     }
 
     private string GetDialogInitialDirectory()
@@ -167,7 +173,7 @@ public partial class MainWindow : Window
 
     private CardDefinition CreateDefaultCard()
     {
-        var pool = _poolOptions.Count > 0 ? _poolOptions[0] : "ColorlessCardPool";
+        var pool = _poolEntries.Count > 0 ? _poolEntries[0].Name : "ColorlessCardPool";
         return new CardDefinition
         {
             ClassName = "NewCard",
@@ -199,7 +205,7 @@ public partial class MainWindow : Window
             TxtDescription.Text = m.Description ?? "";
             TxtEnergyCost.Text = m.EnergyCost.ToString();
             EnsurePoolInOptions(m.PoolTypeName);
-            SelectCombo(CmbPoolType, m.PoolTypeName);
+            SelectPoolCombo(m.PoolTypeName);
             SelectCombo(CmbCardType, m.CardType);
             SelectCombo(CmbRarity, m.Rarity);
             SelectCombo(CmbTargetType, NormalizeTargetTypeForUi(m.TargetType));
@@ -298,9 +304,28 @@ public partial class MainWindow : Window
         var name = string.IsNullOrWhiteSpace(poolTypeName) ? null : poolTypeName.Trim();
         if (string.IsNullOrEmpty(name))
             return;
-        if (_poolOptions.Contains(name, StringComparer.Ordinal))
+        if (_poolEntries.Any(e => string.Equals(e.Name, name, StringComparison.Ordinal)))
             return;
-        _poolOptions.Add(name);
+        _poolEntries.Add(new CardPoolEntry { Name = name, DisplayName = null });
+    }
+
+    private void SelectPoolCombo(string? poolTypeName)
+    {
+        if (string.IsNullOrWhiteSpace(poolTypeName))
+        {
+            CmbPoolType.SelectedIndex = _poolEntries.Count > 0 ? 0 : -1;
+            return;
+        }
+        var n = poolTypeName.Trim();
+        foreach (var e in _poolEntries)
+        {
+            if (string.Equals(e.Name, n, StringComparison.Ordinal))
+            {
+                CmbPoolType.SelectedItem = e;
+                return;
+            }
+        }
+        CmbPoolType.SelectedIndex = _poolEntries.Count > 0 ? 0 : -1;
     }
 
     private static DynamicVarEntry CloneVar(DynamicVarEntry v)
@@ -350,14 +375,21 @@ public partial class MainWindow : Window
         box.SelectedIndex = box.Items.Count > 0 ? 0 : -1;
     }
 
+    private string ResolvePoolTypeNameFromCombo()
+    {
+        if (CmbPoolType.SelectedItem is CardPoolEntry pe)
+            return string.IsNullOrWhiteSpace(pe.Name) ? "ColorlessCardPool" : pe.Name.Trim();
+        if (CmbPoolType.SelectedValue is string s && !string.IsNullOrWhiteSpace(s))
+            return s.Trim();
+        return _poolEntries.FirstOrDefault()?.Name ?? "ColorlessCardPool";
+    }
+
     private CardDefinition CollectModelFromUi()
     {
         if (!int.TryParse(TxtEnergyCost.Text.Trim(), out var energy))
             energy = 0;
 
-        var pool = CmbPoolType.SelectedItem?.ToString()?.Trim();
-        if (string.IsNullOrEmpty(pool))
-            pool = _poolOptions.Count > 0 ? _poolOptions[0] : "ColorlessCardPool";
+        var pool = ResolvePoolTypeNameFromCombo();
 
         return new CardDefinition
         {
@@ -585,15 +617,14 @@ public partial class MainWindow : Window
 
     private void MenuSettings_Click(object sender, RoutedEventArgs e)
     {
-        var poolBefore = CmbPoolType.SelectedItem?.ToString();
+        var poolBefore = ResolvePoolTypeNameFromCombo();
         var w = new SettingsWindow { Owner = this };
         if (w.ShowDialog() != true)
             return;
 
         LoadSettingsAndPools();
-        if (!string.IsNullOrEmpty(poolBefore))
-            EnsurePoolInOptions(poolBefore);
-        SelectCombo(CmbPoolType, poolBefore ?? "");
+        EnsurePoolInOptions(poolBefore);
+        SelectPoolCombo(poolBefore);
         StatusText.Text = "已更新设置";
     }
 
@@ -602,6 +633,56 @@ public partial class MainWindow : Window
         var w = new DynamicVarTemplatesWindow(this);
         if (w.ShowDialog() == true)
             StatusText.Text = $"模版已保存: {DynamicVarTemplateJson.GetDefaultFilePath()}";
+    }
+
+    private void BtnManagePlayActionTemplates_Click(object sender, RoutedEventArgs e)
+    {
+        var w = new CardPlayActionTemplatesWindow(this);
+        if (w.ShowDialog() == true)
+            StatusText.Text = $"打出效果模版已保存: {CardPlayActionTemplateJson.GetDefaultFilePath()}";
+    }
+
+    /// <summary>
+    /// 按模版名称追加一行 <see cref="CardPlayAction"/>：ActionType 与名称一致，value / 重复次数固定为 1，其余默认。
+    /// 若已存在<strong>相同模版默认内容</strong>的一行（同 ActionType 且 literal/1/1、无 notes），返回 false。
+    /// </summary>
+    public bool TryAddCardPlayActionFromTemplate(string actionType)
+    {
+        var t = actionType.Trim();
+        if (t.Length == 0)
+            return false;
+        if (_playActions.Any(a => IsSameAsTemplateDefaultRow(a, t)))
+            return false;
+        _playActions.Add(new CardPlayAction
+        {
+            ActionType = t,
+            ValueBinding = "literal",
+            Value = 1m,
+            RepeatCountBinding = "literal",
+            RepeatCountValue = 1m,
+            Notes = null
+        });
+        MarkDirty();
+        StatusText.Text = $"已添加打出效果: {t}";
+        return true;
+    }
+
+    /// <summary>与「从模版添加」生成的默认行一致（用于判断是否重复）。</summary>
+    private static bool IsSameAsTemplateDefaultRow(CardPlayAction a, string templateActionType)
+    {
+        if (!string.Equals(a.ActionType?.Trim(), templateActionType, StringComparison.Ordinal))
+            return false;
+        if (!string.Equals(a.ValueBinding?.Trim(), "literal", StringComparison.Ordinal))
+            return false;
+        if (a.Value != 1m)
+            return false;
+        if (!string.Equals(a.RepeatCountBinding?.Trim(), "literal", StringComparison.Ordinal))
+            return false;
+        if (a.RepeatCountValue != 1m)
+            return false;
+        if (!string.IsNullOrWhiteSpace(a.Notes))
+            return false;
+        return true;
     }
 
     /// <summary>按模版 name 向当前卡牌追加一行；已存在同 kind 返回 false。</summary>

@@ -40,9 +40,9 @@
                 <TextBox x:Name="TxtCardLocalizationJsonPath" />
             </DockPanel>
 
-            <TextBlock Text="卡池类型名（下拉选项，可增删）" FontWeight="SemiBold" Margin="0,0,0,4" />
+            <TextBlock Text="卡池（CardPool.json，与 exe 同目录）" FontWeight="SemiBold" Margin="0,0,0,4" />
             <TextBlock TextWrapping="Wrap" Foreground="Gray" FontSize="11" Margin="0,0,0,8"
-                       Text="与代码中 [Pool(typeof(类型名))] 一致，例如 ColorlessCardPool。" />
+                       Text="「类型名」写入卡牌 JSON 与生成代码（[Pool(typeof(...))]）；「显示名称」仅用于编辑器下拉，留空则下拉显示类型名。" />
         </StackPanel>
 
         <GroupBox Grid.Row="1" Header="卡池列表" Margin="0,0,0,12">
@@ -50,19 +50,43 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
                     <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
-                <ListBox x:Name="LstPoolTypes" Grid.Row="0" MinHeight="120" Margin="0,0,0,8" />
-                <DockPanel Grid.Row="1" LastChildFill="True">
-                    <Button DockPanel.Dock="Right" Content="删除选中" Width="88" Margin="8,0,0,0" Click="BtnRemovePool_Click" />
-                    <Button DockPanel.Dock="Right" Content="添加" Width="64" Margin="8,0,0,0" Click="BtnAddPool_Click" />
-                    <TextBox x:Name="TxtNewPoolType" />
-                </DockPanel>
+                <DataGrid x:Name="GridPools" Grid.Row="0"
+                          AutoGenerateColumns="False"
+                          CanUserAddRows="False"
+                          MinHeight="140"
+                          Margin="0,0,0,8"
+                          HeadersVisibility="Column">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="类型名（输出）" Binding="{Binding Name, UpdateSourceTrigger=PropertyChanged}" Width="2*" />
+                        <DataGridTextColumn Header="显示名称（可选）" Binding="{Binding DisplayName, UpdateSourceTrigger=PropertyChanged}" Width="*" />
+                    </DataGrid.Columns>
+                </DataGrid>
+                <Grid Grid.Row="1" Margin="0,0,0,8">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBox x:Name="TxtNewPoolType" Grid.Column="0" Margin="0,0,8,0"
+                             ToolTip="新卡池类型名，如 MyCardPool" />
+                    <TextBox x:Name="TxtNewPoolDisplayName" Grid.Column="1" Margin="0,0,8,0"
+                             ToolTip="可选，如下拉显示中文名" />
+                    <Button Grid.Column="2" Content="添加" Width="64" Margin="0,0,8,0" Click="BtnAddPool_Click" />
+                    <Button Grid.Column="3" Content="删除选中" Width="88" Click="BtnRemovePool_Click" />
+                </Grid>
+                <TextBlock Grid.Row="2" Foreground="Gray" FontSize="11" TextWrapping="Wrap"
+                           Text="默认含 ColorlessCardPool（无色牌）、CurseCardPool（诅咒牌）、StatusCardPool（状态牌）；首次运行会在 exe 同目录生成 CardPool.json。" />
             </Grid>
         </GroupBox>
 
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
-            <TextBlock x:Name="TxtSettingsPath" VerticalAlignment="Center" Margin="0,0,16,0"
-                       Foreground="Gray" FontSize="11" TextTrimming="CharacterEllipsis" />
+            <StackPanel VerticalAlignment="Center" Margin="0,0,16,0" MaxWidth="360">
+                <TextBlock x:Name="TxtSettingsPath" Foreground="Gray" FontSize="11" TextTrimming="CharacterEllipsis" />
+                <TextBlock x:Name="TxtCardPoolPath" Foreground="Gray" FontSize="11" TextTrimming="CharacterEllipsis" Margin="0,2,0,0" />
+            </StackPanel>
             <Button Content="确定" Width="88" Margin="0,0,8,0" IsDefault="True" Click="BtnOk_Click" />
             <Button Content="取消" Width="88" IsCancel="True" Click="BtnCancel_Click" />
         </StackPanel>

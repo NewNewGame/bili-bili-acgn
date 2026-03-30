@@ -26,10 +26,7 @@ public sealed class EditorSettings
     [JsonPropertyName("cardLocalizationJsonPath")]
     public string CardLocalizationJsonPath { get; set; } = "";
 
-    /// <summary>卡池类型名下拉选项（对应 [Pool(typeof(...))] 中的类型名）。</summary>
+    /// <summary>已弃用：卡池由 exe 同目录 <c>CardPool.json</c> 管理；保留字段仅便于从旧版 settings 读取并迁移。</summary>
     [JsonPropertyName("poolTypeOptions")]
-    public List<string> PoolTypeOptions { get; set; } =
-    [
-        "ColorlessCardPool"
-    ];
+    public List<string>? PoolTypeOptions { get; set; }
 }
