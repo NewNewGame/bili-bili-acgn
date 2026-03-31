@@ -509,6 +509,121 @@ public partial class MainWindow : Window
         SaveToPath(_currentPath);
     }
 
+    /// <summary>仅将当前表单的名称/描述合并到设置中的 cards.json，不依赖「保存并生成」。</summary>
+    private void MenuUpdateCardLocalization_Click(object sender, RoutedEventArgs e)
+    {
+        var missing = new List<string>();
+        if (string.IsNullOrWhiteSpace(TxtClassName.Text))
+            missing.Add("类名（Class name）");
+
+        _settings = EditorSettingsJson.LoadOrCreateDefault();
+        var locPath = _settings.CardLocalizationJsonPath?.Trim() ?? "";
+        if (string.IsNullOrEmpty(locPath))
+            missing.Add("「工具 → 设置」中的「卡牌信息 JSON 路径」（cards.json）");
+
+        var current = CollectModelFromUi();
+        if (string.IsNullOrWhiteSpace(current.Title))
+            missing.Add("卡牌名称（标题），用于写入 cards.json");
+
+        if (missing.Count > 0)
+        {
+            ShowMissingRequiredFields("更新卡牌信息", missing);
+            return;
+        }
+
+        try
+        {
+            CardLocalizationJsonMerger.MergeTitleAndDescription(locPath, current.ClassName, current.Namespace, current.Title, current.Description);
+            var full = Path.GetFullPath(locPath);
+            StatusText.Text = $"已更新卡牌信息: {full}";
+            System.Windows.MessageBox.Show($"已写入：{full}", "更新卡牌信息", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+        catch (Exception ex)
+        {
+            System.Windows.MessageBox.Show(ex.Message, "更新卡牌信息失败", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+    }
+
+    /// <summary>多选卡牌定义 JSON，依次合并 title/description 到设置中的 cards.json。</summary>
+    private void MenuBatchUpdateCardLocalization_Click(object sender, RoutedEventArgs e)
+    {
+        _settings = EditorSettingsJson.LoadOrCreateDefault();
+        var locPath = _settings.CardLocalizationJsonPath?.Trim() ?? "";
+        if (string.IsNullOrEmpty(locPath))
+        {
+            System.Windows.MessageBox.Show(
+                "请先在「工具 → 设置」中配置「卡牌信息 JSON 路径」（cards.json）。",
+                "批量更新卡牌信息",
+                MessageBoxButton.OK,
+                MessageBoxImage.Warning);
+            return;
+        }
+
+        var dlg = new Microsoft.Win32.OpenFileDialog
+        {
+            Filter = "JSON (*.json)|*.json|所有文件 (*.*)|*.*",
+            Title = "选择多条卡牌定义 JSON（可多选）",
+            Multiselect = true,
+            InitialDirectory = GetDialogInitialDirectory()
+        };
+        if (dlg.ShowDialog() != true || dlg.FileNames.Length == 0)
+            return;
+
+        var ok = new List<string>();
+        var skipped = new List<string>();
+        var errors = new List<string>();
+
+        foreach (var path in dlg.FileNames.Distinct(StringComparer.OrdinalIgnoreCase))
+        {
+            try
+            {
+                var def = CardDefinitionJson.LoadFromFile(path);
+                if (string.IsNullOrWhiteSpace(def.ClassName))
+                {
+                    skipped.Add($"{Path.GetFileName(path)}：缺少 className");
+                    continue;
+                }
+                if (string.IsNullOrWhiteSpace(def.Title))
+                {
+                    skipped.Add($"{Path.GetFileName(path)}：缺少 title");
+                    continue;
+                }
+                CardLocalizationJsonMerger.MergeTitleAndDescription(locPath, def.ClassName, def.Namespace, def.Title, def.Description);
+                ok.Add(Path.GetFileName(path));
+            }
+            catch (Exception ex)
+            {
+                errors.Add($"{Path.GetFileName(path)}：{ex.Message}");
+            }
+        }
+
+        var dest = Path.GetFullPath(locPath);
+        StatusText.Text = $"批量更新卡牌信息：成功 {ok.Count} 个 → {dest}";
+
+        var lines = new List<string> { $"目标文件：{dest}", "", $"成功合并：{ok.Count} 个" };
+        if (ok.Count > 0)
+            lines.Add(string.Join("\n", ok.Select(f => $"  · {f}")));
+        if (skipped.Count > 0)
+        {
+            lines.Add("");
+            lines.Add($"跳过（{skipped.Count}）：");
+            lines.AddRange(skipped.Select(s => $"  · {s}"));
+        }
+        if (errors.Count > 0)
+        {
+            lines.Add("");
+            lines.Add($"失败（{errors.Count}）：");
+            lines.AddRange(errors.Select(s => $"  · {s}"));
+        }
+
+        var img = errors.Count > 0
+            ? MessageBoxImage.Warning
+            : ok.Count == 0 && skipped.Count > 0
+                ? MessageBoxImage.Warning
+                : MessageBoxImage.Information;
+        System.Windows.MessageBox.Show(string.Join(Environment.NewLine, lines), "批量更新卡牌信息", MessageBoxButton.OK, img);
+    }
+
     private void MenuSaveAs_Click(object sender, RoutedEventArgs e)
     {
         var dlg = new Microsoft.Win32.SaveFileDialog

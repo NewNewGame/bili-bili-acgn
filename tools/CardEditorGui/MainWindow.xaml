@@ -27,6 +27,8 @@
                 <MenuItem Header="打开(_O)..." Click="MenuOpen_Click" InputGestureText="Ctrl+O" />
                 <Separator />
                 <MenuItem Header="保存(_S)" Click="MenuSave_Click" InputGestureText="Ctrl+S" />
+                <MenuItem Header="更新卡牌信息(cards.json)(_U)…" Click="MenuUpdateCardLocalization_Click" />
+                <MenuItem Header="批量更新卡牌信息(cards.json)(_B)…" Click="MenuBatchUpdateCardLocalization_Click" />
                 <MenuItem Header="另存为(_A)..." Click="MenuSaveAs_Click" />
                 <MenuItem Header="保存并生成(_G)..." Click="MenuSaveAndGenerate_Click" />
                 <Separator />

@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "className": "CornSyndrome",
   "title": "玉米症",
-  "description": "获得{Block:diff()}点格挡。本回合给你手牌的一张牌添加[gold]有一说一[/gold]。",
+  "description": "获得{Block:diff()}点格挡。随机给你手牌中的一张牌添加[gold]有一说一[/gold]。",
   "namespace": "BiliBiliACGN.BiliBiliACGNCode.Cards",
   "energyCost": 1,
   "cardType": "Skill",
