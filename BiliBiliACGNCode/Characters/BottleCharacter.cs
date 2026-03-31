@@ -31,18 +31,9 @@ public sealed class BottleCharacter : PlaceholderCharacterModel
     public override RelicPoolModel RelicPool => ModelDb.RelicPool<BottleRelicPool>();
 
     public override PotionPoolModel PotionPool => ModelDb.PotionPool<BottlePotionPool>();
-    // 人物模型tscn路径。要自定义见下。
-    public override string CustomVisualPath => "res://BiliBiliACGN/scenes/bottle_chracter.tscn";
     // 人物头像路径。
     public override string CustomIconTexturePath => "res://BiliBiliACGN/images/characters/bottle_icon.png";
     protected override string MapMarkerPath => "res://BiliBiliACGN/images/characters/bottle_map_marker.png";
-    // 能量表盘tscn路径。要自定义见下。
-    public override string CustomEnergyCounterPath => "res://BiliBiliACGN/scenes/bottle_energy_counter.tscn";
-    // 人物选择背景。
-    public override string CustomIconPath => "res://BiliBiliACGN/scenes/bottle_character_icon.tscn";
-    public override string CustomCharacterSelectBg => "res://BiliBiliACGN/scenes/bottle_select_bg.tscn";
-    //public override string CustomRestSiteAnimPath => "res://BiliBiliACGN/scenes/bottle_rest_site.tscn";
-    //public override string CustomMerchantAnimPath => "res://BiliBiliACGN/scenes/bottle_merchant.tscn";
     public override string CustomArmPointingTexturePath => "res://BiliBiliACGN/images/hands/bottle_point.png";
     public override string CustomArmPaperTexturePath => "res://BiliBiliACGN/images/hands/bottle_paper.png";
     public override string CustomArmRockTexturePath => "res://BiliBiliACGN/images/hands/bottle_rock.png";

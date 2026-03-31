@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://dwysqs5534an2"]
+
+[ext_resource type="Texture2D" uid="uid://dpdv8s74xdyw7" path="res://BiliBiliACGN/images/characters/bottle_chracter.png" id="1_gy0u0"]
+
+[node name="MerchantCharacter" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(3.0000005, -183.00002)
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("1_gy0u0")

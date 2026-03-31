@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://b81u1ibyscsr7"]
+[gd_scene load_steps=2 format=3 uid="uid://c0c12vlplnwkv"]
 
-[ext_resource type="Texture2D" uid="uid://dpdv8s74xdyw7" path="res://BiliBiliACGN/images/characters/bottle_chracter.png" id="1_4xj67"]
+[ext_resource type="Texture2D" uid="uid://dpdv8s74xdyw7" path="res://BiliBiliACGN/images/characters/bottle_chracter.png" id="1_agfs1"]
 
 [node name="bottle" type="Node2D"]
 metadata/_edit_vertical_guides_ = [-1036.0]
@@ -9,7 +9,7 @@ metadata/_edit_vertical_guides_ = [-1036.0]
 unique_name_in_owner = true
 position = Vector2(0, -154)
 scale = Vector2(0.3, 0.3)
-texture = ExtResource("1_4xj67")
+texture = ExtResource("1_agfs1")
 
 [node name="Bounds" type="Control" parent="."]
 unique_name_in_owner = true
