@@ -17,8 +17,9 @@ using MegaCrit.Sts2.Core.Models;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Characters;
 
-public sealed class BottleCharacter : CustomCharacterModel
+public sealed class BottleCharacter : PlaceholderCharacterModel
 {
+    public override string PlaceholderID => "bottle";
     public override Color NameColor => new Color("789ccd");
 
     public override CharacterGender Gender => CharacterGender.Masculine;
@@ -61,14 +62,5 @@ public sealed class BottleCharacter : CustomCharacterModel
 
     public override IReadOnlyList<RelicModel> StartingRelics => [
         ModelDb.Relic<Alzheimer>()
-    ];
-
-    // 攻击建筑师的攻击特效列表
-    public override List<string> GetArchitectAttackVfx() => [
-        "vfx/vfx_attack_blunt",
-        "vfx/vfx_heavy_blunt",
-        "vfx/vfx_attack_slash",
-        "vfx/vfx_bloody_impact",
-        "vfx/vfx_rock_shatter"
     ];
 }   

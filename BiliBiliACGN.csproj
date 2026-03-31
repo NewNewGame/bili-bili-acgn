@@ -73,6 +73,7 @@
     <Content Include="BiliBiliACGN\localization\zhs\*.json" />
 
     <Content Include="BiliBiliACGN\images\**\*" />
+    <Content Include="BiliBiliACGN\scenes\**\*" />
 
   </ItemGroup>
 
@@ -80,6 +81,7 @@
 
   <ItemGroup>
     <Folder Include="BiliBiliACGN\images\" />
+    <Folder Include="BiliBiliACGN\scenes\" />
   </ItemGroup>
 
 

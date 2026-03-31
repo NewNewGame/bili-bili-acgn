@@ -5,10 +5,13 @@
 //* 描述：阿尔茨海默症
 //*******************************************************
 
+using BaseLib.Utils;
+using BiliBiliACGN.BiliBiliACGNCode.Relics.RelicPool;
 using MegaCrit.Sts2.Core.Entities.Relics;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Relics;
 
+[Pool(typeof(BottleRelicPool))]
 public sealed class Alzheimer : RelicBaseModel
 {
     public override RelicRarity Rarity => RelicRarity.Starter;

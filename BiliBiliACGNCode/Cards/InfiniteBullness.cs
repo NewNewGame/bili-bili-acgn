@@ -48,7 +48,7 @@ public sealed class InfiniteBullness : CardBaseModel
     {
         #region 卡牌打出效果
         await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
-        await PowerCmd.Apply<InfiniteBullnessPower>(base.Owner.Creature, base.DynamicVars["Power"].BaseValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<InfiniteBullnessPower>(base.Owner.Creature, base.DynamicVars["Cards"].BaseValue, base.Owner.Creature, this);
         #endregion
     }
 
@@ -59,7 +59,7 @@ public sealed class InfiniteBullness : CardBaseModel
     {
         #region 升级效果
         base.EnergyCost.UpgradeBy(-1);
-        base.DynamicVars["Power"].UpgradeValueBy(1m);
+        base.DynamicVars["Cards"].UpgradeValueBy(1m);
 
         #endregion
     }
