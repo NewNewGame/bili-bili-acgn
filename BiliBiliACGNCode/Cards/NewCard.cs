@@ -12,6 +12,7 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using BiliBiliACGN.BiliBiliACGNCode.Cards.CardPool;
 using MegaCrit.Sts2.Core.ValueProps;
+using MegaCrit.Sts2.Core.HoverTips;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Cards;
 
@@ -19,6 +20,8 @@ namespace BiliBiliACGN.BiliBiliACGNCode.Cards;
 public sealed class NewCard : CardBaseModel
 {
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CustomKeyWords.YYSY];
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromKeyword(CustomKeyWords.YYSY)];
+
     #region 卡牌属性配置
         private const int energyCost = 1;
         private const CardType type = CardType.Attack;

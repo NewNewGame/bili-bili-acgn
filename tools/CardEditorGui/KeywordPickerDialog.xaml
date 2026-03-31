@@ -1,0 +1,20 @@
+<Window x:Class="CardEditorGui.KeywordPickerDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="选择关键字"
+        Height="380" Width="420"
+        MinHeight="280" MinWidth="360"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="CanResizeWithGrip">
+    <DockPanel Margin="12">
+        <TextBlock DockPanel.Dock="Top" TextWrapping="Wrap" Foreground="Gray" FontSize="11" Margin="0,0,0,10"
+                   Text="从「关键字配置」中选择一项。双击列表或点确定。" />
+        <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,12,0,0">
+            <Button Content="确定" Width="88" Margin="0,0,8,0" IsDefault="True" Click="BtnOk_Click" />
+            <Button Content="取消" Width="88" IsCancel="True" Click="BtnCancel_Click" />
+        </StackPanel>
+        <ListBox x:Name="LstOptions"
+                 DisplayMemberPath="Name"
+                 MouseDoubleClick="LstOptions_MouseDoubleClick" />
+    </DockPanel>
+</Window>

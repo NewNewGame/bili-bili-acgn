@@ -22,14 +22,16 @@ public static class CardDefinitionModelComparer
             TargetType = m.TargetType,
             ShowInCardLibrary = m.ShowInCardLibrary,
             PoolTypeName = m.PoolTypeName,
-            DynamicVars = m.DynamicVars.Select(v => new DynamicVarEntry
+            CanonicalKeywordFields = (m.CanonicalKeywordFields ?? []).ToList(),
+            ExtraHoverTipKeywordFields = (m.ExtraHoverTipKeywordFields ?? []).ToList(),
+            DynamicVars = (m.DynamicVars ?? []).Select(v => new DynamicVarEntry
             {
                 Kind = v.Kind,
                 BaseValue = v.BaseValue,
                 UpgradeValue = v.UpgradeValue,
                 ValueProp = v.ValueProp
             }).ToList(),
-            CardPlayActions = m.CardPlayActions.Select(a => new CardPlayAction
+            CardPlayActions = (m.CardPlayActions ?? []).Select(a => new CardPlayAction
             {
                 ActionType = a.ActionType,
                 BuffType = a.BuffType,
@@ -38,6 +40,13 @@ public static class CardDefinitionModelComparer
                 RepeatCountBinding = a.RepeatCountBinding,
                 RepeatCountValue = a.RepeatCountValue,
                 Notes = a.Notes
+            }).ToList(),
+            UpgradeEffects = (m.UpgradeEffects ?? []).Select(u => new UpgradeEffectEntry
+            {
+                Kind = u.Kind,
+                Delta = u.Delta,
+                KeywordField = u.KeywordField,
+                Notes = u.Notes
             }).ToList(),
             Notes = m.Notes
         };
@@ -55,8 +64,11 @@ public static class CardDefinitionModelComparer
         if (!string.Equals(a.TargetType, b.TargetType, StringComparison.Ordinal)) return false;
         if (a.ShowInCardLibrary != b.ShowInCardLibrary) return false;
         if (!string.Equals(a.PoolTypeName, b.PoolTypeName, StringComparison.Ordinal)) return false;
-        if (!DynamicVarsSequenceEquals(a.DynamicVars, b.DynamicVars)) return false;
-        return CardPlayActionsSequenceEquals(a.CardPlayActions, b.CardPlayActions);
+        if (!StringListSequenceEquals(a.CanonicalKeywordFields ?? [], b.CanonicalKeywordFields ?? [])) return false;
+        if (!StringListSequenceEquals(a.ExtraHoverTipKeywordFields ?? [], b.ExtraHoverTipKeywordFields ?? [])) return false;
+        if (!DynamicVarsSequenceEquals(a.DynamicVars ?? [], b.DynamicVars ?? [])) return false;
+        if (!CardPlayActionsSequenceEquals(a.CardPlayActions ?? [], b.CardPlayActions ?? [])) return false;
+        return UpgradeEffectsSequenceEquals(a.UpgradeEffects ?? [], b.UpgradeEffects ?? []);
     }
 
     /// <summary>卡牌名称 + 卡牌描述（与 cards.json 对应）。</summary>
@@ -69,6 +81,16 @@ public static class CardDefinitionModelComparer
         LocalizationSliceEquals(current, snapshot) &&
         CodeSliceEquals(current, snapshot) &&
         !string.Equals(NormNotes(current.Notes), NormNotes(snapshot.Notes), StringComparison.Ordinal);
+
+    private static bool StringListSequenceEquals(IReadOnlyList<string> a, IReadOnlyList<string> b)
+    {
+        if (a.Count != b.Count) return false;
+        for (var i = 0; i < a.Count; i++)
+        {
+            if (!string.Equals(a[i]?.Trim() ?? "", b[i]?.Trim() ?? "", StringComparison.Ordinal)) return false;
+        }
+        return true;
+    }
 
     private static bool DynamicVarsSequenceEquals(IReadOnlyList<DynamicVarEntry> a, IReadOnlyList<DynamicVarEntry> b)
     {
@@ -102,6 +124,19 @@ public static class CardDefinitionModelComparer
                     StringComparison.Ordinal))
                 return false;
             if (a[i].RepeatCountValue != b[i].RepeatCountValue) return false;
+            if (!string.Equals(a[i].Notes ?? "", b[i].Notes ?? "", StringComparison.Ordinal)) return false;
+        }
+        return true;
+    }
+
+    private static bool UpgradeEffectsSequenceEquals(IReadOnlyList<UpgradeEffectEntry> a, IReadOnlyList<UpgradeEffectEntry> b)
+    {
+        if (a.Count != b.Count) return false;
+        for (var i = 0; i < a.Count; i++)
+        {
+            if (!string.Equals(a[i].Kind?.Trim() ?? "", b[i].Kind?.Trim() ?? "", StringComparison.Ordinal)) return false;
+            if (a[i].Delta != b[i].Delta) return false;
+            if (!string.Equals(a[i].KeywordField?.Trim() ?? "", b[i].KeywordField?.Trim() ?? "", StringComparison.Ordinal)) return false;
             if (!string.Equals(a[i].Notes ?? "", b[i].Notes ?? "", StringComparison.Ordinal)) return false;
         }
         return true;

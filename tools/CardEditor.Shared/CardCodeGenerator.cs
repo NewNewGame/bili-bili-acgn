@@ -15,6 +15,7 @@ public static class CardCodeGenerator
 {
     private static readonly CultureInfo ZhCn = new("zh-CN");
 
+    public const string RegionCardKeywords = "卡牌关键词与悬停";
     public const string RegionCardProperties = "卡牌属性配置";
     public const string RegionCardPlayAction = "卡牌打出效果";
     public const string RegionOnUpgrade = "升级效果";
@@ -63,12 +64,15 @@ public static class CardCodeGenerator
         sb.AppendLine("using MegaCrit.Sts2.Core.Models.CardPools;");
         sb.AppendLine("using BiliBiliACGN.BiliBiliACGNCode.Cards.CardPool;");
         sb.AppendLine("using MegaCrit.Sts2.Core.ValueProps;");
+        if (NeedsHoverTipsUsing(def))
+            sb.AppendLine("using MegaCrit.Sts2.Core.HoverTips;");
         sb.AppendLine();
         sb.AppendLine($"namespace {ns};");
         sb.AppendLine();
         sb.AppendLine($"[Pool(typeof({pool}))]");
         sb.AppendLine($"public sealed class {className} : CardBaseModel");
         sb.AppendLine("{");
+        sb.Append(FormatRegionBlock(RegionCardKeywords, IndentClass, BuildCardKeywordsInner(def)));
         sb.AppendLine($"{IndentClass}#region {RegionCardProperties}");
         sb.Append(BuildCardPropertiesInner(def, className));
         sb.AppendLine($"{IndentClass}#endregion");
@@ -131,10 +135,13 @@ public static class CardCodeGenerator
     private static string MergeRegionsIntoExisting(string existing, CardDefinition def, string className)
     {
         var result = existing;
+        var keywordsInner = BuildCardKeywordsInner(def);
         var cardInner = BuildCardPropertiesInner(def, className);
         var playInner = BuildCardPlayActionInner(def);
         var upgradeInner = BuildOnUpgradeInner(def);
 
+        if (RegionExists(result, RegionCardKeywords, IndentClass))
+            TryReplaceRegionContent(result, RegionCardKeywords, IndentClass, keywordsInner, out result);
         if (RegionExists(result, RegionCardProperties, IndentClass))
             TryReplaceRegionContent(result, RegionCardProperties, IndentClass, cardInner, out result);
         if (RegionExists(result, RegionCardPlayAction, IndentMethod))
@@ -143,9 +150,31 @@ public static class CardCodeGenerator
             TryReplaceRegionContent(result, RegionOnUpgrade, IndentMethod, upgradeInner, out result);
 
         var inserts = new List<(int Index, string Text)>();
-        if (!RegionExists(result, RegionCardProperties, IndentClass) &&
-            TryFindInsertIndexAfterClassOpenBrace(result, out var idxClass))
-            inserts.Add((idxClass, FormatRegionBlock(RegionCardProperties, IndentClass, cardInner)));
+        var kwMissing = !RegionExists(result, RegionCardKeywords, IndentClass);
+        var propsMissing = !RegionExists(result, RegionCardProperties, IndentClass);
+        if (kwMissing && propsMissing && TryFindInsertIndexAfterClassOpenBrace(result, out var idxBoth))
+        {
+            inserts.Add((idxBoth,
+                FormatRegionBlock(RegionCardKeywords, IndentClass, keywordsInner) +
+                FormatRegionBlock(RegionCardProperties, IndentClass, cardInner)));
+        }
+        else
+        {
+            if (kwMissing)
+            {
+                if (TryFindInsertIndexBeforeRegion(result, RegionCardProperties, IndentClass, out var idxBeforeProps))
+                    inserts.Add((idxBeforeProps, FormatRegionBlock(RegionCardKeywords, IndentClass, keywordsInner)));
+                else if (TryFindInsertIndexAfterClassOpenBrace(result, out var idxKw))
+                    inserts.Add((idxKw, FormatRegionBlock(RegionCardKeywords, IndentClass, keywordsInner)));
+            }
+            if (propsMissing)
+            {
+                if (TryFindInsertIndexAfterRegionEnd(result, RegionCardKeywords, IndentClass, out var idxAfterKw))
+                    inserts.Add((idxAfterKw, FormatRegionBlock(RegionCardProperties, IndentClass, cardInner)));
+                else if (TryFindInsertIndexAfterClassOpenBrace(result, out var idxClass))
+                    inserts.Add((idxClass, FormatRegionBlock(RegionCardProperties, IndentClass, cardInner)));
+            }
+        }
         if (!RegionExists(result, RegionCardPlayAction, IndentMethod) &&
             TryFindInsertIndexAfterOnPlayOpenBrace(result, out var idxPlay))
             inserts.Add((idxPlay, FormatRegionBlock(RegionCardPlayAction, IndentMethod, playInner)));
@@ -165,6 +194,38 @@ public static class CardCodeGenerator
 
     private static string FormatRegionBlock(string regionName, string indent, string inner) =>
         $"{indent}#region {regionName}{Environment.NewLine}{inner}{indent}#endregion{Environment.NewLine}";
+
+    private static bool TryFindInsertIndexBeforeRegion(string source, string regionName, string indent, out int insertIndex)
+    {
+        insertIndex = -1;
+        var tag = $"{indent}#region {regionName}";
+        var idx = source.IndexOf(tag, StringComparison.Ordinal);
+        if (idx < 0)
+            return false;
+        insertIndex = idx;
+        return true;
+    }
+
+    /// <summary>定位到 <c>#region {regionName}</c> 之后与之配对的第一行 <c>#endregion</c> 之后（用于在其后插入下一块 region）。</summary>
+    private static bool TryFindInsertIndexAfterRegionEnd(string source, string regionName, string indent, out int insertIndex)
+    {
+        insertIndex = -1;
+        var startTag = $"{indent}#region {regionName}";
+        var startIdx = source.IndexOf(startTag, StringComparison.Ordinal);
+        if (startIdx < 0)
+            return false;
+        var endTag = $"{indent}#endregion";
+        var endIdx = source.IndexOf(endTag, startIdx + startTag.Length, StringComparison.Ordinal);
+        if (endIdx < 0)
+            return false;
+        var pos = endIdx + endTag.Length;
+        if (pos < source.Length && source[pos] == '\r')
+            pos++;
+        if (pos < source.Length && source[pos] == '\n')
+            pos++;
+        insertIndex = pos;
+        return true;
+    }
 
     private static bool TryFindInsertIndexAfterClassOpenBrace(string source, out int insertIndex)
     {
@@ -285,6 +346,40 @@ public static class CardCodeGenerator
         return sb.ToString();
     }
 
+    private static bool NeedsHoverTipsUsing(CardDefinition def)
+    {
+        foreach (var raw in def.ExtraHoverTipKeywordFields ?? [])
+        {
+            if (SanitizeKeywordFieldName(raw) != null)
+                return true;
+        }
+        return false;
+    }
+
+    /// <summary>写入 <c>#region 卡牌关键词与悬停</c> 内正文（不含 region 行）。</summary>
+    private static string BuildCardKeywordsInner(CardDefinition def)
+    {
+        const string TAB = "    ";
+        var canon = (def.CanonicalKeywordFields ?? [])
+            .Select(SanitizeKeywordFieldName).Where(f => f != null).Cast<string>().ToList();
+        var hover = (def.ExtraHoverTipKeywordFields ?? [])
+            .Select(SanitizeKeywordFieldName).Where(f => f != null).Cast<string>().ToList();
+        var sb = new StringBuilder();
+        if (canon.Count > 0)
+        {
+            var expr = string.Join(", ", canon.Select(f => $"CustomKeyWords.{f}"));
+            sb.AppendLine($"{TAB}public override IEnumerable<CardKeyword> CanonicalKeywords => [{expr}];");
+        }
+        if (hover.Count > 0)
+        {
+            var expr = string.Join(", ", hover.Select(f => $"HoverTipFactory.FromKeyword(CustomKeyWords.{f})"));
+            sb.AppendLine($"{TAB}protected override IEnumerable<IHoverTip> ExtraHoverTips => [{expr}];");
+        }
+        if (sb.Length == 0)
+            sb.AppendLine($"{TAB}// 未配置 CanonicalKeywords / ExtraHoverTips");
+        return sb.ToString();
+    }
+
     private static string BuildCardPlayActionInner(CardDefinition def)
     {
         var actions = def.CardPlayActions ?? [];
@@ -330,10 +425,73 @@ public static class CardCodeGenerator
             sb.AppendLine($"{IndentMethod}base.DynamicVars[\"{key}\"].UpgradeValueBy({u}m);");
             any = true;
         }
+
+        foreach (var e in def.UpgradeEffects ?? [])
+        {
+            var kind = (e.Kind ?? "").Trim();
+            if (kind.Equals("EnergyCostDelta", StringComparison.OrdinalIgnoreCase))
+            {
+                sb.AppendLine($"{IndentMethod}base.EnergyCost.UpgradeBy({e.Delta});");
+                any = true;
+                continue;
+            }
+            if (kind.Equals("AddKeyword", StringComparison.OrdinalIgnoreCase))
+            {
+                var kf = SanitizeKeywordFieldName(e.KeywordField);
+                if (kf == null)
+                {
+                    sb.AppendLine($"{IndentMethod}// TODO: AddKeyword 未填写 keywordField。");
+                    any = true;
+                }
+                else
+                {
+                    sb.AppendLine($"{IndentMethod}AddKeyword(CustomKeyWords.{kf});");
+                    any = true;
+                }
+                continue;
+            }
+            if (kind.Equals("RemoveKeyword", StringComparison.OrdinalIgnoreCase))
+            {
+                var kf = SanitizeKeywordFieldName(e.KeywordField);
+                if (kf == null)
+                {
+                    sb.AppendLine($"{IndentMethod}// TODO: RemoveKeyword 未填写 keywordField。");
+                    any = true;
+                }
+                else
+                {
+                    sb.AppendLine($"{IndentMethod}RemoveKeyword(CustomKeyWords.{kf});");
+                    any = true;
+                }
+                continue;
+            }
+            sb.AppendLine($"{IndentMethod}// TODO: 未知升级效果 kind \"{EscapeCSharpString(kind)}\"。");
+            any = true;
+        }
+
         if (!any)
-            sb.AppendLine($"{IndentMethod}// 无升级数值（upgradeValue 均为 0）");
+            sb.AppendLine($"{IndentMethod}// 无升级效果（动态变量 upgradeValue 均为 0，且未配置 upgradeEffects）");
         sb.AppendLine();
         return sb.ToString();
+    }
+
+    /// <summary>与 <c>CustomKeyWords</c> 静态字段名一致：字母/数字/下划线，且不以数字开头。</summary>
+    private static string? SanitizeKeywordFieldName(string? raw)
+    {
+        if (string.IsNullOrWhiteSpace(raw))
+            return null;
+        var s = raw.Trim();
+        if (s.Length == 0)
+            return null;
+        if (!char.IsLetter(s[0]) && s[0] != '_')
+            return null;
+        foreach (var c in s)
+        {
+            if (char.IsLetterOrDigit(c) || c == '_')
+                continue;
+            return null;
+        }
+        return s;
     }
 
     public static string SanitizeClassName(string raw)

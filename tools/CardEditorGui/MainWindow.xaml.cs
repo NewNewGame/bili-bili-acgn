@@ -20,7 +20,11 @@ public partial class MainWindow : Window
     private EditorSettings _settings = new();
     private readonly ObservableCollection<CardPoolEntry> _poolEntries = [];
     private readonly ObservableCollection<BuffOptionEntry> _buffOptions = [];
+    private readonly ObservableCollection<KeywordOptionEntry> _keywordOptions = [];
+    private readonly ObservableCollection<string> _canonicalKeywordFields = [];
+    private readonly ObservableCollection<string> _extraHoverTipKeywordFields = [];
     private readonly ObservableCollection<DynamicVarEntry> _dynamicVars = [];
+    private readonly ObservableCollection<UpgradeEffectEntry> _upgradeEffects = [];
     private readonly ObservableCollection<CardPlayAction> _playActions = [];
 
     /// <summary>CardPlayAction「数值来源」下拉：literal + 各 DynamicVar.kind。</summary>
@@ -39,6 +43,21 @@ public partial class MainWindow : Window
         ColPlayActionValueBinding.ItemsSource = PlayActionValueBindingOptions;
         ColPlayActionRepeatBinding.ItemsSource = PlayActionValueBindingOptions;
         GridCardPlayActions.ItemsSource = _playActions;
+        ColUpgradeEffectKind.ItemsSource = new[]
+        {
+            new ValueBindingOption { Key = "EnergyCostDelta", Display = "能耗变化 (UpgradeBy)" },
+            new ValueBindingOption { Key = "AddKeyword", Display = "添加关键字" },
+            new ValueBindingOption { Key = "RemoveKeyword", Display = "移除关键字" }
+        };
+        ColUpgradeEffectKeyword.ItemsSource = _keywordOptions;
+        ColUpgradeEffectKeyword.DisplayMemberPath = nameof(KeywordOptionEntry.Name);
+        ColUpgradeEffectKeyword.SelectedValuePath = nameof(KeywordOptionEntry.Name);
+        GridUpgradeEffects.ItemsSource = _upgradeEffects;
+        _upgradeEffects.CollectionChanged += UpgradeEffects_CollectionChanged;
+        LstCanonicalKeywords.ItemsSource = _canonicalKeywordFields;
+        LstExtraHoverTips.ItemsSource = _extraHoverTipKeywordFields;
+        _canonicalKeywordFields.CollectionChanged += KeywordFieldLists_CollectionChanged;
+        _extraHoverTipKeywordFields.CollectionChanged += KeywordFieldLists_CollectionChanged;
         _dynamicVars.CollectionChanged += DynamicVars_CollectionChanged;
         FillComboDefaults();
         LoadSettingsAndPools();
@@ -76,6 +95,10 @@ public partial class MainWindow : Window
         _buffOptions.Clear();
         foreach (var b in BuffOptionsJson.LoadOrCreateDefault())
             _buffOptions.Add(new BuffOptionEntry { Name = b.Name, Notes = b.Notes });
+
+        _keywordOptions.Clear();
+        foreach (var k in CardKeywordOptionsJson.LoadOrCreateDefault())
+            _keywordOptions.Add(new KeywordOptionEntry { Name = k.Name, Notes = k.Notes });
     }
 
     private string GetDialogInitialDirectory()
@@ -84,6 +107,18 @@ public partial class MainWindow : Window
         if (!string.IsNullOrEmpty(dir) && Directory.Exists(dir))
             return dir;
         return Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+    }
+
+    private void UpgradeEffects_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
+    {
+        if (!_suppressDirty)
+            MarkDirty();
+    }
+
+    private void KeywordFieldLists_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
+    {
+        if (!_suppressDirty)
+            MarkDirty();
     }
 
     private void DynamicVars_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
@@ -194,10 +229,13 @@ public partial class MainWindow : Window
             TargetType = "AnyEnemy",
             ShowInCardLibrary = true,
             PoolTypeName = pool,
+            CanonicalKeywordFields = [],
+            ExtraHoverTipKeywordFields = [],
             DynamicVars =
             [
                 new DynamicVarEntry { Kind = "Damage", BaseValue = 6m, UpgradeValue = 0m }
             ],
+            UpgradeEffects = [],
             CardPlayActions = [],
             Notes = ""
         };
@@ -220,6 +258,21 @@ public partial class MainWindow : Window
             ChkShowInLibrary.IsChecked = m.ShowInCardLibrary;
             TxtNotes.Text = m.Notes ?? "";
 
+            _canonicalKeywordFields.Clear();
+            foreach (var x in m.CanonicalKeywordFields ?? [])
+            {
+                var t = x?.Trim();
+                if (!string.IsNullOrEmpty(t))
+                    _canonicalKeywordFields.Add(t);
+            }
+            _extraHoverTipKeywordFields.Clear();
+            foreach (var x in m.ExtraHoverTipKeywordFields ?? [])
+            {
+                var t = x?.Trim();
+                if (!string.IsNullOrEmpty(t))
+                    _extraHoverTipKeywordFields.Add(t);
+            }
+
             _dynamicVars.Clear();
             foreach (var v in m.DynamicVars)
                 _dynamicVars.Add(CloneVar(v));
@@ -232,66 +285,19 @@ public partial class MainWindow : Window
                 foreach (var a in m.CardPlayActions)
                     _playActions.Add(ClonePlayAction(a));
             }
+            _upgradeEffects.Clear();
+            if (m.UpgradeEffects != null)
+            {
+                foreach (var u in m.UpgradeEffects)
+                    _upgradeEffects.Add(CloneUpgradeEffect(u));
+            }
             RebuildPlayActionValueBindingOptions();
-            foreach (var v in _dynamicVars)
-                EnsurePlayActionForDynamicVarKind(v.Kind);
         }
         finally
         {
             _suppressDirty = false;
             RefreshPersistedSnapshot();
         }
-    }
-
-    /// <summary>
-    /// kind 为 Damage/Block/Cards/Discard/Exhaust 时，若打出效果中尚无「操作类型 + 数值来源=该 kind」的一行，则自动追加。
-    /// </summary>
-    private void EnsurePlayActionForDynamicVarKind(string? kind)
-    {
-        var k = kind?.Trim() ?? "";
-        if (k.Length == 0)
-            return;
-        var actionType = MapDynamicVarKindToPlayActionType(k);
-        if (actionType == null)
-            return;
-        if (HasPlayActionLinkedToKind(k, actionType))
-            return;
-        _playActions.Add(new CardPlayAction
-        {
-            ActionType = actionType,
-            BuffType = null,
-            ValueBinding = k,
-            Value = 0m,
-            RepeatCountBinding = "literal",
-            RepeatCountValue = 1m,
-            Notes = null
-        });
-        RebuildPlayActionValueBindingOptions();
-        if (!_suppressDirty)
-            MarkDirty();
-    }
-
-    /// <summary>Cards → DrawCards，其余 kind 与操作类型同名。</summary>
-    private static string? MapDynamicVarKindToPlayActionType(string kindTrimmed)
-    {
-        if (kindTrimmed.Equals("Damage", StringComparison.OrdinalIgnoreCase))
-            return "Damage";
-        if (kindTrimmed.Equals("Block", StringComparison.OrdinalIgnoreCase))
-            return "Block";
-        if (kindTrimmed.Equals("Cards", StringComparison.OrdinalIgnoreCase))
-            return "DrawCards";
-        if (kindTrimmed.Equals("Discard", StringComparison.OrdinalIgnoreCase))
-            return "Discard";
-        if (kindTrimmed.Equals("Exhaust", StringComparison.OrdinalIgnoreCase))
-            return "Exhaust";
-        return null;
-    }
-
-    private bool HasPlayActionLinkedToKind(string kindTrimmed, string actionType)
-    {
-        return _playActions.Any(a =>
-            string.Equals(a.ActionType?.Trim(), actionType, StringComparison.OrdinalIgnoreCase) &&
-            string.Equals(a.ValueBinding?.Trim(), kindTrimmed, StringComparison.OrdinalIgnoreCase));
     }
 
     private void RefreshPersistedSnapshot()
@@ -350,6 +356,15 @@ public partial class MainWindow : Window
             ValueProp = vp
         };
     }
+
+    private static UpgradeEffectEntry CloneUpgradeEffect(UpgradeEffectEntry u) =>
+        new()
+        {
+            Kind = string.IsNullOrWhiteSpace(u.Kind) ? "EnergyCostDelta" : u.Kind.Trim(),
+            Delta = u.Delta,
+            KeywordField = string.IsNullOrWhiteSpace(u.KeywordField) ? null : u.KeywordField.Trim(),
+            Notes = u.Notes
+        };
 
     private static CardPlayAction ClonePlayAction(CardPlayAction a)
     {
@@ -414,7 +429,10 @@ public partial class MainWindow : Window
             TargetType = CmbTargetType.SelectedItem?.ToString() ?? "AnyEnemy",
             ShowInCardLibrary = ChkShowInLibrary.IsChecked == true,
             PoolTypeName = pool,
+            CanonicalKeywordFields = _canonicalKeywordFields.ToList(),
+            ExtraHoverTipKeywordFields = _extraHoverTipKeywordFields.ToList(),
             DynamicVars = _dynamicVars.Select(CloneVar).ToList(),
+            UpgradeEffects = _upgradeEffects.Select(CloneUpgradeEffect).ToList(),
             CardPlayActions = _playActions.Select(ClonePlayAction).ToList(),
             Notes = string.IsNullOrWhiteSpace(TxtNotes.Text) ? null : TxtNotes.Text
         };
@@ -721,7 +739,6 @@ public partial class MainWindow : Window
             UpgradeValue = 0m,
             ValueProp = DynamicVarEntry.DefaultValuePropForKind(k)
         });
-        EnsurePlayActionForDynamicVarKind(k);
         MarkDirty();
         StatusText.Text = $"已添加动态变量: {k}";
         return true;
@@ -775,7 +792,6 @@ public partial class MainWindow : Window
     private void BtnAddVar_Click(object sender, RoutedEventArgs e)
     {
         _dynamicVars.Add(new DynamicVarEntry { Kind = "Damage", BaseValue = 1m, UpgradeValue = 0m });
-        EnsurePlayActionForDynamicVarKind("Damage");
         MarkDirty();
     }
 
@@ -788,10 +804,7 @@ public partial class MainWindow : Window
         }
         _dynamicVars.Remove(row);
         if (_dynamicVars.Count == 0)
-        {
             _dynamicVars.Add(new DynamicVarEntry { Kind = "Damage", BaseValue = 1m, UpgradeValue = 0m });
-            EnsurePlayActionForDynamicVarKind("Damage");
-        }
         MarkDirty();
     }
 
@@ -852,6 +865,112 @@ public partial class MainWindow : Window
         GridCardPlayActions.Items.Refresh();
         StatusText.Text = $"BUFF 选项已保存: {BuffOptionsJson.GetDefaultFilePath()}";
     }
+
+    private void BtnAddUpgradeEffect_Click(object sender, RoutedEventArgs e)
+    {
+        var kw = _keywordOptions.Count > 0 ? _keywordOptions[0].Name : null;
+        _upgradeEffects.Add(new UpgradeEffectEntry
+        {
+            Kind = "EnergyCostDelta",
+            Delta = -1,
+            KeywordField = kw,
+            Notes = null
+        });
+        GridUpgradeEffects.SelectedItem = _upgradeEffects[^1];
+        MarkDirty();
+    }
+
+    private void BtnRemoveUpgradeEffect_Click(object sender, RoutedEventArgs e)
+    {
+        if (GridUpgradeEffects.SelectedItem is not UpgradeEffectEntry row)
+        {
+            System.Windows.MessageBox.Show("请先选中一行。", "提示", MessageBoxButton.OK, MessageBoxImage.Information);
+            return;
+        }
+        _upgradeEffects.Remove(row);
+        MarkDirty();
+    }
+
+    private void BtnKeywordOptions_Click(object sender, RoutedEventArgs e)
+    {
+        var w = new CardKeywordOptionsWindow { Owner = this };
+        if (w.ShowDialog() != true)
+            return;
+        _keywordOptions.Clear();
+        foreach (var k in CardKeywordOptionsJson.LoadOrCreateDefault())
+            _keywordOptions.Add(new KeywordOptionEntry { Name = k.Name, Notes = k.Notes });
+        GridUpgradeEffects.Items.Refresh();
+        StatusText.Text = $"关键字选项已保存: {CardKeywordOptionsJson.GetDefaultFilePath()}";
+    }
+
+    private void BtnKeywordCanonicalAdd_Click(object sender, RoutedEventArgs e)
+    {
+        var dlg = new KeywordPickerDialog(_keywordOptions, _canonicalKeywordFields.ToList()) { Owner = this };
+        if (dlg.ShowDialog() != true || string.IsNullOrEmpty(dlg.SelectedName))
+            return;
+        _canonicalKeywordFields.Add(dlg.SelectedName);
+        StatusText.Text = $"已添加 CanonicalKeyword: {dlg.SelectedName}";
+    }
+
+    private void BtnKeywordCanonicalRemove_Click(object sender, RoutedEventArgs e)
+    {
+        if (LstCanonicalKeywords.SelectedItem is not string s)
+        {
+            System.Windows.MessageBox.Show("请先选中一行。", "提示", MessageBoxButton.OK, MessageBoxImage.Information);
+            return;
+        }
+        _canonicalKeywordFields.Remove(s);
+    }
+
+    private void BtnKeywordCanonicalUp_Click(object sender, RoutedEventArgs e) =>
+        MoveKeywordListItem(_canonicalKeywordFields, LstCanonicalKeywords, -1);
+
+    private void BtnKeywordCanonicalDown_Click(object sender, RoutedEventArgs e) =>
+        MoveKeywordListItem(_canonicalKeywordFields, LstCanonicalKeywords, 1);
+
+    private void BtnKeywordHoverAdd_Click(object sender, RoutedEventArgs e)
+    {
+        var dlg = new KeywordPickerDialog(_keywordOptions, _extraHoverTipKeywordFields.ToList()) { Owner = this };
+        if (dlg.ShowDialog() != true || string.IsNullOrEmpty(dlg.SelectedName))
+            return;
+        _extraHoverTipKeywordFields.Add(dlg.SelectedName);
+        StatusText.Text = $"已添加 ExtraHoverTip: {dlg.SelectedName}";
+    }
+
+    private void BtnKeywordHoverRemove_Click(object sender, RoutedEventArgs e)
+    {
+        if (LstExtraHoverTips.SelectedItem is not string s)
+        {
+            System.Windows.MessageBox.Show("请先选中一行。", "提示", MessageBoxButton.OK, MessageBoxImage.Information);
+            return;
+        }
+        _extraHoverTipKeywordFields.Remove(s);
+    }
+
+    private void BtnKeywordHoverUp_Click(object sender, RoutedEventArgs e) =>
+        MoveKeywordListItem(_extraHoverTipKeywordFields, LstExtraHoverTips, -1);
+
+    private void BtnKeywordHoverDown_Click(object sender, RoutedEventArgs e) =>
+        MoveKeywordListItem(_extraHoverTipKeywordFields, LstExtraHoverTips, 1);
+
+    private static void MoveKeywordListItem(ObservableCollection<string> list, System.Windows.Controls.ListBox lb, int delta)
+    {
+        if (lb.SelectedItem is not string s)
+        {
+            System.Windows.MessageBox.Show("请先选中一行。", "提示", MessageBoxButton.OK, MessageBoxImage.Information);
+            return;
+        }
+        var i = list.IndexOf(s);
+        if (i < 0)
+            return;
+        var ni = i + delta;
+        if (ni < 0 || ni >= list.Count)
+            return;
+        list.Move(i, ni);
+        lb.SelectedItem = list[ni];
+    }
+
+    private void GridUpgradeEffects_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e) => MarkDirty();
 
     private void GridCardPlayActions_BeginningEdit(object sender, DataGridBeginningEditEventArgs e)
     {
@@ -921,8 +1040,6 @@ public partial class MainWindow : Window
             var rowItem = e.Row?.Item as DynamicVarEntry;
             Dispatcher.BeginInvoke(() =>
             {
-                if (rowItem != null)
-                    EnsurePlayActionForDynamicVarKind(rowItem.Kind);
                 RebuildPlayActionValueBindingOptions();
                 MarkDirty();
                 RefreshDescriptionPreview();

@@ -89,6 +89,55 @@
                     </Grid>
                 </GroupBox>
 
+                <GroupBox Header="关键词与悬停提示（CanonicalKeywords / ExtraHoverTips）" Margin="0,0,0,10">
+                    <DockPanel Margin="8">
+                        <TextBlock DockPanel.Dock="Top" TextWrapping="Wrap" Foreground="Gray" FontSize="11" Margin="0,0,0,8"
+                                   Text="顺序即生成代码中的数组顺序。点击「添加」从「关键字配置」中选择（与升级效果共用）；name 须与 CustomKeyWords 静态字段一致。" />
+                        <Grid MinHeight="120">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid Grid.Column="0" Margin="0,0,6,0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <TextBlock Grid.Row="0" Text="CanonicalKeywords" FontWeight="SemiBold" Margin="0,0,0,4" />
+                                <ListBox x:Name="LstCanonicalKeywords"
+                                         Grid.Row="1"
+                                         MinHeight="80"
+                                         Margin="0,0,0,6" />
+                                <WrapPanel Grid.Row="2" Orientation="Horizontal">
+                                    <Button Content="添加" Width="56" Margin="0,0,6,0" Click="BtnKeywordCanonicalAdd_Click" />
+                                    <Button Content="删除" Width="56" Margin="0,0,6,0" Click="BtnKeywordCanonicalRemove_Click" />
+                                    <Button Content="上移" Width="56" Margin="0,0,6,0" Click="BtnKeywordCanonicalUp_Click" />
+                                    <Button Content="下移" Width="56" Click="BtnKeywordCanonicalDown_Click" />
+                                </WrapPanel>
+                            </Grid>
+                            <Grid Grid.Column="1" Margin="6,0,0,0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <TextBlock Grid.Row="0" Text="ExtraHoverTips（FromKeyword）" FontWeight="SemiBold" Margin="0,0,0,4" />
+                                <ListBox x:Name="LstExtraHoverTips"
+                                         Grid.Row="1"
+                                         MinHeight="80"
+                                         Margin="0,0,0,6" />
+                                <WrapPanel Grid.Row="2" Orientation="Horizontal">
+                                    <Button Content="添加" Width="56" Margin="0,0,6,0" Click="BtnKeywordHoverAdd_Click" />
+                                    <Button Content="删除" Width="56" Margin="0,0,6,0" Click="BtnKeywordHoverRemove_Click" />
+                                    <Button Content="上移" Width="56" Margin="0,0,6,0" Click="BtnKeywordHoverUp_Click" />
+                                    <Button Content="下移" Width="56" Click="BtnKeywordHoverDown_Click" />
+                                </WrapPanel>
+                            </Grid>
+                        </Grid>
+                    </DockPanel>
+                </GroupBox>
+
                 <GroupBox Header="动态变量" Margin="0,0,0,10">
                     <DockPanel Margin="8">
                         <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" Margin="0,8,0,0">
@@ -115,10 +164,45 @@
                     </DockPanel>
                 </GroupBox>
 
+                <GroupBox Header="升级效果（OnUpgrade）" Margin="0,0,0,10">
+                    <DockPanel Margin="8">
+                        <TextBlock DockPanel.Dock="Top" TextWrapping="Wrap" Foreground="Gray" FontSize="11" Margin="0,0,0,8"
+                                   Text="与「动态变量」中的 upgradeValue 叠加：生成代码时先执行全部 DynamicVars.UpgradeValueBy，再按下列顺序执行。能耗变化：base.EnergyCost.UpgradeBy(delta)，常用 delta=-1。添加/移除关键字：AddKeyword(CustomKeyWords.xxx) / RemoveKeyword(...)，字段名须与关键字配置一致。" />
+                        <WrapPanel DockPanel.Dock="Bottom" Orientation="Horizontal" Margin="0,8,0,0">
+                            <Button Content="添加一行" Width="88" Margin="0,0,8,8" Click="BtnAddUpgradeEffect_Click" />
+                            <Button Content="删除选中" Width="88" Margin="0,0,8,8" Click="BtnRemoveUpgradeEffect_Click" />
+                            <Button Content="关键字配置" Width="88" Margin="0,0,8,8" Click="BtnKeywordOptions_Click" />
+                        </WrapPanel>
+                        <DataGrid x:Name="GridUpgradeEffects"
+                                  AutoGenerateColumns="False"
+                                  CanUserAddRows="False"
+                                  MinHeight="100"
+                                  HeadersVisibility="Column"
+                                  CellEditEnding="GridUpgradeEffects_CellEditEnding">
+                            <DataGrid.Columns>
+                                <DataGridComboBoxColumn x:Name="ColUpgradeEffectKind"
+                                                        Header="类型"
+                                                        SelectedValueBinding="{Binding Kind, UpdateSourceTrigger=PropertyChanged}"
+                                                        SelectedValuePath="Key"
+                                                        DisplayMemberPath="Display"
+                                                        Width="220" />
+                                <DataGridTextColumn Header="能耗变化量" Binding="{Binding Delta, UpdateSourceTrigger=PropertyChanged}" Width="100" />
+                                <DataGridComboBoxColumn x:Name="ColUpgradeEffectKeyword"
+                                                        Header="关键字字段"
+                                                        SelectedValueBinding="{Binding KeywordField, UpdateSourceTrigger=PropertyChanged}"
+                                                        SelectedValuePath="Name"
+                                                        DisplayMemberPath="Name"
+                                                        Width="140" />
+                                <DataGridTextColumn Header="notes" Binding="{Binding Notes}" Width="*" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </DockPanel>
+                </GroupBox>
+
                 <GroupBox Header="打出效果 (CardPlayAction)" Margin="0,0,0,10">
                     <DockPanel Margin="8">
                         <TextBlock DockPanel.Dock="Top" TextWrapping="Wrap" Foreground="Gray" FontSize="11" Margin="0,0,0,8"
-                                   Text="按顺序执行。数值来源选「固定数值」可编辑 value；选某一 kind 则与上方动态变量表中同名字段绑定。重复次数同理（固定或绑定 kind）。可用上移/下移调整顺序。" />
+                                   Text="按顺序执行；可为空，也可重复多条相同操作。数值来源选「固定数值」可编辑 value；选某一 kind 则与上方动态变量表中同名字段绑定。重复次数同理（固定或绑定 kind）。可用上移/下移调整顺序。" />
                         <WrapPanel DockPanel.Dock="Bottom" Margin="0,8,0,0">
                             <Button Content="添加操作" Width="88" Margin="0,0,8,8" Click="BtnAddPlayAction_Click" />
                             <Button Content="删除选中" Width="88" Margin="0,0,8,8" Click="BtnRemovePlayAction_Click" />
