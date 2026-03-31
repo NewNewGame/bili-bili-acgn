@@ -16,10 +16,20 @@ public partial class KeywordPickerDialog : Window
         foreach (var o in options)
         {
             var n = o.Name?.Trim() ?? "";
-            if (n.Length == 0 || ex.Contains(n))
+            if (n.Length == 0 || IsKeywordExcluded(o, ex))
                 continue;
             LstOptions.Items.Add(o);
         }
+    }
+
+    private static bool IsKeywordExcluded(KeywordOptionEntry o, HashSet<string> ex)
+    {
+        var q = o.QualifiedKey;
+        var n = o.Name.Trim();
+        if (ex.Contains(q)) return true;
+        if (ex.Contains(n)) return true;
+        if (ex.Contains(KeywordOptionEntry.FormatQualified(n, null))) return true;
+        return false;
     }
 
     private void BtnOk_Click(object sender, RoutedEventArgs e)
@@ -35,7 +45,7 @@ public partial class KeywordPickerDialog : Window
             MessageBox.Show("请先选中一项。", "提示", MessageBoxButton.OK, MessageBoxImage.Information);
             return;
         }
-        SelectedName = k.Name.Trim();
+        SelectedName = k.QualifiedKey;
         DialogResult = true;
         Close();
     }

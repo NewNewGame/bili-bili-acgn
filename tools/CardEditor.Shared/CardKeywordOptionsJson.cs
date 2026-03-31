@@ -66,17 +66,63 @@ public static class CardKeywordOptionsJson
     public static List<KeywordOptionEntry> LoadOrCreateDefault()
     {
         var root = ExeBundledSettingsJson.LoadOrCreateDefault();
-        var list = root.CardKeywordOptions;
-        if (list.Count > 0)
-            return list;
-        var d = CloneDefaultOptions();
-        root.CardKeywordOptions = d;
-        ExeBundledSettingsJson.SaveDefault(root);
-        return d;
+        var merged = MergeWithCatalog(root.CardKeywordOptions ?? []);
+        // 只要能补齐默认项，就回写一次，避免用户每次都“缺内置项”
+        if (!SequenceQualifiedEquals(root.CardKeywordOptions, merged))
+        {
+            root.CardKeywordOptions = merged;
+            ExeBundledSettingsJson.SaveDefault(root);
+        }
+        return merged;
+    }
+
+    private static bool SequenceQualifiedEquals(List<KeywordOptionEntry>? a, List<KeywordOptionEntry> b)
+    {
+        if (a == null)
+            return b.Count == 0;
+        if (a.Count != b.Count)
+            return false;
+        for (var i = 0; i < a.Count; i++)
+        {
+            if (!string.Equals(a[i].QualifiedKey, b[i].QualifiedKey, StringComparison.Ordinal))
+                return false;
+            if (!string.Equals(a[i].Notes, b[i].Notes, StringComparison.Ordinal))
+                return false;
+        }
+        return true;
+    }
+
+    private static List<KeywordOptionEntry> MergeWithCatalog(List<KeywordOptionEntry> existing)
+    {
+        var merged = new List<KeywordOptionEntry>(existing.Count + 16);
+        var seen = new HashSet<string>(StringComparer.Ordinal);
+
+        foreach (var e in existing)
+        {
+            var name = e.Name?.Trim() ?? "";
+            if (name.Length == 0)
+                continue;
+            var prefix = string.IsNullOrWhiteSpace(e.MemberPrefix) ? null : e.MemberPrefix.Trim();
+            var normalized = new KeywordOptionEntry { Name = name, MemberPrefix = prefix, Notes = e.Notes };
+            var key = normalized.QualifiedKey;
+            if (seen.Add(key))
+                merged.Add(normalized);
+        }
+
+        foreach (var d in CloneDefaultOptions())
+        {
+            var key = d.QualifiedKey;
+            if (seen.Add(key))
+                merged.Add(d);
+        }
+
+        return merged;
     }
 
     public static List<KeywordOptionEntry> CloneDefaultOptions() =>
-        CardKeywordCatalog.CloneDefault().Select(k => new KeywordOptionEntry { Name = k.Name, Notes = k.Notes }).ToList();
+        CardKeywordCatalog.CloneDefault()
+            .Select(k => new KeywordOptionEntry { Name = k.Name, Notes = k.Notes, MemberPrefix = k.MemberPrefix })
+            .ToList();
 
     public static void SaveDefault(List<KeywordOptionEntry> options)
     {

@@ -15,7 +15,7 @@ public partial class CardKeywordOptionsWindow : Window
         InitializeComponent();
         GridKeywords.ItemsSource = _rows;
         foreach (var k in CardKeywordOptionsJson.LoadOrCreateDefault())
-            _rows.Add(new KeywordOptionEntry { Name = k.Name, Notes = k.Notes });
+            _rows.Add(new KeywordOptionEntry { Name = k.Name, Notes = k.Notes, MemberPrefix = k.MemberPrefix });
     }
 
     private void BtnAddKeyword_Click(object sender, RoutedEventArgs e)
@@ -23,14 +23,21 @@ public partial class CardKeywordOptionsWindow : Window
         var name = TxtNewKeywordName.Text.Trim();
         if (string.IsNullOrEmpty(name))
             return;
-        if (_rows.Any(x => string.Equals(x.Name?.Trim(), name, StringComparison.Ordinal)))
+        var prefix = TxtNewMemberPrefix.Text.Trim();
+        var entry = new KeywordOptionEntry
         {
-            MessageBox.Show("列表中已有该项。", "提示", MessageBoxButton.OK, MessageBoxImage.Information);
+            Name = name,
+            MemberPrefix = string.IsNullOrEmpty(prefix) ? null : prefix,
+            Notes = string.IsNullOrEmpty(TxtNewKeywordNotes.Text.Trim()) ? null : TxtNewKeywordNotes.Text.Trim()
+        };
+        if (_rows.Any(x => string.Equals(x.QualifiedKey, entry.QualifiedKey, StringComparison.Ordinal)))
+        {
+            MessageBox.Show("列表中已有相同限定名（前缀+name）的项。", "提示", MessageBoxButton.OK, MessageBoxImage.Information);
             return;
         }
-        var notes = TxtNewKeywordNotes.Text.Trim();
-        _rows.Add(new KeywordOptionEntry { Name = name, Notes = string.IsNullOrEmpty(notes) ? null : notes });
+        _rows.Add(entry);
         TxtNewKeywordName.Clear();
+        TxtNewMemberPrefix.Clear();
         TxtNewKeywordNotes.Clear();
         GridKeywords.SelectedItem = _rows[^1];
     }
@@ -47,7 +54,7 @@ public partial class CardKeywordOptionsWindow : Window
 
     private void BtnOk_Click(object sender, RoutedEventArgs e)
     {
-        var names = new HashSet<string>(StringComparer.Ordinal);
+        var keys = new HashSet<string>(StringComparer.Ordinal);
         foreach (var k in _rows)
         {
             var n = k.Name?.Trim() ?? "";
@@ -56,14 +63,20 @@ public partial class CardKeywordOptionsWindow : Window
                 MessageBox.Show("「name」不能为空。", "校验", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
-            if (!names.Add(n))
+            var q = k.QualifiedKey;
+            if (!keys.Add(q))
             {
-                MessageBox.Show($"重复的 name：{n}", "校验", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show($"重复的限定名：{q}", "校验", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
         }
 
-        CardKeywordOptionsJson.SaveDefault(_rows.Select(x => new KeywordOptionEntry { Name = x.Name, Notes = x.Notes }).ToList());
+        CardKeywordOptionsJson.SaveDefault(_rows.Select(x => new KeywordOptionEntry
+        {
+            Name = x.Name,
+            MemberPrefix = x.MemberPrefix,
+            Notes = x.Notes
+        }).ToList());
         DialogResult = true;
         Close();
     }

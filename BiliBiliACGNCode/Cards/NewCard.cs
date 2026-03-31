@@ -19,7 +19,7 @@ namespace BiliBiliACGN.BiliBiliACGNCode.Cards;
 [Pool(typeof(BottleCardPool))]
 public sealed class NewCard : CardBaseModel
 {
-    public override IEnumerable<CardKeyword> CanonicalKeywords => [CustomKeyWords.YYSY];
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [CustomKeyWords.YYSY, CardKeyword.Eternal];
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromKeyword(CustomKeyWords.YYSY)];
 
     #region 卡牌属性配置

@@ -50,8 +50,8 @@ public partial class MainWindow : Window
             new ValueBindingOption { Key = "RemoveKeyword", Display = "移除关键字" }
         };
         ColUpgradeEffectKeyword.ItemsSource = _keywordOptions;
-        ColUpgradeEffectKeyword.DisplayMemberPath = nameof(KeywordOptionEntry.Name);
-        ColUpgradeEffectKeyword.SelectedValuePath = nameof(KeywordOptionEntry.Name);
+        ColUpgradeEffectKeyword.DisplayMemberPath = nameof(KeywordOptionEntry.DisplayLabel);
+        ColUpgradeEffectKeyword.SelectedValuePath = nameof(KeywordOptionEntry.QualifiedKey);
         GridUpgradeEffects.ItemsSource = _upgradeEffects;
         _upgradeEffects.CollectionChanged += UpgradeEffects_CollectionChanged;
         LstCanonicalKeywords.ItemsSource = _canonicalKeywordFields;
@@ -95,7 +95,7 @@ public partial class MainWindow : Window
 
         _keywordOptions.Clear();
         foreach (var k in CardKeywordOptionsJson.LoadOrCreateDefault())
-            _keywordOptions.Add(new KeywordOptionEntry { Name = k.Name, Notes = k.Notes });
+            _keywordOptions.Add(new KeywordOptionEntry { Name = k.Name, Notes = k.Notes, MemberPrefix = k.MemberPrefix });
     }
 
     private string GetDialogInitialDirectory()
@@ -260,14 +260,14 @@ public partial class MainWindow : Window
             {
                 var t = x?.Trim();
                 if (!string.IsNullOrEmpty(t))
-                    _canonicalKeywordFields.Add(t);
+                    _canonicalKeywordFields.Add(CardCodeGenerator.NormalizeKeywordStoredForUi(t));
             }
             _extraHoverTipKeywordFields.Clear();
             foreach (var x in m.ExtraHoverTipKeywordFields ?? [])
             {
                 var t = x?.Trim();
                 if (!string.IsNullOrEmpty(t))
-                    _extraHoverTipKeywordFields.Add(t);
+                    _extraHoverTipKeywordFields.Add(CardCodeGenerator.NormalizeKeywordStoredForUi(t));
             }
 
             _dynamicVars.Clear();
@@ -286,7 +286,12 @@ public partial class MainWindow : Window
             if (m.UpgradeEffects != null)
             {
                 foreach (var u in m.UpgradeEffects)
-                    _upgradeEffects.Add(CloneUpgradeEffect(u));
+                {
+                    var row = CloneUpgradeEffect(u);
+                    if (!string.IsNullOrWhiteSpace(row.KeywordField))
+                        row.KeywordField = CardCodeGenerator.NormalizeKeywordStoredForUi(row.KeywordField!);
+                    _upgradeEffects.Add(row);
+                }
             }
             RebuildPlayActionValueBindingOptions();
         }
@@ -865,7 +870,7 @@ public partial class MainWindow : Window
 
     private void BtnAddUpgradeEffect_Click(object sender, RoutedEventArgs e)
     {
-        var kw = _keywordOptions.Count > 0 ? _keywordOptions[0].Name : null;
+        var kw = _keywordOptions.Count > 0 ? _keywordOptions[0].QualifiedKey : null;
         _upgradeEffects.Add(new UpgradeEffectEntry
         {
             Kind = "EnergyCostDelta",
@@ -895,7 +900,7 @@ public partial class MainWindow : Window
             return;
         _keywordOptions.Clear();
         foreach (var k in CardKeywordOptionsJson.LoadOrCreateDefault())
-            _keywordOptions.Add(new KeywordOptionEntry { Name = k.Name, Notes = k.Notes });
+            _keywordOptions.Add(new KeywordOptionEntry { Name = k.Name, Notes = k.Notes, MemberPrefix = k.MemberPrefix });
         GridUpgradeEffects.Items.Refresh();
         StatusText.Text = $"关键字选项已保存: {CardKeywordOptionsJson.GetDefaultFilePath()}";
     }

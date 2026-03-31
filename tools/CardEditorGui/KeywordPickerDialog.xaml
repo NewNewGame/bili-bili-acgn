@@ -14,7 +14,7 @@
             <Button Content="取消" Width="88" IsCancel="True" Click="BtnCancel_Click" />
         </StackPanel>
         <ListBox x:Name="LstOptions"
-                 DisplayMemberPath="Name"
+                 DisplayMemberPath="DisplayLabel"
                  MouseDoubleClick="LstOptions_MouseDoubleClick" />
     </DockPanel>
 </Window>

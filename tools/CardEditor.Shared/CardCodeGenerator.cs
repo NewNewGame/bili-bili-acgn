@@ -350,7 +350,7 @@ public static class CardCodeGenerator
     {
         foreach (var raw in def.ExtraHoverTipKeywordFields ?? [])
         {
-            if (SanitizeKeywordFieldName(raw) != null)
+            if (FormatKeywordExpressionForEmit(raw) != null)
                 return true;
         }
         return false;
@@ -361,18 +361,18 @@ public static class CardCodeGenerator
     {
         const string TAB = "    ";
         var canon = (def.CanonicalKeywordFields ?? [])
-            .Select(SanitizeKeywordFieldName).Where(f => f != null).Cast<string>().ToList();
+            .Select(FormatKeywordExpressionForEmit).Where(f => f != null).Cast<string>().ToList();
         var hover = (def.ExtraHoverTipKeywordFields ?? [])
-            .Select(SanitizeKeywordFieldName).Where(f => f != null).Cast<string>().ToList();
+            .Select(FormatKeywordExpressionForEmit).Where(f => f != null).Cast<string>().ToList();
         var sb = new StringBuilder();
         if (canon.Count > 0)
         {
-            var expr = string.Join(", ", canon.Select(f => $"CustomKeyWords.{f}"));
+            var expr = string.Join(", ", canon);
             sb.AppendLine($"{TAB}public override IEnumerable<CardKeyword> CanonicalKeywords => [{expr}];");
         }
         if (hover.Count > 0)
         {
-            var expr = string.Join(", ", hover.Select(f => $"HoverTipFactory.FromKeyword(CustomKeyWords.{f})"));
+            var expr = string.Join(", ", hover.Select(f => $"HoverTipFactory.FromKeyword({f})"));
             sb.AppendLine($"{TAB}protected override IEnumerable<IHoverTip> ExtraHoverTips => [{expr}];");
         }
         if (sb.Length == 0)
@@ -437,30 +437,30 @@ public static class CardCodeGenerator
             }
             if (kind.Equals("AddKeyword", StringComparison.OrdinalIgnoreCase))
             {
-                var kf = SanitizeKeywordFieldName(e.KeywordField);
-                if (kf == null)
+                var expr = FormatKeywordExpressionForEmit(e.KeywordField);
+                if (expr == null)
                 {
                     sb.AppendLine($"{IndentMethod}// TODO: AddKeyword 未填写 keywordField。");
                     any = true;
                 }
                 else
                 {
-                    sb.AppendLine($"{IndentMethod}AddKeyword(CustomKeyWords.{kf});");
+                    sb.AppendLine($"{IndentMethod}AddKeyword({expr});");
                     any = true;
                 }
                 continue;
             }
             if (kind.Equals("RemoveKeyword", StringComparison.OrdinalIgnoreCase))
             {
-                var kf = SanitizeKeywordFieldName(e.KeywordField);
-                if (kf == null)
+                var expr = FormatKeywordExpressionForEmit(e.KeywordField);
+                if (expr == null)
                 {
                     sb.AppendLine($"{IndentMethod}// TODO: RemoveKeyword 未填写 keywordField。");
                     any = true;
                 }
                 else
                 {
-                    sb.AppendLine($"{IndentMethod}RemoveKeyword(CustomKeyWords.{kf});");
+                    sb.AppendLine($"{IndentMethod}RemoveKeyword({expr});");
                     any = true;
                 }
                 continue;
@@ -473,6 +473,52 @@ public static class CardCodeGenerator
             sb.AppendLine($"{IndentMethod}// 无升级效果（动态变量 upgradeValue 均为 0，且未配置 upgradeEffects）");
         sb.AppendLine();
         return sb.ToString();
+    }
+
+    /// <summary>
+    /// 将 JSON 中的关键字字符串转为可写入 C# 的成员表达式：无点号视为 <c>CustomKeyWords</c> 下的字段名；
+    /// 已含点号则视为完整限定名（如 <c>CardKeyword.Exhaust</c>），逐段须为合法标识符。
+    /// </summary>
+    public static string? FormatKeywordExpressionForEmit(string? stored)
+    {
+        if (string.IsNullOrWhiteSpace(stored))
+            return null;
+        var t = stored.Trim();
+        if (!t.Contains('.'))
+        {
+            var f = SanitizeKeywordFieldName(t);
+            return f == null ? null : $"CustomKeyWords.{f}";
+        }
+        return SanitizeQualifiedKeywordExpression(t) ? t : null;
+    }
+
+    /// <summary>加载 JSON 时规范化列表/升级字段：无点号补 <c>CustomKeyWords.</c>；含点号则原样保留（含无法校验时）。</summary>
+    public static string NormalizeKeywordStoredForUi(string? raw)
+    {
+        if (string.IsNullOrWhiteSpace(raw))
+            return "";
+        var t = raw.Trim();
+        if (!t.Contains('.'))
+        {
+            var f = SanitizeKeywordFieldName(t);
+            return f == null ? t : $"CustomKeyWords.{f}";
+        }
+        return t;
+    }
+
+    private static bool SanitizeQualifiedKeywordExpression(string t)
+    {
+        var parts = t.Split('.');
+        if (parts.Length < 2)
+            return false;
+        foreach (var p in parts)
+        {
+            if (string.IsNullOrWhiteSpace(p))
+                return false;
+            if (SanitizeKeywordFieldName(p.Trim()) == null)
+                return false;
+        }
+        return true;
     }
 
     /// <summary>与 <c>CustomKeyWords</c> 静态字段名一致：字母/数字/下划线，且不以数字开头。</summary>

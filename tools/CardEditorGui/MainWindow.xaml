@@ -92,7 +92,7 @@
                 <GroupBox Header="关键词与悬停提示（CanonicalKeywords / ExtraHoverTips）" Margin="0,0,0,10">
                     <DockPanel Margin="8">
                         <TextBlock DockPanel.Dock="Top" TextWrapping="Wrap" Foreground="Gray" FontSize="11" Margin="0,0,0,8"
-                                   Text="顺序即生成代码中的数组顺序。点击「添加」从「关键字配置」中选择（与升级效果共用）；name 须与 CustomKeyWords 静态字段一致。" />
+                                   Text="顺序即生成代码中的数组顺序。从「关键字配置」选择后保存为「前缀.成员」形式（如 CustomKeyWords.YYSY、CardKeyword.Exhaust）。旧数据仅含短名时会自动补 CustomKeyWords.。" />
                         <Grid MinHeight="120">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*" />
