@@ -54,6 +54,7 @@ public sealed class ZhuangTang : CardBaseModel
         if (pile != null){
             // 随机打出手牌中一张带[gold]有一说一[/gold]的牌
             var randomCard = base.Owner.RunState.Rng.CombatCardSelection.NextItem(pile.Cards);
+            if(randomCard != null)
             await CardCmd.AutoPlay(choiceContext, randomCard, null);
         }
     }
