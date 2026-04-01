@@ -27,6 +27,6 @@ public sealed class AddYYSYTempPower : PowerBaseModel
             return;
         }
         card.AddKeyword(CustomKeyWords.YYSY);
-		await PowerCmd.Apply<YYSYPower>(base.Owner, -1, base.Owner, null);
+		await PowerCmd.Apply<AddYYSYTempPower>(base.Owner, -1, base.Owner, null);
     }
 }

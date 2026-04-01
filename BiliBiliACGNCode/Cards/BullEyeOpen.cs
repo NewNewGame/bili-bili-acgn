@@ -2,7 +2,7 @@
 //* 文件：BullEyeOpen
 //* 作者：wheat
 //* 创建时间：2026/03/31 08:51:59 星期二
-//* 描述：造成等同于你本回合抽到过的[gold]有一说一[/gold]次数的{CalculatedDamage:diff()}伤害。
+//* 描述：造成等同于你打出过的[gold]有一说一[/gold]次数的{CalculatedDamage:diff()}*2伤害。
 //*******************************************************
 
 using BaseLib.Utils;
@@ -38,8 +38,8 @@ public sealed class BullEyeOpen : CardBaseModel
         new CalculationBaseVar(1m),
 		new ExtraDamageVar(1m),
 		new CalculatedDamageVar(ValueProp.Move).WithMultiplier((CardModel card, Creature? _) => 
-        CombatManager.Instance.History.Entries.OfType<CardDrawnEntry>().Count(
-            (CardDrawnEntry e) => e.Actor == card.Owner.Creature && e.Card.CanonicalKeywords.Contains(CustomKeyWords.YYSY)))
+        2*CombatManager.Instance.History.Entries.OfType<CardPlayFinishedEntry>().Count(
+            (CardPlayFinishedEntry e) => e.CardPlay.Card.Owner == card.Owner && e.CardPlay.Card.Keywords.Contains(CustomKeyWords.YYSY)))
     ];
 
     public BullEyeOpen() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }

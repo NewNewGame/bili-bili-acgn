@@ -1,6 +1,6 @@
 {
   "BILIBILIACGN-BULL_EYE_OPEN.title": "牛眼开",
-  "BILIBILIACGN-BULL_EYE_OPEN.description": "造成等同于你本回合抽到过的[gold]有一说一[/gold]次数的{CalculatedDamage:diff()}伤害。",
+  "BILIBILIACGN-BULL_EYE_OPEN.description": "造成等同于你打出过的[gold]有一说一[/gold]次数两倍的伤害。\n(造成{CalculatedDamage:diff()}点伤害。)",
   "BILIBILIACGN-BULL_STAB.title": "牛刺",
   "BILIBILIACGN-BULL_STAB.description": "造成{Damage:diff()}点伤害。{IfUpgraded:show:选择|随机}打出手牌中[blue]1[/blue]张带[gold]有一说一[/gold]的牌。",
   "BILIBILIACGN-DAY0.title": "Day0",
