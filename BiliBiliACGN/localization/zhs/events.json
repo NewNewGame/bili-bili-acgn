@@ -5,5 +5,71 @@
     "STRANGE_MURMUR.pages.INITIAL.options.COMBAT.description": "开始战斗",
     "STRANGE_MURMUR.pages.INITIAL.options.IGNORE.title": "视而不见",
     "STRANGE_MURMUR.pages.INITIAL.options.IGNORE.description": "无视并离开",
-    "STRANGE_MURMUR.pages.LEAVE.description": "你选择无视了奇怪的低语。"
+    "STRANGE_MURMUR.pages.LEAVE.description": "你选择无视了奇怪的低语。",
+
+    "ANIME_TIME_MACHINE.title": "新番时光机",
+    "ANIME_TIME_MACHINE.pages.INITIAL.description": "在一个垃圾废弃场，你发现了一些奇怪的设备",
+    "ANIME_TIME_MACHINE.pages.INITIAL.options.TRY.title": "调查奇怪的抽屉",
+    "ANIME_TIME_MACHINE.pages.INITIAL.options.TRY.description": "随机获得[gold]特殊卡牌[/gold]",
+    "ANIME_TIME_MACHINE.pages.INITIAL.options.NO.title": "调查奇怪的微波炉",
+    "ANIME_TIME_MACHINE.pages.INITIAL.options.NO.description": "随机获得[gold]特殊遗物[/gold]",
+
+    "SHERRY.title": "啊~雪莉",
+    "SHERRY.pages.INITIAL.description": "你发现一只受伤的白猫，明明你早已经见惯了这样的场景，但不知为何这次你却停下了你的脚步。",
+    "SHERRY.pages.INITIAL.options.TRY.title": "带走小猫",
+    "SHERRY.pages.INITIAL.options.TRY.description": "获得【凡庸】，可以在[gold]休息处[/gold]治疗小猫。",
+    "SHERRY.pages.INITIAL.options.NO.title": "眉头一紧，你还是离开了",
+    "SHERRY.pages.INITIAL.options.NO.description": "都过去了...",
+
+    "E_HEI_JIANG.title": "奇怪的面具",
+    "E_HEI_JIANG.pages.INITIAL.description": "一个奇怪的面具引起了你的注意，不禁觉得有点诡异，仿佛[sine]它在注视着你？[/sine]",
+
+
+    "EVA_.title": "同步率测试",
+    "EVA.pages.INITIAL.description": "你站在一个巨大的白色试验场中央。前方是一台紫色机体，驾驶舱门敞开。碇源堂双手交叉，冷冷地说：“坐进去，或者离开。",
+    "EVA_.pages.INITIAL.options.TRY.title": "坐进去，全力同步",
+    "EVA_.pages.INITIAL.options.TRY.description": "你尝试与EVA融合。失去50%当前生命值。获得卡牌【我已eva形态出击】",
+    "EVA_.pages.INITIAL.options.NO.title": "拒绝，转身离开",
+    "EVA_.pages.INITIAL.options.NO.description": "我不想当工具。获得遗物【A.T.力场发生器】",
+
+    "BAGA_MEGAMI_.title": "智障女神",
+    "BAGA_MEGAMI_.pages.INITIAL.description": "一个穿着奇怪紧身衣、自称女神的蓝发女性站在你面前，大喊道：“吾乃阿库娅！要我给你加buff吗？” 她看起来不太聪明的样子。",
+    "BAGA_MEGAMI_.pages.INITIAL.options.TRY.title": "你同意了",
+    "BAGA_MEGAMI_.pages.INITIAL.options.TRY.description": "让她加buff，获得一张特殊卡牌【阿库娅的祝福】",
+    "BAGA_MEGAMI_.pages.INITIAL.options.NO.title": "不！",
+    "BAGA_MEGAMI_.pages.INITIAL.options.NO.description": "我最喜欢对自以为是的人说No！",
+    "BAGA_MEGAMI_.pages.INITIAL.options.MEGAMI.title": "我选择女神你成为我的buff",
+    "BAGA_MEGAMI_.pages.INITIAL.options.MEGAMI.description": "阿库娅加入了队伍....",
+
+    "DOCTOR_INVENTION.title": "博士的发明",
+    "DOCTOR_INVENTION.pages.INITIAL.description": "你遇到一个自称“博士”的8岁天才（？），她手里拿着一个奇怪的装置：“这是能让人打喷嚏24小时的机器！要试试吗？”",
+    "DOCTOR_INVENTION.pages.INITIAL.options.TRY.title": "让她对敌人用",
+    "DOCTOR_INVENTION.pages.INITIAL.options.TRY.description": "获得遗物【打喷嚏机器】",
+    "DOCTOR_INVENTION.pages.INITIAL.options.BUY.title": "买下发明",
+    "DOCTOR_INVENTION.pages.INITIAL.options.BUY.description": "花费50金币，获得遗物【博士的喷嚏机】",
+
+    "DESPERATE_DAILY.title": "绝望的日常",
+    "DESPERATE_DAILY.pages.INITIAL.description": "你走在无尽的废墟中，在这荒无人烟的地方没有什么食物，你已经2天没能吃上东西了。两个少女骑着摩托车经过，问你要不要一起吃最后的罐头。”",
+    "DESPERATE_DAILY.pages.INITIAL.options.EAT.title": "自己吃了",
+    "DESPERATE_DAILY.pages.INITIAL.options.EAT.description": "恢复50%点生命值，但获得诅咒【绝望感】",
+    "DESPERATE_DAILY.pages.INITIAL.options.LEAVE.title": "把罐头留给她们",
+    "DESPERATE_DAILY.pages.INITIAL.options.LEAVE.description": "获得【空腹】",
+
+    "PURE_GOLD_CARD.title": "24K纯金卡",
+    "PURE_GOLD_CARD.pages.INITIAL.description": "你在路上发现密封起来的一张以24K黄金打造，重约11g，刻画着攻击力高达3000的卡牌，文本上写着任何对手都能将之粉碎，其破坏力不可估量。”",
+
+    "O_KUO_DA.title": "哦扩达",
+    "O_KUO_DA.pages.INITIAL.description": "你看到两个造型诡异的小学生（？）在吵架。“嘿嘿，哦扩达？”“没有——” “哦扩达？”“没有——” “那就是生气了！””",
+    "O_KUO_DA.pages.INITIAL.options.OGUODA.title": "加入吵架，说“生气了吗”",
+    "O_KUO_DA.pages.INITIAL.options.OGUODA.description": "你开始了复读机模式",
+    "O_KUO_DA.pages.INITIAL.options.NAIYO.title": "加入吵架，说“没有”",
+    "O_KUO_DA.pages.INITIAL.options.NAIYO.description": "你选择了另一边",
+    "O_KUO_DA.pages.INITIAL.options.COMBAT.title": "那就全都揍一顿",
+    "O_KUO_DA.pages.INITIAL.options.COMBAT.description": "你受不了了"
+
+
+
+
+
+
 }
