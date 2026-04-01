@@ -1,0 +1,9 @@
+{
+    "STRANGE_MURMUR.title": "奇怪的呢喃",
+    "STRANGE_MURMUR.pages.INITIAL.description": "穿梭在一群不知链接何处的水管森林，在不远处你似乎听到了什么呢喃声和哀嚎声。声音听起来十分的悲伤甚至癫狂，在这幽静的“森林”他的呢喃仿佛死去的[sine]鬼魂[/sine]一样漂浮在你的身旁。当你越发接近声音的来源，你终于听清了他话语\n\n[sine][color=green]“甚而为龟，我很抱歉”[/color][/sine]",
+    "STRANGE_MURMUR.pages.INITIAL.options.COMBAT.title": "过去看看",
+    "STRANGE_MURMUR.pages.INITIAL.options.COMBAT.description": "开始战斗",
+    "STRANGE_MURMUR.pages.INITIAL.options.IGNORE.title": "视而不见",
+    "STRANGE_MURMUR.pages.INITIAL.options.IGNORE.description": "无视并离开",
+    "STRANGE_MURMUR.pages.LEAVE.description": "你选择无视了奇怪的低语。"
+}
