@@ -37,7 +37,8 @@ public sealed class HairGrowth : CardBaseModel
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
         new CalculationBaseVar(0m),
-        new CalculatedVar("DrawCards").WithMultiplier((CardModel card, Creature? target)=>
+        new CalculationExtraVar(1m),
+        new CalculatedVar("CalculatedCard").WithMultiplier((CardModel card, Creature? target)=>
 		{
 			return target?.GetPowerAmount<YYSYPower>() ?? 0;
 		})
@@ -53,7 +54,7 @@ public sealed class HairGrowth : CardBaseModel
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         #region 卡牌打出效果
-        await CardPileCmd.Draw(choiceContext, ((CalculatedVar)base.DynamicVars["DrawCards"]).Calculate(cardPlay.Target), base.Owner);
+        await CardPileCmd.Draw(choiceContext, ((CalculatedVar)base.DynamicVars["CalculatedCard"]).Calculate(cardPlay.Target), base.Owner);
         #endregion
     }
 

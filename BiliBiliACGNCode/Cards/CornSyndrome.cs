@@ -2,7 +2,7 @@
 //* 文件：CornSyndrome
 //* 作者：wheat
 //* 创建时间：2026/03/31 08:55:49 星期二
-//* 描述：获得{Block:diff()}点格挡。随机给你手牌中的一张牌添加[gold]有一说一[/gold]。
+//* 描述：获得{Block:diff()}点格挡。随机/选择给你手牌中的一张牌添加[gold]有一说一[/gold]。
 //*******************************************************
 
 using BaseLib.Utils;
@@ -49,16 +49,22 @@ public sealed class CornSyndrome : CardBaseModel
         #region 卡牌打出效果
         await CreatureCmd.GainBlock(base.Owner.Creature, base.DynamicVars.Block.BaseValue, ValueProp.Move, null);
         #endregion
+
+        // 获取所有手牌
         var pile = PileType.Hand.GetPile(base.Owner);
-        if (pile != null){
-            // 获取所有没有有一说一的手牌
-            foreach(var card in pile.Cards){
-                if(!card.Keywords.Contains(CustomKeyWords.YYSY)){
-                    card.AddKeyword(CustomKeyWords.YYSY);
-                    break;
-                }
+        if (pile != null && pile.Cards.Count() > 0){   
+            // 如果升级了，那就选择一张没有有一说一的手牌   
+            if(base.IsUpgraded){
+            var card = (await CardSelectCmd.FromHand(choiceContext, base.Owner, MCardSelectorPrefs.AddYYSY, MCardSelectorPrefs.NoYYSYFilter, this)).FirstOrDefault();
+                if(card != null)
+                await CardCmd.AutoPlay(choiceContext, card, null);
+            }else{
+                // 随机给你手牌中的一张牌添加[gold]有一说一[/gold]
+                var randomCard = base.Owner.RunState.Rng.CombatCardSelection.NextItem(pile.Cards);
+                if(randomCard != null)
+                    await CardCmd.AutoPlay(choiceContext, randomCard, null);
             }
-        }
+        }   
     }
 
     /// <summary>

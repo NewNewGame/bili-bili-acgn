@@ -2,7 +2,7 @@
 //* 文件：ZhuangTang
 //* 作者：wheat
 //* 创建时间：2026/03/31 10:25:35 星期二
-//* 描述：获得{Block:diff()}点格挡。随机打出手牌中一张带[gold]有一说一[/gold]的牌。
+//* 描述：获得{Block:diff()}点格挡。随机/选择打出手牌中一张带[gold]有一说一[/gold]的牌。
 //*******************************************************
 
 using BaseLib.Utils;
@@ -49,13 +49,21 @@ public sealed class ZhuangTang : CardBaseModel
         #region 卡牌打出效果
         await CreatureCmd.GainBlock(base.Owner.Creature, base.DynamicVars.Block.BaseValue, ValueProp.Move, null);
         #endregion
-        // 随机打出手牌中一张带[gold]有一说一[/gold]的牌
+        // 获取所有手牌
         var pile = PileType.Hand.GetPile(base.Owner);
-        if (pile != null){
-            // 随机打出手牌中一张带[gold]有一说一[/gold]的牌
-            var randomCard = base.Owner.RunState.Rng.CombatCardSelection.NextItem(pile.Cards);
-            if(randomCard != null)
-            await CardCmd.AutoPlay(choiceContext, randomCard, null);
+        if (pile != null && pile.Cards.Count() > 0){
+            // 如果升级了，那就选择一张带[gold]有一说一[/gold]的牌
+            if(base.IsUpgraded){
+                var card = (await CardSelectCmd.FromHand(choiceContext, base.Owner, MCardSelectorPrefs.YYSY, MCardSelectorPrefs.YYSYFilter, this)).FirstOrDefault();
+                if(card != null)
+                await CardCmd.AutoPlay(choiceContext, card, null);
+            }else{
+                // 随机打出手牌中一张带[gold]有一说一[/gold]的牌
+                var randomCard = base.Owner.RunState.Rng.CombatCardSelection.NextItem(pile.Cards);
+                if(randomCard != null)
+                await CardCmd.AutoPlay(choiceContext, randomCard, null);
+            }
+            
         }
     }
 

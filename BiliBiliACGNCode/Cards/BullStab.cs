@@ -31,7 +31,6 @@ public sealed class BullStab : CardBaseModel
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
         new DamageVar(7m, ValueProp.Move),
-        new CardsVar(1)
     ];
 
     public BullStab() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
@@ -70,7 +69,6 @@ public sealed class BullStab : CardBaseModel
     {
         #region 升级效果
         base.DynamicVars["Damage"].UpgradeValueBy(3m);
-        base.DynamicVars["Cards"].UpgradeValueBy(1m);
 
         #endregion
     }

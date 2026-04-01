@@ -12,6 +12,7 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using BiliBiliACGN.BiliBiliACGNCode.Cards.CardPool;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Commands;
+using MegaCrit.Sts2.Core.Logging;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Cards;
 
@@ -48,17 +49,16 @@ public sealed class UsGreenCard : CardBaseModel
         #region 卡牌打出效果
         #endregion
         // 获取所有带[gold]有一说一[/gold]的手牌
-        var pile = PileType.Hand.GetPile(base.Owner);
-        int cnt = 0;
+        var cards = PileType.Hand.GetPile(base.Owner).Cards.Where(card => card.Keywords.Contains(CustomKeyWords.YYSY)).ToArray();
+        int n = cards.Count();
         // 遍历所有卡牌，自动打出带[gold]有一说一[/gold]的卡牌
-        foreach(var card in pile.Cards){
-            if(card.Keywords.Contains(CustomKeyWords.YYSY)){
-                await CardCmd.AutoPlay(choiceContext, card, null);
-                cnt++;
-            }
+        for(int i = 0; i < n; i++){
+            await CardCmd.AutoPlay(choiceContext, cards.ElementAt(i), null);
         }
         // 抽取相同数量的牌
-        await CardPileCmd.Draw(choiceContext, cnt, base.Owner);
+        if(n > 0){
+            await CardPileCmd.Draw(choiceContext, n, base.Owner);
+        }
     }
 
     /// <summary>
