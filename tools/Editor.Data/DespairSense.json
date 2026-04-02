@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "className": "DespairSense",
+  "title": "绝望感",
+  "description": "没有效果。",
+  "namespace": "BiliBiliACGN.BiliBiliACGNCode.Cards",
+  "energyCost": 0,
+  "cardType": "Curse",
+  "rarity": "Curse",
+  "targetType": "None",
+  "showInCardLibrary": true,
+  "poolTypeName": "CurseCardPool",
+  "canonicalKeywordFields": [],
+  "extraHoverTipKeywordFields": [],
+  "dynamicVars": [],
+  "cardPlayActions": [],
+  "upgradeEffects": [],
+  "notes": "诅咒牌，0 费，打出无效果。"
+}

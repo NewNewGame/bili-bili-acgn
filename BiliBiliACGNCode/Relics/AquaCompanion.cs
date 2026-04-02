@@ -20,7 +20,7 @@ using MegaCrit.Sts2.Core.ValueProps;
 namespace BiliBiliACGN.BiliBiliACGNCode.Relics;
 
 [Pool(typeof(EventRelicPool))]
-public sealed class GoddessCompanion : RelicBaseModel
+public sealed class AquaCompanion : RelicBaseModel
 {
     public override RelicRarity Rarity => RelicRarity.Event;
     protected override IEnumerable<DynamicVar> CanonicalVars => [new DynamicVar("Damage", 20m), new DynamicVar("Amount", 5m), new DynamicVar("Gold", 10m), new DamageVar("RandomDamage", 0m, ValueProp.Unpowered)];
@@ -67,9 +67,6 @@ public sealed class GoddessCompanion : RelicBaseModel
 				    VfxCmd.PlayOnCreatureCenters(combatState.HittableEnemies, "vfx/vfx_attack_slash");
 				    await CreatureCmd.Damage(choiceContext, combatState.HittableEnemies, (DamageVar)base.DynamicVars["RandomDamage"], base.Owner.Creature);
                 }
-
-                // 失活
-                base.Status = RelicStatus.Disabled;
 			}
 		}
 	}

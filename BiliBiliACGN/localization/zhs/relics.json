@@ -49,5 +49,17 @@
     "BILIBILIACGN-CALM_PIPI.flavor": "还没想好",
     "BILIBILIACGN-ULTIMATE_SHIT_ANIME_COMMITTEE.title": "究极粪动画制作委员会",
     "BILIBILIACGN-ULTIMATE_SHIT_ANIME_COMMITTEE.description": "每回合第一张牌打出后，随机复制一张手牌，这张卡牌可以[gold]免费[/gold]打出，本回合后移除。",
-    "BILIBILIACGN-ULTIMATE_SHIT_ANIME_COMMITTEE.flavor": "还没想好"
+    "BILIBILIACGN-ULTIMATE_SHIT_ANIME_COMMITTEE.flavor": "还没想好",
+    "BILIBILIACGN-QIAN_HU_DIARY.title": "千户的日记",
+    "BILIBILIACGN-QIAN_HU_DIARY.description": "每当你跳过一次卡牌奖励，回合结束时获得等同于[blue]跳过次数×{Amount}[/blue]的[gold]格挡[/gold]。",
+    "BILIBILIACGN-QIAN_HU_DIARY.flavor": "还没想好",
+    "BILIBILIACGN-MILD_SNEEZING.title": "轻微喷嚏",
+    "BILIBILIACGN-MILD_SNEEZING.description": "下[blue]{Fights}[/blue]场战斗：每回合有[blue]{SkipChance}%[/blue]几率跳过敌人回合。每回合，随机丢弃[blue]{DiscardAmount}[/blue]张牌。",
+    "BILIBILIACGN-MILD_SNEEZING.flavor": "还没想好",
+    "BILIBILIACGN-HA_KA_SE_SNEEZING_MACHINE.title": "博士的喷嚏机",
+    "BILIBILIACGN-HA_KA_SE_SNEEZING_MACHINE.description": "每场战斗开始时，所有敌人获得[blue]{WeakAmount}[/blue]层虚弱；你也有[blue]{FragileChance}%[/blue]几率获得[blue]{FragileAmount}[/blue]层脆弱。",
+    "BILIBILIACGN-HA_KA_SE_SNEEZING_MACHINE.flavor": "还没想好",
+    "BILIBILIACGN-PURE_GOLD_CARD.title": "24k纯金卡",
+    "BILIBILIACGN-PURE_GOLD_CARD.description": "获得诅咒[red]青眼白龙[/red]，进入[gold]商店[/gold]时移除。",
+    "BILIBILIACGN-PURE_GOLD_CARD.flavor": "还没想好"
 }

@@ -4,7 +4,12 @@
 //* 创建时间：2026/04/01 18:43:00 星期三
 //* 描述：哦跨哒事件(Pop子与Pipi美)
 //*******************************************************
+using BiliBiliACGN.BiliBiliACGNCode.Core.Models.Encounters;
+using BiliBiliACGN.BiliBiliACGNCode.Relics;
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Events;
+using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Rewards;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Events;
 
@@ -13,6 +18,7 @@ public sealed class OKuoDaEvents : EventBaseModel
     public override bool IsShared => true;
     public override IReadOnlySet<Type> OwnerActTypes => new HashSet<Type> { };
     public override EventLayoutType LayoutType => EventLayoutType.Default;
+    public override EncounterModel? CanonicalEncounter => ModelDb.Encounter<StrangeMurmurEncounter>();
 
     protected override IReadOnlyList<EventOption> GenerateInitialOptions()
     {
@@ -24,21 +30,26 @@ public sealed class OKuoDaEvents : EventBaseModel
         ];
     }
 
-    private Task Oguoda()
+    private async Task Oguoda()
     {
-        // TODO: 实现选项 OGUODA 的具体逻辑
-        return Task.CompletedTask;
+        // 获得遗物愤怒的pop子
+        await RelicCmd.Obtain<AngryPop>(base.Owner);
     }
 
-    private Task Naiyo()
+    private async Task Naiyo()
     {
-        // TODO: 实现选项 NAIYO 的具体逻辑
-        return Task.CompletedTask;
+        // 获得遗物冷静的pipi美
+        await RelicCmd.Obtain<CalmPipi>(base.Owner);
     }
 
     private Task Combat()
     {
-        // TODO: 实现选项 COMBAT 的具体逻辑
+        // 进入战斗
+        EnterCombatWithoutExitingEvent<OKuoDaEncounter>([
+            new RelicReward(ModelDb.Relic<UltimateShitAnimeCommittee>(), base.Owner),
+            new PotionReward(base.Owner)
+        ], false);
+        
         return Task.CompletedTask;
     }
 }

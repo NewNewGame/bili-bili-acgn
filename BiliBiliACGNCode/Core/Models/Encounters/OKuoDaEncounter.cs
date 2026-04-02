@@ -1,8 +1,8 @@
 //****************** 代码文件申明 ***********************
-//* StrangeMurmurEncounter
+//* OKuoDaEncounter
 //* 作者：wheat
-//* 创建时间：2026/04/01 10:00:00 星期三
-//* 描述：奇怪的低语战斗场景
+//* 创建时间：2026/04/02 15:09:02 星期四
+//* 描述：Pop子与Pipi美战斗场景
 //*******************************************************
 using BiliBiliACGN.BiliBiliACGNCode.Core.Models.Encounters.Monsters;
 using MegaCrit.Sts2.Core.Models;
@@ -10,12 +10,11 @@ using MegaCrit.Sts2.Core.Rooms;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Core.Models.Encounters;
 
-public sealed class StrangeMurmurEncounter : EncounterModel
+public sealed class OKuoDaEncounter : EncounterModel
 {
 	public override RoomType RoomType => RoomType.Monster;
 
 	public override IEnumerable<MonsterModel> AllPossibleMonsters => [ModelDb.Monster<PopPipi>()];
-	// TODO 暂时先用这个，之后再改
 	protected override IReadOnlyList<(MonsterModel, string?)> GenerateMonsters()
 	{
 		PopPipi popPipi = (PopPipi)ModelDb.Monster<PopPipi>().ToMutable();

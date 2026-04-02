@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "className": "EmptyStomach",
+  "title": "空腹",
+  "description": "在你的回合结束时，如果这张牌在你的手牌中，则失去2点生命值。",
+  "namespace": "BiliBiliACGN.BiliBiliACGNCode.Cards",
+  "energyCost": 0,
+  "cardType": "Curse",
+  "rarity": "Curse",
+  "targetType": "None",
+  "showInCardLibrary": true,
+  "poolTypeName": "CurseCardPool",
+  "canonicalKeywordFields": [],
+  "extraHoverTipKeywordFields": [],
+  "dynamicVars": [],
+  "cardPlayActions": [],
+  "upgradeEffects": [],
+  "notes": "诅咒。回合结束手牌中扣血：逻辑未在代码中实现。"
+}

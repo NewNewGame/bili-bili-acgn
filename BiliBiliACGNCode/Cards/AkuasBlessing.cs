@@ -18,7 +18,7 @@ using MegaCrit.Sts2.Core.Models.Powers;
 namespace BiliBiliACGN.BiliBiliACGNCode.Cards;
 
 [Pool(typeof(EventCardPool))]
-public sealed class AkuasBlessing : CardBaseModel
+public sealed class AquasBlessing : CardBaseModel
 {
     #region 卡牌关键词与悬停
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
@@ -39,7 +39,7 @@ public sealed class AkuasBlessing : CardBaseModel
         new DynamicVar("Probility", 30m),
     ];
 
-    public AkuasBlessing() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
+    public AquasBlessing() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
 
     #endregion
 
