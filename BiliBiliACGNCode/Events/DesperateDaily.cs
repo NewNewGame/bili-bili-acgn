@@ -15,7 +15,7 @@ using MegaCrit.Sts2.Core.Runs;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Events;
 
-public sealed class DesperateDailyEvents : EventBaseModel
+public sealed class DesperateDaily : EventBaseModel
 {
     public override bool IsShared => false;
     public override IReadOnlySet<Type> OwnerActTypes => new HashSet<Type> { };

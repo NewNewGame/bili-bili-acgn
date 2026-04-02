@@ -12,7 +12,7 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Events;
 
-public sealed class HaKaSeInventionEvents : EventBaseModel
+public sealed class HaKaSeInvention : EventBaseModel
 {
     public override bool IsShared => false;
     public override IReadOnlySet<Type> OwnerActTypes => new HashSet<Type> { };

@@ -11,7 +11,7 @@ using MegaCrit.Sts2.Core.Models;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Events;
 
-public sealed class AnimeTimeMachineEvents : EventBaseModel
+public sealed class AnimeTimeMachine : EventBaseModel
 {
     public override bool IsShared => false;
     public override IReadOnlySet<Type> OwnerActTypes => new HashSet<Type> { };

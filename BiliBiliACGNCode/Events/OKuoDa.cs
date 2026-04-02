@@ -13,7 +13,7 @@ using MegaCrit.Sts2.Core.Rewards;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Events;
 
-public sealed class OKuoDaEvents : EventBaseModel
+public sealed class OKuoDa : EventBaseModel
 {
     public override bool IsShared => true;
     public override IReadOnlySet<Type> OwnerActTypes => new HashSet<Type> { };

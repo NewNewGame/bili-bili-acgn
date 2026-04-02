@@ -21,7 +21,7 @@ using MegaCrit.Sts2.Core.Runs;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Events;
 
-public sealed class PureGoldCardEvents : EventBaseModel
+public sealed class PureGoldCardEvent : EventBaseModel
 {
     public override bool IsShared => true;
     public override IReadOnlySet<Type> OwnerActTypes => new HashSet<Type> { };

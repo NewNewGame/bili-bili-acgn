@@ -8,7 +8,7 @@ using MegaCrit.Sts2.Core.Events;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Events;
 
-public sealed class EHeiJiangEvents : EventBaseModel
+public sealed class EHeiJiang : EventBaseModel
 {
     public override bool IsShared => true;
     public override IReadOnlySet<Type> OwnerActTypes => new HashSet<Type> { };

@@ -15,7 +15,19 @@ public static class EventRegister
     private static readonly Dictionary<Type, List<EventModel>> ExtraEventsByActType = [];
     private static readonly List<EventModel> ExtraSharedEvents = [];
     private static bool _initialized;
-    private static readonly List<EventModel> _events = [ModelDb.Event<StrangeMurmur>(), ModelDb.Event<SherryEvents>()];
+    private static readonly List<EventModel> _events = [
+        ModelDb.Event<AnimeTimeMachine>(),
+        ModelDb.Event<BagaMegami>(),
+        ModelDb.Event<DesperateDaily>(),
+        ModelDb.Event<PureGoldCardEvent>(),
+        ModelDb.Event<EHeiJiang>(),
+        ModelDb.Event<EvaEvents>(),
+        ModelDb.Event<HaKaSeInvention>(),
+        ModelDb.Event<OKuoDa>(),
+        ModelDb.Event<PureGoldCardEvent>(),
+        ModelDb.Event<SherryEvent>(),
+        ModelDb.Event<StrangeMurmur>()
+     ];
 
     public static void RegisterEvents()
     {

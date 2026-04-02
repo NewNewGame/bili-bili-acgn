@@ -15,7 +15,7 @@ using MegaCrit.Sts2.Core.Models.Cards;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Events;
 
-public sealed class SherryEvents : EventBaseModel
+public sealed class SherryEvent : EventBaseModel
 {
     public override bool IsShared => true;
     public override IReadOnlySet<Type> OwnerActTypes => new HashSet<Type> { };

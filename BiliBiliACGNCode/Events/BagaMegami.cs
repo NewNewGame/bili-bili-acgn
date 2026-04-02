@@ -14,7 +14,7 @@ using MegaCrit.Sts2.Core.Models;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Events;
 
-public sealed class BagaMegamiEvents : EventBaseModel
+public sealed class BagaMegami : EventBaseModel
 {
     public override bool IsShared => false;
     public override IReadOnlySet<Type> OwnerActTypes => new HashSet<Type> { };
