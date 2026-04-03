@@ -1,27 +1,22 @@
 //****************** 代码文件申明 ***********************
-//* 文件：InfiniteBullnessPower
+//* 文件：ChairTuberPower
 //* 作者：wheat
 //* 创建时间：2026/03/31 10:20:49 星期二
-//* 描述：能力 无量牛处 每回合自动打出{Cards:diff()}张带[gold]有一说一[/gold]的牌。
+//* 描述：能力 椅子主播 每回合自动打出{Cards:diff()}张带[gold]有一说一[/gold]的牌。
 //*******************************************************
 
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
-using MegaCrit.Sts2.Core.Entities.Cards;
-using MegaCrit.Sts2.Core.Entities.Players;
-using Godot;
-using MegaCrit.Sts2.Core.Extensions;
 using MegaCrit.Sts2.Core.Models;
 using BiliBiliACGN.BiliBiliACGNCode.Cards;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
-using MegaCrit.Sts2.Core.Logging;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Powers;
 
-public sealed class InfiniteBullnessPower : PowerBaseModel
+public sealed class ChairTuberPower : PowerBaseModel
 {
-    protected override string customIconPath => "infinitebullness";
+    protected override string customIconPath => "chairtuber";
     public override PowerType Type => PowerType.Buff;
 
     public override PowerStackType StackType => PowerStackType.Counter;

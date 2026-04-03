@@ -17,7 +17,7 @@ using MegaCrit.Sts2.Core.HoverTips;
 namespace BiliBiliACGN.BiliBiliACGNCode.Cards;
 
 [Pool(typeof(BottleCardPool))]
-public sealed class InfiniteBullness : CardBaseModel
+public sealed class ChairTuber : CardBaseModel
 {
     #region 卡牌关键词与悬停
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromKeyword(CustomKeyWords.YYSY)];
@@ -37,7 +37,7 @@ public sealed class InfiniteBullness : CardBaseModel
         new CardsVar(2)
     ];
 
-    public InfiniteBullness() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
+    public ChairTuber() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
 
     #endregion
 
@@ -48,7 +48,7 @@ public sealed class InfiniteBullness : CardBaseModel
     {
         #region 卡牌打出效果
         await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
-        await PowerCmd.Apply<InfiniteBullnessPower>(base.Owner.Creature, base.DynamicVars["Cards"].BaseValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<ChairTuberPower>(base.Owner.Creature, base.DynamicVars["Cards"].BaseValue, base.Owner.Creature, this);
         #endregion
     }
 
