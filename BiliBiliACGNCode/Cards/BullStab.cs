@@ -11,6 +11,7 @@ using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.ValueProps;
 
@@ -20,6 +21,8 @@ namespace BiliBiliACGN.BiliBiliACGNCode.Cards;
 public sealed class BullStab : CardBaseModel
 {
     #region 卡牌属性配置
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromKeyword(CustomKeyWords.YYSY)];
+
     private const int energyCost = 1;
     private const CardType type = CardType.Attack;
     private const CardRarity rarity = CardRarity.Uncommon;

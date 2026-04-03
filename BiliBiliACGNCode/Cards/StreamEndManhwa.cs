@@ -32,7 +32,7 @@ public sealed class StreamEndManhwa : CardBaseModel
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new DynamicVar("NextEnergy", 2m),
+        new EnergyVar(2),
         new DynamicVar("Power", 2m)
     ];
 
@@ -44,7 +44,7 @@ public sealed class StreamEndManhwa : CardBaseModel
     {
         // 下回合能量 +NextEnergy；获得 Power 层红温
         if(base.Owner != null){
-            await PowerCmd.Apply<EnergyNextTurnPower>(base.Owner.Creature, base.DynamicVars["NextEnergy"].BaseValue, base.Owner.Creature, null);
+            await PowerCmd.Apply<EnergyNextTurnPower>(base.Owner.Creature, base.DynamicVars.Energy.BaseValue, base.Owner.Creature, null);
             await PowerCmd.Apply<AngerPower>(base.Owner.Creature, base.DynamicVars["Power"].BaseValue, base.Owner.Creature, null);
         }
     }

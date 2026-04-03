@@ -12,6 +12,7 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using BiliBiliACGN.BiliBiliACGNCode.Cards.CardPool;
 using BiliBiliACGN.BiliBiliACGNCode.Powers;
+using MegaCrit.Sts2.Core.HoverTips;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Cards;
 
@@ -20,6 +21,8 @@ public sealed class WitPeak : CardBaseModel
 {
     #region 卡牌关键词与悬停
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromKeyword(CustomKeyWords.YYSY)];
+
     #endregion
     #region 卡牌属性配置
     private const int energyCost = 0;
@@ -33,7 +36,7 @@ public sealed class WitPeak : CardBaseModel
     /// </summary>
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new DynamicVar("Energy", 1m)
+        new EnergyVar(1)
     ];
 
     public WitPeak() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
@@ -46,7 +49,7 @@ public sealed class WitPeak : CardBaseModel
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         #region 卡牌打出效果
-        await PlayerCmd.GainEnergy(base.DynamicVars["Energy"].BaseValue, base.Owner);
+        await PlayerCmd.GainEnergy(base.DynamicVars.Energy.BaseValue, base.Owner);
         await PowerCmd.Apply<AddYYSYTempPower>(base.Owner.Creature, 2, base.Owner.Creature, null);
         var drawCards = await CardPileCmd.Draw(choiceContext, 2m, base.Owner);
         foreach(var card in drawCards){
@@ -61,7 +64,7 @@ public sealed class WitPeak : CardBaseModel
     protected override void OnUpgrade()
     {
         #region 升级效果
-        base.DynamicVars["Energy"].UpgradeValueBy(1m);
+        base.DynamicVars.Energy.UpgradeValueBy(1m);
 
         #endregion
     }

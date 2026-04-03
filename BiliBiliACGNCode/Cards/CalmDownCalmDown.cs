@@ -32,7 +32,7 @@ public sealed class CalmDownCalmDown : CardBaseModel
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new DynamicVar("Energy", 2m)
+        new EnergyVar(2)
     ];
 
     public CalmDownCalmDown() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }

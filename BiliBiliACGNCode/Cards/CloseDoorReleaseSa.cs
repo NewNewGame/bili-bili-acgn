@@ -15,6 +15,7 @@ using BiliBiliACGN.BiliBiliACGNCode.Cards.CardPool;
 using BiliBiliACGN.BiliBiliACGNCode.Powers;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Entities.Creatures;
+using MegaCrit.Sts2.Core.Commands;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Cards;
 
@@ -36,7 +37,7 @@ public sealed class CloseDoorReleaseSa : CardBaseModel
         new CalculationBaseVar(6m),
 		new ExtraDamageVar(2m),
         // 伤害 = Damage + Anger层数 * AngerBonus（Anger 来自 AngerPower）
-        new CalculatedDamageVar(ValueProp.Move).WithMultiplier((CardModel card, Creature? _) => card.Owner.Creature.GetPowerAmount<AngerPower>())
+        new CalculatedDamageVar(ValueProp.Move).WithMultiplier((CardModel card, Creature? _) => card.Owner?.Creature.GetPowerAmount<AngerPower>() ?? 0)
     ];
 
     public CloseDoorReleaseSa() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
@@ -45,8 +46,11 @@ public sealed class CloseDoorReleaseSa : CardBaseModel
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        // TODO: 伤害 = Damage + floor(Anger层数 / PerAnger) * AngerBonus（Anger 来自 AngerPower）
-        await Task.CompletedTask;
+        // 伤害 = Damage + floor(Anger层数 / PerAnger) * AngerBonus（Anger 来自 AngerPower）
+        await DamageCmd.Attack(base.DynamicVars.CalculatedDamage.BaseValue)
+            .FromCard(this)
+            .Targeting(cardPlay.Target)
+            .Execute(choiceContext);
     }
 
     protected override void OnUpgrade()

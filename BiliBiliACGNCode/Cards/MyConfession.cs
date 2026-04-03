@@ -21,7 +21,7 @@ namespace BiliBiliACGN.BiliBiliACGNCode.Cards;
 public sealed class MyConfession : CardBaseModel
 {
     #region 卡牌关键词与悬停
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromKeyword(CustomKeyWords.Anger)];
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromKeyword(CustomKeyWords.Anger),HoverTipFactory.FromPower<RagePower>()];
     #endregion
 
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://capev36uknfng"
-path="res://.godot/imported/new_card.png-2e12136baa89bf9d4946ec4f652fa741.ctex"
+uid="uid://6b64nkfsk3vw"
+path="res://.godot/imported/meditation.png-594948b951b91652bb6cde478f3a5dd9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://BiliBiliACGN/images/card_portraits/new_card.png"
-dest_files=["res://.godot/imported/new_card.png-2e12136baa89bf9d4946ec4f652fa741.ctex"]
+source_file="res://BiliBiliACGN/images/card_portraits/big/meditation.png"
+dest_files=["res://.godot/imported/meditation.png-594948b951b91652bb6cde478f3a5dd9.ctex"]
 
 [params]
 

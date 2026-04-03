@@ -50,7 +50,7 @@ public sealed class TwoHundredLoveComics : CardBaseModel
 
     protected override void OnUpgrade()
     {
-        base.DynamicVars["Damage"].UpgradeValueBy(1m);
-        base.DynamicVars["BonusDamage"].UpgradeValueBy(1m);
+        base.DynamicVars.CalculationBase.UpgradeValueBy(1m);
+        base.DynamicVars.ExtraDamage.UpgradeValueBy(1m);
     }
 }

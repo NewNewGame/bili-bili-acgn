@@ -39,7 +39,7 @@ public sealed class NeedAKill : CardBaseModel
     [
         new DamageVar(8m, ValueProp.Move),
         new DynamicVar("RageDamage", 5m),
-        new DynamicVar("Gold", 10m)
+        new GoldVar(10)
     ];
 
     public NeedAKill() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }

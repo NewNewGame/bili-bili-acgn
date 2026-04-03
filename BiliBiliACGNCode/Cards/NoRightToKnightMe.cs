@@ -14,6 +14,7 @@ using BiliBiliACGN.BiliBiliACGNCode.Cards.CardPool;
 using BottleRagePower = BiliBiliACGN.BiliBiliACGNCode.Powers.RagePower;
 using MegaCrit.Sts2.Core.Commands;
 using BiliBiliACGN.BiliBiliACGNCode.Powers;
+using MegaCrit.Sts2.Core.Models.Powers;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Cards;
 
@@ -24,7 +25,9 @@ public sealed class NoRightToKnightMe : CardBaseModel
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
     [
         HoverTipFactory.FromKeyword(CustomKeyWords.Anger),
-        HoverTipFactory.FromPower<BottleRagePower>()
+        HoverTipFactory.FromPower<BottleRagePower>(),
+        HoverTipFactory.FromPower<StrengthPower>(),
+
     ];
     #endregion
 

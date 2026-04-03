@@ -32,7 +32,7 @@ public sealed class MaiMaiProtect : CardBaseModel
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
         new DynamicVar("AngerLoss", 1m),
-        new DynamicVar("Energy", 1m)
+        new EnergyVar(1)
     ];
 
     public MaiMaiProtect() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }

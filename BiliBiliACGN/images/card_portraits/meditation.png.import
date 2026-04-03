@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bh6oam13bykyt"
-path="res://.godot/imported/test_power_card.png-4d0f78294ec325834d5e9ed0b3a06c2b.ctex"
+uid="uid://bkmk346wsfmu7"
+path="res://.godot/imported/meditation.png-f43705bdb17918c0a8c30fc36404ea19.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://BiliBiliACGN/images/card_portraits/big/test_power_card.png"
-dest_files=["res://.godot/imported/test_power_card.png-4d0f78294ec325834d5e9ed0b3a06c2b.ctex"]
+source_file="res://BiliBiliACGN/images/card_portraits/meditation.png"
+dest_files=["res://.godot/imported/meditation.png-f43705bdb17918c0a8c30fc36404ea19.ctex"]
 
 [params]
 

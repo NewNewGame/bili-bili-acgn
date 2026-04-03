@@ -11,6 +11,7 @@ using BiliBiliACGN.BiliBiliACGNCode.Powers;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Cards;
@@ -32,6 +33,8 @@ public sealed class Creep : CardBaseModel
     [
         new DynamicVar("Power", 2m)
     ];
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<TangShiPower>()];
+
 
     public Creep() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
 

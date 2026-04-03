@@ -12,13 +12,16 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using BiliBiliACGN.BiliBiliACGNCode.Cards.CardPool;
 using MegaCrit.Sts2.Core.Commands;
 using BiliBiliACGN.BiliBiliACGNCode.Powers;
+using MegaCrit.Sts2.Core.HoverTips;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Cards;
 
 [Pool(typeof(BottleCardPool))]
 public sealed class KaiYun : CardBaseModel
 {
-
+    #region 卡牌关键词与悬停
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<TangShiPower>()];
+    #endregion
     #region 卡牌属性配置
     private const int energyCost = 1;
     private const CardType type = CardType.Skill;

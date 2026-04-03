@@ -35,7 +35,7 @@ public sealed class Day0 : CardBaseModel
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
         new BlockVar(8m, ValueProp.Move),
-        new CardsVar(2)
+        new CardsVar(3)
     ];
 
     public Day0() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
@@ -61,7 +61,7 @@ public sealed class Day0 : CardBaseModel
     {
         #region 升级效果
         base.DynamicVars["Block"].UpgradeValueBy(3m);
-        base.DynamicVars["Cards"].UpgradeValueBy(1m);
+        base.DynamicVars["Cards"].UpgradeValueBy(3m);
 
         #endregion
     }

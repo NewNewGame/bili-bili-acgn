@@ -32,9 +32,8 @@ public sealed class SherrysWhisper : CardBaseModel
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
         new DynamicVar("AngerPerEnergy", 3m),
-        new DynamicVar("Energy", 1m),
-        new DynamicVar("MaxEnergy", 3m)
     ];
+    private const int MaxEnergy = 3;
 
     public SherrysWhisper() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
 
@@ -47,9 +46,9 @@ public sealed class SherrysWhisper : CardBaseModel
         // 按本回合/即时消耗的红温值换算能量（AngerPerEnergy、上限 MaxEnergy）
         int anger = base.Owner.Creature.GetPowerAmount<AngerPower>();
         int energy = anger / (int)base.DynamicVars["AngerPerEnergy"].BaseValue;
-        if (energy > base.DynamicVars["MaxEnergy"].BaseValue)
+        if (energy > MaxEnergy)
         {
-            energy = (int)base.DynamicVars["MaxEnergy"].BaseValue;
+            energy = MaxEnergy;
         }
         if(energy > 0){
             await PlayerCmd.GainEnergy(energy, base.Owner);

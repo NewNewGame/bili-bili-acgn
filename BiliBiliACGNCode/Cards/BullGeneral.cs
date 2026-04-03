@@ -10,7 +10,6 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
-using MegaCrit.Sts2.Core.Models.Powers;
 using BiliBiliACGN.BiliBiliACGNCode.Cards.CardPool;
 using BiliBiliACGN.BiliBiliACGNCode.Powers;
 using MegaCrit.Sts2.Core.Commands;
@@ -24,7 +23,6 @@ public sealed class BullGeneral : CardBaseModel
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
     [
         HoverTipFactory.FromKeyword(CustomKeyWords.Anger),
-        HoverTipFactory.FromPower<StrengthPower>()
     ];
     #endregion
     #region 卡牌属性配置

@@ -20,7 +20,6 @@ namespace BiliBiliACGN.BiliBiliACGNCode.Cards;
 public sealed class BurnZero : CardBaseModel
 {
     #region 卡牌关键词与悬停
-    public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromKeyword(CustomKeyWords.Anger)];
     #endregion
     #region 卡牌属性配置

@@ -33,7 +33,7 @@ public sealed class CorrectTeam : CardBaseModel
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new DynamicVar("MaxEnergy", 1m),
+        new EnergyVar(1),
         new DynamicVar("DrawInRage", 2m)
     ];
 
