@@ -2,7 +2,7 @@
 //* 文件：YYSYLossPower
 //* 作者：wheat
 //* 创建时间：2026/03/29 星期日
-//* 描述：能力 有一说一损失
+//* 描述：能力 唐氏损失
 //*******************************************************
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -11,9 +11,9 @@ using MegaCrit.Sts2.Core.Commands;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Powers;
 
-public sealed class YYSYLossPower : PowerBaseModel
+public sealed class TangShiLossPower : PowerBaseModel
 {
-    protected override string customIconPath => "yysyLoss";
+    protected override string customIconPath => "tangshiLoss";
 
     public override PowerType Type => PowerType.Debuff;
 
@@ -25,7 +25,7 @@ public sealed class YYSYLossPower : PowerBaseModel
 		{
 			Flash();
 			await PowerCmd.Remove(this);
-			await PowerCmd.Apply<YYSYPower>(base.Owner, -base.Amount, base.Owner, null);
+			await PowerCmd.Apply<TangShiPower>(base.Owner, -base.Amount, base.Owner, null);
 		}
     }
 

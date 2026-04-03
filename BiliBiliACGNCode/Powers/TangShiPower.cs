@@ -1,8 +1,8 @@
 //****************** 代码文件申明 ***********************
-//* 文件：YYSYPower
+//* 文件：TangShiPower
 //* 作者：wheat
 //* 创建时间：2026/03/29 星期日
-//* 描述：能力 有一说一
+//* 描述：能力 唐氏
 //*******************************************************
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.Models;
@@ -14,9 +14,9 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Powers;
 
-public sealed class YYSYPower : PowerBaseModel
+public sealed class TangShiPower : PowerBaseModel
 {
-    protected override string customIconPath => "yysy";
+    protected override string customIconPath => "tangshi";
 
     public override PowerType Type => PowerType.Buff;
 

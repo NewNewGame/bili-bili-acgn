@@ -40,7 +40,7 @@ public sealed class HairGrowth : CardBaseModel
         new CalculationExtraVar(1m),
         new CalculatedVar("CalculatedCard").WithMultiplier((CardModel card, Creature? _)=>
 		{
-			return card.Owner.Creature?.GetPowerAmount<YYSYPower>() ?? 0;
+			return card.Owner.Creature?.GetPowerAmount<TangShiPower>() ?? 0;
 		})
     ];
 
