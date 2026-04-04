@@ -171,7 +171,7 @@
   "BILIBILIACGN-SOY_BRAISED_F1CKLE.title": "红烧飞扣",
   "BILIBILIACGN-SOY_BRAISED_F1CKLE.description": "战斗结束后[gold]回复[/gold]{Heal:diff()}点生命。",
   "BILIBILIACGN-AHA_XIU_MAKER.title": "啊哈！修maker",
-  "BILIBILIACGN-AHA_XIU_MAKER.description": "造成{Damage:diff()}点伤害，获得{Block:diff()}点格挡。",
+  "BILIBILIACGN-AHA_XIU_MAKER.description": "对所有敌人造成{Damage:diff()}点伤害X次。",
   "BILIBILIACGN-TWO_HUNDRED_LOVE_COMICS.title": "200本恋爱漫画",
   "BILIBILIACGN-TWO_HUNDRED_LOVE_COMICS.description": "造成{CalculatedDamage:diff()}点伤害。\n你在回合进行中每抽到一张牌，都会使其额外造成{ExtraDamage:diff()}点伤害。",
   "BILIBILIACGN-CLOSE_DOOR_RELEASE_SA.title": "关门放萨",
