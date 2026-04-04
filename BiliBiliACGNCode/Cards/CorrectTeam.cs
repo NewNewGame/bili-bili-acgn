@@ -11,7 +11,7 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using BiliBiliACGN.BiliBiliACGNCode.Cards.CardPool;
-using BottleRagePower = BiliBiliACGN.BiliBiliACGNCode.Powers.RagePower;
+using BottleRagePower = BiliBiliACGN.BiliBiliACGNCode.Powers.BerserkPower;
 using BiliBiliACGN.BiliBiliACGNCode.Powers;
 using MegaCrit.Sts2.Core.Commands;
 

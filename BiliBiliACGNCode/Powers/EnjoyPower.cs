@@ -29,7 +29,7 @@ public sealed class EnjoyPower : PowerBaseModel
     // 进入红怒后自动打出 Amount 张手牌中带有一说一的牌
     public override async Task AfterPowerAmountChanged(PowerModel power, decimal amount, Creature? applier, CardModel? cardSource)
     {
-        if(power is RagePower && amount > 0 && applier == base.Owner){
+        if(power is BerserkPower && amount > 0 && applier == base.Owner){
             // 获取手牌中带有一说一的牌
             var cards = PileType.Hand.GetPile(base.Owner.Player).Cards.Where(c => c.Keywords.Contains(CustomKeyWords.YYSY)).ToList();
             // 实际执行操作次数为带有一说一的手牌数量和能力次数中的较小值

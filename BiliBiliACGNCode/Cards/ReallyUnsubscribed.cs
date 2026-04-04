@@ -13,7 +13,7 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.ValueProps;
 using BiliBiliACGN.BiliBiliACGNCode.Cards.CardPool;
-using BottleRagePower = BiliBiliACGN.BiliBiliACGNCode.Powers.RagePower;
+using BottleRagePower = BiliBiliACGN.BiliBiliACGNCode.Powers.BerserkPower;
 using MegaCrit.Sts2.Core.Commands;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Cards;
@@ -28,7 +28,7 @@ public sealed class ReallyUnsubscribed : CardBaseModel
         HoverTipFactory.FromPower<BottleRagePower>()
     ];
     // 红怒状态发光
-    protected override bool ShouldGlowGoldInternal => base.Owner.Creature.GetPower<RagePower>() != null;
+    protected override bool ShouldGlowGoldInternal => base.Owner.Creature.GetPower<BottleRagePower>() != null;
     #endregion
     #region 卡牌属性配置
     private const int energyCost = 0;
@@ -57,7 +57,7 @@ public sealed class ReallyUnsubscribed : CardBaseModel
             .Execute(choiceContext);
         // 给予易伤
         var addValue = base.DynamicVars["VulnerablePower"].BaseValue;
-        if(base.Owner.Creature.HasPower<RagePower>()){
+        if(base.Owner.Creature.HasPower<BottleRagePower>()){
             addValue += base.DynamicVars["VulnerableRage"].BaseValue;
         }
         await PowerCmd.Apply<VulnerablePower>(cardPlay.Target, addValue, base.Owner.Creature, null);

@@ -24,7 +24,7 @@ public sealed class OnlyTailwindGames : CardBaseModel
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
     [
         HoverTipFactory.Static(StaticHoverTip.Block),
-        HoverTipFactory.FromPower<RagePower>(),
+        HoverTipFactory.FromPower<BerserkPower>(),
         HoverTipFactory.FromPower<SwallowPridePower>()
     ];
     #endregion

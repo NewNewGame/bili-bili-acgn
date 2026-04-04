@@ -21,7 +21,7 @@ public sealed class StartEnjoying : CardBaseModel
     #region 卡牌关键词与悬停
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
     [
-        HoverTipFactory.FromPower<RagePower>(),
+        HoverTipFactory.FromPower<BerserkPower>(),
         HoverTipFactory.FromKeyword(CustomKeyWords.YYSY)
     ];
     #endregion

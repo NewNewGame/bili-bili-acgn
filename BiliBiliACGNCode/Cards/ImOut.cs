@@ -23,7 +23,7 @@ namespace BiliBiliACGN.BiliBiliACGNCode.Cards;
 public sealed class ImOut : CardBaseModel
 {
     #region 卡牌关键词与悬停
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<RagePower>()];
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<BerserkPower>()];
     #endregion
     #region 卡牌属性配置
     private const int energyCost = 0;
@@ -51,7 +51,7 @@ public sealed class ImOut : CardBaseModel
     public override async Task AfterPowerAmountChanged(PowerModel power, decimal amount, Creature? applier, CardModel? cardSource)
     {
         // 如果进入红怒，这张牌从弃牌堆移回手牌
-        if(power is RagePower && base.Pile.Type != PileType.Hand){
+        if(power is BerserkPower && base.Pile.Type != PileType.Hand){
             await CardPileCmd.Add(this, PileType.Hand);
         }
     }

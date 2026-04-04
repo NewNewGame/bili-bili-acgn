@@ -19,9 +19,9 @@ using MegaCrit.Sts2.Core.Combat;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Powers;
 
-public sealed class RagePower : PowerBaseModel
+public sealed class BerserkPower : PowerBaseModel
 {
-    protected override string customIconPath => "rage";
+    protected override string customIconPath => "berserk";
 
     public override PowerType Type => PowerType.Buff;
 

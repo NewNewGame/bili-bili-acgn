@@ -21,9 +21,9 @@ namespace BiliBiliACGN.BiliBiliACGNCode.Cards;
 public sealed class JusticeBao : CardBaseModel
 {
     #region 卡牌关键词与悬停
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<RagePower>()];
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<BerserkPower>()];
     // 红怒状态发光
-    protected override bool ShouldGlowGoldInternal => base.Owner.Creature.GetPower<RagePower>() != null;
+    protected override bool ShouldGlowGoldInternal => base.Owner.Creature.GetPower<BerserkPower>() != null;
     #endregion
 
     #region 卡牌属性配置
@@ -50,7 +50,7 @@ public sealed class JusticeBao : CardBaseModel
             .Targeting(cardPlay.Target)
             .Execute(choiceContext);
         // 若 RagePower 存在则打出抽牌堆顶牌
-        if(base.Owner.Creature.HasPower<RagePower>()){
+        if(base.Owner.Creature.HasPower<BerserkPower>()){
             await CardPileCmd.AutoPlayFromDrawPile(choiceContext, base.Owner, 1, CardPilePosition.Top, forceExhaust: false);
         }
     }

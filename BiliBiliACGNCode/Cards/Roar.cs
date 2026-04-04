@@ -20,9 +20,9 @@ namespace BiliBiliACGN.BiliBiliACGNCode.Cards;
 public sealed class Roar : CardBaseModel
 {
     #region 卡牌关键词与悬停
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<RagePower>()];
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<BerserkPower>()];
     // 红怒状态高亮
-    protected override bool ShouldGlowGoldInternal => base.Owner.Creature.HasPower<RagePower>();
+    protected override bool ShouldGlowGoldInternal => base.Owner.Creature.HasPower<BerserkPower>();
 
     #endregion
     #region 卡牌属性配置
@@ -46,7 +46,7 @@ public sealed class Roar : CardBaseModel
     {
         decimal value = base.DynamicVars["Cards"].BaseValue;
         // [gold]红怒[/gold]状态下额外抽取{RageCards:diff()}张
-        if (base.Owner.Creature.HasPower<RagePower>())
+        if (base.Owner.Creature.HasPower<BerserkPower>())
         {
             value += base.DynamicVars["RageCards"].BaseValue;
         }

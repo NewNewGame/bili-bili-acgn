@@ -27,7 +27,7 @@ public sealed class AngerChargePower : PowerBaseModel
     {
         // 如果充能值大于最大充能值，则移除
         if(base.Amount >= MAXCHARGE && power is AngerChargePower){
-            await PowerCmd.Apply<RagePower>(base.Owner, 1, base.Owner, cardSource);
+            await PowerCmd.Apply<BerserkPower>(base.Owner, 1, base.Owner, cardSource);
             await PowerCmd.Apply<AngerChargePower>(base.Owner, -MAXCHARGE, base.Owner, cardSource);
         }
     }

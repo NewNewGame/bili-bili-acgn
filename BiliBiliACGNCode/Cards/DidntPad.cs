@@ -21,7 +21,7 @@ namespace BiliBiliACGN.BiliBiliACGNCode.Cards;
 public sealed class DidntPad : CardBaseModel
 {
     #region 卡牌关键词与悬停
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<RagePower>(), HoverTipFactory.Static(StaticHoverTip.Block)];
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<BerserkPower>(), HoverTipFactory.Static(StaticHoverTip.Block)];
     #endregion
     #region 卡牌属性配置
     private const int energyCost = 1;
@@ -30,7 +30,7 @@ public sealed class DidntPad : CardBaseModel
     private const TargetType targetType = TargetType.Self;
     private const bool shouldShowInCardLibrary = true;
     // 如果处于红怒状态，则发光
-    protected override bool ShouldGlowGoldInternal => base.Owner.Creature.GetPower<RagePower>() != null;
+    protected override bool ShouldGlowGoldInternal => base.Owner.Creature.GetPower<BerserkPower>() != null;
 
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
@@ -46,7 +46,7 @@ public sealed class DidntPad : CardBaseModel
     {
         // 获得 Block 格挡；若已有 RagePower 再获得 Block 格挡
         await CreatureCmd.GainBlock(base.Owner.Creature, base.DynamicVars.Block.BaseValue, base.DynamicVars.Block.Props, cardPlay);
-        if(base.Owner.Creature.GetPower<RagePower>() != null){
+        if(base.Owner.Creature.GetPower<BerserkPower>() != null){
             await CreatureCmd.GainBlock(base.Owner.Creature, base.DynamicVars.Block.BaseValue, base.DynamicVars.Block.Props, cardPlay);
         }
     }

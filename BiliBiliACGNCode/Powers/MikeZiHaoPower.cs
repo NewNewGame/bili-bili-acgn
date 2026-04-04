@@ -30,7 +30,7 @@ public sealed class MikeZiHaoPower : PowerBaseModel
     // 进入红怒时获得 Amount 点力量
     public override async Task AfterPowerAmountChanged(PowerModel power, decimal amount, Creature? applier, CardModel? cardSource)
     {
-        if(applier == base.Owner && power is RagePower && amount > 0){
+        if(applier == base.Owner && power is BerserkPower && amount > 0){
             await PowerCmd.Apply<StrengthPower>(base.Owner, base.Amount, base.Owner, null);
         }
     }

@@ -24,7 +24,7 @@ public sealed class EmergencyOxygen : CardBaseModel
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
     [
         HoverTipFactory.FromKeyword(CustomKeyWords.Anger),
-        HoverTipFactory.FromPower<RagePower>()
+        HoverTipFactory.FromPower<BerserkPower>()
     ];
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new CalculationBaseVar(0m),
@@ -51,7 +51,7 @@ public sealed class EmergencyOxygen : CardBaseModel
         // 获得等同于当前红温值层数的格挡
 		await CreatureCmd.GainBlock(base.Owner.Creature, base.DynamicVars.CalculatedBlock.Calculate(cardPlay.Target), base.DynamicVars.CalculatedBlock.Props, cardPlay);
         // 移除红怒状态
-        await PowerCmd.Apply<RagePower>(base.Owner.Creature, -1, base.Owner.Creature, null);
+        await PowerCmd.Apply<BerserkPower>(base.Owner.Creature, -1, base.Owner.Creature, null);
     }
 
     protected override void OnUpgrade()

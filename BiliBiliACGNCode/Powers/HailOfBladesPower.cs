@@ -25,7 +25,7 @@ public sealed class HailOfBladesPower : PowerBaseModel
 		{
 			return false;
 		}
-		if(base.Owner.HasPower<RagePower>())
+		if(base.Owner.HasPower<BerserkPower>())
 		{
 			return false;
 		}

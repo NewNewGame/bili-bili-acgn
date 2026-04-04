@@ -21,7 +21,7 @@ namespace BiliBiliACGN.BiliBiliACGNCode.Cards;
 public sealed class MyConfession : CardBaseModel
 {
     #region 卡牌关键词与悬停
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromKeyword(CustomKeyWords.Anger),HoverTipFactory.FromPower<RagePower>()];
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromKeyword(CustomKeyWords.Anger),HoverTipFactory.FromPower<BerserkPower>()];
     #endregion
 
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
@@ -53,7 +53,7 @@ public sealed class MyConfession : CardBaseModel
             .Targeting(cardPlay.Target)
             .WithHitCount(base.DynamicVars["CalculatedTimes"].IntValue)
             .Execute(choiceContext);
-        await PowerCmd.Apply<RagePower>(base.Owner.Creature, -1, base.Owner.Creature, null);
+        await PowerCmd.Apply<BerserkPower>(base.Owner.Creature, -1, base.Owner.Creature, null);
     }
 
     protected override void OnUpgrade()
