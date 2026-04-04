@@ -39,7 +39,7 @@ public sealed class BerserkPower : PowerBaseModel
         
         // 回复能量
         await PlayerCmd.GainEnergy(base.DynamicVars.Energy.BaseValue, base.Owner.Player);
-        await CardPileCmd.Draw(CombatHelper.GetTemporaryPlayerChoiceContext(), base.DynamicVars.Cards.BaseValue, base.Owner.Player);
+        await CardPileCmd.Draw(CombatUtils.GetTemporaryPlayerChoiceContext(), base.DynamicVars.Cards.BaseValue, base.Owner.Player);
     }
     public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource)
     {

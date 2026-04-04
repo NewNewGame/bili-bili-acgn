@@ -15,6 +15,8 @@ using MegaCrit.Sts2.Core.Events;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Rewards;
+using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.Runs;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Events;
 
@@ -23,11 +25,11 @@ public sealed class Nuke : EventBaseModel
 {
     public override bool IsShared => true;
 
-    // 特定第二层图触发
-    public override IReadOnlySet<Type> OwnerActTypes =>new HashSet<Type> { };
-
     public override EventLayoutType LayoutType => EventLayoutType.Default;
-
+    protected override IEnumerable<DynamicVar> CanonicalVars => [
+        new StringVar("CurseTitle", ModelDb.Card<NuclearRadiation>().Title),
+        new StringVar("Potion", ModelDb.Potion<HextechBomb>().Title.GetFormattedText()),
+    ];
     protected override IReadOnlyList<EventOption> GenerateInitialOptions()
     {
         return
@@ -35,6 +37,10 @@ public sealed class Nuke : EventBaseModel
             new EventOption(this, Follow, "NUCLEAR_WEAPON.pages.INITIAL.options.FOLLOW", HoverTipFactory.FromCard<NuclearRadiation>()),
             new EventOption(this, StopKids, "NUCLEAR_WEAPON.pages.INITIAL.options.STOP", HoverTipFactory.FromPotion<HextechBomb>()),
         ];
+    }
+    public override bool IsAllowed(RunState runState){
+        // 第二层限定
+        return runState.TotalFloor <= EventUtils.SecondFloorMaxLevel && runState.TotalFloor >= EventUtils.FirstFloorMaxLevel;
     }
 
     private async Task Follow()
@@ -57,14 +63,14 @@ public sealed class Nuke : EventBaseModel
                 await CardPileCmd.RemoveFromDeck(item);
             }
         }
-        SetEventFinished(L10NLookup("NUCLEAR_WEAPON.pages.FOLLOW.description"));
+        SetEventFinished(L10NLookup("NUCLEAR_WEAPON.pages.FOLLOW.END.description"));
     }
 
     private async Task StopKids()
     {
         // 获得药水【海克斯炸弹】
         await RewardsCmd.OfferCustom(base.Owner, new List<Reward> { new PotionReward(ModelDb.Potion<HextechBomb>(), base.Owner) });
-        SetEventFinished(L10NLookup("NUCLEAR_WEAPON.pages.STOP.description"));
+        SetEventFinished(L10NLookup("NUCLEAR_WEAPON.pages.STOP.END.description"));
     }
 
 }

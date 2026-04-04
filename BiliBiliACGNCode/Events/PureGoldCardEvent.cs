@@ -19,6 +19,7 @@ using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Nodes.Rooms;
 using MegaCrit.Sts2.Core.Rewards;
 using MegaCrit.Sts2.Core.Runs;
+using MegaCrit.Sts2.Core.Localization.DynamicVars;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Events;
 
@@ -26,11 +27,14 @@ namespace BiliBiliACGN.BiliBiliACGNCode.Events;
 public sealed class PureGoldCardEvent : EventBaseModel
 {
     public override bool IsShared => true;
-    public override IReadOnlySet<Type> OwnerActTypes => new HashSet<Type> { };
     public override EventLayoutType LayoutType => EventLayoutType.Default;
     private static readonly string _trialNondescriptVfx = SceneHelper.GetScenePath("vfx/events/trial_nondescript_vfx");
     private static string ParkPath => ImageHelper.GetImagePath("events/pure_gold_card_park.png");
     public override EncounterModel? CanonicalEncounter => ModelDb.Encounter<PureGoldCardEncounter>();
+    protected override IEnumerable<DynamicVar> CanonicalVars => [
+        new StringVar("CurseTitle", ModelDb.Card<BlueEyesWhiteDragon>().Title),
+        new StringVar("CardTitle", ModelDb.Card<FourthBlueEyesWhiteDragon>().Title),
+    ];
     protected override IReadOnlyList<EventOption> GenerateInitialOptions()
     {
         return
@@ -38,6 +42,10 @@ public sealed class PureGoldCardEvent : EventBaseModel
             new EventOption(this, Pickup, "PURE_GOLD_CARD.pages.INITIAL.options.PICKUP", HoverTipFactory.FromRelic<PureGoldCard>()),
             new EventOption(this, GiveItBack, "PURE_GOLD_CARD.pages.INITIAL.options.GIVEITBACK"),
         ];
+    }
+    public override bool IsAllowed(RunState runState){
+        // 第二三层限定
+        return runState.TotalFloor > EventUtils.FirstFloorMaxLevel;
     }
 
     /// <summary>
@@ -50,6 +58,7 @@ public sealed class PureGoldCardEvent : EventBaseModel
     {
         // 获得24k纯金卡遗物
         await RelicCmd.Obtain<PureGoldCard>(base.Owner);
+        SetEventFinished(L10NLookup("PURE_GOLD_CARD.pages.PICKUP.END.description"));
     }
     /// <summary>
     /// 添加vfx到事件场景图片

@@ -16,6 +16,8 @@ using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Nodes.Rooms;
 using MegaCrit.Sts2.Core.Rewards;
+using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.Runs;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Events;
 
@@ -23,9 +25,11 @@ namespace BiliBiliACGN.BiliBiliACGNCode.Events;
 public sealed class StrangeMurmur : EventBaseModel
 {
     public override bool IsShared => true;
-    public override IReadOnlySet<Type> OwnerActTypes => new HashSet<Type> {};
     public override EventLayoutType LayoutType => EventLayoutType.Default;
     public override EncounterModel? CanonicalEncounter => ModelDb.Encounter<StrangeMurmurEncounter>();
+    protected override IEnumerable<DynamicVar> CanonicalVars => [
+        new StringVar("Relic", ModelDb.Relic<TurtleShell>().Title.GetFormattedText()),
+    ];
     private static string MARIOGUIGUIPath => ImageHelper.GetImagePath("events/mario_guigui.png");
 	protected override IReadOnlyList<EventOption> GenerateInitialOptions()
 	{
@@ -34,6 +38,10 @@ public sealed class StrangeMurmur : EventBaseModel
 			new EventOption(this, Ignore, "STRANGE_MURMUR.pages.INITIAL.options.IGNORE")
         ];
 	}
+    public override bool IsAllowed(RunState runState){
+        // 第一层限定
+        return runState.TotalFloor <= EventUtils.FirstFloorMaxLevel;
+    }
     /// <summary>
     /// 过去看看
     /// </summary>
@@ -60,7 +68,7 @@ public sealed class StrangeMurmur : EventBaseModel
 	}
     private Task Ignore()
     {
-        SetEventFinished(L10NLookup("STRANGE_MURMUR.pages.LEAVE.description"));
+        SetEventFinished(L10NLookup("STRANGE_MURMUR.pages.IGNORE.END.description"));
         return Task.CompletedTask;
     }
 }

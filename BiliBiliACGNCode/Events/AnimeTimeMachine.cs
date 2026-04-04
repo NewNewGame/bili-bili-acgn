@@ -16,7 +16,6 @@ namespace BiliBiliACGN.BiliBiliACGNCode.Events;
 public sealed class AnimeTimeMachine : EventBaseModel
 {
     public override bool IsShared => false;
-    public override IReadOnlySet<Type> OwnerActTypes => new HashSet<Type> { };
     public override EventLayoutType LayoutType => EventLayoutType.Default;
     /// <summary>
     /// 随机获得的遗物列表

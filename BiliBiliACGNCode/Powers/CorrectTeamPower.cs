@@ -42,7 +42,7 @@ public sealed class CorrectTeamPower : PowerBaseModel
     {
         if(power is BerserkPower && amount > 0 && applier == base.Owner){
             // 抽牌
-            await CardPileCmd.Draw(CombatHelper.GetTemporaryPlayerChoiceContext(), base.Amount, base.Owner.Player);
+            await CardPileCmd.Draw(CombatUtils.GetTemporaryPlayerChoiceContext(), base.Amount, base.Owner.Player);
         }
     }
 

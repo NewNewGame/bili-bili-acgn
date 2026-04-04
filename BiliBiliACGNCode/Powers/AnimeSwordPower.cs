@@ -28,7 +28,7 @@ public sealed class AnimeSwordPower : PowerBaseModel
             var enemies = base.CombatState.HittableEnemies;
             var enemy = base.CombatState.RunState.Rng.CombatTargets.NextItem(enemies);
             if(enemy != null){
-                await CreatureCmd.Damage(CombatHelper.GetTemporaryPlayerChoiceContext(), enemy, base.Amount, ValueProp.Unpowered, base.Owner, null);
+                await CreatureCmd.Damage(CombatUtils.GetTemporaryPlayerChoiceContext(), enemy, base.Amount, ValueProp.Unpowered, base.Owner, null);
             }
         }
     }

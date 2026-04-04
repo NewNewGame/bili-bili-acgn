@@ -11,6 +11,8 @@ using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Events;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Rewards;
+using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.Runs;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Events;
 
@@ -18,10 +20,13 @@ namespace BiliBiliACGN.BiliBiliACGNCode.Events;
 public sealed class OKuoDa : EventBaseModel
 {
     public override bool IsShared => true;
-    public override IReadOnlySet<Type> OwnerActTypes => new HashSet<Type> { };
     public override EventLayoutType LayoutType => EventLayoutType.Default;
     public override EncounterModel? CanonicalEncounter => ModelDb.Encounter<StrangeMurmurEncounter>();
-
+    protected override IEnumerable<DynamicVar> CanonicalVars => [
+        new StringVar("Relic", ModelDb.Relic<AngryPop>().Title.GetFormattedText()),
+        new StringVar("Relic2", ModelDb.Relic<CalmPipi>().Title.GetFormattedText()),
+        new StringVar("Relic3", ModelDb.Relic<UltimateShitAnimeCommittee>().Title.GetFormattedText()),
+    ];
     protected override IReadOnlyList<EventOption> GenerateInitialOptions()
     {
         return
@@ -31,17 +36,23 @@ public sealed class OKuoDa : EventBaseModel
             new EventOption(this, Combat, "O_KUO_DA.pages.INITIAL.options.COMBAT")
         ];
     }
+    public override bool IsAllowed(RunState runState){
+        // 第一后期和二层限定
+        return runState.TotalFloor <= EventUtils.SecondFloorMaxLevel && runState.TotalFloor >= 6;
+    }
 
     private async Task Oguoda()
     {
         // 获得遗物愤怒的pop子
         await RelicCmd.Obtain<AngryPop>(base.Owner);
+        SetEventFinished(L10NLookup("O_KUO_DA.pages.OGUODA.END.description"));
     }
 
     private async Task Naiyo()
     {
         // 获得遗物冷静的pipi美
         await RelicCmd.Obtain<CalmPipi>(base.Owner);
+        SetEventFinished(L10NLookup("O_KUO_DA.pages.NAIYO.END.description"));
     }
 
     private Task Combat()

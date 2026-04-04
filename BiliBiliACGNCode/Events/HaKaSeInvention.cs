@@ -10,6 +10,8 @@ using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Events;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Runs;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Events;
 
@@ -17,31 +19,31 @@ namespace BiliBiliACGN.BiliBiliACGNCode.Events;
 public sealed class HaKaSeInvention : EventBaseModel
 {
     public override bool IsShared => false;
-    public override IReadOnlySet<Type> OwnerActTypes => new HashSet<Type> { };
     public override EventLayoutType LayoutType => EventLayoutType.Default;
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new GoldVar(50),
+        new StringVar("Relic", ModelDb.Relic<MildSneezing>().Title.GetFormattedText()),
+        new StringVar("Relic2", ModelDb.Relic<HaKaSeSneezingMachine>().Title.GetFormattedText()),
     ];
-
-    protected override IReadOnlyList<EventOption> GenerateInitialOptions()
-    {
-        var list = new List<EventOption>();
-        list.Add(new EventOption(this, Try, "HA_KA_SE_INVENTION.pages.INITIAL.options.TRY", HoverTipFactory.FromRelic<MildSneezing>()));
-        if(base.Owner.Gold < (int)base.DynamicVars["Gold"].BaseValue)
-        {
-            list.Add(new EventOption(this, Buy, "HA_KA_SE_INVENTION.pages.INITIAL.options.LOCKED", HoverTipFactory.FromRelic<HaKaSeSneezingMachine>()));
+    public override bool IsAllowed(RunState runState){
+        // 大于100块钱
+        foreach(var player in runState.Players){
+            if(player.Gold < 100){
+                return false;
+            }
         }
-        else
-        {
-            list.Add(new EventOption(this, Buy, "HA_KA_SE_INVENTION.pages.INITIAL.options.BUY", HoverTipFactory.FromRelic<HaKaSeSneezingMachine>()));
-        }
-        return list;
+        return true;
     }
-
+    protected override IReadOnlyList<EventOption> GenerateInitialOptions() =>[
+        new EventOption(this, Try, "HA_KA_SE_INVENTION.pages.INITIAL.options.TRY", HoverTipFactory.FromRelic<MildSneezing>()),
+        new EventOption(this, Buy, "HA_KA_SE_INVENTION.pages.INITIAL.options.BUY", HoverTipFactory.FromRelic<HaKaSeSneezingMachine>())
+    ];
     private async Task Try()
     {
         // 获得轻微喷嚏遗物
         await RelicCmd.Obtain<MildSneezing>(base.Owner);
+        // 设置事件结束
+        SetEventFinished(L10NLookup("HA_KA_SE_INVENTION.pages.TRY.END.description"));
     }
 
     private async Task Buy()
@@ -49,5 +51,7 @@ public sealed class HaKaSeInvention : EventBaseModel
         // 获得博士的喷嚏机遗物
         await RelicCmd.Obtain<HaKaSeSneezingMachine>(base.Owner);
         await PlayerCmd.LoseGold(50, base.Owner);
+        // 设置事件结束
+        SetEventFinished(L10NLookup("HA_KA_SE_INVENTION.pages.BUY.END.description"));
     }
 }

@@ -9,6 +9,9 @@ using BiliBiliACGN.BiliBiliACGNCode.Relics;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Events;
 using MegaCrit.Sts2.Core.HoverTips;
+using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Runs;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Events;
 
@@ -16,9 +19,15 @@ namespace BiliBiliACGN.BiliBiliACGNCode.Events;
 public sealed class EHeiJiang : EventBaseModel
 {
     public override bool IsShared => true;
-    public override IReadOnlySet<Type> OwnerActTypes => new HashSet<Type> { };
     public override EventLayoutType LayoutType => EventLayoutType.Default;
-
+    protected override IEnumerable<DynamicVar> CanonicalVars => [
+        new StringVar("Relic", ModelDb.Relic<EiHeiMask>().Title.GetFormattedText()),
+    ];
+    public override bool IsAllowed(RunState runState)
+    {
+        // 第一层限定
+        return runState.TotalFloor <= EventUtils.FirstFloorMaxLevel;
+    } 
     protected override IReadOnlyList<EventOption> GenerateInitialOptions()
     {
         return
@@ -32,6 +41,7 @@ public sealed class EHeiJiang : EventBaseModel
     {
         // 获得诶嘿酱的面具
         await RelicCmd.Obtain<EiHeiMask>(base.Owner);
+        SetEventFinished(L10NLookup("E_HEI_JIANG.pages.WEARMASK.END.description"));
     }
 
 

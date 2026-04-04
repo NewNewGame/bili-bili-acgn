@@ -13,6 +13,8 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Events;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Runs;
+using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.Models;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Events;
 
@@ -20,9 +22,11 @@ namespace BiliBiliACGN.BiliBiliACGNCode.Events;
 public sealed class DesperateDaily : EventBaseModel
 {
     public override bool IsShared => false;
-    public override IReadOnlySet<Type> OwnerActTypes => new HashSet<Type> { };
     public override EventLayoutType LayoutType => EventLayoutType.Default;
-
+    protected override IEnumerable<DynamicVar> CanonicalVars => [
+        new StringVar("CurseTitle", ModelDb.Card<DespairSense>().Title),
+        new StringVar("CurseTitle2", ModelDb.Card<EmptyStomach>().Title),
+    ];
     protected override IReadOnlyList<EventOption> GenerateInitialOptions()
     {
         return
@@ -47,6 +51,7 @@ public sealed class DesperateDaily : EventBaseModel
         int maxHp = Mathf.Min(base.Owner.Creature.MaxHp - base.Owner.Creature.CurrentHp, (int)(base.Owner.Creature.MaxHp * 0.5m));
         await CreatureCmd.Heal(base.Owner.Creature, maxHp, false);
         await CardPileCmd.Add(base.Owner.RunState.CreateCard<DespairSense>(base.Owner), PileType.Deck);
+        SetEventFinished(L10NLookup("DESPERATE_DAILY.pages.EAT.END.description"));
     }
 
     private async Task Leave()
@@ -54,5 +59,6 @@ public sealed class DesperateDaily : EventBaseModel
         // 获得诅咒【空腹】。获得千户的日记遗物
         await CardPileCmd.Add(base.Owner.RunState.CreateCard<EmptyStomach>(base.Owner), PileType.Deck);
         await RelicCmd.Obtain<QianHuDiary>(base.Owner);
+        SetEventFinished(L10NLookup("DESPERATE_DAILY.pages.LEAVE.END.description"));
     }
 }

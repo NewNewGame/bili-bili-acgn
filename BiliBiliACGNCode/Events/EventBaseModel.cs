@@ -11,8 +11,5 @@ namespace BiliBiliACGN.BiliBiliACGNCode.Events;
 
 public abstract class EventBaseModel : EventModel
 {
-    /// <summary>
-    /// 事件归属的 Act 类型
-    /// </summary>
-    public abstract IReadOnlySet<Type> OwnerActTypes { get; }
+
 }

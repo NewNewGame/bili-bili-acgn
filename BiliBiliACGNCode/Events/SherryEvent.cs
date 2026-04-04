@@ -13,6 +13,7 @@ using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Cards;
+using MegaCrit.Sts2.Core.Runs;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Events;
 
@@ -20,7 +21,6 @@ namespace BiliBiliACGN.BiliBiliACGNCode.Events;
 public sealed class SherryEvent : EventBaseModel
 {
     public override bool IsShared => true;
-    public override IReadOnlySet<Type> OwnerActTypes => new HashSet<Type> { };
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new StringVar("CurseTitle", ModelDb.Card<Normality>().Title),
     ];
@@ -35,6 +35,10 @@ public sealed class SherryEvent : EventBaseModel
             new EventOption(this, No, "SHERRY_EVENTS.pages.INITIAL.options.NO")
         ];
     }
+    public override bool IsAllowed(RunState runState){
+        // 第一层限定
+        return runState.TotalFloor <= EventUtils.FirstFloorMaxLevel;
+    }
 
     /// <summary>
     /// 获得受伤的雪莉，获得诅咒
@@ -45,7 +49,7 @@ public sealed class SherryEvent : EventBaseModel
         CardModel card = base.Owner.RunState.CreateCard<Normality>(base.Owner);
 		CardCmd.PreviewCardPileAdd(new List<CardPileAddResult>(){await CardPileCmd.Add(card, PileType.Deck)}, 2f);
         await RelicCmd.Obtain<SherryHurt>(base.Owner);
-        SetEventFinished(L10NLookup("SHERRY_EVENTS.pages.TRYLEAVE.description"));
+        SetEventFinished(L10NLookup("SHERRY_EVENTS.pages.TRY.END.description"));
     }
     /// <summary>
     /// 离开什么都没有
@@ -53,7 +57,7 @@ public sealed class SherryEvent : EventBaseModel
     /// <returns></returns>
     private Task No()
     {
-        SetEventFinished(L10NLookup("SHERRY_EVENTS.pages.LEAVE.description"));
+        SetEventFinished(L10NLookup("SHERRY_EVENTS.pages.NO.END.description"));
         return Task.CompletedTask;
     }
 }

@@ -1,5 +1,5 @@
 //****************** 代码文件申明 ***********************
-//* 文件：CombatHelper
+//* 文件：CombatUtils
 //* 作者：wheat
 //* 创建时间：2026/04/04 10:00:00 星期六
 //* 描述：战斗辅助类
@@ -9,7 +9,7 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Utils;
 
-public static class CombatHelper
+public static class CombatUtils
 {
     /// <summary>
     /// 无中生有的情况下使用的PlayerChoiceContext
