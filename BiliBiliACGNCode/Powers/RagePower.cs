@@ -15,6 +15,7 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.GameActions;
 using MegaCrit.Sts2.Core.ValueProps;
 using BaseLib.Extensions;
+using MegaCrit.Sts2.Core.Combat;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Powers;
 
@@ -67,5 +68,12 @@ public sealed class RagePower : PowerBaseModel
 
         return 1m + base.DynamicVars["DamageMultiplier"].BaseValue/100m;
     }
-
+    // 回合结束后失去红怒
+    public override async Task AfterTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)
+    {
+        if (side == CombatSide.Enemy)
+        {
+            await PowerCmd.Remove(this);
+        }
+    }
 }

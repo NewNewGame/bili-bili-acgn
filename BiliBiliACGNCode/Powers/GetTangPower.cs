@@ -40,6 +40,10 @@ public sealed class GetTangPower : PowerBaseModel
     }
     public override decimal ModifyBlockAdditive(Creature target, decimal block, ValueProp props, CardModel? cardSource, CardPlay? cardPlay)
     {
+		if(target != base.Owner)
+		{
+			return 0m;
+		}
 
 		if (!props.IsPoweredAttack_())
 		{

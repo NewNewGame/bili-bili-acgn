@@ -48,11 +48,6 @@ public sealed class PowerlessAngry : CardBaseModel
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         #region 卡牌打出效果
-        await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue)
-            .FromCard(this)
-            .Targeting(cardPlay.Target)
-            .Execute(choiceContext);
-
         await PowerCmd.Apply<AngerPower>(base.Owner.Creature, base.DynamicVars["Power"].BaseValue, base.Owner.Creature, this);
         #endregion
     }
@@ -64,7 +59,6 @@ public sealed class PowerlessAngry : CardBaseModel
     {
         #region 升级效果
         base.DynamicVars["Power"].UpgradeValueBy(1m);
-
         #endregion
     }
 }

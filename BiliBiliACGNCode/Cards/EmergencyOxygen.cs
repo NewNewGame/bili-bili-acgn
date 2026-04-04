@@ -51,7 +51,7 @@ public sealed class EmergencyOxygen : CardBaseModel
         // 获得等同于当前红温值层数的格挡
 		await CreatureCmd.GainBlock(base.Owner.Creature, base.DynamicVars.CalculatedBlock.Calculate(cardPlay.Target), base.DynamicVars.CalculatedBlock.Props, cardPlay);
         // 移除红怒状态
-        await PowerCmd.Remove<RagePower>(base.Owner.Creature);
+        await PowerCmd.Apply<RagePower>(base.Owner.Creature, -1, base.Owner.Creature, null);
     }
 
     protected override void OnUpgrade()

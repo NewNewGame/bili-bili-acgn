@@ -31,7 +31,7 @@ public sealed class SherrysWhisper : CardBaseModel
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new DynamicVar("AngerPerEnergy", 3m),
+        new DynamicVar("AngerPerEnergy", 4m),
     ];
     private const int MaxEnergy = 3;
 

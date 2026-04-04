@@ -66,5 +66,6 @@ public sealed class ReallyUnsubscribed : CardBaseModel
     protected override void OnUpgrade()
     {
         base.DynamicVars["Damage"].UpgradeValueBy(1m);
+        base.DynamicVars["VulnerableRage"].UpgradeValueBy(1m);
     }
 }

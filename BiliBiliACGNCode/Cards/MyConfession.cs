@@ -53,7 +53,7 @@ public sealed class MyConfession : CardBaseModel
             .Targeting(cardPlay.Target)
             .WithHitCount(base.DynamicVars["CalculatedTimes"].IntValue)
             .Execute(choiceContext);
-        await PowerCmd.Remove<RagePower>(base.Owner.Creature);
+        await PowerCmd.Apply<RagePower>(base.Owner.Creature, -1, base.Owner.Creature, null);
     }
 
     protected override void OnUpgrade()
