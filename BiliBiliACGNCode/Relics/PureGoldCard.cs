@@ -29,20 +29,18 @@ public sealed class PureGoldCard : RelicBaseModel
         CardModel card = base.Owner.RunState.CreateCard<BlueEyesWhiteDragon>(base.Owner);
         CardCmd.PreviewCardPileAdd(new List<CardPileAddResult>(){await CardPileCmd.Add(card, PileType.Deck)}, 2f);
     }
-    public override Task AfterRoomEntered(AbstractRoom room)
+    public override async Task AfterRoomEntered(AbstractRoom room)
     {
         if(room is MerchantRoom){
             Flash();
             base.Status = RelicStatus.Disabled;
             // 移除所有的青眼白龙
             var qingYanBlueEyesWhiteDragon = base.Owner.Deck.Cards.Where(card => card is BlueEyesWhiteDragon).ToList();
-            foreach(var card in qingYanBlueEyesWhiteDragon){
-                base.Owner.Deck.RemoveInternal(card, false);
-            }
+            await PlayerCmd.GainGold(870m * qingYanBlueEyesWhiteDragon.Count, base.Owner);
+            await CardPileCmd.RemoveFromDeck(qingYanBlueEyesWhiteDragon);
             base.Status = RelicStatus.Disabled;
         }
 
-        return base.AfterRoomEntered(room);
     }
 
 

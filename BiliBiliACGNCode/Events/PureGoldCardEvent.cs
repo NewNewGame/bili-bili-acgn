@@ -39,8 +39,8 @@ public sealed class PureGoldCardEvent : EventBaseModel
     {
         return
         [
-            new EventOption(this, Pickup, "PURE_GOLD_CARD.pages.INITIAL.options.PICKUP", HoverTipFactory.FromRelic<PureGoldCard>()),
-            new EventOption(this, GiveItBack, "PURE_GOLD_CARD.pages.INITIAL.options.GIVEITBACK"),
+            new EventOption(this, Pickup, "PURE_GOLD_CARD_EVENT.pages.INITIAL.options.PICKUP", HoverTipFactory.FromRelic<PureGoldCard>()),
+            new EventOption(this, GiveItBack, "PURE_GOLD_CARD_EVENT.pages.INITIAL.options.GIVEITBACK"),
         ];
     }
     public override bool IsAllowed(RunState runState){
@@ -58,7 +58,7 @@ public sealed class PureGoldCardEvent : EventBaseModel
     {
         // 获得24k纯金卡遗物
         await RelicCmd.Obtain<PureGoldCard>(base.Owner);
-        SetEventFinished(L10NLookup("PURE_GOLD_CARD.pages.PICKUP.END.description"));
+        SetEventFinished(L10NLookup("PURE_GOLD_CARD_EVENT.pages.PICKUP.END.description"));
     }
     /// <summary>
     /// 添加vfx到事件场景图片
@@ -88,9 +88,9 @@ public sealed class PureGoldCardEvent : EventBaseModel
 			NEventRoom.Instance.SetPortrait(PreloadManager.Cache.GetTexture2D(ParkPath));
 		}
 
-        SetEventState(L10NLookup("PURE_GOLD_CARD.pages.PARK.description"), [
-			new EventOption(this, AcceptDuel, "PURE_GOLD_CARD.pages.PARK.options.DUEL", HoverTipFactory.FromCard<FourthBlueEyesWhiteDragon>()),
-			new EventOption(this, RefuseDuel, "PURE_GOLD_CARD.pages.PARK.options.REFUSE")
+        SetEventState(L10NLookup("PURE_GOLD_CARD_EVENT.pages.PARK.description"), [
+			new EventOption(this, AcceptDuel, "PURE_GOLD_CARD_EVENT.pages.PARK.options.DUEL", HoverTipFactory.FromCard<FourthBlueEyesWhiteDragon>()),
+			new EventOption(this, RefuseDuel, "PURE_GOLD_CARD_EVENT.pages.PARK.options.REFUSE")
 		]);
     }
     private async Task AcceptDuel()
@@ -104,7 +104,7 @@ public sealed class PureGoldCardEvent : EventBaseModel
     private async Task RefuseDuel()
     {
         // 拒绝决斗
-        SetEventFinished(L10NLookup("PURE_GOLD_CARD.pages.PARK.LEAVE.description"));
+        SetEventFinished(L10NLookup("PURE_GOLD_CARD_EVENT.pages.PARK.LEAVE.description"));
     }
 
 }

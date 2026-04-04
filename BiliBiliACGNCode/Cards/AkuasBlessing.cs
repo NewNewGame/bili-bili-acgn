@@ -48,16 +48,15 @@ public sealed class AquasBlessing : CardBaseModel
     /// </summary>
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        #region 卡牌打出效果
         await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
-        await PowerCmd.Apply<StrengthPower>(base.Owner.Creature, base.DynamicVars["Power"].BaseValue, base.Owner.Creature, this);
-        await PowerCmd.Apply<DexterityPower>(base.Owner.Creature, base.DynamicVars["Power"].BaseValue, base.Owner.Creature, this);
-        #endregion
         // 有30/20%几率你获得1层脆弱和易伤
-        if (base.CombatState.RunState.Rng.CombatPotionGeneration.NextInt(0, 100) <= base.DynamicVars["Probility"].BaseValue)
+        if (base.CombatState.RunState.Rng.CombatPotionGeneration.NextInt(0, 100) < base.DynamicVars["Probility"].BaseValue)
         {
             await PowerCmd.Apply<FrailPower>(base.Owner.Creature, 1m, base.Owner.Creature, this);
             await PowerCmd.Apply<VulnerablePower>(base.Owner.Creature, 1m, base.Owner.Creature, this);
+        }else{
+            await PowerCmd.Apply<StrengthPower>(base.Owner.Creature, base.DynamicVars["Power"].BaseValue, base.Owner.Creature, this);
+            await PowerCmd.Apply<DexterityPower>(base.Owner.Creature, base.DynamicVars["Power"].BaseValue, base.Owner.Creature, this);
         }
     }
 

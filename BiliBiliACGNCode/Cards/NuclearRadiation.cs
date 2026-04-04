@@ -12,6 +12,7 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models.CardPools;
+using MegaCrit.Sts2.Core.Models.Cards;
 using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.ValueProps;
 
@@ -25,8 +26,10 @@ public sealed class NuclearRadiation : CardBaseModel
     private const CardRarity rarity = CardRarity.Curse;
     private const TargetType targetType = TargetType.None;
     private const bool shouldShowInCardLibrary = true;
+    public override bool CanBeGeneratedByModifiers => false;
+    public override bool HasTurnEndInHandEffect => true;
     public override int MaxUpgradeLevel => 0;
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new HpLossVar(1m), new DynamicVar("Power", 1m)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new HpLossVar(3m), new DynamicVar("Power", 1m)];
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<VulnerablePower>()];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Unplayable];
 
@@ -35,6 +38,7 @@ public sealed class NuclearRadiation : CardBaseModel
     public override async Task OnTurnEndInHand(PlayerChoiceContext choiceContext)
     {
         // 如果留在手牌失去1点生命值，1层易伤
+        await Cmd.Wait(0.25f);
         await CreatureCmd.Damage(choiceContext, base.Owner.Creature, base.DynamicVars.HpLoss.BaseValue, ValueProp.Unblockable | ValueProp.Unpowered | ValueProp.Move, this);
         await PowerCmd.Apply<VulnerablePower>(base.Owner.Creature, base.DynamicVars["Power"].BaseValue, base.Owner.Creature, this);
     }

@@ -25,18 +25,15 @@ public sealed class BlueEyesWhiteDragon : CardBaseModel
     private const CardRarity rarity = CardRarity.Curse;
     private const TargetType targetType = TargetType.Self;
     private const bool shouldShowInCardLibrary = true;
-
+    public override bool CanBeGeneratedByModifiers => false;
+	public override bool HasTurnEndInHandEffect => true;
     public override int MaxUpgradeLevel => 0;
     protected override IEnumerable<DynamicVar> CanonicalVars => [new DynamicVar("Power", 2m), new DynamicVar("Gold", 870m)];
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<StrengthPower>()];
-    public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Eternal, CardKeyword.Exhaust, CardKeyword.Ethereal];
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Eternal, CardKeyword.Exhaust];
 
     public BlueEyesWhiteDragon() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
 
-    protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
-    {
-        await Task.CompletedTask;
-    }
     public override async Task OnTurnEndInHand(PlayerChoiceContext choiceContext)
     {
         // 给予对面所有敌人2点力量Buff
