@@ -29,8 +29,8 @@ public sealed class EmergencyOxygen : CardBaseModel
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new CalculationBaseVar(0m),
 		new CalculationExtraVar(1m),
-        new CalculatedBlockVar(ValueProp.Move).WithMultiplier((_, creature) => {
-            return creature?.GetPower<AngerPower>()?.Amount ?? 0m;
+        new CalculatedBlockVar(ValueProp.Move).WithMultiplier((card, _) => {
+            return card.Owner.Creature.GetPowerAmount<AngerPower>();
         })
     ];
 
@@ -51,7 +51,9 @@ public sealed class EmergencyOxygen : CardBaseModel
         // 获得等同于当前红温值层数的格挡
 		await CreatureCmd.GainBlock(base.Owner.Creature, base.DynamicVars.CalculatedBlock.Calculate(cardPlay.Target), base.DynamicVars.CalculatedBlock.Props, cardPlay);
         // 移除红怒状态
-        await PowerCmd.Apply<BerserkPower>(base.Owner.Creature, -1, base.Owner.Creature, null);
+        if(base.Owner.Creature.HasPower<BerserkPower>()){
+            await PowerCmd.Remove<BerserkPower>(base.Owner.Creature);
+        }
     }
 
     protected override void OnUpgrade()

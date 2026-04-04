@@ -53,7 +53,9 @@ public sealed class MyConfession : CardBaseModel
             .Targeting(cardPlay.Target)
             .WithHitCount(base.DynamicVars["CalculatedTimes"].IntValue)
             .Execute(choiceContext);
-        await PowerCmd.Apply<BerserkPower>(base.Owner.Creature, -1, base.Owner.Creature, null);
+        if(base.Owner.Creature.HasPower<BerserkPower>()){
+            await PowerCmd.Remove<BerserkPower>(base.Owner.Creature);
+        }
     }
 
     protected override void OnUpgrade()

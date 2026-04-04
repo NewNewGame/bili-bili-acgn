@@ -29,26 +29,29 @@ public sealed class BerserkPower : PowerBaseModel
     public override bool IsInstanced => true;
     protected override IEnumerable<DynamicVar> CanonicalVars => [new DynamicVar("DamageMultiplier", 50m), new EnergyVar(3), new CardsVar(2)];
 
-    public override async Task AfterApplied(Creature? applier, CardModel? cardSource)
+    public override async Task AfterPowerAmountChanged(PowerModel power, decimal amount, Creature? applier, CardModel? cardSource)
     {
+        // 如果施加者不是玩家，则返回
+        if(base.Owner.Player != null && base.Owner != applier) return;
+        // 如果不是红怒，则返回
+        if(power is not BerserkPower || amount < 0) return;
+        
         // 回复能量，抽牌
-        if(base.Owner.Player != null && base.Owner == applier){
-            await PlayerCmd.GainEnergy(base.DynamicVars.Energy.BaseValue, base.Owner.Player);
-            // 抽牌
-            PlayerChoiceContext? choiceContext = null;
-            GameAction? running = RunManager.Instance.ActionExecutor.CurrentlyRunningAction;
-            if (running is PlayCardAction playCard && playCard.PlayerChoiceContext != null)
-            {
-                choiceContext = playCard.PlayerChoiceContext;
-            }
-            else if (running is GenericHookGameAction hookAction && hookAction.ChoiceContext != null)
-            {
-                // 若叠层来自「带 HookPlayerChoiceContext 的 hook 动作」（不是普通出牌）
-                choiceContext = hookAction.ChoiceContext;
-            }
-            if(choiceContext != null){
-                await CardPileCmd.Draw(choiceContext, base.DynamicVars.Cards.BaseValue, base.Owner.Player);
-            }
+        await PlayerCmd.GainEnergy(base.DynamicVars.Energy.BaseValue, base.Owner.Player);
+        // 抽牌
+        PlayerChoiceContext? choiceContext = null;
+        GameAction? running = RunManager.Instance.ActionExecutor.CurrentlyRunningAction;
+        if (running is PlayCardAction playCard && playCard.PlayerChoiceContext != null)
+        {
+            choiceContext = playCard.PlayerChoiceContext;
+        }
+        else if (running is GenericHookGameAction hookAction && hookAction.ChoiceContext != null)
+        {
+            // 若叠层来自「带 HookPlayerChoiceContext 的 hook 动作」（不是普通出牌）
+            choiceContext = hookAction.ChoiceContext;
+        }
+        if(choiceContext != null){
+            await CardPileCmd.Draw(choiceContext, base.DynamicVars.Cards.BaseValue, base.Owner.Player);
         }
     }
     public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource)
