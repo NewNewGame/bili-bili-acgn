@@ -2,7 +2,7 @@
 //* 文件：TouchOfOrobasGetUpgradedStarterRelicPatch
 //* 作者：wheat
 //* 创建时间：2026/04/04
-//* 描述：Harmony Postfix，在 TouchOfOrobas.GetUpgradedStarterRelic 返回后允许模组改写升级后的起始遗物
+//* 描述：Harmony Postfix，返回后允许模组改写升级后的起始遗物
 //*******************************************************
 using System.Collections.Generic;
 using BiliBiliACGN.BiliBiliACGNCode.Relics;
