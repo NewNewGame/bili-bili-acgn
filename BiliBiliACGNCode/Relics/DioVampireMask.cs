@@ -11,6 +11,7 @@ using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Relics;
 using MegaCrit.Sts2.Core.HoverTips;
+using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.RelicPools;
 
@@ -21,6 +22,7 @@ public sealed class DioVampireMask : RelicBaseModel
 {
     public override RelicRarity Rarity => RelicRarity.Event;
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromCard<BloodyBite>()];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new DynamicVar("Amount", 5m)];
     public override async Task AfterObtained()
     {
         // 移除所有基础打击
