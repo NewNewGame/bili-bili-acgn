@@ -51,7 +51,7 @@ public sealed class MyConfession : CardBaseModel
         await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue)
             .FromCard(this)
             .Targeting(cardPlay.Target)
-            .WithHitCount(base.DynamicVars["CalculatedTimes"].IntValue)
+            .WithHitCount((int)((CalculatedVar)base.DynamicVars["CalculatedTimes"]).Calculate(cardPlay.Target))
             .Execute(choiceContext);
         if(base.Owner.Creature.HasPower<BerserkPower>()){
             await PowerCmd.Remove<BerserkPower>(base.Owner.Creature);

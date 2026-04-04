@@ -42,10 +42,12 @@ public sealed class InstantPoisonMilk : CardBaseModel
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         // 抽取{Cards:diff()}张牌
-        await CardPileCmd.Draw(choiceContext, base.DynamicVars["Cards"].BaseValue, base.Owner);
+        var drawCards = await CardPileCmd.Draw(choiceContext, base.DynamicVars["Cards"].BaseValue, base.Owner);
         // 若抽到牌含 YYSY 关键字则格挡
-        if(cardPlay.Card.Keywords.Contains(CustomKeyWords.YYSY)){
-            await CreatureCmd.GainBlock(base.Owner.Creature, base.DynamicVars.Block.BaseValue, base.DynamicVars.Block.Props, cardPlay);
+        foreach(var card in drawCards){
+            if(card.Keywords.Contains(CustomKeyWords.YYSY)){
+                await CreatureCmd.GainBlock(base.Owner.Creature, base.DynamicVars.Block.BaseValue, base.DynamicVars.Block.Props, cardPlay);
+            }
         }
     }
 

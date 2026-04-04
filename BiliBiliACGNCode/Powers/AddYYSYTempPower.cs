@@ -2,7 +2,7 @@
 //* 文件：AddYYSYTempPower(临时添加有一说一)
 //* 作者：wheat
 //* 创建时间：2026/03/31 10:20:49 星期二
-//* 描述：能力 临时添加有一说一 每回合随机赋予一张手牌[gold]有一说一[/gold]。
+//* 描述：能力 添加有一说一 每回合随机赋予一张手牌[gold]有一说一[/gold]。
 //*******************************************************
 
 using MegaCrit.Sts2.Core.Entities.Powers;
@@ -27,10 +27,10 @@ public sealed class AddYYSYTempPower : PowerBaseModel
         if(card.Owner.Creature != base.Owner){
             return;
         }
+		await PowerCmd.Apply<AddYYSYTempPower>(base.Owner, -1, base.Owner, null);
         if(card.Keywords.Contains(CustomKeyWords.YYSY)){
             return;
         }
         card.AddKeyword(CustomKeyWords.YYSY);
-		await PowerCmd.Apply<AddYYSYTempPower>(base.Owner, -1, base.Owner, null);
     }
 }

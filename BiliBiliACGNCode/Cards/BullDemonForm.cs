@@ -23,8 +23,6 @@ public sealed class BullDemonForm : CardBaseModel
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromKeyword(CustomKeyWords.YYSY), HoverTipFactory.FromPower<TangShiPower>()];
     #endregion
 
-    public override IEnumerable<CardKeyword> CanonicalKeywords => [CustomKeyWords.YYSY];
-
     #region 卡牌属性配置
     private const int energyCost = 3;
     private const CardType type = CardType.Power;

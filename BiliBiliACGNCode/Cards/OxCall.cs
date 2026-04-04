@@ -27,7 +27,7 @@ public sealed class OxCall : CardBaseModel
     private const int energyCost = 1;
     private const CardType type = CardType.Skill;
     private const CardRarity rarity = CardRarity.Common;
-    private const TargetType targetType = TargetType.AnyEnemy;
+    private const TargetType targetType = TargetType.AllEnemies;
     private const bool shouldShowInCardLibrary = true;
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>

@@ -27,7 +27,7 @@ public sealed class NewYearGalaDeathSong : CardBaseModel
     private const int energyCost = 2;
     private const CardType type = CardType.Attack;
     private const CardRarity rarity = CardRarity.Common;
-    private const TargetType targetType = TargetType.AnyEnemy;
+    private const TargetType targetType = TargetType.AllEnemies;
     private const bool shouldShowInCardLibrary = true;
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>

@@ -5,6 +5,7 @@
 //* 描述：能力 新概念恋爱 在这个回合，你的下1张有一说一会被额外打出一次。
 //*******************************************************
 
+using BiliBiliACGN.BiliBiliACGNCode.Cards;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Creatures;
@@ -22,7 +23,7 @@ public sealed class NewConceptLovePower : PowerBaseModel
 
     public override int ModifyCardPlayCount(CardModel card, Creature? target, int playCount)
 	{
-		if (card.Owner.Creature != base.Owner)
+		if (card.Owner.Creature != base.Owner || !card.Keywords.Contains(CustomKeyWords.YYSY))
 		{
 			return playCount;
 		}

@@ -5,7 +5,7 @@
   "BILIBILIACGN-TANG_SHI_LOSS_POWER.title": "唐氏损失",
   "BILIBILIACGN-TANG_SHI_LOSS_POWER.description": "回合结束时失去[gold]唐氏[/gold]",
   "BILIBILIACGN-TANG_SHI_LOSS_POWER.smartDescription": "回合结束时失去[blue]{Amount}[/blue]点[gold]唐氏[/gold]",
-  "BILIBILIACGN-ADD_YY_SY_TEMP_POWER.title": "临时添加有一说一",
+  "BILIBILIACGN-ADD_YY_SY_TEMP_POWER.title": "添加有一说一",
   "BILIBILIACGN-ADD_YY_SY_TEMP_POWER.description": "为抽到的1张卡牌添加[gold]有一说一[/gold]。",
   "BILIBILIACGN-ADD_YY_SY_TEMP_POWER.smartDescription": "为抽到的[blue]{Amount}[/blue]张手牌添加[gold]有一说一[/gold]。",
   "BILIBILIACGN-ANGER_POWER.title": "红温",

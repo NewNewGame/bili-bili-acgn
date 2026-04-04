@@ -19,9 +19,11 @@ public sealed class SoyBraisedF1cklePower : PowerBaseModel
     public override PowerStackType StackType => PowerStackType.Counter;
 
     //战斗结束后回复 Amount 点生命
-    public override async Task AfterCombatVictory(CombatRoom room)
+    public override async Task AfterCombatEnd(CombatRoom room)
     {
+        Flash();
         await CreatureCmd.Heal(base.Owner, base.Amount, true);
     }
+
 
 }

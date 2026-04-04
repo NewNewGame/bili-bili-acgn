@@ -31,12 +31,6 @@ public sealed class CorrectTeam : CardBaseModel
     private const TargetType targetType = TargetType.Self;
     private const bool shouldShowInCardLibrary = true;
 
-    protected override IEnumerable<DynamicVar> CanonicalVars =>
-    [
-        new EnergyVar(1),
-        new DynamicVar("DrawInRage", 2m)
-    ];
-
     public CorrectTeam() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
 
     #endregion
@@ -44,7 +38,7 @@ public sealed class CorrectTeam : CardBaseModel
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         // 添加正确车队BUFF
-        await PowerCmd.Apply<CorrectTeamPower>(base.Owner.Creature, base.DynamicVars["Powers"].BaseValue, base.Owner.Creature, null);
+        await PowerCmd.Apply<CorrectTeamPower>(base.Owner.Creature, 2, base.Owner.Creature, null);
     }
 
     protected override void OnUpgrade()

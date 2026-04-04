@@ -74,7 +74,7 @@ public sealed class AmericanQuickDraw : CardBaseModel
 		{
 			return Task.CompletedTask;
 		}
-		if (cardPlay.Card.Type != CardType.Skill)
+		if (!cardPlay.Card.Keywords.Contains(CustomKeyWords.YYSY))
 		{
 			return Task.CompletedTask;
 		}

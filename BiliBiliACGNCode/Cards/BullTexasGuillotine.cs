@@ -13,6 +13,10 @@ using BiliBiliACGN.BiliBiliACGNCode.Cards.CardPool;
 using BottleRagePower = BiliBiliACGN.BiliBiliACGNCode.Powers.BerserkPower;
 using MegaCrit.Sts2.Core.Commands;
 using BiliBiliACGN.BiliBiliACGNCode.Powers;
+using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.ValueProps;
+using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Entities.Creatures;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Cards;
 
@@ -25,9 +29,10 @@ public sealed class BullTexasGuillotine : CardBaseModel
         HoverTipFactory.FromKeyword(CustomKeyWords.Anger),
         HoverTipFactory.FromPower<BottleRagePower>()
     ];
+
     #endregion
 
-    public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust, CardKeyword.Retain];
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
 
     #region 卡牌属性配置
     private const int energyCost = -1;
@@ -40,17 +45,31 @@ public sealed class BullTexasGuillotine : CardBaseModel
 
     public BullTexasGuillotine() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
 
+        /// <summary>
+    /// 牌面动态变量配置。
+    /// </summary>
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    [
+        new CalculationBaseVar(0m),
+		new ExtraDamageVar(1m),
+		new CalculatedDamageVar(ValueProp.Move).WithMultiplier((CardModel card, Creature? _) => {
+            // 伤害 = 红温层数 × X(+1) ×（有 红温 则 2倍）
+            int x = card.ResolveEnergyXValue();
+            if(x == 0) return card.Owner.Creature.GetPowerAmount<AngerPower>();
+            decimal num = x;
+            if(card.IsUpgraded) ++num;
+            if(card.Owner.Creature.HasPower<BottleRagePower>()) num *= 2m;
+            decimal dmg = card.Owner.Creature.GetPowerAmount<AngerPower>() * num;
+            return dmg;
+        })
+    ];
+
+
     #endregion
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        // 伤害 = 红温层数 × X(+1) ×（有 红温 则 2倍）
-        decimal num = ResolveEnergyXValue();
-        if(base.IsUpgraded) ++num;
-        if(base.Owner.Creature.HasPower<BottleRagePower>()) num *= 2m;
-        decimal dmg = base.Owner.Creature.GetPowerAmount<AngerPower>() * num;
-        
-        await DamageCmd.Attack(dmg)
+        await DamageCmd.Attack(base.DynamicVars.CalculatedDamage)
             .FromCard(this)
             .Targeting(cardPlay.Target)
             .Execute(choiceContext);
@@ -58,5 +77,6 @@ public sealed class BullTexasGuillotine : CardBaseModel
 
     protected override void OnUpgrade()
     {
+        base.AddKeyword(CardKeyword.Retain);
     }
 }

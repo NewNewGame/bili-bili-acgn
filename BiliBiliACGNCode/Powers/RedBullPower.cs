@@ -19,24 +19,20 @@ public sealed class RedBullPower : PowerBaseModel
 
 	private class Data
 	{
-		public int energySpent;
+		public int angerCharge;
 
 		public int triggerCount;
-	}
 
-	private const int _energyIncrement = 4;
+	}
 
 	public override PowerType Type => PowerType.Buff;
 
 	public override PowerStackType StackType => PowerStackType.Counter;
 
-	public override int DisplayAmount => 4 - GetInternalData<Data>().energySpent % 4;
+	public override int DisplayAmount => base.Amount - GetInternalData<Data>().angerCharge % base.Amount;
 
 	protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.ForEnergy(this)];
-	protected override IEnumerable<DynamicVar> CanonicalVars => [new EnergyVar(4)];
-
 	public override bool IsInstanced => true;
-
 
 	protected override object InitInternalData()
 	{
@@ -46,12 +42,12 @@ public sealed class RedBullPower : PowerBaseModel
     {
         if(amount > 0 && applier == base.Owner && power is AngerPower){
 			Data data = GetInternalData<Data>();
-			data.energySpent += (int)amount;
-			int triggers = data.energySpent / 4 - data.triggerCount;
+			data.angerCharge += (int)amount;
+			int triggers = data.angerCharge / base.Amount - data.triggerCount;
 			if (triggers > 0)
 			{
 				Flash();
-				await PlayerCmd.GainEnergy(base.Amount * triggers, base.Owner.Player);
+				await PlayerCmd.GainEnergy(triggers, base.Owner.Player);
 				data.triggerCount += triggers;
 			}
 			InvokeDisplayAmountChanged();

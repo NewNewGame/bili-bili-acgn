@@ -49,7 +49,7 @@ public sealed class RefutationalPersonality : CardBaseModel
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        decimal value = base.Owner.Creature.HasPower<BottleRagePower>() ? base.DynamicVars["ThornsRage"].BaseValue : base.DynamicVars["Thorns"].BaseValue;
+        decimal value = base.Owner.Creature.HasPower<BottleRagePower>() ? base.DynamicVars["ThornsRage"].BaseValue + base.DynamicVars["Thorns"].BaseValue : base.DynamicVars["Thorns"].BaseValue;
         // 添加荆棘BUFF
         await PowerCmd.Apply<ThornsPower>(base.Owner.Creature, value, base.Owner.Creature, null);
     }

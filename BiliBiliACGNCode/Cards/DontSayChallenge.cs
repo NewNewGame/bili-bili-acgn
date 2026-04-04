@@ -36,7 +36,6 @@ public sealed class DontSayChallenge : CardBaseModel
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
         new DamageVar(6m, ValueProp.Move),
-        new DynamicVar("YYSYPerReturn", 3m)
     ];
 
     public DontSayChallenge() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
@@ -53,9 +52,9 @@ public sealed class DontSayChallenge : CardBaseModel
     public override async Task AfterCardPlayedLate(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         // 本回合内计数 YYSY 打出次数，每满 YYSYPerReturn 次将本牌实例从弃牌/消耗区移入手牌
-        if(cardPlay.Card.Owner == base.Owner && cardPlay.Card.Type == CardType.Skill && base.Pile.Type != PileType.Hand){
+        if(cardPlay.Card.Owner == base.Owner && cardPlay.Card.Keywords.Contains(CustomKeyWords.YYSY) && base.Pile.Type != PileType.Hand){
             int num = CombatManager.Instance.History.CardPlaysFinished.Count((CardPlayFinishedEntry e) => e.HappenedThisTurn(base.CombatState) && e.CardPlay.Card.Keywords.Contains(CustomKeyWords.YYSY) && e.CardPlay.Card.Owner == base.Owner);
-            if(num % base.DynamicVars["YYSYPerReturn"].IntValue == 0){
+            if(num > 0 && num % 3 == 0){
                 await CardPileCmd.Add(this, PileType.Hand);
             }
         }

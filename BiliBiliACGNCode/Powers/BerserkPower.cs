@@ -16,6 +16,7 @@ using MegaCrit.Sts2.Core.GameActions;
 using MegaCrit.Sts2.Core.ValueProps;
 using BaseLib.Extensions;
 using MegaCrit.Sts2.Core.Combat;
+using BiliBiliACGN.BiliBiliACGNCode.Utils;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Powers;
 
@@ -34,25 +35,11 @@ public sealed class BerserkPower : PowerBaseModel
         // 如果施加者不是玩家，则返回
         if(base.Owner.Player != null && base.Owner != applier) return;
         // 如果不是红怒，则返回
-        if(power is not BerserkPower || amount < 0) return;
+        if(power is not BerserkPower || amount < 0 || power != this) return;
         
-        // 回复能量，抽牌
+        // 回复能量
         await PlayerCmd.GainEnergy(base.DynamicVars.Energy.BaseValue, base.Owner.Player);
-        // 抽牌
-        PlayerChoiceContext? choiceContext = null;
-        GameAction? running = RunManager.Instance.ActionExecutor.CurrentlyRunningAction;
-        if (running is PlayCardAction playCard && playCard.PlayerChoiceContext != null)
-        {
-            choiceContext = playCard.PlayerChoiceContext;
-        }
-        else if (running is GenericHookGameAction hookAction && hookAction.ChoiceContext != null)
-        {
-            // 若叠层来自「带 HookPlayerChoiceContext 的 hook 动作」（不是普通出牌）
-            choiceContext = hookAction.ChoiceContext;
-        }
-        if(choiceContext != null){
-            await CardPileCmd.Draw(choiceContext, base.DynamicVars.Cards.BaseValue, base.Owner.Player);
-        }
+        await CardPileCmd.Draw(CombatHelper.GetTemporaryPlayerChoiceContext(), base.DynamicVars.Cards.BaseValue, base.Owner.Player);
     }
     public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource)
     {

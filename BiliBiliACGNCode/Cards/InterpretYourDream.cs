@@ -50,7 +50,7 @@ public sealed class InterpretYourDream : CardBaseModel
             .FromCard(this)
             .Targeting(cardPlay.Target)
             .Execute(choiceContext);
-        await PowerCmd.Apply<GetTangPower>(cardPlay.Target, base.DynamicVars["CalculatedValue"].IntValue, base.Owner.Creature, null);
+        await PowerCmd.Apply<GetTangPower>(cardPlay.Target, ((CalculatedVar)base.DynamicVars["CalculatedValue"]).Calculate(cardPlay.Target), base.Owner.Creature, null);
     }
 
     protected override void OnUpgrade()

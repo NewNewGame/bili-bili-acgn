@@ -34,7 +34,7 @@ public sealed class ShowbizEffect : CardBaseModel
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new DynamicVar("Anger", 1m)
+        new DynamicVar("Anger", 2m)
     ];
 
     public ShowbizEffect() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
