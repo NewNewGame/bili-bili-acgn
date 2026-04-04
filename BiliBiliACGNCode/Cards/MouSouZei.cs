@@ -45,7 +45,7 @@ public sealed class MouSouZei : CardBaseModel
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         // 从抽牌堆选取{Cards:diff()}张牌加入手牌
-        CardSelectorPrefs prefs = new CardSelectorPrefs(base.SelectionScreenPrompt, 0, (int)base.DynamicVars["Cards"].BaseValue);
+        CardSelectorPrefs prefs = new CardSelectorPrefs(base.SelectionScreenPrompt, 0, (int)base.DynamicVars.Cards.BaseValue);
 		List<CardModel> cardsIn = PileType.Draw.GetPile(base.Owner).Cards.ToList();
 		var cardModels = (await CardSelectCmd.FromSimpleGrid(choiceContext, cardsIn, base.Owner, prefs)).ToList();
         foreach (var cardModel in cardModels)
@@ -57,7 +57,6 @@ public sealed class MouSouZei : CardBaseModel
 
     protected override void OnUpgrade()
     {
-        base.EnergyCost.UpgradeBy(-1);
         base.DynamicVars["Cards"].UpgradeValueBy(1m);
     }
 }

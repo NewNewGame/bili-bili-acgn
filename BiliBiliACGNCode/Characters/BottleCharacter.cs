@@ -56,8 +56,8 @@ public sealed class BottleCharacter : PlaceholderCharacterModel
         ModelDb.Card<BottleBlock>(),
         ModelDb.Card<BottleBlock>(),
         ModelDb.Card<BottleBlock>(),
-        ModelDb.Card<BottleBlock>(),
-        ModelDb.Card<AngryStrike>()
+        ModelDb.Card<PowerlessAngry>(),
+        ModelDb.Card<IceBee>(),
     ];
 
     public override IReadOnlyList<RelicModel> StartingRelics => [

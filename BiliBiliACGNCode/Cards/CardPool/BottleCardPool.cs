@@ -42,7 +42,8 @@ public sealed class BottleCardPool : CustomCardPoolModel
     {
         // 所有[Pool(typeof(BottleCardPool))]的卡牌
         return [
-            ModelDb.Card<AngryStrike>(),
+            ModelDb.Card<PowerlessAngry>(),
+            ModelDb.Card<IceBee>(),
             ModelDb.Card<BottleStrike>(),
             ModelDb.Card<BottleBlock>(),
             ModelDb.Card<BullStab>(),

@@ -1,5 +1,5 @@
-﻿//****************** 代码文件申明 ***********************
-//* 文件：PowerlessAngry
+//****************** 代码文件申明 ***********************
+//* 文件：IceBee
 //* 作者：wheat
 //* 创建时间：2026/03/31 12:58:10 星期二
 //* 描述：获得{Power:diff()}层[gold]红温[/gold]。
@@ -11,23 +11,24 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using BiliBiliACGN.BiliBiliACGNCode.Cards.CardPool;
-using MegaCrit.Sts2.Core.ValueProps;
 using MegaCrit.Sts2.Core.HoverTips;
 using BiliBiliACGN.BiliBiliACGNCode.Powers;
+using MegaCrit.Sts2.Core.ValueProps;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Cards;
 
 [Pool(typeof(BottleCardPool))]
-public sealed class PowerlessAngry : CardBaseModel
+public sealed class IceBee : CardBaseModel
 {
     #region 卡牌关键词与悬停
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromKeyword(CustomKeyWords.Anger)];
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<GetTangPower>()];
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [CustomKeyWords.YYSY];
     #endregion
     #region 卡牌属性配置
-    private const int energyCost = 1;
-    private const CardType type = CardType.Skill;
+    private const int energyCost = 0;
+    private const CardType type = CardType.Attack;
     private const CardRarity rarity = CardRarity.Basic;
-    private const TargetType targetType = TargetType.Self;
+    private const TargetType targetType = TargetType.AnyEnemy;
     private const bool shouldShowInCardLibrary = true;
 
     /// <summary>
@@ -35,10 +36,11 @@ public sealed class PowerlessAngry : CardBaseModel
     /// </summary>
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new DynamicVar("Power", 3m),
+        new DamageVar(3m, ValueProp.Move),
+        new DynamicVar("Power", 1m),
     ];
 
-    public PowerlessAngry() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
+    public IceBee() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
 
     #endregion
 
@@ -53,7 +55,7 @@ public sealed class PowerlessAngry : CardBaseModel
             .Targeting(cardPlay.Target)
             .Execute(choiceContext);
 
-        await PowerCmd.Apply<AngerPower>(base.Owner.Creature, base.DynamicVars["Power"].BaseValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<GetTangPower>(cardPlay.Target, base.DynamicVars["Power"].BaseValue, base.Owner.Creature, this);
         #endregion
     }
 
@@ -64,6 +66,7 @@ public sealed class PowerlessAngry : CardBaseModel
     {
         #region 升级效果
         base.DynamicVars["Power"].UpgradeValueBy(1m);
+        base.DynamicVars.Damage.UpgradeValueBy(1m);
 
         #endregion
     }

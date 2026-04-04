@@ -7,10 +7,14 @@
 
 using BaseLib.Utils;
 using BiliBiliACGN.BiliBiliACGNCode.Core.Entities.RestSite;
+using BiliBiliACGN.BiliBiliACGNCode.Powers;
 using BiliBiliACGN.BiliBiliACGNCode.Relics.RelicPool;
+using MegaCrit.Sts2.Core.Combat;
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Relics;
 using MegaCrit.Sts2.Core.Entities.RestSite;
+using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Relics;
 
@@ -26,5 +30,18 @@ public sealed class Alzheimer : RelicBaseModel
 		}
 		options.Add(new AlzheimerRestSiteOption(player));
 		return true;
+	}
+	public override async Task AfterPlayerTurnStart(PlayerChoiceContext choiceContext, Player player)
+	{
+		// 每场战斗开始时获得2点红温
+		if (player == base.Owner)
+		{
+			CombatState combatState = player.Creature.CombatState;
+			if (combatState.RoundNumber == 1)
+			{
+				Flash();
+				await PowerCmd.Apply<AngerPower>(base.Owner.Creature, 2, base.Owner.Creature, null);
+			}
+		}
 	}
 }
