@@ -31,8 +31,8 @@ public sealed class SherryEvent : EventBaseModel
     {
         return
         [
-            new EventOption(this, Try, "SHERRY_EVENTS.pages.INITIAL.options.TRY", HoverTipFactory.FromCard<Normality>()),
-            new EventOption(this, No, "SHERRY_EVENTS.pages.INITIAL.options.NO")
+            new EventOption(this, Try, "SHERRY_EVENT.pages.INITIAL.options.TRY", HoverTipFactory.FromCard<Normality>()),
+            new EventOption(this, No, "SHERRY_EVENT.pages.INITIAL.options.NO")
         ];
     }
     public override bool IsAllowed(RunState runState){
@@ -49,7 +49,7 @@ public sealed class SherryEvent : EventBaseModel
         CardModel card = base.Owner.RunState.CreateCard<Normality>(base.Owner);
 		CardCmd.PreviewCardPileAdd(new List<CardPileAddResult>(){await CardPileCmd.Add(card, PileType.Deck)}, 2f);
         await RelicCmd.Obtain<SherryHurt>(base.Owner);
-        SetEventFinished(L10NLookup("SHERRY_EVENTS.pages.TRY.END.description"));
+        SetEventFinished(L10NLookup("SHERRY_EVENT.pages.TRY.END.description"));
     }
     /// <summary>
     /// 离开什么都没有
@@ -57,7 +57,7 @@ public sealed class SherryEvent : EventBaseModel
     /// <returns></returns>
     private Task No()
     {
-        SetEventFinished(L10NLookup("SHERRY_EVENTS.pages.NO.END.description"));
+        SetEventFinished(L10NLookup("SHERRY_EVENT.pages.NO.END.description"));
         return Task.CompletedTask;
     }
 }

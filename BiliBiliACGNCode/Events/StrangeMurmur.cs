@@ -30,7 +30,7 @@ public sealed class StrangeMurmur : EventBaseModel
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new StringVar("Relic", ModelDb.Relic<TurtleShell>().Title.GetFormattedText()),
     ];
-    private static string MARIOGUIGUIPath => ImageHelper.GetImagePath("events/mario_guigui.png");
+    private static string MARIOGUIGUIPath => ImageHelper.GetImagePath("events/strange_murmur_guigui.png");
 	protected override IReadOnlyList<EventOption> GenerateInitialOptions()
 	{
 		return [
@@ -58,12 +58,12 @@ public sealed class StrangeMurmur : EventBaseModel
     }
     private Task Combat()
 	{
-        // TODO 奖励龟壳，之后在做
+        // 进入战斗，奖励龟壳和药水
 		EnterCombatWithoutExitingEvent<StrangeMurmurEncounter>([
-            new RelicReward(base.Owner),
+            new RelicReward(ModelDb.Relic<TurtleShell>().ToMutable(), base.Owner),
             new PotionReward(base.Owner)
         ], false);
-
+        
 		return Task.CompletedTask;
 	}
     private Task Ignore()

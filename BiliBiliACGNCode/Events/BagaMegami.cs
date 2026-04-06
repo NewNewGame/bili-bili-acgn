@@ -13,12 +13,17 @@ using MegaCrit.Sts2.Core.Events;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.Context;
+using MegaCrit.Sts2.Core.Nodes.Rooms;
+using MegaCrit.Sts2.Core.Assets;
+using MegaCrit.Sts2.Core.Helpers;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Events;
 
 [EventPool(typeof(SharedEventPool))]
 public sealed class BagaMegami : EventBaseModel
 {
+    private static string MEGAMICRYPATH => ImageHelper.GetImagePath("events/baga_megami_cry.png");
     public override bool IsShared => false;
     public override EventLayoutType LayoutType => EventLayoutType.Default;
     protected override IEnumerable<DynamicVar> CanonicalVars => [
@@ -31,9 +36,9 @@ public sealed class BagaMegami : EventBaseModel
     {
         return
         [
-            new EventOption(this, Try, "BAGA_MEGAMI_.pages.INITIAL.options.TRY", HoverTipFactory.FromCard<AquasBlessing>()),
-            new EventOption(this, No, "BAGA_MEGAMI_.pages.INITIAL.options.NO", HoverTipFactory.FromRelic<AquasTears>()),
-            new EventOption(this, Megami, "BAGA_MEGAMI_.pages.INITIAL.options.MEGAMI", HoverTipFactory.FromRelic<AquaCompanion>())
+            new EventOption(this, Try, "BAGA_MEGAMI.pages.INITIAL.options.TRY", HoverTipFactory.FromCard<AquasBlessing>()),
+            new EventOption(this, No, "BAGA_MEGAMI.pages.INITIAL.options.NO", HoverTipFactory.FromRelic<AquasTears>()),
+            new EventOption(this, Megami, "BAGA_MEGAMI.pages.INITIAL.options.MEGAMI", HoverTipFactory.FromRelic<AquaCompanion>())
         ];
     }
 
@@ -42,20 +47,25 @@ public sealed class BagaMegami : EventBaseModel
         // 让她加buff 获得阿库娅的祝福卡牌
         CardModel card = base.Owner.RunState.CreateCard<AquasBlessing>(base.Owner);
         CardCmd.PreviewCardPileAdd(new List<CardPileAddResult>(){await CardPileCmd.Add(card, PileType.Deck)}, 2f);
-        SetEventFinished(L10NLookup("BAGA_MEGAMI_.pages.TRY.END.description"));
+        SetEventFinished(L10NLookup("BAGA_MEGAMI.pages.TRY.END.description"));
     }
 
     private async Task No()
     {
+        // 设置事件场景图片
+        if (LocalContext.IsMe(base.Owner))
+		{
+			NEventRoom.Instance.SetPortrait(PreloadManager.Cache.GetTexture2D(MEGAMICRYPATH));
+		}
         // 拒绝她，获得阿库娅的眼泪
         await RelicCmd.Obtain<AquasTears>(base.Owner);
-        SetEventFinished(L10NLookup("BAGA_MEGAMI_.pages.NO.END.description"));
+        SetEventFinished(L10NLookup("BAGA_MEGAMI.pages.NO.END.description"));
     }
 
     private async Task Megami()
     {
         // 加入队伍，获得智障女神同行遗物
         await RelicCmd.Obtain<AquaCompanion>(base.Owner);
-        SetEventFinished(L10NLookup("BAGA_MEGAMI_.pages.MEGAMI.END.description"));
+        SetEventFinished(L10NLookup("BAGA_MEGAMI.pages.MEGAMI.END.description"));
     }
 }

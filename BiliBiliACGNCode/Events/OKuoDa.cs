@@ -59,7 +59,7 @@ public sealed class OKuoDa : EventBaseModel
     {
         // 进入战斗
         EnterCombatWithoutExitingEvent<OKuoDaEncounter>([
-            new RelicReward(ModelDb.Relic<UltimateShitAnimeCommittee>(), base.Owner),
+            new RelicReward(ModelDb.Relic<UltimateShitAnimeCommittee>().ToMutable(), base.Owner),
             new PotionReward(base.Owner)
         ], false);
         

@@ -28,8 +28,7 @@ public sealed class PureGoldCardEvent : EventBaseModel
 {
     public override bool IsShared => true;
     public override EventLayoutType LayoutType => EventLayoutType.Default;
-    private static readonly string _trialNondescriptVfx = SceneHelper.GetScenePath("vfx/events/trial_nondescript_vfx");
-    private static string ParkPath => ImageHelper.GetImagePath("events/pure_gold_card_park.png");
+    private static string ParkPath => ImageHelper.GetImagePath("events/pure_gold_card_event_park.png");
     public override EncounterModel? CanonicalEncounter => ModelDb.Encounter<PureGoldCardEncounter>();
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new StringVar("CurseTitle", ModelDb.Card<BlueEyesWhiteDragon>().Title),
@@ -61,19 +60,6 @@ public sealed class PureGoldCardEvent : EventBaseModel
         SetEventFinished(L10NLookup("PURE_GOLD_CARD_EVENT.pages.PICKUP.END.description"));
     }
     /// <summary>
-    /// 添加vfx到事件场景图片
-    /// </summary>
-    /// <param name="portraitPath"></param>
-    private void AddVfxAnchoredToPortrait(string portraitPath)
-	{
-		if (LocalContext.IsMe(base.Owner))
-		{
-			Node2D node2D = PreloadManager.Cache.GetScene(portraitPath).Instantiate<Node2D>(PackedScene.GenEditState.Disabled);
-			node2D.Position = new Vector2(292f, 68f);
-			NEventRoom.Instance.Layout.AddVfxAnchoredToPortrait(node2D);
-		}
-	}
-    /// <summary>
     /// 物归原主
     /// 决定去附近的龟有公园派驻所物归原主。
     /// </summary>
@@ -81,7 +67,6 @@ public sealed class PureGoldCardEvent : EventBaseModel
     /// <exception cref="NotImplementedException"></exception>
     private async Task GiveItBack()
     {
-        AddVfxAnchoredToPortrait(_trialNondescriptVfx);
         // 设置事件场景图片
         if (LocalContext.IsMe(base.Owner))
 		{

@@ -34,8 +34,8 @@ public sealed class Nuke : EventBaseModel
     {
         return
         [
-            new EventOption(this, Follow, "NUCLEAR_WEAPON.pages.INITIAL.options.FOLLOW", HoverTipFactory.FromCard<NuclearRadiation>()),
-            new EventOption(this, StopKids, "NUCLEAR_WEAPON.pages.INITIAL.options.STOP", HoverTipFactory.FromPotion<HextechBomb>()),
+            new EventOption(this, Follow, "NUKE.pages.INITIAL.options.FOLLOW", HoverTipFactory.FromCard<NuclearRadiation>()),
+            new EventOption(this, StopKids, "NUKE.pages.INITIAL.options.STOP", HoverTipFactory.FromPotion<HextechBomb>()),
         ];
     }
     public override bool IsAllowed(RunState runState){
@@ -45,32 +45,37 @@ public sealed class Nuke : EventBaseModel
 
     private async Task Follow()
     {
-        // 获得诅咒 核辐射
-        CardModel card = base.Owner.RunState.CreateCard<NuclearRadiation>(base.Owner);
-		CardCmd.PreviewCardPileAdd(new List<CardPileAddResult>(){await CardPileCmd.Add(card, PileType.Deck)}, 2f);
-        // 移除2张牌
-        CardSelectorPrefs cardSelectorPrefs = new CardSelectorPrefs(CardSelectorPrefs.RemoveSelectionPrompt, 0, 2){
-            Cancelable = true,
-            RequireManualConfirmation = true,
-        };
-        // 选择2张牌
-        CardSelectorPrefs prefs = cardSelectorPrefs;
-        IEnumerable<CardModel> enumerable = await CardSelectCmd.FromDeckForRemoval(base.Owner, prefs);
-        if (enumerable.Any())
+        // 只要手牌大于0张，就可以移除牌
+        if(base.Owner.Deck.Cards.Count() > 0)
         {
-            foreach (CardModel item in enumerable)
+            // 移除2张牌
+            CardSelectorPrefs cardSelectorPrefs = new CardSelectorPrefs(CardSelectorPrefs.RemoveSelectionPrompt, 0, 2){
+                Cancelable = true,
+                RequireManualConfirmation = true,
+            };
+            // 选择2张牌
+            CardSelectorPrefs prefs = cardSelectorPrefs;
+            IEnumerable<CardModel> enumerable = await CardSelectCmd.FromDeckForRemoval(base.Owner, prefs);
+            if (enumerable.Any())
             {
-                await CardPileCmd.RemoveFromDeck(item);
+                foreach (CardModel item in enumerable)
+                {
+                    await CardPileCmd.RemoveFromDeck(item);
+                }
             }
         }
-        SetEventFinished(L10NLookup("NUCLEAR_WEAPON.pages.FOLLOW.END.description"));
+
+        // 获得诅咒 核辐射
+        CardModel card = base.Owner.RunState.CreateCard<NuclearRadiation>(base.Owner);
+		CardCmd.PreviewCardPileAdd(new List<CardPileAddResult>(){await CardPileCmd.Add(card, PileType.Deck)}, 1.2f);
+        SetEventFinished(L10NLookup("NUKE.pages.FOLLOW.END.description"));
     }
 
     private async Task StopKids()
     {
         // 获得药水【海克斯炸弹】
-        await RewardsCmd.OfferCustom(base.Owner, new List<Reward> { new PotionReward(ModelDb.Potion<HextechBomb>(), base.Owner) });
-        SetEventFinished(L10NLookup("NUCLEAR_WEAPON.pages.STOP.END.description"));
+        await RewardsCmd.OfferCustom(base.Owner, new List<Reward> { new PotionReward(ModelDb.Potion<HextechBomb>().ToMutable(), base.Owner) });
+        SetEventFinished(L10NLookup("NUKE.pages.STOP.END.description"));
     }
 
 }

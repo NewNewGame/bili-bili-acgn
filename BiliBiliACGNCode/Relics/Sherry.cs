@@ -27,7 +27,7 @@ public sealed class Sherry : RelicBaseModel
     {
         // 获得啊~雪莉
         CardModel card = base.Owner.RunState.CreateCard<ASherry>(base.Owner);
-		CardCmd.PreviewCardPileAdd(new List<CardPileAddResult>(){await CardPileCmd.Add(card, PileType.Deck)}, 2f);
+		CardCmd.PreviewCardPileAdd(new List<CardPileAddResult>(){await CardPileCmd.Add(card, PileType.Deck)}, 1.2f);
         // 移除受伤的雪莉
         var sherryHurt = base.Owner.GetRelic<SherryHurt>();
         if(sherryHurt != null)

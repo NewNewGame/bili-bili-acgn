@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dpir0yb3d0fut"
-path="res://.godot/imported/sherry_events.png-046f50a26c2df980771e2da8c8ac2b88.ctex"
+uid="uid://cc23mvv4q5qxg"
+path="res://.godot/imported/sherry_event.png-872ac55f39e64792416f776aec6f68d6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://images/events/sherry_events.png"
-dest_files=["res://.godot/imported/sherry_events.png-046f50a26c2df980771e2da8c8ac2b88.ctex"]
+source_file="res://images/events/sherry_event.png"
+dest_files=["res://.godot/imported/sherry_event.png-872ac55f39e64792416f776aec6f68d6.ctex"]
 
 [params]
 

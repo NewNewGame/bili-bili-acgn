@@ -35,11 +35,11 @@ public sealed class EvaEvents : EventBaseModel
         var list = new List<EventOption>();
         if(base.Owner.Creature.CurrentHp <= base.Owner.Creature.MaxHp * base.DynamicVars["Hp"].BaseValue / 100m)
         {
-            list.Add(new EventOption(this, Try, "EVA_EVENTS.pages.INITIAL.options.TRY", HoverTipFactory.FromCard<EvaFormStrike>()));
+            list.Add(new EventOption(this, null,"EVA_EVENTS.pages.INITIAL.options.LOCKED"));
         }
         else
         {
-            list.Add(new EventOption(this, null,"EVA_EVENTS.pages.INITIAL.options.LOCKED"));
+            list.Add(new EventOption(this, Try, "EVA_EVENTS.pages.INITIAL.options.TRY", HoverTipFactory.FromCard<EvaFormStrike>()));
         }
         list.Add(new EventOption(this, No, "EVA_EVENTS.pages.INITIAL.options.NO", HoverTipFactory.FromRelic<AtFieldGenerator>()));
         return list;

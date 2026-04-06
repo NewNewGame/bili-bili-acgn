@@ -50,14 +50,16 @@ public sealed class DesperateDaily : EventBaseModel
         // 恢复50%点生命值，但获得诅咒【绝望感】。
         int maxHp = Mathf.Min(base.Owner.Creature.MaxHp - base.Owner.Creature.CurrentHp, (int)(base.Owner.Creature.MaxHp * 0.5m));
         await CreatureCmd.Heal(base.Owner.Creature, maxHp, false);
-        await CardPileCmd.Add(base.Owner.RunState.CreateCard<DespairSense>(base.Owner), PileType.Deck);
+        CardModel card = base.Owner.RunState.CreateCard<DespairSense>(base.Owner);
+        CardCmd.PreviewCardPileAdd(new List<CardPileAddResult>(){await CardPileCmd.Add(card, PileType.Deck)}, 1.2f);
         SetEventFinished(L10NLookup("DESPERATE_DAILY.pages.EAT.END.description"));
     }
 
     private async Task Leave()
     {
         // 获得诅咒【空腹】。获得千户的日记遗物
-        await CardPileCmd.Add(base.Owner.RunState.CreateCard<EmptyStomach>(base.Owner), PileType.Deck);
+        CardModel card = base.Owner.RunState.CreateCard<EmptyStomach>(base.Owner);
+        CardCmd.PreviewCardPileAdd(new List<CardPileAddResult>(){await CardPileCmd.Add(card, PileType.Deck)}, 1.2f);
         await RelicCmd.Obtain<QianHuDiary>(base.Owner);
         SetEventFinished(L10NLookup("DESPERATE_DAILY.pages.LEAVE.END.description"));
     }

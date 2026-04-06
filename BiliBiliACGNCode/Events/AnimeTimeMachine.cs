@@ -65,7 +65,7 @@ public sealed class AnimeTimeMachine : EventBaseModel
                 break;
         }
         if(relic != null){
-            await RelicCmd.Obtain(relic, base.Owner);
+            await RelicCmd.Obtain(relic.ToMutable(), base.Owner);
         }
         await Leave();
     }
