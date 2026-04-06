@@ -33,13 +33,13 @@ public sealed class MildSneezing : RelicBaseModel
         new DynamicVar("DiscardAmount", 1m),
     ];
     public override bool ShowCounter => true;
-    public override int DisplayAmount => Fights;
+    public override int DisplayAmount => BILIBILIACGN_MS_Fights;
 
-    public override bool IsUsedUp => Fights == 0;
+    public override bool IsUsedUp => BILIBILIACGN_MS_Fights == 0;
 
     private int _fights = 3;
     [SavedProperty]
-    public int Fights
+    public int BILIBILIACGN_MS_Fights
     {
         get => _fights;
         set
@@ -92,7 +92,7 @@ public sealed class MildSneezing : RelicBaseModel
         }
         if(_fights > 0)
         {
-            Fights--;
+            BILIBILIACGN_MS_Fights--;
         }
         return Task.CompletedTask;
     }

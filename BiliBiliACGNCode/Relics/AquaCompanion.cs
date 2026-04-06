@@ -26,9 +26,9 @@ public sealed class AquaCompanion : RelicBaseModel
     protected override IEnumerable<DynamicVar> CanonicalVars => [new DynamicVar("Damage", 20m), new DynamicVar("Amount", 5m), new DynamicVar("Gold", 10m), new DamageVar("RandomDamage", 0m, ValueProp.Unpowered)];
     private int _roomEnter = 0;
     public override bool ShowCounter => true;
-    public override int DisplayAmount => RoomEnter;
+    public override int DisplayAmount => BILIBILIACGN_AC_RoomEnter;
     [SavedProperty]
-	public int RoomEnter
+	public int BILIBILIACGN_AC_RoomEnter
 	{
 		get
 		{
@@ -76,7 +76,7 @@ public sealed class AquaCompanion : RelicBaseModel
     }
     public override async Task AfterRoomEntered(AbstractRoom room)
     {
-        RoomEnter++;
+        BILIBILIACGN_AC_RoomEnter++;
     }
     private void RandomLostGold()
     {

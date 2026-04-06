@@ -38,12 +38,12 @@ public sealed class QianHuDiary : RelicBaseModel
 	{
 		get
 		{
-			return KeepDiary * (int)base.DynamicVars["Amount"].BaseValue;
+			return BILIBILIACGN_QHD_KeepDiary * (int)base.DynamicVars["Amount"].BaseValue;
 		}
 	}
 
 	[SavedProperty]
-	public int KeepDiary
+	public int BILIBILIACGN_QHD_KeepDiary
 	{
 		get
 		{
@@ -69,7 +69,7 @@ public sealed class QianHuDiary : RelicBaseModel
 
 	private async Task OnSacrificeSynchronized()
 	{
-		KeepDiary++;
+		BILIBILIACGN_QHD_KeepDiary++;
 		Flash();
 	}
     /// <summary>
@@ -80,10 +80,10 @@ public sealed class QianHuDiary : RelicBaseModel
     /// <returns></returns>
     public override async Task AfterTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)
     {
-        if(side == base.Owner.Creature.Side && KeepDiary > 0)
+        if(side == base.Owner.Creature.Side && BILIBILIACGN_QHD_KeepDiary > 0)
         {
             Flash();
-            await CreatureCmd.GainBlock(base.Owner.Creature, KeepDiary * (int)base.DynamicVars["Amount"].BaseValue, ValueProp.Unpowered, null);
+            await CreatureCmd.GainBlock(base.Owner.Creature, BILIBILIACGN_QHD_KeepDiary * (int)base.DynamicVars["Amount"].BaseValue, ValueProp.Unpowered, null);
         }
     }
 
