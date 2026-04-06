@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dbie2qkjko5vr"
-path="res://.godot/imported/mod_image.png-b0a968f661106fbf084d984a813d527b.ctex"
+uid="uid://ce15dya1o31ww"
+path="res://.godot/imported/mod_image.png-fe1b41aeb52f53e13f55134b75e64121.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://BiliBiliACGN/images/mod_image.png"
-dest_files=["res://.godot/imported/mod_image.png-b0a968f661106fbf084d984a813d527b.ctex"]
+source_file="res://BiliBiliACGN/mod_image.png"
+dest_files=["res://.godot/imported/mod_image.png-fe1b41aeb52f53e13f55134b75e64121.ctex"]
 
 [params]
 
