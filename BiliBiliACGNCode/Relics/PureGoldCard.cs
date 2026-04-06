@@ -28,7 +28,7 @@ public sealed class PureGoldCard : RelicBaseModel
 	public override bool IsUsedUp => _wasUsed;
 
 	[SavedProperty]
-	public bool WasUsed
+	public bool BILIBILIACGN_PGC_WasUsed
 	{
 		get
 		{
@@ -59,7 +59,7 @@ public sealed class PureGoldCard : RelicBaseModel
             var qingYanBlueEyesWhiteDragon = base.Owner.Deck.Cards.Where(card => card is BlueEyesWhiteDragon).ToList();
             await PlayerCmd.GainGold(870m * qingYanBlueEyesWhiteDragon.Count, base.Owner);
             await CardPileCmd.RemoveFromDeck(qingYanBlueEyesWhiteDragon);
-            WasUsed = true;
+            BILIBILIACGN_PGC_WasUsed = true;
         }
 
     }

@@ -29,6 +29,10 @@ public abstract class RelicBaseModel : CustomRelicModel
         get
         {
             var path = $"{Id.Entry.RemovePrefix().ToLowerInvariant()}_outline.png".RelicImagePath();
+            if(ResourceLoader.Exists(path)){
+                return path;
+            }
+            path = $"{Id.Entry.RemovePrefix().ToLowerInvariant()}.png".RelicImagePath();
             return ResourceLoader.Exists(path) ? path : "relic_outline.png".RelicImagePath();
         }
     }

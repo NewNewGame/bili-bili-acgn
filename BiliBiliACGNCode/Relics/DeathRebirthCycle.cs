@@ -22,7 +22,7 @@ public sealed class DeathRebirthCycle : RelicBaseModel
 	public override bool IsUsedUp => _wasUsed;
 
 	[SavedProperty]
-	public bool WasUsed
+	public bool BILIBILIACGN_DRC_WasUsed
 	{
 		get
 		{
@@ -45,7 +45,7 @@ public sealed class DeathRebirthCycle : RelicBaseModel
 		{
 			return true;
 		}
-		if (WasUsed)
+		if (BILIBILIACGN_DRC_WasUsed)
 		{
 			return true;
 		}
@@ -55,7 +55,7 @@ public sealed class DeathRebirthCycle : RelicBaseModel
 	public override async Task AfterPreventingDeath(Creature creature)
 	{
 		Flash();
-		WasUsed = true;
+		BILIBILIACGN_DRC_WasUsed = true;
 		decimal amount = Math.Max(1m, creature.MaxHp);
 		await CreatureCmd.Heal(creature, amount);
 	}

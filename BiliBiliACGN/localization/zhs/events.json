@@ -43,7 +43,7 @@
     "EVA_EVENTS.pages.INITIAL.options.TRY.description": "你尝试与EVA融合。失去[red]{Hp}%[/red]生命值。获得卡牌[gold]{CardTitle}[/gold]",
     "EVA_EVENTS.pages.INITIAL.options.NO.title": "拒绝，转身离开",
     "EVA_EVENTS.pages.INITIAL.options.NO.description": "我不想当工具。获得遗物[gold]{Relic}[/gold]",
-    "EVA_EVENTS.pages.INITIAL.options.LOCKED.title": "已锁定",23
+    "EVA_EVENTS.pages.INITIAL.options.LOCKED.title": "已锁定",
     "EVA_EVENTS.pages.INITIAL.options.LOCKED.description": "需要至少[red]{Hp}%[/red]血量才能解锁。",
 
     "BAGA_MEGAMI.title": "智障女神",
