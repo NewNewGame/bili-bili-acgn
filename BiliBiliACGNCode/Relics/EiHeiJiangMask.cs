@@ -10,11 +10,12 @@ using BiliBiliACGN.BiliBiliACGNCode.Core.Models.Monsters;
 using BiliBiliACGN.BiliBiliACGNCode.Relics.RelicPool;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Relics;
+using MegaCrit.Sts2.Core.Models.RelicPools;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Relics;
 
 
-[Pool(typeof(FanshikiRelicPool))]
+[Pool(typeof(SharedRelicPool))]
 public sealed class EiHeiJiangMask : RelicBaseModel
 {
     public override RelicRarity Rarity => RelicRarity.Starter;

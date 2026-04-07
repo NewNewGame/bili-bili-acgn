@@ -22,7 +22,7 @@ namespace BiliBiliACGN.BiliBiliACGNCode.Cards;
 public sealed class NotAfraidOfMyLies : CardBaseModel
 {
     #region 卡牌关键词与悬停
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromKeyword(CustomKeyWords.Anger)];
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<AngerPower>()];
     // 敌人意图为攻击时高亮
     protected override bool ShouldGlowGoldInternal
 	{

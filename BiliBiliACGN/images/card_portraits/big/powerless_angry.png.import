@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://iueclu5kyn7h"
-path="res://.godot/imported/powrless_angry.png-fa9dc46f5d9dfea535a1166f085b3da6.ctex"
+uid="uid://bs8sxkxwhn8h5"
+path="res://.godot/imported/powerless_angry.png-68b0f4cf390bb573256b2f1eba0d3455.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://BiliBiliACGN/images/card_portraits/big/powrless_angry.png"
-dest_files=["res://.godot/imported/powrless_angry.png-fa9dc46f5d9dfea535a1166f085b3da6.ctex"]
+source_file="res://BiliBiliACGN/images/card_portraits/big/powerless_angry.png"
+dest_files=["res://.godot/imported/powerless_angry.png-68b0f4cf390bb573256b2f1eba0d3455.ctex"]
 
 [params]
 

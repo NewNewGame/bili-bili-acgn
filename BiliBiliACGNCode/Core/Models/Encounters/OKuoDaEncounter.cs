@@ -4,7 +4,7 @@
 //* 创建时间：2026/04/02 15:09:02 星期四
 //* 描述：Pop子与Pipi美战斗场景
 //*******************************************************
-using BiliBiliACGN.BiliBiliACGNCode.Core.Models.Encounters.Monsters;
+using BiliBiliACGN.BiliBiliACGNCode.Core.Models.Monsters;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Rooms;
 

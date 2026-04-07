@@ -1,0 +1,32 @@
+[gd_scene load_steps=3 format=3 uid="uid://cjhl63q6srvs7"]
+
+[ext_resource type="Script" uid="uid://cp1h2s6onqcyh" path="res://BiliBiliACGNCode/Nodes/Combat/SNCreatureVisuals.cs" id="1_htqon"]
+[ext_resource type="Texture2D" uid="uid://b6nmvurc6t22g" path="res://BiliBiliACGN/images/characters/yukihira_itsuka.png" id="2_8ebss"]
+
+[node name="itsuka" type="Node2D"]
+script = ExtResource("1_htqon")
+metadata/_edit_vertical_guides_ = [-1036.0]
+
+[node name="Visuals" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -70.00002)
+scale = Vector2(0.06, 0.06)
+texture = ExtResource("2_8ebss")
+
+[node name="Bounds" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+offset_left = -38.999992
+offset_top = -124.0
+offset_right = 185.0
+offset_bottom = 176.0
+scale = Vector2(0.3600001, 0.3600001)
+
+[node name="IntentPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -182)
+
+[node name="CenterPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -50)

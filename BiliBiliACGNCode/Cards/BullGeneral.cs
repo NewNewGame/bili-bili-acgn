@@ -22,7 +22,7 @@ public sealed class BullGeneral : CardBaseModel
     #region 卡牌关键词与悬停
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
     [
-        HoverTipFactory.FromKeyword(CustomKeyWords.Anger),
+        HoverTipFactory.FromPower<AngerPower>(),
     ];
     #endregion
     #region 卡牌属性配置

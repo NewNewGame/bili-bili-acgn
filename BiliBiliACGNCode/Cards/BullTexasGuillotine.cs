@@ -26,7 +26,7 @@ public sealed class BullTexasGuillotine : CardBaseModel
     #region 卡牌关键词与悬停
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
     [
-        HoverTipFactory.FromKeyword(CustomKeyWords.Anger),
+        HoverTipFactory.FromPower<AngerPower>(),
         HoverTipFactory.FromPower<BottleRagePower>()
     ];
 

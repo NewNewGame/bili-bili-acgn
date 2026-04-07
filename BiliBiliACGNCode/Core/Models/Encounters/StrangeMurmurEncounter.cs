@@ -4,7 +4,7 @@
 //* 创建时间：2026/04/01 10:00:00 星期三
 //* 描述：奇怪的低语战斗场景
 //*******************************************************
-using BiliBiliACGN.BiliBiliACGNCode.Core.Models.Encounters.Monsters;
+using BiliBiliACGN.BiliBiliACGNCode.Core.Models.Monsters;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Rooms;
 

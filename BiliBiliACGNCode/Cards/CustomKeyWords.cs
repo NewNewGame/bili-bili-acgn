@@ -14,7 +14,5 @@ public class CustomKeyWords
     [CustomEnum("YYSY")]
     [KeywordProperties(AutoKeywordPosition.Before)]
     public static CardKeyword YYSY;
-    [CustomEnum("Anger")]
-    [KeywordProperties(AutoKeywordPosition.Before)]
-    public static CardKeyword Anger;
+
 }
