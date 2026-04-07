@@ -16,8 +16,6 @@ namespace BiliBiliACGN.BiliBiliACGNCode.Powers;
 
 public sealed class ReadingRadioPower : PowerBaseModel
 {
-    protected override string customIconPath => "readingradio";
-
     public override PowerType Type => PowerType.Buff;
 
     public override PowerStackType StackType => PowerStackType.Counter;

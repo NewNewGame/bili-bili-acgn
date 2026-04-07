@@ -15,8 +15,6 @@ namespace BiliBiliACGN.BiliBiliACGNCode.Powers;
 
 public sealed class RedBullPower : PowerBaseModel
 {
-    protected override string customIconPath => "redbull";
-
 	private class Data
 	{
 		public int angerCharge;

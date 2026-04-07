@@ -20,8 +20,6 @@ namespace BiliBiliACGN.BiliBiliACGNCode.Powers;
 
 public sealed class BerserkPower : PowerBaseModel
 {
-    protected override string customIconPath => "berserk";
-
     public override PowerType Type => PowerType.Buff;
 
     public override PowerStackType StackType => PowerStackType.Single;
@@ -67,8 +65,13 @@ public sealed class BerserkPower : PowerBaseModel
             await PowerCmd.Remove(this);
         }
     }
-    public override Task AfterRemoved(Creature oldOwner)
+    public override async Task AfterRemoved(Creature oldOwner)
     {
-        return base.AfterRemoved(oldOwner);
+        // 如果有开始享受能力，并且是玩家
+        int num = oldOwner.GetPowerAmount<EnjoyPower>();
+        if(num > 0 && oldOwner.Player != null){
+            // 移除后抽牌
+            await CardPileCmd.Draw(CombatUtils.GetTemporaryPlayerChoiceContext(), base.Amount, oldOwner.Player);
+        }
     }
 }

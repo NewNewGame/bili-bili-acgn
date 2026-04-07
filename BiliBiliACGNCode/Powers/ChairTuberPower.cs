@@ -16,7 +16,6 @@ namespace BiliBiliACGN.BiliBiliACGNCode.Powers;
 
 public sealed class ChairTuberPower : PowerBaseModel
 {
-    protected override string customIconPath => "chairtuber";
     public override PowerType Type => PowerType.Buff;
 
     public override PowerStackType StackType => PowerStackType.Counter;

@@ -13,8 +13,6 @@ namespace BiliBiliACGN.BiliBiliACGNCode.Powers;
 
 public sealed class BlueTamagoPower : PowerBaseModel
 {
-    protected override string customIconPath => "bluetamago";
-
     public override PowerType Type => PowerType.Buff;
 
     public override PowerStackType StackType => PowerStackType.Counter;

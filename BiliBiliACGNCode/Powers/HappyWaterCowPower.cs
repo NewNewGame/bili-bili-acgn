@@ -25,8 +25,6 @@ namespace BiliBiliACGN.BiliBiliACGNCode.Powers;
 
 public sealed class HappyWaterCowPower : PowerBaseModel
 {
-    protected override string customIconPath => "happywatercow";
-
     public override PowerType Type => PowerType.Buff;
 
     public override PowerStackType StackType => PowerStackType.Counter;

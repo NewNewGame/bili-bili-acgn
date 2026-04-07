@@ -17,7 +17,6 @@ namespace BiliBiliACGN.BiliBiliACGNCode.Powers;
 
 public sealed class NewConceptLovePower : PowerBaseModel
 {
-    protected override string customIconPath => "new_concept_love";
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
 

@@ -16,7 +16,6 @@ namespace BiliBiliACGN.BiliBiliACGNCode.Powers;
 
 public sealed class WhereSecondFloorPower : PowerBaseModel
 {
-    protected override string customIconPath => "wheresecondfloor";
     public override PowerType Type => PowerType.Buff;
 
     public override PowerStackType StackType => PowerStackType.Counter;

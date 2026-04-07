@@ -13,8 +13,6 @@ namespace BiliBiliACGN.BiliBiliACGNCode.Powers;
 
 public sealed class TangShiLossPower : PowerBaseModel
 {
-    protected override string customIconPath => "tangshiLoss";
-
     public override PowerType Type => PowerType.Debuff;
 
     public override PowerStackType StackType => PowerStackType.Counter;

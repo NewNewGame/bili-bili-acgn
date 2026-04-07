@@ -12,8 +12,6 @@ namespace BiliBiliACGN.BiliBiliACGNCode.Powers;
 
 public sealed class SoyBraisedF1cklePower : PowerBaseModel
 {
-    protected override string customIconPath => "soybraisedf1ckle";
-
     public override PowerType Type => PowerType.Buff;
 
     public override PowerStackType StackType => PowerStackType.Counter;

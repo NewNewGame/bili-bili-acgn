@@ -18,8 +18,6 @@ namespace BiliBiliACGN.BiliBiliACGNCode.Powers;
 
 public sealed class IAmTheMaggotPower : PowerBaseModel
 {
-    protected override string customIconPath => "iamthemaggot";
-
     public override PowerType Type => PowerType.Buff;
 
     public override PowerStackType StackType => PowerStackType.Counter;

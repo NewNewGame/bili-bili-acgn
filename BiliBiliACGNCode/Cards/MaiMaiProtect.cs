@@ -44,4 +44,9 @@ public sealed class MaiMaiProtect : CardBaseModel
         // 添加脉脉庇护BUFF
         await PowerCmd.Apply<MaiMaiProtectPower>(base.Owner.Creature, base.DynamicVars["AngerLoss"].BaseValue, base.Owner.Creature, null);
     }
+    protected override void OnUpgrade()
+    {
+        // 固有
+        base.AddKeyword(CardKeyword.Innate);
+    }
 }

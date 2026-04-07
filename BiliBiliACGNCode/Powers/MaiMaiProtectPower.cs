@@ -13,8 +13,6 @@ namespace BiliBiliACGN.BiliBiliACGNCode.Powers;
 
 public sealed class MaiMaiProtectPower : PowerBaseModel
 {
-    protected override string customIconPath => "maimaiprotect";
-
     public override PowerType Type => PowerType.Buff;
 
     public override PowerStackType StackType => PowerStackType.Counter;

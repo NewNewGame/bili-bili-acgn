@@ -14,8 +14,6 @@ namespace BiliBiliACGN.BiliBiliACGNCode.Powers;
 
 public sealed class STQGatherPower : PowerBaseModel
 {
-    protected override string customIconPath => "stqgather";
-
     public override PowerType Type => PowerType.Buff;
 
     public override PowerStackType StackType => PowerStackType.Counter;

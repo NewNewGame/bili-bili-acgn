@@ -11,8 +11,6 @@ namespace BiliBiliACGN.BiliBiliACGNCode.Powers;
 
 public sealed class EnjoyPower : PowerBaseModel
 {
-    protected override string customIconPath => "enjoy";
-
     public override PowerType Type => PowerType.Buff;
 
     public override PowerStackType StackType => PowerStackType.Counter;

@@ -14,7 +14,6 @@ namespace BiliBiliACGN.BiliBiliACGNCode.Powers;
 
 public sealed class NoRightToKnightMePower : PowerBaseModel
 {
-    protected override string customIconPath => "no_right_to_knight_me";
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
     public override async Task AfterTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)

@@ -21,8 +21,6 @@ namespace BiliBiliACGN.BiliBiliACGNCode.Powers;
 
 public sealed class MikeZiHaoPower : PowerBaseModel
 {
-    protected override string customIconPath => "mikezihao";
-
     public override PowerType Type => PowerType.Buff;
 
     public override PowerStackType StackType => PowerStackType.Counter;

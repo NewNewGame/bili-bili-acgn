@@ -16,8 +16,6 @@ namespace BiliBiliACGN.BiliBiliACGNCode.Powers;
 
 public sealed class NeverDiePower : PowerBaseModel
 {
-    protected override string customIconPath => "neverdie";
-
     public override PowerType Type => PowerType.Buff;
 
     public override PowerStackType StackType => PowerStackType.Counter;

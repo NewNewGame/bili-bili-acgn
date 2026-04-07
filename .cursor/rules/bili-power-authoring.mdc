@@ -18,10 +18,6 @@ alwaysApply: false
 
 - 参考 `.cursor/rules/bili-csharp-file-header.mdc`
 
-## 图标
-
-- 图标：默认按 `Id` 小写映射；与资源文件名不一致时重写 **`protected override string customIconPath`**（小写、无扩展名，对应 `powers/` 下 `png`），见 `AngerPower`（`anger`）、`NeverDiePower`（`neverdie`）。
-
 ## 本身Amount变化
 - 减少： 减少1优先使用`PowerCmd.Decrement(this)`/更多值时使用`PowerCmd.Apply<TPower>(目标, -数量, 施加者, null)`
 - 增加：使用`PowerCmd.Apply<TPower>(目标, 数量, 施加者, null)`

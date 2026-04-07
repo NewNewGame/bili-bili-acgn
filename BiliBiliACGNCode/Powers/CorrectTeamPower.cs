@@ -16,8 +16,6 @@ namespace BiliBiliACGN.BiliBiliACGNCode.Powers;
 
 public sealed class CorrectTeamPower : PowerBaseModel
 {
-    protected override string customIconPath => "correctteam";
-
     public override PowerType Type => PowerType.Buff;
 
     public override PowerStackType StackType => PowerStackType.Counter;

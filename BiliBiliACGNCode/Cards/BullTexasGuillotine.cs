@@ -10,7 +10,6 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using BiliBiliACGN.BiliBiliACGNCode.Cards.CardPool;
-using BottleRagePower = BiliBiliACGN.BiliBiliACGNCode.Powers.BerserkPower;
 using MegaCrit.Sts2.Core.Commands;
 using BiliBiliACGN.BiliBiliACGNCode.Powers;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
@@ -27,7 +26,6 @@ public sealed class BullTexasGuillotine : CardBaseModel
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
     [
         HoverTipFactory.FromPower<AngerPower>(),
-        HoverTipFactory.FromPower<BottleRagePower>()
     ];
 
     #endregion
@@ -53,7 +51,7 @@ public sealed class BullTexasGuillotine : CardBaseModel
         new CalculationBaseVar(0m),
 		new ExtraDamageVar(1m),
 		new CalculatedDamageVar(ValueProp.Move).WithMultiplier((CardModel card, Creature? _) => {
-            // 伤害 = 红温层数 × X(+1) ×（有 红温 则 2倍）
+            // 伤害 = 红温层数 × X(+1)
             int x = card.ResolveEnergyXValue();
             if(x == 0) return card.Owner.Creature.GetPowerAmount<AngerPower>();
             decimal num = x;

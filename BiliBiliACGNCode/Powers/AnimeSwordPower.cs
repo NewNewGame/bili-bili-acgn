@@ -17,8 +17,6 @@ namespace BiliBiliACGN.BiliBiliACGNCode.Powers;
 
 public sealed class AnimeSwordPower : PowerBaseModel
 {
-    protected override string customIconPath => "animesword";
-
     public override PowerType Type => PowerType.Buff;
 
     public override PowerStackType StackType => PowerStackType.Counter;

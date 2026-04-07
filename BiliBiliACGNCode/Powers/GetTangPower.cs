@@ -19,8 +19,6 @@ namespace BiliBiliACGN.BiliBiliACGNCode.Powers;
 
 public sealed class GetTangPower : PowerBaseModel
 {
-    protected override string customIconPath => "gettang";
-
     public override PowerType Type => PowerType.Debuff;
 
     public override PowerStackType StackType => PowerStackType.Counter;
