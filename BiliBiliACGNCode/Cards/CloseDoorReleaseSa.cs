@@ -47,7 +47,7 @@ public sealed class CloseDoorReleaseSa : CardBaseModel
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         // 伤害 = Damage + floor(Anger层数 / PerAnger) * AngerBonus（Anger 来自 AngerPower）
-        await DamageCmd.Attack(base.DynamicVars.CalculatedDamage.BaseValue)
+        await DamageCmd.Attack(base.DynamicVars.CalculatedDamage)
             .FromCard(this)
             .Targeting(cardPlay.Target)
             .Execute(choiceContext);
