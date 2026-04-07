@@ -40,7 +40,7 @@ public sealed class StrangeMurmur : EventBaseModel
 	}
     public override bool IsAllowed(RunState runState){
         // 第一层限定
-        return runState.TotalFloor <= EventUtils.FirstFloorMaxLevel;
+        return runState.TotalFloor <= EventUtils.FirstFloorMaxLevel && runState.TotalFloor >= 6;
     }
     /// <summary>
     /// 过去看看

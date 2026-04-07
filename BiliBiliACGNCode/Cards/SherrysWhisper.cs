@@ -2,7 +2,7 @@
 //* 文件：SherrysWhisper(雪莉的轻语)
 //* 作者：wheat
 //* 创建时间：2026/04/03
-//* 描述：每消耗{AngerPerEnergy:diff()}点[gold]红温值[/gold]获得{Energy:diff()}点能量，至多{MaxEnergy:diff()}点。
+//* 描述：每消耗{AngerPerEnergy:diff()}点[gold]红温[/gold]抽1张牌，至多{MaxEnergy:diff()}张。
 //*******************************************************
 
 using BaseLib.Utils;
@@ -31,9 +31,10 @@ public sealed class SherrysWhisper : CardBaseModel
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new DynamicVar("AngerPerEnergy", 4m),
+        new DynamicVar("AngerPerEnergy", 3m),
+        new CardsVar(3)
     ];
-    private const int MaxEnergy = 3;
+    private int MaxCards => (int)base.DynamicVars.Cards.BaseValue;
 
     public SherrysWhisper() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
 
@@ -45,20 +46,20 @@ public sealed class SherrysWhisper : CardBaseModel
 		await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
         // 按本回合/即时消耗的红温值换算能量（AngerPerEnergy、上限 MaxEnergy）
         int anger = base.Owner.Creature.GetPowerAmount<AngerPower>();
-        int energy = anger / (int)base.DynamicVars["AngerPerEnergy"].BaseValue;
-        if (energy > MaxEnergy)
+        int cardsToDraw = anger / (int)base.DynamicVars["AngerPerEnergy"].BaseValue;
+        if (cardsToDraw > MaxCards)
         {
-            energy = MaxEnergy;
+            cardsToDraw = MaxCards;
         }
-        if(energy > 0){
-            await PlayerCmd.GainEnergy(energy, base.Owner);
+        if(cardsToDraw > 0){
+            await CardPileCmd.Draw(choiceContext, cardsToDraw, base.Owner);
             // 消耗红温
-            await PowerCmd.Apply<AngerPower>(base.Owner.Creature, -energy * (int)base.DynamicVars["AngerPerEnergy"].BaseValue, base.Owner.Creature, null);
+            await PowerCmd.Apply<AngerPower>(base.Owner.Creature, -cardsToDraw * (int)base.DynamicVars["AngerPerEnergy"].BaseValue, base.Owner.Creature, null);
         }
     }
 
     protected override void OnUpgrade()
     {
-        base.DynamicVars["AngerPerEnergy"].UpgradeValueBy(-1m);
+        base.DynamicVars.Cards.UpgradeValueBy(2m);
     }
 }

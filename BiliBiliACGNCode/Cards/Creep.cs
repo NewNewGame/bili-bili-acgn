@@ -33,6 +33,8 @@ public sealed class Creep : CardBaseModel
     [
         new DynamicVar("Power", 2m)
     ];
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [CustomKeyWords.YYSY];
+
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<TangShiPower>()];
 
 

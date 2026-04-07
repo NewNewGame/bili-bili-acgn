@@ -27,9 +27,10 @@ public sealed class ElbowStrike : CardBaseModel
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new DamageVar(9m, ValueProp.Move),
+        new DamageVar(7m, ValueProp.Move),
         new CardsVar(1)
     ];
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [CustomKeyWords.YYSY];
 
     public ElbowStrike() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
 
@@ -47,7 +48,7 @@ public sealed class ElbowStrike : CardBaseModel
 
     protected override void OnUpgrade()
     {
-        base.DynamicVars["Damage"].UpgradeValueBy(1m);
+        base.DynamicVars["Damage"].UpgradeValueBy(3m);
         base.DynamicVars["Cards"].UpgradeValueBy(1m);
     }
 }

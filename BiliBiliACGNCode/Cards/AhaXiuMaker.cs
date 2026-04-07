@@ -36,7 +36,7 @@ public sealed class AhaXiuMaker : CardBaseModel
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new DamageVar(7m, ValueProp.Move),
+        new DamageVar(5m, ValueProp.Move),
     ];
 
     public AhaXiuMaker() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
