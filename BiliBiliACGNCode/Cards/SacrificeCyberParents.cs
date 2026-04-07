@@ -14,6 +14,8 @@ using BiliBiliACGN.BiliBiliACGNCode.Cards.CardPool;
 using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Commands;
+using MegaCrit.Sts2.Core.HoverTips;
+using BiliBiliACGN.BiliBiliACGNCode.Powers;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Cards;
 
@@ -21,13 +23,14 @@ namespace BiliBiliACGN.BiliBiliACGNCode.Cards;
 public sealed class SacrificeCyberParents : CardBaseModel
 {
     #region 卡牌关键词与悬停
-    public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<AngerPower>(),HoverTipFactory.FromKeyword(CardKeyword.Exhaust)];
     #endregion
     #region 卡牌属性配置
     private const int energyCost = 1;
     private const CardType type = CardType.Attack;
     private const CardRarity rarity = CardRarity.Common;
     private const TargetType targetType = TargetType.AnyEnemy;
+    protected override bool IsPlayable => base.Owner.Creature.GetPowerAmount<AngerPower>() >= 2;
     private const bool shouldShowInCardLibrary = true;
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
@@ -41,16 +44,23 @@ public sealed class SacrificeCyberParents : CardBaseModel
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        // 在你的手牌中选择消耗一张手牌，对所有敌人造成伤害
-        CardModel cardModel = (await CardSelectCmd.FromHand(prefs: new CardSelectorPrefs(CardSelectorPrefs.ExhaustSelectionPrompt, 1), context: choiceContext, player: base.Owner, filter: null, source: this)).FirstOrDefault();
-        if (cardModel != null)
+        // 如果有手牌，则选择消耗一张手牌
+        if(PileType.Hand.GetPile(base.Owner).Cards.Count > 0)
         {
-            await CardCmd.Exhaust(choiceContext, cardModel);
+            // 在你的手牌中选择消耗一张手牌，对所有敌人造成伤害
+            CardModel cardModel = (await CardSelectCmd.FromHand(prefs: new CardSelectorPrefs(CardSelectorPrefs.ExhaustSelectionPrompt, 1), context: choiceContext, player: base.Owner, filter: null, source: this)).FirstOrDefault();
+            if (cardModel != null)
+            {
+                await CardCmd.Exhaust(choiceContext, cardModel);
+            }
         }
+        // 对所有敌人造成伤害
         await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue)
             .FromCard(this)
             .TargetingAllOpponents(base.CombatState)
             .Execute(choiceContext);
+        // 消耗2点红温
+        await PowerCmd.Apply<AngerPower>(base.Owner.Creature, -2, base.Owner.Creature, null);
     }
 
     protected override void OnUpgrade()

@@ -35,7 +35,7 @@ public sealed class WhereSecondFloor : CardBaseModel
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
         new BlockVar(12m, ValueProp.Move),
-        new DynamicVar("Power", 1m)
+        new DynamicVar("Power", 2m)
     ];
 
     public WhereSecondFloor() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }

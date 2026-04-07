@@ -49,6 +49,6 @@ public sealed class CoinOperation : CardBaseModel
 
     protected override void OnUpgrade()
     {
-        base.DynamicVars["Power"].UpgradeValueBy(1m);
+        base.DynamicVars["Power"].UpgradeValueBy(5m);
     }
 }

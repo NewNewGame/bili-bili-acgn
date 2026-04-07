@@ -14,6 +14,7 @@ using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.ValueProps;
 using BiliBiliACGN.BiliBiliACGNCode.Cards.CardPool;
 using MegaCrit.Sts2.Core.Commands;
+using BiliBiliACGN.BiliBiliACGNCode.Powers;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Cards;
 
@@ -21,19 +22,20 @@ namespace BiliBiliACGN.BiliBiliACGNCode.Cards;
 public sealed class NewYearGalaDeathSong : CardBaseModel
 {
     #region 卡牌关键词与悬停
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<VulnerablePower>()];
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<AngerPower>(), HoverTipFactory.FromPower<VulnerablePower>()];
     #endregion
     #region 卡牌属性配置
-    private const int energyCost = 2;
+    private const int energyCost = 1;
     private const CardType type = CardType.Attack;
     private const CardRarity rarity = CardRarity.Common;
     private const TargetType targetType = TargetType.AllEnemies;
+    protected override bool IsPlayable => base.Owner.Creature.GetPowerAmount<AngerPower>() >= 3;
     private const bool shouldShowInCardLibrary = true;
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
         new DamageVar(14m, ValueProp.Move),
-        new DynamicVar("VulnerablePower", 1m)
+        new DynamicVar("VulnerablePower", 2m)
     ];
 
     public NewYearGalaDeathSong() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
@@ -51,6 +53,8 @@ public sealed class NewYearGalaDeathSong : CardBaseModel
         foreach(var enemy in base.CombatState.HittableEnemies){
             await PowerCmd.Apply<VulnerablePower>(enemy, base.DynamicVars["VulnerablePower"].BaseValue, base.Owner.Creature, null);
         }
+        // 消耗3点红温
+        await PowerCmd.Apply<AngerPower>(base.Owner.Creature, -3, base.Owner.Creature, null);
     }
 
     protected override void OnUpgrade()

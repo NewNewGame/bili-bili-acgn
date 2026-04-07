@@ -7,6 +7,7 @@
 
 using BaseLib.Utils;
 using BiliBiliACGN.BiliBiliACGNCode.Cards.CardPool;
+using Godot;
 using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -50,7 +51,14 @@ public sealed class BusinessExpansion : CardBaseModel
         #region 卡牌打出效果
 
         #endregion
-        var cards = await CardSelectCmd.FromHand(choiceContext, base.Owner, new CardSelectorPrefs(MCardSelectorPrefs.TO_ADD_YYSY, 0, (int)base.DynamicVars.Cards.BaseValue), MCardSelectorPrefs.NoYYSYFilter, this);
+        // 计数手牌中有多少个没有有一说一的牌
+        int count = PileType.Hand.GetPile(base.Owner).Cards.Count(c => !c.Keywords.Contains(CustomKeyWords.YYSY));
+        int num = Mathf.Min((int)base.DynamicVars.Cards.BaseValue, count);
+        if(num == 0)
+        {
+            return;
+        }
+        var cards = await CardSelectCmd.FromHand(choiceContext, base.Owner, new CardSelectorPrefs(MCardSelectorPrefs.TO_ADD_YYSY, num), MCardSelectorPrefs.NoYYSYFilter, this);
         foreach(var card in cards){
             card.AddKeyword(CustomKeyWords.YYSY);
         }

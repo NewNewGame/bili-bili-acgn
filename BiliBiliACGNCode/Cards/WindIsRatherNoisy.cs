@@ -5,6 +5,7 @@
 //* 描述：从你的消耗牌堆选择{Cards:diff()}张牌加入手牌。消耗。
 //*******************************************************
 using BaseLib.Utils;
+using Godot;
 using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -34,12 +35,18 @@ public sealed class WindIsRatherNoisy : CardBaseModel
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
+        // 如果消耗堆没有牌，则不进行操作
+        int num = Mathf.Min((int)base.DynamicVars.Cards.BaseValue, PileType.Exhaust.GetPile(base.Owner).Cards.Count);
+        if(num == 0)
+        {
+            return;
+        }
         var cards = (from c in PileType.Exhaust.GetPile(base.Owner).Cards
 				orderby c.Rarity, c.Id
                 select c).ToList();
         if(cards.Count > 0){
             // 多选 UI 从消耗堆取牌入手牌
-            await CardPileCmd.Add(await CardSelectCmd.FromSimpleGrid(choiceContext, cards, base.Owner, new CardSelectorPrefs(base.SelectionScreenPrompt, 0, (int)base.DynamicVars.Cards.BaseValue)), PileType.Hand);
+            await CardPileCmd.Add(await CardSelectCmd.FromSimpleGrid(choiceContext, cards, base.Owner, new CardSelectorPrefs(base.SelectionScreenPrompt, num)), PileType.Hand);
         }
     }
 
