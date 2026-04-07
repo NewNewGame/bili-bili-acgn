@@ -7,7 +7,7 @@
 
 using MegaCrit.Sts2.Core.Models;
 
-namespace BiliBiliACGN.BiliBiliACGNCode.Core.Models.Encounters.Monsters;
+namespace BiliBiliACGN.BiliBiliACGNCode.Core.Models.Monsters;
 
 public abstract class MonsterBaseModel : MonsterModel
 {

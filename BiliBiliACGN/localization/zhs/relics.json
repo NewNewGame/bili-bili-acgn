@@ -130,5 +130,11 @@
     "BILIBILIACGN-MAGICAL_POWERED_ARMOR.flavor": "应用了札里夫义手的技术制作出来的全身覆盖铠甲的魔道具。",
     "BILIBILIACGN-FLAMMABLE_OOLONG_TEA.title": "可燃乌龙茶",
     "BILIBILIACGN-FLAMMABLE_OOLONG_TEA.description": "在每场战斗结束时，回复[green]{Heal:diff()}[/green]点生命。",
-    "BILIBILIACGN-FLAMMABLE_OOLONG_TEA.flavor": "这当然是乌龙茶，由伏特加和威士忌9比1调配制成。"
+    "BILIBILIACGN-FLAMMABLE_OOLONG_TEA.flavor": "这当然是乌龙茶，由伏特加和威士忌9比1调配制成。",
+    "BILIBILIACGN-EI_HEI_JIANG_MASK.title": "欸嘿酱的面具",
+    "BILIBILIACGN-EI_HEI_JIANG_MASK.description": "战斗开始时，召唤一果进行助战",
+    "BILIBILIACGN-EI_HEI_JIANG_MASK.flavor": "还没想好",
+    "BILIBILIACGN-WIND_RANGER_MASK.title": "旋风游侠面具",
+    "BILIBILIACGN-WIND_RANGER_MASK.description": "战斗开始时，召唤一果进行助战",
+    "BILIBILIACGN-WIND_RANGER_MASK.flavor": "还没想好"
 }

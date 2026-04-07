@@ -17,7 +17,7 @@ using MegaCrit.Sts2.Core.MonsterMoves.Intents;
 using MegaCrit.Sts2.Core.MonsterMoves.MonsterMoveStateMachine;
 using MegaCrit.Sts2.Core.ValueProps;
 
-namespace BiliBiliACGN.BiliBiliACGNCode.Core.Models.Encounters.Monsters;
+namespace BiliBiliACGN.BiliBiliACGNCode.Core.Models.Monsters;
 
 public sealed class PopPipi : MonsterBaseModel
 {
