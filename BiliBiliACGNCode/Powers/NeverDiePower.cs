@@ -25,7 +25,7 @@ public sealed class NeverDiePower : PowerBaseModel
     public override async Task AfterCardPlayed(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         if(cardPlay.Card.Owner == base.Owner.Player && cardPlay.Card.Keywords.Contains(CustomKeyWords.YYSY)){
-            await CreatureCmd.GainBlock(base.Owner.Player.Creature, base.Amount, ValueProp.Move, null, true);
+            await CreatureCmd.GainBlock(base.Owner.Player.Creature, base.Amount, ValueProp.Unpowered, null, true);
         }
     }
 }

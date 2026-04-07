@@ -34,7 +34,7 @@
   "BILIBILIACGN-US_GREEN_CARD.title": "美国绿卡",
   "BILIBILIACGN-US_GREEN_CARD.description": "自动打出手牌中所有带[gold]有一说一[/gold]的牌，并抽[gold]相同数量[/gold]的牌。",
   "BILIBILIACGN-WIT_PEAK.title": "智斗巅峰",
-  "BILIBILIACGN-WIT_PEAK.description": "获得{Energy:energyIcons()}，并抽取2张牌同时赋予[gold]有一说一[/gold]。",
+  "BILIBILIACGN-WIT_PEAK.description": "获得{Energy:energyIcons()}，并抽取{Cards:diff()}张牌同时赋予[gold]有一说一[/gold]。",
   "BILIBILIACGN-BOTTLE_STRIKE.title": "牛蹄",
   "BILIBILIACGN-BOTTLE_STRIKE.description": "造成{Damage:diff()}点伤害。",
   "BILIBILIACGN-BOTTLE_BLOCK.title": "防御",

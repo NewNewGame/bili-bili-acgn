@@ -36,7 +36,8 @@ public sealed class WitPeak : CardBaseModel
     /// </summary>
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new EnergyVar(1)
+        new EnergyVar(1),
+        new CardsVar(2)
     ];
 
     public WitPeak() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
@@ -51,7 +52,7 @@ public sealed class WitPeak : CardBaseModel
         #region 卡牌打出效果
         await PlayerCmd.GainEnergy(base.DynamicVars.Energy.BaseValue, base.Owner);
         await PowerCmd.Apply<AddYYSYTempPower>(base.Owner.Creature, 2, base.Owner.Creature, null);
-        var drawCards = await CardPileCmd.Draw(choiceContext, 2m, base.Owner);
+        var drawCards = await CardPileCmd.Draw(choiceContext, base.DynamicVars.Cards.BaseValue, base.Owner);
         foreach(var card in drawCards){
             card.AddKeyword(CustomKeyWords.YYSY);
         }
@@ -65,6 +66,7 @@ public sealed class WitPeak : CardBaseModel
     {
         #region 升级效果
         base.DynamicVars.Energy.UpgradeValueBy(1m);
+        base.DynamicVars.Cards.UpgradeValueBy(1m);
 
         #endregion
     }
