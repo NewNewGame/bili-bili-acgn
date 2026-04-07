@@ -1,5 +1,5 @@
 //****************** 代码文件申明 ***********************
-//* 文件：FanshikiCardPool
+//* 文件：FunShikiCardPool
 //* 作者：wheat
 //* 创建时间：2026/04/07
 //* 描述：泛式卡池
@@ -14,22 +14,22 @@ using MegaCrit.Sts2.Core.Models;
 namespace BiliBiliACGN.BiliBiliACGNCode.Cards.CardPool;
 
 
-public sealed class FanshikiCardPool : CustomCardPoolModel
+public sealed class FunShikiCardPool : CustomCardPoolModel
 {
-    public override string Title => "Fanshiki";
+    public override string Title => "FunShiki";
 
     public override string EnergyColorName => CustomEnergyIconPatches.GetEnergyColorName(Id);
     public override string? TextEnergyIconPath{
         get
         {
-            var path = $"fanshiki_energy_icon.png".EnergyIconImagePath();
+            var path = $"funshiki_energy_icon.png".EnergyIconImagePath();
             return ResourceLoader.Exists(path) ? path : "colorless_energy_icon.png".EnergyIconImagePath();
         }
     }
     public override string? BigEnergyIconPath {
         get
         {
-            var path = $"fanshiki_energy_big.png".EnergyIconImagePath();
+            var path = $"funshiki_energy_big.png".EnergyIconImagePath();
             return ResourceLoader.Exists(path) ? path : "colorless_energy_icon.png".EnergyIconImagePath();
         }
     }
