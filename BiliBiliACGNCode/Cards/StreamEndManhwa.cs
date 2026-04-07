@@ -51,6 +51,6 @@ public sealed class StreamEndManhwa : CardBaseModel
 
     protected override void OnUpgrade()
     {
-        base.DynamicVars["Power"].UpgradeValueBy(1m);
+        base.DynamicVars["Power"].UpgradeValueBy(2m);
     }
 }

@@ -29,7 +29,7 @@ public sealed class MildSneezing : RelicBaseModel
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
         new DynamicVar("Fights", 3m),
-        new DynamicVar("SkipChance", 10m),
+        new DynamicVar("SkipChance", 20m),
         new DynamicVar("DiscardAmount", 1m),
     ];
     public override bool ShowCounter => true;
@@ -65,12 +65,15 @@ public sealed class MildSneezing : RelicBaseModel
         if(player == base.Owner)
         {
             Flash();
-            if(_fights > 0 && base.Owner.RunState.Rng.CombatPotionGeneration.NextInt(0, 100) < (int)base.DynamicVars["SkipChance"].BaseValue)
+            if(_fights > 0)
             {
-                // 眩晕所有敌人
+                // 眩晕敌人
                 foreach(var enemy in player.Creature.CombatState.HittableEnemies)
                 {
-                    await CreatureCmd.Stun(enemy);
+                    if(base.Owner.RunState.Rng.CombatPotionGeneration.NextInt(0, 100) < (int)base.DynamicVars["SkipChance"].BaseValue)
+                    {
+                        await CreatureCmd.Stun(enemy);
+                    }
                 }
             }
             // 每回合随机丢弃1张牌

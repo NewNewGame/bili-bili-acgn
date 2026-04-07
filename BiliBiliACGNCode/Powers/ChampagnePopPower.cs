@@ -1,7 +1,7 @@
 //* ChampagnePopPower
 //* 作者：wheat
 //* 创建时间：2026/04/03
-//* 描述：能力 开香槟 你的下一张[gold]有一说一[/gold]，耗能变成0。
+//* 描述：能力 开香槟 你的下一张非0耗能的[gold]有一说一[/gold]，耗能变成0。
 //*******************************************************
 
 using BiliBiliACGN.BiliBiliACGNCode.Cards;
@@ -25,6 +25,9 @@ public sealed class ChampagnePopPower : PowerBaseModel
 		modifiedCost = originalCost;
 		if (card.Owner.Creature != base.Owner)
 		{
+			return false;
+		}
+		if(originalCost == 0){
 			return false;
 		}
 		if (!card.Keywords.Contains(CustomKeyWords.YYSY))
@@ -52,7 +55,7 @@ public sealed class ChampagnePopPower : PowerBaseModel
 
 	public override async Task BeforeCardPlayed(CardPlay cardPlay)
 	{
-		if (cardPlay.Card.Owner.Creature == base.Owner && cardPlay.Card.Type == CardType.Attack)
+		if (cardPlay.Card.Owner.Creature == base.Owner && cardPlay.Card.Keywords.Contains(CustomKeyWords.YYSY) && cardPlay.Card.EnergyCost.Canonical != 0)
 		{
 			bool flag;
 			switch (cardPlay.Card.Pile?.Type)

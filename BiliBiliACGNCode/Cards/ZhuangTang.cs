@@ -22,6 +22,9 @@ public sealed class ZhuangTang : CardBaseModel
 {
     #region 卡牌关键词与悬停
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromKeyword(CustomKeyWords.YYSY)];
+    // 手牌中有有一说一的牌的时候高亮
+    protected override bool ShouldGlowGoldInternal => PileType.Hand.GetPile(base.Owner).Cards.Any(c => c != this && c.Keywords.Contains(CustomKeyWords.YYSY));
+
     #endregion
     #region 卡牌属性配置
     private const int energyCost = 1;

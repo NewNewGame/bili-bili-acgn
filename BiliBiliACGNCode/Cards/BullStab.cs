@@ -23,6 +23,8 @@ public sealed class BullStab : CardBaseModel
     #region 卡牌属性配置
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromKeyword(CustomKeyWords.YYSY)];
 
+    // 手牌中有有一说一的牌的时候高亮
+    protected override bool ShouldGlowGoldInternal => PileType.Hand.GetPile(base.Owner).Cards.Any(c => c != this && c.Keywords.Contains(CustomKeyWords.YYSY));
     private const int energyCost = 1;
     private const CardType type = CardType.Attack;
     private const CardRarity rarity = CardRarity.Uncommon;

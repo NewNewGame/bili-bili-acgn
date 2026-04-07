@@ -35,7 +35,7 @@ public sealed class NeverDie : CardBaseModel
     /// </summary>
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new BlockVar(2m, ValueProp.Move)
+        new BlockVar(2m, ValueProp.Unpowered)
     ];
 
     public NeverDie() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }

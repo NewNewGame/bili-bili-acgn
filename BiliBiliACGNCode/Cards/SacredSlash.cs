@@ -21,7 +21,7 @@ public sealed class SacredSlash : CardBaseModel
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
 
     #region 卡牌属性配置
-    private const int energyCost = 2;
+    private const int energyCost = 0;
     private const CardType type = CardType.Skill;
     private const CardRarity rarity = CardRarity.Rare;
     private const TargetType targetType = TargetType.Self;
@@ -29,7 +29,7 @@ public sealed class SacredSlash : CardBaseModel
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new CardsVar(6)
+        new CardsVar(3)
     ];
 
     public SacredSlash() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
@@ -50,6 +50,6 @@ public sealed class SacredSlash : CardBaseModel
 
     protected override void OnUpgrade()
     {
-        base.EnergyCost.UpgradeBy(-1);
+        base.DynamicVars["Cards"].UpgradeValueBy(3m);
     }
 }
