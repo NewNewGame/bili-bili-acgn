@@ -25,9 +25,7 @@ alwaysApply: false
 
 ## 数值与词条
 
-- 牌面变量统一 `protected override IEnumerable<DynamicVar> CanonicalVars`；优先 `DamageVar` / `BlockVar` + `ValueProp.Move` ，能量优先用`EnergyVar`，抽卡牌用`CardsVar`其余用 `new DynamicVar("Name", n)`。
-- 关键词：`public override IEnumerable<CardKeyword> CanonicalKeywords` → `CardKeyword.Exhaust`、`Retain`、`Innate` 或 `CustomKeyWords.YYSY`（定义见 `CustomKeyWords.cs`）。
-- 悬停：`ExtraHoverTips` 用 `HoverTipFactory.FromPower<T>()` / `FromKeyword(CustomKeyWords.*)`/ `FromRelic`/`FromCard`/`HoverTipFactory.Static(StaticHoverTip.Block)`等；需要与**模组** Power 同屏且会与 `MegaCrit.Sts2.Core.Models.Powers` 冲突时，用 **`using Alias = BiliBiliACGN.BiliBiliACGNCode.Powers.SomePower`**（见 `ReallyUnsubscribed` 等）。
+- 参考 `.cursor/rules/bili-csharp-file-header.mdc`
 
 ## 实现与命令
 
