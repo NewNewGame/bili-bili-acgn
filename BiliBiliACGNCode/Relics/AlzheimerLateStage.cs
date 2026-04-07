@@ -15,6 +15,8 @@ using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Relics;
 using MegaCrit.Sts2.Core.Entities.RestSite;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.HoverTips;
+using MegaCrit.Sts2.Core.Localization.DynamicVars;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Relics;
 
@@ -22,6 +24,8 @@ namespace BiliBiliACGN.BiliBiliACGNCode.Relics;
 public sealed class AlzheimerLateStage : RelicBaseModel
 {
     public override RelicRarity Rarity => RelicRarity.Starter;
+	protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<AngerPower>()];
+	protected override IEnumerable<DynamicVar> CanonicalVars => [new DynamicVar("AngerAmount", 4m), new DynamicVar("AngerAmountPerTurn", 2m)];
     public override bool TryModifyRestSiteOptions(Player player, ICollection<RestSiteOption> options)
 	{
 		if (player != base.Owner)
@@ -44,9 +48,9 @@ public sealed class AlzheimerLateStage : RelicBaseModel
 			CombatState combatState = player.Creature.CombatState;
 			if (combatState.RoundNumber == 1)
 			{
-				await PowerCmd.Apply<AngerPower>(base.Owner.Creature, 2, base.Owner.Creature, null);
+				await PowerCmd.Apply<AngerPower>(base.Owner.Creature, (int)base.DynamicVars["AngerAmount"].BaseValue, base.Owner.Creature, null);
 			}
-            await PowerCmd.Apply<AngerPower>(base.Owner.Creature, 1, base.Owner.Creature, null);
+            await PowerCmd.Apply<AngerPower>(base.Owner.Creature, (int)base.DynamicVars["AngerAmountPerTurn"].BaseValue, base.Owner.Creature, null);
 		}
 	}
 }
