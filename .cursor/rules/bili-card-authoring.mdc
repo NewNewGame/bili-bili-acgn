@@ -27,6 +27,10 @@ alwaysApply: false
 
 - 参考 `.cursor/rules/bili-csharp-file-header.mdc`
 
+## 多人游戏专属
+
+- 如果卡牌为多人游戏专属需要修改 `public override CardMultiplayerConstraint MultiplayerConstraint => CardMultiplayerConstraint.MultiplayerOnly;`
+
 ## 实现与命令
 
 - 出牌： `protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)`；
