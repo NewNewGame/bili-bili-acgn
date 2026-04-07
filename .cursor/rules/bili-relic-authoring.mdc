@@ -1,0 +1,75 @@
+---
+description: BiliBiliACGN 模组遗物（RelicBaseModel）书写约定，仅本仓库
+globs: BiliBiliACGNCode/Relics/**/*.cs
+alwaysApply: false
+---
+
+# BiliBiliACGN 遗物书写规则
+
+新建/大段编写 `BiliBiliACGNCode/Relics/` 下遗物类时遵循本文；**文件头**仍按 `.cursor/rules/bili-csharp-file-header.mdc`。通用 STS2 骨架见 `.cursor/rules/sts2-relic-generation.mdc`。
+
+## 类型与结构
+
+- 继承 `RelicBaseModel`（`BiliBiliACGN.BiliBiliACGNCode.Relics`），`public sealed class`，**类名 = 文件名**。
+- **必须**实现 `public override RelicRarity Rarity`（如 `Common` / `Uncommon` / `Rare` / `Starter` / `Event` / `Ancient` 等）。
+
+## 数值与词条
+
+- 参考 `.cursor/rules/bili-csharp-file-header.mdc`
+
+## 卡池 `[Pool(typeof(...))]`
+
+遗物通过特性挂入池子（**不像卡牌**那样在 `GenerateAllCards` 里手工逐条注册）；选对池子后才会被对应角色掉落/随机池抽到。
+
+| 池 | 典型用途 |
+|----|----------|
+| `BottleRelicPool` | 瓶子君 152 角色遗物池（`BottleCharacter.RelicPool`） |
+| `XXXRelicPool` | 其他角色遗物池 |
+| `SharedRelicPool` | 全角色共享池（如 `ShortRecorder`、`GreenOnionMiku`） |
+| `EventRelicPool` | 事件奖励遗物（常配合 `RelicRarity.Event`） |
+
+**角色初始遗物**：在对应 `Characters/*Character.cs` 的 `StartingRelics` 里加入 `ModelDb.Relic<YourRelic>()`，与 `[Pool]` 独立。
+
+## 触发与回调
+
+- 在合适的生命周期重写方法实现逻辑，例如：`AfterCardPlayed`、`AfterPlayerTurnStart` / `AfterPlayerTurnStartEarly`、`BeforeCombatStart`、`AfterCombatEnd`、`AfterDamageReceived`、`AfterDeath`、`TryModifyRestSiteOptions` 等。
+- **仅作用于拥有者**时：比较 `base.Owner`、`base.Owner.Creature`、`player == base.Owner`、`cardPlay.Card.Owner == base.Owner` 等，与同目录现有遗物一致。
+- 玩家可见反馈：触发时 `Flash()`；战斗内一次性状态用 `AfterCombatEnd` 重置；需要灰显时用 `RelicStatus.Disabled`（见 `ShortRecorder`）。
+- 修改可变运行时状态前对可写实例调用 `AssertMutable()`；跨战斗持久化用 `[SavedProperty]` + `UpdateDisplay()` / `InvokeDisplayAmountChanged()`（见 `MildSneezing`）。
+- 计数器 UI：`DisplayAmount`、`ShowCounter`、`IsUsedUp` 按需重写。
+- 可保存变量：需要添加[SaverProperty]的Attribute，字段/属性名称需要添加前缀`BILIBILIACGN`
+- 第X个回合开始时：参考
+```csharp
+    public override async Task AfterPlayerTurnStart(PlayerChoiceContext choiceContext, Player player)
+	{
+		if (player == base.Owner)
+		{
+			CombatState combatState = player.Creature.CombatState;
+			if (combatState.RoundNumber == X回合)
+			{
+                //执行操作
+			}
+		}
+	}
+```
+- 战斗结束后：参考
+```csharp
+    public override async Task AfterCombatEnd(CombatRoom room)
+    {
+        // 执行操作
+    }
+```
+
+## 命令与协作
+
+- 优先 `PowerCmd`、`CreatureCmd`、`CardPileCmd`、`PlayerCmd` 等与 STS2 现有链式 API；多人/全体玩家时遍历 `CombatState.Players`（见 `GreenOnionMiku`）。
+
+## 本地化与资源
+
+- 中文文案：`BiliBiliACGN/localization/zhs/relics.json`，键 **`BILIBILIACGN-{CLASS_NAME_UPPER_SNAKE}.title` / `.description`**，可选 **`.flavor`**；多词类名用下划线连接（如 `ALZHEIMER_LATE_STAGE`）。
+- 图标：`RelicBaseModel` 按 `Id` 解析为 `relics/` 下小写 `png` 与 `_outline`；缺图回退 `relic.png`。
+
+## 注意
+
+- 仅改遗物时**不要**顺带改无关角色/事件；新遗物若需**事件选项/奖励**，要在对应 `Events/*.cs` 里显式引用 `ModelDb.Relic<T>()` 或 `HoverTipFactory.FromRelic<T>()`。
+- `RelicBaseModel` 上 `CombatState` 为项目内扩展字段，仅在确有需要时使用。

@@ -25,15 +25,24 @@ alwaysApply: false
 
 ## 数值与词条
 
-- 牌面变量统一 `protected override IEnumerable<DynamicVar> CanonicalVars`；优先 `DamageVar` / `BlockVar` / `CardsVar` + `ValueProp.Move`，其余用 `new DynamicVar("Name", n)`。
+- 牌面变量统一 `protected override IEnumerable<DynamicVar> CanonicalVars`；优先 `DamageVar` / `BlockVar` + `ValueProp.Move` ，能量优先用`EnergyVar`，抽卡牌用`CardsVar`其余用 `new DynamicVar("Name", n)`。
 - 关键词：`public override IEnumerable<CardKeyword> CanonicalKeywords` → `CardKeyword.Exhaust`、`Retain`、`Innate` 或 `CustomKeyWords.YYSY`（定义见 `CustomKeyWords.cs`）。
-- 悬停：`ExtraHoverTips` 用 `HoverTipFactory.FromPower<T>()` / `FromKeyword(CustomKeyWords.*)`；需要与**模组** Power 同屏且会与 `MegaCrit.Sts2.Core.Models.Powers` 冲突时，用 **`using Alias = BiliBiliACGN.BiliBiliACGNCode.Powers.SomePower`**（见 `ReallyUnsubscribed` 等）。
+- 悬停：`ExtraHoverTips` 用 `HoverTipFactory.FromPower<T>()` / `FromKeyword(CustomKeyWords.*)`/ `FromRelic`/`FromCard`/`HoverTipFactory.Static(StaticHoverTip.Block)`等；需要与**模组** Power 同屏且会与 `MegaCrit.Sts2.Core.Models.Powers` 冲突时，用 **`using Alias = BiliBiliACGN.BiliBiliACGNCode.Powers.SomePower`**（见 `ReallyUnsubscribed` 等）。
 
 ## 实现与命令
 
-- 出牌： `protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)`；伤害 `DamageCmd.Attack(...).FromCard(this).Targeting(...).Execute(...)`；能力 `PowerCmd.Apply<T>`；抽牌 `CardPileCmd.Draw` 等（与同目录已实现牌一致）。
+- 出牌： `protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)`；
+- 伤害 `DamageCmd.Attack(...).FromCard(this)`+ (如果是单目标`.Targeting(...)`/全体`.TargetingAllOpponents(base.CombatState)`/随机`.TargetingRandomOpponents(base.CombatState)`)+(如果有攻击次数.WithHitCount(int))；
+- 格挡 `CreatureCmd.GainBlock(choiceContext, cardPlay.Target(目标), base.DynamicVars.Block.BaseValue, base.DynamicVars.Block.Props, base.Owner(给予者), null);`
+- 能力 `PowerCmd.Apply<T>()`；
+- 抽牌 `CardPileCmd.Draw` 等（与同目录已实现牌一致）。
 - 升级： `OnUpgrade()` 内 `DynamicVars[...].UpgradeValueBy(...)` 或 `base.EnergyCost.UpgradeBy(-1)`；诅咒若不可升级可 `MaxUpgradeLevel => 0`。
-- **X 费**：若 API 未定时用占位 `energyCost` + 注释 `TODO`，并在文案说明为 X 费。
+- X 费：energycost为-1，在OnPlay中通过`int num = ResolveEnergyXValue();`获得当前X的值。
+- 诅咒：一般OnPlay方法为空，energycost为-1。
+- 无法打出：卡牌的TargetType为None，CanonicalKeywords 添加`CardKeyword.Unplayable`。
+- 卡牌发光显示：`protected override bool ShouldGlowGoldInternal`重写返回bool条件。
+- 获取玩家牌：`PileType.Hand/Deck/Discard.GetPile(...)`
+- 获取所有敌人：`CombatState.HittableEnemies`
 
 ## 本地化与资源
 

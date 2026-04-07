@@ -1,0 +1,49 @@
+---
+description: BiliBiliACGN 模组能力（PowerBaseModel）书写约定，仅本仓库
+globs: BiliBiliACGNCode/Powers/**/*.cs
+alwaysApply: false
+---
+
+# BiliBiliACGN 能力（Power）书写规则
+
+新建/大段编写 `BiliBiliACGNCode/Powers/` 下能力类时遵循本文；**文件头**仍按 `.cursor/rules/bili-csharp-file-header.mdc`。通用 STS2 骨架见 `.cursor/rules/sts2-power-generation.mdc`。
+
+## 类型与结构
+
+- 继承 `PowerBaseModel`（`BiliBiliACGN.BiliBiliACGNCode.Powers`），`public sealed class`，**类名 = 文件名**，一般以 `Power` 结尾（如 `NeverDiePower`）。
+- **必须**声明 `PowerType`（多为 `PowerType.Buff` / `Debuff`）与 **`PowerStackType`**（如 `Counter`、`Single`）；需要独立实例叠加逻辑时设 `IsInstanced`（见 `BerserkPower`）。
+- 能力**无** `[Pool]`；由卡牌/遗物/其它能力通过 `PowerCmd.Apply<T>` 施加。
+
+## 数值与词条
+
+- 参考 `.cursor/rules/bili-csharp-file-header.mdc`
+
+## 图标
+
+- 图标：默认按 `Id` 小写映射；与资源文件名不一致时重写 **`protected override string customIconPath`**（小写、无扩展名，对应 `powers/` 下 `png`），见 `AngerPower`（`anger`）、`NeverDiePower`（`neverdie`）。
+
+## 本身Amount变化
+- 减少： 减少1优先使用`PowerCmd.Decrement(this)`/更多值时使用`PowerCmd.Apply<TPower>(目标, -数量, 施加者, null)`
+- 增加：使用`PowerCmd.Apply<TPower>(目标, 数量, 施加者, null)`
+- 移除：优先使用`PowerCmd.Remove<TPower>`
+
+## Hook 与归属
+
+- 在合适的生命周期重写方法实现效果，例如：`AfterCardPlayed`、`AfterPowerAmountChanged`、`AfterCardDrawnEarly`、`AfterTurnEnd`、`ModifyDamageMultiplicative`、`BeforeDamage` 等。
+- 回调内先判断 **归属与目标**：`base.Owner`、`base.Owner.Player`、`cardPlay.Card.Owner == base.Owner.Player`、`card.Owner.Creature == base.Owner` 等，与同目录现有能力一致。
+- 临时能力在回合结束或条件满足时用 **`await PowerCmd.Remove(this)`** / **`PowerCmd.Remove<T>(base.Owner)`** 清理；需要反馈时 **`Flash()`**。
+- 可变运行时状态（私有集合、计数）在 getter/初始化路径里 **`AssertMutable()`**（见 `MacroDomainPower`）。
+
+## 与卡牌、原版类型的协作
+
+- 依赖「有一说一」等自定义关键词时引用 **`CustomKeyWords`**（`BiliBiliACGN.BiliBiliACGNCode.Cards`），不要硬编码字符串。
+- 本模组 **红怒** 能力类名为 **`BerserkPower`**，**红温** 为 **`AngerPower`**；避免与 `MegaCrit.Sts2.Core.Models.Powers` 中同名类型混淆，在卡牌/遗物侧必要时用 **`using` 别名**（见 `.cursor/rules/bili-card-authoring.mdc`）。
+
+## 本地化与资源
+
+- 中文文案：`BiliBiliACGN/localization/zhs/powers.json`，键 **`BILIBILIACGN-{CLASS_NAME_UPPER_SNAKE}.title` / `.description`**；若数值会随层数/变量变化，补 **`.smartDescription`** 并在文中使用 `{Amount}`、`{DamageMultiplier}` 等与 `CanonicalVars` 一致的占位符（见现有条目）。
+- 多词或缩写类名转键名时与 **`ADD_YY_SY_TEMP_POWER`** 等形式保持一致（按项目已有键，勿自造冲突键）。
+
+## 注意
+
+- 仅改能力时**不要**顺带改无关卡牌/遗物；若新能力需从事件或 UI 引用，再在对应位置接入 `HoverTipFactory.FromPower<T>()` 或 `PowerCmd` 调用链。
