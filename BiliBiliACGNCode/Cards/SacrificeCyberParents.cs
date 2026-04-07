@@ -29,7 +29,7 @@ public sealed class SacrificeCyberParents : CardBaseModel
     private const int energyCost = 1;
     private const CardType type = CardType.Attack;
     private const CardRarity rarity = CardRarity.Common;
-    private const TargetType targetType = TargetType.AnyEnemy;
+    private const TargetType targetType = TargetType.AllEnemies;
     protected override bool IsPlayable => base.Owner.Creature.GetPowerAmount<AngerPower>() >= 2;
     private const bool shouldShowInCardLibrary = true;
 

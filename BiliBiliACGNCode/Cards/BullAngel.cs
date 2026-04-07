@@ -23,7 +23,7 @@ public sealed class BullAngel : CardBaseModel
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromKeyword(CustomKeyWords.YYSY)];
     #endregion
     #region 卡牌属性配置
-    private const int energyCost = 3;
+    private const int energyCost = 2;
     private const CardType type = CardType.Power;
     private const CardRarity rarity = CardRarity.Uncommon;
     private const TargetType targetType = TargetType.Self;

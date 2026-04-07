@@ -12,6 +12,10 @@ namespace BiliBiliACGN.BiliBiliACGNCode.Utils;
 public static class CombatUtils
 {
     /// <summary>
+    /// 手牌最大数量
+    /// </summary>
+    public const int HandMaxCount = 10;
+    /// <summary>
     /// 无中生有的情况下使用的PlayerChoiceContext
     /// </summary>
     /// <returns></returns>

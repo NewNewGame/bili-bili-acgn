@@ -15,6 +15,7 @@ using MegaCrit.Sts2.Core.ValueProps;
 using BaseLib.Extensions;
 using MegaCrit.Sts2.Core.Combat;
 using BiliBiliACGN.BiliBiliACGNCode.Utils;
+using MegaCrit.Sts2.Core.Entities.Cards;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Powers;
 
@@ -35,7 +36,10 @@ public sealed class BerserkPower : PowerBaseModel
         
         // 回复能量
         await PlayerCmd.GainEnergy(base.DynamicVars.Energy.BaseValue, base.Owner.Player);
-        await CardPileCmd.Draw(CombatUtils.GetTemporaryPlayerChoiceContext(), base.DynamicVars.Cards.BaseValue, base.Owner.Player);
+        // 如果小于手牌上限，则抽牌
+        if(PileType.Hand.GetPile(base.Owner.Player).Cards.Count < CombatUtils.HandMaxCount){
+            await CardPileCmd.Draw(CombatUtils.GetTemporaryPlayerChoiceContext(), base.DynamicVars.Cards.BaseValue, base.Owner.Player);
+        }
     }
     public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource)
     {

@@ -8,7 +8,6 @@
 using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
-using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.ValueProps;
 using BiliBiliACGN.BiliBiliACGNCode.Cards.CardPool;
@@ -23,7 +22,7 @@ namespace BiliBiliACGN.BiliBiliACGNCode.Cards;
 public sealed class AmericanQuickDraw : CardBaseModel
 {
     #region 卡牌关键词与悬停
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromKeyword(CustomKeyWords.YYSY)];
+	public override IEnumerable<CardKeyword> CanonicalKeywords => [CustomKeyWords.YYSY];
     #endregion
     #region 卡牌属性配置
     private const int energyCost = 3;

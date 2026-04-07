@@ -2,7 +2,7 @@
 //* 文件：BullDemonForm(牛魔形态)
 //* 作者：wheat
 //* 创建时间：2026/04/03
-//* 描述：你每打出一张带[gold]有一说一[/gold]的牌，获得{Stacks:diff()}层[gold]唐氏[/gold]。有一说一，保留。
+//* 描述：你每打出一张带[gold]有一说一[/gold]的牌，你打出的牌会被添加[gold]有一说一[/gold]，获得{Stacks:diff()}层[gold]唐氏[/gold]。有一说一，保留。
 //*******************************************************
 
 using BaseLib.Utils;
@@ -32,7 +32,7 @@ public sealed class BullDemonForm : CardBaseModel
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new DynamicVar("Powers", 1m)
+        new DynamicVar("Powers", 2m)
     ];
 
     public BullDemonForm() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
