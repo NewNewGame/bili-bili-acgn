@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://buo4iebukjuho"
-path="res://.godot/imported/bluetamago.png-7099b2e3356a5d334e33b8f72799f7f4.ctex"
+uid="uid://daeepr2442ssg"
+path="res://.godot/imported/blue_tamago_power.png-db3e35b7eea0472fde929281acae330f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://BiliBiliACGN/images/powers/big/bluetamago.png"
-dest_files=["res://.godot/imported/bluetamago.png-7099b2e3356a5d334e33b8f72799f7f4.ctex"]
+source_file="res://BiliBiliACGN/images/powers/blue_tamago_power.png"
+dest_files=["res://.godot/imported/blue_tamago_power.png-db3e35b7eea0472fde929281acae330f.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cjoqvkadsf3op"
-path="res://.godot/imported/swallowpride.png-52dd6ef962866c43cb7ea4e1133323f4.ctex"
+uid="uid://bg07t876wygcl"
+path="res://.godot/imported/swallow_pride_power.png-810375d189b25d87e21be5318d871cad.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://BiliBiliACGN/images/powers/swallowpride.png"
-dest_files=["res://.godot/imported/swallowpride.png-52dd6ef962866c43cb7ea4e1133323f4.ctex"]
+source_file="res://BiliBiliACGN/images/powers/big/swallow_pride_power.png"
+dest_files=["res://.godot/imported/swallow_pride_power.png-810375d189b25d87e21be5318d871cad.ctex"]
 
 [params]
 

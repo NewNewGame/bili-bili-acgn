@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cq4j17grx00ro"
-path="res://.godot/imported/tangshi.png-7cf986802e772fcef4620d89d1b4bb8d.ctex"
+uid="uid://ocprkt8pideo"
+path="res://.godot/imported/blue_tamago_power.png-e7aa3f8e9f85b8b73af8d9f72f6a7087.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://BiliBiliACGN/images/powers/big/tangshi.png"
-dest_files=["res://.godot/imported/tangshi.png-7cf986802e772fcef4620d89d1b4bb8d.ctex"]
+source_file="res://BiliBiliACGN/images/powers/big/blue_tamago_power.png"
+dest_files=["res://.godot/imported/blue_tamago_power.png-e7aa3f8e9f85b8b73af8d9f72f6a7087.ctex"]
 
 [params]
 

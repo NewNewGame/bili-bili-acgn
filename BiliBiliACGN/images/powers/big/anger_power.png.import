@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c558vigdp161u"
-path="res://.godot/imported/anger.png-7b66db83095b1df4b4cdc20ce74b7214.ctex"
+uid="uid://bd5t3qsksv8rh"
+path="res://.godot/imported/anger_power.png-6a6ebbef38f478cee72eb53dbef67b75.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://BiliBiliACGN/images/powers/anger.png"
-dest_files=["res://.godot/imported/anger.png-7b66db83095b1df4b4cdc20ce74b7214.ctex"]
+source_file="res://BiliBiliACGN/images/powers/big/anger_power.png"
+dest_files=["res://.godot/imported/anger_power.png-6a6ebbef38f478cee72eb53dbef67b75.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cdp02p1roj750"
-path="res://.godot/imported/berserk.png-b452184238bfc29198b3edd1c542f336.ctex"
+uid="uid://trrshme3i3ud"
+path="res://.godot/imported/anger_power.png-11d322a83979b859ff670f5fcd3b25df.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://BiliBiliACGN/images/powers/berserk.png"
-dest_files=["res://.godot/imported/berserk.png-b452184238bfc29198b3edd1c542f336.ctex"]
+source_file="res://BiliBiliACGN/images/powers/anger_power.png"
+dest_files=["res://.godot/imported/anger_power.png-11d322a83979b859ff670f5fcd3b25df.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b3a710qnclouf"
-path="res://.godot/imported/tangshi.png-a9472d8aacbc8fb908ad1ef4ab55992d.ctex"
+uid="uid://561ehs0vt3c5"
+path="res://.godot/imported/add_yysy_temp_power.png-e06582cf13ccdd69472506d5d25a85c1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://BiliBiliACGN/images/powers/tangshi.png"
-dest_files=["res://.godot/imported/tangshi.png-a9472d8aacbc8fb908ad1ef4ab55992d.ctex"]
+source_file="res://BiliBiliACGN/images/powers/add_yysy_temp_power.png"
+dest_files=["res://.godot/imported/add_yysy_temp_power.png-e06582cf13ccdd69472506d5d25a85c1.ctex"]
 
 [params]
 

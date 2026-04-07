@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b2gnnlokb6xma"
-path="res://.godot/imported/gettang.png-54de5229568a364617e5272073e97e23.ctex"
+uid="uid://vqhl0rxgekk1"
+path="res://.godot/imported/tang_shi_power.png-26c82e35e44cd1cec8459dffc638fe39.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://BiliBiliACGN/images/powers/gettang.png"
-dest_files=["res://.godot/imported/gettang.png-54de5229568a364617e5272073e97e23.ctex"]
+source_file="res://BiliBiliACGN/images/powers/big/tang_shi_power.png"
+dest_files=["res://.godot/imported/tang_shi_power.png-26c82e35e44cd1cec8459dffc638fe39.ctex"]
 
 [params]
 

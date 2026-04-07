@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://28tv0ilhj1kt"
-path="res://.godot/imported/swallowpride.png-44780d6fcc19855156c88396f971b32f.ctex"
+uid="uid://deqhn37hibp8p"
+path="res://.godot/imported/anger_delay_power.png-a31c6bec95900d2019a6998818edf2d5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://BiliBiliACGN/images/powers/big/swallowpride.png"
-dest_files=["res://.godot/imported/swallowpride.png-44780d6fcc19855156c88396f971b32f.ctex"]
+source_file="res://BiliBiliACGN/images/powers/big/anger_delay_power.png"
+dest_files=["res://.godot/imported/anger_delay_power.png-a31c6bec95900d2019a6998818edf2d5.ctex"]
 
 [params]
 

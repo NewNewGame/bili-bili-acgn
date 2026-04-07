@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://buq4ml2601en3"
-path="res://.godot/imported/angerdelay.png-b065e0adc7b877082d29f06eb8ff0196.ctex"
+uid="uid://dysg6fb81ofr5"
+path="res://.godot/imported/berserk_power.png-e70b3d942a44cfac903603687bb6990d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://BiliBiliACGN/images/powers/big/angerdelay.png"
-dest_files=["res://.godot/imported/angerdelay.png-b065e0adc7b877082d29f06eb8ff0196.ctex"]
+source_file="res://BiliBiliACGN/images/powers/big/berserk_power.png"
+dest_files=["res://.godot/imported/berserk_power.png-e70b3d942a44cfac903603687bb6990d.ctex"]
 
 [params]
 

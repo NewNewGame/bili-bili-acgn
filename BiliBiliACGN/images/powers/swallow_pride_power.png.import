@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://blrmtryybk8up"
-path="res://.godot/imported/bluetamago.png-2d9694594b1b8b884c87a460188313b4.ctex"
+uid="uid://chfgg3xc8i626"
+path="res://.godot/imported/swallow_pride_power.png-a710c716f2d99a01615e3686e0a96d07.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://BiliBiliACGN/images/powers/bluetamago.png"
-dest_files=["res://.godot/imported/bluetamago.png-2d9694594b1b8b884c87a460188313b4.ctex"]
+source_file="res://BiliBiliACGN/images/powers/swallow_pride_power.png"
+dest_files=["res://.godot/imported/swallow_pride_power.png-a710c716f2d99a01615e3686e0a96d07.ctex"]
 
 [params]
 
