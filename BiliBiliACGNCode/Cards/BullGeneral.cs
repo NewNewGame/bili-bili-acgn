@@ -49,8 +49,7 @@ public sealed class BullGeneral : CardBaseModel
 
     protected override void OnUpgrade()
     {
-        base.EnergyCost.UpgradeBy(-1);
-        base.DynamicVars["Anger"].UpgradeValueBy(1m);
+        base.DynamicVars["Anger"].UpgradeValueBy(2m);
         base.AddKeyword(CardKeyword.Retain);
     }
 }

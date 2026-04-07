@@ -67,6 +67,6 @@ public sealed class NotAfraidOfMyLies : CardBaseModel
     {
         base.EnergyCost.UpgradeBy(-1);
         base.DynamicVars["Block"].UpgradeValueBy(2m);
-        base.DynamicVars["Power"].UpgradeValueBy(1m);
+        base.DynamicVars["Power"].UpgradeValueBy(2m);
     }
 }

@@ -33,7 +33,7 @@ public sealed class StreamEndManhwa : CardBaseModel
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
         new EnergyVar(2),
-        new DynamicVar("Power", 2m)
+        new DynamicVar("Power", 3m)
     ];
 
     public StreamEndManhwa() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }

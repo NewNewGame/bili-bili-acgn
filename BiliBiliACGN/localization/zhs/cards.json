@@ -160,7 +160,7 @@
   "BILIBILIACGN-REFUTATIONAL_PERSONALITY.title": "反驳形人格",
   "BILIBILIACGN-REFUTATIONAL_PERSONALITY.description": "获得{Thorns:diff()}层[gold]荆棘[/gold]，[gold]红怒[/gold]时额外获得{ThornsRage:diff()}层。",
   "BILIBILIACGN-START_ENJOYING.title": "开始享受！",
-  "BILIBILIACGN-START_ENJOYING.description": "进入[gold]红怒[/gold]后，自动打出手牌里1张带[gold]有一说一[/gold]的牌。",
+  "BILIBILIACGN-START_ENJOYING.description": "退出[gold]红怒[/gold]后，抽取[blue]{Cards:diff()}[/blue]张牌。",
   "BILIBILIACGN-BULL_ANGEL.title": "牛天使",
   "BILIBILIACGN-BULL_ANGEL.description": "每当你打出一张带[gold]有一说一[/gold]的牌，抽取{Cards:diff()}张牌。",
   "BILIBILIACGN-RED_BULL_CARD.title": "红牛",

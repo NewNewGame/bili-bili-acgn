@@ -26,7 +26,7 @@ public sealed class BerserkPower : PowerBaseModel
 
     public override PowerStackType StackType => PowerStackType.Single;
     public override bool IsInstanced => true;
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new DynamicVar("DamageMultiplier", 50m), new EnergyVar(3), new CardsVar(2)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new DynamicVar("DamageMultiplier", 50m), new EnergyVar(2), new CardsVar(3)];
 
     public override async Task AfterPowerAmountChanged(PowerModel power, decimal amount, Creature? applier, CardModel? cardSource)
     {
@@ -63,5 +63,9 @@ public sealed class BerserkPower : PowerBaseModel
         {
             await PowerCmd.Remove(this);
         }
+    }
+    public override Task AfterRemoved(Creature oldOwner)
+    {
+        return base.AfterRemoved(oldOwner);
     }
 }

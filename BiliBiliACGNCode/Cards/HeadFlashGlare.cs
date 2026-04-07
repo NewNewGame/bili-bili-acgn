@@ -50,6 +50,6 @@ public sealed class HeadFlashGlare : CardBaseModel
     protected override void OnUpgrade()
     {
         base.DynamicVars["Block"].UpgradeValueBy(2m);
-        base.DynamicVars["Power"].UpgradeValueBy(1m);
+        base.DynamicVars["Power"].UpgradeValueBy(2m);
     }
 }

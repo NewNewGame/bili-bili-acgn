@@ -33,7 +33,7 @@ public sealed class CoinOperation : CardBaseModel
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
         new DynamicVar("HpLoss", 1m),
-        new DynamicVar("Power", 2m)
+        new DynamicVar("Power", 3m)
     ];
 
     public CoinOperation() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }

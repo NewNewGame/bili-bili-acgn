@@ -12,6 +12,7 @@ using MegaCrit.Sts2.Core.HoverTips;
 using BiliBiliACGN.BiliBiliACGNCode.Cards.CardPool;
 using BiliBiliACGN.BiliBiliACGNCode.Powers;
 using MegaCrit.Sts2.Core.Commands;
+using MegaCrit.Sts2.Core.Localization.DynamicVars;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Cards;
 
@@ -22,8 +23,8 @@ public sealed class StartEnjoying : CardBaseModel
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
     [
         HoverTipFactory.FromPower<BerserkPower>(),
-        HoverTipFactory.FromKeyword(CustomKeyWords.YYSY)
     ];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new CardsVar(2)];
     #endregion
     #region 卡牌属性配置
     private const int energyCost = 1;
@@ -39,11 +40,12 @@ public sealed class StartEnjoying : CardBaseModel
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         // 添加开始享受BUFF
-        await PowerCmd.Apply<EnjoyPower>(base.Owner.Creature, 1, base.Owner.Creature, null);
+        await PowerCmd.Apply<EnjoyPower>(base.Owner.Creature, base.DynamicVars["Cards"].BaseValue, base.Owner.Creature, null);
     }
 
     protected override void OnUpgrade()
     {
-        base.EnergyCost.UpgradeBy(-1);
+        base.DynamicVars["Cards"].UpgradeValueBy(1m);
+        AddKeyword(CardKeyword.Innate);
     }
 }
