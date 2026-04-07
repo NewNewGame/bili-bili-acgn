@@ -58,7 +58,6 @@ public sealed class BullTexasGuillotine : CardBaseModel
             if(x == 0) return card.Owner.Creature.GetPowerAmount<AngerPower>();
             decimal num = x;
             if(card.IsUpgraded) ++num;
-            if(card.Owner.Creature.HasPower<BottleRagePower>()) num *= 2m;
             decimal dmg = card.Owner.Creature.GetPowerAmount<AngerPower>() * num;
             return dmg;
         })

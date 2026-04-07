@@ -28,7 +28,7 @@ public sealed class InfiniteBullness : CardBaseModel
     private const int energyCost = 0;
     private const CardType type = CardType.Attack;
     private const CardRarity rarity = CardRarity.Ancient;
-    private const TargetType targetType = TargetType.AnyEnemy;
+    private const TargetType targetType = TargetType.AllEnemies;
     private const bool shouldShowInCardLibrary = true;
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
@@ -45,7 +45,7 @@ public sealed class InfiniteBullness : CardBaseModel
     {
         await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue)
         .FromCard(this)
-        .Targeting(cardPlay.Target)
+        .TargetingAllOpponents(base.CombatState)
         .Execute(choiceContext);
         await PowerCmd.Apply<TangShiPower>(base.Owner.Creature, base.DynamicVars["Power"].BaseValue, base.Owner.Creature, this);
     }

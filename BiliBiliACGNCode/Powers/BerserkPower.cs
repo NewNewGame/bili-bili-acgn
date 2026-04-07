@@ -53,7 +53,10 @@ public sealed class BerserkPower : PowerBaseModel
 		{
 			return 1m;
 		}
-
+        if(amount * (1m + base.DynamicVars["DamageMultiplier"].BaseValue/100m) >= int.MaxValue)
+        {
+            return 1m;
+        }
         return 1m + base.DynamicVars["DamageMultiplier"].BaseValue/100m;
     }
     // 回合结束后失去红怒

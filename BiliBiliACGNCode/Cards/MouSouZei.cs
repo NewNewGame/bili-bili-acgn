@@ -65,6 +65,5 @@ public sealed class MouSouZei : CardBaseModel
     protected override void OnUpgrade()
     {
         base.EnergyCost.UpgradeBy(-1);
-        base.DynamicVars["Cards"].UpgradeValueBy(1m);
     }
 }
