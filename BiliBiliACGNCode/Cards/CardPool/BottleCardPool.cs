@@ -106,7 +106,7 @@ public sealed class BottleCardPool : CustomCardPoolModel
             ModelDb.Card<NotAfraidOfMyLies>(),
             ModelDb.Card<InstantPoisonMilk>(),
             ModelDb.Card<HappyWaterBuffalo>(),
-            ModelDb.Card<BurnZero>(),
+            ModelDb.Card<ConfessionRadio>(),
             ModelDb.Card<WhiteDoveWing>(),
             ModelDb.Card<YouCaughtItToo>(),
             ModelDb.Card<BullGeneral>(),

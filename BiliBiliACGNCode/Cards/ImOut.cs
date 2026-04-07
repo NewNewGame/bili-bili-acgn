@@ -34,7 +34,8 @@ public sealed class ImOut : CardBaseModel
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new DamageVar(6m, ValueProp.Move)
+        new DamageVar(4m, ValueProp.Move),
+        new CardsVar(1)
     ];
 
     public ImOut() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
@@ -47,6 +48,7 @@ public sealed class ImOut : CardBaseModel
             .FromCard(this)
             .Targeting(cardPlay.Target)
             .Execute(choiceContext);
+        await CardPileCmd.Draw(choiceContext, base.DynamicVars.Cards.BaseValue, base.Owner);
     }
     public override async Task AfterPowerAmountChanged(PowerModel power, decimal amount, Creature? applier, CardModel? cardSource)
     {

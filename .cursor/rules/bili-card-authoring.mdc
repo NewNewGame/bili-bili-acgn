@@ -1,0 +1,46 @@
+---
+description: BiliBiliACGN 模组卡牌（CardBaseModel）书写约定，仅本仓库
+globs: BiliBiliACGNCode/Cards/**/*.cs
+alwaysApply: false
+---
+
+# BiliBiliACGN 卡牌书写规则
+
+新建/大段编写 `BiliBiliACGNCode/Cards/` 下卡牌类时遵循本文；**文件头**仍按 `.cursor/rules/bili-csharp-file-header.mdc`。
+
+## 类型与结构
+
+- 继承 `CardBaseModel`（`BiliBiliACGN.BiliBiliACGNCode.Cards`），`public sealed class`，**类名 = 文件名**。
+- 构造函数：`base(energyCost, type, rarity, targetType, shouldShowInCardLibrary)`；战斗逻辑只放在 `OnPlay` / `OnUpgrade` / 少数专用回调（如 `OnTurnEndInHand`），**不要**在构造函数里打牌效。
+- 用 `#region` 划分「关键词与悬停」「卡牌属性配置」等，与同目录现有牌一致。
+
+## 卡池 `[Pool(typeof(...))]`
+
+| 池 | 典型用途 |
+|----|----------|
+| `BottleCardPool` | 瓶子君 152 主卡池；新卡需在 `CardPool/BottleCardPool.cs` 的 `GenerateAllCards()` 里 `ModelDb.Card<YourCard>()` |
+| `EventCardPool` | `CardRarity.Event` 的事件牌 |
+| `CurseCardPool` | 诅咒牌（如 `CardType.Curse`、`energyCost = -1`、`Unplayable`） |
+| `FanshikiCardPool` 等 | 其它 `CustomCardPoolModel`；同样需在对应 `GenerateAllCards` 注册 |
+
+## 数值与词条
+
+- 牌面变量统一 `protected override IEnumerable<DynamicVar> CanonicalVars`；优先 `DamageVar` / `BlockVar` / `CardsVar` + `ValueProp.Move`，其余用 `new DynamicVar("Name", n)`。
+- 关键词：`public override IEnumerable<CardKeyword> CanonicalKeywords` → `CardKeyword.Exhaust`、`Retain`、`Innate` 或 `CustomKeyWords.YYSY`（定义见 `CustomKeyWords.cs`）。
+- 悬停：`ExtraHoverTips` 用 `HoverTipFactory.FromPower<T>()` / `FromKeyword(CustomKeyWords.*)`；需要与**模组** Power 同屏且会与 `MegaCrit.Sts2.Core.Models.Powers` 冲突时，用 **`using Alias = BiliBiliACGN.BiliBiliACGNCode.Powers.SomePower`**（见 `ReallyUnsubscribed` 等）。
+
+## 实现与命令
+
+- 出牌： `protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)`；伤害 `DamageCmd.Attack(...).FromCard(this).Targeting(...).Execute(...)`；能力 `PowerCmd.Apply<T>`；抽牌 `CardPileCmd.Draw` 等（与同目录已实现牌一致）。
+- 升级： `OnUpgrade()` 内 `DynamicVars[...].UpgradeValueBy(...)` 或 `base.EnergyCost.UpgradeBy(-1)`；诅咒若不可升级可 `MaxUpgradeLevel => 0`。
+- **X 费**：若 API 未定时用占位 `energyCost` + 注释 `TODO`，并在文案说明为 X 费。
+
+## 本地化与资源
+
+- 中文文案：`BiliBiliACGN/localization/zhs/cards.json`，键格式 **`BILIBILIACGN-{CLASS_NAME_UPPER_SNAKE}.title` / `.description`**，与 `DynamicVar` 占位符一致（如 `{Damage:diff()}`）。
+- 卡图：`CardBaseModel` 按 `Id` 解析为 `card_portraits/`、`card_portraits_full/` 下小写 png；缺图会落到 `none.png`。
+
+## 禁止/注意
+
+- 不要与 `MegaCrit.Sts2.Core.Models.Powers` 里同名类型裸名冲突（如 `RagePower`）；用别名或只 import 一侧。
+- 仅改卡牌时**不要**顺带改无关卡池/全局补丁；新卡**必须**接入对应 `*CardPool.GenerateAllCards`（若属于该池）。
