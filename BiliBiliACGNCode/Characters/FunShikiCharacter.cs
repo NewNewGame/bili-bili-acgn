@@ -15,7 +15,6 @@ using Godot;
 using MegaCrit.Sts2.Core.Entities.Characters;
 using MegaCrit.Sts2.Core.Models;
 
-/*
 public sealed class FunShikiCharacter : PlaceholderCharacterModel
 {
     public override string PlaceholderID => "funshiki";
@@ -53,4 +52,3 @@ public sealed class FunShikiCharacter : PlaceholderCharacterModel
         ModelDb.Relic<EiHeiJiangMask>(),
     ];
 }   
-*/

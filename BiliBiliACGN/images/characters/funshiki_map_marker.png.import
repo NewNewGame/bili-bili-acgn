@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://brtj3i3idm1fd"
-path="res://.godot/imported/energy_test_big.png-8736292bc5b98f2e7a5eb6ab3eb1e152.ctex"
+uid="uid://bag68nqbxgwyh"
+path="res://.godot/imported/funshiki_map_marker.png-36c848298d354493d241f783bd003e27.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://BiliBiliACGN/images/energy/energy_test_big.png"
-dest_files=["res://.godot/imported/energy_test_big.png-8736292bc5b98f2e7a5eb6ab3eb1e152.ctex"]
+source_file="res://BiliBiliACGN/images/characters/funshiki_map_marker.png"
+dest_files=["res://.godot/imported/funshiki_map_marker.png-36c848298d354493d241f783bd003e27.ctex"]
 
 [params]
 
