@@ -41,7 +41,7 @@ public sealed class BullAngel : CardBaseModel
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         // 添加牛天使BUFF
-        await PowerCmd.Apply<AngelCowPower>(base.Owner.Creature, base.DynamicVars["Cards"].BaseValue, base.Owner.Creature, null);
+        await PowerCmd.Apply<AngelCowPower>(base.Owner.Creature, base.DynamicVars["Cards"].BaseValue, base.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()

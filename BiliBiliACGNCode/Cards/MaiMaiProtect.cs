@@ -42,7 +42,7 @@ public sealed class MaiMaiProtect : CardBaseModel
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         // 添加脉脉庇护BUFF
-        await PowerCmd.Apply<MaiMaiProtectPower>(base.Owner.Creature, base.DynamicVars["AngerLoss"].BaseValue, base.Owner.Creature, null);
+        await PowerCmd.Apply<MaiMaiProtectPower>(base.Owner.Creature, base.DynamicVars["AngerLoss"].BaseValue, base.Owner.Creature, this);
     }
     protected override void OnUpgrade()
     {

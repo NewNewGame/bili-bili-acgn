@@ -51,10 +51,10 @@ public sealed class NewYearGalaDeathSong : CardBaseModel
             .Execute(choiceContext);
         // 对所有敌人给予 VulnerablePower 层易伤
         foreach(var enemy in base.CombatState.HittableEnemies){
-            await PowerCmd.Apply<VulnerablePower>(enemy, base.DynamicVars["VulnerablePower"].BaseValue, base.Owner.Creature, null);
+            await PowerCmd.Apply<VulnerablePower>(enemy, base.DynamicVars["VulnerablePower"].BaseValue, base.Owner.Creature, this);
         }
         // 消耗3点红温
-        await PowerCmd.Apply<AngerPower>(base.Owner.Creature, -3, base.Owner.Creature, null);
+        await PowerCmd.Apply<AngerPower>(base.Owner.Creature, -3, base.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()

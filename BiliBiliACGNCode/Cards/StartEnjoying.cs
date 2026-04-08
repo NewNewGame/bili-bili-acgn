@@ -40,7 +40,7 @@ public sealed class StartEnjoying : CardBaseModel
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         // 添加开始享受BUFF
-        await PowerCmd.Apply<EnjoyPower>(base.Owner.Creature, base.DynamicVars["Cards"].BaseValue, base.Owner.Creature, null);
+        await PowerCmd.Apply<EnjoyPower>(base.Owner.Creature, base.DynamicVars["Cards"].BaseValue, base.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()

@@ -50,7 +50,7 @@ public sealed class Meditation : CardBaseModel
         // 获得[gold]红温[/gold]
         await PowerCmd.Apply<AngerPower>(base.Owner.Creature, base.DynamicVars["Power"].BaseValue, base.Owner.Creature, this);
         foreach(var enemy in base.CombatState.HittableEnemies){
-            await PowerCmd.Apply<GetTangPower>(enemy, base.DynamicVars["Tang"].BaseValue, base.Owner.Creature, null);
+            await PowerCmd.Apply<GetTangPower>(enemy, base.DynamicVars["Tang"].BaseValue, base.Owner.Creature, this);
         }
     }
 

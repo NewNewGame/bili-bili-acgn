@@ -43,7 +43,7 @@ public sealed class AnimeSword : CardBaseModel
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         // 获得动漫区的剑BUFF
-        await PowerCmd.Apply<AnimeSwordPower>(base.Owner.Creature, base.DynamicVars["Damage"].BaseValue, base.Owner.Creature, null);
+        await PowerCmd.Apply<AnimeSwordPower>(base.Owner.Creature, base.DynamicVars["Damage"].BaseValue, base.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()

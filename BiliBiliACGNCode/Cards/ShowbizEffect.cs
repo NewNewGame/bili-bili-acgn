@@ -51,7 +51,7 @@ public sealed class ShowbizEffect : CardBaseModel
             await CardCmd.Exhaust(choiceContext, cardModel);
         }
         // 获得{Anger:diff()}点[gold]红温[/gold]。
-        await PowerCmd.Apply<AngerPower>(base.Owner.Creature, base.DynamicVars["Anger"].BaseValue, base.Owner.Creature, null);
+        await PowerCmd.Apply<AngerPower>(base.Owner.Creature, base.DynamicVars["Anger"].BaseValue, base.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()

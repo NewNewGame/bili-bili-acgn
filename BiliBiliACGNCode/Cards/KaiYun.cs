@@ -41,7 +41,7 @@ public sealed class KaiYun : CardBaseModel
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         // 获得开云BUFF
-        await PowerCmd.Apply<KaiYunPower>(base.Owner.Creature, base.DynamicVars["KaiYun"].BaseValue, base.Owner.Creature, null);
+        await PowerCmd.Apply<KaiYunPower>(base.Owner.Creature, base.DynamicVars["KaiYun"].BaseValue, base.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()

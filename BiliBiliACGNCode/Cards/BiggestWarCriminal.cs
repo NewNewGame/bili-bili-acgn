@@ -46,9 +46,9 @@ public sealed class BiggestWarCriminal : CardBaseModel
     {
         // 获得 Anger 层红温；若 CardUpgradeLevel>0 则额外获得 2 点力量
         await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
-        await PowerCmd.Apply<AngerPower>(base.Owner.Creature, base.DynamicVars["Anger"].BaseValue, base.Owner.Creature, null);
+        await PowerCmd.Apply<AngerPower>(base.Owner.Creature, base.DynamicVars["Anger"].BaseValue, base.Owner.Creature, this);
         if(base.IsUpgraded){
-            await PowerCmd.Apply<StrengthPower>(base.Owner.Creature, 2m, base.Owner.Creature, null);
+            await PowerCmd.Apply<StrengthPower>(base.Owner.Creature, 2m, base.Owner.Creature, this);
         }
     }
 

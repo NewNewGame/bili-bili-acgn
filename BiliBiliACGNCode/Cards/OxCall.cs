@@ -44,7 +44,7 @@ public sealed class OxCall : CardBaseModel
         // 对所有敌人施加本回合变唐效果
         if(base.CombatState != null){
         foreach(var enemy in base.CombatState.HittableEnemies){
-                await PowerCmd.Apply<GetTangPower>(enemy, base.DynamicVars["Tang"].BaseValue, base.Owner.Creature, null);
+                await PowerCmd.Apply<GetTangPower>(enemy, base.DynamicVars["Tang"].BaseValue, base.Owner.Creature, this);
             }
         }
     }

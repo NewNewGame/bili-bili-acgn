@@ -47,7 +47,7 @@ public sealed class WhereSecondFloor : CardBaseModel
         // 获得 Block 格挡
         await CreatureCmd.GainBlock(base.Owner.Creature, base.DynamicVars.Block.BaseValue, base.DynamicVars.Block.Props, cardPlay);
         // 获得二楼在哪BUFF
-        await PowerCmd.Apply<WhereSecondFloorPower>(base.Owner.Creature, base.DynamicVars["Power"].BaseValue, base.Owner.Creature, null);
+        await PowerCmd.Apply<WhereSecondFloorPower>(base.Owner.Creature, base.DynamicVars["Power"].BaseValue, base.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()

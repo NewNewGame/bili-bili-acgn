@@ -47,7 +47,7 @@ public sealed class OnlyTailwindGames : CardBaseModel
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         // 获得 SwallowPride 层忍气吞声
-        await PowerCmd.Apply<SwallowPridePower>(base.Owner.Creature, base.DynamicVars["Powers"].BaseValue, base.Owner.Creature, null);
+        await PowerCmd.Apply<SwallowPridePower>(base.Owner.Creature, base.DynamicVars["Powers"].BaseValue, base.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()

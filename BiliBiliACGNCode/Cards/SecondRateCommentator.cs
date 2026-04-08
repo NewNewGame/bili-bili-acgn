@@ -42,7 +42,7 @@ public sealed class SecondRateCommentator : CardBaseModel
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         // 获得二路解说BUFF
-        await PowerCmd.Apply<SecondRateCommentatorPower>(base.Owner.Creature, base.DynamicVars["Anger"].BaseValue, base.Owner.Creature, null);
+        await PowerCmd.Apply<SecondRateCommentatorPower>(base.Owner.Creature, base.DynamicVars["Anger"].BaseValue, base.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()

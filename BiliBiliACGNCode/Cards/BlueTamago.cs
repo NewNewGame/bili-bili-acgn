@@ -38,7 +38,7 @@ public sealed class BlueTamago : CardBaseModel
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         // 添加蓝色团子BUFF
-        await PowerCmd.Apply<BlueTamagoPower>(base.Owner.Creature, base.DynamicVars["Cards"].BaseValue, base.Owner.Creature, null);
+        await PowerCmd.Apply<BlueTamagoPower>(base.Owner.Creature, base.DynamicVars["Cards"].BaseValue, base.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()

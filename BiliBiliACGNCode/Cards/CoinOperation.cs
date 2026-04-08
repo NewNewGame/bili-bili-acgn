@@ -44,7 +44,7 @@ public sealed class CoinOperation : CardBaseModel
     {
         // 失去 HpLoss 点生命，获得 Power 层红温值（AngerPower）
         await CreatureCmd.Damage(choiceContext, base.Owner.Creature, base.DynamicVars["HpLoss"].BaseValue, ValueProp.Unblockable | ValueProp.Unpowered | ValueProp.Move, this);
-        await PowerCmd.Apply<AngerPower>(base.Owner.Creature, base.DynamicVars["Power"].BaseValue, base.Owner.Creature, null);
+        await PowerCmd.Apply<AngerPower>(base.Owner.Creature, base.DynamicVars["Power"].BaseValue, base.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()

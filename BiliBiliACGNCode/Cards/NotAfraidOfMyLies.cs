@@ -59,7 +59,7 @@ public sealed class NotAfraidOfMyLies : CardBaseModel
         await CreatureCmd.GainBlock(base.Owner.Creature, base.DynamicVars.Block.BaseValue, base.DynamicVars.Block.Props, cardPlay);
         // 若敌人意图为攻击，获得{Power:diff()}层红温
         if(cardPlay.Target.Monster?.IntendsToAttack ?? false){
-            await PowerCmd.Apply<AngerPower>(base.Owner.Creature, base.DynamicVars["Power"].BaseValue, base.Owner.Creature, null);
+            await PowerCmd.Apply<AngerPower>(base.Owner.Creature, base.DynamicVars["Power"].BaseValue, base.Owner.Creature, this);
         }
     }
 

@@ -41,7 +41,7 @@ public sealed class HailOfBlades : CardBaseModel
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         // 添加丛刃BUFF
-        await PowerCmd.Apply<HailOfBladesPower>(base.Owner.Creature, 1, base.Owner.Creature, null);
+        await PowerCmd.Apply<HailOfBladesPower>(base.Owner.Creature, 1, base.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()

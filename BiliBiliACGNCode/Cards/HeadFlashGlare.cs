@@ -44,7 +44,7 @@ public sealed class HeadFlashGlare : CardBaseModel
     {
         // 获得 Block 格挡，获得 Power 层红温
         await CreatureCmd.GainBlock(base.Owner.Creature, base.DynamicVars.Block.BaseValue, base.DynamicVars.Block.Props, cardPlay);
-        await PowerCmd.Apply<AngerPower>(base.Owner.Creature, base.DynamicVars["Power"].BaseValue, base.Owner.Creature, null);
+        await PowerCmd.Apply<AngerPower>(base.Owner.Creature, base.DynamicVars["Power"].BaseValue, base.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()

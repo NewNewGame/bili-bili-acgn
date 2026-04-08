@@ -5,7 +5,9 @@
 //* 描述：对所有敌人造成11点伤害。激发所有充能球。
 //*******************************************************
 
+using BaseLib.Utils;
 using BiliBiliACGN.BiliBiliACGNCode.Cards.CardPool;
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
@@ -31,12 +33,22 @@ public sealed class BigNose : CardBaseModel
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        // TODO: 对所有敌人造成伤害，然后激发所有充能球
-        await Task.CompletedTask;
+        // 对所有敌人造成伤害
+        await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue)
+            .FromCard(this)
+            .TargetingAllOpponents(base.CombatState)
+            .Execute(choiceContext);
+        // 激发所有充能球
+        int numberOfOrbs = base.Owner.PlayerCombatState?.OrbQueue.Orbs.Count ?? 0;
+        for(int i = 0; i < numberOfOrbs; i++)
+        {
+            await OrbCmd.EvokeNext(choiceContext, base.Owner);
+        }
     }
 
     protected override void OnUpgrade()
     {
-        // No upgrade values provided.
+        // 降低1点耗能
+        base.EnergyCost.UpgradeBy(-1);
     }
 }

@@ -45,7 +45,7 @@ public sealed class STQGather : CardBaseModel
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         // 添加7tq集合BUFF
-        await PowerCmd.Apply<STQGatherPower>(base.Owner.Creature, base.DynamicVars["Strength"].BaseValue, base.Owner.Creature, null);
+        await PowerCmd.Apply<STQGatherPower>(base.Owner.Creature, base.DynamicVars["Strength"].BaseValue, base.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()

@@ -46,7 +46,7 @@ public sealed class ChampagnePop : CardBaseModel
         await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue).FromCard(this).Targeting(cardPlay.Target)
         .Execute(choiceContext);
         // 施加BUFF
-        await PowerCmd.Apply<ChampagnePopPower>(base.Owner.Creature, 1, base.Owner.Creature, null);
+        await PowerCmd.Apply<ChampagnePopPower>(base.Owner.Creature, 1, base.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()

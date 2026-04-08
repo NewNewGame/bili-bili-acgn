@@ -52,10 +52,10 @@ public sealed class NoRightToKnightMe : CardBaseModel
     {
         // 进入[gold]红怒[/gold]。获得等同于当前[gold]红温[/gold]的[gold]力量[/gold]。下一回合[gold]死亡[/gold]。
         await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
-        await PowerCmd.Apply<BottleRagePower>(base.Owner.Creature,1, base.Owner.Creature, null);
-        await PowerCmd.Apply<StrengthPower>(base.Owner.Creature, base.Owner.Creature.GetPowerAmount<AngerPower>(), base.Owner.Creature, null);
+        await PowerCmd.Apply<BottleRagePower>(base.Owner.Creature,1, base.Owner.Creature, this);
+        await PowerCmd.Apply<StrengthPower>(base.Owner.Creature, base.Owner.Creature.GetPowerAmount<AngerPower>(), base.Owner.Creature, this);
         // 添加NoRightToKnightMe BUFF
-        await PowerCmd.Apply<NoRightToKnightMePower>(base.Owner.Creature, 1, base.Owner.Creature, null);
+        await PowerCmd.Apply<NoRightToKnightMePower>(base.Owner.Creature, 1, base.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()

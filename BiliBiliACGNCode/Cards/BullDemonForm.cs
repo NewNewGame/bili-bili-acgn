@@ -42,7 +42,7 @@ public sealed class BullDemonForm : CardBaseModel
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         // 获得牛魔形态BUFF
-        await PowerCmd.Apply<BullDemonPower>(base.Owner.Creature, base.DynamicVars["Powers"].IntValue, base.Owner.Creature, null);
+        await PowerCmd.Apply<BullDemonPower>(base.Owner.Creature, base.DynamicVars["Powers"].IntValue, base.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()

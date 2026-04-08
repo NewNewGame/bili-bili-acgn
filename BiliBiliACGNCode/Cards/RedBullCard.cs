@@ -41,7 +41,7 @@ public sealed class RedBullCard : CardBaseModel
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         // 添加红牛BUFF
-        await PowerCmd.Apply<RedBullPower>(base.Owner.Creature, base.DynamicVars["AngerPerEnergy"].BaseValue, base.Owner.Creature, null);
+        await PowerCmd.Apply<RedBullPower>(base.Owner.Creature, base.DynamicVars["AngerPerEnergy"].BaseValue, base.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()

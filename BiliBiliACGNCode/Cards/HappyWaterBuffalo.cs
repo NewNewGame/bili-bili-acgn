@@ -51,9 +51,9 @@ public sealed class HappyWaterBuffalo : CardBaseModel
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         // 消耗{AngerCost:diff()}点红温
-        await PowerCmd.Apply<AngerPower>(base.Owner.Creature, -base.DynamicVars["AngerCost"].BaseValue, base.Owner.Creature, null);
+        await PowerCmd.Apply<AngerPower>(base.Owner.Creature, -base.DynamicVars["AngerCost"].BaseValue, base.Owner.Creature, this);
         // 获得[gold]受到的伤害减半[/gold]Buff
-        await PowerCmd.Apply<HappyWaterCowPower>(base.Owner.Creature, 1, base.Owner.Creature, null);
+        await PowerCmd.Apply<HappyWaterCowPower>(base.Owner.Creature, 1, base.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()
