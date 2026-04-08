@@ -1,7 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://cdcoqo78eclji"]
+[gd_scene load_steps=4 format=3 uid="uid://bgb2cnq1rsnpf"]
 
 [ext_resource type="Script" uid="uid://bllvg4nxopi4a" path="res://BiliBiliACGNCode/Nodes/SNRestSiteCharacter.cs" id="1_awmq8"]
-[ext_resource type="Texture2D" uid="uid://dpdv8s74xdyw7" path="res://BiliBiliACGN/images/characters/bottle_chracter.png" id="2_qkqdf"]
+[ext_resource type="Texture2D" uid="uid://fg2vdcccdwdw" path="res://BiliBiliACGN/images/characters/funshiki_chracter.png" id="2_k0a1h"]
 [ext_resource type="PackedScene" uid="uid://bgy88bk44xxvk" path="res://BiliBiliACGN/scenes/selection_reticle.tscn" id="3_evojs"]
 
 [node name="RegentRestSite" type="Node2D"]
@@ -9,11 +9,12 @@ scale = Vector2(0.760006, 0.760006)
 script = ExtResource("1_awmq8")
 
 [node name="SpineSprite" type="TextureRect" parent="."]
-offset_left = -142.10413
-offset_top = -436.83865
-offset_right = 113.895874
-offset_bottom = 75.16135
-texture = ExtResource("2_qkqdf")
+offset_left = -101.31497
+offset_top = -390.78632
+offset_right = 154.68503
+offset_bottom = 121.213684
+scale = Vector2(0.7894753, 0.7894753)
+texture = ExtResource("2_k0a1h")
 expand_mode = 1
 flip_h = true
 

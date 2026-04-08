@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://ulqdvbwenen3" path="res://BiliBiliACGN/images/characters/bottle_icon.png" id="1_gb1uu"]
 
-[node name="WatcherIcon" type="TextureRect"]
+[node name="BottleIcon" type="TextureRect"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://sluh6dewndtj"]
+[gd_scene load_steps=3 format=3 uid="uid://b54o82nu4eodk"]
 
-[ext_resource type="Texture2D" uid="uid://u1au0i8mtp1n" path="res://BiliBiliACGN/images/characters/bottle_bg.png" id="1_wnmbg"]
+[ext_resource type="Texture2D" uid="uid://c0u6yybu0it0l" path="res://BiliBiliACGN/images/characters/funshiki_bg.png" id="1_vc462"]
+
+[sub_resource type="Gradient" id="Gradient_vc462"]
+colors = PackedColorArray(0.87058824, 0, 0, 1, 1, 0.49019608, 1, 1)
 
 [node name="bottle_select_bg" type="Control"]
 layout_mode = 3
@@ -23,7 +26,7 @@ offset_bottom = 102.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.84, 0.84)
-texture = ExtResource("1_wnmbg")
+texture = ExtResource("1_vc462")
 expand_mode = 1
 
 [node name="ash1" type="CPUParticles2D" parent="."]
@@ -40,20 +43,40 @@ angle_min = 45.0
 angle_max = 90.0
 scale_amount_min = 10.0
 scale_amount_max = 10.0
-color = Color(1, 1, 0, 1)
+color = Color(1, 0, 0, 1)
 
 [node name="ash2" type="CPUParticles2D" parent="."]
-position = Vector2(489, -1)
+position = Vector2(371, 519)
 amount = 40
 lifetime = 15.0
 preprocess = 15.0
 local_coords = true
 emission_shape = 3
-emission_rect_extents = Vector2(1200, 1)
+emission_rect_extents = Vector2(50, 14)
+spread = 95.1
 gravity = Vector2(27.41, 39.72)
 orbit_velocity_max = 0.03
 angle_min = -58.5
 angle_max = 164.2
-scale_amount_min = 10.0
-scale_amount_max = 10.0
-color = Color(0.12156863, 0.8117647, 0.33333334, 1)
+scale_amount_min = 5.0
+scale_amount_max = 14.0
+color = Color(0.5686275, 0.16078432, 0.42745098, 1)
+color_ramp = SubResource("Gradient_vc462")
+
+[node name="ash3" type="CPUParticles2D" parent="."]
+position = Vector2(961, 502)
+amount = 40
+lifetime = 15.0
+preprocess = 15.0
+local_coords = true
+emission_shape = 3
+emission_rect_extents = Vector2(50, 14)
+spread = 95.1
+gravity = Vector2(27.41, 39.72)
+orbit_velocity_max = 0.03
+angle_min = -58.5
+angle_max = 164.2
+scale_amount_min = 5.0
+scale_amount_max = 14.0
+color = Color(0.5686275, 0.16078432, 0.42745098, 1)
+color_ramp = SubResource("Gradient_vc462")
