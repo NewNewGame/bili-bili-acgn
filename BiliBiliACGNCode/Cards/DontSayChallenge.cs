@@ -53,7 +53,7 @@ public sealed class DontSayChallenge : CardBaseModel
     {
         // 本回合内计数 YYSY 打出次数，每满 YYSYPerReturn 次将本牌实例从弃牌/消耗区移入手牌
         if(cardPlay.Card.Owner == base.Owner && cardPlay.Card.Keywords.Contains(CustomKeyWords.YYSY) && base.Pile.Type != PileType.Hand){
-            int num = CombatManager.Instance.History.CardPlaysFinished.Count((CardPlayFinishedEntry e) => e.HappenedThisTurn(base.CombatState) && e.CardPlay.Card.Keywords.Contains(CustomKeyWords.YYSY) && e.CardPlay.Card.Owner == base.Owner);
+            int num = CombatManager.Instance.History.CardPlaysFinished.Count((CardPlayFinishedEntry e) => e.HappenedThisTurn(base.CombatState) && e.CardPlay.Card.Keywords.Contains(CustomKeyWords.YYSY) && e.CardPlay.Card.Owner == base.Owner && e.CardPlay.Card.Id != this.Id);
             if(num > 0 && num % 3 == 0){
                 await CardPileCmd.Add(this, PileType.Hand);
             }

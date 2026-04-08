@@ -12,6 +12,7 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Relics;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.RelicPools;
@@ -27,6 +28,8 @@ public sealed class DeathNote : RelicBaseModel
     [
         new CardsVar(1)
     ];
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromCard<DeathNoteD>()];
+
 
     public override async Task AfterPlayerTurnStartEarly(PlayerChoiceContext choiceContext, Player player)
     {
