@@ -15,8 +15,6 @@ namespace BiliBiliACGN.BiliBiliACGNCode.Cards;
 [Pool(typeof(EventCardPool))]
 public sealed class DeathNoteH : CardBaseModel
 {
-    public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
-
     private const int energyCost = 0;
     private const CardType type = CardType.Skill;
     private const CardRarity rarity = CardRarity.Event;
