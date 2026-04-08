@@ -44,6 +44,6 @@ public sealed class SmNiuGe : CardBaseModel
 
     protected override void OnUpgrade()
     {
-        RemoveKeyword(CardKeyword.Exhaust);
+        base.EnergyCost.UpgradeBy(-1);
     }
 }
