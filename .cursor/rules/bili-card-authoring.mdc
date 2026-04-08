@@ -39,7 +39,7 @@ alwaysApply: false
 - 能力 `PowerCmd.Apply<T>()`；
 - 抽牌 `CardPileCmd.Draw` 等（与同目录已实现牌一致）。
 - 升级： `OnUpgrade()` 内 `DynamicVars[...].UpgradeValueBy(...)` 或 `base.EnergyCost.UpgradeBy(-1)`；诅咒若不可升级可 `MaxUpgradeLevel => 0`。
-- X 费：energycost为-1，在OnPlay中通过`int num = ResolveEnergyXValue();`获得当前X的值。
+- X 费：energycost为-1，在OnPlay中通过`int num = ResolveEnergyXValue();`获得当前X的值，需要重写`protected override bool HasEnergyCostX => true;`。
 - 诅咒：一般OnPlay方法为空，energycost为-1。
 - 无法打出：卡牌的TargetType为None，CanonicalKeywords 添加`CardKeyword.Unplayable`。
 - 卡牌发光显示：`protected override bool ShouldGlowGoldInternal`重写返回bool条件。

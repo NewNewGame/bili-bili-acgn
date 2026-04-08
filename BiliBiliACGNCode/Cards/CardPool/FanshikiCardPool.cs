@@ -44,7 +44,32 @@ public sealed class FunShikiCardPool : CustomCardPoolModel
     {
         // 所有[Pool(typeof(FanshikiCardPool))]的卡牌
         return [
-
+            ModelDb.Card<QianDaJiang>(),
+            ModelDb.Card<MoWaLuMoWaLu>(),
+            ModelDb.Card<ChampionPowder>(),
+            ModelDb.Card<FunTuan>(),
+            ModelDb.Card<Penguin>(),
+            ModelDb.Card<Diary>(),
+            ModelDb.Card<TrackPlayer>(),
+            ModelDb.Card<OhHoHoHo>(),
+            ModelDb.Card<MemeMailBox>(),
+            ModelDb.Card<ImSoDespair>(),
+            ModelDb.Card<YandereForm>(),
+            ModelDb.Card<DistortionScholar>(),
+            ModelDb.Card<TelecomEngineeringMaster>(),
+            ModelDb.Card<NtrGodfather>(),
+            ModelDb.Card<HalfFruit>(),
+            ModelDb.Card<ChuunibyouNote>(),
+            ModelDb.Card<CuteNe>(),
+            ModelDb.Card<AnimeMaster>(),
+            ModelDb.Card<MadIsDeadEnd>(),
+            ModelDb.Card<Vector>(),
+            ModelDb.Card<BrainWife>(),
+            ModelDb.Card<Transference>(),
+            ModelDb.Card<Distort>(),
+            ModelDb.Card<RedStone>(),
+            ModelDb.Card<BigNose>(),
+            ModelDb.Card<RainyProtocol>(),
         ];
     }
 }
