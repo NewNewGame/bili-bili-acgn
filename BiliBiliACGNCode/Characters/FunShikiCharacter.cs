@@ -22,8 +22,8 @@ public sealed class FunShikiCharacter : PlaceholderCharacterModel
 
     public override CharacterGender Gender => CharacterGender.Masculine;
 
-    public override int StartingHp => 80;
-
+    public override int StartingHp => 75;
+    public override int BaseOrbSlotCount => 4;
     public override CardPoolModel CardPool => ModelDb.CardPool<FunShikiCardPool>();
 
     public override RelicPoolModel RelicPool => ModelDb.RelicPool<FunShikiRelicPool>();

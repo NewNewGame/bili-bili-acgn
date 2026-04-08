@@ -11,6 +11,7 @@ using BiliBiliACGN.BiliBiliACGNCode.Powers;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Cards;
@@ -28,6 +29,7 @@ public sealed class MawaluMawalu : CardBaseModel
     [
         new DynamicVar("Morbid", 7m),
     ];
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<MorbidPower>()];
 
     public MawaluMawalu() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
 

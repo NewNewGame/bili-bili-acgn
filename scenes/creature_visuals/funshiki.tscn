@@ -1,0 +1,28 @@
+[gd_scene load_steps=2 format=3 uid="uid://1np5qgjh18wh"]
+
+[ext_resource type="Texture2D" uid="uid://dpdv8s74xdyw7" path="res://BiliBiliACGN/images/characters/bottle_chracter.png" id="1_agfs1"]
+
+[node name="bottle" type="Node2D"]
+metadata/_edit_vertical_guides_ = [-1036.0]
+
+[node name="Visuals" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -197)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("1_agfs1")
+
+[node name="Bounds" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+offset_left = -100.0
+offset_top = -300.0
+offset_right = 124.0
+
+[node name="IntentPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -200)
+
+[node name="CenterPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -200)

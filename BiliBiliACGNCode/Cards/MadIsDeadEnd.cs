@@ -23,7 +23,7 @@ namespace BiliBiliACGN.BiliBiliACGNCode.Cards;
 public sealed class MadIsDeadEnd : CardBaseModel
 {
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.Static(StaticHoverTip.Evoke)];
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.Static(StaticHoverTip.Channeling)];
 
     private const int energyCost = 1;
     private const CardType type = CardType.Attack;

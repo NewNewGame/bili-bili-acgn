@@ -38,20 +38,4 @@ public static class PetUtils
     public static bool HasPet<T>(this Creature creature) where T : MonsterModel{
         return creature.Pets.Any(pet => pet.Monster is T);
     }
-    /// <summary>
-    /// 获取女儿
-    /// </summary>
-    /// <param name="creature"></param>
-    /// <returns></returns>
-    public static Creature? GetDaughter(this Creature creature){
-        return creature.Pets.FirstOrDefault(pet => pet.Monster is Itsuka);
-    }
-    /// <summary>
-    /// 判断有没有女儿
-    /// </summary>
-    /// <param name="creature"></param>
-    /// <returns></returns>
-    public static bool HasDaughter(this Creature creature){
-        return creature.Pets.Any(pet => pet.Monster is Itsuka);
-    }
 }
