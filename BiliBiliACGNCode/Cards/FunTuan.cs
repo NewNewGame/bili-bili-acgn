@@ -5,7 +5,11 @@
 //* 描述：获得1/2点能量。从消耗牌堆选择2张牌加入你的手牌。
 //*******************************************************
 
+using BaseLib.Utils;
 using BiliBiliACGN.BiliBiliACGNCode.Cards.CardPool;
+using Godot;
+using MegaCrit.Sts2.Core.CardSelection;
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
@@ -33,8 +37,21 @@ public sealed class FunTuan : CardBaseModel
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        // TODO: 获得能量；从消耗牌堆选择卡加入手牌
-        await Task.CompletedTask;
+        // 获得能量
+        await PlayerCmd.GainEnergy(base.DynamicVars.Energy.BaseValue, base.Owner);
+        // 从消耗牌堆选择卡加入手牌
+        int num = Mathf.Min((int)base.DynamicVars.Cards.BaseValue, PileType.Exhaust.GetPile(base.Owner).Cards.Count);
+        if(num == 0)
+        {
+            return;
+        }
+        var cards = (from c in PileType.Exhaust.GetPile(base.Owner).Cards
+				orderby c.Rarity, c.Id
+                select c).ToList();
+        if(cards.Count > 0){
+            // 多选 UI 从消耗堆取牌入手牌
+            await CardPileCmd.Add(await CardSelectCmd.FromSimpleGrid(choiceContext, cards, base.Owner, new CardSelectorPrefs(base.SelectionScreenPrompt, num)), PileType.Hand);
+        }
     }
 
     protected override void OnUpgrade()

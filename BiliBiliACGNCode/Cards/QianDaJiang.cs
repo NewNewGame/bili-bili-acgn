@@ -29,6 +29,8 @@ public sealed class QianDaJiang : CardBaseModel
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
+        // 如果没有充能球，则不触发
+        if(base.Owner.PlayerCombatState == null || base.Owner.PlayerCombatState.OrbQueue.Orbs.Count == 0) return;
         // 激发最右侧充能球 X / X+1 次
         await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
 		int evokeCount = ResolveEnergyXValue();

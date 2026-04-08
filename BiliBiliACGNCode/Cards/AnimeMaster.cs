@@ -5,7 +5,10 @@
 //* 描述：每当你激发1个充能球时，给予女儿2点力量。
 //*******************************************************
 
+using BaseLib.Utils;
 using BiliBiliACGN.BiliBiliACGNCode.Cards.CardPool;
+using BiliBiliACGN.BiliBiliACGNCode.Powers;
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
@@ -30,8 +33,8 @@ public sealed class AnimeMaster : CardBaseModel
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        // TODO: 施加能力：每当你激发 1 个充能球时，给予女儿力量
-        await Task.CompletedTask;
+        // 施加能力：每当你激发 1 个充能球时，给予女儿力量
+        await PowerCmd.Apply<AnimeMasterPower>(base.Owner.Creature, base.DynamicVars["Strength"].BaseValue, base.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()

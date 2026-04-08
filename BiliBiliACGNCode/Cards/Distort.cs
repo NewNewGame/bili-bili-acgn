@@ -5,6 +5,7 @@
 //* 描述：给予女儿3/4层力量，并对随机敌人发动3/4次进攻。
 //*******************************************************
 
+using BaseLib.Utils;
 using BiliBiliACGN.BiliBiliACGNCode.Cards.CardPool;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;

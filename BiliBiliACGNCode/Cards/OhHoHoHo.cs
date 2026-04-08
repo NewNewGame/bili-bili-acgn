@@ -5,9 +5,18 @@
 //* 描述：本场战斗，你每生成过1个充能球，就生成1个充能球。
 //*******************************************************
 
+using BaseLib.Utils;
 using BiliBiliACGN.BiliBiliACGNCode.Cards.CardPool;
+using BiliBiliACGN.BiliBiliACGNCode.Utils;
+using MegaCrit.Sts2.Core.Combat;
+using MegaCrit.Sts2.Core.Combat.History.Entries;
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.HoverTips;
+using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.Models;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Cards;
 
@@ -20,14 +29,27 @@ public sealed class OhHoHoHo : CardBaseModel
     private const TargetType targetType = TargetType.Self;
     private const bool shouldShowInCardLibrary = true;
 
-    protected override IEnumerable<DynamicVar> CanonicalVars => [];
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => [
+        HoverTipFactory.Static(StaticHoverTip.Channeling),  
+    ];
+
+	protected override IEnumerable<DynamicVar> CanonicalVars => [
+		new CalculationBaseVar(0m),
+		new CalculationExtraVar(1m),
+		new CalculatedVar("CalculatedChannels").WithMultiplier((CardModel card, Creature? _) => CombatManager.Instance.History.Entries.OfType<OrbChanneledEntry>().Count((OrbChanneledEntry e) => e.Actor.Player == card.Owner))
+	];
 
     public OhHoHoHo() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        // TODO: 施加“本场战斗持续”的效果：每生成 1 个充能球，额外再生成 1 个
-        await Task.CompletedTask;
+        // 本场战斗，你每生成过1个充能球，就生成1个充能球。
+        await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
+		int cnt = (int)((CalculatedVar)base.DynamicVars["CalculatedChannels"]).Calculate(cardPlay.Target);
+		for (int i = 0; i < cnt; i++)
+		{
+			await OrbCmd.Channel(choiceContext, OrbUtils.GetRandomFunShikiOrb(base.Owner.RunState.Rng.CombatOrbGeneration), base.Owner);
+		}
     }
 
     protected override void OnUpgrade()

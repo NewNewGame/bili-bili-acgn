@@ -5,9 +5,13 @@
 //* 描述：病态会额外触发1/2次。
 //*******************************************************
 
+using BaseLib.Utils;
 using BiliBiliACGN.BiliBiliACGNCode.Cards.CardPool;
+using BiliBiliACGN.BiliBiliACGNCode.Powers;
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Cards;
@@ -20,7 +24,7 @@ public sealed class DistortionScholar : CardBaseModel
     private const CardRarity rarity = CardRarity.Rare;
     private const TargetType targetType = TargetType.Self;
     private const bool shouldShowInCardLibrary = true;
-
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<MorbidPower>()];
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
         new DynamicVar("ExtraTriggers", 1m),
@@ -30,8 +34,8 @@ public sealed class DistortionScholar : CardBaseModel
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        // TODO: 施加能力：病态额外触发次数
-        await Task.CompletedTask;
+        // 施加能力：病态额外触发次数
+        await PowerCmd.Apply<DistortionScholarPower>(base.Owner.Creature, base.DynamicVars["ExtraTriggers"].BaseValue, base.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()

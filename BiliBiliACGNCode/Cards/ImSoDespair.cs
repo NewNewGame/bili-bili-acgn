@@ -5,9 +5,13 @@
 //* 描述：获得5/9点格挡。本回合，拥有病态的敌人对你造成伤害减半。
 //*******************************************************
 
+using BaseLib.Utils;
 using BiliBiliACGN.BiliBiliACGNCode.Cards.CardPool;
+using BiliBiliACGN.BiliBiliACGNCode.Powers;
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.ValueProps;
 
@@ -21,6 +25,7 @@ public sealed class ImSoDespair : CardBaseModel
     private const CardRarity rarity = CardRarity.Rare;
     private const TargetType targetType = TargetType.Self;
     private const bool shouldShowInCardLibrary = true;
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<MorbidPower>()];
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
@@ -31,8 +36,9 @@ public sealed class ImSoDespair : CardBaseModel
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        // TODO: 获得格挡；本回合拥有病态的敌人对你造成的伤害减半
-        await Task.CompletedTask;
+        // 获得格挡；本回合拥有病态的敌人对你造成的伤害减半
+        await CreatureCmd.GainBlock(base.Owner.Creature, base.DynamicVars.Block.BaseValue, base.DynamicVars.Block.Props, cardPlay);
+        await PowerCmd.Apply<ImSoDespairPower>(base.Owner.Creature, 1m, base.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()

@@ -2,10 +2,13 @@
 //* 文件：ChuunibyouNote(中二笔记)
 //* 作者：wheat
 //* 创建时间：2026/04/08
-//* 描述：每当你打出能力牌时，抽2张牌。（升级后添加固有）
+//* 描述：每当你打出能力牌时，抽2张牌。
 //*******************************************************
 
+using BaseLib.Utils;
 using BiliBiliACGN.BiliBiliACGNCode.Cards.CardPool;
+using BiliBiliACGN.BiliBiliACGNCode.Powers;
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
@@ -30,13 +33,13 @@ public sealed class ChuunibyouNote : CardBaseModel
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        // TODO: 施加能力：每当你打出能力牌时，抽牌
-        await Task.CompletedTask;
+        // 施加能力：每当你打出能力牌时，抽牌
+        await PowerCmd.Apply<ChuunibyouNotePower>(base.Owner.Creature, base.DynamicVars["Cards"].BaseValue, base.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()
     {
         // 升级后添加固有
-        // TODO: 如设计需要：升级后为本牌添加固有（Innate）关键词
+        base.AddKeyword(CardKeyword.Innate);
     }
 }

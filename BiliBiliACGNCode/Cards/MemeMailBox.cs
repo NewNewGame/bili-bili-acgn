@@ -5,10 +5,13 @@
 //* 描述：在下个回合，抽3/4张牌，获得3/4点能量。
 //*******************************************************
 
+using BaseLib.Utils;
 using BiliBiliACGN.BiliBiliACGNCode.Cards.CardPool;
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.Models.Powers;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Cards;
 
@@ -16,7 +19,6 @@ namespace BiliBiliACGN.BiliBiliACGNCode.Cards;
 public sealed class MemeMailBox : CardBaseModel
 {
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
-
     private const int energyCost = 0;
     private const CardType type = CardType.Skill;
     private const CardRarity rarity = CardRarity.Rare;
@@ -33,8 +35,8 @@ public sealed class MemeMailBox : CardBaseModel
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        // TODO: 下回合：抽牌并获得能量
-        await Task.CompletedTask;
+        await PowerCmd.Apply<EnergyNextTurnPower>(base.Owner.Creature, base.DynamicVars.Energy.BaseValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<DrawCardsNextTurnPower>(base.Owner.Creature, base.DynamicVars.Cards.BaseValue, base.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()

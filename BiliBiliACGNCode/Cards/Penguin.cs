@@ -5,10 +5,14 @@
 //* 描述：消耗你的所有手牌，每消耗1张牌，生成1个随机充能球，并抽1张牌。
 //*******************************************************
 
+using BaseLib.Utils;
 using BiliBiliACGN.BiliBiliACGNCode.Cards.CardPool;
+using BiliBiliACGN.BiliBiliACGNCode.Utils;
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.Models;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Cards;
 
@@ -16,21 +20,24 @@ namespace BiliBiliACGN.BiliBiliACGNCode.Cards;
 public sealed class Penguin : CardBaseModel
 {
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
-
     private const int energyCost = 2;
     private const CardType type = CardType.Skill;
     private const CardRarity rarity = CardRarity.Rare;
     private const TargetType targetType = TargetType.Self;
     private const bool shouldShowInCardLibrary = true;
-
-    protected override IEnumerable<DynamicVar> CanonicalVars => [];
-
     public Penguin() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        // TODO: 消耗手牌中所有牌；每消耗 1 张，生成 1 个随机充能球，并抽 1 张牌
-        await Task.CompletedTask;
+        // 消耗手牌中所有牌
+        List<CardModel> list = PileType.Hand.GetPile(base.Owner).Cards.ToList();
+        // 每消耗 1 张，生成 1 个随机充能球，并抽 1 张牌
+        for(int i = 0; i < list.Count; i++)
+        {
+            await CardCmd.Exhaust(choiceContext, list[i]);
+            await OrbCmd.Channel(choiceContext, OrbUtils.GetRandomFunShikiOrb(base.Owner.RunState.Rng.CombatOrbGeneration), base.Owner);
+            await CardPileCmd.Draw(choiceContext, 1, base.Owner);
+        }
     }
 
     protected override void OnUpgrade()

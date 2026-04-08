@@ -5,7 +5,9 @@
 //* 描述：将你弃牌堆所有卡牌重新洗牌放入抽牌堆，然后抽取3/5张牌。
 //*******************************************************
 
+using BaseLib.Utils;
 using BiliBiliACGN.BiliBiliACGNCode.Cards.CardPool;
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
@@ -32,8 +34,9 @@ public sealed class Diary : CardBaseModel
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        // TODO: 将弃牌堆洗入抽牌堆，然后抽牌
-        await Task.CompletedTask;
+        // 将弃牌堆洗入抽牌堆，然后抽牌
+        await CardPileCmd.ShuffleIfNecessary(choiceContext, base.Owner);
+        await CardPileCmd.Draw(choiceContext, base.DynamicVars.Cards.IntValue, base.Owner);
     }
 
     protected override void OnUpgrade()

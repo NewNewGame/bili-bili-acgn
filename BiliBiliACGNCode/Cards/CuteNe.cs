@@ -5,9 +5,13 @@
 //* 描述：女儿获得格挡时，给予你一半的格挡值。
 //*******************************************************
 
+using BaseLib.Utils;
 using BiliBiliACGN.BiliBiliACGNCode.Cards.CardPool;
+using BiliBiliACGN.BiliBiliACGNCode.Powers;
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.HoverTips;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Cards;
 
@@ -19,15 +23,14 @@ public sealed class CuteNe : CardBaseModel
     private const CardRarity rarity = CardRarity.Rare;
     private const TargetType targetType = TargetType.Self;
     private const bool shouldShowInCardLibrary = true;
-
-    protected override IEnumerable<DynamicVar> CanonicalVars => [];
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.Static(StaticHoverTip.Block)];
 
     public CuteNe() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        // TODO: 施加能力：女儿获得格挡时，你获得其一半的格挡值
-        await Task.CompletedTask;
+        // 施加能力：女儿获得格挡时，你获得其一半的格挡值
+        await PowerCmd.Apply<CuteNePower>(base.Owner.Creature, 1m, base.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()

@@ -5,9 +5,12 @@
 //* 描述：复制你所有的充能球一份。
 //*******************************************************
 
+using BaseLib.Utils;
 using BiliBiliACGN.BiliBiliACGNCode.Cards.CardPool;
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.Models;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Cards;
 
@@ -20,14 +23,17 @@ public sealed class TrackPlayer : CardBaseModel
     private const TargetType targetType = TargetType.Self;
     private const bool shouldShowInCardLibrary = true;
 
-    protected override IEnumerable<DynamicVar> CanonicalVars => [];
-
     public TrackPlayer() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        // TODO: 复制你所有的充能球一份
-        await Task.CompletedTask;
+        if(base.Owner.PlayerCombatState == null) return;
+        // 复制你所有的充能球一份
+        var orbs = base.Owner.PlayerCombatState.OrbQueue.Orbs.ToList();
+        foreach (OrbModel item in orbs)
+        {
+            await OrbCmd.Channel(choiceContext, item, base.Owner);
+        }
     }
 
     protected override void OnUpgrade()
