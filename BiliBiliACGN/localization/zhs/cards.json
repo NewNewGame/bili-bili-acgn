@@ -101,7 +101,7 @@
   "BILIBILIACGN-BULL_TEXAS_GUILLOTINE.title": "牛克萨斯断头台",
   "BILIBILIACGN-BULL_TEXAS_GUILLOTINE.description": "造成等同于[gold]红温[/gold]乘{IfUpgraded:show:X+1|X}倍数的伤害。{IsTargeting:\n(造成{CalculatedDamage:diff()}的{IfUpgraded:show:X+1|X}倍点伤害)|}",
   "BILIBILIACGN-BULL_DEMON_FORM.title": "牛魔形态",
-  "BILIBILIACGN-BULL_DEMON_FORM.description": "你每打出一张带[gold]有一说一[/gold]的牌，你打出的牌会被添加[gold]有一说一[/gold]，获得{Powers:diff()}层[gold]唐氏[/gold]。有一说一，保留。",
+  "BILIBILIACGN-BULL_DEMON_FORM.description": "你每打出一张带[gold]有一说一[/gold]的牌，将会获得{Powers:diff()}层[gold]唐氏[/gold]。\n如果没有则你打出的牌会被添加[gold]有一说一[/gold]。",
   "BILIBILIACGN-CORRECT_TEAM.title": "正确车队",
   "BILIBILIACGN-CORRECT_TEAM.description": "在回合开始时，获得{energyPrefix:energyIcons(1)}。[gold]红怒[/gold]状态下额外抽2张牌。",
   "BILIBILIACGN-SECOND_RATE_COMMENTATOR.title": "二路解说",
