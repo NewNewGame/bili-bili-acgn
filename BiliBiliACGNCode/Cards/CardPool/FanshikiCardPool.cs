@@ -45,7 +45,7 @@ public sealed class FunShikiCardPool : CustomCardPoolModel
         // 所有[Pool(typeof(FanshikiCardPool))]的卡牌
         return [
             ModelDb.Card<QianDaJiang>(),
-            ModelDb.Card<MoWaLuMoWaLu>(),
+            ModelDb.Card<MaWaLuMaWaLu>(),
             ModelDb.Card<ChampionPowder>(),
             ModelDb.Card<FunTuan>(),
             ModelDb.Card<Penguin>(),
