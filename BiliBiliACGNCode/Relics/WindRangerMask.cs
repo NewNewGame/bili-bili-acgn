@@ -14,7 +14,7 @@ using MegaCrit.Sts2.Core.Entities.Relics;
 namespace BiliBiliACGN.BiliBiliACGNCode.Relics;
 
 
-[Pool(typeof(FanshikiRelicPool))]
+[Pool(typeof(FunShikiRelicPool))]
 public sealed class WindRangerMask : RelicBaseModel
 {
     public override RelicRarity Rarity => RelicRarity.Starter;
