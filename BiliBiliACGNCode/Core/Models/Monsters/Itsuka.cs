@@ -11,11 +11,11 @@ using MegaCrit.Sts2.Core.MonsterMoves.MonsterMoveStateMachine;
 namespace BiliBiliACGN.BiliBiliACGNCode.Core.Models.Monsters;
 public sealed class Itsuka : MonsterBaseModel
 {
-    public override int MinInitialHp => 9999;
+    public override int MinInitialHp => 10;
 
-    public override int MaxInitialHp => 9999;
+    public override int MaxInitialHp => 10;
 
-    public override bool IsHealthBarVisible => false;
+    public override bool IsHealthBarVisible => base.Creature.IsAlive;
 
     /* 皮肤暂时不打算做
     public override void SetupSkins(NCreatureVisuals visuals)

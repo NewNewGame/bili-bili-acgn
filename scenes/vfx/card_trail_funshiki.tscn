@@ -27,19 +27,19 @@ colors = PackedColorArray(0, 0, 0, 0, 0.25, 0.25, 0.25, 0.305882, 1, 1, 1, 1)
 
 [sub_resource type="Gradient" id="Gradient_miu0s"]
 offsets = PackedFloat32Array(0, 0.554377, 0.806366, 1)
-colors = PackedColorArray(0.1475648, 0.25136402, 0.7699543, 1, 0.3747746, 0.32634297, 0.97079223, 0.447059, 0.27609736, 0.22590393, 0.6403509, 0.482353, 0.55183434, 0.00019310057, 0.5425759, 0)
+colors = PackedColorArray(0.61633617, 0.0700332, 0.15763098, 1, 0.78639495, 0.17544362, 0.39097816, 0.447059, 0.5276176, 0.15235037, 0.23489791, 0.482353, 0.6051841, 0.051831238, 0.30754218, 0)
 
 [sub_resource type="Gradient" id="Gradient_ytddg"]
-colors = PackedColorArray(0.36836272, 0.73906606, 0.96144253, 1, 0.4186914, 0.49776292, 0.95246834, 0)
+colors = PackedColorArray(0.98527914, 0.5433135, 0.6137218, 1, 0.8842443, 0.24212989, 0.6697317, 0)
 
-[node name="CardTrailBottle" type="Node2D"]
+[node name="CardTrailFunShiki" type="Node2D"]
 show_behind_parent = true
 script = ExtResource("1_j4dle")
 
 [node name="Trails" type="Node2D" parent="."]
 
 [node name="OuterTrail" type="Line2D" parent="Trails"]
-modulate = Color(0.86767584, 0.0010916054, 0.9374961, 0.7529412)
+modulate = Color(0.981317, 0.17038664, 0.34557334, 0.7529412)
 material = ExtResource("2_rb1vy")
 width = 96.0
 width_curve = SubResource("Curve_0ojw2")
@@ -51,7 +51,7 @@ joint_mode = 2
 script = ExtResource("4_oasf2")
 
 [node name="InnerTrail" type="Line2D" parent="Trails"]
-modulate = Color(0.9779224, 0.7912807, 1, 0.5019608)
+modulate = Color(0.9998612, 0.6121459, 0.6288423, 0.5019608)
 material = ExtResource("2_rb1vy")
 width = 64.0
 width_curve = SubResource("Curve_eaky7")
@@ -111,13 +111,13 @@ scale_amount_max = 0.05
 color_ramp = SubResource("Gradient_ytddg")
 
 [node name="Sprite2D2" type="Sprite2D" parent="Sprites"]
-modulate = Color(0.15333891, 0.4130144, 0.8343374, 0.7529412)
+modulate = Color(0.7372549, 0.07450981, 0.13725491, 0.7529412)
 material = ExtResource("2_rb1vy")
 scale = Vector2(1.1, 1.054)
 texture = ExtResource("8_i5wnk")
 
 [node name="Sprite2D3" type="Sprite2D" parent="Sprites"]
-modulate = Color(0.43917477, 0.59671557, 0.9744651, 0.5019608)
+modulate = Color(0.94509804, 0.32941177, 0.11764706, 0.5019608)
 material = ExtResource("2_rb1vy")
 scale = Vector2(0.9, 0.9)
 texture = ExtResource("8_i5wnk")

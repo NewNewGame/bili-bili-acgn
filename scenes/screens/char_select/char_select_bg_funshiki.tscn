@@ -46,7 +46,7 @@ scale_amount_max = 10.0
 color = Color(1, 0, 0, 1)
 
 [node name="ash2" type="CPUParticles2D" parent="."]
-position = Vector2(371, 519)
+position = Vector2(98, 23)
 amount = 40
 lifetime = 15.0
 preprocess = 15.0
@@ -64,7 +64,7 @@ color = Color(0.5686275, 0.16078432, 0.42745098, 1)
 color_ramp = SubResource("Gradient_vc462")
 
 [node name="ash3" type="CPUParticles2D" parent="."]
-position = Vector2(961, 502)
+position = Vector2(536, -37)
 amount = 40
 lifetime = 15.0
 preprocess = 15.0

@@ -17,9 +17,9 @@ public static class OrbUtils
     /// 泛式充能球
     /// </summary>
     public static IReadOnlyCollection<OrbModel> FunShikiOrbs =>[
-        ModelDb.Orb<AttackOrb>(),
-        ModelDb.Orb<StrengthOrb>(),
-        ModelDb.Orb<BlockOrb>(),
+        ModelDb.Orb<AttackOrb>().ToMutable(),
+        ModelDb.Orb<StrengthOrb>().ToMutable(),
+        ModelDb.Orb<BlockOrb>().ToMutable(),
     ];
     /// <summary>
     /// 随机获取一个泛式充能球

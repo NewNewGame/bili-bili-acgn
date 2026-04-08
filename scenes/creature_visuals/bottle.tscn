@@ -15,9 +15,11 @@ texture = ExtResource("1_agfs1")
 unique_name_in_owner = true
 layout_mode = 3
 anchors_preset = 0
-offset_left = -100.0
-offset_top = -300.0
-offset_right = 124.0
+offset_left = -106.0
+offset_top = -379.0
+offset_right = 118.0
+offset_bottom = -79.0
+scale = Vector2(0.92857146, 1.2085714)
 
 [node name="IntentPos" type="Marker2D" parent="."]
 unique_name_in_owner = true

@@ -7,10 +7,8 @@
 
 using BiliBiliACGN.BiliBiliACGNCode.Core.Commands;
 using Godot;
-using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
-using MegaCrit.Sts2.Core.ValueProps;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Core.Models.Orbs;
 

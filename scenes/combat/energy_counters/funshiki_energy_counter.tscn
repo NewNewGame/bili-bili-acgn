@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://b878l73tfuol"]
+[gd_scene load_steps=2 format=3 uid="uid://cy4ri7bnbw2gg"]
 
-[ext_resource type="Texture2D" uid="uid://d3i4dd1nfq8se" path="res://BiliBiliACGN/images/energy/bottle152_energy_big.png" id="2_4x7nc"]
+[ext_resource type="Texture2D" uid="uid://dbx4ibe1ssl2x" path="res://BiliBiliACGN/images/energy/funshiki_energy_big.png" id="1_y3aw4"]
 
 [node name="EnergyCounter" type="Control"]
 layout_mode = 3
@@ -40,7 +40,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_4x7nc")
+texture = ExtResource("1_y3aw4")
 expand_mode = 1
 stretch_mode = 5
 
@@ -73,7 +73,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(0.9587051, 0.96530825, 1, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.1882353)
-theme_override_colors/font_outline_color = Color(0.3248963, 0.66199183, 0.9299608, 1)
+theme_override_colors/font_outline_color = Color(0.97763807, 0.41384804, 0.5748572, 1)
 theme_override_constants/shadow_offset_x = 3
 theme_override_constants/shadow_offset_y = 2
 theme_override_constants/outline_size = 16

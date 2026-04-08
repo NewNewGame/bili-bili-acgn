@@ -13,5 +13,21 @@
     "BILIBILIACGN-BOTTLE_CHARACTER.pronounSubject": "他",
     "BILIBILIACGN-BOTTLE_CHARACTER.title": "瓶子君152",
     "BILIBILIACGN-BOTTLE_CHARACTER.titleObject": "瓶子君152",
-    "BILIBILIACGN-BOTTLE_CHARACTER.unlockText": "用[pink]{Prerequisite}[/pink]进行一局游戏来解锁这个角色。"
+    "BILIBILIACGN-BOTTLE_CHARACTER.unlockText": "用[pink]{Prerequisite}[/pink]进行一局游戏来解锁这个角色。",
+
+    "BILIBILIACGN-FUN_SHIKI_CHARACTER.aromaPrinciple": "[sine][blue]……等待……[/blue][/sine]",
+    "BILIBILIACGN-FUN_SHIKI_CHARACTER.banter.alive.endTurnPing": "诶嘿",
+    "BILIBILIACGN-FUN_SHIKI_CHARACTER.banter.dead.endTurnPing": "我想下播了。",
+    "BILIBILIACGN-FUN_SHIKI_CHARACTER.cardsModifierDescription": "泛式的卡牌现在会出现在奖励和商店中。",
+    "BILIBILIACGN-FUN_SHIKI_CHARACTER.cardsModifierTitle": "泛式的卡牌",
+    "BILIBILIACGN-FUN_SHIKI_CHARACTER.description": "Hello大家好这里是泛式。\n要来爬塔，好开心呀。（无表情）",
+    "BILIBILIACGN-FUN_SHIKI_CHARACTER.eventDeathPrevention": "靠！我死了……",
+    "BILIBILIACGN-FUN_SHIKI_CHARACTER.goldMonologue": "[sine]这些金币……[/sine]",
+    "BILIBILIACGN-FUN_SHIKI_CHARACTER.possessiveAdjective": "她的",
+    "BILIBILIACGN-FUN_SHIKI_CHARACTER.pronounObject": "她",
+    "BILIBILIACGN-FUN_SHIKI_CHARACTER.pronounPossessive": "她的",
+    "BILIBILIACGN-FUN_SHIKI_CHARACTER.pronounSubject": "她",
+    "BILIBILIACGN-FUN_SHIKI_CHARACTER.title": "泛式",
+    "BILIBILIACGN-FUN_SHIKI_CHARACTER.titleObject": "泛式",
+    "BILIBILIACGN-FUN_SHIKI_CHARACTER.unlockText":"用[pink]{Prerequisite}[/pink]进行一局游戏来解锁这个角色。"
   }
