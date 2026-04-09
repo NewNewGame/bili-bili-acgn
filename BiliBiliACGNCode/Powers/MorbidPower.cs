@@ -5,6 +5,7 @@
 //* 描述：每当你对敌方造成伤害时，自身受到病态层数的伤害。
 //*******************************************************
 
+using BiliBiliACGN.BiliBiliACGNCode.Utils;
 using Godot;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
@@ -37,6 +38,8 @@ public sealed class MorbidPower : PowerBaseModel
     /// <returns></returns>
     public override async Task AfterApplied(Creature? applier, CardModel? cardSource)
 	{
+        // 如果施加者为空，则返回
+        if(applier == null) return;
         // 如果施加者为玩家
         if(applier.IsPlayer){
             // 如果施加者没有痴迷对象，则给予痴迷对象
@@ -86,16 +89,22 @@ public sealed class MorbidPower : PowerBaseModel
             // 如果没有宠物，则判断攻击目标是否有痴迷对象
             else dealDamge = target.HasPower<InfatuationTargetPower>();
         }
-        if(!dealDamge) return;
+        if(!dealDamge){
+            $"不造成伤害, {target.Name}".LogInfo();
+            return;
+        }
+        $"开始计算伤害，{target.Name}".LogInfo();
         // 计算减免
         int mitigation = base.Owner.GetPowerAmount<MorbidMitigationPower>();
         // 如果减免大于等于100，则不造成伤害
         if(mitigation >= 100) return;
         // 计算攻击次数
-        int atkTimes = Mathf.Min(Amount, 1 + target.GetPowerAmount<DistortionScholarPower>());
+        int atkTimes = Mathf.Min(Amount, 1 + (target.PetOwner != null ? target.PetOwner.Creature.GetPowerAmount<DistortionScholarPower>() : target.GetPowerAmount<DistortionScholarPower>()));
         while(atkTimes > 0){
             // 造成伤害
             await CreatureCmd.Damage(choiceContext, dealer, Amount * (100m - mitigation) / 100m, ValueProp.Unpowered, target);
+            // 如果攻击目标死亡，则退出循环
+            if(target.IsDead) return;
             // 减少一层病态
             await PowerCmd.Decrement(this);
             atkTimes--;

@@ -5,6 +5,7 @@
 //* 描述：每当你激发充能球时，给予女儿力量。
 //*******************************************************
 
+using BiliBiliACGN.BiliBiliACGNCode.Core.Commands;
 using BiliBiliACGN.BiliBiliACGNCode.Core.Models.Monsters;
 using BiliBiliACGN.BiliBiliACGNCode.Utils;
 using MegaCrit.Sts2.Core.Commands;
@@ -26,7 +27,7 @@ public sealed class AnimeMasterPower : PowerBaseModel
     public override async Task AfterOrbEvoked(PlayerChoiceContext choiceContext, OrbModel orb, IEnumerable<Creature> targets)
     {
         if(orb.Owner.Creature != base.Owner) return;
-        var daughter = base.Owner.GetPet<Itsuka>();
+        var daughter = base.Owner.GetDaughter();
         if(daughter == null) return;
         // 给予女儿力量
         await PowerCmd.Apply<StrengthPower>(daughter, Amount, base.Owner, null);

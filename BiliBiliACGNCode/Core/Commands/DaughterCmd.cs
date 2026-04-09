@@ -36,7 +36,11 @@ public static class DaughterCmd
     /// <returns></returns>
     public static Creature? GetDaughter(this Creature creature)
     {
-        return creature.Pets.FirstOrDefault(pet => pet.Monster is Itsuka);
+        var daughter = creature.Pets.FirstOrDefault(pet => pet.Monster is Itsuka);
+        if(daughter == null){
+            daughter = creature.CombatState?.Allies.FirstOrDefault((Creature c) => c.Monster is Itsuka && c.PetOwner?.Creature == creature);
+        }
+        return daughter;
     }
     /// <summary>
     /// 判断有没有女儿
@@ -45,7 +49,19 @@ public static class DaughterCmd
     /// <returns></returns>
     public static bool HasDaughter(this Creature creature)
     {
-        return creature.Pets.Any(pet => pet.Monster is Itsuka);
+        return creature.GetDaughter() != null;
+    }
+    /// <summary>
+    /// 复活女儿
+    /// </summary>
+    /// <param name="daughter"></param>
+    /// <returns></returns>
+    public static Task ReviveDaughter(this Creature daughter)
+    {
+        var owner = daughter.PetOwner;
+        if(owner == null) return Task.CompletedTask;
+        owner.PlayerCombatState?.AddPetInternal(daughter);
+        return Task.CompletedTask;
     }
     /// <summary>
     /// 女儿攻击指令
