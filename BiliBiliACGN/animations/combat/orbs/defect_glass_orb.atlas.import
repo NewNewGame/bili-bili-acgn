@@ -3,12 +3,12 @@
 importer="spine.atlas"
 type="SpineAtlasResource"
 uid="uid://cgvi16qpldrhk"
-path="res://.godot/imported/defect_glass_orb.atlas-458ee618525c0c8268bc819ab802b9e5.spatlas"
+path="res://.godot/imported/defect_glass_orb.atlas-a99c0fbaf6c08167ecf68f74d41f4e1a.spatlas"
 
 [deps]
 
-source_file="res://animations/ui/combat/orbs/defect_glass_orb.atlas"
-dest_files=["res://.godot/imported/defect_glass_orb.atlas-458ee618525c0c8268bc819ab802b9e5.spatlas"]
+source_file="res://BiliBiliACGN/animations/combat/orbs/defect_glass_orb.atlas"
+dest_files=["res://.godot/imported/defect_glass_orb.atlas-a99c0fbaf6c08167ecf68f74d41f4e1a.spatlas"]
 
 [params]
 

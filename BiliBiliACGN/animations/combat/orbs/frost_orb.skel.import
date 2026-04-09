@@ -3,12 +3,12 @@
 importer="spine.skel"
 type="SpineSkeletonFileResource"
 uid="uid://dutipn5f0r21f"
-path="res://.godot/imported/frost_orb.skel-d191fc8a0532d1fcddc86e6b80f30128.spskel"
+path="res://.godot/imported/frost_orb.skel-5a6b40690a1f39295e745c6a49d29299.spskel"
 
 [deps]
 
-source_file="res://animations/ui/combat/orbs/frost_orb.skel"
-dest_files=["res://.godot/imported/frost_orb.skel-d191fc8a0532d1fcddc86e6b80f30128.spskel"]
+source_file="res://BiliBiliACGN/animations/combat/orbs/frost_orb.skel"
+dest_files=["res://.godot/imported/frost_orb.skel-5a6b40690a1f39295e745c6a49d29299.spskel"]
 
 [params]
 
