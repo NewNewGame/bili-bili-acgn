@@ -38,13 +38,15 @@ public sealed class ChampionPowder : CardBaseModel
         // 触发动画
         await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
         // 抽牌
-		await CardPileCmd.Draw(choiceContext, base.DynamicVars.Cards.IntValue, base.Owner);
+		var drawCards = await CardPileCmd.Draw(choiceContext, base.DynamicVars.Cards.IntValue, base.Owner);
+        HashSet<CardModel> hashSet = new HashSet<CardModel>(drawCards);
+        if(hashSet.Count == 0) return;
         // 选择1张牌将其打出2次
 		CardSelectorPrefs cardSelectorPrefs = new CardSelectorPrefs(base.SelectionScreenPrompt, 1){
             PretendCardsCanBePlayed = true
         };
 		CardSelectorPrefs prefs = cardSelectorPrefs;
-		CardModel? card = (await CardSelectCmd.FromHand(choiceContext, base.Owner, prefs, (CardModel c) => c.Type == CardType.Skill && !c.Keywords.Contains(CardKeyword.Unplayable), this)).FirstOrDefault();
+		CardModel? card = (await CardSelectCmd.FromHand(choiceContext, base.Owner, prefs, (CardModel c) => hashSet.Contains(c) &!c.Keywords.Contains(CardKeyword.Unplayable), this)).FirstOrDefault();
 		if (card != null)
 		{
 			for (int i = 0; i < base.DynamicVars["PlayTimes"].IntValue; i++)

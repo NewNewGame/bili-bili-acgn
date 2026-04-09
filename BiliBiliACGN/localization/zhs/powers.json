@@ -116,8 +116,8 @@
   "BILIBILIACGN-ADD_MAX_HP_TEMP_POWER.smartDescription": "这其实是红色[gold]格挡值[/gold]，本回合提升[blue]{Amount}[/blue]点最大生命值。\n[thinky_dots][purple]代码限制，只能这么写了:([/purple][/thinky_dots]",
 
   "BILIBILIACGN-MAWALU_MAWALU_POWER.title": "马瓦鲁马瓦鲁",
-  "BILIBILIACGN-MAWALU_MAWALU_POWER.description": "当这名敌人死亡时，对其他敌人造成等同于它最大生命值[blue]1[/blue]倍的伤害。",
-  "BILIBILIACGN-MAWALU_MAWALU_POWER.smartDescription": "当这名敌人死亡时，对其他敌人造成等同于它最大生命值[blue]{Amount}[/blue]倍的伤害。",
+  "BILIBILIACGN-MAWALU_MAWALU_POWER.description": "当这名敌人死亡时，对其他敌人造成等同于它最大生命值的伤害。",
+  "BILIBILIACGN-MAWALU_MAWALU_POWER.smartDescription": "当这名敌人死亡时，对其他敌人造成等同于它最大生命值的伤害。",
 
   "BILIBILIACGN-IM_SO_DESPAIR_POWER.title": "我好绝望啊",
   "BILIBILIACGN-IM_SO_DESPAIR_POWER.description": "本回合，拥有[gold]病态[/gold]的敌人对你造成伤害减半。",
