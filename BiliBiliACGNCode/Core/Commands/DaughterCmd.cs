@@ -12,6 +12,7 @@ using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.ValueProps;
 using MegaCrit.Sts2.Core.Models;
 using BiliBiliACGN.BiliBiliACGNCode.Powers;
+using BiliBiliACGN.BiliBiliACGNCode.Cards;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Core.Commands;
 
@@ -66,9 +67,9 @@ public static class DaughterCmd
     /// <summary>
     /// 女儿攻击指令
     /// </summary>
-    public static async Task ApplyAttack(this Creature creature, decimal value, PlayerChoiceContext choiceContext, IEnumerable<Creature> targets)
+    public static async Task ApplyAttack(this Creature owner, decimal value, PlayerChoiceContext choiceContext, IEnumerable<Creature> targets)
     {
-        var daughter = creature.GetDaughter();
+        var daughter = owner.GetDaughter();
         if(daughter == null) return;
         /* TODO：攻击特效
         foreach (Creature item in targets)
@@ -77,6 +78,21 @@ public static class DaughterCmd
 		}
         */
 		await CreatureCmd.Damage(choiceContext, targets, value, ValueProp.Move, daughter);
+    }
+    /// <summary>
+    /// 女儿攻击指令
+    /// </summary>
+    public static async Task ApplyAttack(this Creature owner, decimal value, PlayerChoiceContext choiceContext, Creature target)
+    {
+        var daughter = owner.GetDaughter();
+        if(daughter == null) return;
+        /* TODO：攻击特效
+        foreach (Creature item in targets)
+		{
+			VfxCmd.PlayOnCreature(item, "vfx/vfx_attack_lightning");
+		}
+        */
+		await CreatureCmd.Damage(choiceContext, target, value, ValueProp.Move, daughter);
     }
     /// <summary>
     /// 女儿格挡指令
@@ -96,4 +112,10 @@ public static class DaughterCmd
         if(daughter == null) return;
         await PowerCmd.Apply<TPower>(daughter, value, creature, cardSource);
     }
+
+    internal static async Task ApplyStrength<T>(Creature creature, decimal baseValue, PlayerChoiceContext choiceContext, Distort distort)
+    {
+        throw new NotImplementedException();
+    }
+
 }

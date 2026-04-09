@@ -7,6 +7,7 @@
 
 using BaseLib.Utils;
 using BiliBiliACGN.BiliBiliACGNCode.Cards.CardPool;
+using BiliBiliACGN.BiliBiliACGNCode.Core.Commands;
 using BiliBiliACGN.BiliBiliACGNCode.Powers;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -30,7 +31,7 @@ public sealed class CuteNe : CardBaseModel
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         // 施加能力：女儿获得格挡时，你获得其一半的格挡值
-        await PowerCmd.Apply<CuteNePower>(base.Owner.Creature, 1m, base.Owner.Creature, this);
+        await DaughterCmd.ApplyPower<CuteNePower>(base.Owner.Creature, 1m, choiceContext, this);
     }
 
     protected override void OnUpgrade()

@@ -43,6 +43,10 @@ public sealed class BigNose : CardBaseModel
         for(int i = 0; i < numberOfOrbs; i++)
         {
             await OrbCmd.EvokeNext(choiceContext, base.Owner);
+            if(i < numberOfOrbs - 1)
+            {
+                await Cmd.CustomScaledWait(0.15f, 0.25f);
+            }
         }
     }
 
