@@ -14,7 +14,7 @@ namespace BiliBiliACGN.BiliBiliACGNCode.Potions;
 
 public abstract class PotionBaseModel : CustomPotionModel
 {
-    public override string PackedImagePath
+    public override string? CustomPackedImagePath
     {
         get
         {
@@ -22,7 +22,7 @@ public abstract class PotionBaseModel : CustomPotionModel
             return ResourceLoader.Exists(path) ? path : "none.png".PotionImagePath();
         }
     }
-    public override string PackedOutlinePath
+    public override string? CustomPackedOutlinePath
     {
         get
         {
