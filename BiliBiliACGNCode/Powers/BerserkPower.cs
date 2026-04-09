@@ -25,7 +25,7 @@ public sealed class BerserkPower : PowerBaseModel
 
     public override PowerStackType StackType => PowerStackType.Single;
     public override bool IsInstanced => true;
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new DynamicVar("DamageMultiplier", 1.5m), new EnergyVar(2), new CardsVar(3)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new DynamicVar("DamageMultiplier", 150m), new EnergyVar(2), new CardsVar(3)];
 
     public override async Task AfterPowerAmountChanged(PowerModel power, decimal amount, Creature? applier, CardModel? cardSource)
     {
@@ -55,11 +55,12 @@ public sealed class BerserkPower : PowerBaseModel
 		{
 			return 1m;
 		}
-        if(amount * base.DynamicVars["DamageMultiplier"].BaseValue >= int.MaxValue)
+        var damageMultiplier = base.DynamicVars["DamageMultiplier"].BaseValue / 100m;
+        if(amount * damageMultiplier >= int.MaxValue)
         {
             return 1m;
         }
-        return base.DynamicVars["DamageMultiplier"].BaseValue;
+        return damageMultiplier;
     }
     // 回合结束后失去红怒
     public override async Task AfterTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)
