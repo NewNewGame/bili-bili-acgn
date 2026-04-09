@@ -4,10 +4,8 @@
 //* 创建时间：2026/04/04
 //* 描述：Harmony Postfix，返回后允许模组改写升级后的起始遗物
 //*******************************************************
-using System.Collections.Generic;
 using BiliBiliACGN.BiliBiliACGNCode.Relics;
 using HarmonyLib;
-using MegaCrit.Sts2.Core.Logging;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Relics;
 

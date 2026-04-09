@@ -11,6 +11,7 @@ using BiliBiliACGN.BiliBiliACGNCode.Utils;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
+using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.ValueProps;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Powers;
@@ -80,6 +81,15 @@ public sealed class CombatForYouPower : PowerBaseModel
 		}
 		return false;
 	}
+	/// <summary>
+	/// 获得格挡时，给予临时提升生命值
+	/// </summary>
+    public override async Task AfterBlockGained(Creature creature, decimal amount, ValueProp props, CardModel? cardSource)
+    {
+		if(creature != base.Owner) return;
+        await PowerCmd.Apply<AddMaxHpTempPower>(base.Owner, amount, base.Owner, null);
+    }
+
 
 
 }
