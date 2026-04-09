@@ -29,7 +29,7 @@ public sealed class MolotovCocktail : CardBaseModel
     private const bool shouldShowInCardLibrary = true;
     protected override bool ShouldGlowGoldInternal => WasLastCardPlayedAttack;
     private bool WasLastCardPlayedAttack => CombatHistory.CheckLastCardPlayedType(base.Owner, this, CardType.Attack);
-
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [CustomKeyWords.YYSY];
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
         new DamageVar(7m, ValueProp.Move),

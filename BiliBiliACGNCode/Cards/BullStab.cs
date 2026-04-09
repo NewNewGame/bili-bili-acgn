@@ -11,7 +11,6 @@ using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
-using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.ValueProps;
 
@@ -21,7 +20,7 @@ namespace BiliBiliACGN.BiliBiliACGNCode.Cards;
 public sealed class BullStab : CardBaseModel
 {
     #region 卡牌属性配置
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromKeyword(CustomKeyWords.YYSY)];
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [CustomKeyWords.YYSY];
 
     // 手牌中有有一说一的牌的时候高亮
     protected override bool ShouldGlowGoldInternal => PileType.Hand.GetPile(base.Owner).Cards.Any(c => c != this && c.Keywords.Contains(CustomKeyWords.YYSY));
