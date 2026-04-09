@@ -8,6 +8,7 @@
 
 using BaseLib.Extensions;
 using BiliBiliACGN.BiliBiliACGNCode.Utils;
+using Godot;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
@@ -55,11 +56,11 @@ public sealed class CombatForYouPower : PowerBaseModel
 	public override async Task AfterPreventingDeath(Creature creature)
 	{
 		if(creature != base.Owner) return;
-		await CreatureCmd.Heal(creature, 1, false);
 		// 返还过量伤害
 		if(creature.PetOwner != null){
 			await CreatureCmd.Damage(CombatUtils.GetTemporaryPlayerChoiceContext(), creature.PetOwner.Creature, 1, ValueProp.Unpowered, null, null);
 		}
+		creature.HealInternal(1);
 	}
 	/// <summary>
 	/// 死亡后BUFF不移除

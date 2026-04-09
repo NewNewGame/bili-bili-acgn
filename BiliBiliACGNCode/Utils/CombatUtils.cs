@@ -15,11 +15,19 @@ public static class CombatUtils
     /// 手牌最大数量
     /// </summary>
     public const int HandMaxCount = 10;
+    private static PlayerChoiceContext? _temporaryPlayerChoiceContext;
     /// <summary>
     /// 无中生有的情况下使用的PlayerChoiceContext
     /// </summary>
     /// <returns></returns>
-    public static PlayerChoiceContext GetTemporaryPlayerChoiceContext() => new BlockingPlayerChoiceContext();
+    public static PlayerChoiceContext GetTemporaryPlayerChoiceContext()
+    {
+        if(_temporaryPlayerChoiceContext == null)
+        {
+            _temporaryPlayerChoiceContext = new BlockingPlayerChoiceContext();
+        }
+        return _temporaryPlayerChoiceContext;
+    }
     /*
     // 弃用的
         PlayerChoiceContext? choiceContext = null;
