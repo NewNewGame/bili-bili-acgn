@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://0k165d7vf3h"]
+[gd_scene load_steps=15 format=3 uid="uid://cn2qn38f23gks"]
 
 [ext_resource type="Script" uid="uid://chyf4crd4sjse" path="res://BiliBiliACGNCode/Nodes/SNCardTrailVfx.cs" id="1_j4dle"]
 [ext_resource type="Material" uid="uid://c4ycqv0gdxvmr" path="res://BiliBiliACGN/images/vfx/canvas_item_material_additive_shared.tres" id="2_rb1vy"]
