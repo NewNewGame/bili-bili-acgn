@@ -27,7 +27,11 @@ public sealed class Itsuka : MonsterBaseModel
         skeleton.SetSlotsToSetupPose();
     }
     */
-
+    /// <summary>
+    /// 状态机生成
+    /// 挂机
+    /// </summary>
+    /// <returns></returns>
     protected override MonsterMoveStateMachine GenerateMoveStateMachine()
     {
         MoveState moveState = new MoveState("NOTHING_MOVE", (IReadOnlyList<Creature> _) => Task.CompletedTask);

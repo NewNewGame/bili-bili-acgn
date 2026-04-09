@@ -17,6 +17,11 @@ namespace BiliBiliACGN.BiliBiliACGNCode.Core.Commands;
 
 public static class DaughterCmd
 {
+    /// <summary>
+    /// 召唤女儿
+    /// </summary>
+    /// <param name="creature"></param>
+    /// <returns></returns>
     public static async Task<Creature?> SummonDaughter(this Creature creature)
     {
         var daughter = await PlayerCmd.AddPet<Itsuka>(creature.Player);
@@ -33,7 +38,6 @@ public static class DaughterCmd
     {
         return creature.Pets.FirstOrDefault(pet => pet.Monster is Itsuka);
     }
-
     /// <summary>
     /// 判断有没有女儿
     /// </summary>
@@ -46,11 +50,6 @@ public static class DaughterCmd
     /// <summary>
     /// 女儿攻击指令
     /// </summary>
-    /// <param name="creature"></param>
-    /// <param name="value"></param>
-    /// <param name="choiceContext"></param>
-    /// <param name="targets"></param>
-    /// <returns></returns>
     public static async Task ApplyAttack(this Creature creature, decimal value, PlayerChoiceContext choiceContext, IEnumerable<Creature> targets)
     {
         var daughter = creature.GetDaughter();
@@ -66,10 +65,6 @@ public static class DaughterCmd
     /// <summary>
     /// 女儿格挡指令
     /// </summary>
-    /// <param name="creature"></param>
-    /// <param name="value"></param>
-    /// <param name="choiceContext"></param>
-    /// <returns></returns>
     public static async Task ApplyBlock(this Creature creature, decimal value, PlayerChoiceContext choiceContext)
     {
         var daughter = creature.GetDaughter();
@@ -79,12 +74,6 @@ public static class DaughterCmd
     /// <summary>
     /// 女儿能力指令
     /// </summary>
-    /// <typeparam name="TPower"></typeparam>
-    /// <param name="creature"></param>
-    /// <param name="value"></param>
-    /// <param name="choiceContext"></param>
-    /// <param name="cardSource"></param>
-    /// <returns></returns>
     public static async Task ApplyPower<TPower>(this Creature creature, decimal value, PlayerChoiceContext choiceContext, CardModel? cardSource) where TPower : PowerModel
     {
         var daughter = creature.GetDaughter();

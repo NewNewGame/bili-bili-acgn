@@ -12,6 +12,7 @@ using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.Logging;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Platform;
 using MegaCrit.Sts2.Core.Runs;
@@ -27,7 +28,6 @@ public sealed class MorbidPower : PowerBaseModel
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
         new DynamicVar("DamageReductionPercent", 25m),
-        new StringVar("Applier"),
     ];
     /// <summary>
     /// 施加者为玩家时，设置施加者名称
@@ -35,12 +35,16 @@ public sealed class MorbidPower : PowerBaseModel
     /// <param name="applier"></param>
     /// <param name="cardSource"></param>
     /// <returns></returns>
-    public override Task AfterApplied(Creature? applier, CardModel? cardSource)
+    public override async Task AfterApplied(Creature? applier, CardModel? cardSource)
 	{
+        // 如果施加者为玩家
         if(applier.IsPlayer){
-            ((StringVar)base.DynamicVars["Applier"]).StringValue = PlatformUtil.GetPlayerName(RunManager.Instance.NetService.Platform, applier.Player.NetId);
+            // 如果施加者没有痴迷对象，则给予痴迷对象
+            if(!applier.HasPower<InfatuationTargetPower>())
+            {
+                await PowerCmd.Apply<InfatuationTargetPower>(applier, 1, applier, null);
+            }
         }
-		return Task.CompletedTask;
 	}
     /// <summary>
     /// 对敌方造成伤害时，自身受到病态层数的伤害
@@ -54,10 +58,12 @@ public sealed class MorbidPower : PowerBaseModel
     /// <returns></returns>
     public override async Task AfterDamageGiven(PlayerChoiceContext choiceContext, Creature? dealer, DamageResult result, ValueProp props, Creature target, CardModel? cardSource)
     {
-        // 如果伤害为0，则返回
-        if(result.TotalDamage == 0) return;
         // 如果攻击目标或者攻击者为空，则返回
         if(target == null || dealer == null) return;
+        // 如果玩家伤害为0，则返回
+        if(result.TotalDamage == 0 && dealer.IsPlayer) return;
+        // 如果攻击者不是病态持有者，则返回
+        if(dealer != base.Owner) return;
         bool dealDamge = true;
         // 玩家持有时
         if(base.Owner.IsPlayer){
@@ -67,8 +73,18 @@ public sealed class MorbidPower : PowerBaseModel
             if(cardSource == null) dealDamge = false;
         }else{
             // 敌人持有时
-            // 如果攻击目标不是施加者，则不造成伤害
-            if(target != base.Applier) dealDamge = false;
+            // 如果攻击目标是宠物，则判断宠物主人是否有痴迷对象
+            if(target.PetOwner != null){
+                // 如果攻击目标未死亡，则判断宠物主人是否有痴迷对象
+                if(!result.WasTargetKilled){
+                    dealDamge = target.PetOwner.Creature.HasPower<InfatuationTargetPower>();
+                }else{
+                    // 如果攻击目标死亡，则不造成伤害
+                    dealDamge = false;
+                }
+            }
+            // 如果没有宠物，则判断攻击目标是否有痴迷对象
+            else dealDamge = target.HasPower<InfatuationTargetPower>();
         }
         if(!dealDamge) return;
         // 计算减免
@@ -85,7 +101,7 @@ public sealed class MorbidPower : PowerBaseModel
             atkTimes--;
         }
         // 给予免疫
-        await PowerCmd.Apply<MorbidMitigationPower>(target, base.DynamicVars["DamageReductionPercent"].BaseValue, base.Owner, null);
+        await PowerCmd.Apply<MorbidMitigationPower>(dealer, base.DynamicVars["DamageReductionPercent"].BaseValue, null, null);
     }
     /// <summary>
     /// 回合结束时减少一层病态

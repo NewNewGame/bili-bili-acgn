@@ -17,7 +17,7 @@ namespace BiliBiliACGN.BiliBiliACGNCode.Powers;
 public sealed class YandereFormPower : PowerBaseModel
 {
     public override PowerType Type => PowerType.Buff;
-    public override PowerStackType StackType => PowerStackType.Single;
+    public override PowerStackType StackType => PowerStackType.Counter;
 
     public override async Task AfterDamageGiven(PlayerChoiceContext choiceContext, Creature? dealer, DamageResult result, ValueProp props, Creature target, CardModel? cardSource)
     {

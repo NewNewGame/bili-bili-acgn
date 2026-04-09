@@ -107,6 +107,10 @@
   "BILIBILIACGN-MORBID_MITIGATION_POWER.description": "本回合，受到来自[gold]病态[/gold]的伤害减少[blue]1%[/blue]。",
   "BILIBILIACGN-MORBID_MITIGATION_POWER.smartDescription": "本回合，受到来自[gold]病态[/gold]的伤害减少[blue]{Amount}%[/blue]。",
 
+  "BILIBILIACGN-INFATUATION_TARGET_POWER.title": "痴迷对象",
+  "BILIBILIACGN-INFATUATION_TARGET_POWER.description": "[gold]病态[/gold]持有者攻击你会触发[gold]病态[/gold]伤害。\n如果你死亡了，将[gold]痴迷对象[/gold]转让给下一个玩家。",
+  "BILIBILIACGN-INFATUATION_TARGET_POWER.smartDescription": "[gold]病态[/gold]持有者攻击你会触发[gold]病态[/gold]伤害。\n如果你死亡了，将[gold]痴迷对象[/gold]转让给下一个玩家。",
+
   "BILIBILIACGN-MAWALU_MAWALU_POWER.title": "马瓦鲁马瓦鲁",
   "BILIBILIACGN-MAWALU_MAWALU_POWER.description": "当这名敌人死亡时，对其他敌人造成等同于它最大生命值[blue]1[/blue]倍的伤害。",
   "BILIBILIACGN-MAWALU_MAWALU_POWER.smartDescription": "当这名敌人死亡时，对其他敌人造成等同于它最大生命值[blue]{Amount}[/blue]倍的伤害。",
@@ -116,8 +120,8 @@
   "BILIBILIACGN-IM_SO_DESPAIR_POWER.smartDescription": "本回合，拥有[gold]病态[/gold]的敌人对你造成伤害减半。",
 
   "BILIBILIACGN-YANDERE_FORM_POWER.title": "病娇形态",
-  "BILIBILIACGN-YANDERE_FORM_POWER.description": "每当你或女儿造成伤害时，同时给予等量的[gold]病态[/gold]1次。",
-  "BILIBILIACGN-YANDERE_FORM_POWER.smartDescription": "每当你或女儿造成伤害时，同时给予等量的[gold]病态[/gold][blue]{Amount}[/blue]次。",
+  "BILIBILIACGN-YANDERE_FORM_POWER.description": "每当你或女儿造成伤害时，同时给予等量的[gold]病态[/gold]1倍。",
+  "BILIBILIACGN-YANDERE_FORM_POWER.smartDescription": "每当你或女儿造成伤害时，同时给予等量的[gold]病态[/gold][blue]{Amount}[/blue]倍。",
 
   "BILIBILIACGN-DISTORTION_SCHOLAR_POWER.title": "扭曲学家",
   "BILIBILIACGN-DISTORTION_SCHOLAR_POWER.description": "敌人对你的[gold]病态[/gold]会额外触发[blue]1[/blue]次。",
