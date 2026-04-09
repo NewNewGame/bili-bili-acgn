@@ -6,9 +6,8 @@
 //*******************************************************
 
 using BaseLib.Utils;
-using BiliBiliACGN.BiliBiliACGNCode.Core.Models.Monsters;
+using BiliBiliACGN.BiliBiliACGNCode.Core.Commands;
 using BiliBiliACGN.BiliBiliACGNCode.Relics.RelicPool;
-using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Relics;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Relics;
@@ -26,7 +25,7 @@ public sealed class WindRangerMask : RelicBaseModel
 
 	private async Task SummonPet()
 	{
-		await PlayerCmd.AddPet<Itsuka>(base.Owner);
+		await DaughterCmd.SummonDaughter(base.Owner.Creature);
 	}
 
 }

@@ -6,6 +6,7 @@
 //*******************************************************
 
 using BaseLib.Utils;
+using BiliBiliACGN.BiliBiliACGNCode.Core.Commands;
 using BiliBiliACGN.BiliBiliACGNCode.Core.Models.Monsters;
 using BiliBiliACGN.BiliBiliACGNCode.Relics.RelicPool;
 using MegaCrit.Sts2.Core.Commands;
@@ -27,7 +28,7 @@ public sealed class EiHeiJiangMask : RelicBaseModel
 
 	private async Task SummonPet()
 	{
-		await PlayerCmd.AddPet<Itsuka>(base.Owner);
+		await DaughterCmd.SummonDaughter(base.Owner.Creature);
 	}
 
 }

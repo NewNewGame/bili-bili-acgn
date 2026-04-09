@@ -11,11 +11,19 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.ValueProps;
 using MegaCrit.Sts2.Core.Models;
+using BiliBiliACGN.BiliBiliACGNCode.Powers;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Core.Commands;
 
 public static class DaughterCmd
 {
+    public static async Task<Creature?> SummonDaughter(this Creature creature)
+    {
+        var daughter = await PlayerCmd.AddPet<Itsuka>(creature.Player);
+        if(daughter == null) return null;
+        await PowerCmd.Apply<CombatForYouPower>(daughter, 1, daughter, null);
+        return daughter;
+    }
     /// <summary>
     /// 获取女儿
     /// </summary>

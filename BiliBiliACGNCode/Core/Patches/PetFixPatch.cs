@@ -14,9 +14,9 @@ using MegaCrit.Sts2.Core.Nodes.Rooms;
 namespace BiliBiliACGN.BiliBiliACGNCode.Core.Patches;
 
 [HarmonyPatch(typeof(NCombatRoom))]
-public static class Patch_NCombatRoom_AddCreature_AllowItsukaInteract
+public static class PetFixPatch
 {
-    
+
     [HarmonyPostfix]
     [HarmonyPatch(nameof(NCombatRoom.AddCreature))]
     public static void AddCreature_Postfix(NCombatRoom __instance, Creature creature)
@@ -37,4 +37,5 @@ public static class Patch_NCombatRoom_AddCreature_AllowItsukaInteract
         // 强制打开交互（会显示血条 + 可点选 + 进手柄导航）
         node.ToggleIsInteractable(true);
     }
+    
 }
