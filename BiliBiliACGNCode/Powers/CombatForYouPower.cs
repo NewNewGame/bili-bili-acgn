@@ -31,7 +31,7 @@ public sealed class CombatForYouPower : PowerBaseModel
 		{
 			return target;
 		}
-		if (base.Owner.IsDead)
+		if (base.Owner.IsDead || base.Owner.CurrentHp == 1)
 		{
 			return target;
 		}
