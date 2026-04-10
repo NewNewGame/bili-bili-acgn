@@ -19,6 +19,7 @@
 
 Mod依赖BaseLib至少0.2.6版本。  
 Mod制作过程使用Cursor协助，书写rule可以查看[.cursor](.cursor)。  
+[tools](tools)。内涵卡牌制作编辑器，但是没想象的那么好用就没做了，已弃用。  
 
 
 
