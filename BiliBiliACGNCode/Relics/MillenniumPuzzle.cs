@@ -25,6 +25,7 @@ public sealed class MillenniumPuzzle : RelicBaseModel
         if(cardModel != null)
         {
             cardModel.AddKeyword(CardKeyword.Innate);
+            CardCmd.Preview(cardModel);
         }
     }
     
