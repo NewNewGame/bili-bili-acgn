@@ -53,7 +53,7 @@ public sealed class BottleCardPool : CustomCardPoolModel
             ModelDb.Card<Day0>(),
             ModelDb.Card<DeepThink>(),
             ModelDb.Card<HairGrowth>(),
-            ModelDb.Card<IAmTheMaggot>(),
+            ModelDb.Card<ClownEmperor>(),
             ModelDb.Card<ChairTuber>(),
             ModelDb.Card<MacroDomain>(),
             ModelDb.Card<NeverDie>(),
