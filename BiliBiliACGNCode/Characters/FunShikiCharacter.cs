@@ -4,7 +4,7 @@
 //* 创建时间：2026/04/07
 //* 描述：泛式角色
 //*******************************************************
-
+/*
 using BaseLib.Abstracts;
 using BiliBiliACGN.BiliBiliACGNCode.Cards;
 using BiliBiliACGN.BiliBiliACGNCode.Cards.CardPool;
@@ -52,3 +52,4 @@ public sealed class FunShikiCharacter : PlaceholderCharacterModel
         ModelDb.Relic<EiHeiJiangMask>(),
     ];
 }   
+*/
