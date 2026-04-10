@@ -100,7 +100,7 @@
   "BILIBILIACGN-ANGER_DELAY_POWER.smartDescription": "下个回合会获得[blue]{Amount}[/blue]点[gold]红温[/gold]。",
 
   "BILIBILIACGN-MORBID_POWER.title": "病态",
-  "BILIBILIACGN-MORBID_POWER.description": "每当你对敌方造成伤害时，自身受到[gold]病态[/gold]层数的伤害。[gold]病态[/gold]会在触发和每回合结束时减少[blue]1[/blue]层。本回合每次受到[gold]病态[/gold]伤害获得[blue]25%[/blue][gold]减免[/gold]。",
+  "BILIBILIACGN-MORBID_POWER.description": "每当你对敌方造成伤害时，自身受到[gold]病态[/gold]层数的伤害。[gold]病态[/gold]会在触发和每回合结束时减少[blue]1[/blue]层。本回合每次受到[gold]病态[/gold]伤害获得[blue]30%[/blue][gold]减免[/gold]。",
   "BILIBILIACGN-MORBID_POWER.smartDescription": "每当你对敌方造成伤害时，自身受到[blue]{Amount}[/blue]点[gold]病态[/gold]伤害。[gold]病态[/gold]会在触发和每回合结束时减少[blue]1[/blue]层。本回合每次受到[gold]病态[/gold]伤害获得[blue]{DamageReductionPercent}%[/blue][gold]减免[/gold]。",
 
   "BILIBILIACGN-MORBID_MITIGATION_POWER.title": "病态减免",
@@ -126,6 +126,10 @@
   "BILIBILIACGN-YANDERE_FORM_POWER.title": "病娇形态",
   "BILIBILIACGN-YANDERE_FORM_POWER.description": "每当你或女儿造成伤害时，同时给予等量的[gold]病态[/gold]1倍。",
   "BILIBILIACGN-YANDERE_FORM_POWER.smartDescription": "每当你或女儿造成伤害时，同时给予等量的[gold]病态[/gold][blue]{Amount}[/blue]倍。",
+
+  "BILIBILIACGN-MADLY_LOVE_POWER.title": "狂恋",
+  "BILIBILIACGN-MADLY_LOVE_POWER.description": "你的[gold]病态[/gold]伤害会额外触发[blue]1[/blue]次，同时不获得[gold]减免[/gold]。",
+  "BILIBILIACGN-MADLY_LOVE_POWER.smartDescription": "你的[gold]病态[/gold]伤害会额外触发[blue]{Amount}[/blue]次，同时不获得[gold]减免[/gold]。",
 
   "BILIBILIACGN-DISTORTION_SCHOLAR_POWER.title": "扭曲学家",
   "BILIBILIACGN-DISTORTION_SCHOLAR_POWER.description": "敌人对你的[gold]病态[/gold]会额外触发[blue]1[/blue]次。",

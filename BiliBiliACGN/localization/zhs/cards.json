@@ -247,7 +247,7 @@
   "BILIBILIACGN-YANDERE_FORM.title": "病娇形态",
   "BILIBILIACGN-YANDERE_FORM.description": "每当你或女儿造成伤害时，同时给予等量的[gold]病态[/gold]。",
   "BILIBILIACGN-DISTORTION_SCHOLAR.title": "扭曲学家",
-  "BILIBILIACGN-DISTORTION_SCHOLAR.description": "[gold]病态[/gold]会额外触发{ExtraTriggers:diff()}次。",
+  "BILIBILIACGN-DISTORTION_SCHOLAR.description": "给予所有敌人{ExtraTriggers:diff()}层[gold]狂恋[/gold]。\n[gold]病态[/gold]会额外触发{ExtraTriggers:diff()}次。",
   "BILIBILIACGN-TELECOM_ENGINEERING_MASTER.title": "通信工程硕士",
   "BILIBILIACGN-TELECOM_ENGINEERING_MASTER.description": "你每[gold]激发[/gold]1个充能球，获得{Focus:diff()}点[gold]集中[/gold]。",
   "BILIBILIACGN-NTR_GODFATHER.title": "NTR教父",

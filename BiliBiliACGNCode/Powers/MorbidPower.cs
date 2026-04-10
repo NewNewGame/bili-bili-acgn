@@ -13,10 +13,8 @@ using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
-using MegaCrit.Sts2.Core.Logging;
 using MegaCrit.Sts2.Core.Models;
-using MegaCrit.Sts2.Core.Platform;
-using MegaCrit.Sts2.Core.Runs;
+using MegaCrit.Sts2.Core.MonsterMoves.Intents;
 using MegaCrit.Sts2.Core.ValueProps;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Powers;
@@ -28,8 +26,69 @@ public sealed class MorbidPower : PowerBaseModel
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new DynamicVar("DamageReductionPercent", 25m),
+        new DynamicVar("DamageReductionPercent", 30m),
     ];
+    /// <summary>
+    /// 预估下一回合造成的伤害
+    /// 不精准
+    /// </summary>
+    /// <returns></returns>
+    public int CalculateTotalDamageNextTurn()
+	{
+        // 如果战斗状态为空，则返回Amount
+        if(base.Owner.CombatState == null) return Amount;
+        // 如果施加者为玩家或宠物，则返回Amount
+        if(base.Owner.IsPlayer || base.Owner.IsPet) return Amount;
+        // 如果施加者为敌人，则计算伤害
+		decimal num = default(decimal);
+        // 计算触发次数
+        int num2 = 1 + base.Owner.GetPowerAmount<MadlyLovePower>();
+        // 计算攻击次数，默认1次
+        int atkTimes = 1;
+        // 从攻击意图中获取攻击次数
+        if(base.Owner.Monster != null){
+            foreach (AbstractIntent intent in base.Owner.Monster.NextMove.Intents)
+            {
+                if (intent is AttackIntent atk)
+                {
+                    atkTimes = atk.Repeats;
+                    break;
+                }
+            }
+        }
+        // 减免计数
+        decimal reduction = 0;
+        // 剩余病态层数
+        decimal amt = Amount;
+        // 获取所有敌人
+        IEnumerable<Creature> source = from c in base.Owner.CombatState.GetOpponentsOf(base.Owner) where c.IsAlive select c;
+        // 遍历所有敌人
+        foreach(var creature in source){
+            // 如果敌人有痴迷对象，则计算伤害
+            if(creature.HasPower<InfatuationTargetPower>()){
+                // 每次攻击叠加计算
+                for(int _ = 0; _ < atkTimes; _++){
+                    // 单次伤害触发次数
+                    for(int __ = 0; __ < num2; __++){
+                        // 计算伤害，累加减免
+                        num += (int)((100m - reduction) / 100m * amt);
+                        // 如果触发次数用完了，则退出循环
+                        if(--amt == 0) break;
+                    }
+                    // 如果剩余病态层数为0，则退出循环
+                    if(amt == 0) break;
+                    // 累加减免，如果减免大于等于100，则退出循环
+                    reduction += base.DynamicVars["DamageReductionPercent"].BaseValue;
+                    if(reduction >= 100m) break;
+                }
+                // 如果剩余病态层数为0或减免大于等于100，则退出循环
+                if(amt == 0 || reduction >= 100m) break;
+            }
+        }
+        $"病态伤害预估计算：结束计算伤害，攻击者{base.Owner.Name}，触发次数{num2}，攻击次数{atkTimes}，伤害{num}".LogInfo();
+		return (int)num;
+	}
+
     /// <summary>
     /// 施加者为玩家时，设置施加者名称
     /// </summary>
@@ -63,48 +122,37 @@ public sealed class MorbidPower : PowerBaseModel
     {
         // 如果攻击目标或者攻击者为空，则返回
         if(target == null || dealer == null) return;
-        // 如果玩家伤害为0，则返回
-        if(result.TotalDamage == 0 && dealer.IsPlayer) return;
         // 如果攻击者不是病态持有者，则返回
         if(dealer != base.Owner) return;
+        // 如果攻击目标为宠物，则不造成伤害
+        if(target.IsPet) return;
         bool dealDamge = true;
         // 玩家持有时
         if(base.Owner.IsPlayer){
-            // 如果攻击者不是该玩家，则不造成伤害
-            if(dealer != base.Owner) dealDamge = false;
             // 如果卡牌来源为空，则不造成伤害
             if(cardSource == null) dealDamge = false;
+            // 如果伤害为0，则不造成伤害
+            if(result.TotalDamage == 0) dealDamge = false;
         }else{
-            // 敌人持有时
-            // 如果攻击目标是宠物，则判断宠物主人是否有痴迷对象
-            if(target.PetOwner != null){
-                // 如果攻击目标未死亡，则判断宠物主人是否有痴迷对象
-                if(!result.WasTargetKilled){
-                    dealDamge = target.PetOwner.Creature.HasPower<InfatuationTargetPower>();
-                }else{
-                    // 如果攻击目标死亡，则不造成伤害
-                    dealDamge = false;
-                }
-            }
-            // 如果没有宠物，则判断攻击目标是否有痴迷对象
-            else dealDamge = target.HasPower<InfatuationTargetPower>();
+            // 敌人持有时，判断攻击目标是否有痴迷对象
+           dealDamge = target.HasPower<InfatuationTargetPower>();
         }
         if(!dealDamge){
-            $"不造成伤害, {target.Name}".LogInfo();
+            $"病态伤害计算：不造成伤害, 攻击者{dealer.Name}，攻击目标{target.Name}".LogInfo();
             return;
         }
-        $"开始计算伤害，{target.Name}".LogInfo();
+        $"病态伤害计算：开始计算伤害，攻击者{dealer.Name}，攻击目标{target.Name}".LogInfo();
         // 计算减免
         int mitigation = base.Owner.GetPowerAmount<MorbidMitigationPower>();
         // 如果减免大于等于100，则不造成伤害
         if(mitigation >= 100) return;
         // 计算攻击次数
-        int atkTimes = Mathf.Min(Amount, 1 + (target.PetOwner != null ? target.PetOwner.Creature.GetPowerAmount<DistortionScholarPower>() : target.GetPowerAmount<DistortionScholarPower>()));
+        int atkTimes = Mathf.Min(Amount, 1 + base.Owner.GetPowerAmount<MadlyLovePower>());
         while(atkTimes > 0){
             // 造成伤害
             await CreatureCmd.Damage(choiceContext, dealer, Amount * (100m - mitigation) / 100m, ValueProp.Unpowered, target);
-            // 如果攻击目标死亡，则退出循环
-            if(target.IsDead) return;
+            // 如果病态持有者死亡，则退出循环
+            if(dealer.IsDead) return;
             // 减少一层病态
             await PowerCmd.Decrement(this);
             atkTimes--;
