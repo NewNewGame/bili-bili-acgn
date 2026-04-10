@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dux6emintnw7"
-path="res://.godot/imported/im_out.png-e43da421d4da8a21c16b0e39490e63a4.ctex"
+uid="uid://bdeuq8yie6twg"
+path="res://.godot/imported/honest_pick_up.png-f05290403ca8a4e9dd3c09e9d4b18698.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://BiliBiliACGN/images/card_portraits/im_out.png"
-dest_files=["res://.godot/imported/im_out.png-e43da421d4da8a21c16b0e39490e63a4.ctex"]
+source_file="res://BiliBiliACGN/images/card_portraits/big/honest_pick_up.png"
+dest_files=["res://.godot/imported/honest_pick_up.png-f05290403ca8a4e9dd3c09e9d4b18698.ctex"]
 
 [params]
 
