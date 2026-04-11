@@ -72,7 +72,7 @@ public sealed class BottleCardPool : CustomCardPoolModel
             ModelDb.Card<StreamEndManhwa>(),
             ModelDb.Card<HeadFlashGlare>(),
             ModelDb.Card<ElbowStrike>(),
-            ModelDb.Card<OutsiderMe>(),
+            ModelDb.Card<Zero>(),
             ModelDb.Card<NewYearGalaDeathSong>(),
             ModelDb.Card<SacrificeCyberParents>(),
             ModelDb.Card<ReallyUnsubscribed>(),

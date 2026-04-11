@@ -1,5 +1,5 @@
 //****************** 代码文件申明 ***********************
-//* 文件：OutsiderMe(外人我是！)
+//* 文件：Zero(零蛋)
 //* 作者：wheat
 //* 创建时间：2026/04/03
 //* 描述：造成{Damage:diff()}点伤害。将你弃牌堆中的一张牌放到抽牌堆顶部。
@@ -18,7 +18,7 @@ using MegaCrit.Sts2.Core.Models;
 namespace BiliBiliACGN.BiliBiliACGNCode.Cards;
 
 [Pool(typeof(BottleCardPool))]
-public sealed class OutsiderMe : CardBaseModel
+public sealed class Zero : CardBaseModel
 {
     #region 卡牌属性配置
     private const int energyCost = 1;
@@ -32,7 +32,7 @@ public sealed class OutsiderMe : CardBaseModel
         new DamageVar(8m, ValueProp.Move)
     ];
 
-    public OutsiderMe() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
+    public Zero() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
 
     #endregion
 

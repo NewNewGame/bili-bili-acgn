@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cibxlf2gxeg2e"
-path="res://.godot/imported/outsider_me.png-e058eccbcd1ef98f0a773508b074f82c.ctex"
+uid="uid://ckyup8qtnw7ro"
+path="res://.godot/imported/only_two_years_older.png-b4bc6fbff1f725e03fc3a1560d85b21a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://BiliBiliACGN/images/card_portraits/outsider_me.png"
-dest_files=["res://.godot/imported/outsider_me.png-e058eccbcd1ef98f0a773508b074f82c.ctex"]
+source_file="res://BiliBiliACGN/images/card_portraits/only_two_years_older.png"
+dest_files=["res://.godot/imported/only_two_years_older.png-b4bc6fbff1f725e03fc3a1560d85b21a.ctex"]
 
 [params]
 
