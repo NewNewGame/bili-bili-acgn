@@ -27,6 +27,10 @@ public abstract class PotionBaseModel : CustomPotionModel
         get
         {
             var path = $"{Id.Entry.RemovePrefix().ToLowerInvariant()}_outline.png".PotionImagePath();
+            if(ResourceLoader.Exists(path)){
+                return path;
+            }
+            path = $"{Id.Entry.RemovePrefix().ToLowerInvariant()}.png".PotionImagePath();
             return ResourceLoader.Exists(path) ? path : "none.png".PotionImagePath();
         }
     }
