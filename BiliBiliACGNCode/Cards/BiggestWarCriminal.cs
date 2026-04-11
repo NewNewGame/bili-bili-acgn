@@ -25,6 +25,8 @@ public sealed class BiggestWarCriminal : CardBaseModel
     #endregion
 
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
+    protected override bool ShouldGlowGoldInternal => base.Owner.Creature.GetPowerAmount<AngerChargePower>() +base.DynamicVars["Anger"].BaseValue >= AngerChargePower.MAXCHARGE;
+
 
     #region 卡牌属性配置
     private const int energyCost = 2;

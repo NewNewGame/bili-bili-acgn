@@ -45,7 +45,7 @@ public sealed class NotAfraidOfMyLies : CardBaseModel
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new BlockVar(5m, ValueProp.Move),
+        new BlockVar(8m, ValueProp.Move),
         new DynamicVar("Power", 3m)
     ];
 
@@ -66,7 +66,6 @@ public sealed class NotAfraidOfMyLies : CardBaseModel
     protected override void OnUpgrade()
     {
         base.EnergyCost.UpgradeBy(-1);
-        base.DynamicVars["Block"].UpgradeValueBy(2m);
         base.DynamicVars["Power"].UpgradeValueBy(2m);
     }
 }

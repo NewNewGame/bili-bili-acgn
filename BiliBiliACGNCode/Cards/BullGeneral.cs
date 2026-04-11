@@ -24,6 +24,7 @@ public sealed class BullGeneral : CardBaseModel
     [
         HoverTipFactory.FromPower<AngerPower>(),
     ];
+    protected override bool ShouldGlowGoldInternal => base.Owner.Creature.GetPowerAmount<AngerChargePower>() +base.DynamicVars["Anger"].BaseValue >= AngerChargePower.MAXCHARGE;
     #endregion
     #region 卡牌属性配置
     private const int energyCost = 2;

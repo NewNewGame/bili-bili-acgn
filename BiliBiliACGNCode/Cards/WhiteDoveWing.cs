@@ -25,10 +25,11 @@ public sealed class WhiteDoveWing : CardBaseModel
     private const CardRarity rarity = CardRarity.Uncommon;
     private const TargetType targetType = TargetType.Self;
     private const bool shouldShowInCardLibrary = true;
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [CustomKeyWords.YYSY];
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new BlockVar(9m, ValueProp.Move)
+        new BlockVar(6m, ValueProp.Move)
     ];
 
     public WhiteDoveWing() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }

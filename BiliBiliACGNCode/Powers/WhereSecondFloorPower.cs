@@ -11,6 +11,7 @@ using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.ValueProps;
+using MegaCrit.Sts2.Core.Combat;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Powers;
 
@@ -26,6 +27,13 @@ public sealed class WhereSecondFloorPower : PowerBaseModel
         {
             return;
         }
-        await PowerCmd.Apply<AngerDelayPower>(base.Owner, 1m, base.Owner, null);
+        await PowerCmd.Apply<AngerDelayPower>(base.Owner, Amount, base.Owner, null);
+    }
+    public override async Task AfterTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)
+    {
+        if(side == CombatSide.Enemy)
+        {
+            await PowerCmd.Remove(this);
+        }
     }
 }

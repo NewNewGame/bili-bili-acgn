@@ -21,7 +21,8 @@ namespace BiliBiliACGN.BiliBiliACGNCode.Cards;
 public sealed class HeadFlashGlare : CardBaseModel
 {
     #region 卡牌关键词与悬停
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<AngerPower>(), HoverTipFactory.Static(StaticHoverTip.Block)];
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.Static(StaticHoverTip.Block), HoverTipFactory.FromPower<AngerPower>()];
+    protected override bool ShouldGlowGoldInternal => base.Owner.Creature.GetPowerAmount<AngerChargePower>() +base.DynamicVars["Power"].BaseValue >= AngerChargePower.MAXCHARGE;
     #endregion
     #region 卡牌属性配置
     private const int energyCost = 1;

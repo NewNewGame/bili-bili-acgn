@@ -22,6 +22,7 @@ public sealed class CoinOperation : CardBaseModel
 {
     #region 卡牌关键词与悬停
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<AngerPower>()];
+    protected override bool ShouldGlowGoldInternal => base.Owner.Creature.GetPowerAmount<AngerChargePower>() +base.DynamicVars["Power"].BaseValue >= AngerChargePower.MAXCHARGE;
     #endregion
     #region 卡牌属性配置
     private const int energyCost = 0;
@@ -49,6 +50,6 @@ public sealed class CoinOperation : CardBaseModel
 
     protected override void OnUpgrade()
     {
-        base.DynamicVars["Power"].UpgradeValueBy(5m);
+        base.DynamicVars["Power"].UpgradeValueBy(1m);
     }
 }
