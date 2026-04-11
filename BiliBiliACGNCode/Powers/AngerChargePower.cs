@@ -16,7 +16,7 @@ public sealed class AngerChargePower : PowerBaseModel
     /// <summary>
     /// 最大充能值
     /// </summary>
-    private const int MAXCHARGE = 10;
+    public static readonly int MAXCHARGE = 10;
     public override PowerType Type => PowerType.Buff;
 
     public override PowerStackType StackType => PowerStackType.Counter;

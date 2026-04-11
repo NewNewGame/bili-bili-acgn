@@ -34,7 +34,7 @@ public sealed class NewYearGalaDeathSong : CardBaseModel
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new DamageVar(14m, ValueProp.Move),
+        new DamageVar(11m, ValueProp.Move),
         new DynamicVar("VulnerablePower", 2m)
     ];
 
@@ -59,7 +59,6 @@ public sealed class NewYearGalaDeathSong : CardBaseModel
 
     protected override void OnUpgrade()
     {
-        base.DynamicVars["Damage"].UpgradeValueBy(5m);
-        base.DynamicVars["VulnerablePower"].UpgradeValueBy(1m);
+        base.DynamicVars["Damage"].UpgradeValueBy(4m);
     }
 }

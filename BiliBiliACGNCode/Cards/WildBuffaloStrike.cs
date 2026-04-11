@@ -21,9 +21,7 @@ namespace BiliBiliACGN.BiliBiliACGNCode.Cards;
 public sealed class WildBuffaloStrike : CardBaseModel
 {
     protected override HashSet<CardTag> CanonicalTags => [CardTag.Strike];
-    #region 卡牌关键词与悬停
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromKeyword(CustomKeyWords.YYSY)];
-    #endregion
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [CustomKeyWords.YYSY];
     #region 卡牌属性配置
     private const int energyCost = 1;
     private const CardType type = CardType.Attack;

@@ -26,7 +26,7 @@ public sealed class BusinessExpansion : CardBaseModel
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromKeyword(CustomKeyWords.YYSY)];
 
     #region 卡牌属性配置
-    private const int energyCost = 1;
+    private const int energyCost = 0;
     private const CardType type = CardType.Skill;
     private const CardRarity rarity = CardRarity.Common;
     private const TargetType targetType = TargetType.Self;
@@ -36,7 +36,7 @@ public sealed class BusinessExpansion : CardBaseModel
     /// </summary>
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new CardsVar(2)
+        new CardsVar(3)
     ];
 
     public BusinessExpansion() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }

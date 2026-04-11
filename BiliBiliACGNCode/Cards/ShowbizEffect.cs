@@ -23,6 +23,7 @@ public sealed class ShowbizEffect : CardBaseModel
 {
     #region 卡牌关键词与悬停
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<AngerPower>()];
+    protected override bool ShouldGlowGoldInternal => base.Owner.Creature.GetPowerAmount<AngerChargePower>() +base.DynamicVars["Anger"].BaseValue >= AngerChargePower.MAXCHARGE;
     #endregion
 
     #region 卡牌属性配置

@@ -6,6 +6,7 @@
 //*******************************************************
 
 using MegaCrit.Sts2.Core.CardSelection;
+using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Localization;
 using MegaCrit.Sts2.Core.Models;
 
@@ -16,6 +17,7 @@ public static class MCardSelectorPrefs
     public static LocString TO_ADD_YYSY = new LocString("card_selection", "TO_ADD_YYSY");
     public static LocString TO_YYSY = new LocString("card_selection", "TO_YYSY");
     public static Func<CardModel, bool> YYSYFilter = (card) => card.Keywords.Contains(CustomKeyWords.YYSY);
-    public static Func<CardModel, bool> NoYYSYFilter = (card) => !card.Keywords.Contains(CustomKeyWords.YYSY);
+    public static Func<CardModel, bool> NoYYSYFilter = (card) => !card.Keywords.Contains(CustomKeyWords.YYSY) && !card.Keywords.Contains(CardKeyword.Unplayable)
+     && card.Id != ModelDb.Card<NoRightToKnightMe>().Id;
 
 }

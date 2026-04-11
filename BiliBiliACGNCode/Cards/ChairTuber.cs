@@ -23,7 +23,7 @@ public sealed class ChairTuber : CardBaseModel
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromKeyword(CustomKeyWords.YYSY)];
     #endregion
     #region 卡牌属性配置
-    private const int energyCost = 2;
+    private const int energyCost = 1;
     private const CardType type = CardType.Power;
     private const CardRarity rarity = CardRarity.Rare;
     private const TargetType targetType = TargetType.Self;
@@ -58,7 +58,7 @@ public sealed class ChairTuber : CardBaseModel
     protected override void OnUpgrade()
     {
         #region 升级效果
-        base.EnergyCost.UpgradeBy(-1);
+        base.AddKeyword(CardKeyword.Retain);
         base.DynamicVars["Cards"].UpgradeValueBy(1m);
 
         #endregion

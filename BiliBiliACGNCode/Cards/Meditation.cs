@@ -25,6 +25,7 @@ public sealed class Meditation : CardBaseModel
         HoverTipFactory.FromPower<AngerPower>(),
         HoverTipFactory.FromPower<GetTangPower>(),
     ];
+    protected override bool ShouldGlowGoldInternal => base.Owner.Creature.GetPowerAmount<AngerChargePower>() +base.DynamicVars["Power"].BaseValue >= AngerChargePower.MAXCHARGE;
     #endregion
     #region 卡牌属性配置
     private const int energyCost = 1;

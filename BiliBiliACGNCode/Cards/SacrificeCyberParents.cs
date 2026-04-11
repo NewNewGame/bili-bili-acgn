@@ -30,12 +30,13 @@ public sealed class SacrificeCyberParents : CardBaseModel
     private const CardType type = CardType.Attack;
     private const CardRarity rarity = CardRarity.Common;
     private const TargetType targetType = TargetType.AllEnemies;
-    protected override bool IsPlayable => base.Owner.Creature.GetPowerAmount<AngerPower>() >= 2;
+    protected override bool IsPlayable => base.Owner.Creature.GetPowerAmount<AngerPower>() >= base.DynamicVars["AngerNeed"].BaseValue;
     private const bool shouldShowInCardLibrary = true;
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new DamageVar(9m, ValueProp.Move)
+        new DamageVar(9m, ValueProp.Move),
+        new DynamicVar("AngerNeed", 3m)
     ];
 
     public SacrificeCyberParents() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
@@ -60,7 +61,7 @@ public sealed class SacrificeCyberParents : CardBaseModel
             .TargetingAllOpponents(base.CombatState)
             .Execute(choiceContext);
         // 消耗2点红温
-        await PowerCmd.Apply<AngerPower>(base.Owner.Creature, -2, base.Owner.Creature, this);
+        await PowerCmd.Apply<AngerPower>(base.Owner.Creature, -base.DynamicVars["AngerNeed"].BaseValue, base.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()

@@ -35,10 +35,10 @@ public sealed class BullEyeOpen : CardBaseModel
     /// </summary>
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new CalculationBaseVar(1m),
-		new ExtraDamageVar(1m),
+        new CalculationBaseVar(0m),
+		new ExtraDamageVar(3m),
 		new CalculatedDamageVar(ValueProp.Move).WithMultiplier((CardModel card, Creature? _) => 
-        2*CombatManager.Instance.History.Entries.OfType<CardPlayFinishedEntry>().Count(
+        CombatManager.Instance.History.Entries.OfType<CardPlayFinishedEntry>().Count(
             (CardPlayFinishedEntry e) => e.CardPlay.Card.Owner == card.Owner && e.CardPlay.Card.Keywords.Contains(CustomKeyWords.YYSY)))
     ];
 
