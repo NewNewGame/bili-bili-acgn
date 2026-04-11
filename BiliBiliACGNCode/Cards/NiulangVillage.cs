@@ -1,5 +1,5 @@
 //****************** 代码文件申明 ***********************
-//* 文件：BullTexasGuillotine(牛克萨斯断头台)
+//* 文件：NiulangVillage(牛郎村)
 //* 作者：wheat
 //* 创建时间：2026/04/03
 //* 描述：X费。造成等同于[gold]红温值[/gold]×本次支付能量倍数的伤害；[gold]红怒[/gold]时倍率翻倍。消耗，保留。
@@ -20,7 +20,7 @@ using MegaCrit.Sts2.Core.Entities.Creatures;
 namespace BiliBiliACGN.BiliBiliACGNCode.Cards;
 
 [Pool(typeof(BottleCardPool))]
-public sealed class BullTexasGuillotine : CardBaseModel
+public sealed class NiulangVillage : CardBaseModel
 {
     #region 卡牌关键词与悬停
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
@@ -41,7 +41,7 @@ public sealed class BullTexasGuillotine : CardBaseModel
     private const TargetType targetType = TargetType.AnyEnemy;
     private const bool shouldShowInCardLibrary = true;
 
-    public BullTexasGuillotine() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
+    public NiulangVillage() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
 
         /// <summary>
     /// 牌面动态变量配置。

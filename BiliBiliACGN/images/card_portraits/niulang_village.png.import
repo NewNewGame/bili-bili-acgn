@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d2ectjh50ql6f"
-path="res://.godot/imported/outsider_me.png-172ea5725ba4d6f92b10f81ebb6a82f7.ctex"
+uid="uid://mh1wjsnocr7e"
+path="res://.godot/imported/niulang_village.png-39b09ea449090715a67d623d52b46237.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://BiliBiliACGN/images/card_portraits/big/outsider_me.png"
-dest_files=["res://.godot/imported/outsider_me.png-172ea5725ba4d6f92b10f81ebb6a82f7.ctex"]
+source_file="res://BiliBiliACGN/images/card_portraits/niulang_village.png"
+dest_files=["res://.godot/imported/niulang_village.png-39b09ea449090715a67d623d52b46237.ctex"]
 
 [params]
 

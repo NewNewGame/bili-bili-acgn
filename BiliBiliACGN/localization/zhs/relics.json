@@ -9,7 +9,7 @@
     "BILIBILIACGN-SHERRY.description": "获得1张[gold]啊~雪莉[/gold]，它可以为你助战。",
     "BILIBILIACGN-SHERRY.flavor": "啊~雪莉",
     "BILIBILIACGN-SHERRY_HURT.title": "受伤的雪莉",
-    "BILIBILIACGN-SHERRY_HURT.description": "你可以在[gold]休息处[/gold]选择治疗[gold]受伤的雪莉[/gold]",
+    "BILIBILIACGN-SHERRY_HURT.description": "你可以在[gold]休息处[/gold]选择治疗[gold]受伤的雪莉[/gold]。\n同时移除2张卡牌。",
     "BILIBILIACGN-SHERRY_HURT.flavor": "啊~雪莉",
     "BILIBILIACGN-MYSTERY_WATER_CARD.title": "神秘的水卡",
     "BILIBILIACGN-MYSTERY_WATER_CARD.description": "商店药水免费",

@@ -31,7 +31,7 @@ public sealed class SherryEvent : EventBaseModel
     {
         return
         [
-            new EventOption(this, Try, "SHERRY_EVENT.pages.INITIAL.options.TRY", HoverTipFactory.FromCard<Normality>()),
+            new EventOption(this, Try, "SHERRY_EVENT.pages.INITIAL.options.TRY", HoverTipFactory.FromRelic<SherryHurt>().Append(HoverTipFactory.FromCard<Normality>())),
             new EventOption(this, No, "SHERRY_EVENT.pages.INITIAL.options.NO")
         ];
     }

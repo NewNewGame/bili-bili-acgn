@@ -14,7 +14,9 @@ using MegaCrit.Sts2.Core.Saves.Runs;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Relics;
 
-[Pool(typeof(SharedRelicPool))]
+/*
+// TODO：晚点再做
+//[Pool(typeof(SharedRelicPool))]
 public sealed class DragonBallRadar : RelicBaseModel
 {
     public override RelicRarity Rarity => RelicRarity.Uncommon;
@@ -50,3 +52,4 @@ public sealed class DragonBallRadar : RelicBaseModel
         }
     }
 }
+*/
