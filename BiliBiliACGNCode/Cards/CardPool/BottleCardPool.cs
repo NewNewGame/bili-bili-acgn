@@ -83,7 +83,7 @@ public sealed class BottleCardPool : CustomCardPoolModel
             ModelDb.Card<InterpretYourDream>(),
             ModelDb.Card<DontSayChallenge>(),
             ModelDb.Card<BullEyeOpen>(),
-            ModelDb.Card<BullTexasGuillotine>(),
+            ModelDb.Card<NiulangVillage>(),
             ModelDb.Card<BullDemonForm>(),
             ModelDb.Card<CorrectTeam>(),
             ModelDb.Card<SecondRateCommentator>(),
