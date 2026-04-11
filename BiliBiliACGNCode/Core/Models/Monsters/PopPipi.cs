@@ -37,16 +37,20 @@ public sealed class PopPipi : MonsterBaseModel
     /// 加buff音效
     /// </summary>
 	private const string _buffSfx = "event:/sfx/enemy/enemy_attacks/punch_construct/punch_construct_buff";
-	public override int MinInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 300, 100);
+	public override int MinInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 250, 200);
     public override int MaxInitialHp => MinInitialHp;
     /// <summary>
     /// 重拳伤害
     /// </summary>
-	private int StrongPunchDamage => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 16, 14);
+	private int StrongPunchDamage => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 22, 17);
     /// <summary>
     /// 快速拳伤害
     /// </summary>
-	private int FastPunchDamage => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 6, 5);
+	private int FastPunchDamage => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 9, 6);
+	 /// <summary>
+    /// buff值
+    /// </summary>
+	private int PowerValue => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 3, 2);
     /// <summary>
     /// 快速拳重复次数
     /// </summary>
@@ -92,14 +96,14 @@ public sealed class PopPipi : MonsterBaseModel
 	}
     /// <summary>
     /// 生成怪物逻辑行为状态机
-    /// 防御 -> 重拳出击 -> 多段轻拳 -> 循环 （必须循环）
+    /// 施加buff -> 重拳出击 -> 多段轻拳 -> 循环 （必须循环）
     /// </summary>
     /// <returns></returns>
     protected override MonsterMoveStateMachine GenerateMoveStateMachine()
     {
         List<MonsterState> list = new List<MonsterState>();
-        // 防御
-		MoveState moveState = new MoveState("READY_MOVE", ReadyMove, new DefendIntent());
+        // 施加buff
+		MoveState moveState = new MoveState("READY_MOVE", ReadyMove, new BuffIntent());
         // 重拳出击
 		MoveState moveState2 = new MoveState("STRONG_PUNCH_MOVE", StrongPunchMove, new SingleAttackIntent(StrongPunchDamage));
         // 多段轻拳
@@ -114,7 +118,7 @@ public sealed class PopPipi : MonsterBaseModel
 		return new MonsterMoveStateMachine(list, StartsWithStrongPunch ? moveState2 : moveState);
     }
     /// <summary>
-    /// 防御
+    /// 施加BUFF
     /// </summary>
     /// <param name="targets"></param>
     /// <returns></returns>
@@ -122,7 +126,7 @@ public sealed class PopPipi : MonsterBaseModel
 	{
 		SfxCmd.Play("event:/sfx/enemy/enemy_attacks/punch_construct/punch_construct_buff");
 		await CreatureCmd.TriggerAnim(base.Creature, "Cast", 0.8f);
-		await CreatureCmd.GainBlock(base.Creature, 10m, ValueProp.Move, null);
+		await PowerCmd.Apply<StrengthPower>(base.Creature, PowerValue, base.Creature, null);
 	}
 
     /// <summary>
