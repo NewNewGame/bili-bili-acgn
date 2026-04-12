@@ -7,6 +7,7 @@ metadata/_edit_vertical_guides_ = [-1036.0]
 
 [node name="Visuals" type="Sprite2D" parent="."]
 unique_name_in_owner = true
+z_index = 10
 position = Vector2(0, -197)
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("1_agfs1")
@@ -27,4 +28,4 @@ position = Vector2(0, -200)
 
 [node name="CenterPos" type="Marker2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(0, -200)
+position = Vector2(-14, -264)

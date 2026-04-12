@@ -16,6 +16,7 @@ using BaseLib.Extensions;
 using MegaCrit.Sts2.Core.Combat;
 using BiliBiliACGN.BiliBiliACGNCode.Utils;
 using MegaCrit.Sts2.Core.Entities.Cards;
+using BiliBiliACGN.BiliBiliACGNCode.Nodes;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Powers;
 
@@ -26,7 +27,22 @@ public sealed class BerserkPower : PowerBaseModel
     public override PowerStackType StackType => PowerStackType.Single;
     public override bool IsInstanced => true;
     protected override IEnumerable<DynamicVar> CanonicalVars => [new DynamicVar("DamageMultiplier", 150m), new EnergyVar(2), new CardsVar(3)];
-
+    /// <summary>
+    /// 应用前
+    /// </summary>
+    public override Task BeforeApplied(Creature target, decimal amount, Creature? applier, CardModel? cardSource)
+    {
+        // 如果目标为空，则返回
+        if(target == null) return Task.CompletedTask;
+        // 如果目标已经有红怒，则返回
+        if(target.HasPower<BerserkPower>())
+        {
+            return Task.CompletedTask;
+        }
+        // 添加红怒VFX
+        CustomVfxCmd.AddVfxOnCenter(target, CustomVfxCmd.BerserkPath);
+        return Task.CompletedTask;
+    }
     public override async Task AfterPowerAmountChanged(PowerModel power, decimal amount, Creature? applier, CardModel? cardSource)
     {
         // 如果施加者不是玩家，则返回
@@ -72,11 +88,18 @@ public sealed class BerserkPower : PowerBaseModel
     }
     public override async Task AfterRemoved(Creature oldOwner)
     {
+        // 如果旧所有者不是当前所有者，则返回
+        if(oldOwner != base.Owner) return;
         // 如果有开始享受能力，并且是玩家
         int num = oldOwner.GetPowerAmount<EnjoyPower>();
         if(num > 0 && oldOwner.Player != null){
             // 移除后抽牌
             await CardPileCmd.Draw(CombatUtils.GetTemporaryPlayerChoiceContext(), base.Amount, oldOwner.Player);
+        }
+        // 如果旧所有者没有红怒，则移除红怒VFX
+        if(!oldOwner.HasPower<BerserkPower>())
+        {
+            CustomVfxCmd.RemoveVfx<SNBerserkVfx>(oldOwner);
         }
     }
 }
