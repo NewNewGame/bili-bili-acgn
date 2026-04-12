@@ -9,7 +9,6 @@ using Godot;
 using MegaCrit.Sts2.Core.Assets;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Helpers;
-using MegaCrit.Sts2.Core.Logging;
 using MegaCrit.Sts2.Core.Nodes.Combat;
 using MegaCrit.Sts2.Core.Nodes.Rooms;
 using MegaCrit.Sts2.Core.TestSupport;
@@ -50,7 +49,6 @@ public static class CustomVfxCmd
                 Node2D node2D = PreloadManager.Cache.GetScene(scenePath).Instantiate<Node2D>(PackedScene.GenEditState.Disabled);
                 creatureNode.AddChildSafely(node2D);
                 node2D.GlobalPosition = creatureNode.GlobalPosition;
-                Log.Info($"添加VFX成功: {target.Name}, {path}");
             }
         }
     }
@@ -70,7 +68,6 @@ public static class CustomVfxCmd
                 Node2D node2D = PreloadManager.Cache.GetScene(scenePath).Instantiate<Node2D>(PackedScene.GenEditState.Disabled);
                 creatureNode.AddChildSafely(node2D);
                 node2D.GlobalPosition = creatureNode.VfxSpawnPosition;
-                Log.Info($"添加VFX成功: {target.Name}, {path}");
             }
         }
     }
@@ -93,16 +90,12 @@ public static class CustomVfxCmd
     /// </summary>
     public static void RemoveVfx<T>(NCreature parent) where T : Node2D{
         if(parent == null) return;
-        Log.Info($"尝试移除VFX: {parent}, {typeof(T).Name}");
         if (!TestMode.IsOn && NCombatRoom.Instance != null)
         {
-            // 获取VFX节点
-            Log.Info($"获取VFX节点: {typeof(T).Name}");
             // 遍历所有子节点， 找到类型为T的节点，然后删除
             foreach(var child in parent.GetChildren()){
                 if(child is T node){
                     node.QueueFreeSafely();
-                    Log.Info($"移除VFX成功: {parent}, {typeof(T).Name}");
                     return;
                 }
             }

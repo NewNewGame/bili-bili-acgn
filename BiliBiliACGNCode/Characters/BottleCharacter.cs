@@ -12,7 +12,9 @@ using BiliBiliACGN.BiliBiliACGNCode.Potions.PotionPool;
 using BiliBiliACGN.BiliBiliACGNCode.Relics;
 using BiliBiliACGN.BiliBiliACGNCode.Relics.RelicPool;
 using Godot;
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Characters;
+using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.Models;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Characters;
@@ -45,6 +47,14 @@ public sealed class BottleCharacter : PlaceholderCharacterModel
 	// 过渡音效。这个不能删。
 	public override string CharacterTransitionSfx => "event:/sfx/ui/wipe_ironclad";
 	public override string CustomCharacterSelectTransitionPath => "res://BiliBiliACGN/materials/transitions/" + PlaceholderID + "_transition_mat.tres";
+	/// <summary>
+	/// 额外资产路径
+	/// </summary>
+    protected override IEnumerable<string> ExtraAssetPaths => new string[]{
+		CustomVfxCmd.BerserkPath,
+		CustomVfxCmd.InfiniteBullnessPath,
+	}.Select(SceneHelper.GetScenePath);
+
 
 	public override IEnumerable<CardModel> StartingDeck => [
 		ModelDb.Card<BottleStrike>(),
