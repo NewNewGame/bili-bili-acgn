@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" uid="uid://c5ev0nm5g8pov" path="res://BiliBiliACGNCode/Nodes/SNBerserkVfx.cs" id="1_la0ec"]
 [ext_resource type="Texture2D" uid="uid://cmtmsnjphochi" path="res://BiliBiliACGN/images/vfx/miasma_cloud.png" id="2_la0ec"]
-[ext_resource type="Material" uid="uid://87tld07k2ue5" path="res://BiliBiliACGN/materials/vfx_infinite_bullness_process.tres" id="3_burst"]
-[ext_resource type="Material" uid="uid://m46qu0d2ivpm" path="res://BiliBiliACGN/materials/vfx_infinite_bullness_ring_process.tres" id="4_ring"]
+[ext_resource type="Material" uid="uid://87tld07k2ue5" path="res://BiliBiliACGN/shaders/vfx/vfx_infinite_bullness_process.tres" id="3_burst"]
+[ext_resource type="Material" uid="uid://m46qu0d2ivpm" path="res://BiliBiliACGN/shaders/vfx/vfx_infinite_bullness_ring_process.tres" id="4_ring"]
 [ext_resource type="Texture2D" uid="uid://bo0x5nnrrn5h4" path="res://BiliBiliACGN/images/vfx/dot.png" id="5_tex"]
 
 [node name="VfxIBerserk" type="Node2D"]

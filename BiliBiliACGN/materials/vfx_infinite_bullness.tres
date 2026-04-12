@@ -1,6 +1,0 @@
-[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://c1ud16eo41v5e"]
-
-[ext_resource type="Shader" uid="uid://cnr5msahn3mdm" path="res://BiliBiliACGN/materials/alpha_from_grayscale.gdshader" id="1_alpha"]
-
-[resource]
-shader = ExtResource("1_alpha")
