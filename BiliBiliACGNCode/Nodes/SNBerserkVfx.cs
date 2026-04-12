@@ -1,8 +1,8 @@
 //****************** 代码文件申明 ***********************
-//* 文件：SNInfiniteBullnessVfx(无限牛处VFX)
+//* 文件：SNBerserkVfx(红怒VFX)
 //* 作者：wheat
 //* 创建时间：2026/04/12
-//* 描述：无限牛处VFX
+//* 描述：红怒VFX
 //*******************************************************
 
 using Godot;
@@ -14,9 +14,9 @@ using MegaCrit.Sts2.Core.TestSupport;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Nodes;
 
-public partial class SNInfiniteBullnessVfx : Node2D
+public partial class SNBerserkVfx : Node2D
 {
-    public static readonly string scenePath = SceneHelper.GetScenePath("vfx/vfx_infinite_bullness");
+    public static readonly string scenePath = SceneHelper.GetScenePath("vfx/vfx_berserk");
 
 	[Export(PropertyHint.None, "")]
 	private Array<GpuParticles2D> _particles = new Array<GpuParticles2D>();
@@ -25,16 +25,16 @@ public partial class SNInfiniteBullnessVfx : Node2D
 
 	private CancellationTokenSource? _cts;
 
-	public static SNInfiniteBullnessVfx? Create(Vector2 targetPosition, Color tint)
+	public static SNBerserkVfx? Create(Vector2 targetPosition, Color tint)
 	{
 		if (TestMode.IsOn)
 		{
 			return null;
 		}
-		SNInfiniteBullnessVfx nInfiniteBullnessVfx = PreloadManager.Cache.GetScene(scenePath).Instantiate<SNInfiniteBullnessVfx>(PackedScene.GenEditState.Disabled);
-		nInfiniteBullnessVfx.GlobalPosition = targetPosition;
-		nInfiniteBullnessVfx._tint = tint;
-		return nInfiniteBullnessVfx;
+		SNBerserkVfx nBerserkVfx = PreloadManager.Cache.GetScene(scenePath).Instantiate<SNBerserkVfx>(PackedScene.GenEditState.Disabled);
+		nBerserkVfx.GlobalPosition = targetPosition;
+		nBerserkVfx._tint = tint;
+		return nBerserkVfx;
 	}
 
 	public override void _Ready()
@@ -49,7 +49,7 @@ public partial class SNInfiniteBullnessVfx : Node2D
 				}
 			}
 		}
-		TaskHelper.RunSafely(PlayVfx());
+		PlayVfx();
 	}
 
 	public override void _ExitTree()
@@ -58,7 +58,7 @@ public partial class SNInfiniteBullnessVfx : Node2D
 		_cts?.Dispose();
 	}
 
-	private async Task PlayVfx()
+	private void PlayVfx()
 	{
 		_cts = new CancellationTokenSource();
 		foreach (GpuParticles2D particle in _particles)
@@ -66,7 +66,5 @@ public partial class SNInfiniteBullnessVfx : Node2D
 			particle.SelfModulate = _tint;
 			particle.Restart();
 		}
-		await Cmd.Wait(1.35f, _cts.Token);
-		this.QueueFreeSafely();
 	}
 }
