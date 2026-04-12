@@ -39,6 +39,16 @@ public partial class SNInfiniteBullnessVfx : Node2D
 
 	public override void _Ready()
 	{
+		if (_particles.Count == 0)
+		{
+			foreach (Node child in GetChildren())
+			{
+				if (child is GpuParticles2D gpu)
+				{
+					_particles.Add(gpu);
+				}
+			}
+		}
 		TaskHelper.RunSafely(PlayVfx());
 	}
 
@@ -56,7 +66,7 @@ public partial class SNInfiniteBullnessVfx : Node2D
 			particle.SelfModulate = _tint;
 			particle.Restart();
 		}
-		await Cmd.Wait(1f, _cts.Token);
+		await Cmd.Wait(1.35f, _cts.Token);
 		this.QueueFreeSafely();
 	}
 }
