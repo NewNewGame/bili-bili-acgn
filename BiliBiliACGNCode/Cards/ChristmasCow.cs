@@ -1,5 +1,5 @@
 //****************** 代码文件申明 ***********************
-//* 文件：InstantPoisonMilk(瞬发毒奶)
+//* 文件：ChristmasCow(圣诞牛)
 //* 作者：wheat
 //* 创建时间：2026/04/03
 //* 描述：抽取{Cards:diff()}张牌。若该牌带[gold]有一说一[/gold]，则获得{Block:diff()}点格挡。
@@ -17,7 +17,7 @@ using MegaCrit.Sts2.Core.Commands;
 namespace BiliBiliACGN.BiliBiliACGNCode.Cards;
 
 [Pool(typeof(BottleCardPool))]
-public sealed class InstantPoisonMilk : CardBaseModel
+public sealed class ChristmasCow : CardBaseModel
 {
     #region 卡牌关键词与悬停
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromKeyword(CustomKeyWords.YYSY)];
@@ -35,7 +35,7 @@ public sealed class InstantPoisonMilk : CardBaseModel
         new BlockVar(3m, ValueProp.Move)
     ];
 
-    public InstantPoisonMilk() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
+    public ChristmasCow() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
 
     #endregion
 
