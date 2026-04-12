@@ -1,5 +1,5 @@
 //****************** 代码文件申明 ***********************
-//* 文件：YouCaughtItToo(你也染上了？)
+//* 文件：BottlesNewYearWish(牛的新年愿望)
 //* 作者：wheat
 //* 创建时间：2026/04/03
 //* 描述：消耗。将随机一张攻击牌加入手牌，该牌带有[gold]有一说一[/gold]。
@@ -17,7 +17,7 @@ using MegaCrit.Sts2.Core.Commands;
 namespace BiliBiliACGN.BiliBiliACGNCode.Cards;
 
 [Pool(typeof(BottleCardPool))]
-public sealed class YouCaughtItToo : CardBaseModel
+public sealed class BottlesNewYearWish : CardBaseModel
 {
     #region 卡牌关键词与悬停
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
@@ -30,7 +30,7 @@ public sealed class YouCaughtItToo : CardBaseModel
     private const TargetType targetType = TargetType.Self;
     private const bool shouldShowInCardLibrary = true;
 
-    public YouCaughtItToo() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
+    public BottlesNewYearWish() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
 
     #endregion
 
