@@ -30,4 +30,13 @@ public static class OrbUtils
     {
         return rng.NextItem(FunShikiOrbs);
     }
+    /// <summary>
+    /// 随机获取一个泛式充能球
+    /// </summary>
+    /// <param name="card"></param>
+    /// <returns></returns>
+    public static OrbModel GetRandomFunShikiOrb(this CardModel card)
+    {
+        return GetRandomFunShikiOrb(card.CombatState.RunState.Rng.CombatOrbGeneration);
+    }
 }   
