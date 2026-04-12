@@ -5,7 +5,12 @@
 //* 描述：每当女儿获得格挡时，对随机敌人造成 Amount 点伤害
 //*******************************************************
 
+using BiliBiliACGN.BiliBiliACGNCode.Utils;
+using MegaCrit.Sts2.Core.Commands;
+using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
+using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.ValueProps;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Powers;
 
@@ -15,5 +20,14 @@ public sealed class SailorUniformPower : PowerBaseModel
 
     public override PowerStackType StackType => PowerStackType.Counter;
 
-    // TODO: 监听女儿获得格挡，DamageCmd 随机目标
+    public override async Task AfterBlockGained(Creature creature, decimal amount, ValueProp props, CardModel? cardSource)
+    {
+        if(creature != base.Owner) return;
+        if(base.Owner.CombatState == null) return;
+        // 随机获得一个敌人
+        var enemy = base.Owner.CombatState.RunState.Rng.CombatTargets.NextItem(base.Owner.CombatState.HittableEnemies);
+        if(enemy == null) return;
+        await CreatureCmd.Damage(CombatUtils.GetTemporaryPlayerChoiceContext(), enemy, base.Amount, ValueProp.Unpowered, cardSource);
+    }
+
 }

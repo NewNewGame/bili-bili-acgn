@@ -6,6 +6,7 @@
 //*******************************************************
 
 using BiliBiliACGN.BiliBiliACGNCode.Core.Models.Orbs;
+using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Models;
 using Rng = MegaCrit.Sts2.Core.Random.Rng;
 
@@ -38,5 +39,14 @@ public static class OrbUtils
     public static OrbModel GetRandomFunShikiOrb(this CardModel card)
     {
         return GetRandomFunShikiOrb(card.CombatState.RunState.Rng.CombatOrbGeneration);
+    }
+        /// <summary>
+    /// 随机获取一个泛式充能球
+    /// </summary>
+    /// <param name="card"></param>
+    /// <returns></returns>
+    public static OrbModel GetRandomFunShikiOrb(this CombatState combatState)
+    {
+        return GetRandomFunShikiOrb(combatState.RunState.Rng.CombatOrbGeneration);
     }
 }   

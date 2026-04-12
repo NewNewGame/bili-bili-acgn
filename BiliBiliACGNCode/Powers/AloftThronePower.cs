@@ -5,7 +5,13 @@
 //* 描述：每当女儿发动进攻时，抽 Amount 张牌
 //*******************************************************
 
+using BiliBiliACGN.BiliBiliACGNCode.Core.Models.Monsters;
+using MegaCrit.Sts2.Core.Commands;
+using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
+using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.ValueProps;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Powers;
 
@@ -15,5 +21,12 @@ public sealed class AloftThronePower : PowerBaseModel
 
     public override PowerStackType StackType => PowerStackType.Counter;
 
-    // TODO: 订阅女儿进攻事件，CardPileCmd.Draw
+    // 每当女儿发动进攻时，抽 Amount 张牌
+    public override async Task AfterDamageGiven(PlayerChoiceContext choiceContext, Creature? dealer, DamageResult result, ValueProp props, Creature target, CardModel? cardSource)
+    {
+        if(base.Owner.Player == null) return;
+        if(dealer == null || dealer.Monster is not Itsuka) return;
+        await CardPileCmd.Draw(choiceContext, base.Amount, base.Owner.Player);
+    }
+
 }
