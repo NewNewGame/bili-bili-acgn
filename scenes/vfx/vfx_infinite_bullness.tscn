@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://78h2x1u0jx8b"]
+
+[ext_resource type="Script" uid="uid://cup634cqbnqfx" path="res://BiliBiliACGNCode/Nodes/SNInfiniteBullnessVfx.cs" id="1_0kiqw"]
+[ext_resource type="Material" uid="uid://c1ud16eo41v5e" path="res://BiliBiliACGN/materials/vfx_infinite_bullness.tres" id="3_3vh63"]
+[ext_resource type="Texture2D" uid="uid://bo0x5nnrrn5h4" path="res://BiliBiliACGN/images/vfx/dot.png" id="4_3vh63"]
+
+[node name="VfxInfiniteBullness" type="Node2D"]
+script = ExtResource("1_0kiqw")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+material = ExtResource("3_3vh63")
+texture = ExtResource("4_3vh63")
+process_material = ExtResource("3_3vh63")

@@ -43,9 +43,11 @@ public sealed class InfiniteBullness : CardBaseModel
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
+        // 造成伤害
         await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue)
         .FromCard(this)
         .TargetingAllOpponents(base.CombatState)
+        .WithAttackerFx("vfx/vfx_infinite_bullness")
         .Execute(choiceContext);
         await PowerCmd.Apply<TangShiPower>(base.Owner.Creature, base.DynamicVars["Power"].BaseValue, base.Owner.Creature, this);
     }
