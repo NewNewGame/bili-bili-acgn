@@ -50,9 +50,10 @@ public sealed class BottleCharacter : PlaceholderCharacterModel
 	/// <summary>
 	/// 额外资产路径
 	/// </summary>
-    protected override IEnumerable<string> ExtraAssetPaths => new string[]{
+	protected override IEnumerable<string> ExtraAssetPaths => new string[]{
 		CustomVfxCmd.BerserkPath,
 		CustomVfxCmd.InfiniteBullnessPath,
+		CustomVfxCmd.NoRightToKnightMePath,
 	}.Select(SceneHelper.GetScenePath);
 
 

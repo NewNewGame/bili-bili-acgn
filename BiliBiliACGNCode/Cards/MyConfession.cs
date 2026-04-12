@@ -2,7 +2,7 @@
 //* 文件：MyConfession(我的忏悔)
 //* 作者：wheat
 //* 创建时间：2026/04/03
-//* 描述：造成{Damage:diff()}点伤害，重复等同于[gold]红温[/gold]次数的攻击，随后退出[gold]红怒[/gold]。消耗。
+//* 描述：使敌人失去{Damage:diff()}点生命，重复等同于[gold]红温[/gold]次数的攻击，随后退出[gold]红怒[/gold]。消耗。
 //*******************************************************
 
 using BaseLib.Utils;
@@ -35,7 +35,7 @@ public sealed class MyConfession : CardBaseModel
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new DamageVar(3m, ValueProp.Move),
+        new DamageVar(3m, ValueProp.Move|ValueProp.Unblockable|ValueProp.Unpowered),
         new CalculationBaseVar(0m),
         new CalculationExtraVar(1m),
         new CalculatedVar("CalculatedTimes").WithMultiplier((card, creature) => card.Owner.Creature.GetPowerAmount<AngerPower>())
@@ -47,12 +47,16 @@ public sealed class MyConfession : CardBaseModel
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        // 按当前 AngerPower 层数重复造成 Damage 次攻击；最后移除 RagePower（退出红怒）
-        await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue)
-            .FromCard(this)
-            .Targeting(cardPlay.Target)
-            .WithHitCount((int)((CalculatedVar)base.DynamicVars["CalculatedTimes"]).Calculate(cardPlay.Target))
-            .Execute(choiceContext);
+        if(cardPlay.Target != null){
+            // 按当前 AngerPower 层数重复造成 Damage 次攻击；最后移除 RagePower（退出红怒）
+            int atkTimes = (int)((CalculatedVar)base.DynamicVars["CalculatedTimes"]).Calculate(cardPlay.Target);
+            for(int i = 0; i < atkTimes; i++){
+                await CreatureCmd.Damage(choiceContext, cardPlay.Target, base.DynamicVars.Damage, base.Owner.Creature, this);
+                if(cardPlay.Target.IsDead) break;
+            }
+        }
+
+
         if(base.Owner.Creature.HasPower<BerserkPower>()){
             await PowerCmd.Remove<BerserkPower>(base.Owner.Creature);
         }
@@ -61,6 +65,6 @@ public sealed class MyConfession : CardBaseModel
     protected override void OnUpgrade()
     {
         base.EnergyCost.UpgradeBy(-1);
-        base.DynamicVars["Damage"].UpgradeValueBy(1m);
+        base.DynamicVars["CalculationBase"].UpgradeValueBy(1m);
     }
 }

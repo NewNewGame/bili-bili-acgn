@@ -93,7 +93,7 @@
   "BILIBILIACGN-IM_OUT.title": "走了走了",
   "BILIBILIACGN-IM_OUT.description": "造成{Damage:diff()}点伤害。\n抽取{Cards:diff()}张牌。\n每当你进入[gold]红怒[/gold]，这张牌回到你的[gold]手牌[/gold]。",
   "BILIBILIACGN-MY_CONFESSION.title": "我的忏悔",
-  "BILIBILIACGN-MY_CONFESSION.description": "造成{Damage:diff()}点伤害，{IsTargeting:重复{CalculatedTimes}次数的攻击|重复等同于你[gold]红温[/gold]次数的攻击}，随后退出[gold]红怒[/gold]。",
+  "BILIBILIACGN-MY_CONFESSION.description": "使敌人失去{Damage:diff()}点生命，{IsTargeting:重复{CalculatedTimes}次数的攻击|重复等同于你[gold]红温[/gold]次数的攻击}。\n随后退出[gold]红怒[/gold]。",
   "BILIBILIACGN-INTERPRET_YOUR_DREAM.title": "我阐释你的梦",
   "BILIBILIACGN-INTERPRET_YOUR_DREAM.description": "造成{Damage:diff()}点伤害。\n敌人本回合获得{IsTargeting:{CalculatedValue}|等同于你[gold]红温[/gold]}层[gold]变唐[/gold]。",
   "BILIBILIACGN-DONT_SAY_CHALLENGE.title": "不要说挑战",

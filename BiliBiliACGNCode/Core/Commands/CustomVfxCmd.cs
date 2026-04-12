@@ -5,6 +5,8 @@
 //* 描述：自定义VFX命令
 //*******************************************************
 
+using System.Linq;
+using BaseLib.Extensions;
 using Godot;
 using MegaCrit.Sts2.Core.Assets;
 using MegaCrit.Sts2.Core.Entities.Creatures;
@@ -19,6 +21,7 @@ public static class CustomVfxCmd
 {
     public static readonly string BerserkPath = "vfx/vfx_berserk";
     public static readonly string InfiniteBullnessPath = "vfx/vfx_infinite_bullness";
+    public static readonly string NoRightToKnightMePath = "vfx/vfx_no_right_to_knight_me";
     /// <summary>
     /// 去掉前缀 <c>vfx/</c>，按下划线分段，每段首字母大写后首尾拼接（无分隔符）。
     /// 例如 <c>vfx/vfx_infinite_bullness</c> → <c>VfxInfiniteBullness</c>。
