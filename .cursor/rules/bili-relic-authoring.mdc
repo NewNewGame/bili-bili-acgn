@@ -15,7 +15,7 @@ alwaysApply: false
 
 ## 数值与词条
 
-- 参考 `.cursor/rules/bili-csharp-file-header.mdc`
+- 参考 `.cursor/rules/bili-vars-authoring.mdc`
 
 ## 卡池 `[Pool(typeof(...))]`
 

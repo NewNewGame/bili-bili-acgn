@@ -13,6 +13,7 @@ alwaysApply: false
 - 继承 `CardBaseModel`（`BiliBiliACGN.BiliBiliACGNCode.Cards`），`public sealed class`，**类名 = 文件名**。
 - 构造函数：`base(energyCost, type, rarity, targetType, shouldShowInCardLibrary)`；战斗逻辑只放在 `OnPlay` / `OnUpgrade` / 少数专用回调（如 `OnTurnEndInHand`），**不要**在构造函数里打牌效。
 - 用 `#region` 划分「关键词与悬停」「卡牌属性配置」等，与同目录现有牌一致。
+- rarity 对应：基础（Basic）、罕见（Uncommon）、稀有（Rare）、诅咒（Curse）、任务（Quest）、事件（Event）、先古（Ancient）
 
 ## 卡池 `[Pool(typeof(...))]`
 
@@ -25,7 +26,7 @@ alwaysApply: false
 
 ## 数值与词条
 
-- 参考 `.cursor/rules/bili-csharp-file-header.mdc`
+- 参考 `.cursor/rules/bili-vars-authoring.mdc`
 
 ## 多人游戏专属
 
