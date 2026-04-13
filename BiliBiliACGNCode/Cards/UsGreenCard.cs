@@ -13,6 +13,7 @@ using BiliBiliACGN.BiliBiliACGNCode.Cards.CardPool;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Logging;
+using BiliBiliACGN.BiliBiliACGNCode.Utils;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Cards;
 
@@ -53,7 +54,7 @@ public sealed class UsGreenCard : CardBaseModel
         int n = cards.Count();
         // 遍历所有卡牌，自动打出带[gold]有一说一[/gold]的卡牌
         for(int i = 0; i < n; i++){
-            await CardCmd.AutoPlay(choiceContext, cards.ElementAt(i), null);
+            await AutoPlayUtils.AutoPlaySafely(choiceContext, cards.ElementAt(i));
         }
         // 抽取相同数量的牌
         if(n > 0){

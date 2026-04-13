@@ -12,6 +12,7 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using BiliBiliACGN.BiliBiliACGNCode.Cards.CardPool;
 using MegaCrit.Sts2.Core.HoverTips;
+using BiliBiliACGN.BiliBiliACGNCode.Utils;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Cards;
 
@@ -50,7 +51,7 @@ public sealed class OffFieldPlay : CardBaseModel
         var drawCards = await CardPileCmd.Draw(choiceContext, base.DynamicVars.Cards.BaseValue, base.Owner);
         foreach(var card in drawCards){
             if(card.Keywords.Contains(CustomKeyWords.YYSY)){
-                await CardCmd.AutoPlay(choiceContext, card, null);
+                await AutoPlayUtils.AutoPlaySafely(choiceContext, card);
             }
         }
     }
