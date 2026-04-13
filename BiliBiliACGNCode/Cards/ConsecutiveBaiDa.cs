@@ -29,7 +29,8 @@ public sealed class ConsecutiveBaiDa : CardBaseModel
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        // 将你的能量翻�?        await PlayerCmd.GainEnergy(base.Owner.PlayerCombatState.Energy, base.Owner);
+        // 将你的能量翻倍
+        await PlayerCmd.GainEnergy(base.Owner.PlayerCombatState.Energy, base.Owner);
     }
 
     protected override void OnUpgrade()

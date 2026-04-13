@@ -47,7 +47,7 @@ public sealed class WanCeJin : CardBaseModel
         for(int i = 0; i < cnt; i++){
             await OrbCmd.EvokeNext(choiceContext, base.Owner);
         }
-        await PlayerCmd.GainEnergy(base.DynamicVars["FocusPerOrb"].BaseValue * cnt, base.Owner);
+        await PowerCmd.Apply<FocusPower>(base.Owner.Creature, base.DynamicVars["FocusPerOrb"].BaseValue * cnt, base.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()

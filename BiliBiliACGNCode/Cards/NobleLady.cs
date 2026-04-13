@@ -39,7 +39,7 @@ public sealed class NobleLady : CardBaseModel
     {
         ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
         await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue).FromCard(this).Targeting(cardPlay.Target).Execute(choiceContext);
-        await PowerCmd.Apply<NobleLadyPower>(cardPlay.Target, base.DynamicVars["NobleLadyPower"].BaseValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<NobleLadyPower>(cardPlay.Target, 1m, base.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()

@@ -6,6 +6,7 @@
 //*******************************************************
 
 using BiliBiliACGN.BiliBiliACGNCode.Core.Models.Orbs;
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -25,9 +26,13 @@ public sealed class FanRemixAtelierPower : PowerBaseModel
         HoverTipFactory.FromOrb<AttackOrb>()
     ];
 
-    public override Task AfterPlayerTurnStart(PlayerChoiceContext choiceContext, Player player)
+    public override async Task AfterPlayerTurnStart(PlayerChoiceContext choiceContext, Player player)
     {
-        // TODO: 若 player 为施加者玩家：OrbCmd.Channel<AttackOrb>；PowerCmd.Decrement 或 Apply 负数减少 Amount；Amount 为 0 时 Remove
-        return Task.CompletedTask;
+        if(player != base.Owner.Player)
+        {
+            return;
+        }
+        await OrbCmd.Channel<AttackOrb>(choiceContext, base.Owner.Player);
+        await PowerCmd.Decrement(this);
     }
 }

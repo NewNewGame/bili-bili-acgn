@@ -52,5 +52,6 @@ public sealed class AnimeEmperorPower : PowerBaseModel
             data.triggerCount = 0;
             await OrbCmd.Channel(choiceContext, OrbUtils.GetRandomFunShikiOrb(base.Owner.CombatState), base.Owner.Player);
         }
+        InvokeDisplayAmountChanged();
     }
 }

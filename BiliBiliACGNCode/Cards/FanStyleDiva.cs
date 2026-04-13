@@ -47,7 +47,7 @@ public sealed class FanStyleDiva : CardBaseModel
             .FromCard(this)
             .Targeting(cardPlay.Target)
             .Execute(choiceContext);
-        await PowerCmd.Apply<MorbidPower>(base.Owner.Creature, base.DynamicVars["Morbid"].BaseValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<MorbidPower>(cardPlay.Target, base.DynamicVars["Morbid"].BaseValue, base.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()

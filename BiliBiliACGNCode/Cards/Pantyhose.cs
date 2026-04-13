@@ -43,7 +43,7 @@ public sealed class Pantyhose : CardBaseModel
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        await CreatureCmd.GainBlock(base.Owner.Creature, base.DynamicVars.CalculatedBlock.BaseValue, base.DynamicVars.CalculatedBlock.Props, cardPlay);
+        await CreatureCmd.GainBlock(base.Owner.Creature, base.DynamicVars.CalculatedBlock.Calculate(cardPlay.Target), base.DynamicVars.CalculatedBlock.Props, cardPlay);
     }
 
     protected override void OnUpgrade()

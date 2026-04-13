@@ -25,7 +25,7 @@ public sealed class DestinyStagePower : PowerBaseModel
     /// </summary>
     /// <param name="choiceContext">选择上下文</param>
     /// <param name="cardPlay">卡牌打出</param>
-    public override async Task AfterCardPlayed(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+    public override async Task AfterCardPlayedLate(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         if(cardPlay.Card.Type != CardType.Power || cardPlay.Card.Owner != base.Owner.Player) return;
         for(int i = 0; i < base.Amount; i++){

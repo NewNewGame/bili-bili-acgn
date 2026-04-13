@@ -19,7 +19,7 @@ public sealed class NewSeasonWonderHousePower : PowerBaseModel
     public override PowerStackType StackType => PowerStackType.Counter;
 
     // 每当你打出能力牌时，获得 Amount 点能量
-    public override async Task AfterCardPlayed(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+    public override async Task AfterCardPlayedLate(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         if(cardPlay.Card.Owner != base.Owner.Player) return;
         if(cardPlay.Card.Type != CardType.Power) return;

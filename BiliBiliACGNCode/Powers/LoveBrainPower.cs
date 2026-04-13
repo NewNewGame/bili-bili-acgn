@@ -39,6 +39,7 @@ public sealed class LoveBrainPower : PowerBaseModel
                 await PlayerCmd.GainEnergy(1, base.Owner.Player);
                 data.appliedTime = 0;
             }
+            InvokeDisplayAmountChanged();
         }
     }
 }

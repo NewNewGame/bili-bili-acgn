@@ -33,7 +33,7 @@ public sealed class BlackRabbit : CardBaseModel
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
-        var damageResults = await DaughterCmd.ApplyAttack(base.Owner.Creature, base.DynamicVars.Damage.BaseValue, choiceContext, cardPlay.Target);
+        var damageResults = await DaughterCmd.ApplyAttack(base.Owner.Creature, 0m, choiceContext, cardPlay.Target);
         await CreatureCmd.GainBlock(base.Owner.Creature, damageResults.Sum((DamageResult r) => r.TotalDamage + r.OverkillDamage), ValueProp.Move, cardPlay);
     }
 

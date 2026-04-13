@@ -23,7 +23,7 @@ public sealed class ChuunibyouNotePower : PowerBaseModel
     /// <param name="choiceContext"></param>
     /// <param name="cardPlay"></param>
     /// <returns></returns>
-    public override async Task AfterCardPlayed(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+    public override async Task AfterCardPlayedLate(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         if(cardPlay.Card.Owner == base.Owner.Player && cardPlay.Card.Type == CardType.Power)
         {

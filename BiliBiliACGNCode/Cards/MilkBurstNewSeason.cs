@@ -29,7 +29,7 @@ public sealed class MilkBurstNewSeason : CardBaseModel
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new DynamicVar("Energy", 1m)
+        new EnergyVar(1)
     ];
 
     public MilkBurstNewSeason() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
