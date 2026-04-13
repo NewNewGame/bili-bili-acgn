@@ -33,7 +33,7 @@ public sealed class KuyaXi : CardBaseModel
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new DynamicVar("NextEnergy", 2m),
+        new EnergyVar(2),
         new DynamicVar("Strength", 2m)
     ];
 
@@ -44,7 +44,12 @@ public sealed class KuyaXi : CardBaseModel
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         // 在下个回合获得{NextEnergy:diff()}点能量并给予女儿{Strength:diff()}点[gold]力量[/gold]。
-        await PowerCmd.Apply<EnergyNextTurnPower>(base.Owner.Creature, base.DynamicVars["NextEnergy"].BaseValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<EnergyNextTurnPower>(base.Owner.Creature, base.DynamicVars.Energy.BaseValue, base.Owner.Creature, this);
         await DaughterCmd.ApplyPower<DelayedStrengthPower>(base.Owner.Creature, base.DynamicVars["Strength"].BaseValue, choiceContext, this);
+    }
+    protected override void OnUpgrade()
+    {
+        base.DynamicVars["Strength"].UpgradeValueBy(1m);
+        base.DynamicVars.Energy.UpgradeValueBy(1m);
     }
 }

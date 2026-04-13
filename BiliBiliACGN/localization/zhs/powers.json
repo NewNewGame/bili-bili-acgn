@@ -208,12 +208,12 @@
   "BILIBILIACGN-TASTE_HISTORIAN_POWER.smartDescription": "每当你[gold]激发[/gold]1个充能球时，抽[blue]{Amount}[/blue]张牌。",
 
   "BILIBILIACGN-NEW_SEASON_GUIDE_POWER.title": "新番导视",
-  "BILIBILIACGN-NEW_SEASON_GUIDE_POWER.description": "在你的回合开始时，触发你最左侧的充能球的被动能力[blue]1[/blue]次。",
-  "BILIBILIACGN-NEW_SEASON_GUIDE_POWER.smartDescription": "在你的回合开始时，触发你最左侧的充能球的被动能力[blue]{Amount}[/blue]次。",
+  "BILIBILIACGN-NEW_SEASON_GUIDE_POWER.description": "在你的回合开始时，触发你最左侧的充能球的[gold]被动[/gold]能力[blue]1[/blue]次。",
+  "BILIBILIACGN-NEW_SEASON_GUIDE_POWER.smartDescription": "在你的回合开始时，触发你最左侧的充能球的[gold]被动[/gold]能力[blue]{Amount}[/blue]次。",
 
   "BILIBILIACGN-ANIME_EMPEROR_POWER.title": "动漫皇帝",
-  "BILIBILIACGN-ANIME_EMPEROR_POWER.description": "每当你[gold]激发[/gold][blue]4[/blue]个充能球，随机生成[blue]1[/blue]个充能球。",
-  "BILIBILIACGN-ANIME_EMPEROR_POWER.smartDescription": "每当你[gold]激发[/gold][blue]{Amount}[/blue]个充能球，随机生成[blue]1[/blue]个充能球。",
+  "BILIBILIACGN-ANIME_EMPEROR_POWER.description": "每当你[gold]激发[/gold][blue]4[/blue]个充能球，随机[gold]生成[/gold][blue]1[/blue]个[gold]攻击[/gold]充能球。",
+  "BILIBILIACGN-ANIME_EMPEROR_POWER.smartDescription": "每当你[gold]激发[/gold][blue]{Amount}[/blue]个充能球，随机[gold]生成[/gold][blue]1[/blue]个[gold]攻击[/gold]充能球。",
 
   "BILIBILIACGN-NOBLE_LADY_POWER.title": "大家闺秀",
   "BILIBILIACGN-NOBLE_LADY_POWER.description": "在本回合内，每[gold]激发[/gold][blue]1[/blue]个充能球女儿向该敌人[gold]进攻[/gold]1次。",
@@ -224,6 +224,6 @@
   "BILIBILIACGN-DELAYED_STRENGTH_POWER.smartDescription": "在你下一个回合开始时，获得[blue]{Amount}[/blue]点[gold]力量[/gold]。",
 
   "BILIBILIACGN-FAN_REMIX_ATELIER_POWER.title": "泛式二创屋",
-  "BILIBILIACGN-FAN_REMIX_ATELIER_POWER.description": "在接下来回合开始时，生成[blue]1[/blue]个[gold]攻击[/gold]充能球。",
-  "BILIBILIACGN-FAN_REMIX_ATELIER_POWER.smartDescription": "在接下来[blue]{Amount}[/blue]个回合开始时，各生成[blue]1[/blue]个[gold]攻击[/gold]充能球。"
+  "BILIBILIACGN-FAN_REMIX_ATELIER_POWER.description": "在接下来回合开始时，[gold]生成[/gold][blue]1[/blue]个[gold]攻击[/gold]充能球。",
+  "BILIBILIACGN-FAN_REMIX_ATELIER_POWER.smartDescription": "在接下来[blue]{Amount}[/blue]个回合开始时，[gold]生成[/gold][blue]1[/blue]个[gold]攻击[/gold]充能球。"
 }
