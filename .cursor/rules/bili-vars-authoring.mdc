@@ -1,0 +1,13 @@
+---
+description: BiliBiliACGN 模组 C# 数值、属性、Hover 相关（创建/新建 .cs 时必填）
+globs: BiliBiliACGNCode/**/*.cs
+alwaysApply: false
+---
+
+## 卡牌(Card)、遗物(Relic)、能力(Power)数值与词条
+
+- 变量统一 `protected override IEnumerable<DynamicVar> CanonicalVars`；优先 `DamageVar` / `BlockVar` + `ValueProp.Move` ，能量优先用`EnergyVar`，抽卡牌用`CardsVar`其余用 `new DynamicVar("Name", n)`。
+- 关键词：`public override IEnumerable<CardKeyword> CanonicalKeywords` → `CardKeyword.Exhaust`、`Retain`、`Innate` 或 `CustomKeyWords.YYSY`（定义见 `CustomKeyWords.cs`）。
+- 悬停：`ExtraHoverTips` 用 `HoverTipFactory.FromPower<T>()` / `FromKeyword(CustomKeyWords.*)`/ `FromRelic`/`FromCard`/`HoverTipFactory.Static(...)，格挡StaticHoverTip.Block，生成StaticHoverTip.Channeling，激发StaticHoverTip.Evoke`等；需要与**模组** Power 同屏且会与 `MegaCrit.Sts2.Core.Models.Powers` 冲突时，用 **`using Alias = BiliBiliACGN.BiliBiliACGNCode.Powers.SomePower`**（见 `ReallyUnsubscribed` 等）。
+
+

@@ -16,7 +16,7 @@ alwaysApply: false
 
 ## 数值与词条
 
-- 参考 `.cursor/rules/bili-csharp-file-header.mdc`
+- 参考 `.cursor/rules/bili-vars-authoring.mdc`
 
 ## 本身Amount变化
 - 减少： 减少1优先使用`PowerCmd.Decrement(this)`/更多值时使用`PowerCmd.Apply<TPower>(目标, -数量, 施加者, null)`
