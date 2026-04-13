@@ -48,7 +48,7 @@ public sealed class MinusTwentyMillionFruit : CardBaseModel
         int attackCount = base.DynamicVars["Hits"].IntValue;
         for(int i = 0; i < attackCount; i++)
         {
-            await DaughterCmd.ApplyAttack(base.Owner.Creature, base.DynamicVars.Damage.BaseValue, choiceContext, cardPlay.Target);
+            await DaughterCmd.ApplyAttack(base.Owner.Creature, 0m, choiceContext, cardPlay.Target);
             await Cmd.Wait(0.25f);
         }
         await PowerCmd.Apply<WeakPower>(base.Owner.Creature, base.DynamicVars["Weak"].BaseValue, base.Owner.Creature, this);

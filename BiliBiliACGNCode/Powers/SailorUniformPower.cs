@@ -23,11 +23,11 @@ public sealed class SailorUniformPower : PowerBaseModel
     public override async Task AfterBlockGained(Creature creature, decimal amount, ValueProp props, CardModel? cardSource)
     {
         if(creature != base.Owner) return;
-        if(base.Owner.CombatState == null) return;
+        if(base.CombatState == null) return;
         // 随机获得一个敌人
-        var enemy = base.Owner.CombatState.RunState.Rng.CombatTargets.NextItem(base.Owner.CombatState.HittableEnemies);
+        var enemy = base.CombatState.RunState.Rng.CombatTargets.NextItem(base.CombatState.HittableEnemies);
         if(enemy == null) return;
-        await CreatureCmd.Damage(CombatUtils.GetTemporaryPlayerChoiceContext(), enemy, base.Amount, ValueProp.Unpowered, cardSource);
+        await CreatureCmd.Damage(CombatUtils.GetTemporaryPlayerChoiceContext(), enemy, base.Amount, ValueProp.Unpowered,base.Owner);
     }
 
 }

@@ -225,5 +225,9 @@
 
   "BILIBILIACGN-FAN_REMIX_ATELIER_POWER.title": "泛式二创屋",
   "BILIBILIACGN-FAN_REMIX_ATELIER_POWER.description": "在接下来回合开始时，[gold]生成[/gold][blue]1[/blue]个[gold]攻击[/gold]充能球。",
-  "BILIBILIACGN-FAN_REMIX_ATELIER_POWER.smartDescription": "在接下来[blue]{Amount}[/blue]个回合开始时，[gold]生成[/gold][blue]1[/blue]个[gold]攻击[/gold]充能球。"
+  "BILIBILIACGN-FAN_REMIX_ATELIER_POWER.smartDescription": "在接下来[blue]{Amount}[/blue]个回合开始时，[gold]生成[/gold][blue]1[/blue]个[gold]攻击[/gold]充能球。",
+
+  "BILIBILIACGN-FOCUS_LOSS_POWER.title": "集中损失",
+  "BILIBILIACGN-FOCUS_LOSS_POWER.description": "本回合结束时，失去[blue]1[/blue]点[gold]集中[/gold]。",
+  "BILIBILIACGN-FOCUS_LOSS_POWER.smartDescription": "本回合结束时，失去[blue]{Amount}[/blue]点[gold]集中[/gold]。"
 }

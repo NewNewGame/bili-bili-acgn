@@ -11,11 +11,28 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
+using MegaCrit.Sts2.Core.Models;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Powers;
 
 public sealed class DestinyStagePower : PowerBaseModel
 {
+    private class Data
+    {
+        public readonly Dictionary<CardModel, int> amountsForPlayedCards = new Dictionary<CardModel, int>();
+    }
+    protected override object InitInternalData()
+    {
+        return new Data();
+    }
+    public override Task BeforeCardPlayed(CardPlay cardPlay)
+    {
+        if(cardPlay.Card.Owner != base.Owner.Player) return Task.CompletedTask;
+        if(cardPlay.Card.Type != CardType.Power) return Task.CompletedTask;
+        GetInternalData<Data>().amountsForPlayedCards.Add(cardPlay.Card, base.Amount);
+        return Task.CompletedTask;
+    }
+
     public override PowerType Type => PowerType.Buff;
 
     public override PowerStackType StackType => PowerStackType.Counter;
@@ -25,15 +42,18 @@ public sealed class DestinyStagePower : PowerBaseModel
     /// </summary>
     /// <param name="choiceContext">选择上下文</param>
     /// <param name="cardPlay">卡牌打出</param>
-    public override async Task AfterCardPlayedLate(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+    public override async Task AfterCardPlayed(PlayerChoiceContext context, CardPlay cardPlay)
     {
-        if(cardPlay.Card.Type != CardType.Power || cardPlay.Card.Owner != base.Owner.Player) return;
-        for(int i = 0; i < base.Amount; i++){
-            await OrbCmd.Channel(choiceContext, OrbUtils.GetRandomFunShikiOrb(cardPlay.Card), base.Owner.Player);
-            if(i < base.Amount - 1)
-            {
-                await Cmd.Wait(0.25f);
+        if(cardPlay.Card.Owner == base.Owner.Player && GetInternalData<Data>().amountsForPlayedCards.Remove(cardPlay.Card, out var value) && value > 0)
+        {
+            for(int i = 0; i < value; i++){
+                await OrbCmd.Channel(context, OrbUtils.GetRandomFunShikiOrb(cardPlay.Card), base.Owner.Player);
+                if(i < value - 1)
+                {
+                    await Cmd.Wait(0.1f);
+                }
             }
         }
     }
+
 }
