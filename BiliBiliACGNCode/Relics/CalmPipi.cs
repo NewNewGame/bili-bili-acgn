@@ -17,6 +17,7 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.Models.RelicPools;
+using MegaCrit.Sts2.Core.Rooms;
 using MegaCrit.Sts2.Core.ValueProps;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Relics;
@@ -72,5 +73,10 @@ public sealed class CalmPipi : RelicBaseModel
 		{
             dmg += result.UnblockedDamage;
 		}
+    }
+    public override Task AfterCombatEnd(CombatRoom room)
+    {
+        UpdateValue(0m);
+        return base.AfterCombatEnd(room);
     }
 }
