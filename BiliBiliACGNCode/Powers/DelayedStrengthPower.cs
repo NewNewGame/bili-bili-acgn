@@ -5,6 +5,7 @@
 //* 描述：在你下一个回合开始时，获得力量（数值见 Amount / CanonicalVars）。
 //*******************************************************
 
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -21,9 +22,13 @@ public sealed class DelayedStrengthPower : PowerBaseModel
 
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<StrengthPower>()];
 
-    public override Task AfterPlayerTurnStart(PlayerChoiceContext choiceContext, Player player)
+    public override async Task AfterPlayerTurnStart(PlayerChoiceContext choiceContext, Player player)
     {
-        // TODO: 仅在「下一」玩家回合开始时生效：对 base.Owner 施加 StrengthPower（层数取 Strength/Amount）；随后移除本能力
-        return Task.CompletedTask;
+        if(player != base.Owner.Player)
+        {
+            return;
+        }
+        await PowerCmd.Apply<StrengthPower>(base.Owner, Amount, base.Owner, null);
+        await PowerCmd.Remove(this);
     }
 }

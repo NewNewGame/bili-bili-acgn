@@ -42,7 +42,7 @@ public sealed class FunShikiCardPool : CustomCardPoolModel
 
     protected override CardModel[] GenerateAllCards()
     {
-        // 所有[Pool(typeof(FanshikiCardPool))]的卡牌
+        // 所有[Pool(typeof(FunShikiCardPool))]的卡牌
         return [
             ModelDb.Card<QianDaJiang>(),
             ModelDb.Card<MawaluMawalu>(),
