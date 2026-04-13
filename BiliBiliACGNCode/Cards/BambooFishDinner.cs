@@ -49,6 +49,6 @@ public sealed class BambooFishDinner : CardBaseModel
 
     protected override void OnUpgrade()
     {
-        base.DynamicVars["ExtraDamage"].UpgradeValueBy(1m);
+        base.DynamicVars["ExtraDamage"].UpgradeValueBy(2m);
     }
 }

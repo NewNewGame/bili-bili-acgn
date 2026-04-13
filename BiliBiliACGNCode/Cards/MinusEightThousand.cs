@@ -28,7 +28,7 @@ public sealed class MinusEightThousand : CardBaseModel
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new DynamicVar("RandomOrbs", 1m),
+        new DynamicVar("RandomOrbs", 2m),
     ];
 
     public MinusEightThousand() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }

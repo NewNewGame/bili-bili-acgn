@@ -26,5 +26,6 @@ public static class TouchOfOrobasGetUpgradedStarterRelicPatch
         if(__result.ContainsKey(ModelDb.Relic<Alzheimer>().Id))
             return;
         __result[ModelDb.Relic<Alzheimer>().Id] = ModelDb.Relic<AlzheimerLateStage>();
+        __result[ModelDb.Relic<EiHeiJiangMask>().Id] = ModelDb.Relic<WindRangerMask>();
     }
 }
