@@ -11,6 +11,7 @@ using MegaCrit.Sts2.Core.Models;
 using BiliBiliACGN.BiliBiliACGNCode.Cards;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
+using BiliBiliACGN.BiliBiliACGNCode.Utils;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Powers;
 
@@ -52,7 +53,7 @@ public sealed class ChairTuberPower : PowerBaseModel
             if(card.Keywords.Contains(CustomKeyWords.YYSY) && !AutoplayingCards.Contains(card)){
                 currentAmount++;
                 AutoplayingCards.Add(card);
-                await CardCmd.AutoPlay(choiceContext, card, null);
+                await AutoPlayUtils.AutoPlaySafely(choiceContext, card);
                 AutoplayingCards.Remove(card);
             }
         }
