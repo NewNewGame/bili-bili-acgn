@@ -1,0 +1,54 @@
+//****************** 代码文件申明 ***********************
+//* 文件：MinusTwentyMillionFruit(负2000万果)
+//* 作者：wheat
+//* 创建时间：2026/04/11
+//* 描述：女儿向敌人发动{Hits:diff()}次[gold]进攻[/gold]。给予{Weak:diff()}层[gold]虚弱[/gold]。
+//*******************************************************
+
+using BaseLib.Utils;
+using BiliBiliACGN.BiliBiliACGNCode.Cards.CardPool;
+using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.HoverTips;
+using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.Models.Powers;
+using MegaCrit.Sts2.Core.ValueProps;
+
+namespace BiliBiliACGN.BiliBiliACGNCode.Cards;
+
+[Pool(typeof(FunShikiCardPool))]
+public sealed class MinusTwentyMillionFruit : CardBaseModel
+{
+    #region 卡牌关键词与悬停
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Innate];
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<WeakPower>()];
+    #endregion
+    #region 卡牌属性配置
+    private const int energyCost = 0;
+    private const CardType type = CardType.Attack;
+    private const CardRarity rarity = CardRarity.Ancient;
+    private const TargetType targetType = TargetType.AnyEnemy;
+    private const bool shouldShowInCardLibrary = true;
+
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    [
+        new DynamicVar("Hits", 2m),
+        new DynamicVar("Weak", 3m)
+    ];
+
+    public MinusTwentyMillionFruit() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
+
+    #endregion
+
+    protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+    {
+        // TODO: 女儿 Hits 次进攻；WeakPower
+        await Task.CompletedTask;
+    }
+
+    protected override void OnUpgrade()
+    {
+        base.DynamicVars["Hits"].UpgradeValueBy(1m);
+        base.DynamicVars["Weak"].UpgradeValueBy(2m);
+    }
+}
