@@ -73,4 +73,9 @@ public sealed class CalmPipi : RelicBaseModel
             dmg += result.UnblockedDamage;
 		}
     }
+    public override Task AfterCombatEnd(CombatRoom room)
+    {
+        UpdateValue(0m);
+        return base.AfterCombatEnd(room);
+    }
 }
