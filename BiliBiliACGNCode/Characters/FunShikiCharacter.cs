@@ -44,7 +44,18 @@ public sealed class FunShikiCharacter : PlaceholderCharacterModel
 	public override string CustomCharacterSelectTransitionPath => "res://BiliBiliACGN/materials/transitions/" + PlaceholderID + "_transition_mat.tres";
 
 	public override IEnumerable<CardModel> StartingDeck => [
-
+		ModelDb.Card<WhirlwindStrike>(),
+		ModelDb.Card<WhirlwindStrike>(),
+		ModelDb.Card<WhirlwindStrike>(),
+		ModelDb.Card<WhirlwindStrike>(),
+		ModelDb.Card<WhirlwindStrike>(),
+		ModelDb.Card<FunShikiDefend>(),
+		ModelDb.Card<FunShikiDefend>(),
+		ModelDb.Card<FunShikiDefend>(),
+		ModelDb.Card<FunShikiDefend>(),
+		ModelDb.Card<FunShikiDefend>(),
+		ModelDb.Card<ZeroFruit>(),
+		ModelDb.Card<MangaArtistKirito>(),
 	];
 
 	public override IReadOnlyList<RelicModel> StartingRelics => [
