@@ -7,6 +7,7 @@
 
 using BaseLib.Utils;
 using BiliBiliACGN.BiliBiliACGNCode.Cards.CardPool;
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
@@ -43,8 +44,14 @@ public sealed class FanBaYe : CardBaseModel
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        // TODO: 伤害；按当前充能球不同种类数 × Cards 抽牌
-        await Task.CompletedTask;
+        // 造成{Damage:diff()}点伤害。你每有一种不同的充能球，抽{Cards:diff()}张牌。
+        await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue)
+            .FromCard(this)
+            .Targeting(cardPlay.Target)
+            .Execute(choiceContext);
+        int num = (from orb in base.Owner.PlayerCombatState.OrbQueue.Orbs
+				group orb by orb.Id).Count();
+        await CardPileCmd.Draw(choiceContext, base.DynamicVars["Cards"].BaseValue * num, base.Owner);
     }
 
     protected override void OnUpgrade()

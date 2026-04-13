@@ -7,10 +7,11 @@
 
 using BaseLib.Utils;
 using BiliBiliACGN.BiliBiliACGNCode.Cards.CardPool;
+using BiliBiliACGN.BiliBiliACGNCode.Core.Commands;
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
-using MegaCrit.Sts2.Core.ValueProps;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Cards;
 
@@ -35,8 +36,12 @@ public sealed class TataKai : CardBaseModel
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        // TODO: 对目标重复 DaughterCmd.ApplyAttack(owner, 0, choiceContext, target) 共 Hits 次
-        await Task.CompletedTask;
+        // 女儿向敌人发动{Hits:diff()}次[gold]进攻[/gold]。
+        int hits = base.DynamicVars["Hits"].IntValue;
+        for(int i = 0; i < hits; i++)
+        {
+            await DaughterCmd.ApplyAttack(base.Owner.Creature, 0, choiceContext, cardPlay.Target);
+        }
     }
 
     protected override void OnUpgrade()

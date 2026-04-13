@@ -8,6 +8,7 @@
 using BaseLib.Utils;
 using BiliBiliACGN.BiliBiliACGNCode.Cards.CardPool;
 using BiliBiliACGN.BiliBiliACGNCode.Powers;
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
@@ -39,8 +40,8 @@ public sealed class AishiteruRailway : CardBaseModel
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        // TODO: 施加 Power：监听打出能力牌，对随机敌人叠病态 Morbid
-        await Task.CompletedTask;
+        await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
+        await PowerCmd.Apply<AishiteruRailwayPower>(base.Owner.Creature, base.DynamicVars["Morbid"].BaseValue, base.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()

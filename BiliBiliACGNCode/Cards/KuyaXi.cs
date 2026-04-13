@@ -7,6 +7,9 @@
 
 using BaseLib.Utils;
 using BiliBiliACGN.BiliBiliACGNCode.Cards.CardPool;
+using BiliBiliACGN.BiliBiliACGNCode.Core.Commands;
+using BiliBiliACGN.BiliBiliACGNCode.Powers;
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
@@ -40,7 +43,8 @@ public sealed class KuyaXi : CardBaseModel
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        // TODO: 下回合能量 + 女儿下回合/即时力量（按设计用 Power 或 PlayerBuff）
-        await Task.CompletedTask;
+        // 在下个回合获得{NextEnergy:diff()}点能量并给予女儿{Strength:diff()}点[gold]力量[/gold]。
+        await PowerCmd.Apply<EnergyNextTurnPower>(base.Owner.Creature, base.DynamicVars["NextEnergy"].BaseValue, base.Owner.Creature, this);
+        await DaughterCmd.ApplyPower<DelayedStrengthPower>(base.Owner.Creature, base.DynamicVars["Strength"].BaseValue, choiceContext, this);
     }
 }

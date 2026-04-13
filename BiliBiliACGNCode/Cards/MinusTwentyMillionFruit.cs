@@ -7,6 +7,8 @@
 
 using BaseLib.Utils;
 using BiliBiliACGN.BiliBiliACGNCode.Cards.CardPool;
+using BiliBiliACGN.BiliBiliACGNCode.Core.Commands;
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
@@ -42,8 +44,14 @@ public sealed class MinusTwentyMillionFruit : CardBaseModel
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        // TODO: 女儿 Hits 次进攻；WeakPower
-        await Task.CompletedTask;
+        // 女儿向敌人发动{Hits:diff()}次[gold]进攻[/gold]。给予{Weak:diff()}层[gold]虚弱[/gold]。
+        int attackCount = base.DynamicVars["Hits"].IntValue;
+        for(int i = 0; i < attackCount; i++)
+        {
+            await DaughterCmd.ApplyAttack(base.Owner.Creature, base.DynamicVars.Damage.BaseValue, choiceContext, cardPlay.Target);
+            await Cmd.Wait(0.25f);
+        }
+        await PowerCmd.Apply<WeakPower>(base.Owner.Creature, base.DynamicVars["Weak"].BaseValue, base.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()

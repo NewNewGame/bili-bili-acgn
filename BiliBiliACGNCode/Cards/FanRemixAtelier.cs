@@ -8,6 +8,8 @@
 using BaseLib.Utils;
 using BiliBiliACGN.BiliBiliACGNCode.Cards.CardPool;
 using BiliBiliACGN.BiliBiliACGNCode.Core.Models.Orbs;
+using BiliBiliACGN.BiliBiliACGNCode.Powers;
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
@@ -35,7 +37,7 @@ public sealed class FanRemixAtelier : CardBaseModel
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new BlockVar(4m, ValueProp.Move),
+        new BlockVar(5m, ValueProp.Move),
         new DynamicVar("Rounds", 2m)
     ];
 
@@ -45,8 +47,9 @@ public sealed class FanRemixAtelier : CardBaseModel
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        // TODO: GainBlock；施加 Power：后续 Rounds 个回合开始各 Channel 1 个 AttackOrb
-        await Task.CompletedTask;
+        // 获得{Block:diff()}点[gold]格挡[/gold]。在接下来{Rounds:diff()}个回合开始时，生成1个[gold]攻击[/gold]充能球。
+        await CreatureCmd.GainBlock(base.Owner.Creature, base.DynamicVars.Block.BaseValue, base.DynamicVars.Block.Props, cardPlay);
+        await PowerCmd.Apply<FanRemixAtelierPower>(base.Owner.Creature, base.DynamicVars["Rounds"].BaseValue, base.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()

@@ -8,6 +8,7 @@
 using BaseLib.Utils;
 using BiliBiliACGN.BiliBiliACGNCode.Cards.CardPool;
 using BiliBiliACGN.BiliBiliACGNCode.Core.Models.Orbs;
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
@@ -45,8 +46,15 @@ public sealed class CrazyStackArmor : CardBaseModel
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        // TODO: 造成伤害；循环 Channel BlockOrb BlockOrbs 次
-        await Task.CompletedTask;
+        // 造成{Damage:diff()}点伤害。生成{BlockOrbs:diff()}个[gold]格挡[/gold]充能球。
+        await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue)
+            .FromCard(this)
+            .Targeting(cardPlay.Target)
+            .Execute(choiceContext);
+        for(int i = 0; i < base.DynamicVars["BlockOrbs"].IntValue; i++)
+        {
+            await OrbCmd.Channel<BlockOrb>(choiceContext, base.Owner);
+        }
     }
 
     protected override void OnUpgrade()

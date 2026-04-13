@@ -7,12 +7,13 @@
 
 using BaseLib.Utils;
 using BiliBiliACGN.BiliBiliACGNCode.Cards.CardPool;
+using BiliBiliACGN.BiliBiliACGNCode.Core.Commands;
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models.Powers;
-using MegaCrit.Sts2.Core.ValueProps;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Cards;
 
@@ -40,7 +41,8 @@ public sealed class ZeroFruit : CardBaseModel
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        // TODO: DaughterCmd.ApplyAttack；WeakPower
-        await Task.CompletedTask;
+        // 女儿向敌人发动1次[gold]进攻[/gold]。给予{Weak:diff()}层[gold]虚弱[/gold]。
+        await DaughterCmd.ApplyAttack(base.Owner.Creature, base.DynamicVars.Damage.BaseValue, choiceContext, cardPlay.Target);
+        await PowerCmd.Apply<WeakPower>(base.Owner.Creature, base.DynamicVars["Weak"].BaseValue, base.Owner.Creature, this);
     }
 }

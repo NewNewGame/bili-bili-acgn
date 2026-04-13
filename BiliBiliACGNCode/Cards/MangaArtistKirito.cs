@@ -8,6 +8,7 @@
 using BaseLib.Utils;
 using BiliBiliACGN.BiliBiliACGNCode.Cards.CardPool;
 using BiliBiliACGN.BiliBiliACGNCode.Core.Models.Orbs;
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
@@ -37,7 +38,7 @@ public sealed class MangaArtistKirito : CardBaseModel
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        // TODO: OrbCmd.Channel<AttackOrb>
-        await Task.CompletedTask;
+        // 生成1个[gold]攻击[/gold]充能球。
+        await OrbCmd.Channel<AttackOrb>(choiceContext, base.Owner);
     }
 }

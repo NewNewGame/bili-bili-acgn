@@ -7,6 +7,8 @@
 
 using BaseLib.Utils;
 using BiliBiliACGN.BiliBiliACGNCode.Cards.CardPool;
+using BiliBiliACGN.BiliBiliACGNCode.Core.Commands;
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
@@ -40,8 +42,9 @@ public sealed class FrenchAccent : CardBaseModel
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        // TODO: DaughterCmd.ApplyPower<StrengthPower>；抽 Cards
-        await Task.CompletedTask;
+        // 给予女儿{Strength:diff()}点[gold]力量[/gold]。抽取{Cards:diff()}张牌。
+        await DaughterCmd.ApplyPower<StrengthPower>(base.Owner.Creature, base.DynamicVars["Strength"].BaseValue, choiceContext, this);
+        await CardPileCmd.Draw(choiceContext, base.DynamicVars["Cards"].BaseValue, base.Owner);
     }
 
     protected override void OnUpgrade()

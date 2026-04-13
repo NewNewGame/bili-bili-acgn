@@ -7,6 +7,8 @@
 
 using BaseLib.Utils;
 using BiliBiliACGN.BiliBiliACGNCode.Cards.CardPool;
+using BiliBiliACGN.BiliBiliACGNCode.Core.Commands;
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
@@ -17,11 +19,7 @@ namespace BiliBiliACGN.BiliBiliACGNCode.Cards;
 public sealed class UtterMadness : CardBaseModel
 {
     #region 卡牌关键词与悬停
-    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-    [
-        HoverTipFactory.Static(StaticHoverTip.Channeling),
-        HoverTipFactory.Static(StaticHoverTip.Evoke)
-    ];
+
     #endregion
     #region 卡牌属性配置
     private const int energyCost = 1;
@@ -36,7 +34,13 @@ public sealed class UtterMadness : CardBaseModel
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        // TODO: 基础：按充能球不同种类数，女儿向目标各进攻 1 次；升级：按充能球总个数
-        await Task.CompletedTask;
+        // 女儿向敌人发动{Hits:diff()}次[gold]进攻[/gold]。
+        int num = base.IsUpgraded ? base.Owner.PlayerCombatState.OrbQueue.Orbs.Count() : (from orb in base.Owner.PlayerCombatState.OrbQueue.Orbs
+				group orb by orb.Id).Count();
+        for(int i = 0; i < num; i++)
+        {
+            await DaughterCmd.ApplyAttack(base.Owner.Creature, 0, choiceContext, cardPlay.Target);
+            await Cmd.Wait(0.25f);
+        }
     }
 }

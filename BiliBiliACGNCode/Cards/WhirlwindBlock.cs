@@ -7,9 +7,13 @@
 
 using BaseLib.Utils;
 using BiliBiliACGN.BiliBiliACGNCode.Cards.CardPool;
+using MegaCrit.Sts2.Core.CardSelection;
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.ValueProps;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Cards;
@@ -17,6 +21,9 @@ namespace BiliBiliACGN.BiliBiliACGNCode.Cards;
 [Pool(typeof(FunShikiCardPool))]
 public sealed class WhirlwindBlock : CardBaseModel
 {
+    #region 卡牌关键词与悬停
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.Static(StaticHoverTip.Block)];
+    #endregion
     #region 卡牌属性配置
     private const int energyCost = 1;
     private const CardType type = CardType.Skill;
@@ -35,8 +42,15 @@ public sealed class WhirlwindBlock : CardBaseModel
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        // TODO: GainBlock；弃牌堆选一张置顶抽牌堆
-        await Task.CompletedTask;
+        // 获得{Block:diff()}点[gold]格挡[/gold]。将弃牌堆中的一张牌放到抽牌堆顶部。
+        await CreatureCmd.GainBlock(base.Owner.Creature, base.DynamicVars.Block.BaseValue, base.DynamicVars.Block.Props, cardPlay);
+        CardSelectorPrefs prefs = new CardSelectorPrefs(base.SelectionScreenPrompt, 1);
+        CardPile pile = PileType.Discard.GetPile(base.Owner);
+        CardModel cardModel = (await CardSelectCmd.FromSimpleGrid(choiceContext, pile.Cards, base.Owner, prefs)).FirstOrDefault();
+        if (cardModel != null)
+        {
+            await CardPileCmd.Add(cardModel, PileType.Draw, CardPilePosition.Top);
+        }
     }
 
     protected override void OnUpgrade()

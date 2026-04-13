@@ -7,9 +7,11 @@
 
 using BaseLib.Utils;
 using BiliBiliACGN.BiliBiliACGNCode.Cards.CardPool;
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.ValueProps;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Cards;
@@ -36,8 +38,12 @@ public sealed class WhirlwindReturnStrike : CardBaseModel
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        // TODO: 伤害；施加本回合 Buff：下 NextPlays 张打出的牌置入抽牌堆顶
-        await Task.CompletedTask;
+        // 造成{Damage:diff()}点伤害。本回合下{NextPlays:diff()}张打出的牌会回到抽牌堆顶部。
+        await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue)
+            .FromCard(this)
+            .Targeting(cardPlay.Target)
+            .Execute(choiceContext);
+        await PowerCmd.Apply<ReboundPower>(base.Owner.Creature, base.DynamicVars["NextPlays"].BaseValue, base.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()

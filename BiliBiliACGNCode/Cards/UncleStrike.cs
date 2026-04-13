@@ -7,6 +7,7 @@
 
 using BaseLib.Utils;
 using BiliBiliACGN.BiliBiliACGNCode.Cards.CardPool;
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
@@ -21,6 +22,7 @@ public sealed class UncleStrike : CardBaseModel
 {
     #region 卡牌关键词与悬停
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<WeakPower>()];
+    protected override HashSet<CardTag> CanonicalTags => [CardTag.Strike];
     #endregion
     #region 卡牌属性配置
     private const int energyCost = 1;
@@ -41,8 +43,12 @@ public sealed class UncleStrike : CardBaseModel
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        // TODO: 伤害 + WeakPower
-        await Task.CompletedTask;
+        // 造成{Damage:diff()}点伤害。给予{Weak:diff()}层[gold]虚弱[/gold]。
+        await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue)
+            .FromCard(this)
+            .Targeting(cardPlay.Target)
+            .Execute(choiceContext);
+        await PowerCmd.Apply<WeakPower>(base.Owner.Creature, base.DynamicVars["Weak"].BaseValue, base.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()

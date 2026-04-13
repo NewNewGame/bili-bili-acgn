@@ -163,6 +163,10 @@
   "BILIBILIACGN-LOVE_RAILWAY_POWER.description": "每打出[blue]1[/blue]张能力牌，给予随机敌人[blue]1[/blue]层[gold]病态[/gold]。",
   "BILIBILIACGN-LOVE_RAILWAY_POWER.smartDescription": "每打出[blue]1[/blue]张能力牌，给予随机敌人[blue]{Amount}[/blue]层[gold]病态[/gold]。",
 
+  "BILIBILIACGN-AISHITERU_RAILWAY_POWER.title": "爱洗铁路",
+  "BILIBILIACGN-AISHITERU_RAILWAY_POWER.description": "每打出[blue]1[/blue]张能力牌，给予随机敌人[blue]1[/blue]层[gold]病态[/gold]。",
+  "BILIBILIACGN-AISHITERU_RAILWAY_POWER.smartDescription": "每打出[blue]1[/blue]张能力牌，给予随机敌人[blue]{Amount}[/blue]层[gold]病态[/gold]。",
+
   "BILIBILIACGN-COMBAT_FOR_YOU_POWER.title": "为你而战",
   "BILIBILIACGN-COMBAT_FOR_YOU_POWER.description": "女儿会[gold]保护[/gold]你，帮会吸收所有未被[gold]格挡[/gold]的攻击伤害。\n为你而战，但不会为了你去死，过量伤害返还。",
   "BILIBILIACGN-COMBAT_FOR_YOU_POWER.smartDescription": "女儿会[gold]保护[/gold]你，帮会吸收所有未被[gold]格挡[/gold]的攻击伤害。\n为你而战，但不会为了你去死，过量伤害返还。",
