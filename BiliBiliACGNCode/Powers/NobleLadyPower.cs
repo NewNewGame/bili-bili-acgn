@@ -5,6 +5,7 @@
 //* 描述：本回合每激发1个充能球女儿向该敌人进攻1次。
 //*******************************************************
 
+using BiliBiliACGN.BiliBiliACGNCode.Cards;
 using BiliBiliACGN.BiliBiliACGNCode.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
@@ -23,7 +24,7 @@ public sealed class NobleLadyPower : PowerBaseModel
 
     public override PowerStackType StackType => PowerStackType.Counter;
     public override bool IsInstanced => true;
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.Static(StaticHoverTip.Evoke)];
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.Static(StaticHoverTip.Evoke), HoverTipFactory.Static(CustomeHoverTips.AttackOrb)];
     protected override IEnumerable<DynamicVar> CanonicalVars => [new StringVar("Applier")];
     public override Task AfterApplied(Creature? applier, CardModel? cardSource)
 	{

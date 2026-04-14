@@ -14,7 +14,6 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models.Powers;
-using MegaCrit.Sts2.Core.ValueProps;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Cards;
 
@@ -23,7 +22,7 @@ public sealed class MinusTwentyMillionFruit : CardBaseModel
 {
     #region 卡牌关键词与悬停
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Innate];
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<WeakPower>()];
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<WeakPower>(), HoverTipFactory.Static(CustomeHoverTips.AttackOrb)];
     #endregion
     #region 卡牌属性配置
     private const int energyCost = 0;

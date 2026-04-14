@@ -27,6 +27,7 @@ public sealed class UtterMadness : CardBaseModel
     private const CardRarity rarity = CardRarity.Common;
     private const TargetType targetType = TargetType.AnyEnemy;
     private const bool shouldShowInCardLibrary = true;
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.Static(CustomeHoverTips.AttackOrb)];
 
     public UtterMadness() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
 

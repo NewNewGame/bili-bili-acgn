@@ -26,7 +26,7 @@ public sealed class BlackRabbit : CardBaseModel
     private const TargetType targetType = TargetType.AnyEnemy;
     private const bool shouldShowInCardLibrary = true;
 
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.Static(StaticHoverTip.Block)];
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.Static(StaticHoverTip.Block), HoverTipFactory.Static(CustomeHoverTips.AttackOrb)];
 
     public BlackRabbit() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
 

@@ -25,7 +25,7 @@ public sealed class UnreachableFlower : CardBaseModel
     private const CardRarity rarity = CardRarity.Uncommon;
     private const TargetType targetType = TargetType.AllEnemies;
     private const bool shouldShowInCardLibrary = true;
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<VulnerablePower>()];
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<VulnerablePower>(), HoverTipFactory.Static(CustomeHoverTips.AttackOrb)];
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [

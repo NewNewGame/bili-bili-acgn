@@ -26,7 +26,7 @@ public sealed class NobleLady : CardBaseModel
     private const TargetType targetType = TargetType.AnyEnemy;
     private const bool shouldShowInCardLibrary = true;
 
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.Static(StaticHoverTip.Evoke)];
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.Static(StaticHoverTip.Evoke), HoverTipFactory.Static(CustomeHoverTips.AttackOrb)];
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [

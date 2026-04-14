@@ -5,6 +5,7 @@
 //* 描述：在接下来若干回合开始时，各生成1个进攻充能球（剩余次数为 Amount）。
 //*******************************************************
 
+using BiliBiliACGN.BiliBiliACGNCode.Cards;
 using BiliBiliACGN.BiliBiliACGNCode.Core.Models.Orbs;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Players;
@@ -23,7 +24,8 @@ public sealed class FanRemixAtelierPower : PowerBaseModel
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
     [
         HoverTipFactory.Static(StaticHoverTip.Channeling),
-        HoverTipFactory.FromOrb<AttackOrb>()
+        HoverTipFactory.FromOrb<AttackOrb>(),
+        HoverTipFactory.Static(CustomeHoverTips.AttackOrb)
     ];
 
     public override async Task AfterPlayerTurnStart(PlayerChoiceContext choiceContext, Player player)

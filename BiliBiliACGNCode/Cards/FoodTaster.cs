@@ -38,8 +38,6 @@ public sealed class FoodTaster : CardBaseModel
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        int deckCount = PileType.Draw.GetPile(base.Owner).Cards.Count();
-        int num = (int)(deckCount / base.DynamicVars["DeckPer"].BaseValue);
         await PlayerCmd.GainEnergy(((CalculatedVar)base.DynamicVars["CalculatedEnergy"]).Calculate(base.Owner.Creature), base.Owner);
     }
 

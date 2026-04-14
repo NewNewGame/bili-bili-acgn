@@ -25,7 +25,8 @@ public sealed class FanRemixAtelier : CardBaseModel
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
     [
         HoverTipFactory.Static(StaticHoverTip.Channeling),
-        HoverTipFactory.FromOrb<AttackOrb>()
+        HoverTipFactory.FromOrb<AttackOrb>(),
+        HoverTipFactory.Static(CustomeHoverTips.AttackOrb)
     ];
     #endregion
     #region 卡牌属性配置

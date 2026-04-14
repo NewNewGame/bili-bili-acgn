@@ -11,6 +11,7 @@ using BiliBiliACGN.BiliBiliACGNCode.Powers;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Cards;
@@ -28,6 +29,8 @@ public sealed class AloftThrone : CardBaseModel
     [
         new CardsVar(1),
     ];
+
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.Static(CustomeHoverTips.AttackOrb)];
 
     public AloftThrone() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
 

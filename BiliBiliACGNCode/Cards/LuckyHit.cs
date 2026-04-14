@@ -29,6 +29,7 @@ public sealed class LuckyHit : CardBaseModel
     [
         HoverTipFactory.Static(StaticHoverTip.Evoke),
         HoverTipFactory.FromOrb<AttackOrb>(),
+        HoverTipFactory.Static(CustomeHoverTips.AttackOrb),
     ];
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
