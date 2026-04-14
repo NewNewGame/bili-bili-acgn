@@ -30,7 +30,7 @@ public sealed class MildSneezing : RelicBaseModel
     [
         new DynamicVar("Fights", 3m),
         new DynamicVar("SkipChance", 20m),
-        new DynamicVar("DiscardChance", 20m),
+        new DynamicVar("DiscardChance", 30m),
     ];
     public override bool ShowCounter => true;
     public override int DisplayAmount => BILIBILIACGN_MS_Fights;
