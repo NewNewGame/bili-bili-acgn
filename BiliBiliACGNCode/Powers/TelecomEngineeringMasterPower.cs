@@ -17,10 +17,18 @@ namespace BiliBiliACGN.BiliBiliACGNCode.Powers;
 
 public sealed class TelecomEngineeringMasterPower : PowerBaseModel
 {
+    private class Data{
+        public int EvokeCount;
+    }
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
+    public override bool IsInstanced => true;
+    public override int DisplayAmount => Amount - GetInternalData<Data>().EvokeCount;
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.Static(StaticHoverTip.Evoke),HoverTipFactory.FromPower<FocusPower>()];
-
+    protected override object? InitInternalData()
+    {
+        return new Data();
+    }
     /// <summary>
     /// 每激发1个充能球，获得1点集中。
     /// </summary>
@@ -32,8 +40,14 @@ public sealed class TelecomEngineeringMasterPower : PowerBaseModel
     {
         // 如果充能球所有者不是你，则返回
         if(orb.Owner.Creature != base.Owner) return;
-        // 获得集中
-        await PowerCmd.Apply<FocusPower>(base.Owner, Amount, base.Owner, null);
+        var data = GetInternalData<Data>();
+        data.EvokeCount++;
+        if(data.EvokeCount >= Amount){
+            data.EvokeCount = 0;
+            // 获得集中
+            await PowerCmd.Apply<FocusPower>(base.Owner, 1, base.Owner, null);
+        }
+        InvokeDisplayAmountChanged();
     }
 
 }

@@ -28,15 +28,15 @@ public sealed class TelecomEngineeringMaster : CardBaseModel
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.Static(StaticHoverTip.Evoke),HoverTipFactory.FromPower<FocusPower>()];
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new DynamicVar("Focus", 1m),
+        new DynamicVar("Evoke", 3m),
     ];
 
     public TelecomEngineeringMaster() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        // 施加能力：每激发 1 个充能球，获得集中
-        await PowerCmd.Apply<TelecomEngineeringMasterPower>(base.Owner.Creature, base.DynamicVars["Focus"].BaseValue, base.Owner.Creature, this);
+        // 施加能力：每激发 3 个充能球，获得1集中
+        await PowerCmd.Apply<TelecomEngineeringMasterPower>(base.Owner.Creature, base.DynamicVars["Evoke"].BaseValue, base.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()

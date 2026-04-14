@@ -249,7 +249,7 @@
   "BILIBILIACGN-DISTORTION_SCHOLAR.title": "扭曲学家",
   "BILIBILIACGN-DISTORTION_SCHOLAR.description": "给予所有敌人{ExtraTriggers:diff()}层[gold]狂恋[/gold]。\n[gold]病态[/gold]会额外触发{ExtraTriggers:diff()}次。",
   "BILIBILIACGN-TELECOM_ENGINEERING_MASTER.title": "通信工程硕士",
-  "BILIBILIACGN-TELECOM_ENGINEERING_MASTER.description": "你每[gold]激发[/gold]1个充能球，获得{Focus:diff()}点[gold]集中[/gold]。",
+  "BILIBILIACGN-TELECOM_ENGINEERING_MASTER.description": "你每[gold]激发[/gold]{Evoke:diff()}个充能球，获得1点[gold]集中[/gold]。",
   "BILIBILIACGN-NTR_GODFATHER.title": "NTR教父",
   "BILIBILIACGN-NTR_GODFATHER.description": "获得{Energy:energyIcons()}，抽{Cards:diff()}张牌。在你的回合开始时，给予自身{MorbidSelf:diff()}层[gold]病态[/gold]。",
   "BILIBILIACGN-HALF_FRUIT.title": "0.5果",

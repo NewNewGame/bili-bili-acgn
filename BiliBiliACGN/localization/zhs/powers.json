@@ -136,8 +136,8 @@
   "BILIBILIACGN-DISTORTION_SCHOLAR_POWER.smartDescription": "敌人对你的[gold]病态[/gold]会额外触发[blue]{Amount}[/blue]次。",
 
   "BILIBILIACGN-TELECOM_ENGINEERING_MASTER_POWER.title": "通信工程硕士",
-  "BILIBILIACGN-TELECOM_ENGINEERING_MASTER_POWER.description": "你每[gold]激发[/gold][blue]1[/blue]个充能球，获得[blue]1[/blue]点[gold]集中[/gold]。",
-  "BILIBILIACGN-TELECOM_ENGINEERING_MASTER_POWER.smartDescription": "你每[gold]激发[/gold][blue]1[/blue]个充能球，获得[blue]{Amount}[/blue]点[gold]集中[/gold]。",
+  "BILIBILIACGN-TELECOM_ENGINEERING_MASTER_POWER.description": "你每[gold]激发[/gold][blue]3[/blue]个充能球，获得[blue]1[/blue]点[gold]集中[/gold]。",
+  "BILIBILIACGN-TELECOM_ENGINEERING_MASTER_POWER.smartDescription": "你每[gold]激发[/gold][blue]{Amount}[/blue]个充能球，获得[blue]1[/blue]点[gold]集中[/gold]。",
 
   "BILIBILIACGN-NTR_GODFATHER_POWER.title": "NTR教父",
   "BILIBILIACGN-NTR_GODFATHER_POWER.description": "在你的回合开始时，给予自身[blue]1[/blue]层[gold]病态[/gold]。",
