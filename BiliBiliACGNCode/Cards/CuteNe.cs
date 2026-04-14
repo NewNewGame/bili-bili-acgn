@@ -31,7 +31,7 @@ public sealed class CuteNe : CardBaseModel
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         // 施加能力：女儿获得格挡时，你获得其一半的格挡值
-        await DaughterCmd.ApplyPower<CuteNePower>(base.Owner.Creature, 1m, choiceContext, this);
+        await DaughterCmd.ApplyPower<CuteNePower>(base.Owner.Creature, 1m, null);
     }
 
     protected override void OnUpgrade()

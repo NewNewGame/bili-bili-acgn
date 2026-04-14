@@ -41,7 +41,7 @@ public sealed class SailorUniform : CardBaseModel
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         // 给予女儿SailorUniformPower BUFF
-        await DaughterCmd.ApplyPower<SailorUniformPower>(base.Owner.Creature, base.DynamicVars.Damage.BaseValue, choiceContext, this);
+        await DaughterCmd.ApplyPower<SailorUniformPower>(base.Owner.Creature, base.DynamicVars.Damage.BaseValue, this);
     }
 
     protected override void OnUpgrade()

@@ -9,6 +9,8 @@ using BaseLib.Utils;
 using BiliBiliACGN.BiliBiliACGNCode.Core.Commands;
 using BiliBiliACGN.BiliBiliACGNCode.Relics.RelicPool;
 using MegaCrit.Sts2.Core.Entities.Relics;
+using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.Models.Powers;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Relics;
 
@@ -17,15 +19,15 @@ namespace BiliBiliACGN.BiliBiliACGNCode.Relics;
 public sealed class WindRangerMask : RelicBaseModel
 {
     public override RelicRarity Rarity => RelicRarity.Starter;
-
+	protected override IEnumerable<DynamicVar> CanonicalVars => [new DynamicVar("Power", 5m)];
     public override async Task BeforeCombatStart()
 	{
 		await SummonPet();
 	}
-
 	private async Task SummonPet()
 	{
 		await DaughterCmd.SummonDaughter(base.Owner.Creature);
+		await DaughterCmd.ApplyPower<StrengthPower>(base.Owner.Creature, base.DynamicVars["Power"].BaseValue, null);
 	}
 
 }

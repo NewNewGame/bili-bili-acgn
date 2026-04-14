@@ -47,7 +47,7 @@ public sealed class StrengthOrb : OrbBaseModel
 	public override async Task<IEnumerable<Creature>> Evoke(PlayerChoiceContext playerChoiceContext)
 	{
 		PlayEvokeSfx();
-		await DaughterCmd.ApplyPower<StrengthPower>(base.Owner.Creature, (int)EvokeVal/3m, playerChoiceContext, null);
+		await DaughterCmd.ApplyPower<StrengthPower>(base.Owner.Creature, (int)EvokeVal/3m, null);
 		return new List<Creature>(){base.Owner.Creature};
 	}
 }   

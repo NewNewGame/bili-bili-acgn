@@ -7,10 +7,9 @@
 
 using BaseLib.Utils;
 using BiliBiliACGN.BiliBiliACGNCode.Core.Commands;
-using BiliBiliACGN.BiliBiliACGNCode.Core.Models.Monsters;
-using BiliBiliACGN.BiliBiliACGNCode.Relics.RelicPool;
-using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Relics;
+using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.Models.RelicPools;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Relics;
@@ -20,6 +19,7 @@ namespace BiliBiliACGN.BiliBiliACGNCode.Relics;
 public sealed class EiHeiJiangMask : RelicBaseModel
 {
     public override RelicRarity Rarity => RelicRarity.Starter;
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new DynamicVar("Power", 3)];
 
     public override async Task BeforeCombatStart()
 	{
@@ -29,6 +29,7 @@ public sealed class EiHeiJiangMask : RelicBaseModel
 	private async Task SummonPet()
 	{
 		await DaughterCmd.SummonDaughter(base.Owner.Creature);
+		await DaughterCmd.ApplyPower<StrengthPower>(base.Owner.Creature, base.DynamicVars["Power"].BaseValue, null);
 	}
 
 }

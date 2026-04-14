@@ -106,7 +106,7 @@ public static class DaughterCmd
     /// <summary>
     /// 女儿能力指令
     /// </summary>
-    public static async Task ApplyPower<TPower>(this Creature creature, decimal value, PlayerChoiceContext choiceContext, CardModel? cardSource) where TPower : PowerModel
+    public static async Task ApplyPower<TPower>(this Creature creature, decimal value, CardModel? cardSource) where TPower : PowerModel
     {
         var daughter = creature.GetDaughter();
         if(daughter == null) return;

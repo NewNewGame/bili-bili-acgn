@@ -45,7 +45,7 @@ public sealed class SuddenUpdate : CardBaseModel
     {
         // 获得{Block:diff()}点[gold]格挡[/gold]。女儿获得{Strength:diff()}点[gold]力量[/gold]。
         await CreatureCmd.GainBlock(base.Owner.Creature, base.DynamicVars.Block.BaseValue, base.DynamicVars.Block.Props, cardPlay);
-        await DaughterCmd.ApplyPower<FlexPotionPower>(base.Owner.Creature, base.DynamicVars["Strength"].BaseValue, choiceContext, this);
+        await DaughterCmd.ApplyPower<FlexPotionPower>(base.Owner.Creature, base.DynamicVars["Strength"].BaseValue, this);
     }
 
     protected override void OnUpgrade()

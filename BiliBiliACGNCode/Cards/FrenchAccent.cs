@@ -43,7 +43,7 @@ public sealed class FrenchAccent : CardBaseModel
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         // 给予女儿{Strength:diff()}点[gold]力量[/gold]。抽取{Cards:diff()}张牌。
-        await DaughterCmd.ApplyPower<StrengthPower>(base.Owner.Creature, base.DynamicVars["Strength"].BaseValue, choiceContext, this);
+        await DaughterCmd.ApplyPower<StrengthPower>(base.Owner.Creature, base.DynamicVars["Strength"].BaseValue, this);
         await CardPileCmd.Draw(choiceContext, base.DynamicVars["Cards"].BaseValue, base.Owner);
     }
 

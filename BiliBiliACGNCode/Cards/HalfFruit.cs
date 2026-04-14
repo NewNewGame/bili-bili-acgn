@@ -35,7 +35,7 @@ public sealed class HalfFruit : CardBaseModel
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         // 施加能力：女儿攻击敌人时，给予敌人本回合变唐
-        await DaughterCmd.ApplyPower<HalfFruitPower>(base.Owner.Creature, base.DynamicVars["Tang"].BaseValue, choiceContext, this);
+        await DaughterCmd.ApplyPower<HalfFruitPower>(base.Owner.Creature, base.DynamicVars["Tang"].BaseValue, this);
     }
 
     protected override void OnUpgrade()

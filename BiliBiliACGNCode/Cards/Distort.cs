@@ -37,7 +37,7 @@ public sealed class Distort : CardBaseModel
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         // 给予女儿力量，然后对随机敌人发动多次攻击
-        await DaughterCmd.ApplyPower<StrengthPower>(base.Owner.Creature, base.DynamicVars["Strength"].BaseValue, choiceContext, this);
+        await DaughterCmd.ApplyPower<StrengthPower>(base.Owner.Creature, base.DynamicVars["Strength"].BaseValue, this);
         for(int i = 0; i < base.DynamicVars["Attacks"].BaseValue; i++){
             if(CombatState.HittableEnemies.Count == 0) break;
             await DaughterCmd.ApplyAttack(base.Owner.Creature, 0m, choiceContext, CombatState.RunState.Rng.CombatTargets.NextItem(CombatState.HittableEnemies));

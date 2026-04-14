@@ -45,7 +45,7 @@ public sealed class KuyaXi : CardBaseModel
     {
         // 在下个回合获得{NextEnergy:diff()}点能量并给予女儿{Strength:diff()}点[gold]力量[/gold]。
         await PowerCmd.Apply<EnergyNextTurnPower>(base.Owner.Creature, base.DynamicVars.Energy.BaseValue, base.Owner.Creature, this);
-        await DaughterCmd.ApplyPower<DelayedStrengthPower>(base.Owner.Creature, base.DynamicVars["Strength"].BaseValue, choiceContext, this);
+        await DaughterCmd.ApplyPower<DelayedStrengthPower>(base.Owner.Creature, base.DynamicVars["Strength"].BaseValue, this);
     }
     protected override void OnUpgrade()
     {
