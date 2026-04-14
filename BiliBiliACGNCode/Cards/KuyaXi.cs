@@ -34,7 +34,7 @@ public sealed class KuyaXi : CardBaseModel
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
         new EnergyVar(2),
-        new DynamicVar("Strength", 2m)
+        new DynamicVar("Strength", 1m)
     ];
 
     public KuyaXi() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }

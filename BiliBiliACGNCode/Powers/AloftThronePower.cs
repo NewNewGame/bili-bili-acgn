@@ -9,10 +9,13 @@ using BiliBiliACGN.BiliBiliACGNCode.Cards;
 using BiliBiliACGN.BiliBiliACGNCode.Core.Models.Monsters;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Creatures;
+using MegaCrit.Sts2.Core.Entities.Multiplayer;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Models.Powers;
+using MegaCrit.Sts2.Core.Runs;
 using MegaCrit.Sts2.Core.ValueProps;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Powers;
@@ -29,7 +32,12 @@ public sealed class AloftThronePower : PowerBaseModel
     {
         if(base.Owner.Player == null) return;
         if(dealer == null || dealer.Monster is not Itsuka) return;
-        await CardPileCmd.Draw(choiceContext, base.Amount, base.Owner.Player);
+        // 如果不是在出牌阶段，则下回合抽牌
+        if(RunManager.Instance.ActionQueueSynchronizer.CombatState != ActionSynchronizerCombatState.PlayPhase){
+            await PowerCmd.Apply<DrawCardsNextTurnPower>(base.Owner, base.Amount, base.Owner, null);
+        }else{
+            await CardPileCmd.Draw(choiceContext, base.Amount, base.Owner.Player);
+        }
     }
 
 }

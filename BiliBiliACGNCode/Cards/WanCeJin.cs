@@ -7,6 +7,7 @@
 
 using BaseLib.Utils;
 using BiliBiliACGN.BiliBiliACGNCode.Cards.CardPool;
+using BiliBiliACGN.BiliBiliACGNCode.Utils;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -46,6 +47,9 @@ public sealed class WanCeJin : CardBaseModel
         int cnt = base.Owner.PlayerCombatState.OrbQueue.Orbs.Count;
         for(int i = 0; i < cnt; i++){
             await OrbCmd.EvokeNext(choiceContext, base.Owner);
+            if(i < cnt - 1){
+                await OrbUtils.OrbEvokeWait();
+            }
         }
         await PowerCmd.Apply<FocusPower>(base.Owner.Creature, base.DynamicVars["FocusPerOrb"].BaseValue * cnt, base.Owner.Creature, this);
     }

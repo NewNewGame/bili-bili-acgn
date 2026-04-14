@@ -18,7 +18,7 @@ protected override string ChannelSfx => "event:/sfx/characters/defect/defect_fro
 
 	public override Color DarkenedColor => new Color("7860a7");
 
-	public override decimal PassiveVal => ModifyOrbValue(1m);
+	public override decimal PassiveVal => ModifyOrbValue(2m);
 
 	public override decimal EvokeVal => ModifyOrbValue(4m);
 
