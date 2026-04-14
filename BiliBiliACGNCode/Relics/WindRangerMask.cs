@@ -26,7 +26,9 @@ public sealed class WindRangerMask : RelicBaseModel
 	}
 	private async Task SummonPet()
 	{
-		await DaughterCmd.SummonDaughter(base.Owner.Creature);
+		var daughter = await DaughterCmd.SummonDaughter(base.Owner.Creature);
+		daughter.SetMaxHpInternal(16);
+		daughter.SetCurrentHpInternal(16);
 		await DaughterCmd.ApplyPower<StrengthPower>(base.Owner.Creature, base.DynamicVars["Power"].BaseValue, null);
 	}
 

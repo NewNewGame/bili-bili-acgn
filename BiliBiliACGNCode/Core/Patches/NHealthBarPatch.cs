@@ -1,26 +1,45 @@
 //****************** 代码文件申明 ***********************
-//* 文件：NHealthBarMorbidForegroundPatch
+//* 文件：NHealthBarPatch
 //* 作者：wheat
 //* 创建时间：2026/04/10
-//* 描述：在 NHealthBar._Ready 挂载病态层数前景条，并在 RefreshForeground 后与原版血条同步
+//* 描述：更新拓展血条的显示，显示病态条
 //*******************************************************
 
 using System.Reflection;
 using System.Runtime.CompilerServices;
+using BiliBiliACGN.BiliBiliACGNCode.Core.Models.Monsters;
 using BiliBiliACGN.BiliBiliACGNCode.Powers;
+using BiliBiliACGN.BiliBiliACGNCode.Utils;
 using Godot;
 using HarmonyLib;
+using MegaCrit.Sts2.addons.mega_text;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Nodes.Combat;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Core.Patches;
 
-/// <summary>
-/// 病态层数在血条上的显示：控件挂在原版 <see cref="NHealthBar"/> 上，引用存于弱表，不写进游戏类型。
-/// </summary>
-[HarmonyPatch]
-public static class NHealthBarMorbidForegroundPatch
+
+[HarmonyPatch(typeof(NHealthBar))]
+public static class NHealthBarPatch
 {
+
+	#region 血条相关字段属性
+	/// <summary>血条的文本标签。</summary>
+	private static readonly Lazy<FieldInfo?> HpLabelProp = new(() =>
+		AccessTools.DeclaredField(typeof(NHealthBar), "_hpLabel"));
+	/// <summary>血条的文本标签。</summary>
+	private static readonly Lazy<FieldInfo?> CreatureProp = new(() =>
+		AccessTools.DeclaredField(typeof(NHealthBar), "_creature"));
+	/// <summary>读取 <c>NHealthBar</c> 上绑定的 <see cref="Creature"/>（私有字段 <c>_creature</c>）。</summary>
+	private static MegaLabel? GetHpLabel(NHealthBar bar) =>
+		HpLabelProp.Value?.GetValue(bar) as MegaLabel;
+	
+	/// <summary>读取 <c>NHealthBar</c> 上绑定的 <see cref="Creature"/>（私有字段 <c>_creature</c>）。</summary>
+	private static Creature? GetCreature(NHealthBar bar) =>
+		CreatureProp.Value?.GetValue(bar) as Creature;
+	#endregion
+
+	#region 病态条相关字段属性
 	/// <summary>场景树里病态条的节点名，便于调试时在编辑器里辨认。</summary>
 	private const string MorbidNodeName = "MorbidForeground_BiliBiliACGN";
 
@@ -35,19 +54,19 @@ public static class NHealthBarMorbidForegroundPatch
 	private static readonly Lazy<PropertyInfo?> MaxFgWidthProp = new(() =>
 		AccessTools.DeclaredProperty(typeof(NHealthBar), "MaxFgWidth"));
 
-	/// <summary>读取 <c>NHealthBar</c> 上绑定的 <see cref="Creature"/>（私有字段 <c>_creature</c>）。</summary>
-	private static Creature? GetCreature(NHealthBar bar) =>
-		AccessTools.Field(typeof(NHealthBar), "_creature")?.GetValue(bar) as Creature;
 
 	/// <summary>取末日条作克隆模板，布局与原版末日前景一致。</summary>
 	private static Control? GetDoomForeground(NHealthBar bar) =>
 		AccessTools.Field(typeof(NHealthBar), "_doomForeground")?.GetValue(bar) as Control;
 
+	#endregion
+
+	#region 病态条相关方法
 	/// <summary>
 	/// 在原版 <c>_Ready</c> 取完节点之后执行：复制末日条、改色为粉红、插入到末日条之后并登记弱表。
 	/// </summary>
 	[HarmonyPostfix]
-	[HarmonyPatch(typeof(NHealthBar), "_Ready")]
+	[HarmonyPatch(nameof(NHealthBar._Ready))]
 	public static void Ready_Postfix(NHealthBar __instance)
 	{
 		// 已创建且节点仍有效则跳过，防止重复 AddChild
@@ -79,7 +98,7 @@ public static class NHealthBarMorbidForegroundPatch
 	/// 算法对齐原版末日条非致命分支（<c>GetFgWidth</c> + <c>MaxFgWidth</c> + NinePatch 右边距）。
 	/// </summary>
 	[HarmonyPostfix]
-	[HarmonyPatch(typeof(NHealthBar), "RefreshForeground")]
+	[HarmonyPatch("RefreshForeground")]
 	public static void RefreshForeground_Postfix(NHealthBar __instance)
 	{
 		if (!MorbidForegroundByBar.TryGetValue(__instance, out var morbid) || !IsValidControl(morbid))
@@ -129,4 +148,56 @@ public static class NHealthBarMorbidForegroundPatch
 	/// <summary>节点未被释放（Godot 侧仍有效）。</summary>
 	private static bool IsValidControl(Control? c) =>
 		c != null && GodotObject.IsInstanceValid(c);
+	#endregion
+
+	#region 血条相关方法
+	/// <summary>
+	/// 在原版 <c>RefreshText</c> 之后执行：更新血条的文本显示；
+	/// </summary>
+	[HarmonyPostfix]
+	[HarmonyPatch("RefreshText")]
+	public static void RefreshText_Postfix(NHealthBar __instance)
+	{
+		// 获取血条的文本标签和绑定的生物
+		var hpLabel = GetHpLabel(__instance);
+		var creature = GetCreature(__instance);
+		if (hpLabel == null || creature == null)
+			return;
+		// 死亡、无限血与原版一致：不显示毒/末日，病态条也隐藏
+		if (creature.CurrentHp <= 0)
+        {
+            return;
+        }
+		// 无限血与原版一致：不显示毒/末日，病态条也隐藏
+        if (creature.ShowsInfiniteHp)
+        {
+            return;
+        }
+		// 计算病态伤害
+		int morbidDamage = creature.GetPower<MorbidPower>()?.CalculateTotalDamageNextTurn() ?? 0;
+		// 如果病态伤害致命，则设置血条颜色
+		if (IsMorbidLethal(creature, morbidDamage))
+		{
+			hpLabel.AddThemeColorOverride("font_color", new Color("E27296"));
+			hpLabel.AddThemeColorOverride("font_outline_color", new Color("8A1D40"));
+		}
+		// 如果是一果，显示血量为当前值-1
+		if(creature.Monster is Itsuka){
+			if(creature.CurrentHp <= 1){
+				hpLabel.SetTextAutoSize("累了");
+			}else{
+				hpLabel.SetTextAutoSize($"{creature.CurrentHp - 1}/{creature.MaxHp-1}");
+			}
+		}
+	}
+ 	private static bool IsMorbidLethal(Creature creature, int morbidDamage)
+    {
+        if (morbidDamage <= 0 || !creature.HasPower<MorbidPower>())
+        {
+            return false;
+        }
+
+        return morbidDamage >= creature.CurrentHp;
+    }
+	#endregion
 }

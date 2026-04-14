@@ -1,4 +1,3 @@
-//****************** 代码文件申明 ***********************
 //* 文件：EiHeiJiangMask
 //* 作者：wheat
 //* 创建时间：2026/04/07
@@ -28,7 +27,9 @@ public sealed class EiHeiJiangMask : RelicBaseModel
 
 	private async Task SummonPet()
 	{
-		await DaughterCmd.SummonDaughter(base.Owner.Creature);
+		var daughter = await DaughterCmd.SummonDaughter(base.Owner.Creature);
+		daughter.SetMaxHpInternal(11);
+		daughter.SetCurrentHpInternal(11);
 		await DaughterCmd.ApplyPower<StrengthPower>(base.Owner.Creature, base.DynamicVars["Power"].BaseValue, null);
 	}
 
