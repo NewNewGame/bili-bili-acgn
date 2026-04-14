@@ -1,8 +1,8 @@
-[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://q24ps3ib43a0"]
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://dp66722ubmv5r"]
 
-[ext_resource type="Texture2D" uid="uid://i41wu603k04n" path="res://images/ui/transitions/silent_transition.png" id="2_i0imf"]
+[ext_resource type="Texture2D" uid="uid://jvldwl2cyrvu" path="res://images/ui/transitions/ironclad_transition.png" id="1_gwmkq"]
 
-[sub_resource type="Shader" id="Shader_3ab6h"]
+[sub_resource type="Shader" id="Shader_spnx5"]
 code = "shader_type canvas_item;
 
 uniform sampler2D transitionTex;
@@ -20,6 +20,6 @@ void fragment() {
 
 [resource]
 resource_local_to_scene = true
-shader = SubResource("Shader_3ab6h")
-shader_parameter/threshold = 0.0
-shader_parameter/transitionTex = ExtResource("2_i0imf")
+shader = SubResource("Shader_spnx5")
+shader_parameter/threshold = 0.332
+shader_parameter/transitionTex = ExtResource("1_gwmkq")
