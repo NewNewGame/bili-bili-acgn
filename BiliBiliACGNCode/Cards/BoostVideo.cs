@@ -8,6 +8,7 @@
 using BaseLib.Utils;
 using BiliBiliACGN.BiliBiliACGNCode.Cards.CardPool;
 using BiliBiliACGN.BiliBiliACGNCode.Core.Models.Orbs;
+using BiliBiliACGN.BiliBiliACGNCode.Utils;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -46,9 +47,14 @@ public sealed class BoostVideo : CardBaseModel
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         // 生成{BlockOrbs:diff()}个[gold]格挡[/gold]充能球。抽{Cards:diff()}张牌。
-        for(int i = 0; i < base.DynamicVars["BlockOrbs"].BaseValue; i++)
+        int blockOrbCount = (int)base.DynamicVars["BlockOrbs"].BaseValue;
+        for(int i = 0; i < blockOrbCount; i++)
         {
             await OrbCmd.Channel<BlockOrb>(choiceContext, base.Owner);
+            if(i < blockOrbCount - 1)
+            {
+                await OrbUtils.OrbChannelingWait();
+            }
         }
         await CardPileCmd.Draw(choiceContext, base.DynamicVars["Cards"].BaseValue, base.Owner);
     }

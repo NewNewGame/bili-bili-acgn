@@ -40,6 +40,10 @@ public sealed class MinusEightThousand : CardBaseModel
         if(base.IsUpgraded)++num;
         for(int i = 0; i < num; i++){
             await OrbCmd.Channel(choiceContext, OrbUtils.GetRandomFunShikiOrb(this),base.Owner);
+            if(i < num - 1)
+            {
+                await OrbUtils.OrbChannelingWait();
+            }
         }
     }
 

@@ -50,7 +50,18 @@ public static class OrbUtils
     {
         return GetRandomFunShikiOrb(combatState.RunState.Rng.CombatOrbGeneration);
     }
+    /// <summary>
+    /// 充能球激发等待
+    /// </summary>
+    /// <returns></returns>
     public static Task OrbEvokeWait(){
         return Cmd.CustomScaledWait(0.15f, 0.25f);
+    }
+    /// <summary>
+    /// 充能球生成等待
+    /// </summary>
+    /// <returns></returns>
+    public static Task OrbChannelingWait(){
+        return Cmd.CustomScaledWait(0.05f, 0.10f);
     }
 }   

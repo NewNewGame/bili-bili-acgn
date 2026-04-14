@@ -7,6 +7,7 @@
 
 using BaseLib.Utils;
 using BiliBiliACGN.BiliBiliACGNCode.Cards.CardPool;
+using BiliBiliACGN.BiliBiliACGNCode.Utils;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -51,7 +52,7 @@ public sealed class FinaleRoast : CardBaseModel
             await OrbCmd.EvokeNext(choiceContext, base.Owner);
             if(i < cnt - 1)
             {
-                await Cmd.Wait(0.25f);
+                await OrbUtils.OrbEvokeWait();
             }
         }
     }

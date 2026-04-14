@@ -7,6 +7,7 @@
 
 using BaseLib.Utils;
 using BiliBiliACGN.BiliBiliACGNCode.Cards.CardPool;
+using BiliBiliACGN.BiliBiliACGNCode.Utils;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -41,7 +42,10 @@ public sealed class QianDaJiang : CardBaseModel
 		for (int i = 0; i < evokeCount; i++)
 		{
 			await OrbCmd.EvokeNext(choiceContext, base.Owner, i == evokeCount - 1);
-			await Cmd.Wait(0.25f);
+			if(i < evokeCount - 1)
+			{
+				await OrbUtils.OrbEvokeWait();
+			}
 		}
     }
 

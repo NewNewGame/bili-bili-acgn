@@ -8,6 +8,7 @@
 using BaseLib.Utils;
 using BiliBiliACGN.BiliBiliACGNCode.Cards.CardPool;
 using BiliBiliACGN.BiliBiliACGNCode.Core.Models.Orbs;
+using BiliBiliACGN.BiliBiliACGNCode.Utils;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -51,9 +52,14 @@ public sealed class CrazyStackArmor : CardBaseModel
             .FromCard(this)
             .Targeting(cardPlay.Target)
             .Execute(choiceContext);
-        for(int i = 0; i < base.DynamicVars["BlockOrbs"].IntValue; i++)
+        int blockOrbCount = base.DynamicVars["BlockOrbs"].IntValue;
+        for(int i = 0; i < blockOrbCount; i++)
         {
             await OrbCmd.Channel<BlockOrb>(choiceContext, base.Owner);
+            if(i < blockOrbCount - 1)
+            {
+                await OrbUtils.OrbChannelingWait();
+            }
         }
     }
 

@@ -8,6 +8,7 @@
 using BaseLib.Utils;
 using BiliBiliACGN.BiliBiliACGNCode.Cards.CardPool;
 using BiliBiliACGN.BiliBiliACGNCode.Core.Models.Orbs;
+using BiliBiliACGN.BiliBiliACGNCode.Utils;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -38,8 +39,13 @@ public sealed class ManManEel : CardBaseModel
     {
         // 获得6点格挡，生成2个格挡充能球
         await CreatureCmd.GainBlock(base.Owner.Creature, base.DynamicVars.Block.BaseValue, base.DynamicVars.Block.Props, cardPlay);
-        for(int i = 0; i < base.DynamicVars["BlockOrbs"].BaseValue; i++){
+        int blockOrbCount = (int)base.DynamicVars["BlockOrbs"].BaseValue;
+        for(int i = 0; i < blockOrbCount; i++){
             await OrbCmd.Channel<BlockOrb>(choiceContext, base.Owner);
+            if(i < blockOrbCount - 1)
+            {
+                await OrbUtils.OrbChannelingWait();
+            }
         }
     }
 

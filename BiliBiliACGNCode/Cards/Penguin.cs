@@ -38,6 +38,10 @@ public sealed class Penguin : CardBaseModel
         {
             await CardCmd.Exhaust(choiceContext, list[i]);
             await OrbCmd.Channel(choiceContext, OrbUtils.GetRandomFunShikiOrb(base.Owner.RunState.Rng.CombatOrbGeneration), base.Owner);
+            if(i < list.Count - 1)
+            {
+                await OrbUtils.OrbChannelingWait();
+            }
             await CardPileCmd.Draw(choiceContext, 1, base.Owner);
         }
     }

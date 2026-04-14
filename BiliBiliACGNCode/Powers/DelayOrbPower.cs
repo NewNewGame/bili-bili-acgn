@@ -29,6 +29,9 @@ public sealed class DelayOrbPower : PowerBaseModel
         while(amount > 0){
             await OrbCmd.Channel(choiceContext, OrbUtils.GetRandomFunShikiOrb(base.Owner.CombatState), base.Owner.Player);
             amount--;
+            if(amount > 0){
+                await OrbUtils.OrbChannelingWait();
+            }
         }
     }
 }

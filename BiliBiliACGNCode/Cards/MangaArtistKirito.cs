@@ -8,6 +8,7 @@
 using BaseLib.Utils;
 using BiliBiliACGN.BiliBiliACGNCode.Cards.CardPool;
 using BiliBiliACGN.BiliBiliACGNCode.Core.Models.Orbs;
+using BiliBiliACGN.BiliBiliACGNCode.Utils;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -44,6 +45,10 @@ public sealed class MangaArtistKirito : CardBaseModel
         int cnt = (int)base.DynamicVars["Channeling"].BaseValue;
         for(int i = 0; i < cnt; i++){
             await OrbCmd.Channel<AttackOrb>(choiceContext, base.Owner);
+            if(i < cnt - 1)
+            {
+                await OrbUtils.OrbChannelingWait();
+            }
         }
     }
     protected override void OnUpgrade()

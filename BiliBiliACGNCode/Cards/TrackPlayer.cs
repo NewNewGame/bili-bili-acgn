@@ -7,6 +7,7 @@
 
 using BaseLib.Utils;
 using BiliBiliACGN.BiliBiliACGNCode.Cards.CardPool;
+using BiliBiliACGN.BiliBiliACGNCode.Utils;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -30,9 +31,13 @@ public sealed class TrackPlayer : CardBaseModel
         if(base.Owner.PlayerCombatState == null) return;
         // 复制你所有的充能球一份
         var orbs = base.Owner.PlayerCombatState.OrbQueue.Orbs.ToList();
-        foreach (OrbModel item in orbs)
+        for(int i = 0; i < orbs.Count; i++)
         {
-            await OrbCmd.Channel(choiceContext, item, base.Owner);
+            await OrbCmd.Channel(choiceContext, orbs[i], base.Owner);
+            if(i < orbs.Count - 1)
+            {
+                await OrbUtils.OrbChannelingWait();
+            }
         }
     }
 

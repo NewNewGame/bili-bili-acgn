@@ -49,6 +49,10 @@ public sealed class OhHoHoHo : CardBaseModel
 		for (int i = 0; i < cnt; i++)
 		{
 			await OrbCmd.Channel(choiceContext, OrbUtils.GetRandomFunShikiOrb(base.Owner.RunState.Rng.CombatOrbGeneration), base.Owner);
+			if(i < cnt - 1)
+			{
+				await OrbUtils.OrbChannelingWait();
+			}
 		}
     }
 
