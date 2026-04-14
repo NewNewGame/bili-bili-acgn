@@ -27,6 +27,11 @@ public sealed class FoodTaster : CardBaseModel
     [
         new DynamicVar("DeckPer", 4m),
         new EnergyVar(1),
+        new CalculationBaseVar(0m),
+        new CalculationExtraVar(1m),
+        new CalculatedVar("CalculatedEnergy").WithMultiplier((card, _) => {
+            return (int)(PileType.Draw.GetPile(card.Owner).Cards.Count() / card.DynamicVars["DeckPer"].BaseValue);
+        })
     ];
 
     public FoodTaster() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
@@ -35,7 +40,7 @@ public sealed class FoodTaster : CardBaseModel
     {
         int deckCount = PileType.Draw.GetPile(base.Owner).Cards.Count();
         int num = (int)(deckCount / base.DynamicVars["DeckPer"].BaseValue);
-        await PlayerCmd.GainEnergy(base.DynamicVars.Energy.BaseValue * num, base.Owner);
+        await PlayerCmd.GainEnergy(((CalculatedVar)base.DynamicVars["CalculatedEnergy"]).Calculate(base.Owner.Creature), base.Owner);
     }
 
     protected override void OnUpgrade()

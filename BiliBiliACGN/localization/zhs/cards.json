@@ -279,7 +279,7 @@
   "BILIBILIACGN-FUN_SHIKI_ECSTASY.title": "泛式狂喜",
   "BILIBILIACGN-FUN_SHIKI_ECSTASY.description": "向敌人施加[gold]病态[/gold]{MorbidAmount:diff()}点{IfUpgraded:show:X/X+1|X}次。",
   "BILIBILIACGN-FOOD_TASTER.title": "试吃员",
-  "BILIBILIACGN-FOOD_TASTER.description": "[gold]抽牌堆[/gold]每有{DeckPer:diff()}张牌，\n获得{Energy:energyIcons()}。",
+  "BILIBILIACGN-FOOD_TASTER.description": "[gold]抽牌堆[/gold]每有{DeckPer:diff()}张牌，\n获得{Energy:energyIcons()}。{InCombat:\n(获得{CalculatedEnergy}点{energyPrefix:energyIcons(1)})|}",
   "BILIBILIACGN-CONSECUTIVE_BAI_DA.title": "蝉联百大",
   "BILIBILIACGN-CONSECUTIVE_BAI_DA.description": "将你的{energyPrefix:energyIcons(1)}翻倍。",
   "BILIBILIACGN-ONE_COLOR_ORB.title": "一色股",
