@@ -7,6 +7,7 @@
 
 using BaseLib.Utils;
 using BiliBiliACGN.BiliBiliACGNCode.Cards.CardPool;
+using BiliBiliACGN.BiliBiliACGNCode.Utils;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -20,9 +21,10 @@ public sealed class BigNose : CardBaseModel
 {
     private const int energyCost = 1;
     private const CardType type = CardType.Attack;
-    private const CardRarity rarity = CardRarity.Rare;
+    private const CardRarity rarity = CardRarity.Uncommon;
     private const TargetType targetType = TargetType.AllEnemies;
     private const bool shouldShowInCardLibrary = true;
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
@@ -45,14 +47,13 @@ public sealed class BigNose : CardBaseModel
             await OrbCmd.EvokeNext(choiceContext, base.Owner);
             if(i < numberOfOrbs - 1)
             {
-                await Cmd.CustomScaledWait(0.15f, 0.25f);
+                await OrbUtils.OrbEvokeWait();
             }
         }
     }
 
     protected override void OnUpgrade()
     {
-        // 降低1点耗能
-        base.EnergyCost.UpgradeBy(-1);
+        base.DynamicVars.Damage.UpgradeValueBy(4m);
     }
 }

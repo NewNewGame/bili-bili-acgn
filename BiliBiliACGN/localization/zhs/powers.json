@@ -229,5 +229,13 @@
 
   "BILIBILIACGN-FOCUS_LOSS_POWER.title": "集中损失",
   "BILIBILIACGN-FOCUS_LOSS_POWER.description": "本回合结束时，失去[blue]1[/blue]点[gold]集中[/gold]。",
-  "BILIBILIACGN-FOCUS_LOSS_POWER.smartDescription": "本回合结束时，失去[blue]{Amount}[/blue]点[gold]集中[/gold]。"
+  "BILIBILIACGN-FOCUS_LOSS_POWER.smartDescription": "本回合结束时，失去[blue]{Amount}[/blue]点[gold]集中[/gold]。",
+
+  "BILIBILIACGN-BLACK_RABBIT_POWER.title": "黑兔",
+  "BILIBILIACGN-BLACK_RABBIT_POWER.description": "每当你[gold]激发[/gold][blue]3[/blue]个充能球，获得[blue]1[/blue]个充能球栏位。",
+  "BILIBILIACGN-BLACK_RABBIT_POWER.smartDescription": "每当你[gold]激发[/gold][blue]{Amount}[/blue]个充能球，获得[blue]1[/blue]个充能球栏位。",
+
+  "BILIBILIACGN-DELAY_ORB_POWER.title": "延迟充能球",
+  "BILIBILIACGN-DELAY_ORB_POWER.description": "在你下一个回合开始时，[gold]生成[/gold][blue]1[/blue]个随机充能球。",
+  "BILIBILIACGN-DELAY_ORB_POWER.smartDescription": "在你下一个回合开始时，[gold]生成[/gold][blue]{Amount}[/blue]个随机充能球。"
 }

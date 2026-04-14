@@ -35,7 +35,7 @@ public sealed class Archbishop : CardBaseModel
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
         new DamageVar(7m, ValueProp.Move),
-        new DynamicVar("StrengthOnHit", 2m),
+        new DynamicVar("StrengthOnHit", 1m),
     ];
 
     public Archbishop() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }

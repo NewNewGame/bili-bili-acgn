@@ -21,17 +21,18 @@ namespace BiliBiliACGN.BiliBiliACGNCode.Cards;
 [Pool(typeof(FunShikiCardPool))]
 public sealed class FunPhilosophy : CardBaseModel
 {
-    private const int energyCost = 1;
+    private const int energyCost = 0;
     private const CardType type = CardType.Skill;
     private const CardRarity rarity = CardRarity.Uncommon;
     private const TargetType targetType = TargetType.Self;
     private const bool shouldShowInCardLibrary = true;
 
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.Static(StaticHoverTip.Block)];
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new BlockVar(7m, ValueProp.Move),
+        new BlockVar(5m, ValueProp.Move),
     ];
 
     public FunPhilosophy() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
@@ -52,5 +53,6 @@ public sealed class FunPhilosophy : CardBaseModel
     protected override void OnUpgrade()
     {
         base.DynamicVars.Block.UpgradeValueBy(4m);
+        base.RemoveKeyword(CardKeyword.Exhaust);
     }
 }

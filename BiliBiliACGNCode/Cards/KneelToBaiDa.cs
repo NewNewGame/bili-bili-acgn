@@ -2,12 +2,13 @@
 //* 文件：KneelToBaiDa(给百大跪下！)
 //* 作者：wheat
 //* 创建时间：2026/04/11
-//* 描述：造成10点伤害，给予2层易伤，生成1个力量充能球。
+//* 描述：造成10点伤害，激发你最右侧的充能球两次。
 //*******************************************************
 
 using BaseLib.Utils;
 using BiliBiliACGN.BiliBiliACGNCode.Cards.CardPool;
 using BiliBiliACGN.BiliBiliACGNCode.Core.Models.Orbs;
+using BiliBiliACGN.BiliBiliACGNCode.Utils;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -26,12 +27,11 @@ public sealed class KneelToBaiDa : CardBaseModel
     private const CardRarity rarity = CardRarity.Uncommon;
     private const TargetType targetType = TargetType.AnyEnemy;
     private const bool shouldShowInCardLibrary = true;
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<VulnerablePower>(),HoverTipFactory.Static(StaticHoverTip.Channeling),HoverTipFactory.FromOrb<StrengthOrb>(),];
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.Static(StaticHoverTip.Evoke)];
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
         new DamageVar(10m, ValueProp.Move),
-        new DynamicVar("Vulnerable", 2m),
     ];
 
     public KneelToBaiDa() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
@@ -42,8 +42,11 @@ public sealed class KneelToBaiDa : CardBaseModel
             .FromCard(this)
             .Targeting(cardPlay.Target)
             .Execute(choiceContext);
-        await PowerCmd.Apply<VulnerablePower>(cardPlay.Target, base.DynamicVars["Vulnerable"].BaseValue, base.Owner.Creature, this);
-        await OrbCmd.Channel<StrengthOrb>(choiceContext, base.Owner);
+        if(base.Owner.PlayerCombatState.OrbQueue.Orbs.Count > 0){
+            await OrbCmd.EvokeNext(choiceContext, base.Owner, false);
+            await OrbUtils.OrbEvokeWait();
+            await OrbCmd.EvokeNext(choiceContext, base.Owner, true);
+        }
     }
 
     protected override void OnUpgrade() { }

@@ -20,7 +20,7 @@ namespace BiliBiliACGN.BiliBiliACGNCode.Cards;
 [Pool(typeof(FunShikiCardPool))]
 public sealed class LuckyHit : CardBaseModel
 {
-    private const int energyCost = 0;
+    private const int energyCost = 1;
     private const CardType type = CardType.Attack;
     private const CardRarity rarity = CardRarity.Uncommon;
     private const TargetType targetType = TargetType.AnyEnemy;
@@ -40,7 +40,7 @@ public sealed class LuckyHit : CardBaseModel
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        // 造成伤害，激发你的所有攻击充能球
+        // 造成伤害，你的所有攻击充能球触发被动
         await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue)
             .FromCard(this)
             .Targeting(cardPlay.Target)

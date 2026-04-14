@@ -7,6 +7,7 @@
 
 using BiliBiliACGN.BiliBiliACGNCode.Core.Models.Orbs;
 using MegaCrit.Sts2.Core.Combat;
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Models;
 using Rng = MegaCrit.Sts2.Core.Random.Rng;
 
@@ -40,7 +41,7 @@ public static class OrbUtils
     {
         return GetRandomFunShikiOrb(card.CombatState.RunState.Rng.CombatOrbGeneration);
     }
-        /// <summary>
+    /// <summary>
     /// 随机获取一个泛式充能球
     /// </summary>
     /// <param name="card"></param>
@@ -48,5 +49,8 @@ public static class OrbUtils
     public static OrbModel GetRandomFunShikiOrb(this CombatState combatState)
     {
         return GetRandomFunShikiOrb(combatState.RunState.Rng.CombatOrbGeneration);
+    }
+    public static Task OrbEvokeWait(){
+        return Cmd.CustomScaledWait(0.15f, 0.25f);
     }
 }   

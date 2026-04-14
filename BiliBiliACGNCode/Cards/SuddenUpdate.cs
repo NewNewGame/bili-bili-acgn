@@ -2,12 +2,12 @@
 //* 文件：SuddenUpdate(突然更新)
 //* 作者：wheat
 //* 创建时间：2026/04/11
-//* 描述：获得{Block:diff()}点[gold]格挡[/gold]。本回合女儿获得{Strength:diff()}点[gold]力量[/gold]。
+//* 描述：获得{Block:diff()}点[gold]格挡[/gold]。下回合，随机[gold]生成[/gold]{OrbCount:diff()}个充能球。
 //*******************************************************
 
 using BaseLib.Utils;
 using BiliBiliACGN.BiliBiliACGNCode.Cards.CardPool;
-using BiliBiliACGN.BiliBiliACGNCode.Core.Commands;
+using BiliBiliACGN.BiliBiliACGNCode.Powers;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -25,7 +25,7 @@ public sealed class SuddenUpdate : CardBaseModel
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.Static(StaticHoverTip.Block), HoverTipFactory.FromPower<StrengthPower>()];
     #endregion
     #region 卡牌属性配置
-    private const int energyCost = 1;
+    private const int energyCost = 2;
     private const CardType type = CardType.Skill;
     private const CardRarity rarity = CardRarity.Common;
     private const TargetType targetType = TargetType.Self;
@@ -33,8 +33,8 @@ public sealed class SuddenUpdate : CardBaseModel
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new BlockVar(8m, ValueProp.Move),
-        new DynamicVar("Strength", 2m)
+        new BlockVar(13m, ValueProp.Move),
+        new DynamicVar("OrbCount", 1m)
     ];
 
     public SuddenUpdate() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
@@ -45,12 +45,12 @@ public sealed class SuddenUpdate : CardBaseModel
     {
         // 获得{Block:diff()}点[gold]格挡[/gold]。女儿获得{Strength:diff()}点[gold]力量[/gold]。
         await CreatureCmd.GainBlock(base.Owner.Creature, base.DynamicVars.Block.BaseValue, base.DynamicVars.Block.Props, cardPlay);
-        await DaughterCmd.ApplyPower<FlexPotionPower>(base.Owner.Creature, base.DynamicVars["Strength"].BaseValue, this);
+        await PowerCmd.Apply<DelayOrbPower>(base.Owner.Creature, base.DynamicVars["OrbCount"].BaseValue, base.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()
     {
         base.DynamicVars["Block"].UpgradeValueBy(3m);
-        base.DynamicVars["Strength"].UpgradeValueBy(1m);
+        base.DynamicVars["OrbCount"].UpgradeValueBy(1m);
     }
 }

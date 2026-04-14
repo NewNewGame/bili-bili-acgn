@@ -45,12 +45,15 @@ public sealed class AnimeEmperorPower : PowerBaseModel
     /// <param name="targets">目标</param>
     public override async Task AfterOrbEvoked(PlayerChoiceContext choiceContext, OrbModel orb, IEnumerable<Creature> targets)
     {
+        // 如果充能球不是玩家的，则返回
         if(orb.Owner != base.Owner.Player) return;
         Data data = GetInternalData<Data>();
+        // 计数器加1
         data.triggerCount++;
+        // 如果计数器大于等于Amount，则获得1个延迟充能球
         if(data.triggerCount >= base.Amount){
             data.triggerCount = 0;
-            await OrbCmd.Channel(choiceContext, OrbUtils.GetRandomFunShikiOrb(base.Owner.CombatState), base.Owner.Player);
+            await PowerCmd.Apply<DelayOrbPower>(base.Owner, 1, base.Owner, null);
         }
         InvokeDisplayAmountChanged();
     }
