@@ -62,6 +62,10 @@ public static class RichPresencePatch
                         // 这边直接用你想要的名称顶替Ascension
                         SteamSetRichPresence.Value?.Invoke(null, new object[] { "Ascension", "牛子豪 - A" + State.AscensionLevel});
                         break;
+                    case FunShikiCharacter:
+                        SteamSetRichPresence.Value?.Invoke(null, new object[] { "Character", "DEFECT"});
+                        SteamSetRichPresence.Value?.Invoke(null, new object[] { "Ascension", "泛式 - A" + State.AscensionLevel});
+                        break;
                 }
             }
         }
