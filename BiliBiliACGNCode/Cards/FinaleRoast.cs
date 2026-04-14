@@ -31,7 +31,7 @@ public sealed class FinaleRoast : CardBaseModel
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new BlockVar(9m, ValueProp.Move),
+        new BlockVar(7m, ValueProp.Move),
         new DynamicVar("Evokes", 2m)
     ];
 
@@ -43,15 +43,22 @@ public sealed class FinaleRoast : CardBaseModel
     {
         // 获得{Block:diff()}点[gold]格挡[/gold]。[gold]激发[/gold]{Evokes:diff()}个充能球。
         await CreatureCmd.GainBlock(base.Owner.Creature, base.DynamicVars.Block.BaseValue, base.DynamicVars.Block.Props, cardPlay);
-        for(int i = 0; i < base.DynamicVars["Evokes"].BaseValue; i++)
+        // 如果没有充能球就返回
+        if(base.Owner.PlayerCombatState?.OrbQueue.Orbs.Count == 0) return;
+        int cnt = (int)base.DynamicVars["Evokes"].BaseValue;
+        for(int i = 0; i < cnt; i++)
         {
             await OrbCmd.EvokeNext(choiceContext, base.Owner);
-            await Cmd.Wait(0.25f);
+            if(i < cnt - 1)
+            {
+                await Cmd.Wait(0.25f);
+            }
         }
     }
 
     protected override void OnUpgrade()
     {
-        base.DynamicVars["Block"].UpgradeValueBy(5m);
+        base.DynamicVars["Block"].UpgradeValueBy(3m);
+        base.DynamicVars["Evokes"].UpgradeValueBy(1m);
     }
 }

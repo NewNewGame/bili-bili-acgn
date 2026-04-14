@@ -12,6 +12,7 @@ using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
+using MegaCrit.Sts2.Core.Localization.DynamicVars;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Cards;
 
@@ -31,6 +32,8 @@ public sealed class MangaArtistKirito : CardBaseModel
     private const CardRarity rarity = CardRarity.Basic;
     private const TargetType targetType = TargetType.Self;
     private const bool shouldShowInCardLibrary = true;
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new DynamicVar("Channeling", 1m)];
+
 
     public MangaArtistKirito() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
 
@@ -38,7 +41,12 @@ public sealed class MangaArtistKirito : CardBaseModel
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
+        int cnt = (int)base.DynamicVars["Channeling"].BaseValue;
         // 生成1个[gold]攻击[/gold]充能球。
         await OrbCmd.Channel<AttackOrb>(choiceContext, base.Owner);
+    }
+    protected override void OnUpgrade()
+    {
+        base.DynamicVars["Channeling"].UpgradeValueBy(1m);
     }
 }

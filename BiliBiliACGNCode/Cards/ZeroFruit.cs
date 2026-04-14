@@ -45,4 +45,8 @@ public sealed class ZeroFruit : CardBaseModel
         await DaughterCmd.ApplyAttack(base.Owner.Creature, 0m, choiceContext, cardPlay.Target);
         await PowerCmd.Apply<WeakPower>(cardPlay.Target, base.DynamicVars["Weak"].BaseValue, base.Owner.Creature, this);
     }
+    protected override void OnUpgrade()
+    {
+        base.DynamicVars["Weak"].UpgradeValueBy(1m);
+    }
 }

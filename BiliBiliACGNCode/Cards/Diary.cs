@@ -35,7 +35,7 @@ public sealed class Diary : CardBaseModel
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         // 将弃牌堆洗入抽牌堆，然后抽牌
-        await CardPileCmd.ShuffleIfNecessary(choiceContext, base.Owner);
+        await CardPileCmd.Shuffle(choiceContext, base.Owner);
         await CardPileCmd.Draw(choiceContext, base.DynamicVars.Cards.IntValue, base.Owner);
     }
 
