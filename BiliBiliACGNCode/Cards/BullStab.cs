@@ -7,6 +7,7 @@
 
 using BaseLib.Utils;
 using BiliBiliACGN.BiliBiliACGNCode.Cards.CardPool;
+using BiliBiliACGN.BiliBiliACGNCode.Utils;
 using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -61,12 +62,12 @@ public sealed class BullStab : CardBaseModel
             if(base.IsUpgraded){
                 var card = (await CardSelectCmd.FromHand(choiceContext, base.Owner, new CardSelectorPrefs(MCardSelectorPrefs.TO_YYSY, 1), MCardSelectorPrefs.YYSYFilter, this)).FirstOrDefault();
                 if(card != null)
-                await CardCmd.AutoPlay(choiceContext, card, null);
+                await AutoPlayUtils.AutoPlaySafely(choiceContext, card);
             }else{
                 // 随机打出手牌中一张带[gold]有一说一[/gold]的牌
                 var randomCard = base.Owner.RunState.Rng.CombatCardSelection.NextItem(pile.Cards.Where(MCardSelectorPrefs.YYSYFilter));
                 if(randomCard != null)
-                await CardCmd.AutoPlay(choiceContext, randomCard, null);
+                await AutoPlayUtils.AutoPlaySafely(choiceContext, randomCard);
             }
             
         }

@@ -11,6 +11,7 @@ using MegaCrit.Sts2.Core.Models;
 using BiliBiliACGN.BiliBiliACGNCode.Cards;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
+using BiliBiliACGN.BiliBiliACGNCode.Utils;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Powers;
 
@@ -19,8 +20,6 @@ public sealed class MacroDomainPower : PowerBaseModel
     public override PowerType Type => PowerType.Buff;
 
     public override PowerStackType StackType => PowerStackType.Counter;
-
-    private int currentAmount = 0;
     /// <summary>
     /// 自动打出的卡牌集合
     /// </summary>
@@ -54,7 +53,7 @@ public sealed class MacroDomainPower : PowerBaseModel
         // 自动打出有一说一的卡牌
         if(card.Owner.Creature == base.Owner && card.Keywords.Contains(CustomKeyWords.YYSY) && !AutoplayingCards.Contains(card)){
             AutoplayingCards.Add(card);
-            await CardCmd.AutoPlay(choiceContext, card, null);
+            await AutoPlayUtils.AutoPlaySafely(choiceContext, card);
             AutoplayingCards.Remove(card);
         }
     }

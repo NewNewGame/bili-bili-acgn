@@ -7,6 +7,7 @@
 
 using BaseLib.Utils;
 using BiliBiliACGN.BiliBiliACGNCode.Cards.CardPool;
+using BiliBiliACGN.BiliBiliACGNCode.Utils;
 using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -51,7 +52,7 @@ public sealed class ChampionPowder : CardBaseModel
 		{
 			for (int i = 0; i < base.DynamicVars["PlayTimes"].IntValue; i++)
 			{
-				await CardCmd.AutoPlay(choiceContext, card, null);
+				await AutoPlayUtils.AutoPlaySafely(choiceContext, card);
 			}
 		}
     }

@@ -13,6 +13,7 @@ using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Rewards;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Runs;
+using MegaCrit.Sts2.Core.HoverTips;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Events;
 
@@ -21,7 +22,7 @@ public sealed class OKuoDa : EventBaseModel
 {
     public override bool IsShared => true;
     public override EventLayoutType LayoutType => EventLayoutType.Default;
-    public override EncounterModel? CanonicalEncounter => ModelDb.Encounter<StrangeMurmurEncounter>();
+    public override EncounterModel? CanonicalEncounter => ModelDb.Encounter<OKuoDaEncounter>();
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new StringVar("Relic", ModelDb.Relic<AngryPop>().Title.GetFormattedText()),
         new StringVar("Relic2", ModelDb.Relic<CalmPipi>().Title.GetFormattedText()),
@@ -31,9 +32,9 @@ public sealed class OKuoDa : EventBaseModel
     {
         return
         [
-            new EventOption(this, Oguoda, "O_KUO_DA.pages.INITIAL.options.OGUODA"),
-            new EventOption(this, Naiyo, "O_KUO_DA.pages.INITIAL.options.NAIYO"),
-            new EventOption(this, Combat, "O_KUO_DA.pages.INITIAL.options.COMBAT")
+            new EventOption(this, Oguoda, "O_KUO_DA.pages.INITIAL.options.OGUODA", HoverTipFactory.FromRelic<AngryPop>()),
+            new EventOption(this, Naiyo, "O_KUO_DA.pages.INITIAL.options.NAIYO", HoverTipFactory.FromRelic<CalmPipi>()),
+            new EventOption(this, Combat, "O_KUO_DA.pages.INITIAL.options.COMBAT", HoverTipFactory.FromRelic<UltimateShitAnimeCommittee>())
         ];
     }
     public override bool IsAllowed(RunState runState){

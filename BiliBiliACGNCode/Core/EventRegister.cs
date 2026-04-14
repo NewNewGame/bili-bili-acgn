@@ -85,7 +85,6 @@ public static class EventRegister
             return;
         _initialized = true;
 
-        Log.Info($"[B站动画区Mod] 事件注册开始：AllEvents={ModelDb.AllEvents.Count()}");
         InjectEvents();
 
         var eventMethod = typeof(ModelDb).GetMethods(BindingFlags.Public | BindingFlags.Static)
@@ -112,7 +111,7 @@ public static class EventRegister
                 Register(ev, poolType);
         }
 
-        Log.Info($"[B站动画区Mod] 事件注册完成：按 Act 注入={ExtraEventsByActType.Sum(x => x.Value.Count)}，共享事件={ExtraSharedEvents.Count}");
+        Log.Info($"[B站动画区Mod] 事件注册完成：专属事件池={ExtraEventsByActType.Sum(x => x.Value.Count)}，共享事件池={ExtraSharedEvents.Count}");
     }
 
     private static void Register(EventModel eventModel, Type poolType)

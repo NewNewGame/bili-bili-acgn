@@ -30,15 +30,14 @@ public sealed class DeathNote : RelicBaseModel
     ];
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromCard<DeathNoteD>()];
 
-
-    public override async Task AfterPlayerTurnStartEarly(PlayerChoiceContext choiceContext, Player player)
+    public override async Task AfterPlayerTurnStart(PlayerChoiceContext choiceContext, Player player)
     {
         if(player == base.Owner)
         {
             CombatState combatState = player.Creature.CombatState;
             if (combatState.RoundNumber == 1){
                 Flash();
-                await CardPileCmd.AddGeneratedCardToCombat(ModelDb.Card<DeathNoteD>(), PileType.Hand, true);
+                await CardPileCmd.AddGeneratedCardToCombat(combatState.CreateCard<DeathNoteD>(player), PileType.Hand, true);
             }
         }
     }
