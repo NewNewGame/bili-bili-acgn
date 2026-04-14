@@ -2,7 +2,7 @@
 //* 文件：MildSneezing
 //* 作者：wheat
 //* 创建时间：2026/04/02
-//* 描述：轻微喷嚏 下3场战斗，每回合有30%几率跳过敌人回合，并每回合随机丢弃1张牌
+//* 描述：轻微喷嚏 下3场战斗，每回合有20%几率跳过敌人回合，每回合有20%几率随机丢弃1张牌
 //*******************************************************
 
 
@@ -30,7 +30,7 @@ public sealed class MildSneezing : RelicBaseModel
     [
         new DynamicVar("Fights", 3m),
         new DynamicVar("SkipChance", 20m),
-        new DynamicVar("DiscardAmount", 1m),
+        new DynamicVar("DiscardChance", 30m),
     ];
     public override bool ShowCounter => true;
     public override int DisplayAmount => BILIBILIACGN_MS_Fights;
@@ -79,12 +79,19 @@ public sealed class MildSneezing : RelicBaseModel
             // 每回合随机丢弃1张牌
             // 获取手牌
             var hand = PileType.Hand.GetPile(base.Owner);
-            // 随机丢弃1张牌
-            var randomCard = base.Owner.RunState.Rng.CombatCardSelection.NextItem(hand.Cards);
-            if(randomCard != null)
+            if(hand.Cards.Count > 0)
             {
-                await CardCmd.Discard(choiceContext, randomCard);
+                if(base.Owner.RunState.Rng.CombatPotionGeneration.NextInt(0, 100) < (int)base.DynamicVars["DiscardChance"].BaseValue)
+                {
+                    // 随机丢弃1张牌
+                    var randomCard = base.Owner.RunState.Rng.CombatCardSelection.NextItem(hand.Cards);
+                    if(randomCard != null)
+                    {
+                        await CardCmd.Discard(choiceContext, randomCard);
+                    }
+                }
             }
+            
         }
     }
     public override Task AfterCombatVictory(CombatRoom room)
