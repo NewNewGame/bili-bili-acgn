@@ -16,9 +16,9 @@ public sealed class AttackOrb : OrbBaseModel
 {
 	protected override string ChannelSfx => "event:/sfx/characters/defect/defect_plasma_channel";
     public override Color DarkenedColor => new Color("008585");
-    public override decimal PassiveVal => 1m;
+    public override decimal PassiveVal => 0m;
 
-    public override decimal EvokeVal => 1.25m;
+    public override decimal EvokeVal => 3m;
 
 	public override async Task BeforeTurnEndOrbTrigger(PlayerChoiceContext choiceContext)
 	{
