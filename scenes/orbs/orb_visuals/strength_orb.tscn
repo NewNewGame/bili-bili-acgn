@@ -1,8 +1,16 @@
-[gd_scene load_steps=13 format=3 uid="uid://wrnhms8buflq"]
+[gd_scene load_steps=14 format=3 uid="uid://wrnhms8buflq"]
 
-[ext_resource type="SpineSkeletonDataResource" uid="uid://jlyoh37nf1xf" path="res://animations/ui/combat/orbs/dark_orb_skel_data.tres" id="1_6hxcw"]
-[ext_resource type="Texture2D" uid="uid://dmkmwcafcfa5v" path="res://images/vfx/orbs/dark_orb_particle.png" id="2_a6pj1"]
-[ext_resource type="CanvasItemMaterial" uid="uid://c4ycqv0gdxvmr" path="res://themes/canvas_item_material_additive_shared.tres" id="shared_additive_mat"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://jlyoh37nf1xf" path="res://BiliBiliACGN/animations/combat/orbs/dark_orb_skel_data.tres" id="1_6hxcw"]
+[ext_resource type="Texture2D" uid="uid://dmkmwcafcfa5v" path="res://BiliBiliACGN/orbs/dark_orb_particle.png" id="2_a6pj1"]
+[ext_resource type="Texture2D" uid="uid://gfn6jw2vql1p" path="res://BiliBiliACGN/images/icon/strength_power.png" id="4_68ibn"]
+[ext_resource type="Material" uid="uid://c4ycqv0gdxvmr" path="res://BiliBiliACGN/images/vfx/canvas_item_material_additive_shared.tres" id="shared_additive_mat"]
+
+[sub_resource type="Curve" id="Curve_alpha_ParticleProcessMaterial_itccg"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_alpha_ParticleProcessMaterial_itccg"]
+curve = SubResource("Curve_alpha_ParticleProcessMaterial_itccg")
 
 [sub_resource type="Gradient" id="Gradient_otta2"]
 colors = PackedColorArray(0.2484, 0.2484, 0.2484, 1, 0.87516, 0.87516, 0.87516, 1)
@@ -24,13 +32,6 @@ point_count = 2
 [sub_resource type="CurveTexture" id="CurveTexture_pwhyd"]
 curve = SubResource("Curve_bdjnv")
 
-[sub_resource type="Curve" id="Curve_alpha_ParticleProcessMaterial_itccg"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="CurveTexture" id="CurveTexture_alpha_ParticleProcessMaterial_itccg"]
-curve = SubResource("Curve_alpha_ParticleProcessMaterial_itccg")
-
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_itccg"]
 particle_flag_disable_z = true
 angle_max = 360.0
@@ -40,13 +41,14 @@ gravity = Vector3(0, 0, 0)
 scale_min = 0.2
 scale_max = 0.4
 scale_curve = SubResource("CurveTexture_pwhyd")
+color = Color(1, 0.08627451, 0.06666667, 1)
 color_ramp = SubResource("GradientTexture1D_jclau")
-alpha_curve = SubResource("CurveTexture_alpha_ParticleProcessMaterial_itccg")
 color_initial_ramp = SubResource("GradientTexture1D_nbrr1")
+alpha_curve = SubResource("CurveTexture_alpha_ParticleProcessMaterial_itccg")
 hue_variation_min = -0.08
 hue_variation_max = 0.02
 
-[node name="DarkOrb" type="Node2D"]
+[node name="StrenthOrb" type="Node2D"]
 
 [node name="SpineSkeleton" type="SpineSprite" parent="."]
 skeleton_data_res = ExtResource("1_6hxcw")
@@ -54,6 +56,7 @@ preview_skin = "Default"
 preview_animation = "idle_loop"
 preview_frame = false
 preview_time = 0.0
+modulate = Color(0.8235294, 0.16862746, 0.16078432, 1)
 scale = Vector2(0.1, 0.1)
 
 [node name="Particles1" type="GPUParticles2D" parent="."]
@@ -62,3 +65,11 @@ amount = 6
 texture = ExtResource("2_a6pj1")
 lifetime = 2.0
 process_material = SubResource("ParticleProcessMaterial_itccg")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_left = -13.000001
+offset_top = -13.000004
+offset_right = 243.0
+offset_bottom = 243.0
+scale = Vector2(0.098000005, 0.098000005)
+texture = ExtResource("4_68ibn")

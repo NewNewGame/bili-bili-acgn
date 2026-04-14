@@ -1,8 +1,8 @@
 [gd_scene load_steps=11 format=3 uid="uid://b3r0riei06i3t"]
 
-[ext_resource type="SpineSkeletonDataResource" uid="uid://t3fckcb7ah43" path="res://animations/ui/combat/orbs/frost_orb_skel_data.tres" id="1_7ahjt"]
-[ext_resource type="Texture2D" uid="uid://bd7n2mtq6hdfw" path="res://images/vfx/orbs/frost_orb_particle.png" id="2_uspun"]
-[ext_resource type="Material" uid="uid://c4ycqv0gdxvmr" path="res://themes/canvas_item_material_additive_shared.tres" id="shared_additive_mat"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://t3fckcb7ah43" path="res://BiliBiliACGN/animations/combat/orbs/frost_orb_skel_data.tres" id="1_7ahjt"]
+[ext_resource type="Texture2D" uid="uid://bd7n2mtq6hdfw" path="res://BiliBiliACGN/orbs/frost_orb_particle.png" id="2_uspun"]
+[ext_resource type="Material" uid="uid://c4ycqv0gdxvmr" path="res://BiliBiliACGN/images/vfx/canvas_item_material_additive_shared.tres" id="shared_additive_mat"]
 
 [sub_resource type="Curve" id="Curve_alpha_ParticleProcessMaterial_eb6dp"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
@@ -37,7 +37,7 @@ scale_curve = SubResource("CurveTexture_vx2da")
 color_ramp = SubResource("GradientTexture1D_0dlyu")
 alpha_curve = SubResource("CurveTexture_alpha_ParticleProcessMaterial_eb6dp")
 
-[node name="FrostOrb" type="Node2D"]
+[node name="BlockOrb" type="Node2D"]
 
 [node name="SpineSkeleton" type="SpineSprite" parent="."]
 skeleton_data_res = ExtResource("1_7ahjt")
@@ -45,6 +45,7 @@ preview_skin = "Default"
 preview_animation = "idle_loop"
 preview_frame = false
 preview_time = 0.0
+modulate = Color(4.428029e-06, 0.8287783, 0.37485123, 1)
 scale = Vector2(0.1, 0.1)
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]

@@ -46,7 +46,7 @@ public sealed class AttackOrb : OrbBaseModel
 		}
 		IReadOnlyList<Creature> targets = (allEnemies) ? list : ((target == null) ? new List<Creature>(){base.Owner.RunState.Rng.CombatTargets.NextItem(list)} : new List<Creature>{target});
 
-		PlayEvokeSfx();
+		//PlayEvokeSfx();
         await DaughterCmd.ApplyAttack(base.Owner.Creature, value, choiceContext, targets);
 		return targets;
 	}

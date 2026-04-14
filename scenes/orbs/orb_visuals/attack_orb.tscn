@@ -1,8 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://bu5t0o2bqav4u"]
+[gd_scene load_steps=3 format=3 uid="uid://bu5t0o2bqav4u"]
 
-[ext_resource type="SpineSkeletonDataResource" uid="uid://bjl1ywh0twqxb" path="res://animations/ui/combat/orbs/glass_orb_skel_data.tres" id="1_4pg7w"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://bjl1ywh0twqxb" path="res://BiliBiliACGN/animations/combat/orbs/glass_orb_skel_data.tres" id="1_4pg7w"]
+[ext_resource type="Texture2D" uid="uid://c3itx3308bffk" path="res://BiliBiliACGN/images/icon/free_attack_power.png" id="2_xxauc"]
 
-[node name="ScrapOrb" type="Node2D"]
+[node name="AttackOrb" type="Node2D"]
 
 [node name="SpineSkeleton" type="SpineSprite" parent="."]
 skeleton_data_res = ExtResource("1_4pg7w")
@@ -11,3 +12,11 @@ preview_animation = "idle_loop"
 preview_frame = false
 preview_time = 0.0
 scale = Vector2(0.1, 0.1)
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_left = -13.000001
+offset_top = -13.000004
+offset_right = 243.0
+offset_bottom = 243.0
+scale = Vector2(0.098000005, 0.098000005)
+texture = ExtResource("2_xxauc")
