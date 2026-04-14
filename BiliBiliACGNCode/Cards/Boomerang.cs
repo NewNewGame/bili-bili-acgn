@@ -1,5 +1,5 @@
 //****************** 代码文件申明 ***********************
-//* 文件：Bommerang(回旋镖)
+//* 文件：Boomerang(回旋镖)
 //* 作者：wheat
 //* 创建时间：2026/04/11
 //* 描述：造成{Damage:diff()}点伤害。本回合下{NextPlays:diff()}张打出的牌会回到抽牌堆顶部。
@@ -17,7 +17,7 @@ using MegaCrit.Sts2.Core.ValueProps;
 namespace BiliBiliACGN.BiliBiliACGNCode.Cards;
 
 [Pool(typeof(FunShikiCardPool))]
-public sealed class Bommerang : CardBaseModel
+public sealed class Boomerang : CardBaseModel
 {
     #region 卡牌属性配置
     private const int energyCost = 1;
@@ -32,7 +32,7 @@ public sealed class Bommerang : CardBaseModel
         new DynamicVar("NextPlays", 1m)
     ];
 
-    public Bommerang() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
+    public Boomerang() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
 
     #endregion
 

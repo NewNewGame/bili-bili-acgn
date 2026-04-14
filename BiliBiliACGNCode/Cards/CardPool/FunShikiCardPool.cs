@@ -113,7 +113,7 @@ public sealed class FunShikiCardPool : CustomCardPoolModel
             ModelDb.Card<FanStyleDiva>(),
             ModelDb.Card<UncleStrike>(),
             ModelDb.Card<WhirlwindStrike>(),
-            ModelDb.Card<Bommerang>(),
+            ModelDb.Card<Boomerang>(),
             ModelDb.Card<FunShikiDefend>(),
             ModelDb.Card<ZeroFruit>(),
             ModelDb.Card<MangaArtistKirito>(),
