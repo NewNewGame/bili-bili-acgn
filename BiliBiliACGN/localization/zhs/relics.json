@@ -58,7 +58,7 @@
     "BILIBILIACGN-QIAN_HU_DIARY.description": "每当你跳过一次卡牌奖励，回合结束时获得等同于[blue]跳过次数×{Amount}[/blue]的[gold]格挡[/gold]。",
     "BILIBILIACGN-QIAN_HU_DIARY.flavor": "还没想好",
     "BILIBILIACGN-MILD_SNEEZING.title": "轻微喷嚏",
-    "BILIBILIACGN-MILD_SNEEZING.description": "下[blue]{Fights}[/blue]场战斗：每回合有[blue]{SkipChance}%[/blue]几率跳过敌人回合。每回合，随机丢弃[blue]{DiscardAmount}[/blue]张牌。",
+    "BILIBILIACGN-MILD_SNEEZING.description": "下[blue]{Fights}[/blue]场战斗：每回合有[blue]{SkipChance}%[/blue]几率跳过敌人回合。\n每回合有[blue]{DiscardChance}%[/blue]几率随机丢弃[blue]1[/blue]张牌。",
     "BILIBILIACGN-MILD_SNEEZING.flavor": "啊~啾~！~！",
     "BILIBILIACGN-HA_KA_SE_SNEEZING_MACHINE.title": "博士的喷嚏机",
     "BILIBILIACGN-HA_KA_SE_SNEEZING_MACHINE.description": "每场战斗开始时，去除所有敌人的[gold]人工制造[/gold]并给予[blue]{WeakAmount}[/blue]层[gold]虚弱[/gold]；你也有[blue]{FragileChance}%[/blue]几率获得[blue]{FragileAmount}[/blue]层[gold]脆弱[/gold]。",
