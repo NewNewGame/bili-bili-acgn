@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bu5t0o2bqav4u"]
 
 [ext_resource type="SpineSkeletonDataResource" uid="uid://bjl1ywh0twqxb" path="res://BiliBiliACGN/animations/combat/orbs/glass_orb_skel_data.tres" id="1_4pg7w"]
-[ext_resource type="Texture2D" uid="uid://c3itx3308bffk" path="res://BiliBiliACGN/images/icon/free_attack_power.png" id="2_xxauc"]
+[ext_resource type="Texture2D" uid="uid://cba5yryr8fx6s" path="res://BiliBiliACGN/images/icon/parry_power.png" id="2_xxauc"]
 
 [node name="AttackOrb" type="Node2D"]
 
@@ -11,6 +11,7 @@ preview_skin = "Default"
 preview_animation = "idle_loop"
 preview_frame = false
 preview_time = 0.0
+modulate = Color(1, 1, 0.7764706, 1)
 scale = Vector2(0.1, 0.1)
 
 [node name="TextureRect" type="TextureRect" parent="."]

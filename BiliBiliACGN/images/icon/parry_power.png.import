@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c3itx3308bffk"
-path="res://.godot/imported/free_attack_power.png-eed20a294b46f5471ac4ee52f1d6c001.ctex"
+uid="uid://cba5yryr8fx6s"
+path="res://.godot/imported/parry_power.png-6b85faeb17026c7e19e34debed6904d9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://BiliBiliACGN/images/icon/free_attack_power.png"
-dest_files=["res://.godot/imported/free_attack_power.png-eed20a294b46f5471ac4ee52f1d6c001.ctex"]
+source_file="res://BiliBiliACGN/images/icon/parry_power.png"
+dest_files=["res://.godot/imported/parry_power.png-6b85faeb17026c7e19e34debed6904d9.ctex"]
 
 [params]
 
