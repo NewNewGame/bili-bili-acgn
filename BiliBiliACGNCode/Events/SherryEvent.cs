@@ -22,7 +22,7 @@ public sealed class SherryEvent : EventBaseModel
 {
     public override bool IsShared => true;
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new StringVar("CurseTitle", ModelDb.Card<Normality>().Title),
+        new StringVar("CurseTitle", ModelDb.Card<Doubt>().Title),
     ];
 
     public override EventLayoutType LayoutType => EventLayoutType.Default;
@@ -31,7 +31,7 @@ public sealed class SherryEvent : EventBaseModel
     {
         return
         [
-            new EventOption(this, Try, "SHERRY_EVENT.pages.INITIAL.options.TRY", HoverTipFactory.FromRelic<SherryHurt>().Append(HoverTipFactory.FromCard<Normality>())),
+            new EventOption(this, Try, "SHERRY_EVENT.pages.INITIAL.options.TRY", HoverTipFactory.FromRelic<SherryHurt>().Append(HoverTipFactory.FromCard<Doubt>())),
             new EventOption(this, No, "SHERRY_EVENT.pages.INITIAL.options.NO")
         ];
     }
@@ -46,7 +46,7 @@ public sealed class SherryEvent : EventBaseModel
     /// <returns></returns>
     private async Task Try()
     {
-        CardModel card = base.Owner.RunState.CreateCard<Normality>(base.Owner);
+        CardModel card = base.Owner.RunState.CreateCard<Doubt>(base.Owner);
 		CardCmd.PreviewCardPileAdd(new List<CardPileAddResult>(){await CardPileCmd.Add(card, PileType.Deck)}, 2f);
         await RelicCmd.Obtain<SherryHurt>(base.Owner);
         SetEventFinished(L10NLookup("SHERRY_EVENT.pages.TRY.END.description"));

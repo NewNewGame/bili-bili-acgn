@@ -26,7 +26,7 @@ public sealed class EvaFormStrike : CardBaseModel
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<WeakPower>(), HoverTipFactory.FromPower<VulnerablePower>()];
     #endregion
     #region 卡牌属性配置
-    private const int energyCost = 0;
+    private const int energyCost = 2;
     private const CardType type = CardType.Attack;
     private const CardRarity rarity = CardRarity.Event;
     private const TargetType targetType = TargetType.AllEnemies;

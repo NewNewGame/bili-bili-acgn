@@ -2,7 +2,7 @@
 //* 文件：NiulangVillage(牛郎村)
 //* 作者：wheat
 //* 创建时间：2026/04/03
-//* 描述：X费。造成等同于[gold]红温值[/gold]×本次支付能量倍数的伤害；[gold]红怒[/gold]时倍率翻倍。消耗，保留。
+//* 描述：X费。获得{IfUpgraded:show:X+1|X}点[gold]力量[/gold]。\n给予所有敌人{IfUpgraded:show:X+1|X}层[gold]易伤[/gold]。
 //*******************************************************
 
 using BaseLib.Utils;
@@ -16,6 +16,7 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.ValueProps;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Entities.Creatures;
+using MegaCrit.Sts2.Core.Models.Powers;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Cards;
 
@@ -25,7 +26,8 @@ public sealed class NiulangVillage : CardBaseModel
     #region 卡牌关键词与悬停
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
     [
-        HoverTipFactory.FromPower<AngerPower>(),
+        HoverTipFactory.FromPower<StrengthPower>(),
+        HoverTipFactory.FromPower<VulnerablePower>(),
     ];
 
     #endregion
@@ -36,44 +38,27 @@ public sealed class NiulangVillage : CardBaseModel
     private const int energyCost = -1;
     protected override bool HasEnergyCostX => true;
 
-    private const CardType type = CardType.Attack;
+    private const CardType type = CardType.Skill;
     private const CardRarity rarity = CardRarity.Rare;
-    private const TargetType targetType = TargetType.AnyEnemy;
+    private const TargetType targetType = TargetType.AllEnemies;
     private const bool shouldShowInCardLibrary = true;
 
     public NiulangVillage() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
-
-        /// <summary>
-    /// 牌面动态变量配置。
-    /// </summary>
-    protected override IEnumerable<DynamicVar> CanonicalVars =>
-    [
-        new CalculationBaseVar(0m),
-		new ExtraDamageVar(1m),
-		new CalculatedDamageVar(ValueProp.Move).WithMultiplier((CardModel card, Creature? _) => {
-            // 伤害 = 红温层数 × X(+1)
-            int x = card.ResolveEnergyXValue();
-            if(x == 0) return card.Owner.Creature.GetPowerAmount<AngerPower>();
-            decimal num = x;
-            if(card.IsUpgraded) ++num;
-            decimal dmg = card.Owner.Creature.GetPowerAmount<AngerPower>() * num;
-            return dmg;
-        })
-    ];
-
 
     #endregion
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        await DamageCmd.Attack(base.DynamicVars.CalculatedDamage)
-            .FromCard(this)
-            .Targeting(cardPlay.Target)
-            .Execute(choiceContext);
+        // 计算X，升级+1
+        int x = ResolveEnergyXValue();
+        if(base.IsUpgraded) ++x;
+        // 获得力量
+        await PowerCmd.Apply<StrengthPower>(base.Owner.Creature, x, base.Owner.Creature, this);
+        // 给予所有敌人易伤
+        if(base.CombatState == null) return;
+        foreach(var enemy in base.CombatState.HittableEnemies){
+            await PowerCmd.Apply<VulnerablePower>(enemy, x, base.Owner.Creature, this);
+        }
     }
 
-    protected override void OnUpgrade()
-    {
-        base.AddKeyword(CardKeyword.Retain);
-    }
 }
