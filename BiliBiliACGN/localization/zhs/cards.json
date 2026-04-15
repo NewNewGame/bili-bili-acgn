@@ -319,7 +319,7 @@
   "BILIBILIACGN-NEW_SEASON_TIME_MACHINE.title": "新番时光机",
   "BILIBILIACGN-NEW_SEASON_TIME_MACHINE.description": "抽{Cards:diff()}张牌。\n造成{Damage:diff()}点伤害。\n每当女儿发动{AttacksPerReturn:diff()}次[gold]进攻[/gold]，这张牌回到你的手牌。",
   "BILIBILIACGN-UNREACHABLE_FLOWER.title": "高岭之花",
-  "BILIBILIACGN-UNREACHABLE_FLOWER.description": "给予所有敌人{Vulnerable:diff()}层[gold]易伤[/gold]。\n女儿向所有敌人发动1次[gold]进攻[/gold]。",
+  "BILIBILIACGN-UNREACHABLE_FLOWER.description": "给予敌人{Morbid:diff()}层[gold]病态[/gold]。\n抽{Cards:diff()}张牌。",
   "BILIBILIACGN-FUN_SHIKI_ONMYOJI.title": "泛式阴阳术",
   "BILIBILIACGN-FUN_SHIKI_ONMYOJI.description": "获得{Block:diff()}点[gold]格挡[/gold]。\n获得{Distortion:diff()}点[gold]扭曲[/gold]。",
   "BILIBILIACGN-FUN_PHILOSOPHY.title": "泛哲",
