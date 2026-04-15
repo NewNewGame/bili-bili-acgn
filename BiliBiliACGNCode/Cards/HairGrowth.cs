@@ -10,11 +10,8 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using BiliBiliACGN.BiliBiliACGNCode.Cards.CardPool;
-using MegaCrit.Sts2.Core.HoverTips;
-using MegaCrit.Sts2.Core.Models;
-using MegaCrit.Sts2.Core.Entities.Creatures;
-using BiliBiliACGN.BiliBiliACGNCode.Powers;
 using MegaCrit.Sts2.Core.Commands;
+using MegaCrit.Sts2.Core.ValueProps;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Cards;
 
@@ -22,13 +19,14 @@ namespace BiliBiliACGN.BiliBiliACGNCode.Cards;
 public sealed class HairGrowth : CardBaseModel
 {
     #region 卡牌关键词与悬停
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromKeyword(CustomKeyWords.YYSY)];
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [CustomKeyWords.YYSY];
+
     #endregion
     #region 卡牌属性配置
-    private const int energyCost = 1;
-    private const CardType type = CardType.Skill;
+    private const int energyCost = 4;
+    private const CardType type = CardType.Attack;
     private const CardRarity rarity = CardRarity.Uncommon;
-    private const TargetType targetType = TargetType.Self;
+    private const TargetType targetType = TargetType.AnyEnemy;
     private const bool shouldShowInCardLibrary = true;
 
     /// <summary>
@@ -36,12 +34,7 @@ public sealed class HairGrowth : CardBaseModel
     /// </summary>
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new CalculationBaseVar(0m),
-        new CalculationExtraVar(1m),
-        new CalculatedVar("CalculatedCard").WithMultiplier((CardModel card, Creature? _)=>
-		{
-			return card.Owner.Creature?.GetPowerAmount<TangShiPower>() ?? 0;
-		})
+        new DamageVar(16m, ValueProp.Move)
     ];
 
     public HairGrowth() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
@@ -54,8 +47,12 @@ public sealed class HairGrowth : CardBaseModel
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         #region 卡牌打出效果
+        await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue)
+            .FromCard(this)
+            .Targeting(cardPlay.Target)
+            .WithHitCount(2)
+            .Execute(choiceContext);
         #endregion
-        await CardPileCmd.Draw(choiceContext, ((CalculatedVar)base.DynamicVars["CalculatedCard"]).Calculate(base.Owner.Creature), base.Owner);
     }
 
     /// <summary>
@@ -64,8 +61,7 @@ public sealed class HairGrowth : CardBaseModel
     protected override void OnUpgrade()
     {
         #region 升级效果
-        // 无升级效果（动态变量 upgradeValue 均为 0，且未配置 upgradeEffects）
-
+        base.DynamicVars["Damage"].UpgradeValueBy(4m);
         #endregion
     }
 }
