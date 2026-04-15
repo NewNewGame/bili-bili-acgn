@@ -160,18 +160,5 @@ public sealed class MorbidPower : PowerBaseModel
         // 给予免疫
         await PowerCmd.Apply<MorbidMitigationPower>(dealer, base.DynamicVars["DamageReductionPercent"].BaseValue, null, null);
     }
-    /// <summary>
-    /// 回合结束时减少一层病态
-    /// </summary>
-    /// <param name="choiceContext"></param>
-    /// <param name="side"></param>
-    /// <returns></returns>
-    public override async Task AfterTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)
-	{
-		if (side == base.Owner.Side)
-		{
-			await PowerCmd.Decrement(this);
-		}
-	}
 
 }
