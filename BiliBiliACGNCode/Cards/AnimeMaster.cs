@@ -28,7 +28,7 @@ public sealed class AnimeMaster : CardBaseModel
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new DynamicVar("Strength", 2m),
+        new DynamicVar("Strength", 1m),
     ];
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.Static(StaticHoverTip.Evoke),HoverTipFactory.FromPower<StrengthPower>()];
 
@@ -42,6 +42,6 @@ public sealed class AnimeMaster : CardBaseModel
 
     protected override void OnUpgrade()
     {
-        base.EnergyCost.UpgradeBy(-1);
+        base.DynamicVars["Strength"].UpgradeValueBy(1m);
     }
 }

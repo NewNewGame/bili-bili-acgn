@@ -150,7 +150,7 @@ public sealed class MorbidPower : PowerBaseModel
         int atkTimes = Mathf.Min(Amount, 1 + base.Owner.GetPowerAmount<MadlyLovePower>());
         while(atkTimes > 0){
             // 造成伤害
-            await CreatureCmd.Damage(choiceContext, dealer, Amount * (100m - mitigation) / 100m, ValueProp.Unpowered, target);
+            await CreatureCmd.Damage(choiceContext, dealer, Amount * (100m - mitigation) / 100m, ValueProp.Unpowered | ValueProp.Unblockable, target);
             // 如果病态持有者死亡，则退出循环
             if(dealer.IsDead) return;
             // 减少一层病态

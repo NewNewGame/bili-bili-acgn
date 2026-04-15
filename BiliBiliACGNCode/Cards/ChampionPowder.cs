@@ -20,7 +20,7 @@ namespace BiliBiliACGN.BiliBiliACGNCode.Cards;
 [Pool(typeof(FunShikiCardPool))]
 public sealed class ChampionPowder : CardBaseModel
 {
-    private const int energyCost = 1;
+    private const int energyCost = 2;
     private const CardType type = CardType.Skill;
     private const CardRarity rarity = CardRarity.Rare;
     private const TargetType targetType = TargetType.Self;
@@ -52,6 +52,7 @@ public sealed class ChampionPowder : CardBaseModel
 		{
 			for (int i = 0; i < base.DynamicVars["PlayTimes"].IntValue; i++)
 			{
+                $"自动打出牌：{card}，次数：{i}".LogInfo();
 				await AutoPlayUtils.AutoPlaySafely(choiceContext, card);
 			}
 		}

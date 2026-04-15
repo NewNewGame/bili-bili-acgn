@@ -19,13 +19,13 @@ public static class AutoPlayUtils
     /// <param name="choiceContext"></param>
     /// <param name="card"></param>
     /// <returns></returns>
-    public static async Task AutoPlaySafely(PlayerChoiceContext choiceContext, CardModel card)
+    public static Task AutoPlaySafely(PlayerChoiceContext choiceContext, CardModel card)
     {
         // 如果战斗状态为空或没有可攻击的敌人，则直接返回
         var combatState = card.CombatState;
         if(combatState == null || combatState.HittableEnemies.Count == 0){
-            return;
+            return Task.CompletedTask;
         }
-        await CardCmd.AutoPlay(choiceContext, card, null);
+        return CardCmd.AutoPlay(choiceContext, card, null);
     }
 }
