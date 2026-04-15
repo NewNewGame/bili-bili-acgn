@@ -2,12 +2,11 @@
 //* 文件：DoZatan(做杂谈)
 //* 作者：wheat
 //* 创建时间：2026/04/11
-//* 描述：造成{Damage:diff()}点伤害2次。\n随机打出你的[gold]抽牌堆[/gold]中的{Cards:diff()}张牌。
+//* 描述：造成{Damage:diff()}点伤害2次。\n随机打出你的[gold]抽牌堆[/gold]中的1张牌。
 //*******************************************************
 
 using BaseLib.Utils;
 using BiliBiliACGN.BiliBiliACGNCode.Cards.CardPool;
-using BiliBiliACGN.BiliBiliACGNCode.Powers;
 using BiliBiliACGN.BiliBiliACGNCode.Utils;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
