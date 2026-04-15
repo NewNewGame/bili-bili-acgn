@@ -2,7 +2,7 @@
 //* 文件：FunPhilosophy(泛哲)
 //* 作者：wheat
 //* 创建时间：2026/04/11
-//* 描述：获得7/11点格挡，从抽牌堆选1张放到抽牌堆顶。
+//* 描述：获得3/5点格挡，从弃牌堆选1张加入手牌。
 //*******************************************************
 
 using BaseLib.Utils;
@@ -23,7 +23,7 @@ public sealed class FunPhilosophy : CardBaseModel
 {
     private const int energyCost = 0;
     private const CardType type = CardType.Skill;
-    private const CardRarity rarity = CardRarity.Uncommon;
+    private const CardRarity rarity = CardRarity.Common;
     private const TargetType targetType = TargetType.Self;
     private const bool shouldShowInCardLibrary = true;
 
@@ -32,27 +32,27 @@ public sealed class FunPhilosophy : CardBaseModel
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new BlockVar(5m, ValueProp.Move),
+        new BlockVar(3m, ValueProp.Move),
     ];
 
     public FunPhilosophy() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        // 获得格挡，从抽牌堆选1张放到抽牌堆顶
+        // 获得格挡，从弃牌堆选1张加入手牌
         await CreatureCmd.GainBlock(base.Owner.Creature, base.DynamicVars.Block.BaseValue, base.DynamicVars.Block.Props, cardPlay);
         CardSelectorPrefs prefs = new CardSelectorPrefs(base.SelectionScreenPrompt, 1);
-		CardPile pile = PileType.Draw.GetPile(base.Owner);
+		CardPile pile = PileType.Discard.GetPile(base.Owner);
 		CardModel cardModel = (await CardSelectCmd.FromSimpleGrid(choiceContext, pile.Cards, base.Owner, prefs)).FirstOrDefault();
 		if (cardModel != null)
 		{
-			await CardPileCmd.Add(cardModel, PileType.Draw, CardPilePosition.Top);
+			await CardPileCmd.Add(cardModel, PileType.Hand);
 		}
     }
 
     protected override void OnUpgrade()
     {
-        base.DynamicVars.Block.UpgradeValueBy(4m);
+        base.DynamicVars.Block.UpgradeValueBy(2m);
         base.RemoveKeyword(CardKeyword.Exhaust);
     }
 }

@@ -7,6 +7,8 @@
 
 using BaseLib.Utils;
 using BiliBiliACGN.BiliBiliACGNCode.Cards.CardPool;
+using BiliBiliACGN.BiliBiliACGNCode.Core.Models.Orbs;
+using BiliBiliACGN.BiliBiliACGNCode.Utils;
 using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -22,7 +24,7 @@ namespace BiliBiliACGN.BiliBiliACGNCode.Cards;
 public sealed class WhirlwindBlock : CardBaseModel
 {
     #region 卡牌关键词与悬停
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.Static(StaticHoverTip.Block)];
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromOrb<BlockOrb>(), HoverTipFactory.Static(StaticHoverTip.Channeling)];
     #endregion
     #region 卡牌属性配置
     private const int energyCost = 1;
@@ -33,7 +35,7 @@ public sealed class WhirlwindBlock : CardBaseModel
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new BlockVar(6m, ValueProp.Move)
+        new DynamicVar("BlockOrb", 1m)
     ];
 
     public WhirlwindBlock() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
@@ -42,19 +44,24 @@ public sealed class WhirlwindBlock : CardBaseModel
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        // 获得{Block:diff()}点[gold]格挡[/gold]。将弃牌堆中的一张牌放到抽牌堆顶部。
-        await CreatureCmd.GainBlock(base.Owner.Creature, base.DynamicVars.Block.BaseValue, base.DynamicVars.Block.Props, cardPlay);
-        CardSelectorPrefs prefs = new CardSelectorPrefs(base.SelectionScreenPrompt, 1);
-        CardPile pile = PileType.Discard.GetPile(base.Owner);
-        CardModel cardModel = (await CardSelectCmd.FromSimpleGrid(choiceContext, pile.Cards, base.Owner, prefs)).FirstOrDefault();
-        if (cardModel != null)
-        {
-            await CardPileCmd.Add(cardModel, PileType.Draw, CardPilePosition.Top);
+        // 抽取1张牌
+        var drawCards = await CardPileCmd.Draw(choiceContext, 1, base.Owner);
+        var cardModel = drawCards.FirstOrDefault();
+        // 如果抽到的牌是技能牌，则生成1个格挡充能球
+        if(cardModel != null && cardModel.Type == CardType.Skill){
+            int cnt = base.DynamicVars["BlockOrb"].IntValue;
+            for(int i = 0; i < cnt; i++){
+                await OrbCmd.Channel<BlockOrb>(choiceContext, base.Owner);
+                if(i < cnt - 1){
+                    await OrbUtils.OrbChannelingWait();
+                }
+            }
         }
     }
 
     protected override void OnUpgrade()
     {
         base.DynamicVars["Block"].UpgradeValueBy(3m);
+        base.DynamicVars["BlockOrb"].UpgradeValueBy(1m);
     }
 }
