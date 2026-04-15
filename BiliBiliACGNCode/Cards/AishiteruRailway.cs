@@ -31,7 +31,7 @@ public sealed class AishiteruRailway : CardBaseModel
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new DynamicVar("Morbid", 5m)
+        new DynamicVar("Morbid", 2m)
     ];
 
     public AishiteruRailway() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
@@ -46,6 +46,7 @@ public sealed class AishiteruRailway : CardBaseModel
 
     protected override void OnUpgrade()
     {
-        base.DynamicVars["Morbid"].UpgradeValueBy(3m);
+        base.DynamicVars["Morbid"].UpgradeValueBy(1m);
+        base.EnergyCost.UpgradeBy(-1);
     }
 }

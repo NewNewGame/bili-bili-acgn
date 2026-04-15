@@ -28,7 +28,7 @@ public sealed class UnreachableFlower : CardBaseModel
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new DynamicVar("Morbid", 6m),
+        new DynamicVar("Morbid", 8m),
         new CardsVar(2),
     ];
 

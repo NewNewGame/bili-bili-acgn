@@ -59,7 +59,6 @@ public sealed class ChampionPowder : CardBaseModel
 
     protected override void OnUpgrade()
     {
-        base.DynamicVars.Cards.UpgradeValueBy(1m);
-        base.DynamicVars["PlayTimes"].UpgradeValueBy(1m);
+        base.DynamicVars.Cards.UpgradeValueBy(2m);
     }
 }

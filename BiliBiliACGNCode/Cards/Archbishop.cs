@@ -34,7 +34,7 @@ public sealed class Archbishop : CardBaseModel
     ];
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new DamageVar(7m, ValueProp.Move),
+        new DamageVar(13m, ValueProp.Move),
         new DynamicVar("StrengthOnHit", 1m),
     ];
 
@@ -49,7 +49,7 @@ public sealed class Archbishop : CardBaseModel
 
     protected override void OnUpgrade()
     {
-        base.DynamicVars.Damage.UpgradeValueBy(1m);
+        base.DynamicVars.Damage.UpgradeValueBy(2m);
         base.DynamicVars["StrengthOnHit"].UpgradeValueBy(1m);
     }
 }

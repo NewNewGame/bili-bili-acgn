@@ -27,7 +27,7 @@ public sealed class AhShortHaircut : CardBaseModel
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<MorbidPower>()];
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new DynamicVar("MorbidStacks", 2m),
+        new DynamicVar("MorbidStacks", 3m),
     ];
 
     public AhShortHaircut() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }

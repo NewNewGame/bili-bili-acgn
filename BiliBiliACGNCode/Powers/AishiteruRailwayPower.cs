@@ -41,7 +41,7 @@ public sealed class AishiteruRailwayPower : PowerBaseModel
     /// </summary>
     public override async Task AfterCardPlayedLate(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        if (cardPlay.Card.Owner != base.Owner.Player || cardPlay.Card.Type != CardType.Power)
+        if (cardPlay.Card.Owner != base.Owner.Player)
         {
             return;
         }
