@@ -56,6 +56,6 @@ public sealed class WanCeJin : CardBaseModel
 
     protected override void OnUpgrade()
     {
-        base.DynamicVars["FocusPerOrb"].UpgradeValueBy(1m);
+        base.EnergyCost.UpgradeBy(-1);
     }
 }

@@ -133,9 +133,9 @@
     "BILIBILIACGN-FLAMMABLE_OOLONG_TEA.description": "在每场战斗结束时，回复[green]{Heal:diff()}[/green]点生命。",
     "BILIBILIACGN-FLAMMABLE_OOLONG_TEA.flavor": "这当然是乌龙茶，由伏特加和威士忌9比1调配制成。",
     "BILIBILIACGN-EI_HEI_JIANG_MASK.title": "欸嘿酱的面具",
-    "BILIBILIACGN-EI_HEI_JIANG_MASK.description": "战斗开始时，召唤一果进行助战，女儿的初始生命值为[blue]{Hp:diff()}[/blue]点，[gold]力量[/gold]为[blue]{Power:diff()}[/blue]。\n召唤[blue]{AttackOrb:diff()}[/blue]个[gold]进攻[/gold]充能球。",
+    "BILIBILIACGN-EI_HEI_JIANG_MASK.description": "战斗开始时，召唤一果进行助战(生命[blue]{Hp:diff()}[/blue]点/[gold]力量[/gold][blue]{Power:diff()}[/blue]点)。\n召唤[blue]{AttackOrb:diff()}[/blue]个[gold]进攻[/gold]充能球。",
     "BILIBILIACGN-EI_HEI_JIANG_MASK.flavor": "还没想好",
     "BILIBILIACGN-WIND_RANGER_MASK.title": "旋风游侠面具",
-    "BILIBILIACGN-WIND_RANGER_MASK.description": "战斗开始时，召唤一果进行助战，女儿的初始生命值为[blue]{Hp:diff()}[/blue]点，[gold]力量[/gold]为[blue]{Power:diff()}[/blue]。\n召唤[blue]{AttackOrb:diff()}[/blue]个[gold]进攻[/gold]充能球。",
+    "BILIBILIACGN-WIND_RANGER_MASK.description": "战斗开始时，召唤一果进行助战(生命[blue]{Hp:diff()}[/blue]点/[gold]力量[/gold][blue]{Power:diff()}[/blue]点)。\n召唤[blue]{AttackOrb:diff()}[/blue]个[gold]进攻[/gold]充能球。",
     "BILIBILIACGN-WIND_RANGER_MASK.flavor": "还没想好"
 }

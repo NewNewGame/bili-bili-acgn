@@ -2,7 +2,7 @@
 //* 文件：Distort(扭曲)
 //* 作者：wheat
 //* 创建时间：2026/04/08
-//* 描述：给予女儿3/4层力量，并对随机敌人发动3/4次进攻。
+//* 描述：给予女儿3/4层力量，并对随机敌人发动4/5次进攻。
 //*******************************************************
 
 using BaseLib.Utils;
@@ -32,7 +32,7 @@ public sealed class Distort : CardBaseModel
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
         new DynamicVar("Strength", 3m),
-        new DynamicVar("Attacks", 3m),
+        new DynamicVar("Attacks", 4m),
     ];
 
     public Distort() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
