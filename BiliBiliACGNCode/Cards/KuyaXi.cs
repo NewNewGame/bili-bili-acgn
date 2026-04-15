@@ -50,6 +50,5 @@ public sealed class KuyaXi : CardBaseModel
     protected override void OnUpgrade()
     {
         base.DynamicVars["Strength"].UpgradeValueBy(1m);
-        base.DynamicVars.Energy.UpgradeValueBy(1m);
     }
 }

@@ -28,4 +28,5 @@ public static class AutoPlayUtils
         }
         return CardCmd.AutoPlay(choiceContext, card, null);
     }
+
 }

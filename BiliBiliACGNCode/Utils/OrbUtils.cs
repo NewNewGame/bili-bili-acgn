@@ -21,6 +21,7 @@ public static class OrbUtils
     public static IReadOnlyCollection<OrbModel> FunShikiOrbs =>[
         ModelDb.Orb<AttackOrb>(),
         ModelDb.Orb<AttackOrb>(),
+        ModelDb.Orb<AttackOrb>(),
         ModelDb.Orb<StrengthOrb>(),
         ModelDb.Orb<BlockOrb>(),
         ModelDb.Orb<BlockOrb>(),

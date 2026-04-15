@@ -2,12 +2,13 @@
 //* 文件：DoZatan(做杂谈)
 //* 作者：wheat
 //* 创建时间：2026/04/11
-//* 描述：造成{Damage:diff()}点伤害。本回合获得{Focus:diff()}点[gold]集中[/gold]。
+//* 描述：造成{Damage:diff()}点伤害2次。\n随机打出你的[gold]抽牌堆[/gold]中的{Cards:diff()}张牌。
 //*******************************************************
 
 using BaseLib.Utils;
 using BiliBiliACGN.BiliBiliACGNCode.Cards.CardPool;
 using BiliBiliACGN.BiliBiliACGNCode.Powers;
+using BiliBiliACGN.BiliBiliACGNCode.Utils;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -33,8 +34,7 @@ public sealed class DoZatan : CardBaseModel
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new DamageVar(9m, ValueProp.Move),
-        new DynamicVar("Focus", 1m)
+        new DamageVar(5m, ValueProp.Move),
     ];
 
     public DoZatan() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
@@ -43,18 +43,22 @@ public sealed class DoZatan : CardBaseModel
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        // 造成{Damage:diff()}点伤害。本回合获得{Focus:diff()}点[gold]集中[/gold]。
+        // 造成{Damage:diff()}点伤害2次。随机打出你的[gold]抽牌堆[/gold]中的{Cards:diff()}张牌。
         await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue)
             .FromCard(this)
             .Targeting(cardPlay.Target)
+            .WithHitCount(2)
             .Execute(choiceContext);
-        await PowerCmd.Apply<FocusPower>(base.Owner.Creature, base.DynamicVars["Focus"].BaseValue, base.Owner.Creature, this);
-        await PowerCmd.Apply<FocusLossPower>(base.Owner.Creature, base.DynamicVars["Focus"].BaseValue, base.Owner.Creature, this);
+        // 随机打出你的[gold]抽牌堆[/gold]中的1张牌。
+        var drawCards = PileType.Draw.GetPile(base.Owner).Cards;
+        var randomCard = base.Owner.RunState.Rng.CombatCardSelection.NextItem(drawCards);
+        if(randomCard != null){
+            await AutoPlayUtils.AutoPlaySafely(choiceContext, randomCard);
+        }
     }
 
     protected override void OnUpgrade()
     {
         base.DynamicVars["Damage"].UpgradeValueBy(3m);
-        base.DynamicVars["Focus"].UpgradeValueBy(1m);
     }
 }

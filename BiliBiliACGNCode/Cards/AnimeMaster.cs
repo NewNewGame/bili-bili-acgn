@@ -42,6 +42,6 @@ public sealed class AnimeMaster : CardBaseModel
 
     protected override void OnUpgrade()
     {
-        base.DynamicVars["Strength"].UpgradeValueBy(1m);
+        base.EnergyCost.UpgradeBy(-1);
     }
 }

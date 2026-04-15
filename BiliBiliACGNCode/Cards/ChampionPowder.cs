@@ -7,6 +7,7 @@
 
 using BaseLib.Utils;
 using BiliBiliACGN.BiliBiliACGNCode.Cards.CardPool;
+using BiliBiliACGN.BiliBiliACGNCode.Powers;
 using BiliBiliACGN.BiliBiliACGNCode.Utils;
 using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Commands;
@@ -20,11 +21,12 @@ namespace BiliBiliACGN.BiliBiliACGNCode.Cards;
 [Pool(typeof(FunShikiCardPool))]
 public sealed class ChampionPowder : CardBaseModel
 {
-    private const int energyCost = 2;
+    private const int energyCost = 1;
     private const CardType type = CardType.Skill;
     private const CardRarity rarity = CardRarity.Rare;
     private const TargetType targetType = TargetType.Self;
     private const bool shouldShowInCardLibrary = true;
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
@@ -50,16 +52,14 @@ public sealed class ChampionPowder : CardBaseModel
 		CardModel? card = (await CardSelectCmd.FromHand(choiceContext, base.Owner, prefs, (CardModel c) => hashSet.Contains(c) &!c.Keywords.Contains(CardKeyword.Unplayable), this)).FirstOrDefault();
 		if (card != null)
 		{
-			for (int i = 0; i < base.DynamicVars["PlayTimes"].IntValue; i++)
-			{
-                $"自动打出牌：{card}，次数：{i}".LogInfo();
-				await AutoPlayUtils.AutoPlaySafely(choiceContext, card);
-			}
+			await PowerCmd.Apply<ExtraPlayCardPower>(base.Owner.Creature, base.DynamicVars["PlayTimes"].IntValue-1, base.Owner.Creature, this);
+			await AutoPlayUtils.AutoPlaySafely(choiceContext, card);
 		}
     }
 
     protected override void OnUpgrade()
     {
         base.DynamicVars.Cards.UpgradeValueBy(1m);
+        base.DynamicVars["PlayTimes"].UpgradeValueBy(1m);
     }
 }

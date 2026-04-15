@@ -2,7 +2,7 @@
 //* 文件：FrenchAccent(法国口音)
 //* 作者：wheat
 //* 创建时间：2026/04/11
-//* 描述：给予女儿{Strength:diff()}点[gold]力量[/gold]。抽{Cards:diff()}张牌。
+//* 描述：造成{Damage:diff()}点伤害。\n给予女儿{Strength:diff()}点[gold]力量[/gold]。
 //*******************************************************
 
 using BaseLib.Utils;
@@ -14,6 +14,7 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models.Powers;
+using MegaCrit.Sts2.Core.ValueProps;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Cards;
 
@@ -25,15 +26,15 @@ public sealed class FrenchAccent : CardBaseModel
     #endregion
     #region 卡牌属性配置
     private const int energyCost = 1;
-    private const CardType type = CardType.Skill;
+    private const CardType type = CardType.Attack;
     private const CardRarity rarity = CardRarity.Common;
-    private const TargetType targetType = TargetType.Self;
+    private const TargetType targetType = TargetType.AnyEnemy;
     private const bool shouldShowInCardLibrary = true;
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
         new DynamicVar("Strength", 1m),
-        new CardsVar(2)
+        new DamageVar(8m, ValueProp.Move),
     ];
 
     public FrenchAccent() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
@@ -42,14 +43,17 @@ public sealed class FrenchAccent : CardBaseModel
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        // 给予女儿{Strength:diff()}点[gold]力量[/gold]。抽取{Cards:diff()}张牌。
+        // 造成伤害，给予女儿{Strength:diff()}点[gold]力量[/gold]。
+        await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue)
+            .FromCard(this)
+            .Targeting(cardPlay.Target)
+            .Execute(choiceContext);
         await DaughterCmd.ApplyPower<StrengthPower>(base.Owner.Creature, base.DynamicVars["Strength"].BaseValue, this);
-        await CardPileCmd.Draw(choiceContext, base.DynamicVars["Cards"].BaseValue, base.Owner);
     }
 
     protected override void OnUpgrade()
     {
         base.DynamicVars["Strength"].UpgradeValueBy(1m);
-        base.DynamicVars["Cards"].UpgradeValueBy(1m);
+        base.DynamicVars["Damage"].UpgradeValueBy(3m);
     }
 }

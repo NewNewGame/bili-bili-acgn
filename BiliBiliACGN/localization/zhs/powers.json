@@ -237,5 +237,9 @@
 
   "BILIBILIACGN-DELAY_ORB_POWER.title": "延迟充能球",
   "BILIBILIACGN-DELAY_ORB_POWER.description": "在你下一个回合开始时，[gold]生成[/gold][blue]1[/blue]个随机充能球。",
-  "BILIBILIACGN-DELAY_ORB_POWER.smartDescription": "在你下一个回合开始时，[gold]生成[/gold][blue]{Amount}[/blue]个随机充能球。"
+  "BILIBILIACGN-DELAY_ORB_POWER.smartDescription": "在你下一个回合开始时，[gold]生成[/gold][blue]{Amount}[/blue]个随机充能球。",
+
+  "BILIBILIACGN-EXTRA_PLAY_CARD_POWER.title": "额外打出",
+  "BILIBILIACGN-EXTRA_PLAY_CARD_POWER.description": "在这个回合，你的下[blue]1[/blue]张牌会被额外打出[blue]1[/blue]次。",
+  "BILIBILIACGN-EXTRA_PLAY_CARD_POWER.smartDescription": "在这个回合，你的下[blue]1[/blue]张牌会被额外打出[blue]{Amount}[/blue]次。"
 }

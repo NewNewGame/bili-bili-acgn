@@ -45,6 +45,7 @@ public sealed class NtrGodfather : CardBaseModel
     protected override void OnUpgrade()
     {
         base.DynamicVars.Energy.UpgradeValueBy(1m);
+        base.DynamicVars.Cards.UpgradeValueBy(1m);
         base.DynamicVars["MorbidSelf"].UpgradeValueBy(-1m);
     }
 }
