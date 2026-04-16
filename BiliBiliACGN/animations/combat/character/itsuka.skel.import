@@ -1,0 +1,14 @@
+[remap]
+
+importer="spine.skel"
+type="SpineSkeletonFileResource"
+uid="uid://67p7w6mag42s"
+path="res://.godot/imported/itsuka.skel-76c41d1fe56c788f1f36e2f4a7c9779e.spskel"
+
+[deps]
+
+source_file="res://BiliBiliACGN/animations/combat/character/itsuka.skel"
+dest_files=["res://.godot/imported/itsuka.skel-76c41d1fe56c788f1f36e2f4a7c9779e.spskel"]
+
+[params]
+

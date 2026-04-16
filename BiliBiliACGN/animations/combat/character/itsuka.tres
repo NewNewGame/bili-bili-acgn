@@ -1,0 +1,8 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=3 format=3 uid="uid://ccrnw8gv1eutt"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://cokas4m1p32y5" path="res://BiliBiliACGN/images/characters/yukihira_itsuka.atlas" id="1_gll8x"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://67p7w6mag42s" path="res://BiliBiliACGN/animations/combat/character/itsuka.skel" id="2_0dtbo"]
+
+[resource]
+atlas_res = ExtResource("1_gll8x")
+skeleton_file_res = ExtResource("2_0dtbo")

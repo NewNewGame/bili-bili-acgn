@@ -1,17 +1,21 @@
 [gd_scene load_steps=3 format=3 uid="uid://cjhl63q6srvs7"]
 
 [ext_resource type="Script" uid="uid://cp1h2s6onqcyh" path="res://BiliBiliACGNCode/Nodes/Combat/SNCreatureVisuals.cs" id="1_htqon"]
-[ext_resource type="Texture2D" uid="uid://b6nmvurc6t22g" path="res://BiliBiliACGN/images/characters/yukihira_itsuka.png" id="2_8ebss"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://ccrnw8gv1eutt" path="res://BiliBiliACGN/animations/combat/character/itsuka.tres" id="2_8ebss"]
 
 [node name="itsuka" type="Node2D"]
 script = ExtResource("1_htqon")
 metadata/_edit_vertical_guides_ = [-1036.0]
 
-[node name="Visuals" type="Sprite2D" parent="."]
+[node name="Visuals" type="SpineSprite" parent="."]
+skeleton_data_res = ExtResource("2_8ebss")
+preview_skin = "Default"
+preview_animation = "-- Empty --"
+preview_frame = false
+preview_time = 0.0
 unique_name_in_owner = true
-position = Vector2(265.43, -96)
+position = Vector2(293, -13)
 scale = Vector2(0.08, 0.08)
-texture = ExtResource("2_8ebss")
 
 [node name="Bounds" type="Control" parent="."]
 unique_name_in_owner = true

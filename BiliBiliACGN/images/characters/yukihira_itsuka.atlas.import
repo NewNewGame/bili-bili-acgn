@@ -1,0 +1,16 @@
+[remap]
+
+importer="spine.atlas"
+type="SpineAtlasResource"
+uid="uid://cokas4m1p32y5"
+path="res://.godot/imported/yukihira_itsuka.atlas-3ca774ccb10774f3be28f380cb65e2ca.spatlas"
+
+[deps]
+
+source_file="res://BiliBiliACGN/images/characters/yukihira_itsuka.atlas"
+dest_files=["res://.godot/imported/yukihira_itsuka.atlas-3ca774ccb10774f3be28f380cb65e2ca.spatlas"]
+
+[params]
+
+normal_map_prefix="n"
+specular_map_prefix="s"

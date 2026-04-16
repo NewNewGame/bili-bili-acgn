@@ -1,0 +1,187 @@
+
+yukihira_itsuka.png
+size: 2035,1642
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+刘海1
+  rotate: false
+  xy: 1631, 607
+  size: 402, 582
+  orig: 402, 582
+  offset: 0, 0
+  index: -1
+刘海2
+  rotate: true
+  xy: 959, 1435
+  size: 205, 527
+  orig: 205, 527
+  offset: 0, 0
+  index: -1
+刘海3
+  rotate: true
+  xy: 408, 1345
+  size: 219, 524
+  orig: 219, 524
+  offset: 0, 0
+  index: -1
+嘴2
+  rotate: false
+  xy: 215, 1584
+  size: 159, 56
+  orig: 163, 59
+  offset: 2, 1
+  index: -1
+头部阴影
+  rotate: false
+  xy: 1225, 112
+  size: 791, 493
+  orig: 794, 497
+  offset: 1, 2
+  index: -1
+左辫子
+  rotate: true
+  xy: 2, 2
+  size: 503, 778
+  orig: 503, 778
+  offset: 0, 0
+  index: -1
+手1
+  rotate: true
+  xy: 1186, 917
+  size: 283, 443
+  orig: 283, 443
+  offset: 0, 0
+  index: -1
+手2
+  rotate: true
+  xy: 782, 936
+  size: 265, 402
+  orig: 265, 402
+  offset: 0, 0
+  index: -1
+眉毛1
+  rotate: false
+  xy: 2, 1603
+  size: 211, 37
+  orig: 211, 37
+  offset: 0, 0
+  index: -1
+眉毛2
+  rotate: false
+  xy: 2, 1603
+  size: 211, 37
+  orig: 211, 37
+  offset: 0, 0
+  index: -1
+眼珠1
+  rotate: false
+  xy: 2, 1106
+  size: 252, 245
+  orig: 252, 245
+  offset: 0, 0
+  index: -1
+眼珠2
+  rotate: false
+  xy: 513, 1097
+  size: 267, 246
+  orig: 267, 246
+  offset: 0, 0
+  index: -1
+眼皮1
+  rotate: false
+  xy: 934, 1203
+  size: 325, 230
+  orig: 351, 269
+  offset: 13, 20
+  index: -1
+眼皮2
+  rotate: false
+  xy: 2, 1353
+  size: 404, 218
+  orig: 451, 312
+  offset: 24, 47
+  index: -1
+睫毛1
+  rotate: false
+  xy: 376, 1573
+  size: 286, 67
+  orig: 286, 67
+  offset: 0, 0
+  index: -1
+睫毛2
+  rotate: false
+  xy: 664, 1566
+  size: 293, 74
+  orig: 293, 74
+  offset: 0, 0
+  index: -1
+睫毛2-1
+  rotate: true
+  xy: 1689, 1191
+  size: 241, 322
+  orig: 243, 324
+  offset: 1, 1
+  index: -1
+睫毛2-2
+  rotate: true
+  xy: 256, 1098
+  size: 245, 255
+  orig: 247, 257
+  offset: 1, 1
+  index: -1
+腿1
+  rotate: true
+  xy: 1261, 1202
+  size: 230, 426
+  orig: 230, 426
+  offset: 0, 0
+  index: -1
+腿2
+  rotate: true
+  xy: 1488, 1434
+  size: 206, 442
+  orig: 206, 442
+  offset: 0, 0
+  index: -1
+裙子
+  rotate: false
+  xy: 495, 507
+  size: 728, 408
+  orig: 728, 408
+  offset: 0, 0
+  index: -1
+身体
+  rotate: true
+  xy: 2, 708
+  size: 388, 491
+  orig: 388, 491
+  offset: 0, 0
+  index: -1
+
+yukihira_itsuka2.png
+size: 2022,1367
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+侧发
+  rotate: true
+  xy: 2, 122
+  size: 1243, 1132
+  orig: 1243, 1135
+  offset: 0, 3
+  index: -1
+右辫子
+  rotate: true
+  xy: 1136, 2
+  size: 537, 748
+  orig: 537, 748
+  offset: 0, 0
+  index: -1
+头
+  rotate: true
+  xy: 1136, 541
+  size: 824, 884
+  orig: 824, 884
+  offset: 0, 0
+  index: -1
