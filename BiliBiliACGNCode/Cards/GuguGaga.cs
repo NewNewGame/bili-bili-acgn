@@ -26,7 +26,7 @@ public sealed class GuguGaga : CardBaseModel
         HoverTipFactory.FromPower<VulnerablePower>(),
     ];
 
-    private const int energyCost = 2;
+    private const int energyCost = 0;
     private const CardType type = CardType.Skill;
     private const CardRarity rarity = CardRarity.Event;
     private const TargetType targetType = TargetType.AllEnemies;
@@ -54,7 +54,6 @@ public sealed class GuguGaga : CardBaseModel
 
     protected override void OnUpgrade()
     {
-        base.DynamicVars["Vulnerable"].UpgradeValueBy(3m);
-        base.AddKeyword(CardKeyword.Retain);
+        base.DynamicVars["Vulnerable"].UpgradeValueBy(2m);
     }
 }

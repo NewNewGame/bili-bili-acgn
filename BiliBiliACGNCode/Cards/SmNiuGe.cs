@@ -25,7 +25,7 @@ public sealed class SmNiuGe : CardBaseModel
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
 
     #region 卡牌属性配置
-    private const int energyCost = 2;
+    private const int energyCost = 3;
     private const CardType type = CardType.Skill;
     private const CardRarity rarity = CardRarity.Rare;
     private const TargetType targetType = TargetType.Self;

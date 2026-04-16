@@ -48,10 +48,15 @@ public sealed class NeedAKill : CardBaseModel
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        // 造成无视格挡的伤害，数值视 Rage 取 Damage 或 RageDamage；击杀给金币
+        // 造成害，数值视 Rage 取 Damage 或 RageDamage；击杀给金币
         ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
 		bool shouldTriggerFatal = cardPlay.Target.Powers.All((PowerModel p) => p.ShouldOwnerDeathTriggerFatal());
-		AttackCommand attackCommand = await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue).FromCard(this).Targeting(cardPlay.Target)
+        decimal dmg = base.DynamicVars.Damage.BaseValue;
+        if(base.Owner.Creature.HasPower<BottleRagePower>())
+        {
+            dmg += base.DynamicVars["RageDamage"].BaseValue;
+        }
+		AttackCommand attackCommand = await DamageCmd.Attack(dmg).FromCard(this).Targeting(cardPlay.Target)
 			.Execute(choiceContext);
 		if (shouldTriggerFatal && attackCommand.Results.Any((DamageResult r) => r.WasTargetKilled))
 		{
