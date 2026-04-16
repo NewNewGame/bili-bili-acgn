@@ -23,7 +23,7 @@ public sealed class StrengthOrb : OrbBaseModel
 
 	public override Color DarkenedColor => new Color("9001d3");
 
-	public override decimal PassiveVal => ModifyOrbValue(6m);
+	public override decimal PassiveVal => ModifyOrbValue(5m);
 
 	public override decimal EvokeVal => _evokeVal;
 

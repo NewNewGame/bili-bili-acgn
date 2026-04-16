@@ -28,7 +28,7 @@ public sealed class TataKai : CardBaseModel
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new DynamicVar("Hits", 3m)
+        new DynamicVar("Hits", 4m)
     ];
 
     public TataKai() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }

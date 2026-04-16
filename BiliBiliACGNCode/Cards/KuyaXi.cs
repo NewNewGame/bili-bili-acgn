@@ -34,7 +34,7 @@ public sealed class KuyaXi : CardBaseModel
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
         new EnergyVar(2),
-        new DynamicVar("Strength", 1m)
+        new DynamicVar("Strength", 2m)
     ];
 
     public KuyaXi() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
@@ -49,6 +49,7 @@ public sealed class KuyaXi : CardBaseModel
     }
     protected override void OnUpgrade()
     {
+        base.DynamicVars.Energy.UpgradeValueBy(1m);
         base.DynamicVars["Strength"].UpgradeValueBy(1m);
     }
 }
