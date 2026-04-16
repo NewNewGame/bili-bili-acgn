@@ -44,14 +44,8 @@ public sealed class AddMaxHpTempPower : PowerBaseModel
     {
         if(target != base.Owner) return;
         int amount = Mathf.Min(this.Amount, result.TotalDamage);
-        // 如果没有击破护盾，那就播放格挡音效
-        if(amount < this.Amount){
-            SfxCmd.Play("event:/sfx/block_hit");
-        }
         await PowerCmd.Apply<AddMaxHpTempPower>(base.Owner, -amount, base.Owner, null);
         await CreatureCmd.SetMaxHp(base.Owner, Mathf.Max(base.Owner.MaxHp - amount, 1));
-        await CreatureCmd.LoseBlock(base.Owner, amount);
-
     }
 
     public override async Task AfterTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)
