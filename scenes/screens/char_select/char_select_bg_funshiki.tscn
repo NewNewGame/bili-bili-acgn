@@ -1,11 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://b54o82nu4eodk"]
+[gd_scene load_steps=3 format=3 uid="uid://c1un3yyj6wypd"]
 
 [ext_resource type="Texture2D" uid="uid://c0u6yybu0it0l" path="res://BiliBiliACGN/images/characters/funshiki_bg.png" id="1_vc462"]
 
 [sub_resource type="Gradient" id="Gradient_vc462"]
 colors = PackedColorArray(0.87058824, 0, 0, 1, 1, 0.49019608, 1, 1)
 
-[node name="bottle_select_bg" type="Control"]
+[node name="funshiki_select_bg" type="Control"]
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5

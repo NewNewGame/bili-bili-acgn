@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cbqgehjngle7e"
-path="res://.godot/imported/fanshiki_character.png-e988d22ba00564c02fccecd67ec77412.ctex"
+uid="uid://bm2vgursn7xp8"
+path="res://.godot/imported/funshiki_character.png-2dca5dce94c9fc4b4559ef28f5106387.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://BiliBiliACGN/images/characters/fanshiki_character.png"
-dest_files=["res://.godot/imported/fanshiki_character.png-e988d22ba00564c02fccecd67ec77412.ctex"]
+source_file="res://BiliBiliACGN/images/characters/funshiki_character.png"
+dest_files=["res://.godot/imported/funshiki_character.png-2dca5dce94c9fc4b4559ef28f5106387.ctex"]
 
 [params]
 

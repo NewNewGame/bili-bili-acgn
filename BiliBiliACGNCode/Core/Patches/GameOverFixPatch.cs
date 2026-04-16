@@ -4,9 +4,9 @@
 //* 创建时间：2026/04/11 10:00:00 星期四
 //* 描述：游戏结束修复补丁
 //*******************************************************
-/*
 
 using BaseLib.Abstracts;
+using BiliBiliACGN.BiliBiliACGNCode.Characters;
 using HarmonyLib;
 using MegaCrit.Sts2.Core.Nodes.Rooms;
 using MegaCrit.Sts2.Core.Nodes.Screens.GameOverScreen;
@@ -30,10 +30,10 @@ public static class GameOverFixPatch
             if(runState == null) return false;
             var state = runState as RunState;
             if(state == null) return false;
-            // 遍历玩家，如果玩家是PlaceholderCharacterModel，则返回拦截
+            // 遍历玩家，如果玩家是FunShikiCharacter，泛式还没做Spine动画，则返回拦截
             foreach (var player in state.Players){
                 // 可自行修改判断条件(没有spine动画的角色返回false就行)
-                if(player.Character is PlaceholderCharacterModel){
+                if(player.Character is FunShikiCharacter){
                     return false;
                 }
             }
@@ -42,4 +42,3 @@ public static class GameOverFixPatch
         return true;
     }
 }
-*/

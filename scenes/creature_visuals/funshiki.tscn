@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cl431atbevn22"]
 
-[ext_resource type="Texture2D" uid="uid://fg2vdcccdwdw" path="res://BiliBiliACGN/images/characters/funshiki_chracter.png" id="1_4msbd"]
+[ext_resource type="Texture2D" uid="uid://bm2vgursn7xp8" path="res://BiliBiliACGN/images/characters/funshiki_character.png" id="1_4msbd"]
 
 [node name="funshiki" type="Node2D"]
 metadata/_edit_vertical_guides_ = [-1036.0]
