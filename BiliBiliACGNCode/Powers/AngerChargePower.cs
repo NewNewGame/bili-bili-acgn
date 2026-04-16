@@ -23,6 +23,8 @@ public sealed class AngerChargePower : PowerBaseModel
 
     public override async Task AfterPowerAmountChanged(PowerModel power, decimal amount, Creature? applier, CardModel? cardSource)
     {
+        // 如果对象不是自己，则返回
+        if(power.Owner != base.Owner) return;
         // 如果充能值大于最大充能值，则移除
         if(base.Amount >= MAXCHARGE && power is AngerChargePower){
             await PowerCmd.Apply<BerserkPower>(base.Owner, 1, base.Owner, cardSource);

@@ -52,6 +52,8 @@ public sealed class ImOut : CardBaseModel
     }
     public override async Task AfterPowerAmountChanged(PowerModel power, decimal amount, Creature? applier, CardModel? cardSource)
     {
+        // 如果对象不是自己，则返回
+        if(power.Owner != base.Owner.Creature) return;
         // 如果进入红怒，这张牌从弃牌堆移回手牌
         if(power is BerserkPower && base.Pile.Type != PileType.Hand){
             await CardPileCmd.Add(this, PileType.Hand);
