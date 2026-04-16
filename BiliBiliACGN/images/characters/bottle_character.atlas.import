@@ -1,0 +1,16 @@
+[remap]
+
+importer="spine.atlas"
+type="SpineAtlasResource"
+uid="uid://bvylfjl4jnep0"
+path="res://.godot/imported/bottle_character.atlas-097a30e8e98baae293def173741808c8.spatlas"
+
+[deps]
+
+source_file="res://BiliBiliACGN/images/characters/bottle_character.atlas"
+dest_files=["res://.godot/imported/bottle_character.atlas-097a30e8e98baae293def173741808c8.spatlas"]
+
+[params]
+
+normal_map_prefix="n"
+specular_map_prefix="s"

@@ -1,0 +1,13 @@
+
+bottle_character.png
+size: 630,1507
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+bottle_chracter
+  rotate: false
+  xy: 2, 2
+  size: 626, 1503
+  orig: 630, 1507
+  offset: 2, 2
+  index: -1

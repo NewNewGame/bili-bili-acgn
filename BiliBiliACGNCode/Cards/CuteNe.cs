@@ -29,6 +29,7 @@ public sealed class CuteNe : CardBaseModel
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
+        await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
         // 施加能力：女儿获得格挡时，你获得其一半的格挡值
         await PowerCmd.Apply<CuteNePower>(base.Owner.Creature, 1m, base.Owner.Creature, this);
     }

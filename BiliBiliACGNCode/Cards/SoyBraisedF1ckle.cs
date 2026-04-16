@@ -36,6 +36,7 @@ public sealed class SoyBraisedF1ckle : CardBaseModel
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
+        await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
         // 添加红烧飞扣BUFF
         await PowerCmd.Apply<SoyBraisedF1cklePower>(base.Owner.Creature, base.DynamicVars["Heal"].BaseValue, base.Owner.Creature, this);
     }

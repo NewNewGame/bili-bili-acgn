@@ -40,6 +40,7 @@ public sealed class RedBullCard : CardBaseModel
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
+        await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
         // 添加红牛BUFF
         await PowerCmd.Apply<RedBullPower>(base.Owner.Creature, base.DynamicVars["AngerPerEnergy"].BaseValue, base.Owner.Creature, this);
     }

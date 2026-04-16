@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dpdv8s74xdyw7"
-path="res://.godot/imported/bottle_chracter.png-189aacda514d0a5033b1984036cf9a4e.ctex"
+uid="uid://7q37t2e405pl"
+path="res://.godot/imported/bottle_character.png-1bde62819e2c40f1c00852f059e3d1bf.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://BiliBiliACGN/images/characters/bottle_chracter.png"
-dest_files=["res://.godot/imported/bottle_chracter.png-189aacda514d0a5033b1984036cf9a4e.ctex"]
+source_file="res://BiliBiliACGN/images/characters/bottle_character.png"
+dest_files=["res://.godot/imported/bottle_character.png-1bde62819e2c40f1c00852f059e3d1bf.ctex"]
 
 [params]
 

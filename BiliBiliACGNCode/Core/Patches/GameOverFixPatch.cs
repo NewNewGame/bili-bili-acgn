@@ -4,6 +4,7 @@
 //* 创建时间：2026/04/11 10:00:00 星期四
 //* 描述：游戏结束修复补丁
 //*******************************************************
+/*
 
 using BaseLib.Abstracts;
 using HarmonyLib;
@@ -12,7 +13,6 @@ using MegaCrit.Sts2.Core.Nodes.Screens.GameOverScreen;
 using MegaCrit.Sts2.Core.Runs;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Core.Patches;
-
 /// <summary>
 /// 游戏结束修复补丁
 /// 如果你的角色没有Spine可以使用这个来解决非战斗房间放弃的卡死问题
@@ -42,3 +42,4 @@ public static class GameOverFixPatch
         return true;
     }
 }
+*/

@@ -33,6 +33,7 @@ public sealed class ChuunibyouNote : CardBaseModel
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
+        await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
         // 施加能力：每当你打出能力牌时，抽牌
         await PowerCmd.Apply<ChuunibyouNotePower>(base.Owner.Creature, base.DynamicVars["Cards"].BaseValue, base.Owner.Creature, this);
     }

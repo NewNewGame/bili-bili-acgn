@@ -35,6 +35,7 @@ public sealed class TelecomEngineeringMaster : CardBaseModel
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
+        await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
         // 施加能力：每激发 1 个充能球，获得集中
         await PowerCmd.Apply<TelecomEngineeringMasterPower>(base.Owner.Creature, base.DynamicVars["Focus"].BaseValue, base.Owner.Creature, this);
     }

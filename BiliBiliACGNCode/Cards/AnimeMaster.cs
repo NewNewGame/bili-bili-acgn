@@ -33,6 +33,7 @@ public sealed class AnimeMaster : CardBaseModel
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
+        await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
         // 施加能力：每当你激发 1 个充能球时，给予女儿力量
         await PowerCmd.Apply<AnimeMasterPower>(base.Owner.Creature, base.DynamicVars["Strength"].BaseValue, base.Owner.Creature, this);
     }
