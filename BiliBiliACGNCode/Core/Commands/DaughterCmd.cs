@@ -95,13 +95,13 @@ public static class DaughterCmd
 		return await CreatureCmd.Damage(choiceContext, target, value, ValueProp.Move, daughter);
     }
     /// <summary>
-    /// 女儿格挡指令
+    /// 女儿提升最大生命值指令
     /// </summary>
-    public static async Task ApplyBlock(this Creature creature, decimal value, PlayerChoiceContext choiceContext)
+    public static async Task AddTempHp(this Creature creature, decimal value, PlayerChoiceContext choiceContext)
     {
         var daughter = creature.GetDaughter();
         if(daughter == null) return;
-        await CreatureCmd.GainBlock(daughter, value, ValueProp.Unpowered, null);
+        await PowerCmd.Apply<AddMaxHpTempPower>(creature, value, creature, null);
     }
     /// <summary>
     /// 女儿能力指令

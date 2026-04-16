@@ -2,7 +2,7 @@
 //* 文件：CuteNePower(可爱捏)
 //* 作者：wheat
 //* 创建时间：2026/04/08
-//* 描述：女儿获得格挡时，给予你一半的格挡值。
+//* 描述：女儿提升最大生命值时，给予你一半的格挡值。
 //*******************************************************
 
 using MegaCrit.Sts2.Core.Commands;
@@ -21,18 +21,20 @@ public sealed class CuteNePower : PowerBaseModel
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.Static(StaticHoverTip.Block)];
 
     /// <summary>
-    /// 女儿获得格挡时，给予你一半的格挡值。
+    /// 女儿提升最大生命值时，给予你一半的格挡值。
     /// </summary>
     /// <param name="creature"></param>
     /// <param name="amount"></param>
     /// <param name="props"></param>
     /// <param name="cardSource"></param>
     /// <returns></returns>
-    public override async Task AfterBlockGained(Creature creature, decimal amount, ValueProp props, CardModel? cardSource)
+    public override async Task AfterPowerAmountChanged(PowerModel power, decimal amount, Creature? applier, CardModel? cardSource)
     {
-        if(creature != base.Owner || creature.PetOwner == null) return;
+        if(amount <= 0 || power is not AddMaxHpTempPower) return;
+        if(applier != base.Owner || base.Owner.PetOwner == null) return;
         // 给予你一半的格挡值
-        await CreatureCmd.GainBlock(creature.PetOwner.Creature, amount * Amount / 2, ValueProp.Unpowered, null);
+        await CreatureCmd.GainBlock(base.Owner.PetOwner.Creature, amount * Amount / 2, ValueProp.Unpowered, null);
     }
+
 
 }

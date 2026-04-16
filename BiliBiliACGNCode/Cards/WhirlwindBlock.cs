@@ -21,7 +21,7 @@ namespace BiliBiliACGN.BiliBiliACGNCode.Cards;
 public sealed class WhirlwindBlock : CardBaseModel
 {
     #region 卡牌关键词与悬停
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromOrb<BlockOrb>(), HoverTipFactory.Static(StaticHoverTip.Channeling)];
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromOrb<LifeOrb>(), HoverTipFactory.Static(StaticHoverTip.Channeling)];
     #endregion
     #region 卡牌属性配置
     private const int energyCost = 0;
@@ -48,7 +48,7 @@ public sealed class WhirlwindBlock : CardBaseModel
         if(cardModel != null && cardModel.Type == CardType.Skill){
             int cnt = base.DynamicVars["BlockOrb"].IntValue;
             for(int i = 0; i < cnt; i++){
-                await OrbCmd.Channel<BlockOrb>(choiceContext, base.Owner);
+                await OrbCmd.Channel<LifeOrb>(choiceContext, base.Owner);
                 if(i < cnt - 1){
                     await OrbUtils.OrbChannelingWait();
                 }

@@ -20,14 +20,22 @@ public sealed class SailorUniformPower : PowerBaseModel
 
     public override PowerStackType StackType => PowerStackType.Counter;
 
-    public override async Task AfterBlockGained(Creature creature, decimal amount, ValueProp props, CardModel? cardSource)
+    /// <summary>
+    /// 每当女儿获得格挡时，对随机敌人造成 Amount 点伤害。
+    /// </summary>
+    /// <param name="creature"></param>
+    /// <param name="amount"></param>
+    /// <param name="props"></param>
+    /// <param name="cardSource"></param>
+    /// <returns></returns>
+    public override async Task AfterPowerAmountChanged(PowerModel power, decimal amount, Creature? applier, CardModel? cardSource)
     {
-        if(creature != base.Owner) return;
+        if(amount <= 0 || power is not AddMaxHpTempPower) return;
+        if(applier != base.Owner) return;
         if(base.CombatState == null) return;
         // 随机获得一个敌人
         var enemy = base.CombatState.RunState.Rng.CombatTargets.NextItem(base.CombatState.HittableEnemies);
         if(enemy == null) return;
         await CreatureCmd.Damage(CombatUtils.GetTemporaryPlayerChoiceContext(), enemy, base.Amount, ValueProp.Unpowered,base.Owner);
     }
-
 }

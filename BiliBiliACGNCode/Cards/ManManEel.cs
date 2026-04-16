@@ -26,7 +26,7 @@ public sealed class ManManEel : CardBaseModel
     private const CardRarity rarity = CardRarity.Uncommon;
     private const TargetType targetType = TargetType.Self;
     private const bool shouldShowInCardLibrary = true;
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.Static(StaticHoverTip.Block),HoverTipFactory.Static(StaticHoverTip.Channeling),HoverTipFactory.FromOrb<BlockOrb>(),];
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.Static(StaticHoverTip.Block),HoverTipFactory.Static(StaticHoverTip.Channeling),HoverTipFactory.FromOrb<LifeOrb>(),];
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
         new BlockVar(8m, ValueProp.Move),
@@ -41,7 +41,7 @@ public sealed class ManManEel : CardBaseModel
         await CreatureCmd.GainBlock(base.Owner.Creature, base.DynamicVars.Block.BaseValue, base.DynamicVars.Block.Props, cardPlay);
         int blockOrbCount = (int)base.DynamicVars["BlockOrbs"].BaseValue;
         for(int i = 0; i < blockOrbCount; i++){
-            await OrbCmd.Channel<BlockOrb>(choiceContext, base.Owner);
+            await OrbCmd.Channel<LifeOrb>(choiceContext, base.Owner);
             if(i < blockOrbCount - 1)
             {
                 await OrbUtils.OrbChannelingWait();

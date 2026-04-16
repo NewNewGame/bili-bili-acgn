@@ -24,7 +24,7 @@ public sealed class BoostVideo : CardBaseModel
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
     [
         HoverTipFactory.Static(StaticHoverTip.Channeling),
-        HoverTipFactory.FromOrb<BlockOrb>()
+        HoverTipFactory.FromOrb<LifeOrb>()
     ];
     #endregion
     #region 卡牌属性配置
@@ -50,7 +50,7 @@ public sealed class BoostVideo : CardBaseModel
         int blockOrbCount = (int)base.DynamicVars["BlockOrbs"].BaseValue;
         for(int i = 0; i < blockOrbCount; i++)
         {
-            await OrbCmd.Channel<BlockOrb>(choiceContext, base.Owner);
+            await OrbCmd.Channel<LifeOrb>(choiceContext, base.Owner);
             if(i < blockOrbCount - 1)
             {
                 await OrbUtils.OrbChannelingWait();

@@ -25,7 +25,7 @@ public sealed class CrazyStackArmor : CardBaseModel
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
     [
         HoverTipFactory.Static(StaticHoverTip.Channeling),
-        HoverTipFactory.FromOrb<BlockOrb>()
+        HoverTipFactory.FromOrb<LifeOrb>()
     ];
     #endregion
     #region 卡牌属性配置
@@ -55,7 +55,7 @@ public sealed class CrazyStackArmor : CardBaseModel
         int blockOrbCount = base.DynamicVars["BlockOrbs"].IntValue;
         for(int i = 0; i < blockOrbCount; i++)
         {
-            await OrbCmd.Channel<BlockOrb>(choiceContext, base.Owner);
+            await OrbCmd.Channel<LifeOrb>(choiceContext, base.Owner);
             if(i < blockOrbCount - 1)
             {
                 await OrbUtils.OrbChannelingWait();

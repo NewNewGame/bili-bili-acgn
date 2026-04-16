@@ -1,8 +1,8 @@
 //****************** 代码文件申明 ***********************
-//* 文件：BlockOrb
+//* 文件：LifeOrb
 //* 作者：wheat
 //* 创建时间：2026/04/08
-//* 描述：格挡充能球
+//* 描述：生命充能球
 //*******************************************************
 
 using BiliBiliACGN.BiliBiliACGNCode.Core.Commands;
@@ -12,7 +12,7 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Core.Models.Orbs;
 
-public sealed class BlockOrb : OrbBaseModel
+public sealed class LifeOrb : OrbBaseModel
 {
 protected override string ChannelSfx => "event:/sfx/characters/defect/defect_frost_channel";
 
@@ -35,13 +35,13 @@ protected override string ChannelSfx => "event:/sfx/characters/defect/defect_fro
 		}
 		Trigger();
 		PlayPassiveSfx();
-		await DaughterCmd.ApplyBlock(base.Owner.Creature, PassiveVal, choiceContext);
+		await DaughterCmd.AddTempHp(base.Owner.Creature, PassiveVal, choiceContext);
 	}
 
 	public override async Task<IEnumerable<Creature>> Evoke(PlayerChoiceContext playerChoiceContext)
 	{
 		PlayEvokeSfx();
-		await DaughterCmd.ApplyBlock(base.Owner.Creature, EvokeVal, playerChoiceContext);
+		await DaughterCmd.AddTempHp(base.Owner.Creature, EvokeVal, playerChoiceContext);
 		return new List<Creature>(){base.Owner.Creature};
 	}
     

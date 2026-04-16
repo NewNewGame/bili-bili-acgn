@@ -23,8 +23,8 @@ public static class OrbUtils
         ModelDb.Orb<AttackOrb>(),
         ModelDb.Orb<AttackOrb>(),
         ModelDb.Orb<StrengthOrb>(),
-        ModelDb.Orb<BlockOrb>(),
-        ModelDb.Orb<BlockOrb>(),
+        ModelDb.Orb<LifeOrb>(),
+        ModelDb.Orb<LifeOrb>(),
     ];
     /// <summary>
     /// 随机获取一个泛式充能球
