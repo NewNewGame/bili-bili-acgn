@@ -8,7 +8,6 @@ using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.HoverTips;
-using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Powers;
@@ -38,7 +37,7 @@ public sealed class RedBullPower : PowerBaseModel
 	}
     public override async Task AfterPowerAmountChanged(PowerModel power, decimal amount, Creature? applier, CardModel? cardSource)
     {
-        if(amount > 0 && applier == base.Owner && power is AngerPower){
+        if(amount > 0 && power.Owner == base.Owner && power is AngerPower){
 			Data data = GetInternalData<Data>();
 			data.angerCharge += (int)amount;
 			int triggers = data.angerCharge / base.Amount - data.triggerCount;

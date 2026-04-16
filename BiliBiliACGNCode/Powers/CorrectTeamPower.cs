@@ -38,7 +38,7 @@ public sealed class CorrectTeamPower : PowerBaseModel
     // 红怒状态下额外抽 Amount 张牌
     public override async Task AfterPowerAmountChanged(PowerModel power, decimal amount, Creature? applier, CardModel? cardSource)
     {
-        if(power is BerserkPower && amount > 0 && applier == base.Owner){
+        if(power is BerserkPower && amount > 0 && power.Owner == base.Owner){
             // 抽牌
             await CardPileCmd.Draw(CombatUtils.GetTemporaryPlayerChoiceContext(), base.Amount, base.Owner.Player);
         }

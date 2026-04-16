@@ -46,9 +46,9 @@ public sealed class BerserkPower : PowerBaseModel
     public override async Task AfterPowerAmountChanged(PowerModel power, decimal amount, Creature? applier, CardModel? cardSource)
     {
         // 如果施加者不是玩家，则返回
-        if(base.Owner.Player != null && base.Owner != applier) return;
+        if(base.Owner.Player == null) return;
         // 如果不是红怒，则返回
-        if(power is not BerserkPower || amount < 0 || power != this) return;
+        if(power is not BerserkPower || amount < 0 || power.Owner != base.Owner) return;
         
         // 回复能量
         await PlayerCmd.GainEnergy(base.DynamicVars.Energy.BaseValue, base.Owner.Player);

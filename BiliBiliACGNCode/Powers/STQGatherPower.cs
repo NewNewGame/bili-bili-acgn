@@ -21,7 +21,7 @@ public sealed class STQGatherPower : PowerBaseModel
     public override async Task AfterPowerAmountChanged(PowerModel power, decimal amount, Creature? applier, CardModel? cardSource)
     {
         // 进入红怒时所有盟友获得 Amount 点力量
-        if(applier == base.Owner && power is BerserkPower && amount > 0){
+        if(power.Owner == base.Owner && power is BerserkPower && amount > 0){
             foreach(var player in base.CombatState.Players){
                 if(player.Creature == base.Owner || player.Creature.IsAlive == false)
                 {
