@@ -21,7 +21,7 @@ public sealed class SailorUniformPower : PowerBaseModel
     public override PowerStackType StackType => PowerStackType.Counter;
 
     /// <summary>
-    /// 每当女儿获得格挡时，对随机敌人造成 Amount 点伤害。
+    /// 每当女儿提升最大生命值时，对随机敌人造成 Amount 点伤害。
     /// </summary>
     /// <param name="creature"></param>
     /// <param name="amount"></param>
@@ -30,8 +30,7 @@ public sealed class SailorUniformPower : PowerBaseModel
     /// <returns></returns>
     public override async Task AfterPowerAmountChanged(PowerModel power, decimal amount, Creature? applier, CardModel? cardSource)
     {
-        if(amount <= 0 || power is not AddMaxHpTempPower) return;
-        if(applier != base.Owner) return;
+        if(amount <= 0 || power is not AddMaxHpTempPower || power.Owner != base.Owner) return;
         if(base.CombatState == null) return;
         // 随机获得一个敌人
         var enemy = base.CombatState.RunState.Rng.CombatTargets.NextItem(base.CombatState.HittableEnemies);

@@ -23,8 +23,8 @@ public sealed class AddMaxHpTempPower : PowerBaseModel
 
     public override async Task AfterPowerAmountChanged(PowerModel power, decimal amount, Creature? applier, CardModel? cardSource)
     {
-        // 如果不是本能力，则返回
-        if(power != this || applier != base.Owner) return;
+        // 如果不是本能力，对象不是自己，则返回
+        if(power != this && power.Owner != base.Owner) return;
 
         // 如果数量小于等于0，则返回
         if(amount <= 0) return;
