@@ -20,6 +20,7 @@ public sealed class SwallowPridePower : PowerBaseModel
     //进入红怒时获得能量与力量
     public override async Task AfterPowerAmountChanged(PowerModel power, decimal amount, Creature? applier, CardModel? cardSource)
     {
+        if(base.Owner.Player == null) return;
         if(power.Owner == base.Owner && power is BerserkPower && amount > 0){
             Flash();
             await PlayerCmd.GainEnergy(base.Amount, base.Owner.Player);
