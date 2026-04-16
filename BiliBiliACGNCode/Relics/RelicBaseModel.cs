@@ -33,7 +33,7 @@ public abstract class RelicBaseModel : CustomRelicModel
                 return path;
             }
             path = $"{Id.Entry.RemovePrefix().ToLowerInvariant()}.png".RelicImagePath();
-            return ResourceLoader.Exists(path) ? path : "relic_outline.png".RelicImagePath();
+            return ResourceLoader.Exists(path) ? path : "relic.png".RelicImagePath();
         }
     }
 
