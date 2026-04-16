@@ -31,10 +31,10 @@ public sealed class FunShikiCharacter : PlaceholderCharacterModel
 	// 人物头像路径。
 	public override string CustomIconTexturePath => "res://BiliBiliACGN/images/characters/funshiki_icon.png";
 	protected override string MapMarkerPath => "res://BiliBiliACGN/images/characters/funshiki_map_marker.png";
-	//public override string CustomArmPointingTexturePath => "res://BiliBiliACGN/images/hands/fanshiki_point.png";
-	//public override string CustomArmPaperTexturePath => "res://BiliBiliACGN/images/hands/fanshiki_paper.png";
-	//public override string CustomArmRockTexturePath => "res://BiliBiliACGN/images/hands/funshiki_rock.png";
-	//public override string CustomArmScissorsTexturePath => "res://BiliBiliACGN/images/hands/funshiki_scissors.png";
+	public override string CustomArmPointingTexturePath => "res://BiliBiliACGN/images/hands/funshiki_point.png";
+	public override string CustomArmPaperTexturePath => "res://BiliBiliACGN/images/hands/funshiki_paper.png";
+	public override string CustomArmRockTexturePath => "res://BiliBiliACGN/images/hands/funshiki_rock.png";
+	public override string CustomArmScissorsTexturePath => "res://BiliBiliACGN/images/hands/funshiki_scissors.png";
 	// 人物选择图标。
 	public override string CustomCharacterSelectIconPath => "res://BiliBiliACGN/images/characters/funshiki_select_icon.png";
 	// 人物选择图标-锁定状态。
