@@ -21,7 +21,7 @@ public sealed class FunShikiCharacter : PlaceholderCharacterModel
 	public override string PlaceholderID => "funshiki";
 	public override Color NameColor => new Color("E02D16");
 	public override CharacterGender Gender => CharacterGender.Feminine;
-	public override int StartingHp => 65;
+	public override int StartingHp => 60;
 	public override int BaseOrbSlotCount => 4;
 	public override CardPoolModel CardPool => ModelDb.CardPool<FunShikiCardPool>();
 

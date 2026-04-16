@@ -101,7 +101,7 @@ public static class DaughterCmd
     {
         var daughter = creature.GetDaughter();
         if(daughter == null) return;
-        await PowerCmd.Apply<AddMaxHpTempPower>(creature, value, creature, null);
+        await PowerCmd.Apply<AddMaxHpTempPower>(daughter, value, creature, null);
     }
     /// <summary>
     /// 女儿能力指令
