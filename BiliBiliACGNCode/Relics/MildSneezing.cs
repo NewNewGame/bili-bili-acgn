@@ -64,9 +64,10 @@ public sealed class MildSneezing : RelicBaseModel
         // 玩家回合开始时，判断是否跳过敌人回合
         if(player == base.Owner)
         {
-            Flash();
+            bool trigger = false;
             if(_fights > 0)
             {
+                trigger = true;
                 // 眩晕敌人
                 foreach(var enemy in player.Creature.CombatState.HittableEnemies)
                 {
@@ -81,6 +82,7 @@ public sealed class MildSneezing : RelicBaseModel
             var hand = PileType.Hand.GetPile(base.Owner);
             if(hand.Cards.Count > 0)
             {
+                trigger = true;
                 if(base.Owner.RunState.Rng.CombatPotionGeneration.NextInt(0, 100) < (int)base.DynamicVars["DiscardChance"].BaseValue)
                 {
                     // 随机丢弃1张牌
@@ -91,7 +93,10 @@ public sealed class MildSneezing : RelicBaseModel
                     }
                 }
             }
-            
+            if(trigger)
+            {
+                Flash();
+            }
         }
     }
     public override Task AfterCombatVictory(CombatRoom room)
