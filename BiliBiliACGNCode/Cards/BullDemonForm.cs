@@ -41,6 +41,7 @@ public sealed class BullDemonForm : CardBaseModel
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
+        await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
         // 获得牛魔形态BUFF
         await PowerCmd.Apply<BullDemonPower>(base.Owner.Creature, base.DynamicVars["Powers"].IntValue, base.Owner.Creature, this);
     }

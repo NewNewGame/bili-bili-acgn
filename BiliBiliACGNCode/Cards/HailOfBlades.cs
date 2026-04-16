@@ -40,6 +40,7 @@ public sealed class HailOfBlades : CardBaseModel
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
+        await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
         // 添加丛刃BUFF
         await PowerCmd.Apply<HailOfBladesPower>(base.Owner.Creature, 1, base.Owner.Creature, this);
     }

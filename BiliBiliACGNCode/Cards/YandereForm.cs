@@ -30,6 +30,7 @@ public sealed class YandereForm : CardBaseModel
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
+        await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
         // 施加能力：你或女儿造成伤害时，同时给予等量病态
         await PowerCmd.Apply<YandereFormPower>(base.Owner.Creature, 1m, base.Owner.Creature, this);
     }

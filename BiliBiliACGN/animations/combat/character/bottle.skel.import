@@ -1,0 +1,14 @@
+[remap]
+
+importer="spine.skel"
+type="SpineSkeletonFileResource"
+uid="uid://c8s1kxa00a0la"
+path="res://.godot/imported/bottle.skel-6c5dfda86b66035e5d1fe2c9059a6376.spskel"
+
+[deps]
+
+source_file="res://BiliBiliACGN/animations/combat/character/bottle.skel"
+dest_files=["res://.godot/imported/bottle.skel-6c5dfda86b66035e5d1fe2c9059a6376.spskel"]
+
+[params]
+

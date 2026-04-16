@@ -7,8 +7,8 @@
 
 using BaseLib.Utils;
 using BiliBiliACGN.BiliBiliACGNCode.Cards.CardPool;
-using BiliBiliACGN.BiliBiliACGNCode.Core.Commands;
 using BiliBiliACGN.BiliBiliACGNCode.Powers;
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
@@ -34,8 +34,10 @@ public sealed class HalfFruit : CardBaseModel
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        // 施加能力：女儿攻击敌人时，给予敌人本回合变唐
-        await DaughterCmd.ApplyPower<HalfFruitPower>(base.Owner.Creature, base.DynamicVars["Tang"].BaseValue, this);
+        // 播放动画
+        await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
+        // 施加能力：女儿攻击敌人时，该敌人在本回合失去力量
+        await PowerCmd.Apply<HalfFruitPower>(base.Owner.Creature, base.DynamicVars["StrengthLoss"].BaseValue, base.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()

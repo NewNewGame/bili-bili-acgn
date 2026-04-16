@@ -35,8 +35,10 @@ public sealed class DistortionScholar : CardBaseModel
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         if(base.CombatState != null){
-        // 施加能力：病态额外触发次数
-            foreach(var enemy in base.CombatState.HittableEnemies){
+            // 播放动画
+            await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
+            // 施加能力：病态额外触发次数
+             foreach(var enemy in base.CombatState.HittableEnemies){
                 await PowerCmd.Apply<MadlyLovePower>(enemy, base.DynamicVars["ExtraTriggers"].BaseValue, base.Owner.Creature, this);
             }
         }

@@ -2,7 +2,7 @@
 //* 文件：TelecomEngineeringMaster(通信工程硕士)
 //* 作者：wheat
 //* 创建时间：2026/04/08
-//* 描述：你每激发1个充能球，获得1点集中。
+//* 描述：你每激发3个充能球，获得1点集中。
 //*******************************************************
 
 using BaseLib.Utils;
@@ -35,8 +35,10 @@ public sealed class TelecomEngineeringMaster : CardBaseModel
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        // 施加能力：每激发 3 个充能球，获得1集中
-        await PowerCmd.Apply<TelecomEngineeringMasterPower>(base.Owner.Creature, base.DynamicVars["Evoke"].BaseValue, base.Owner.Creature, this);
+        // 播放动画
+        await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
+        // 施加能力：每激发 1 个充能球，获得集中
+        await PowerCmd.Apply<TelecomEngineeringMasterPower>(base.Owner.Creature, base.DynamicVars["Focus"].BaseValue, base.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()

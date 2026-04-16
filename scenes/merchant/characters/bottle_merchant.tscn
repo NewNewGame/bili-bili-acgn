@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://dwysqs5534an2"]
 
 [ext_resource type="Script" uid="uid://dm0ygui2dyg8f" path="res://BiliBiliACGNCode/Nodes/SNMerchantCharacter.cs" id="1_0rk10"]
-[ext_resource type="Texture2D" uid="uid://dpdv8s74xdyw7" path="res://BiliBiliACGN/images/characters/bottle_chracter.png" id="1_gy0u0"]
+[ext_resource type="Texture2D" uid="uid://7q37t2e405pl" path="res://BiliBiliACGN/images/characters/bottle_character.png" id="1_gy0u0"]
 
 [node name="MerchantCharacter" type="Node2D"]
 script = ExtResource("1_0rk10")

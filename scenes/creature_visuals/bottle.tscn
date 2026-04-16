@@ -1,16 +1,20 @@
 [gd_scene load_steps=2 format=3 uid="uid://c0c12vlplnwkv"]
 
-[ext_resource type="Texture2D" uid="uid://dpdv8s74xdyw7" path="res://BiliBiliACGN/images/characters/bottle_chracter.png" id="1_agfs1"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://b3rafqri3jjy7" path="res://BiliBiliACGN/animations/combat/character/bottle.tres" id="2_b3f04"]
 
 [node name="bottle" type="Node2D"]
 metadata/_edit_vertical_guides_ = [-1036.0]
 
-[node name="Visuals" type="Sprite2D" parent="."]
+[node name="Visuals" type="SpineSprite" parent="."]
+skeleton_data_res = ExtResource("2_b3f04")
+preview_skin = "Default"
+preview_animation = "-- Empty --"
+preview_frame = false
+preview_time = 0.0
 unique_name_in_owner = true
 z_index = 10
-position = Vector2(0, -197)
+position = Vector2(-6, -14)
 scale = Vector2(0.25, 0.25)
-texture = ExtResource("1_agfs1")
 
 [node name="Bounds" type="Control" parent="."]
 unique_name_in_owner = true

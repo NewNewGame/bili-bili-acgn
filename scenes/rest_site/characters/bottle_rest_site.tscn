@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://cvtdsx5v7l4b4"]
 
 [ext_resource type="Script" uid="uid://bllvg4nxopi4a" path="res://BiliBiliACGNCode/Nodes/SNRestSiteCharacter.cs" id="1_awmq8"]
-[ext_resource type="Texture2D" uid="uid://dpdv8s74xdyw7" path="res://BiliBiliACGN/images/characters/bottle_chracter.png" id="2_qkqdf"]
+[ext_resource type="Texture2D" uid="uid://7q37t2e405pl" path="res://BiliBiliACGN/images/characters/bottle_character.png" id="2_qkqdf"]
 [ext_resource type="PackedScene" uid="uid://bgy88bk44xxvk" path="res://BiliBiliACGN/scenes/selection_reticle.tscn" id="3_evojs"]
 
 [node name="RegentRestSite" type="Node2D"]

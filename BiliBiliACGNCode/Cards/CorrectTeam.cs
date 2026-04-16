@@ -37,6 +37,7 @@ public sealed class CorrectTeam : CardBaseModel
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
+        await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
         // 添加正确车队BUFF
         await PowerCmd.Apply<CorrectTeamPower>(base.Owner.Creature, 2, base.Owner.Creature, this);
     }
