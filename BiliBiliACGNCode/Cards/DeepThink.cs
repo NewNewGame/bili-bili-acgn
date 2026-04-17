@@ -34,7 +34,7 @@ public sealed class DeepThink : CardBaseModel
     /// </summary>
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new DynamicVar("Power", 2m)
+        new DynamicVar("Power", 3m)
     ];
 
     public DeepThink() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }

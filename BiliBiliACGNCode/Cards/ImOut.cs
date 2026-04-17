@@ -28,13 +28,13 @@ public sealed class ImOut : CardBaseModel
     #region 卡牌属性配置
     private const int energyCost = 0;
     private const CardType type = CardType.Attack;
-    private const CardRarity rarity = CardRarity.Common;
+    private const CardRarity rarity = CardRarity.Uncommon;
     private const TargetType targetType = TargetType.AnyEnemy;
     private const bool shouldShowInCardLibrary = true;
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new DamageVar(4m, ValueProp.Move),
+        new DamageVar(6m, ValueProp.Move),
         new CardsVar(1)
     ];
 

@@ -35,7 +35,7 @@ public sealed class JusticeBao : CardBaseModel
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new DamageVar(9m, ValueProp.Move)
+        new DamageVar(8m, ValueProp.Move)
     ];
 
     public JusticeBao() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }

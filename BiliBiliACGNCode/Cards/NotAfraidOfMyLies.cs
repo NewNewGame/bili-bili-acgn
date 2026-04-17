@@ -2,7 +2,7 @@
 //* 文件：NotAfraidOfMyLies(他不怕我说谎吗)
 //* 作者：wheat
 //* 创建时间：2026/04/03
-//* 描述：获得{Block:diff()}点格挡。若敌人意图为攻击，获得{Power:diff()}层[gold]红温[/gold]。
+//* 描述：获得{Block:diff()}点格挡。若敌人意图为攻击，获得{Power:diff()}点[gold]唐氏[/gold]。
 //*******************************************************
 
 using BaseLib.Utils;
@@ -22,7 +22,7 @@ namespace BiliBiliACGN.BiliBiliACGNCode.Cards;
 public sealed class NotAfraidOfMyLies : CardBaseModel
 {
     #region 卡牌关键词与悬停
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<AngerPower>()];
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<TangShiPower>()];
     // 敌人意图为攻击时高亮
     protected override bool ShouldGlowGoldInternal
 	{
@@ -46,7 +46,7 @@ public sealed class NotAfraidOfMyLies : CardBaseModel
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
         new BlockVar(8m, ValueProp.Move),
-        new DynamicVar("Power", 3m)
+        new DynamicVar("Power", 1m)
     ];
 
     public NotAfraidOfMyLies() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
@@ -59,13 +59,13 @@ public sealed class NotAfraidOfMyLies : CardBaseModel
         await CreatureCmd.GainBlock(base.Owner.Creature, base.DynamicVars.Block.BaseValue, base.DynamicVars.Block.Props, cardPlay);
         // 若敌人意图为攻击，获得{Power:diff()}层红温
         if(cardPlay.Target.Monster?.IntendsToAttack ?? false){
-            await PowerCmd.Apply<AngerPower>(base.Owner.Creature, base.DynamicVars["Power"].BaseValue, base.Owner.Creature, this);
+            await PowerCmd.Apply<TangShiPower>(base.Owner.Creature, base.DynamicVars["Power"].BaseValue, base.Owner.Creature, this);
         }
     }
 
     protected override void OnUpgrade()
     {
-        base.EnergyCost.UpgradeBy(-1);
-        base.DynamicVars["Power"].UpgradeValueBy(2m);
+        base.DynamicVars["Block"].UpgradeValueBy(2m);
+        base.DynamicVars["Power"].UpgradeValueBy(1m);
     }
 }

@@ -66,7 +66,6 @@ public sealed class WitPeak : CardBaseModel
     {
         #region 升级效果
         base.DynamicVars.Energy.UpgradeValueBy(1m);
-        base.DynamicVars.Cards.UpgradeValueBy(1m);
 
         #endregion
     }

@@ -31,7 +31,7 @@ public sealed class Creep : CardBaseModel
     /// </summary>
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new DynamicVar("Power", 2m)
+        new DynamicVar("Power", 3m)
     ];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CustomKeyWords.YYSY];
 
