@@ -1,5 +1,6 @@
 {
     "STRANGE_MURMUR.title": "奇怪的呢喃",
+    "STRANGE_MURMUR.loss": "生而为人，我很抱歉。",
     "STRANGE_MURMUR.pages.INITIAL.description": "穿梭在一群不知链接何处的水管森林，在不远处你似乎听到了什么呢喃声和哀嚎声。声音听起来十分的悲伤甚至癫狂，在这幽静的“森林”他的呢喃仿佛死去的[sine]鬼魂[/sine]一样漂浮在你的身旁。当你越发接近声音的来源，你终于听清了他话语\n\n[sine][color=green]“甚而为龟，我很抱歉”[/color][/sine]",
     "STRANGE_MURMUR.pages.INITIAL.options.LOOK.title": "过去看看",
     "STRANGE_MURMUR.pages.INITIAL.options.LOOK.description": "深入查看发出声音的地方",
@@ -84,7 +85,7 @@
     "PURE_GOLD_CARD_EVENT.pages.INITIAL.options.GIVEITBACK.title": "物归原主",
     "PURE_GOLD_CARD_EVENT.pages.INITIAL.options.GIVEITBACK.description": "决定去附近的龟有公园派驻所物归原主。",
     "PURE_GOLD_CARD_EVENT.pages.PARK.description": "刚走到门口，就看到一个身穿白色长风衣、高挑冷峻的男人大步流星地走来。\n“就是你捡到了我的青眼白龙？” 海马濑人用锐利的目光盯着你，“很好。作为感谢，我不会用‘裂疾风弹把你轰成渣。但是……来决斗！”",
-    "PURE_GOLD_CARD_EVENT.pages.PARK.options.DUEL.title": "接受决斗",
+    "PURE_GOLD_CARD_EVENT.pages.PARK.options.DUEL.title": "决斗功能尚未开启:)",
     "PURE_GOLD_CARD_EVENT.pages.PARK.options.DUEL.description": "你接受了决斗，可以获得[gold]{CardTitle}[/gold]。",
     "PURE_GOLD_CARD_EVENT.pages.PARK.options.REFUSE.title": "拒绝决斗",
     "PURE_GOLD_CARD_EVENT.pages.PARK.options.REFUSE.description": "你决定把卡牌还给海马濑人。",
@@ -101,6 +102,7 @@
 
 
     "O_KUO_DA.title": "哦扩达",
+    "O_KUO_DA.loss": "哦扩大？？？",
     "O_KUO_DA.pages.INITIAL.description": "你看到两个造型诡异的小学生（？）在吵架。“嘿嘿，哦扩达？”“没有——” “哦扩达？”“没有——” “那就是生气了！””",
     "O_KUO_DA.pages.INITIAL.options.OGUODA.title": "加入吵架，说“生气了吗”",
     "O_KUO_DA.pages.INITIAL.options.OGUODA.description": "你开始了复读机模式，获得遗物[gold]{Relic}[/gold]",
