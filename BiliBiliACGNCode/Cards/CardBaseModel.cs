@@ -14,22 +14,9 @@ namespace BiliBiliACGN.BiliBiliACGNCode.Cards;
 
 public abstract class CardBaseModel : CustomCardModel
 {
-    //Image size:
-    //Normal art: 1000x760 (Using 500x380 should also work, it will simply be scaled.)
-    //Full art: 606x852
-    public override string CustomPortraitPath
-    {
-        get
-        {
-            var path = $"{Id.Entry.RemovePrefix().ToLowerInvariant()}.png".BigCardImagePath();
-            return ResourceLoader.Exists(path) ? path : "none.png".BigCardImagePath();
-        }
-    }
-    
     //Smaller variants of card images for efficiency:
     //Smaller variant of fullart: 250x350
     //Smaller variant of normalart: 250x190
-    
     //Uses card_portraits/card_name.png as image path. These should be smaller images.
     public override string PortraitPath
     {
@@ -39,16 +26,6 @@ public abstract class CardBaseModel : CustomCardModel
             return ResourceLoader.Exists(path) ? path : "none.png".CardImagePath();
         }
     }
-
-    public override string BetaPortraitPath
-    {
-        get
-        {
-            var path = $"beta/{Id.Entry.RemovePrefix().ToLowerInvariant()}.png".CardImagePath();
-            return ResourceLoader.Exists(path) ? path : "none.png".CardImagePath();
-        }
-    }
-
     public CardBaseModel(int canonicalEnergyCost, CardType type, CardRarity rarity, TargetType targetType, bool shouldShowInCardLibrary = true) : base(canonicalEnergyCost, type, rarity, targetType, shouldShowInCardLibrary)
     {
     }

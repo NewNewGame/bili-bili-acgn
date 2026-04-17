@@ -26,7 +26,7 @@ public sealed class BerserkPower : PowerBaseModel
 
     public override PowerStackType StackType => PowerStackType.Single;
     public override bool IsInstanced => true;
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new DynamicVar("DamageMultiplier", 150m), new EnergyVar(2), new CardsVar(3)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new DynamicVar("DamageMultiplier", 150m), new EnergyVar(2), new CardsVar(2)];
     /// <summary>
     /// 应用前
     /// </summary>
