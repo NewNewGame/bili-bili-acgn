@@ -26,7 +26,7 @@ public sealed class BlowWithThemAll : CardBaseModel
 {
     #region 卡牌关键词与悬停
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<AngerPower>()];
-    protected override bool ShouldGlowGoldInternal => base.Owner.Creature.GetPowerAmount<AngerPower>() >= 3;
+    protected override bool ShouldGlowGoldInternal => base.Owner.Creature.GetPowerAmount<AngerPower>() >= base.DynamicVars["Anger"].BaseValue;
     #endregion
     #region 卡牌属性配置
     private const int energyCost = 1;
@@ -37,7 +37,8 @@ public sealed class BlowWithThemAll : CardBaseModel
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new DamageVar(8m, ValueProp.Move)
+        new DamageVar(8m, ValueProp.Move),
+        new DynamicVar("Anger", 2m)
     ];
 
     public BlowWithThemAll() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
@@ -57,7 +58,7 @@ public sealed class BlowWithThemAll : CardBaseModel
         await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue).FromCard(this).TargetingAllOpponents(base.CombatState)
             .Execute(choiceContext);
         // 消耗3点红温
-        await PowerCmd.Apply<AngerPower>(base.Owner.Creature, -3, base.Owner.Creature, this);
+        await PowerCmd.Apply<AngerPower>(base.Owner.Creature, -base.DynamicVars["Anger"].BaseValue, base.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()
