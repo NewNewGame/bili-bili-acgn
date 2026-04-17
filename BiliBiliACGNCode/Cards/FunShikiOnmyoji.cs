@@ -29,7 +29,7 @@ public sealed class FunShikiOnmyoji : CardBaseModel
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
     [
         HoverTipFactory.Static(StaticHoverTip.Block),
-        HoverTipFactory.FromPower<TwistBuffPower>(),
+        HoverTipFactory.FromPower<TwistPower>(),
     ];
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
@@ -43,7 +43,7 @@ public sealed class FunShikiOnmyoji : CardBaseModel
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         await CreatureCmd.GainBlock(base.Owner.Creature, base.DynamicVars.Block.BaseValue, base.DynamicVars.Block.Props, cardPlay);
-        await PowerCmd.Apply<TwistBuffPower>(base.Owner.Creature, base.DynamicVars["Distortion"].BaseValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<TwistPower>(base.Owner.Creature, base.DynamicVars["Distortion"].BaseValue, base.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()
