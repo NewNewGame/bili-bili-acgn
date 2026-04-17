@@ -16,6 +16,7 @@ using BiliBiliACGN.BiliBiliACGNCode.Powers;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Commands;
+using Godot;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Cards;
 
@@ -51,8 +52,9 @@ public sealed class CloseDoorReleaseSa : CardBaseModel
             .FromCard(this)
             .Targeting(cardPlay.Target)
             .Execute(choiceContext);
-        // 消耗所有红温
-        await PowerCmd.Remove<AngerPower>(base.Owner.Creature);
+        // 消耗一半红温
+        int amount = Mathf.Max(1, base.Owner.Creature.GetPowerAmount<AngerPower>() / 2);
+        await PowerCmd.Apply<AngerPower>(base.Owner.Creature, -amount, base.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()
