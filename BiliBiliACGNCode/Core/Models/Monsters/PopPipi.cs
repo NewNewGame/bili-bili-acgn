@@ -15,13 +15,12 @@ using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.MonsterMoves.Intents;
 using MegaCrit.Sts2.Core.MonsterMoves.MonsterMoveStateMachine;
-using MegaCrit.Sts2.Core.ValueProps;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Core.Models.Monsters;
 
 public sealed class PopPipi : MonsterBaseModel
 {
-        /// <summary>
+    /// <summary>
     /// 单次攻击音效
     /// </summary>
 	private const string _attackSingleSfx = "event:/sfx/enemy/enemy_attacks/punch_construct/punch_construct_attack_single";

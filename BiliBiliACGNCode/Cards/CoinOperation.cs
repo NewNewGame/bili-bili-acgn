@@ -32,7 +32,7 @@ public sealed class CoinOperation : CardBaseModel
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new DamageVar(15m, ValueProp.Move),
+        new DamageVar(13m, ValueProp.Move),
         new DynamicVar("Tang", 2m)
     ];
 
@@ -52,7 +52,8 @@ public sealed class CoinOperation : CardBaseModel
 
     protected override void OnUpgrade()
     {
-        base.DynamicVars["Damage"].UpgradeValueBy(4m);
+        base.DynamicVars["Damage"].UpgradeValueBy(3m);
         base.DynamicVars["Tang"].UpgradeValueBy(1m);
+        base.AddKeyword(CustomKeyWords.YYSY);
     }
 }

@@ -27,7 +27,7 @@ public sealed class MyConfession : CardBaseModel
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
 
     #region 卡牌属性配置
-    private const int energyCost = 2;
+    private const int energyCost = 1;
     private const CardType type = CardType.Attack;
     private const CardRarity rarity = CardRarity.Rare;
     private const TargetType targetType = TargetType.AnyEnemy;
@@ -35,7 +35,7 @@ public sealed class MyConfession : CardBaseModel
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new DamageVar(3m, ValueProp.Move|ValueProp.Unblockable|ValueProp.Unpowered),
+        new DamageVar(4m, ValueProp.Unblockable|ValueProp.Unpowered),
         new CalculationBaseVar(0m),
         new CalculationExtraVar(1m),
         new CalculatedVar("CalculatedTimes").WithMultiplier((card, creature) => card.Owner.Creature.GetPowerAmount<AngerPower>())
@@ -64,7 +64,6 @@ public sealed class MyConfession : CardBaseModel
 
     protected override void OnUpgrade()
     {
-        base.EnergyCost.UpgradeBy(-1);
-        base.DynamicVars["CalculationBase"].UpgradeValueBy(1m);
+        base.DynamicVars["Damage"].UpgradeValueBy(2m);
     }
 }

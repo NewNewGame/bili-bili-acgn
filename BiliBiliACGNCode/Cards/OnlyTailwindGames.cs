@@ -2,7 +2,7 @@
 //* 文件：OnlyTailwindGames(只打顺风局)
 //* 作者：wheat
 //* 创建时间：2026/04/03
-//* 描述：获得{SwallowPride:diff()}层忍气吞声；进入红怒时获得{RageEnergy:diff()}点能量
+//* 描述：获得{SwallowPride:diff()}层忍气吞声；进入红怒时获得{RageEnergy:diff()}点能量，并获得{Power:diff()}点[gold]红温[/gold]。
 //*******************************************************
 
 using BaseLib.Utils;
@@ -38,7 +38,7 @@ public sealed class OnlyTailwindGames : CardBaseModel
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new DynamicVar("Powers", 3m),
+        new DynamicVar("Powers", 2m),
     ];
 
     public OnlyTailwindGames() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
@@ -54,5 +54,6 @@ public sealed class OnlyTailwindGames : CardBaseModel
 
     protected override void OnUpgrade()
     {
+        base.EnergyCost.UpgradeBy(-1);
     }
 }

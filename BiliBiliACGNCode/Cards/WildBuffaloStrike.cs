@@ -35,7 +35,7 @@ public sealed class WildBuffaloStrike : CardBaseModel
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
         new DamageVar(9m, ValueProp.Move),
-        new DynamicVar("Power", 1m)
+        new DynamicVar("Power", 2m)
     ];
 
     public WildBuffaloStrike() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }

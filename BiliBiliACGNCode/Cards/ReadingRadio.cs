@@ -2,7 +2,7 @@
 //* 文件：ReadingRadio
 //* 作者：wheat
 //* 创建时间：2026/03/31 10:23:28 星期二
-//* 描述：每当你抽到一张带[gold]有一说一[/gold]的牌，随机对一名敌人造成{Damage:diff()}点伤害。
+//* 描述：每当你抽到[blue]1[/blue]张带[gold]有一说一[/gold]的牌，获得[blue]1[/blue]点[gold]格挡[/gold]。
 //*******************************************************
 
 using BaseLib.Utils;
@@ -11,7 +11,6 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using BiliBiliACGN.BiliBiliACGNCode.Cards.CardPool;
-using MegaCrit.Sts2.Core.ValueProps;
 using MegaCrit.Sts2.Core.HoverTips;
 using BiliBiliACGN.BiliBiliACGNCode.Powers;
 
@@ -21,7 +20,10 @@ namespace BiliBiliACGN.BiliBiliACGNCode.Cards;
 public sealed class ReadingRadio : CardBaseModel
 {
     #region 卡牌关键词与悬停
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromKeyword(CustomKeyWords.YYSY)];
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => [
+        HoverTipFactory.FromKeyword(CustomKeyWords.YYSY),
+        HoverTipFactory.Static(StaticHoverTip.Block)
+    ];
     #endregion
     #region 卡牌属性配置
     private const int energyCost = 2;
@@ -59,6 +61,7 @@ public sealed class ReadingRadio : CardBaseModel
     protected override void OnUpgrade()
     {
         #region 升级效果
+        base.EnergyCost.UpgradeBy(-1);
         base.DynamicVars["Power"].UpgradeValueBy(1m);
 
         #endregion

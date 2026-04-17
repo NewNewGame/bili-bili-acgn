@@ -58,7 +58,7 @@ public sealed class MacroDomain : CardBaseModel
     protected override void OnUpgrade()
     {
         #region 升级效果
-        base.EnergyCost.UpgradeBy(-1);
+        base.AddKeyword(CardKeyword.Retain);
         #endregion
 
     }

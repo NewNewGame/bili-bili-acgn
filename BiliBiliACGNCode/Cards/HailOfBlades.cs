@@ -25,7 +25,7 @@ public sealed class HailOfBlades : CardBaseModel
     #region 卡牌属性配置
     private const int energyCost = 2;
     private const CardType type = CardType.Power;
-    private const CardRarity rarity = CardRarity.Uncommon;
+    private const CardRarity rarity = CardRarity.Rare;
     private const TargetType targetType = TargetType.Self;
     private const bool shouldShowInCardLibrary = true;
 
@@ -47,6 +47,6 @@ public sealed class HailOfBlades : CardBaseModel
 
     protected override void OnUpgrade()
     {
-        base.EnergyCost.UpgradeBy(-1);
+        base.AddKeyword(CardKeyword.Retain);
     }
 }

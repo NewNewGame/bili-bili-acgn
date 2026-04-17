@@ -22,7 +22,7 @@ public sealed class AnimeSwordPower : PowerBaseModel
     {
         // 如果对象不是自己，则返回
         if(power.Owner != base.Owner) return;
-        if(power is AngerPower && amount > 0){
+        if(power is AngerPower && amount != 0){
             var enemies = base.CombatState.HittableEnemies;
             var enemy = base.CombatState.RunState.Rng.CombatTargets.NextItem(enemies);
             if(enemy != null){

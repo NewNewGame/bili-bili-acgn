@@ -54,17 +54,10 @@ public sealed class CornSyndrome : CardBaseModel
         // 获取所有手牌
         var pile = PileType.Hand.GetPile(base.Owner);
         if (pile != null && pile.Cards.Count() > 0){   
-            // 如果升级了，那就选择一张没有有一说一的手牌   
-            if(base.IsUpgraded){
+            // 选择一张没有有一说一的手牌   
             var card = (await CardSelectCmd.FromHand(choiceContext, base.Owner, new CardSelectorPrefs(MCardSelectorPrefs.TO_ADD_YYSY, 1), MCardSelectorPrefs.NoYYSYFilter, this)).FirstOrDefault();
                 if(card != null)
                     card.AddKeyword(CustomKeyWords.YYSY);
-            }else{
-                // 随机给你手牌中的一张牌添加[gold]有一说一[/gold]
-                var randomCard = base.Owner.RunState.Rng.CombatCardSelection.NextItem(pile.Cards.Where(MCardSelectorPrefs.NoYYSYFilter));
-                if(randomCard != null)
-                    randomCard.AddKeyword(CustomKeyWords.YYSY);
-            }
         }   
     }
 

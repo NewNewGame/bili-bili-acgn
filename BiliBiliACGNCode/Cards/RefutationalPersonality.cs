@@ -12,8 +12,8 @@ using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models.Powers;
 using BiliBiliACGN.BiliBiliACGNCode.Cards.CardPool;
-using BottleRagePower = BiliBiliACGN.BiliBiliACGNCode.Powers.BerserkPower;
 using MegaCrit.Sts2.Core.Commands;
+using BiliBiliACGN.BiliBiliACGNCode.Powers;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Cards;
 
@@ -24,23 +24,21 @@ public sealed class RefutationalPersonality : CardBaseModel
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
     [
         HoverTipFactory.FromPower<ThornsPower>(),
-        HoverTipFactory.FromPower<BottleRagePower>()
+        HoverTipFactory.FromPower<AngerPower>()
     ];
-    // 红怒时发光
-    protected override bool ShouldGlowGoldInternal => base.Owner.Creature.HasPower<BottleRagePower>();
 
     #endregion
     #region 卡牌属性配置
-    private const int energyCost = 1;
-    private const CardType type = CardType.Power;
+    private const int energyCost = 2;
+    private const CardType type = CardType.Skill;
     private const CardRarity rarity = CardRarity.Uncommon;
     private const TargetType targetType = TargetType.Self;
     private const bool shouldShowInCardLibrary = true;
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new DynamicVar("Thorns", 2m),
-        new DynamicVar("ThornsRage", 2m)
+        new DynamicVar("Thorns", 1m),
+        new DynamicVar("Anger", 5m)
     ];
 
     public RefutationalPersonality() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
@@ -50,14 +48,14 @@ public sealed class RefutationalPersonality : CardBaseModel
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
-        decimal value = base.Owner.Creature.HasPower<BottleRagePower>() ? base.DynamicVars["ThornsRage"].BaseValue + base.DynamicVars["Thorns"].BaseValue : base.DynamicVars["Thorns"].BaseValue;
         // 添加荆棘BUFF
-        await PowerCmd.Apply<ThornsPower>(base.Owner.Creature, value, base.Owner.Creature, this);
+        await PowerCmd.Apply<ThornsPower>(base.Owner.Creature, base.DynamicVars["Thorns"].BaseValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<AngerPower>(base.Owner.Creature, base.DynamicVars["Anger"].BaseValue, base.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()
     {
         base.DynamicVars["Thorns"].UpgradeValueBy(1m);
-        base.DynamicVars["ThornsRage"].UpgradeValueBy(1m);
+        base.AddKeyword(CardKeyword.Retain);
     }
 }

@@ -11,7 +11,6 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using BiliBiliACGN.BiliBiliACGNCode.Cards.CardPool;
-using BiliBiliACGN.BiliBiliACGNCode.Powers;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.ValueProps;
 
@@ -57,5 +56,6 @@ public sealed class BullGeneral : CardBaseModel
     {
         base.DynamicVars["Damage"].UpgradeValueBy(2m);
         base.DynamicVars["Block"].UpgradeValueBy(2m);
+        base.AddKeyword(CustomKeyWords.YYSY);
     }
 }

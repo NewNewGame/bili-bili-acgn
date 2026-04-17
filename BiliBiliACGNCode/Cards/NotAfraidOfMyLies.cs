@@ -45,8 +45,7 @@ public sealed class NotAfraidOfMyLies : CardBaseModel
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new BlockVar(8m, ValueProp.Move),
-        new DynamicVar("Power", 2m)
+        new DynamicVar("Power", 3m)
     ];
 
     public NotAfraidOfMyLies() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
@@ -55,8 +54,6 @@ public sealed class NotAfraidOfMyLies : CardBaseModel
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        // 获得{Block:diff()}点格挡
-        await CreatureCmd.GainBlock(base.Owner.Creature, base.DynamicVars.Block.BaseValue, base.DynamicVars.Block.Props, cardPlay);
         // 若敌人意图为攻击，获得{Power:diff()}层红温
         if(cardPlay.Target.Monster?.IntendsToAttack ?? false){
             await PowerCmd.Apply<TangShiPower>(base.Owner.Creature, base.DynamicVars["Power"].BaseValue, base.Owner.Creature, this);
@@ -65,7 +62,6 @@ public sealed class NotAfraidOfMyLies : CardBaseModel
 
     protected override void OnUpgrade()
     {
-        base.DynamicVars["Block"].UpgradeValueBy(3m);
         base.DynamicVars["Power"].UpgradeValueBy(2m);
     }
 }

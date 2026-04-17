@@ -21,6 +21,7 @@ public sealed class Roar : CardBaseModel
 {
     #region 卡牌关键词与悬停
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.Static(StaticHoverTip.Block)];
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [CustomKeyWords.YYSY];
 
     #endregion
     #region 卡牌属性配置
@@ -48,6 +49,5 @@ public sealed class Roar : CardBaseModel
     protected override void OnUpgrade()
     {
         base.DynamicVars["Block"].UpgradeValueBy(2m);
-        base.AddKeyword(CustomKeyWords.YYSY);
     }
 }
