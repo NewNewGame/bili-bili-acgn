@@ -2,7 +2,7 @@
 //* 文件：HailOfBlades(丛刃)
 //* 作者：wheat
 //* 创建时间：2026/04/03
-//* 描述：[gold]红怒[/gold]时，你所有攻击牌的耗能减少{EnergyReduce:diff()}点。
+//* 描述：本回合，[gold]红怒[/gold]时前2张攻击牌免费打出。
 //*******************************************************
 
 using BaseLib.Utils;
@@ -31,7 +31,7 @@ public sealed class HailOfBlades : CardBaseModel
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new DynamicVar("EnergyReduce", 1m)
+        new DynamicVar("Cards", 2m)
     ];
 
     public HailOfBlades() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
@@ -42,7 +42,7 @@ public sealed class HailOfBlades : CardBaseModel
     {
         await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
         // 添加丛刃BUFF
-        await PowerCmd.Apply<HailOfBladesPower>(base.Owner.Creature, 1, base.Owner.Creature, this);
+        await PowerCmd.Apply<HailOfBladesPower>(base.Owner.Creature, base.DynamicVars["Cards"].BaseValue, base.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()

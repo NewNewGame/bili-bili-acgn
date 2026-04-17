@@ -156,7 +156,7 @@
   "BILIBILIACGN-BULL_GENERAL.title": "牛大将军",
   "BILIBILIACGN-BULL_GENERAL.description": "获得{Anger:diff()}点[gold]红温[/gold]",
   "BILIBILIACGN-HAIL_OF_BLADES.title": "丛刃",
-  "BILIBILIACGN-HAIL_OF_BLADES.description": "[gold]红怒[/gold]时，你所有攻击牌的耗能减少{EnergyReduce:diff()}点。",
+  "BILIBILIACGN-HAIL_OF_BLADES.description": "本回合，[gold]红怒[/gold]时前{Cards:diff()}张攻击牌免费打出。",
   "BILIBILIACGN-REFUTATIONAL_PERSONALITY.title": "反驳形人格",
   "BILIBILIACGN-REFUTATIONAL_PERSONALITY.description": "获得{Thorns:diff()}层[gold]荆棘[/gold]，\n[gold]红怒[/gold]时额外获得{ThornsRage:diff()}层。",
   "BILIBILIACGN-START_ENJOYING.title": "开始享受！",

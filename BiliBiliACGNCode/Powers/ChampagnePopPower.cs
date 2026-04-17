@@ -53,7 +53,7 @@ public sealed class ChampagnePopPower : PowerBaseModel
 
 	public override async Task BeforeCardPlayed(CardPlay cardPlay)
 	{
-		if (cardPlay.Card.Owner.Creature == base.Owner && cardPlay.Card.Keywords.Contains(CustomKeyWords.YYSY) && cardPlay.Card.EnergyCost.Canonical != 0)
+		if (cardPlay.Card.Owner.Creature == base.Owner && !cardPlay.IsAutoPlay && cardPlay.IsLastInSeries && cardPlay.Card.Keywords.Contains(CustomKeyWords.YYSY) && cardPlay.Card.EnergyCost.Canonical != 0)
 		{
 			bool flag;
 			switch (cardPlay.Card.Pile?.Type)

@@ -4,5 +4,5 @@
   "BILIBILIACGN-YYSYLoss.title": "有一说一损失",
   "BILIBILIACGN-YYSYLoss.description": "回合结束时失去[gold]有一说一[/gold]",
   "BILIBILIACGN-ANGER.title": "红温",
-  "BILIBILIACGN-ANGER.description": "每获得[blue]10[/blue]层[gold]红温[/gold]，进入[gold]红怒[/gold]状态，进入[gold]红怒[/gold]状态时，伤害增加[blue]50%[/blue]，获得{energyPrefix:energyIcons(3)}，并抽取[blue]2[/blue]张牌。部分卡牌得到加强。"
+  "BILIBILIACGN-ANGER.description": "每获得[blue]10[/blue]层[gold]红温[/gold]，进入[gold]红怒[/gold]状态，进入[gold]红怒[/gold]状态时，伤害乘算[blue]150%[/blue]，获得{energyPrefix:energyIcons(2)}，并抽取[blue]2[/blue]张牌。部分卡牌得到加强。"
 }
