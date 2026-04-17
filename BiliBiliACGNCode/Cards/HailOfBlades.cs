@@ -31,7 +31,7 @@ public sealed class HailOfBlades : CardBaseModel
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new DynamicVar("Cards", 2m)
+        new DynamicVar("Cards", 3m)
     ];
 
     public HailOfBlades() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
