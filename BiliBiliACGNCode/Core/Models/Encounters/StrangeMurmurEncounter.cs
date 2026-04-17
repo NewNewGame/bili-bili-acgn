@@ -14,15 +14,12 @@ public sealed class StrangeMurmurEncounter : EncounterModel
 {
 	public override RoomType RoomType => RoomType.Monster;
 
-	public override IEnumerable<MonsterModel> AllPossibleMonsters => [ModelDb.Monster<PopPipi>()];
-	// TODO 暂时先用这个，之后再改
+	public override IEnumerable<MonsterModel> AllPossibleMonsters => [ModelDb.Monster<GuiGui>()];
 	protected override IReadOnlyList<(MonsterModel, string?)> GenerateMonsters()
 	{
-		PopPipi popPipi = (PopPipi)ModelDb.Monster<PopPipi>().ToMutable();
-		popPipi.StartsWithStrongPunch = true;
-		popPipi.StartingHpReduction = base.Rng.NextInt(2, 10);
+		GuiGui guiGui = (GuiGui)ModelDb.Monster<GuiGui>().ToMutable();
 		return [
-			new (popPipi, null),
+			new (guiGui, null),
 		];
 	}
 }

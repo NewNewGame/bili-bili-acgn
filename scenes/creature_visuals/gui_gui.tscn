@@ -1,17 +1,17 @@
-[gd_scene load_steps=3 format=3 uid="uid://chym25uvc4woa"]
+[gd_scene load_steps=3 format=3 uid="uid://ci0m1vnsureqf"]
 
 [ext_resource type="Script" uid="uid://cp1h2s6onqcyh" path="res://BiliBiliACGNCode/Nodes/Combat/SNCreatureVisuals.cs" id="1_htqon"]
-[ext_resource type="Texture2D" uid="uid://bajbm14ahidfn" path="res://BiliBiliACGN/images/monsters/poppipi.png" id="1_l43vx"]
+[ext_resource type="Texture2D" uid="uid://3e85jrtf4711" path="res://BiliBiliACGN/images/characters/guigui.png" id="2_7ll8t"]
 
-[node name="pop_pipi" type="Node2D"]
+[node name="gui_gui" type="Node2D"]
 script = ExtResource("1_htqon")
 metadata/_edit_vertical_guides_ = [-1036.0]
 
 [node name="Visuals" type="Sprite2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(0, -216)
-scale = Vector2(0.6, 0.6)
-texture = ExtResource("1_l43vx")
+position = Vector2(10.999992, -258)
+scale = Vector2(0.4284303, 0.42843035)
+texture = ExtResource("2_7ll8t")
 
 [node name="Bounds" type="Control" parent="."]
 unique_name_in_owner = true
@@ -25,8 +25,8 @@ scale = Vector2(1.44, 1.44)
 
 [node name="IntentPos" type="Marker2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(0, -432)
+position = Vector2(0, -614)
 
 [node name="CenterPos" type="Marker2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(0, -133)
+position = Vector2(0, -265)
