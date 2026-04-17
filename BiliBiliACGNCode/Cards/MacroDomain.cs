@@ -20,7 +20,13 @@ namespace BiliBiliACGN.BiliBiliACGNCode.Cards;
 public sealed class MacroDomain : CardBaseModel
 {
     #region 卡牌关键词与悬停
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromKeyword(CustomKeyWords.YYSY)];
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => [
+        HoverTipFactory.FromKeyword(CustomKeyWords.YYSY),
+    ];
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [
+        CardKeyword.Exhaust,
+    ];
+
     #endregion
     #region 卡牌属性配置
     private const int energyCost = 1;
@@ -58,7 +64,7 @@ public sealed class MacroDomain : CardBaseModel
     protected override void OnUpgrade()
     {
         #region 升级效果
-        base.AddKeyword(CardKeyword.Retain);
+        base.RemoveKeyword(CardKeyword.Exhaust);
         #endregion
 
     }

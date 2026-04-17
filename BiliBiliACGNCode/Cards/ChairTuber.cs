@@ -58,7 +58,6 @@ public sealed class ChairTuber : CardBaseModel
     protected override void OnUpgrade()
     {
         #region 升级效果
-        base.AddKeyword(CardKeyword.Retain);
         base.DynamicVars["Cards"].UpgradeValueBy(1m);
 
         #endregion
