@@ -1,0 +1,7 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://c4xcnknkaibq1"]
+
+[ext_resource type="Shader" uid="uid://bpj32nloh60fj" path="res://BiliBiliACGN/shaders/vfx/common/vfx_grayscale_particle_shader.gdshader" id="1_asp77"]
+
+[resource]
+shader = ExtResource("1_asp77")
+shader_parameter/pivot_offset = Vector2(0, 0)
