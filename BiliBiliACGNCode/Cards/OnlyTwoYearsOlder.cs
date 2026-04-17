@@ -32,7 +32,6 @@ public sealed class OnlyTwoYearsOlder : CardBaseModel
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
         new DynamicVar("VulnerablePower", 2m),
-        new CardsVar(1)
     ];
 
     public OnlyTwoYearsOlder() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
@@ -43,13 +42,13 @@ public sealed class OnlyTwoYearsOlder : CardBaseModel
     {
         // 对目标施加{VulnerablePower:diff()}层易伤
         await PowerCmd.Apply<VulnerablePower>(cardPlay.Target, base.DynamicVars["VulnerablePower"].BaseValue, base.Owner.Creature, cardPlay.Card);
-        // 抽取{Cards:diff()}张牌
-        await CardPileCmd.Draw(choiceContext, base.DynamicVars["Cards"].BaseValue, base.Owner);
+        if(base.IsUpgraded){
+            await CardPileCmd.Draw(choiceContext, 1, base.Owner);
+        }
     }
 
     protected override void OnUpgrade()
     {
         base.DynamicVars["VulnerablePower"].UpgradeValueBy(1m);
-        base.DynamicVars["Cards"].UpgradeValueBy(1m);
     }
 }

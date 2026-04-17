@@ -47,6 +47,6 @@ public sealed class BullAngel : CardBaseModel
 
     protected override void OnUpgrade()
     {
-        base.EnergyCost.UpgradeBy(-1);
+        base.AddKeyword(CardKeyword.Retain);
     }
 }

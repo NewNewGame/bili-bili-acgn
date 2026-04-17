@@ -2,7 +2,7 @@
 //* 文件：BullGeneral(牛大将军)
 //* 作者：wheat
 //* 创建时间：2026/04/03
-//* 描述：[gold]保留[/gold]。获得{Anger:diff()}点[gold]红温[/gold]。
+//* 描述：造成{Damage:diff()}点伤害。获得{Block:diff()}点[gold]格挡[/gold]。
 //*******************************************************
 
 using BaseLib.Utils;
@@ -13,6 +13,7 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using BiliBiliACGN.BiliBiliACGNCode.Cards.CardPool;
 using BiliBiliACGN.BiliBiliACGNCode.Powers;
 using MegaCrit.Sts2.Core.Commands;
+using MegaCrit.Sts2.Core.ValueProps;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Cards;
 
@@ -22,20 +23,20 @@ public sealed class BullGeneral : CardBaseModel
     #region 卡牌关键词与悬停
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
     [
-        HoverTipFactory.FromPower<AngerPower>(),
+        HoverTipFactory.Static(StaticHoverTip.Block),
     ];
-    protected override bool ShouldGlowGoldInternal => base.Owner.Creature.GetPowerAmount<AngerChargePower>() +base.DynamicVars["Anger"].BaseValue >= AngerChargePower.MAXCHARGE;
     #endregion
     #region 卡牌属性配置
-    private const int energyCost = 2;
-    private const CardType type = CardType.Skill;
-    private const CardRarity rarity = CardRarity.Uncommon;
-    private const TargetType targetType = TargetType.Self;
+    private const int energyCost = 1;
+    private const CardType type = CardType.Attack;
+    private const CardRarity rarity = CardRarity.Common;
+    private const TargetType targetType = TargetType.AnyEnemy;
     private const bool shouldShowInCardLibrary = true;
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new DynamicVar("Anger", 5m),
+        new DamageVar(5m, ValueProp.Move),
+        new BlockVar(5m, ValueProp.Move),
     ];
 
     public BullGeneral() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
@@ -44,13 +45,17 @@ public sealed class BullGeneral : CardBaseModel
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        // 获得{Anger:diff()}点红温
-        await PowerCmd.Apply<AngerPower>(base.Owner.Creature, base.DynamicVars["Anger"].BaseValue, base.Owner.Creature, this);
+        // 造成伤害，获得格挡
+        await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue)
+            .FromCard(this)
+            .Targeting(cardPlay.Target)
+            .Execute(choiceContext);
+        await CreatureCmd.GainBlock(base.Owner.Creature, base.DynamicVars.Block.BaseValue, base.DynamicVars.Block.Props, cardPlay);
     }
 
     protected override void OnUpgrade()
     {
-        base.DynamicVars["Anger"].UpgradeValueBy(2m);
-        base.AddKeyword(CardKeyword.Retain);
+        base.DynamicVars["Damage"].UpgradeValueBy(2m);
+        base.DynamicVars["Block"].UpgradeValueBy(2m);
     }
 }

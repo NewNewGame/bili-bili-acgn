@@ -2,7 +2,7 @@
 //* 文件：CoinOperation(铸币操作)
 //* 作者：wheat
 //* 创建时间：2026/04/03
-//* 描述：失去{HpLoss:diff()}点生命，获得{Power:diff()}层红温值。
+//* 描述：造成{Damage:diff()}点伤害。给予敌人{Tang:diff()}层[gold]变唐[/gold]。
 //*******************************************************
 
 using BaseLib.Utils;
@@ -21,20 +21,19 @@ namespace BiliBiliACGN.BiliBiliACGNCode.Cards;
 public sealed class CoinOperation : CardBaseModel
 {
     #region 卡牌关键词与悬停
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<AngerPower>()];
-    protected override bool ShouldGlowGoldInternal => base.Owner.Creature.GetPowerAmount<AngerChargePower>() +base.DynamicVars["Power"].BaseValue >= AngerChargePower.MAXCHARGE;
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<GetTangPower>()];
     #endregion
     #region 卡牌属性配置
-    private const int energyCost = 0;
-    private const CardType type = CardType.Skill;
+    private const int energyCost = 2;
+    private const CardType type = CardType.Attack;
     private const CardRarity rarity = CardRarity.Common;
-    private const TargetType targetType = TargetType.Self;
+    private const TargetType targetType = TargetType.AnyEnemy;
     private const bool shouldShowInCardLibrary = true;
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new DynamicVar("HpLoss", 1m),
-        new DynamicVar("Power", 3m)
+        new DamageVar(15m, ValueProp.Move),
+        new DynamicVar("Tang", 2m)
     ];
 
     public CoinOperation() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
@@ -43,13 +42,17 @@ public sealed class CoinOperation : CardBaseModel
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        // 失去 HpLoss 点生命，获得 Power 层红温值（AngerPower）
-        await CreatureCmd.Damage(choiceContext, base.Owner.Creature, base.DynamicVars["HpLoss"].BaseValue, ValueProp.Unblockable | ValueProp.Unpowered | ValueProp.Move, this);
-        await PowerCmd.Apply<AngerPower>(base.Owner.Creature, base.DynamicVars["Power"].BaseValue, base.Owner.Creature, this);
+        // 造成伤害，给予敌人变唐
+        await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue)
+            .FromCard(this)
+            .Targeting(cardPlay.Target)
+            .Execute(choiceContext);
+        await PowerCmd.Apply<GetTangPower>(cardPlay.Target, base.DynamicVars["Tang"].BaseValue, base.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()
     {
-        base.DynamicVars["Power"].UpgradeValueBy(1m);
+        base.DynamicVars["Damage"].UpgradeValueBy(4m);
+        base.DynamicVars["Tang"].UpgradeValueBy(1m);
     }
 }

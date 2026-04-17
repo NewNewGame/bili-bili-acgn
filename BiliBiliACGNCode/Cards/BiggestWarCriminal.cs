@@ -37,7 +37,7 @@ public sealed class BiggestWarCriminal : CardBaseModel
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new DynamicVar("Anger", 8m)
+        new DynamicVar("Anger", 7m)
     ];
 
     public BiggestWarCriminal() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }

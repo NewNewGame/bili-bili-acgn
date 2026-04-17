@@ -26,6 +26,7 @@ public sealed class NeedAKill : CardBaseModel
     #region 卡牌关键词与悬停
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<BottleRagePower>(), HoverTipFactory.Static(StaticHoverTip.Fatal)];
     protected override bool ShouldGlowGoldInternal => base.Owner.Creature.HasPower<BottleRagePower>();
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
 
     #endregion
     #region 卡牌属性配置

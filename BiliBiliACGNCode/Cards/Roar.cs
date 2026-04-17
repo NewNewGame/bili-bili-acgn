@@ -2,7 +2,7 @@
 //* 文件：Roar(怒吼)
 //* 作者：wheat
 //* 创建时间：2026/04/03
-//* 描述：立即抽取{Cards:diff()}张牌；[gold]红怒[/gold]状态下抽取{RageCards:diff()}张。
+//* 描述：获得{Block:diff()}点[gold]格挡[/gold]。
 //*******************************************************
 
 using BaseLib.Utils;
@@ -11,8 +11,8 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using BiliBiliACGN.BiliBiliACGNCode.Cards.CardPool;
-using BiliBiliACGN.BiliBiliACGNCode.Powers;
 using MegaCrit.Sts2.Core.Commands;
+using MegaCrit.Sts2.Core.ValueProps;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Cards;
 
@@ -20,22 +20,19 @@ namespace BiliBiliACGN.BiliBiliACGNCode.Cards;
 public sealed class Roar : CardBaseModel
 {
     #region 卡牌关键词与悬停
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<BerserkPower>()];
-    // 红怒状态高亮
-    protected override bool ShouldGlowGoldInternal => base.Owner.Creature.HasPower<BerserkPower>();
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.Static(StaticHoverTip.Block)];
 
     #endregion
     #region 卡牌属性配置
-    private const int energyCost = 1;
+    private const int energyCost = 0;
     private const CardType type = CardType.Skill;
-    private const CardRarity rarity = CardRarity.Uncommon;
+    private const CardRarity rarity = CardRarity.Common;
     private const TargetType targetType = TargetType.Self;
     private const bool shouldShowInCardLibrary = true;
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new CardsVar(2),
-        new DynamicVar("RageCards", 1m)
+        new BlockVar(4m, ValueProp.Move)
     ];
 
     public Roar() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
@@ -44,19 +41,13 @@ public sealed class Roar : CardBaseModel
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        decimal value = base.DynamicVars["Cards"].BaseValue;
-        // [gold]红怒[/gold]状态下额外抽取{RageCards:diff()}张
-        if (base.Owner.Creature.HasPower<BerserkPower>())
-        {
-            value += base.DynamicVars["RageCards"].BaseValue;
-        }
-        // 立即抽取{Cards:diff()}张牌
-        await CardPileCmd.Draw(choiceContext, value, base.Owner);
+        // 获得 Block 格挡
+        await CreatureCmd.GainBlock(base.Owner.Creature, base.DynamicVars.Block.BaseValue, base.DynamicVars.Block.Props, cardPlay);
     }
 
     protected override void OnUpgrade()
     {
-        base.EnergyCost.UpgradeBy(-1);
-        base.DynamicVars["RageCards"].UpgradeValueBy(1m);
+        base.DynamicVars["Block"].UpgradeValueBy(2m);
+        base.AddKeyword(CustomKeyWords.YYSY);
     }
 }

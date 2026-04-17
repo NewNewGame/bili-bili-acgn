@@ -26,6 +26,7 @@ public sealed class OnlyTailwindGames : CardBaseModel
         HoverTipFactory.FromPower<BerserkPower>(),
         HoverTipFactory.FromPower<SwallowPridePower>()
     ];
+
     #endregion
     #region 卡牌属性配置
     private const int energyCost = 1;
@@ -52,7 +53,6 @@ public sealed class OnlyTailwindGames : CardBaseModel
 
     protected override void OnUpgrade()
     {
-        base.DynamicVars["Powers"].UpgradeValueBy(1);
-        base.DynamicVars.Energy.UpgradeValueBy(1);
+        base.EnergyCost.UpgradeBy(-1);
     }
 }
