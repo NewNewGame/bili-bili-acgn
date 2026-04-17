@@ -1,0 +1,14 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://fepako3f0j63"]
+
+[ext_resource type="Shader" uid="uid://c8cq8mcq20umd" path="res://BiliBiliACGN/shaders/vfx/noise_flash.gdshader" id="1_ammtw"]
+
+[resource]
+shader = ExtResource("1_ammtw")
+shader_parameter/flash_color = Color(0.7921569, 0.84705883, 0.14509805, 0.95686275)
+shader_parameter/speed = 3.7240001768899997
+shader_parameter/frequency = 10.554000501315
+shader_parameter/softness = 0.030000001425000002
+shader_parameter/alpha_gain = 0.17200000817
+shader_parameter/warp_amount = 0.10000000475
+shader_parameter/warp_scale = 1.0900000452552299
+shader_parameter/warp_speed = 0.22000001045
