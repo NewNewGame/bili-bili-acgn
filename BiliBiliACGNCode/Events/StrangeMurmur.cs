@@ -38,7 +38,7 @@ public sealed class StrangeMurmur : EventBaseModel
 			new EventOption(this, Ignore, "STRANGE_MURMUR.pages.INITIAL.options.IGNORE")
         ];
 	}
-    public override bool IsAllowed(RunState runState){
+    public override bool IsAllowed(IRunState runState){
         // 第一层限定
         return runState.TotalFloor <= EventUtils.FirstFloorMaxLevel && runState.TotalFloor >= 6;
     }

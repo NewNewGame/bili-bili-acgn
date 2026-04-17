@@ -37,7 +37,7 @@ public sealed class OKuoDa : EventBaseModel
             new EventOption(this, Combat, "O_KUO_DA.pages.INITIAL.options.COMBAT", HoverTipFactory.FromRelic<UltimateShitAnimeCommittee>())
         ];
     }
-    public override bool IsAllowed(RunState runState){
+    public override bool IsAllowed(IRunState runState){
         // 第一后期和二层限定
         return runState.TotalFloor <= EventUtils.SecondFloorMaxLevel && runState.TotalFloor >= 6;
     }

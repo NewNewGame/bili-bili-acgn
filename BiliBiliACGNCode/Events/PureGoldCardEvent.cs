@@ -42,7 +42,7 @@ public sealed class PureGoldCardEvent : EventBaseModel
             new EventOption(this, GiveItBack, "PURE_GOLD_CARD_EVENT.pages.INITIAL.options.GIVEITBACK"),
         ];
     }
-    public override bool IsAllowed(RunState runState){
+    public override bool IsAllowed(IRunState runState){
         // 第二三层限定
         return runState.TotalFloor > EventUtils.FirstFloorMaxLevel;
     }

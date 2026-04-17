@@ -25,7 +25,7 @@ public sealed class HaKaSeInvention : EventBaseModel
         new StringVar("Relic", ModelDb.Relic<MildSneezing>().Title.GetFormattedText()),
         new StringVar("Relic2", ModelDb.Relic<HaKaSeSneezingMachine>().Title.GetFormattedText()),
     ];
-    public override bool IsAllowed(RunState runState){
+    public override bool IsAllowed(IRunState runState){
         // 大于100块钱
         foreach(var player in runState.Players){
             if(player.Gold < 100){

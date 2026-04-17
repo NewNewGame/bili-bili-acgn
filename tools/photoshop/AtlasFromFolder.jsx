@@ -17,26 +17,31 @@
 app.displayDialogs = DialogModes.NO;
 
 var MAX_ATLAS = 4096;
-var EDGE_PAD = 1;
-var CELL_GAP = 2;
+var EDGE_PAD = 0;
+var CELL_GAP = 0;
+var CANDIDATE_PAGE_SIZES = [256, 512, 1024, 2048, 4096];
+var DEFAULT_NAME_PREFIX = "bilibiliacgn_";
 
 function main() {
-    var srcFolder = Folder.selectDialog("选择包含图片的文件夹（将递归扫描子文件夹）");
+    var srcFolder = Folder.selectDialog("选择包含图片的文件夹（只扫描当前文件夹，不进入子文件夹）");
     if (!srcFolder) return;
 
     var outFolder = Folder.selectDialog("选择输出文件夹（将写入 .tpsheet 与 PNG）");
     if (!outFolder) return;
 
-    var baseName = prompt("图集基础文件名（不含扩展名）", "card_atlas");
+    var baseName = prompt("图集基础文件名（不含扩展名）", DEFAULT_NAME_PREFIX + "card_atlas");
     if (baseName === null) return;
     baseName = trim_(baseName);
     if (!baseName.length) {
         alert("基础文件名不能为空。");
         return;
     }
+    if (baseName.indexOf(DEFAULT_NAME_PREFIX) !== 0) {
+        baseName = DEFAULT_NAME_PREFIX + baseName;
+    }
 
     var items = [];
-    collectImages_(srcFolder, "", items);
+    collectImagesFlat_(srcFolder, "", items);
     if (!items.length) {
         alert("未找到 PNG / JPG / JPEG 图片。");
         return;
@@ -101,6 +106,12 @@ function main() {
         return a.rel.toLowerCase().localeCompare(b.rel.toLowerCase());
     });
 
+    var pageSize = choosePageSize_(items);
+    if (!pageSize) {
+        alert("无法选择合适的方形图集尺寸（请检查是否存在超大图片）。");
+        return;
+    }
+
     var pages = [];
     var page = newPage_();
     var cx = EDGE_PAD;
@@ -112,14 +123,14 @@ function main() {
         var ih = items[j].h;
 
         // New row if doesn't fit horizontally.
-        if (cx + iw > MAX_ATLAS) {
+        if (cx + iw > pageSize) {
             cx = EDGE_PAD;
             cy += rowH + CELL_GAP;
             rowH = 0;
         }
 
         // New page if doesn't fit vertically (at current row position).
-        if (cy + ih > MAX_ATLAS) {
+        if (cy + ih > pageSize) {
             pages.push(page);
             page = newPage_();
             cx = EDGE_PAD;
@@ -128,7 +139,7 @@ function main() {
         }
 
         // Retry new row on a fresh page if still doesn't fit horizontally (very wide sprites).
-        if (cx + iw > MAX_ATLAS) {
+        if (cx + iw > pageSize) {
             cx = EDGE_PAD;
             cy += rowH + CELL_GAP;
             rowH = 0;
@@ -154,7 +165,7 @@ function main() {
     for (var p = 0; p < pages.length; p++) {
         var pngName = baseName + "_" + p + ".png";
         var pngFile = new File(outFolder.fsName + "/" + pngName);
-        var dims = buildAtlasPage_(pages[p], pngFile, pngName);
+        var dims = buildAtlasPage_(pages[p], pngFile, pngName, pageSize);
         textureBlocks.push({
             image: pngName,
             w: dims.w,
@@ -178,14 +189,84 @@ function newPage_() {
     return { sprites: [], maxX: EDGE_PAD, maxY: EDGE_PAD };
 }
 
-function collectImages_(folder, relPrefix, out) {
+function choosePageSize_(items) {
+    var maxW = 0;
+    var maxH = 0;
+    var totalArea = 0;
+    for (var i = 0; i < items.length; i++) {
+        maxW = Math.max(maxW, items[i].w + EDGE_PAD);
+        maxH = Math.max(maxH, items[i].h + EDGE_PAD);
+        totalArea += items[i].w * items[i].h;
+    }
+
+    // Prefer square sizes; primary objective is fewest pages, then least wasted pixels.
+    var best = null;
+    for (var c = 0; c < CANDIDATE_PAGE_SIZES.length; c++) {
+        var s = CANDIDATE_PAGE_SIZES[c];
+        if (s > MAX_ATLAS) continue;
+        if (s < maxW || s < maxH) continue;
+
+        var sim = simulatePack_(items, s);
+        if (!sim.ok) continue;
+
+        var pages = sim.pages;
+        var waste = pages * s * s - totalArea;
+        if (best === null) {
+            best = { size: s, pages: pages, waste: waste };
+            continue;
+        }
+        if (pages < best.pages || (pages === best.pages && waste < best.waste)) {
+            best = { size: s, pages: pages, waste: waste };
+        }
+    }
+    return best ? best.size : null;
+}
+
+function simulatePack_(items, pageSize) {
+    var pages = 1;
+    var cx = EDGE_PAD;
+    var cy = EDGE_PAD;
+    var rowH = 0;
+
+    for (var j = 0; j < items.length; j++) {
+        var iw = items[j].w;
+        var ih = items[j].h;
+
+        if (iw + EDGE_PAD > pageSize || ih + EDGE_PAD > pageSize) {
+            return { ok: false, pages: 0 };
+        }
+
+        if (cx + iw > pageSize) {
+            cx = EDGE_PAD;
+            cy += rowH + CELL_GAP;
+            rowH = 0;
+        }
+
+        if (cy + ih > pageSize) {
+            pages += 1;
+            cx = EDGE_PAD;
+            cy = EDGE_PAD;
+            rowH = 0;
+        }
+
+        if (cx + iw > pageSize) {
+            cx = EDGE_PAD;
+            cy += rowH + CELL_GAP;
+            rowH = 0;
+        }
+
+        rowH = Math.max(rowH, ih);
+        cx += iw + CELL_GAP;
+    }
+
+    return { ok: true, pages: pages };
+}
+
+function collectImagesFlat_(folder, relPrefix, out) {
     var list = folder.getFiles();
     for (var i = 0; i < list.length; i++) {
         var f = list[i];
-        if (f instanceof Folder) {
-            if (f.name === "." || f.name === "..") continue;
-            collectImages_(f, relPrefix + f.name + "/", out);
-        } else if (f instanceof File && isImageFile_(f)) {
+        if (f instanceof File && isImageFile_(f)) {
             out.push({ file: f, rel: relPrefix + f.name });
         }
     }
@@ -252,9 +333,10 @@ function writeTpsheet_(file, textureBlocks) {
     file.close();
 }
 
-function buildAtlasPage_(page, pngFile, pngName) {
-    var aw = Math.min(MAX_ATLAS, page.maxX + EDGE_PAD);
-    var ah = Math.min(MAX_ATLAS, page.maxY + EDGE_PAD);
+function buildAtlasPage_(page, pngFile, pngName, pageSize) {
+    // Keep the atlas PNG square for better packing consistency.
+    var aw = pageSize;
+    var ah = pageSize;
 
     var atlas = app.documents.add(
         aw,
