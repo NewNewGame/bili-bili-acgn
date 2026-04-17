@@ -81,7 +81,7 @@
   "BILIBILIACGN-ZERO.description": "造成{Damage:diff()}点伤害。\n将你[gold]弃牌堆[/gold]中的一张牌放到[gold]抽牌堆[/gold]顶部。",
   "BILIBILIACGN-ZERO.selectionScreenPrompt": "选择一张牌放到[gold]抽牌堆[/gold]顶部。",
   "BILIBILIACGN-NEW_YEAR_GALA_DEATH_SONG.title": "拜年祭死歌",
-  "BILIBILIACGN-NEW_YEAR_GALA_DEATH_SONG.description": "消耗3点[gold]红温[/gold]，对所有敌人造成{Damage:diff()}点伤害，给予{VulnerablePower:diff()}层[gold]易伤[/gold]。",
+  "BILIBILIACGN-NEW_YEAR_GALA_DEATH_SONG.description": "对所有敌人造成{Damage:diff()}点伤害，给予{VulnerablePower:diff()}层[gold]易伤[/gold]。",
   "BILIBILIACGN-SACRIFICE_CYBER_PARENTS.title": "献祭赛博浮木",
   "BILIBILIACGN-SACRIFICE_CYBER_PARENTS.description": "消耗{AngerNeed:diff()}点[gold]红温[/gold]，在你的[gold]手牌[/gold]中选择消耗一张手牌，对所有敌人造成{Damage:diff()}点伤害。",
   "BILIBILIACGN-REALLY_UNSUBSCRIBED.title": "真取关啊",
