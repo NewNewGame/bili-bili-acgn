@@ -6,10 +6,10 @@
 [ext_resource type="Texture2D" uid="uid://bo0x5nnrrn5h4" path="res://BiliBiliACGN/images/vfx/dot.png" id="5_tex"]
 
 [node name="VfxInfiniteBullness" type="Node2D"]
+z_index = 1
 script = ExtResource("1_0kiqw")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
-z_index = 15
 emitting = false
 amount = 5
 texture = ExtResource("5_tex")
@@ -20,7 +20,6 @@ fixed_fps = 0
 process_material = ExtResource("3_burst")
 
 [node name="GPUParticles2DRing" type="GPUParticles2D" parent="."]
-z_index = 15
 emitting = false
 amount = 56
 texture = ExtResource("5_tex")

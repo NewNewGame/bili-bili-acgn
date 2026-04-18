@@ -13,7 +13,7 @@
 script = ExtResource("1_script")
 
 [node name="Uplight" type="GPUParticles2D" parent="."]
-z_index = 15
+z_index = 2
 position = Vector2(0, -352)
 scale = Vector2(1, 3)
 emitting = false
@@ -27,7 +27,7 @@ fixed_fps = 0
 process_material = ExtResource("3_uplight")
 
 [node name="Confetti" type="GPUParticles2D" parent="."]
-z_index = 14
+z_index = 1
 material = ExtResource("2_draw")
 position = Vector2(0, -526)
 emitting = false
@@ -41,7 +41,7 @@ fixed_fps = 0
 process_material = ExtResource("4_confetti")
 
 [node name="Stars" type="GPUParticles2D" parent="."]
-z_index = 12
+z_index = 1
 position = Vector2(0, -403)
 emitting = false
 amount = 32
