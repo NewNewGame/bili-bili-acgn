@@ -52,6 +52,7 @@ public sealed class PureGoldCard : RelicBaseModel
     }
     public override async Task AfterRoomEntered(AbstractRoom room)
     {
+        if(base.Status == RelicStatus.Disabled) return;
         if(room is MerchantRoom){
             Flash();
             base.Status = RelicStatus.Disabled;
