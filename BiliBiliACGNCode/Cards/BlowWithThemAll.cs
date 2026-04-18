@@ -39,7 +39,7 @@ public sealed class BlowWithThemAll : CardBaseModel
     [
         new DynamicVar("Anger", 2m),
         new CalculationBaseVar(9m),
-        new CalculationExtraVar(3m),
+        new ExtraDamageVar(3m),
         new CalculatedDamageVar(ValueProp.Move).WithMultiplier((card, _) => card.Owner.Creature.HasPower<BerserkPower>() ? 1 : 0)
     ];
 
