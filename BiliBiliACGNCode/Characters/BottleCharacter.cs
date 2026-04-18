@@ -23,6 +23,9 @@ public sealed class BottleCharacter : PlaceholderCharacterModel
 {
 	public override string PlaceholderID => "bottle";
 	public override Color NameColor => new Color("789ccd");
+    public override Color MapDrawingColor => new Color("789ccd");
+    public override Color DialogueColor => new Color("789ccd");
+    public override Color EnergyLabelOutlineColor => new Color("184788");
 	public override CharacterGender Gender => CharacterGender.Masculine;
 	public override int StartingHp => 80;
 	public override float CastAnimDelay => 0.25f;
