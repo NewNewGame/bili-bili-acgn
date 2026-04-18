@@ -13,6 +13,5 @@ preview_animation = "-- Empty --"
 preview_frame = false
 preview_time = 0.0
 unique_name_in_owner = true
-z_index = 10
 position = Vector2(6.999999, -42)
 scale = Vector2(0.33, 0.33)
