@@ -56,7 +56,7 @@ public sealed class RefutationalPersonality : CardBaseModel
 
     protected override void OnUpgrade()
     {
-        base.DynamicVars["Thorns"].UpgradeValueBy(1m);
+        base.DynamicVars["Anger"].UpgradeValueBy(1m);
         base.AddKeyword(CardKeyword.Retain);
     }
 }
