@@ -26,6 +26,7 @@ public sealed class RefutationalPersonality : CardBaseModel
         HoverTipFactory.FromPower<ThornsPower>(),
         HoverTipFactory.FromPower<AngerPower>()
     ];
+    protected override bool ShouldGlowGoldInternal => base.Owner.Creature.GetPowerAmount<AngerChargePower>() +base.DynamicVars["Anger"].BaseValue >= AngerChargePower.MAXCHARGE;
 
     #endregion
     #region 卡牌属性配置
