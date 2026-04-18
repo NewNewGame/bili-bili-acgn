@@ -25,7 +25,7 @@
   "BILIBILIACGN-CLOWN_EMPEROR.title": "小丑皇帝",
   "BILIBILIACGN-CLOWN_EMPEROR.description": "每回合随机赋予1张手牌[gold]有一说一[/gold]。",
   "BILIBILIACGN-CHAIR_TUBER.title": "椅子主播",
-  "BILIBILIACGN-CHAIR_TUBER.description": "每回合自动打出{Cards:diff()}张带[gold]有一说一[/gold]的牌。",
+  "BILIBILIACGN-CHAIR_TUBER.description": "每回合自动打出前{Cards:diff()}张抽到的带[gold]有一说一[/gold]的牌。",
   "BILIBILIACGN-MACRO_DOMAIN.title": "宏观领域",
   "BILIBILIACGN-MACRO_DOMAIN.description": "[gold]本回合[/gold]你抽到的所有带[gold]有一说一[/gold]的手牌自动打出。",
   "BILIBILIACGN-NEVER_DIE.title": "永远不死",

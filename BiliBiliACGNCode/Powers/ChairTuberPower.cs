@@ -2,7 +2,7 @@
 //* 文件：ChairTuberPower
 //* 作者：wheat
 //* 创建时间：2026/03/31 10:20:49 星期二
-//* 描述：能力 椅子主播 每回合自动打出{Cards:diff()}张带[gold]有一说一[/gold]的牌。
+//* 描述：能力 椅子主播 每回合自动打出前{Cards:diff()}张抽到带[gold]有一说一[/gold]的牌。
 //*******************************************************
 
 using MegaCrit.Sts2.Core.Entities.Powers;
