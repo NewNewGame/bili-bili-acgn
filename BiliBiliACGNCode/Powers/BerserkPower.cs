@@ -48,7 +48,7 @@ public sealed class BerserkPower : PowerBaseModel
         // 如果施加者不是玩家，则返回
         if(base.Owner.Player == null) return;
         // 如果不是红怒，则返回
-        if(power is not BerserkPower || amount < 0 || power.Owner != base.Owner) return;
+        if(power != this || amount < 0 || power.Owner != base.Owner) return;
         
         // 回复能量
         await PlayerCmd.GainEnergy(base.DynamicVars.Energy.BaseValue, base.Owner.Player);
