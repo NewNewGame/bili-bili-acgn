@@ -39,6 +39,7 @@ public sealed class OnlyTailwindGames : CardBaseModel
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
         new DynamicVar("Powers", 2m),
+        new EnergyVar(2)
     ];
 
     public OnlyTailwindGames() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }

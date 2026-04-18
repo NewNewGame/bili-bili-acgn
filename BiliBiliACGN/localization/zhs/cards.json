@@ -143,7 +143,7 @@
   "BILIBILIACGN-WHERE_SECOND_FLOOR.title": "二楼在哪？",
   "BILIBILIACGN-WHERE_SECOND_FLOOR.description": "获得{Block:diff()}点[gold]格挡[/gold]。你在这个回合每受到一次攻击，都会获得{Power:diff()}点[gold]红温[/gold]。",
   "BILIBILIACGN-NOT_AFRAID_OF_MY_LIES.title": "他不怕我说谎吗",
-  "BILIBILIACGN-NOT_AFRAID_OF_MY_LIES.description": "获得{Block:diff()}点[gold]格挡[/gold]。若敌人意图为攻击，获得{Power:diff()}点[gold]唐氏[/gold]。",
+  "BILIBILIACGN-NOT_AFRAID_OF_MY_LIES.description": "若敌人意图为攻击，获得{Power:diff()}点[gold]唐氏[/gold]。",
   "BILIBILIACGN-CHRISTMAS_COW.title": "圣诞牛",
   "BILIBILIACGN-CHRISTMAS_COW.description": "抽取{Cards:diff()}张牌。若该牌带[gold]有一说一[/gold]，则获得{Block:diff()}点[gold]格挡[/gold]。",
   "BILIBILIACGN-HAPPY_WATER_BUFFALO.title": "欢乐水牛",
