@@ -56,6 +56,6 @@ public sealed class BiggestWarCriminal : CardBaseModel
 
     protected override void OnUpgrade()
     {
-        base.DynamicVars["Anger"].UpgradeValueBy(2m);
+        base.DynamicVars["Anger"].UpgradeValueBy(3m);
     }
 }

@@ -37,7 +37,7 @@ public sealed class IceBee : CardBaseModel
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
         new DamageVar(3m, ValueProp.Move),
-        new DynamicVar("Power", 1m),
+        new DynamicVar("Power", 2m),
     ];
 
     public IceBee() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }

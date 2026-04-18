@@ -1,0 +1,128 @@
+[gd_scene load_steps=8 format=3 uid="uid://ihuak5hg5v0a"]
+
+[ext_resource type="Texture2D" uid="uid://ddouphww0r8d6" path="res://BiliBiliACGN/images/vfx/ui/ui_card_mask.png" id="1_1gntu"]
+[ext_resource type="Texture2D" uid="uid://cnnu2hi8qwc6q" path="res://BiliBiliACGN/images/vfx/ui/card/ui_card_border_vignette.png" id="2_u4xii"]
+[ext_resource type="Texture2D" uid="uid://cgpaf12xcgk58" path="res://BiliBiliACGN/images/vfx/ui/card/ui_card_border_glow.png" id="3_3uuka"]
+[ext_resource type="Material" uid="uid://fepako3f0j63" path="res://BiliBiliACGN/materials/noise_flash.tres" id="4_1naca"]
+[ext_resource type="Texture2D" uid="uid://uw2ooupfl8iw" path="res://BiliBiliACGN/images/vfx/trail2.png" id="5_1naca"]
+[ext_resource type="Script" path="res://BiliBiliACGNCode/Nodes/SNNoRightToKnightMeOverlayVfx.cs" id="6_1naca"]
+[ext_resource type="PackedScene" uid="uid://cadw5ckp7788m" path="res://BiliBiliACGN/scenes/vfx/common/vfx_common_specks.tscn" id="8_ldtr3"]
+
+[node name="vfx_ui_card_affliction_no_right_to_knight_me" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -211.0
+offset_right = 150.0
+offset_bottom = 211.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("6_1naca")
+
+[node name="card_mask" type="TextureRect" parent="."]
+clip_children = 1
+custom_minimum_size = Vector2(300, 422)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("1_1gntu")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="card_vignette" type="TextureRect" parent="card_mask"]
+self_modulate = Color(0.7085113, 0.59384024, 0.30862424, 0.2509804)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -61.0
+offset_right = 61.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("2_u4xii")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="card_glow" type="TextureRect" parent="card_mask"]
+self_modulate = Color(0.9460295, 0.9454624, 0.6330854, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("3_3uuka")
+expand_mode = 1
+
+[node name="galvanized_main" type="TextureRect" parent="card_mask"]
+self_modulate = Color(1, 1, 0.43137255, 1)
+texture_repeat = 2
+material = ExtResource("4_1naca")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("5_1naca")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="card_vignette2" type="TextureRect" parent="card_mask"]
+self_modulate = Color(0.4442735, 0.39818418, 0, 0.5019608)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -61.0
+offset_right = 61.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("2_u4xii")
+expand_mode = 2
+stretch_mode = 5
+script = ExtResource("6_1naca")
+
+[node name="card_glow2" type="TextureRect" parent="card_mask"]
+self_modulate = Color(0.66917455, 0.5659508, 0.10852326, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("3_3uuka")
+expand_mode = 1
+
+[node name="vfx_common_specks_top" parent="card_mask" instance=ExtResource("8_ldtr3")]
+position = Vector2(150, 0)
+emitting = true
+amount = 4
+lifetime = 3.0
+one_shot = false
+explosiveness = 0.0
+local_coords = true
+
+[node name="vfx_common_specks_bottom" parent="card_mask" instance=ExtResource("8_ldtr3")]
+position = Vector2(150, 422)
+rotation = -1.5707964
+emitting = true
+amount = 4
+lifetime = 3.0
+one_shot = false
+explosiveness = 0.0
+local_coords = true

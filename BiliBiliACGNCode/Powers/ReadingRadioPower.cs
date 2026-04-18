@@ -2,7 +2,7 @@
 //* 文件：ReadingRadioPower(读书电台)
 //* 作者：wheat
 //* 创建时间：2026/03/31 10:20:49 星期二
-//* 描述：能力 读书电台 每当你抽到一张带[gold]有一说一[/gold]的牌，对所有敌人造成{Damage:diff()}点伤害。
+//* 描述：能力 读书电台 每当你抽到[blue]1[/blue]张带[gold]有一说一[/gold]的牌，获得[blue]1[/blue]点[gold]格挡[/gold]。
 //*******************************************************
 
 using MegaCrit.Sts2.Core.Entities.Powers;
@@ -24,9 +24,7 @@ public sealed class ReadingRadioPower : PowerBaseModel
     {
         if (card.Owner.Creature == base.Owner && card.Keywords.Contains(CustomKeyWords.YYSY))
 		{
-			VfxCmd.PlayOnCreatureCenters(base.CombatState.HittableEnemies, "vfx/vfx_attack_slash");
-			SfxCmd.Play("slash_attack.mp3");
-			await CreatureCmd.Damage(choiceContext, base.CombatState.HittableEnemies, base.Amount, ValueProp.Unpowered, base.Owner, null);
+			await CreatureCmd.GainBlock(base.Owner, base.Amount, ValueProp.Unpowered, null);
 		}
     }
 }

@@ -8,7 +8,6 @@ using BiliBiliACGN.BiliBiliACGNCode.Utils;
 using BiliBiliACGN.BiliBiliACGNCode.Cards;
 using BiliBiliACGN.BiliBiliACGNCode.Core.Models.Encounters;
 using BiliBiliACGN.BiliBiliACGNCode.Relics;
-using Godot;
 using MegaCrit.Sts2.Core.Assets;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Context;
@@ -42,7 +41,7 @@ public sealed class PureGoldCardEvent : EventBaseModel
             new EventOption(this, GiveItBack, "PURE_GOLD_CARD_EVENT.pages.INITIAL.options.GIVEITBACK"),
         ];
     }
-    public override bool IsAllowed(RunState runState){
+    public override bool IsAllowed(IRunState runState){
         // 第二三层限定
         return runState.TotalFloor > EventUtils.FirstFloorMaxLevel;
     }
@@ -74,7 +73,7 @@ public sealed class PureGoldCardEvent : EventBaseModel
 		}
 
         SetEventState(L10NLookup("PURE_GOLD_CARD_EVENT.pages.PARK.description"), [
-			new EventOption(this, AcceptDuel, "PURE_GOLD_CARD_EVENT.pages.PARK.options.DUEL", HoverTipFactory.FromCard<FourthBlueEyesWhiteDragon>()),
+			new EventOption(this, null, "PURE_GOLD_CARD_EVENT.pages.PARK.options.DUEL", HoverTipFactory.FromCard<FourthBlueEyesWhiteDragon>()),
 			new EventOption(this, RefuseDuel, "PURE_GOLD_CARD_EVENT.pages.PARK.options.REFUSE")
 		]);
     }

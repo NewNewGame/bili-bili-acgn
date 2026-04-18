@@ -22,12 +22,10 @@ public sealed class STQGatherPower : PowerBaseModel
     {
         // 进入红怒时所有盟友获得 Amount 点力量
         if(power.Owner == base.Owner && power is BerserkPower && amount > 0){
-            foreach(var player in base.CombatState.Players){
-                if(player.Creature == base.Owner || player.Creature.IsAlive == false)
-                {
-                    continue;
-                }
-                await PowerCmd.Apply<StrengthPower>(player.Creature, base.Amount, base.Owner, null);
+            // 获取所有盟友
+            var allies = base.CombatState.Creatures.Where(c => c != base.Owner && c.Side == base.Owner.Side && c.IsAlive).ToList();
+            foreach(var ally in allies){
+                await PowerCmd.Apply<StrengthPower>(ally, base.Amount, base.Owner, null);
             }
         }
     }

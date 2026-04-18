@@ -2,7 +2,7 @@
 //* 文件：EmergencyOxygen(紧急吸氧)
 //* 作者：wheat
 //* 创建时间：2026/04/03
-//* 描述：退出红怒状态，获得等同于当前红温值层数的格挡。
+//* 描述：丢弃1/2张牌，打出1/2张有一说一。
 //*******************************************************
 
 using BaseLib.Utils;
@@ -10,10 +10,10 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using BiliBiliACGN.BiliBiliACGNCode.Cards.CardPool;
-using BiliBiliACGN.BiliBiliACGNCode.Powers;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
-using MegaCrit.Sts2.Core.ValueProps;
 using MegaCrit.Sts2.Core.Commands;
+using MegaCrit.Sts2.Core.CardSelection;
+using BiliBiliACGN.BiliBiliACGNCode.Utils;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Cards;
 
@@ -23,20 +23,15 @@ public sealed class EmergencyOxygen : CardBaseModel
     #region 卡牌关键词与悬停
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
     [
-        HoverTipFactory.FromPower<AngerPower>(),
-        HoverTipFactory.FromPower<BerserkPower>()
+        HoverTipFactory.FromKeyword(CustomKeyWords.YYSY),
     ];
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new CalculationBaseVar(0m),
-		new CalculationExtraVar(1m),
-        new CalculatedBlockVar(ValueProp.Move).WithMultiplier((card, _) => {
-            return card.Owner.Creature.GetPowerAmount<AngerPower>();
-        })
+        new CardsVar(1),
     ];
 
     #endregion
     #region 卡牌属性配置
-    private const int energyCost = 1;
+    private const int energyCost = 0;
     private const CardType type = CardType.Skill;
     private const CardRarity rarity = CardRarity.Common;
     private const TargetType targetType = TargetType.Self;
@@ -48,16 +43,19 @@ public sealed class EmergencyOxygen : CardBaseModel
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        // 获得等同于当前红温值层数的格挡
-		await CreatureCmd.GainBlock(base.Owner.Creature, base.DynamicVars.CalculatedBlock.Calculate(cardPlay.Target), base.DynamicVars.CalculatedBlock.Props, cardPlay);
-        // 移除红怒状态
-        if(base.Owner.Creature.HasPower<BerserkPower>()){
-            await PowerCmd.Remove<BerserkPower>(base.Owner.Creature);
+        // 丢弃1/2张牌，打出1/2张有一说一
+        int cardCount = (int)base.DynamicVars.Cards.BaseValue;
+        // 丢弃1/2张牌
+        await CardCmd.Discard(choiceContext, await CardSelectCmd.FromHandForDiscard(choiceContext, base.Owner, new CardSelectorPrefs(CardSelectorPrefs.DiscardSelectionPrompt, cardCount), null, this));
+        // 打出1/2张有一说一
+        var cards = await CardSelectCmd.FromHand(choiceContext, base.Owner, new CardSelectorPrefs(MCardSelectorPrefs.TO_YYSY, cardCount), MCardSelectorPrefs.YYSYFilter, this);
+        foreach(var card in cards){
+            await AutoPlayUtils.AutoPlaySafely(choiceContext, card);
         }
     }
 
     protected override void OnUpgrade()
     {
-        base.EnergyCost.UpgradeBy(-1);
+        base.DynamicVars["Cards"].UpgradeValueBy(1m);
     }
 }

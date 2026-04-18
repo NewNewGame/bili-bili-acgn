@@ -79,7 +79,7 @@
     "BILIBILIACGN-WILD_BULL_TROPHY.description": "你每在同一回合内打出[blue]{YYSYCount:diff()}[/blue]张[gold]有一说一[/gold]，获得[blue]{Tang:diff()}[/blue]点[gold]唐氏[/gold]。",
     "BILIBILIACGN-WILD_BULL_TROPHY.flavor": "动漫区最没有含金量，最野的奖。",
     "BILIBILIACGN-DEATH_REBIRTH_CYCLE.title": "死亡轮回",
-    "BILIBILIACGN-DEATH_REBIRTH_CYCLE.description": "死亡后满血复活一次。",
+    "BILIBILIACGN-DEATH_REBIRTH_CYCLE.description": "死亡后复活一次，复活后回复{HealAmount:diff()}%的生命值。",
     "BILIBILIACGN-DEATH_REBIRTH_CYCLE.flavor": "我一定会回來拯救你的！",
     "BILIBILIACGN-DEATH_NOTE.title": "死亡笔记",
     "BILIBILIACGN-DEATH_NOTE.description": "在每场战斗开始时，在你手牌里加入[blue]{Cards:diff()}[/blue]张[gold]死亡笔记D[/gold]。",

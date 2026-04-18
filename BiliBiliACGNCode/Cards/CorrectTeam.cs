@@ -45,6 +45,5 @@ public sealed class CorrectTeam : CardBaseModel
     protected override void OnUpgrade()
     {
         base.EnergyCost.UpgradeBy(-1);
-        base.AddKeyword(CardKeyword.Retain);
     }
 }

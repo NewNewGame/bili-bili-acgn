@@ -2,7 +2,7 @@
 //* 文件：BlowWithThemAll(跟他爆了)
 //* 作者：wheat
 //* 创建时间：2026/04/03
-//* 描述：消耗，[gold]固有[/gold]。对所有敌人造成{Damage:diff()}点伤害。
+//* 描述：消耗3点[gold]红温[/gold]，对所有敌人造成{Damage:diff()}点伤害。
 //*******************************************************
 
 using BaseLib.Utils;
@@ -16,6 +16,8 @@ using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Nodes.Rooms;
 using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.Nodes.Vfx;
+using MegaCrit.Sts2.Core.HoverTips;
+using BiliBiliACGN.BiliBiliACGNCode.Powers;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Cards;
 
@@ -23,10 +25,11 @@ namespace BiliBiliACGN.BiliBiliACGNCode.Cards;
 public sealed class BlowWithThemAll : CardBaseModel
 {
     #region 卡牌关键词与悬停
-    public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<AngerPower>()];
+    protected override bool ShouldGlowGoldInternal => base.Owner.Creature.GetPowerAmount<AngerPower>() >= base.DynamicVars["Anger"].BaseValue;
     #endregion
     #region 卡牌属性配置
-    private const int energyCost = 0;
+    private const int energyCost = 1;
     private const CardType type = CardType.Attack;
     private const CardRarity rarity = CardRarity.Common;
     private const TargetType targetType = TargetType.AllEnemies;
@@ -34,7 +37,10 @@ public sealed class BlowWithThemAll : CardBaseModel
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new DamageVar(8m, ValueProp.Move)
+        new DynamicVar("Anger", 2m),
+        new CalculationBaseVar(9m),
+        new ExtraDamageVar(3m),
+        new CalculatedDamageVar(ValueProp.Move).WithMultiplier((card, _) => card.Owner.Creature.HasPower<BerserkPower>() ? 1 : 0)
     ];
 
     public BlowWithThemAll() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
@@ -51,13 +57,15 @@ public sealed class BlowWithThemAll : CardBaseModel
 		}
 		await Cmd.CustomScaledWait(0.2f, 0.3f);
         // 造成伤害
-        await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue).FromCard(this).TargetingAllOpponents(base.CombatState)
+        await DamageCmd.Attack(base.DynamicVars.CalculatedDamage).FromCard(this).TargetingAllOpponents(base.CombatState)
             .Execute(choiceContext);
+        // 消耗3点红温
+        await PowerCmd.Apply<AngerPower>(base.Owner.Creature, -base.DynamicVars["Anger"].BaseValue, base.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()
     {
-        base.DynamicVars["Damage"].UpgradeValueBy(4m);
+        base.DynamicVars.CalculationBase.UpgradeValueBy(3m);
         base.AddKeyword(CardKeyword.Innate);
     }
 }

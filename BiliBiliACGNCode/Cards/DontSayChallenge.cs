@@ -2,7 +2,7 @@
 //* 文件：DontSayChallenge(不要说挑战)
 //* 作者：wheat
 //* 创建时间：2026/04/03
-//* 描述：造成{Damage:diff()}点伤害。本回合你每打出3张带[gold]有一说一[/gold]的牌，将这张牌移回手牌。
+//* 描述：造成{Damage:diff()}点伤害。抽取1张牌。本回合你每打出3张带[gold]有一说一[/gold]的牌，将这张牌移回手牌。
 //*******************************************************
 
 using BaseLib.Utils;
@@ -48,6 +48,7 @@ public sealed class DontSayChallenge : CardBaseModel
             .FromCard(this)
             .Targeting(cardPlay.Target)
             .Execute(choiceContext);
+        await CardPileCmd.Draw(choiceContext, 1, base.Owner);
     }
     public override async Task AfterCardPlayedLate(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {

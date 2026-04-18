@@ -39,7 +39,7 @@ public sealed class ZhuangTang : CardBaseModel
     /// </summary>
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new BlockVar(5m, ValueProp.Move)
+        new BlockVar(7m, ValueProp.Move)
     ];
 
     public ZhuangTang() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
@@ -78,7 +78,7 @@ public sealed class ZhuangTang : CardBaseModel
     protected override void OnUpgrade()
     {
         #region 升级效果
-        base.DynamicVars["Block"].UpgradeValueBy(2m);
+        base.DynamicVars["Block"].UpgradeValueBy(3m);
         #endregion
     }
 }

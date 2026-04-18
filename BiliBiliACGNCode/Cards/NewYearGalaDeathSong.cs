@@ -2,7 +2,7 @@
 //* 文件：NewYearGalaDeathSong(拜年祭死歌)
 //* 作者：wheat
 //* 创建时间：2026/04/03
-//* 描述：对所有敌人造成{Damage:diff()}点伤害，给予{VulnerablePower:diff()}层易伤。
+//* 描述：对所有敌人造成{Damage:diff()}点伤害，给予{WeakPower:diff()}层虚弱。
 //*******************************************************
 
 using BaseLib.Utils;
@@ -14,7 +14,6 @@ using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.ValueProps;
 using BiliBiliACGN.BiliBiliACGNCode.Cards.CardPool;
 using MegaCrit.Sts2.Core.Commands;
-using BiliBiliACGN.BiliBiliACGNCode.Powers;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Cards;
 
@@ -22,20 +21,19 @@ namespace BiliBiliACGN.BiliBiliACGNCode.Cards;
 public sealed class NewYearGalaDeathSong : CardBaseModel
 {
     #region 卡牌关键词与悬停
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<AngerPower>(), HoverTipFactory.FromPower<VulnerablePower>()];
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<WeakPower>()];
     #endregion
     #region 卡牌属性配置
     private const int energyCost = 1;
     private const CardType type = CardType.Attack;
     private const CardRarity rarity = CardRarity.Common;
     private const TargetType targetType = TargetType.AllEnemies;
-    protected override bool IsPlayable => base.Owner.Creature.GetPowerAmount<AngerPower>() >= 3;
     private const bool shouldShowInCardLibrary = true;
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new DamageVar(11m, ValueProp.Move),
-        new DynamicVar("VulnerablePower", 2m)
+        new DamageVar(4m, ValueProp.Move),
+        new DynamicVar("WeakPower", 1m)
     ];
 
     public NewYearGalaDeathSong() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
@@ -44,21 +42,20 @@ public sealed class NewYearGalaDeathSong : CardBaseModel
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        // 对所有敌人造成伤害，给予 VulnerablePower 层易伤
+        // 对所有敌人造成伤害，给予 WeakPower 层虚弱
         await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue)
             .FromCard(this)
             .TargetingAllOpponents(base.CombatState)
             .Execute(choiceContext);
-        // 对所有敌人给予 VulnerablePower 层易伤
+        // 对所有敌人给予 WeakPower 层虚弱
         foreach(var enemy in base.CombatState.HittableEnemies){
-            await PowerCmd.Apply<VulnerablePower>(enemy, base.DynamicVars["VulnerablePower"].BaseValue, base.Owner.Creature, this);
+            await PowerCmd.Apply<WeakPower>(enemy, base.DynamicVars["WeakPower"].BaseValue, base.Owner.Creature, this);
         }
-        // 消耗3点红温
-        await PowerCmd.Apply<AngerPower>(base.Owner.Creature, -3, base.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()
     {
-        base.DynamicVars["Damage"].UpgradeValueBy(4m);
+        base.DynamicVars["Damage"].UpgradeValueBy(3m);
+        base.DynamicVars["WeakPower"].UpgradeValueBy(1m);
     }
 }

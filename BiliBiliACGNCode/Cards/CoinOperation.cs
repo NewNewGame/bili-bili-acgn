@@ -2,7 +2,7 @@
 //* 文件：CoinOperation(铸币操作)
 //* 作者：wheat
 //* 创建时间：2026/04/03
-//* 描述：造成{Damage:diff()}点伤害。给予敌人{Tang:diff()}层[gold]变唐[/gold]。
+//* 描述：失去3点生命值。获得3/4点红温。
 //*******************************************************
 
 using BaseLib.Utils;
@@ -22,18 +22,19 @@ public sealed class CoinOperation : CardBaseModel
 {
     #region 卡牌关键词与悬停
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<GetTangPower>()];
+    protected override bool ShouldGlowGoldInternal => base.Owner.Creature.GetPowerAmount<AngerChargePower>() + base.DynamicVars["Anger"].BaseValue >= AngerChargePower.MAXCHARGE;
     #endregion
     #region 卡牌属性配置
-    private const int energyCost = 2;
-    private const CardType type = CardType.Attack;
+    private const int energyCost = 0;
+    private const CardType type = CardType.Skill;
     private const CardRarity rarity = CardRarity.Common;
-    private const TargetType targetType = TargetType.AnyEnemy;
+    private const TargetType targetType = TargetType.Self;
     private const bool shouldShowInCardLibrary = true;
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new DamageVar(15m, ValueProp.Move),
-        new DynamicVar("Tang", 2m)
+        new HpLossVar(3),
+        new DynamicVar("Anger", 3m)
     ];
 
     public CoinOperation() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
@@ -42,17 +43,15 @@ public sealed class CoinOperation : CardBaseModel
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        // 造成伤害，给予敌人变唐
-        await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue)
-            .FromCard(this)
-            .Targeting(cardPlay.Target)
-            .Execute(choiceContext);
-        await PowerCmd.Apply<GetTangPower>(cardPlay.Target, base.DynamicVars["Tang"].BaseValue, base.Owner.Creature, this);
+        // 播放动画
+		await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
+        // 失去生命值,获得红温
+        await CreatureCmd.Damage(choiceContext, base.Owner.Creature, base.DynamicVars.HpLoss.BaseValue, ValueProp.Unblockable | ValueProp.Unpowered | ValueProp.Move, this);
+        await PowerCmd.Apply<AngerPower>(base.Owner.Creature, base.DynamicVars["Anger"].BaseValue, base.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()
     {
-        base.DynamicVars["Damage"].UpgradeValueBy(4m);
-        base.DynamicVars["Tang"].UpgradeValueBy(1m);
+        base.DynamicVars["Anger"].UpgradeValueBy(1m);
     }
 }

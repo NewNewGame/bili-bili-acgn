@@ -48,7 +48,7 @@ public sealed class BerserkPower : PowerBaseModel
         // 如果施加者不是玩家，则返回
         if(base.Owner.Player == null) return;
         // 如果不是红怒，则返回
-        if(power is not BerserkPower || amount < 0 || power.Owner != base.Owner) return;
+        if(power != this || amount < 0 || power.Owner != base.Owner) return;
         
         // 回复能量
         await PlayerCmd.GainEnergy(base.DynamicVars.Energy.BaseValue, base.Owner.Player);
@@ -102,4 +102,26 @@ public sealed class BerserkPower : PowerBaseModel
             CustomVfxCmd.RemoveVfx<SNBerserkVfx>(oldOwner);
         }
     }
+    public override Task AfterDeath(PlayerChoiceContext choiceContext, Creature creature, bool wasRemovalPrevented, float deathAnimLength)
+    {
+        // 如果旧所有者不是当前所有者，则返回
+        if(creature != base.Owner) return Task.CompletedTask;
+        // 移除红怒VFX
+        CustomVfxCmd.RemoveVfx<SNBerserkVfx>(creature);
+
+        return Task.CompletedTask;
+    }
+    public override Task AfterPreventingDeath(Creature creature)
+    {
+        // 如果旧所有者不是当前所有者，则返回
+        if(creature != base.Owner) return Task.CompletedTask;
+        // 如果旧所有者有红怒，则添加红怒VFX
+        if(creature.HasPower<BerserkPower>())
+        {
+            CustomVfxCmd.AddVfxOnCenter(creature, CustomVfxCmd.BerserkPath);
+        }
+        return Task.CompletedTask;
+    }
+
+
 }

@@ -2,7 +2,7 @@
 //* 文件：CloseDoorReleaseSa(关门放萨)
 //* 作者：wheat
 //* 创建时间：2026/04/03
-//* 描述：造成{Damage:diff()}点伤害。你每有{PerAnger:diff()}层[gold]红温[/gold]，伤害+{AngerBonus:diff()}。
+//* 描述：造成{Damage:diff()}点伤害。消耗所有[gold]红温[/gold]。你每有{PerAnger:diff()}层[gold]红温[/gold]，伤害+{AngerBonus:diff()}。
 //*******************************************************
 
 using BaseLib.Utils;
@@ -16,6 +16,7 @@ using BiliBiliACGN.BiliBiliACGNCode.Powers;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Commands;
+using Godot;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Cards;
 
@@ -34,7 +35,7 @@ public sealed class CloseDoorReleaseSa : CardBaseModel
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new CalculationBaseVar(6m),
+        new CalculationBaseVar(10m),
 		new ExtraDamageVar(2m),
         // 伤害 = Damage + Anger层数 * AngerBonus（Anger 来自 AngerPower）
         new CalculatedDamageVar(ValueProp.Move).WithMultiplier((CardModel card, Creature? _) => card.Owner?.Creature.GetPowerAmount<AngerPower>() ?? 0)
@@ -51,6 +52,9 @@ public sealed class CloseDoorReleaseSa : CardBaseModel
             .FromCard(this)
             .Targeting(cardPlay.Target)
             .Execute(choiceContext);
+        // 消耗一半红温
+        int amount = Mathf.Max(1, base.Owner.Creature.GetPowerAmount<AngerPower>() / 2);
+        await PowerCmd.Apply<AngerPower>(base.Owner.Creature, -amount, base.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()

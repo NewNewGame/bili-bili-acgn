@@ -35,7 +35,7 @@ public sealed class SherryEvent : EventBaseModel
             new EventOption(this, No, "SHERRY_EVENT.pages.INITIAL.options.NO")
         ];
     }
-    public override bool IsAllowed(RunState runState){
+    public override bool IsAllowed(IRunState runState){
         // 第一层限定
         return runState.TotalFloor <= EventUtils.FirstFloorMaxLevel;
     }

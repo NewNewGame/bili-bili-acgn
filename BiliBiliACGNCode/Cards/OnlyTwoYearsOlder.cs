@@ -2,7 +2,7 @@
 //* 文件：OnlyTwoYearsOlder(他才比我大两岁)
 //* 作者：wheat
 //* 创建时间：2026/04/03
-//* 描述：给予{VulnerablePower:diff()}层[gold]易伤[/gold]，并抽取{Cards:diff()}张牌。
+//* 描述：给予{VulnerablePower:diff()}层易伤。抽取{Cards:diff()}张牌。
 //*******************************************************
 
 using BaseLib.Utils;
@@ -31,7 +31,8 @@ public sealed class OnlyTwoYearsOlder : CardBaseModel
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new DynamicVar("VulnerablePower", 2m),
+        new DynamicVar("VulnerablePower", 3m),
+        new CardsVar(1)
     ];
 
     public OnlyTwoYearsOlder() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
@@ -42,9 +43,8 @@ public sealed class OnlyTwoYearsOlder : CardBaseModel
     {
         // 对目标施加{VulnerablePower:diff()}层易伤
         await PowerCmd.Apply<VulnerablePower>(cardPlay.Target, base.DynamicVars["VulnerablePower"].BaseValue, base.Owner.Creature, cardPlay.Card);
-        if(base.IsUpgraded){
-            await CardPileCmd.Draw(choiceContext, 1, base.Owner);
-        }
+        // 抽取一张牌
+        await CardPileCmd.Draw(choiceContext, base.DynamicVars.Cards.BaseValue, base.Owner);
     }
 
     protected override void OnUpgrade()

@@ -2,7 +2,7 @@
 //* 文件：OnlyTailwindGames(只打顺风局)
 //* 作者：wheat
 //* 创建时间：2026/04/03
-//* 描述：获得{SwallowPride:diff()}层忍气吞声；进入红怒时获得{RageEnergy:diff()}点能量；获得{Strength:diff()}点力量。
+//* 描述：获得{SwallowPride:diff()}层忍气吞声；进入红怒时获得{RageEnergy:diff()}点能量，并获得{Power:diff()}点[gold]红温[/gold]。
 //*******************************************************
 
 using BaseLib.Utils;
@@ -31,14 +31,14 @@ public sealed class OnlyTailwindGames : CardBaseModel
     #region 卡牌属性配置
     private const int energyCost = 1;
     private const CardType type = CardType.Skill;
-    private const CardRarity rarity = CardRarity.Common;
+    private const CardRarity rarity = CardRarity.Uncommon;
     private const TargetType targetType = TargetType.Self;
     private const bool shouldShowInCardLibrary = true;
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
         new DynamicVar("Powers", 2m),
-        new EnergyVar(2),
+        new EnergyVar(2)
     ];
 
     public OnlyTailwindGames() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
@@ -47,6 +47,7 @@ public sealed class OnlyTailwindGames : CardBaseModel
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
+        await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
         // 获得 SwallowPride 层忍气吞声
         await PowerCmd.Apply<SwallowPridePower>(base.Owner.Creature, base.DynamicVars["Powers"].BaseValue, base.Owner.Creature, this);
     }

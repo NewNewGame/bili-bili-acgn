@@ -2,7 +2,7 @@
 //* 文件：NoRightToKnightMe(无权为我授勋)
 //* 作者：wheat
 //* 创建时间：2026/04/03
-//* 描述：进入[gold]红怒[/gold]。获得等同于当前[gold]红温[/gold]的[gold]力量[/gold]。下一回合[gold]死亡[/gold]。
+//* 描述：进入[gold]红怒[/gold]。获得5点[gold]力量[/gold]。下一回合[gold]死亡[/gold]。
 //*******************************************************
 
 using BaseLib.Utils;
@@ -42,6 +42,7 @@ public sealed class NoRightToKnightMe : CardBaseModel
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
+        new DynamicVar("Strength", 5m)
     ];
 
     public NoRightToKnightMe() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
@@ -57,12 +58,13 @@ public sealed class NoRightToKnightMe : CardBaseModel
         // 添加NoRightToKnightMe BUFF
         await PowerCmd.Apply<NoRightToKnightMePower>(base.Owner.Creature, 1, base.Owner.Creature, this);
         await PowerCmd.Apply<BottleRagePower>(base.Owner.Creature,1, base.Owner.Creature, this);
-        await PowerCmd.Apply<StrengthPower>(base.Owner.Creature, base.Owner.Creature.GetPowerAmount<AngerPower>(), base.Owner.Creature, this);
+        await PowerCmd.Apply<StrengthPower>(base.Owner.Creature, base.DynamicVars["Strength"].BaseValue, base.Owner.Creature, this);
 
     }
 
     protected override void OnUpgrade()
     {
         AddKeyword(CardKeyword.Retain);
+        base.DynamicVars["Strength"].UpgradeValueBy(5m);
     }
 }

@@ -43,7 +43,7 @@ public static class CustomVfxCmd
     /// <param name="path"></param>
     public static void AddVfx(Creature target, string path){
         if(target == null) return;
-        if (!TestMode.IsOn && NCombatRoom.Instance != null && !target.IsDead)
+        if (!TestMode.IsOn && NCombatRoom.Instance != null)
         {
             NCreature creatureNode = NCombatRoom.Instance.GetCreatureNode(target);
             if (creatureNode != null)
@@ -62,7 +62,7 @@ public static class CustomVfxCmd
     /// <param name="path"></param>
     public static void AddVfxOnCenter(Creature target, string path){
         if(target == null) return;
-        if (!TestMode.IsOn && NCombatRoom.Instance != null && !target.IsDead)
+        if (!TestMode.IsOn && NCombatRoom.Instance != null)
         {
             NCreature creatureNode = NCombatRoom.Instance.GetCreatureNode(target);
             if (creatureNode != null)
@@ -79,7 +79,7 @@ public static class CustomVfxCmd
     /// </summary>
     public static void RemoveVfx<T>(Creature target) where T : Node2D{
         if(target == null) return;
-        if (!TestMode.IsOn && NCombatRoom.Instance != null && !target.IsDead)
+        if (!TestMode.IsOn && NCombatRoom.Instance != null)
         {
             NCreature creatureNode = NCombatRoom.Instance.GetCreatureNode(target);
             if (creatureNode != null)

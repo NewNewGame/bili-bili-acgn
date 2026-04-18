@@ -44,7 +44,7 @@ public sealed class EvaEvents : EventBaseModel
         list.Add(new EventOption(this, No, "EVA_EVENTS.pages.INITIAL.options.NO", HoverTipFactory.FromRelic<AtFieldGenerator>()));
         return list;
     }
-    public override bool IsAllowed(RunState runState)
+    public override bool IsAllowed(IRunState runState)
     {
         // 第一层限定
         return runState.TotalFloor <= EventUtils.FirstFloorMaxLevel;

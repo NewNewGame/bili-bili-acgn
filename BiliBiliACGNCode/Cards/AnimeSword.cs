@@ -2,7 +2,7 @@
 //* 文件：AnimeSword(动漫区的剑)
 //* 作者：wheat
 //* 创建时间：2026/04/03
-//* 描述：每当你获得[gold]红温值[/gold]，对随机敌人造成{Damage:diff()}点伤害。
+//* 描述：每当你获得或消耗[gold]红温[/gold]，对随机敌人造成{Damage:diff()}点伤害。
 //*******************************************************
 
 using BaseLib.Utils;
@@ -25,21 +25,18 @@ public sealed class AnimeSword : CardBaseModel
     #endregion
 
     #region 卡牌属性配置
-    private const int energyCost = 2;
+    private const int energyCost = 1;
     private const CardType type = CardType.Power;
-    private const CardRarity rarity = CardRarity.Rare;
+    private const CardRarity rarity = CardRarity.Uncommon;
     private const TargetType targetType = TargetType.Self;
     private const bool shouldShowInCardLibrary = true;
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new DamageVar(5m, ValueProp.Move)
+        new DamageVar(3m, ValueProp.Move)
     ];
-
     public AnimeSword() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
-
     #endregion
-
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);

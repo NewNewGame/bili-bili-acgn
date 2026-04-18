@@ -30,7 +30,8 @@ public sealed class HonestPickUp : CardBaseModel
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
         new DynamicVar("Gold", 3m),
-        new EnergyVar(1)
+        new EnergyVar(1),
+        new CardsVar(1),
     ];
 
     public HonestPickUp() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
@@ -39,9 +40,10 @@ public sealed class HonestPickUp : CardBaseModel
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        // 金币 + 能量
+        // 金币 + 能量 + 抽牌
         await PlayerCmd.GainGold(base.DynamicVars["Gold"].BaseValue, base.Owner);
         await PlayerCmd.GainEnergy(base.DynamicVars.Energy.BaseValue, base.Owner);
+        await CardPileCmd.Draw(choiceContext, base.DynamicVars.Cards.BaseValue, base.Owner);
     }
 
     protected override void OnUpgrade()

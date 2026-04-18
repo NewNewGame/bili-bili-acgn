@@ -40,7 +40,7 @@ public sealed class DesperateDaily : EventBaseModel
     /// </summary>
     /// <param name="runState"></param>
     /// <returns></returns>
-    public override bool IsAllowed(RunState runState)
+    public override bool IsAllowed(IRunState runState)
     {
         return runState.Players.All(player => player.Creature.CurrentHp <= player.Creature.MaxHp * 0.3m);
     } 

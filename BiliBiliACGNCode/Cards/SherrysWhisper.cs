@@ -60,6 +60,7 @@ public sealed class SherrysWhisper : CardBaseModel
 
     protected override void OnUpgrade()
     {
-        base.DynamicVars.Cards.UpgradeValueBy(2m);
+        base.DynamicVars["AngerPerEnergy"].UpgradeValueBy(-1m);
+        base.DynamicVars.Cards.UpgradeValueBy(1m);
     }
 }

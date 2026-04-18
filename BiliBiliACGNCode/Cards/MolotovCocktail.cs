@@ -2,7 +2,7 @@
 //* 文件：MolotovCocktail(燃烧瓶)
 //* 作者：wheat
 //* 创建时间：2026/04/03
-//* 描述：造成{Damage:diff()}点伤害。若上一张打出的牌是攻击牌，打出后获得{Energy:diff()}点能量。
+//* 描述：造成{Damage:diff()}点伤害。获得{Anger:diff()}点[gold]红温[/gold]。
 //*******************************************************
 
 using BaseLib.Utils;
@@ -11,8 +11,8 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.ValueProps;
 using BiliBiliACGN.BiliBiliACGNCode.Cards.CardPool;
-using BiliBiliACGN.BiliBiliACGNCode.Utils;
 using MegaCrit.Sts2.Core.Commands;
+using BiliBiliACGN.BiliBiliACGNCode.Powers;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Cards;
 
@@ -25,13 +25,11 @@ public sealed class MolotovCocktail : CardBaseModel
     private const CardRarity rarity = CardRarity.Common;
     private const TargetType targetType = TargetType.AnyEnemy;
     private const bool shouldShowInCardLibrary = true;
-    protected override bool ShouldGlowGoldInternal => WasLastCardPlayedAttack;
-    private bool WasLastCardPlayedAttack => CombatHistory.CheckLastCardPlayedType(base.Owner, this, CardType.Attack);
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CustomKeyWords.YYSY];
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
         new DamageVar(6m, ValueProp.Move),
-        new EnergyVar(1)
+        new DynamicVar("Anger", 1m)
     ];
 
     public MolotovCocktail() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
@@ -45,14 +43,13 @@ public sealed class MolotovCocktail : CardBaseModel
             .FromCard(this)
             .Targeting(cardPlay.Target)
             .Execute(choiceContext);
-        if(WasLastCardPlayedAttack){
-            await PlayerCmd.GainEnergy(base.DynamicVars.Energy.BaseValue, base.Owner);
-        }
-        await Task.CompletedTask;
+        // 获得 Anger 点红温
+        await PowerCmd.Apply<AngerPower>(base.Owner.Creature, base.DynamicVars["Anger"].BaseValue, base.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()
     {
         base.DynamicVars["Damage"].UpgradeValueBy(4m);
+        base.DynamicVars["Anger"].UpgradeValueBy(1m);
     }
 }

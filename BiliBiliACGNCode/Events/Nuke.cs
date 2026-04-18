@@ -38,7 +38,7 @@ public sealed class Nuke : EventBaseModel
             new EventOption(this, StopKids, "NUKE.pages.INITIAL.options.STOP", HoverTipFactory.FromPotion<HextechBomb>()),
         ];
     }
-    public override bool IsAllowed(RunState runState){
+    public override bool IsAllowed(IRunState runState){
         // 第二层限定
         return runState.TotalFloor <= EventUtils.SecondFloorMaxLevel && runState.TotalFloor >= EventUtils.FirstFloorMaxLevel;
     }
