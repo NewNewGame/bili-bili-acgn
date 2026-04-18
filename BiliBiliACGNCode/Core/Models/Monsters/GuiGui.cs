@@ -21,7 +21,7 @@ namespace BiliBiliACGN.BiliBiliACGNCode.Core.Models.Monsters;
 
 public sealed class GuiGui : MonsterBaseModel
 {
-	public override int MinInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 120, 160);
+	public override int MinInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 150, 100);
     public override int MaxInitialHp => MinInitialHp;
     /// <summary>
     /// 重拳伤害
