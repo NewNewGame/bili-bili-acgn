@@ -9,6 +9,7 @@ using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models.CardPools;
 using MegaCrit.Sts2.Core.Models.Powers;
@@ -19,6 +20,13 @@ namespace BiliBiliACGN.BiliBiliACGNCode.Cards;
 public sealed class AquasBlessing : CardBaseModel
 {
     #region 卡牌关键词与悬停
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => [
+        HoverTipFactory.FromPower<StrengthPower>(), 
+        HoverTipFactory.FromPower<DexterityPower>(),
+        HoverTipFactory.FromPower<FrailPower>(),
+        HoverTipFactory.FromPower<VulnerablePower>()
+    ];
+
     #endregion
     #region 卡牌属性配置
     private const int energyCost = 1;

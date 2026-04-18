@@ -2,7 +2,7 @@
 //* 文件：OnlyTwoYearsOlder(他才比我大两岁)
 //* 作者：wheat
 //* 创建时间：2026/04/03
-//* 描述：给予2/3层虚弱。给予2/3层易伤。
+//* 描述：给予{VulnerablePower:diff()}层易伤。抽取{Cards:diff()}张牌。
 //*******************************************************
 
 using BaseLib.Utils;
@@ -20,7 +20,7 @@ namespace BiliBiliACGN.BiliBiliACGNCode.Cards;
 public sealed class OnlyTwoYearsOlder : CardBaseModel
 {
     #region 卡牌关键词与悬停
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<VulnerablePower>(),HoverTipFactory.FromPower<WeakPower>()];
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<VulnerablePower>()];
     #endregion
     #region 卡牌属性配置
     private const int energyCost = 1;
@@ -31,8 +31,8 @@ public sealed class OnlyTwoYearsOlder : CardBaseModel
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new DynamicVar("VulnerablePower", 2m),
-        new DynamicVar("WeakPower", 2m),
+        new DynamicVar("VulnerablePower", 3m),
+        new CardsVar(1)
     ];
 
     public OnlyTwoYearsOlder() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
@@ -43,12 +43,12 @@ public sealed class OnlyTwoYearsOlder : CardBaseModel
     {
         // 对目标施加{VulnerablePower:diff()}层易伤
         await PowerCmd.Apply<VulnerablePower>(cardPlay.Target, base.DynamicVars["VulnerablePower"].BaseValue, base.Owner.Creature, cardPlay.Card);
-        await PowerCmd.Apply<WeakPower>(cardPlay.Target, base.DynamicVars["WeakPower"].BaseValue, base.Owner.Creature, cardPlay.Card);
+        // 抽取一张牌
+        await CardPileCmd.Draw(choiceContext, base.DynamicVars.Cards.BaseValue, base.Owner);
     }
 
     protected override void OnUpgrade()
     {
         base.DynamicVars["VulnerablePower"].UpgradeValueBy(1m);
-        base.DynamicVars["WeakPower"].UpgradeValueBy(1m);
     }
 }
