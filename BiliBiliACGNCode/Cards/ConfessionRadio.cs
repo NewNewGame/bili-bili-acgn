@@ -33,7 +33,7 @@ public sealed class ConfessionRadio : CardBaseModel
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new DamageVar(11m, ValueProp.Move),
+        new DamageVar(12m, ValueProp.Move),
     ];
 
     public ConfessionRadio() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }

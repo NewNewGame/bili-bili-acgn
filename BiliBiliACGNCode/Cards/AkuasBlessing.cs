@@ -11,8 +11,6 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models.CardPools;
-using BiliBiliACGN.BiliBiliACGNCode.Cards.CardPool;
-using MegaCrit.Sts2.Core.ValueProps;
 using MegaCrit.Sts2.Core.Models.Powers;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Cards;
@@ -21,7 +19,6 @@ namespace BiliBiliACGN.BiliBiliACGNCode.Cards;
 public sealed class AquasBlessing : CardBaseModel
 {
     #region 卡牌关键词与悬停
-    public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
     #endregion
     #region 卡牌属性配置
     private const int energyCost = 1;

@@ -50,5 +50,6 @@ public sealed class MolotovCocktail : CardBaseModel
     protected override void OnUpgrade()
     {
         base.DynamicVars["Damage"].UpgradeValueBy(4m);
+        base.DynamicVars["Anger"].UpgradeValueBy(1m);
     }
 }

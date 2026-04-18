@@ -35,7 +35,7 @@ public sealed class CornSyndrome : CardBaseModel
     /// </summary>
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new BlockVar(7m, ValueProp.Move)
+        new BlockVar(8m, ValueProp.Move)
     ];
 
     public CornSyndrome() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
@@ -67,7 +67,7 @@ public sealed class CornSyndrome : CardBaseModel
     protected override void OnUpgrade()
     {
         #region 升级效果
-        base.DynamicVars["Block"].UpgradeValueBy(3m);
+        base.DynamicVars["Block"].UpgradeValueBy(4m);
 
         #endregion
     }
