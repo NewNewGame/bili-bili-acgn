@@ -2,7 +2,7 @@
 //* 文件：OffFieldPlay(就玩场外)
 //* 作者：wheat
 //* 创建时间：2026/03/31 10:22:52 星期二
-//* 描述：抽取{Cards:diff()}张牌，若抽到带[gold]有一说一[/gold]的牌则自动打出。
+//* 描述：抽牌直至你的[gold]手牌[/gold]有{Cards:diff()}张牌。
 //*******************************************************
 
 using BaseLib.Utils;
@@ -11,7 +11,6 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using BiliBiliACGN.BiliBiliACGNCode.Cards.CardPool;
-using BiliBiliACGN.BiliBiliACGNCode.Utils;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Cards;
 
@@ -32,7 +31,7 @@ public sealed class OffFieldPlay : CardBaseModel
     /// </summary>
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new CardsVar(2)
+        new CardsVar(6)
     ];
 
     public OffFieldPlay() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
@@ -46,12 +45,10 @@ public sealed class OffFieldPlay : CardBaseModel
     {
         #region 卡牌打出效果
         #endregion
-        var drawCards = await CardPileCmd.Draw(choiceContext, base.DynamicVars.Cards.BaseValue, base.Owner);
-        foreach(var card in drawCards){
-            if(card.Keywords.Contains(CustomKeyWords.YYSY)){
-                await AutoPlayUtils.AutoPlaySafely(choiceContext, card);
-            }
-        }
+        // 计算需要抽取的牌数
+        int cnt = base.DynamicVars.Cards.IntValue - PileType.Hand.GetPile(base.Owner).Cards.Count;
+        if(cnt <= 0) return;
+        await CardPileCmd.Draw(choiceContext, cnt, base.Owner);
     }
 
     /// <summary>
