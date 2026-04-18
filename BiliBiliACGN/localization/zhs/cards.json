@@ -65,7 +65,7 @@
   "BILIBILIACGN-EMERGENCY_OXYGEN.title": "紧急吸氧",
   "BILIBILIACGN-EMERGENCY_OXYGEN.description": "获得{Block:diff()}点[gold]格挡[/gold]。\n将一张[gold]晕眩[/gold]添加到你的[gold]弃牌堆[/gold]。",
   "BILIBILIACGN-ONLY_TAILWIND_GAMES.title": "只打顺风局",
-  "BILIBILIACGN-ONLY_TAILWIND_GAMES.description": "获得{Powers:diff()}层[gold]忍气吞声[/gold]。进入[gold]红怒[/gold]时获得{Energy:energyIcons()}，并获得{Power:diff()}点[gold]红温[/gold]。",
+  "BILIBILIACGN-ONLY_TAILWIND_GAMES.description": "获得{Powers:diff()}层[gold]忍气吞声[/gold]。进入[gold]红怒[/gold]时获得{Energy:energyIcons()}，并获得{Powers:diff()}点[gold]红温[/gold]。",
   "BILIBILIACGN-DIDNT_PAD.title": "我没垫！",
   "BILIBILIACGN-DIDNT_PAD.description": "获得{Block:diff()}点格挡。若处于[gold]红怒[/gold]，额外再获得{Block:diff()}点格挡。",
   "BILIBILIACGN-OX_CALL.title": "牛叫",

@@ -26,7 +26,6 @@ public sealed class OnlyTailwindGames : CardBaseModel
         HoverTipFactory.FromPower<BerserkPower>(),
         HoverTipFactory.FromPower<SwallowPridePower>()
     ];
-    public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
 
     #endregion
     #region 卡牌属性配置
