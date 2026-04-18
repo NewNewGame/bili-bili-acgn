@@ -102,4 +102,26 @@ public sealed class BerserkPower : PowerBaseModel
             CustomVfxCmd.RemoveVfx<SNBerserkVfx>(oldOwner);
         }
     }
+    public override Task AfterDeath(PlayerChoiceContext choiceContext, Creature creature, bool wasRemovalPrevented, float deathAnimLength)
+    {
+        // 如果旧所有者不是当前所有者，则返回
+        if(creature != base.Owner) return Task.CompletedTask;
+        // 移除红怒VFX
+        CustomVfxCmd.RemoveVfx<SNBerserkVfx>(creature);
+
+        return Task.CompletedTask;
+    }
+    public override Task AfterPreventingDeath(Creature creature)
+    {
+        // 如果旧所有者不是当前所有者，则返回
+        if(creature != base.Owner) return Task.CompletedTask;
+        // 如果旧所有者有红怒，则添加红怒VFX
+        if(creature.HasPower<BerserkPower>())
+        {
+            CustomVfxCmd.AddVfxOnCenter(creature, CustomVfxCmd.BerserkPath);
+        }
+        return Task.CompletedTask;
+    }
+
+
 }
