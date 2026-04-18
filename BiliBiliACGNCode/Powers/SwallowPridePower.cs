@@ -22,9 +22,10 @@ public sealed class SwallowPridePower : PowerBaseModel
         if(base.Owner.Player == null) return;
         if(power.Owner == base.Owner && power is BerserkPower && amount > 0){
             Flash();
-            await PlayerCmd.GainEnergy(base.Amount, base.Owner.Player);
-            await PowerCmd.Apply<AngerPower>(base.Owner, base.Amount, base.Owner, cardSource);
+            int amt = (int)base.Amount;
             await PowerCmd.Remove<SwallowPridePower>(base.Owner);
+            await PlayerCmd.GainEnergy(amt, base.Owner.Player);
+            await PowerCmd.Apply<AngerPower>(base.Owner, amt, base.Owner, cardSource);
         }
     }
 }

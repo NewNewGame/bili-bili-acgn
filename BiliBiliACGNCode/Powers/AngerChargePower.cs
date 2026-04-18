@@ -27,8 +27,13 @@ public sealed class AngerChargePower : PowerBaseModel
         if(power.Owner != base.Owner) return;
         // 如果充能值大于最大充能值，则移除
         if(base.Amount >= MAXCHARGE && power is AngerChargePower){
-            await PowerCmd.Apply<BerserkPower>(base.Owner, 1, base.Owner, cardSource);
-            await PowerCmd.Apply<AngerChargePower>(base.Owner, -MAXCHARGE, base.Owner, cardSource);
+            int triggerCount = (int)base.Amount / MAXCHARGE;
+            await PowerCmd.Apply<AngerChargePower>(base.Owner, -MAXCHARGE * triggerCount, base.Owner, cardSource);
+            while(triggerCount > 0){
+                // 进入红怒，红怒是Single类型所以要一个个给。
+                await PowerCmd.Apply<BerserkPower>(base.Owner, 1, base.Owner, cardSource);
+                triggerCount--;
+            }
         }
     }
 
