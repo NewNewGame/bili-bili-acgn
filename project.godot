@@ -32,7 +32,7 @@ export/convert_text_resources_to_binary=false
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/atlas_generator/plugin.cfg", "res://addons/dev_tools/plugin.cfg", "res://addons/fmod/plugin.cfg", "res://addons/mega_text/plugin.cfg", "res://addons/megacontentcreator/plugin.cfg")
+enabled=PackedStringArray("res://addons/atlas_generator/plugin.cfg", "res://addons/fmod/plugin.cfg")
 
 [rendering]
 
