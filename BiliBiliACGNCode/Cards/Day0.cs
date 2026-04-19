@@ -34,7 +34,7 @@ public sealed class Day0 : CardBaseModel
     /// </summary>
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new BlockVar(8m, ValueProp.Move),
+        new BlockVar(9m, ValueProp.Move),
         new CardsVar(3)
     ];
 
