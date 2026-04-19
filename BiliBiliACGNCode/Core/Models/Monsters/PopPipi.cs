@@ -36,7 +36,7 @@ public sealed class PopPipi : MonsterBaseModel
     /// 加buff音效
     /// </summary>
 	private const string _buffSfx = "event:/sfx/enemy/enemy_attacks/punch_construct/punch_construct_buff";
-	public override int MinInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 170, 130);
+	public override int MinInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 170, 140);
     public override int MaxInitialHp => MinInitialHp;
     /// <summary>
     /// 重拳伤害

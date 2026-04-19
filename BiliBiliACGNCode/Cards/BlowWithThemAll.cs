@@ -27,6 +27,8 @@ public sealed class BlowWithThemAll : CardBaseModel
     #region 卡牌关键词与悬停
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<AngerPower>()];
     protected override bool ShouldGlowGoldInternal => base.Owner.Creature.GetPowerAmount<AngerPower>() >= base.DynamicVars["Anger"].BaseValue;
+    protected override bool IsPlayable => base.Owner.Creature.GetPowerAmount<AngerPower>() >= base.DynamicVars["Anger"].BaseValue;
+
     #endregion
     #region 卡牌属性配置
     private const int energyCost = 1;

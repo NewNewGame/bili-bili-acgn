@@ -63,7 +63,6 @@ public sealed class BottleCharacter : PlaceholderCharacterModel
 		ModelDb.Card<BottleStrike>(),
 		ModelDb.Card<BottleStrike>(),
 		ModelDb.Card<BottleStrike>(),
-		ModelDb.Card<BottleStrike>(),
 		ModelDb.Card<BottleBlock>(),
 		ModelDb.Card<BottleBlock>(),
 		ModelDb.Card<BottleBlock>(),

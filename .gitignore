@@ -4,11 +4,14 @@
 export.cfg
 export_presets.cfg
 
-# Addons: Windows / editor shadow copies & temp suffixes (e.g. ~lib*.dll, *~RF*.TMP)
+# Addons: Windows / editor shadow copies, temp suffixes, local caches (e.g. ~lib*.dll, *~RF*.TMP)
 addons/**/~*
 addons/**/*~RF*.TMP
 addons/**/*.tmp
 addons/**/*.TMP
+addons/**/.cache/
+addons/**/__pycache__/
+addons/**/*.pyc
 
 # Godot Android export (generated)
 /android/
@@ -16,6 +19,7 @@ addons/**/*.TMP
 # Mono / C# build outputs
 **/bin/
 **/obj/
+BiliBiliACGN.csproj
 
 # C# / .NET tooling artifacts
 *.user
@@ -44,4 +48,5 @@ BiliBiliACGN/images/powers/sample.psd
 # Spine GDExtension: editor lock / sync temp next to shipped DLLs (project root `windows/`)
 windows/~libspine_godot*
 windows/*~RF*.TMP
+
 
