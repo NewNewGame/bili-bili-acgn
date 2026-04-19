@@ -2,7 +2,7 @@
 //* 文件：ChristmasCow(圣诞牛)
 //* 作者：wheat
 //* 创建时间：2026/04/03
-//* 描述：抽取{Cards:diff()}张牌。若该牌带[gold]有一说一[/gold]，则获得{Block:diff()}点格挡。
+//* 描述：抽2张牌，如果带有有一说一则自动打出，没有则丢弃。
 //*******************************************************
 
 using BaseLib.Utils;
@@ -10,9 +10,9 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
-using MegaCrit.Sts2.Core.ValueProps;
 using BiliBiliACGN.BiliBiliACGNCode.Cards.CardPool;
 using MegaCrit.Sts2.Core.Commands;
+using BiliBiliACGN.BiliBiliACGNCode.Utils;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Cards;
 
@@ -23,7 +23,7 @@ public sealed class ChristmasCow : CardBaseModel
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromKeyword(CustomKeyWords.YYSY)];
     #endregion
     #region 卡牌属性配置
-    private const int energyCost = 0;
+    private const int energyCost = 1;
     private const CardType type = CardType.Skill;
     private const CardRarity rarity = CardRarity.Uncommon;
     private const TargetType targetType = TargetType.Self;
@@ -31,8 +31,7 @@ public sealed class ChristmasCow : CardBaseModel
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new CardsVar(1),
-        new BlockVar(3m, ValueProp.Move)
+        new CardsVar(2),
     ];
 
     public ChristmasCow() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
@@ -43,16 +42,18 @@ public sealed class ChristmasCow : CardBaseModel
     {
         // 抽取{Cards:diff()}张牌
         var drawCards = await CardPileCmd.Draw(choiceContext, base.DynamicVars["Cards"].BaseValue, base.Owner);
-        // 若抽到牌含 YYSY 关键字则格挡
         foreach(var card in drawCards){
             if(card.Keywords.Contains(CustomKeyWords.YYSY)){
-                await CreatureCmd.GainBlock(base.Owner.Creature, base.DynamicVars.Block.BaseValue, base.DynamicVars.Block.Props, cardPlay);
+                await AutoPlayUtils.AutoPlaySafely(choiceContext, card);
+            }else{
+                await CardCmd.Discard(choiceContext, card);
             }
         }
     }
 
     protected override void OnUpgrade()
     {
-        base.DynamicVars["Block"].UpgradeValueBy(2m);
+        // -1费用
+        base.EnergyCost.UpgradeBy(-1);
     }
 }

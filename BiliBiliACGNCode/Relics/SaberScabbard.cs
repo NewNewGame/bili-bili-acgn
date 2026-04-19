@@ -127,6 +127,23 @@ public sealed class SaberScabbard : RelicBaseModel
 			TaskHelper.RunSafely(DoActivateVisuals());
 		}
 	}
+	public override Task BeforeCardPlayed(CardPlay cardPlay)
+	{
+		if (cardPlay.Card.Type != CardType.Attack)
+		{
+			return Task.CompletedTask;
+		}
+		if (cardPlay.Card.Owner != base.Owner)
+		{
+			return Task.CompletedTask;
+		}
+		NotifyAttackPlayed();
+		if (AttacksPlayedThisTurn == base.DynamicVars.Cards.IntValue)
+		{
+			AttackToDouble = cardPlay.Card;
+		}
+		return Task.CompletedTask;
+	}
     /// <summary>
     /// 攻击牌打出时，增加攻击次数
     /// </summary>
@@ -135,11 +152,16 @@ public sealed class SaberScabbard : RelicBaseModel
     /// <returns></returns>
 	public override Task AfterCardPlayed(PlayerChoiceContext context, CardPlay cardPlay)
 	{
-		if (cardPlay.Card.Owner == base.Owner && CombatManager.Instance.IsInProgress && cardPlay.Card.Type == CardType.Attack)
+		if (AttackToDouble == null)
 		{
-			NotifyAttackPlayed();
+			return Task.CompletedTask;
 		}
-        return Task.CompletedTask;
+		if (cardPlay.Card != AttackToDouble)
+		{
+			return Task.CompletedTask;
+		}
+		AttackToDouble = null;
+		return Task.CompletedTask;
 	}
     public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource)
 	{

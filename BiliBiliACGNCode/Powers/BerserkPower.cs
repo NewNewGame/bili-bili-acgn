@@ -40,7 +40,12 @@ public sealed class BerserkPower : PowerBaseModel
             return Task.CompletedTask;
         }
         // 添加红怒VFX
-        CustomVfxCmd.AddVfxOnCenter(target, CustomVfxCmd.BerserkPath);
+        var vfx = CustomVfxCmd.AddVfxOnCenter(target, CustomVfxCmd.BerserkPath);
+        // 将VFX放在最后面
+        if(vfx != null)
+        {
+            vfx.GetParent().MoveChild(vfx, 0);
+        }
         return Task.CompletedTask;
     }
     public override async Task AfterPowerAmountChanged(PowerModel power, decimal amount, Creature? applier, CardModel? cardSource)
