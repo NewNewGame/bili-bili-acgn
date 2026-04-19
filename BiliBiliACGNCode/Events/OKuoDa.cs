@@ -38,8 +38,8 @@ public sealed class OKuoDa : EventBaseModel
         ];
     }
     public override bool IsAllowed(IRunState runState){
-        // 第一后期和二层限定
-        return runState.TotalFloor <= EventUtils.SecondFloorMaxLevel && runState.TotalFloor >= 6;
+        // 第二层限定
+        return runState.TotalFloor <= EventUtils.SecondFloorMaxLevel && runState.TotalFloor > EventUtils.FirstFloorMaxLevel;
     }
 
     private async Task Oguoda()
