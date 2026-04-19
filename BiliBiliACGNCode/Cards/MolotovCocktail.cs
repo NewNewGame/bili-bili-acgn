@@ -28,7 +28,7 @@ public sealed class MolotovCocktail : CardBaseModel
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CustomKeyWords.YYSY];
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new DamageVar(6m, ValueProp.Move),
+        new DamageVar(8m, ValueProp.Move),
         new DynamicVar("Anger", 2m)
     ];
 
@@ -49,7 +49,7 @@ public sealed class MolotovCocktail : CardBaseModel
 
     protected override void OnUpgrade()
     {
-        base.DynamicVars["Damage"].UpgradeValueBy(4m);
+        base.DynamicVars["Damage"].UpgradeValueBy(2m);
         base.DynamicVars["Anger"].UpgradeValueBy(1m);
     }
 }
