@@ -51,8 +51,6 @@ public sealed class FunShikiCharacter : PlaceholderCharacterModel
 		ModelDb.Card<WhirlwindStrike>(),
 		ModelDb.Card<WhirlwindStrike>(),
 		ModelDb.Card<WhirlwindStrike>(),
-		ModelDb.Card<WhirlwindStrike>(),
-		ModelDb.Card<FunShikiDefend>(),
 		ModelDb.Card<FunShikiDefend>(),
 		ModelDb.Card<FunShikiDefend>(),
 		ModelDb.Card<FunShikiDefend>(),
