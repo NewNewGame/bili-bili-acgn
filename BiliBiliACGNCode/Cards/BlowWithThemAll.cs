@@ -65,7 +65,7 @@ public sealed class BlowWithThemAll : CardBaseModel
 
     protected override void OnUpgrade()
     {
-        base.DynamicVars.CalculationBase.UpgradeValueBy(3m);
+        base.DynamicVars.CalculationBase.UpgradeValueBy(4m);
         base.AddKeyword(CardKeyword.Innate);
     }
 }

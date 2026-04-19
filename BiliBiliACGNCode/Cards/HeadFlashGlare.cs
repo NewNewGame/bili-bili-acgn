@@ -33,7 +33,7 @@ public sealed class HeadFlashGlare : CardBaseModel
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new BlockVar(7m, ValueProp.Move),
+        new BlockVar(9m, ValueProp.Move),
         new DynamicVar("Power", 2m)
     ];
 
