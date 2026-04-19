@@ -4,11 +4,14 @@
 export.cfg
 export_presets.cfg
 
-# Addons: Windows / editor shadow copies & temp suffixes (e.g. ~lib*.dll, *~RF*.TMP)
+# Addons: Windows / editor shadow copies, temp suffixes, local caches (e.g. ~lib*.dll, *~RF*.TMP)
 addons/**/~*
 addons/**/*~RF*.TMP
 addons/**/*.tmp
 addons/**/*.TMP
+addons/**/.cache/
+addons/**/__pycache__/
+addons/**/*.pyc
 
 # Godot Android export (generated)
 /android/
@@ -46,5 +49,4 @@ BiliBiliACGN/images/powers/sample.psd
 windows/~libspine_godot*
 windows/*~RF*.TMP
 
-addons/fmod/libs/windows/~libGodotFmod.windows.editor.x86_64.dll
 
