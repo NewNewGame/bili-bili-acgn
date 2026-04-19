@@ -5,9 +5,7 @@
 //* 描述：每当你对敌方造成伤害时，自身受到病态层数的伤害。
 //*******************************************************
 
-using BiliBiliACGN.BiliBiliACGNCode.Utils;
 using Godot;
-using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
@@ -85,7 +83,7 @@ public sealed class MorbidPower : PowerBaseModel
                 if(amt == 0 || reduction >= 100m) break;
             }
         }
-        $"病态伤害预估计算：结束计算伤害，攻击者{base.Owner.Name}，触发次数{num2}，攻击次数{atkTimes}，伤害{num}".LogInfo();
+        //$"病态伤害预估计算：结束计算伤害，攻击者{base.Owner.Name}，触发次数{num2}，攻击次数{atkTimes}，伤害{num}".LogInfo();
 		return (int)num;
 	}
 
@@ -108,19 +106,9 @@ public sealed class MorbidPower : PowerBaseModel
             }
         }
 	}
-    /// <summary>
-    /// 对敌方造成伤害时，自身受到病态层数的伤害
-    /// </summary>
-    /// <param name="choiceContext"></param>
-    /// <param name="dealer"></param>
-    /// <param name="result"></param>
-    /// <param name="props"></param>
-    /// <param name="target"></param>
-    /// <param name="cardSource"></param>
-    /// <returns></returns>
-    public override async Task AfterDamageGiven(PlayerChoiceContext choiceContext, Creature? dealer, DamageResult result, ValueProp props, Creature target, CardModel? cardSource)
+    public override async Task BeforeDamageReceived(PlayerChoiceContext choiceContext, Creature target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource)
     {
-        // 如果攻击目标或者攻击者为空，则返回
+                // 如果攻击目标或者攻击者为空，则返回
         if(target == null || dealer == null) return;
         // 如果攻击者不是病态持有者，则返回
         if(dealer != base.Owner) return;
@@ -132,16 +120,14 @@ public sealed class MorbidPower : PowerBaseModel
             // 如果卡牌来源为空，则不造成伤害
             if(cardSource == null) dealDamge = false;
             // 如果伤害为0，则不造成伤害
-            if(result.TotalDamage == 0) dealDamge = false;
+            if(amount == 0) dealDamge = false;
         }else{
             // 敌人持有时，判断攻击目标是否有痴迷对象
            dealDamge = target.HasPower<InfatuationTargetPower>();
         }
         if(!dealDamge){
-            $"病态伤害计算：不造成伤害, 攻击者{dealer.Name}，攻击目标{target.Name}".LogInfo();
             return;
         }
-        $"病态伤害计算：开始计算伤害，攻击者{dealer.Name}，攻击目标{target.Name}".LogInfo();
         // 计算减免
         int mitigation = base.Owner.GetPowerAmount<MorbidMitigationPower>();
         // 如果减免大于等于100，则不造成伤害
@@ -160,5 +146,6 @@ public sealed class MorbidPower : PowerBaseModel
         // 给予免疫
         await PowerCmd.Apply<MorbidMitigationPower>(dealer, base.DynamicVars["DamageReductionPercent"].BaseValue, null, null);
     }
+
 
 }
