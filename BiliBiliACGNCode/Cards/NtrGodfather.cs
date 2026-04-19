@@ -29,7 +29,7 @@ public sealed class NtrGodfather : CardBaseModel
     [
         new EnergyVar(3),
         new CardsVar(2),
-        new DynamicVar("MorbidSelf", 3m),
+        new DynamicVar("MorbidSelf", 2m),
     ];
 
     public NtrGodfather() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
