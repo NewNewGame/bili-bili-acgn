@@ -60,7 +60,7 @@ public sealed class PowerlessAngry : CardBaseModel
     protected override void OnUpgrade()
     {
         #region 升级效果
-        base.DynamicVars["Power"].UpgradeValueBy(1m);
+        base.EnergyCost.UpgradeBy(-1);
         #endregion
     }
 }

@@ -29,7 +29,7 @@ public sealed class MolotovCocktail : CardBaseModel
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
         new DamageVar(6m, ValueProp.Move),
-        new DynamicVar("Anger", 1m)
+        new DynamicVar("Anger", 2m)
     ];
 
     public MolotovCocktail() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
