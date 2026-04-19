@@ -33,7 +33,7 @@ public sealed class MinusTwentyMillionFruit : CardBaseModel
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new DynamicVar("Hits", 2m),
+        new DynamicVar("Hits", 3m),
         new DynamicVar("Weak", 3m)
     ];
 
@@ -50,7 +50,7 @@ public sealed class MinusTwentyMillionFruit : CardBaseModel
             await DaughterCmd.ApplyAttack(base.Owner.Creature, 0m, choiceContext, cardPlay.Target);
             await Cmd.Wait(0.25f);
         }
-        await PowerCmd.Apply<WeakPower>(base.Owner.Creature, base.DynamicVars["Weak"].BaseValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<WeakPower>(cardPlay.Target, base.DynamicVars["Weak"].BaseValue, base.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()
