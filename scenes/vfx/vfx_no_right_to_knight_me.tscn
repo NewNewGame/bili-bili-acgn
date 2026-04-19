@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://bbpgy8n0jicpe" path="res://BiliBiliACGN/images/vfx/star1.png" id="8_star_tex"]
 
 [node name="VfxNoRightToKnightMe" type="Node2D"]
+z_index = 2
 script = ExtResource("1_script")
 
 [node name="Uplight" type="GPUParticles2D" parent="."]

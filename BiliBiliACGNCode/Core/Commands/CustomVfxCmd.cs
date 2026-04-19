@@ -23,26 +23,12 @@ public static class CustomVfxCmd
     public static readonly string InfiniteBullnessPath = "vfx/vfx_infinite_bullness";
     public static readonly string NoRightToKnightMePath = "vfx/vfx_no_right_to_knight_me";
     /// <summary>
-    /// 去掉前缀 <c>vfx/</c>，按下划线分段，每段首字母大写后首尾拼接（无分隔符）。
-    /// 例如 <c>vfx/vfx_infinite_bullness</c> → <c>VfxInfiniteBullness</c>。
-    /// </summary>
-    private static string ConvertPath(string path)
-    {
-        if (string.IsNullOrEmpty(path))
-        {
-            return string.Empty;
-        }
-        string tail = path.Replace("vfx/", "", StringComparison.Ordinal);
-        string[] segments = tail.Split('_', StringSplitOptions.RemoveEmptyEntries);
-        return string.Concat(segments.Select(static s => s.Capitalize()));
-    }
-    /// <summary>
     /// 添加指定目标的VFX
     /// </summary>
     /// <param name="target"></param>
     /// <param name="path"></param>
-    public static void AddVfx(Creature target, string path){
-        if(target == null) return;
+    public static Node2D? AddVfx(Creature target, string path){
+        if(target == null) return null;
         if (!TestMode.IsOn && NCombatRoom.Instance != null)
         {
             NCreature creatureNode = NCombatRoom.Instance.GetCreatureNode(target);
@@ -52,16 +38,18 @@ public static class CustomVfxCmd
                 Node2D node2D = PreloadManager.Cache.GetScene(scenePath).Instantiate<Node2D>(PackedScene.GenEditState.Disabled);
                 creatureNode.AddChildSafely(node2D);
                 node2D.GlobalPosition = creatureNode.GlobalPosition;
+                return node2D;
             }
         }
+        return null;
     }
     /// <summary>
     /// 添加指定目标的VFX
     /// </summary>
     /// <param name="target"></param>
     /// <param name="path"></param>
-    public static void AddVfxOnCenter(Creature target, string path){
-        if(target == null) return;
+    public static Node2D? AddVfxOnCenter(Creature target, string path){
+        if(target == null) return null;
         if (!TestMode.IsOn && NCombatRoom.Instance != null)
         {
             NCreature creatureNode = NCombatRoom.Instance.GetCreatureNode(target);
@@ -71,8 +59,10 @@ public static class CustomVfxCmd
                 Node2D node2D = PreloadManager.Cache.GetScene(scenePath).Instantiate<Node2D>(PackedScene.GenEditState.Disabled);
                 creatureNode.AddChildSafely(node2D);
                 node2D.GlobalPosition = creatureNode.VfxSpawnPosition;
+                return node2D;
             }
         }
+        return null;
     }
     /// <summary>
     /// 删除指定目标的VFX
