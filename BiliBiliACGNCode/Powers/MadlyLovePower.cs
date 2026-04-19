@@ -5,6 +5,7 @@
 //* 描述：你的病态会额外触发1次。
 //*******************************************************
 
+using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Powers;
@@ -13,5 +14,13 @@ public sealed class MadlyLovePower : PowerBaseModel
 {
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
-    
+    /// <summary>
+    /// 死亡复活后不会移除
+    /// </summary>
+    /// <returns></returns>
+    public override bool ShouldPowerBeRemovedAfterOwnerDeath()
+    {
+        return false;
+    }
+
 }

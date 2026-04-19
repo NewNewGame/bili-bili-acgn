@@ -156,6 +156,13 @@ public sealed class MorbidPower : PowerBaseModel
         // 给予免疫
         await PowerCmd.Apply<MorbidMitigationPower>(dealer, base.DynamicVars["DamageReductionPercent"].BaseValue, null, null);
     }
-
+    /// <summary>
+    /// 死亡复活后不会移除
+    /// </summary>
+    /// <returns></returns>
+    public override bool ShouldPowerBeRemovedAfterOwnerDeath()
+    {
+        return false;
+    }
 
 }
