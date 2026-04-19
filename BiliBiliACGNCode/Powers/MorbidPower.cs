@@ -12,6 +12,7 @@ using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.MonsterMoves.Intents;
 using MegaCrit.Sts2.Core.ValueProps;
 
@@ -54,6 +55,15 @@ public sealed class MorbidPower : PowerBaseModel
                 }
             }
         }
+        int limit = int.MaxValue;
+        // 如果持有者难以杀死，则限制为硬到死层数
+        if(base.Owner.HasPower<HardToKillPower>()){
+            limit = base.Owner.GetPowerAmount<HardToKillPower>();
+        }
+        // 如果持有者无形，则限制为1层
+        if(base.Owner.HasPower<IntangiblePower>()){
+            limit = 1;
+        }
         // 减免计数
         decimal reduction = 0;
         // 剩余病态层数
@@ -69,7 +79,7 @@ public sealed class MorbidPower : PowerBaseModel
                     // 单次伤害触发次数
                     for(int __ = 0; __ < num2; __++){
                         // 计算伤害，累加减免
-                        num += (int)((100m - reduction) / 100m * amt);
+                        num += Mathf.Min(limit, (int)((100m - reduction) / 100m * amt));
                         // 如果触发次数用完了，则退出循环
                         if(--amt == 0) break;
                     }
@@ -108,7 +118,7 @@ public sealed class MorbidPower : PowerBaseModel
 	}
     public override async Task BeforeDamageReceived(PlayerChoiceContext choiceContext, Creature target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource)
     {
-                // 如果攻击目标或者攻击者为空，则返回
+        // 如果攻击目标或者攻击者为空，则返回
         if(target == null || dealer == null) return;
         // 如果攻击者不是病态持有者，则返回
         if(dealer != base.Owner) return;
@@ -117,8 +127,8 @@ public sealed class MorbidPower : PowerBaseModel
         bool dealDamge = true;
         // 玩家持有时
         if(base.Owner.IsPlayer){
-            // 如果卡牌来源为空，则不造成伤害
-            if(cardSource == null) dealDamge = false;
+            // 如果卡牌来源为空，或者是自己攻击自己，则不造成伤害
+            if(cardSource == null || target == base.Owner) dealDamge = false;
             // 如果伤害为0，则不造成伤害
             if(amount == 0) dealDamge = false;
         }else{
