@@ -22,14 +22,14 @@ public sealed class ImSoDespair : CardBaseModel
 {
     private const int energyCost = 1;
     private const CardType type = CardType.Skill;
-    private const CardRarity rarity = CardRarity.Rare;
+    private const CardRarity rarity = CardRarity.Uncommon;
     private const TargetType targetType = TargetType.Self;
     private const bool shouldShowInCardLibrary = true;
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<MorbidPower>()];
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new BlockVar(5m, ValueProp.Move),
+        new BlockVar(4m, ValueProp.Move),
     ];
 
     public ImSoDespair() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
@@ -43,6 +43,6 @@ public sealed class ImSoDespair : CardBaseModel
 
     protected override void OnUpgrade()
     {
-        base.DynamicVars.Block.UpgradeValueBy(4m);
+        base.DynamicVars.Block.UpgradeValueBy(2m);
     }
 }
