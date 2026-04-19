@@ -16,6 +16,7 @@ addons/**/*.TMP
 # Mono / C# build outputs
 **/bin/
 **/obj/
+BiliBiliACGN.csproj
 
 # C# / .NET tooling artifacts
 *.user
@@ -45,3 +46,4 @@ BiliBiliACGN/images/powers/sample.psd
 windows/~libspine_godot*
 windows/*~RF*.TMP
 
+addons/fmod/libs/windows/~libGodotFmod.windows.editor.x86_64.dll
