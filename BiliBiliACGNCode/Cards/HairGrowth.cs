@@ -34,7 +34,7 @@ public sealed class HairGrowth : CardBaseModel
     /// </summary>
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new DamageVar(16m, ValueProp.Move)
+        new DamageVar(18m, ValueProp.Move)
     ];
 
     public HairGrowth() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
@@ -61,7 +61,7 @@ public sealed class HairGrowth : CardBaseModel
     protected override void OnUpgrade()
     {
         #region 升级效果
-        base.DynamicVars["Damage"].UpgradeValueBy(4m);
+        base.DynamicVars["Damage"].UpgradeValueBy(6m);
         #endregion
     }
 }

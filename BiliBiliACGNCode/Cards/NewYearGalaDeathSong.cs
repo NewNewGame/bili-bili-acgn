@@ -57,6 +57,6 @@ public sealed class NewYearGalaDeathSong : CardBaseModel
     protected override void OnUpgrade()
     {
         base.DynamicVars["CalculationBase"].UpgradeValueBy(6m);
-        base.DynamicVars["ExtraDamage"].UpgradeValueBy(2m);
+        base.DynamicVars["ExtraDamage"].UpgradeValueBy(1m);
     }
 }
