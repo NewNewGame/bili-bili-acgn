@@ -1,4 +1,4 @@
-[gd_resource type="ParticleProcessMaterial" load_steps=3 format=3 uid="uid://m46qu0d2ivpm"]
+[gd_resource type="ParticleProcessMaterial" load_steps=3 format=3 uid="uid://btxs7mbp3ivvk"]
 
 [sub_resource type="Gradient" id="Gradient_ring_fade"]
 offsets = PackedFloat32Array(0, 0.12, 1)
@@ -9,22 +9,22 @@ gradient = SubResource("Gradient_ring_fade")
 
 [resource]
 particle_flag_disable_z = true
-emission_shape_scale = Vector3(4, 4, 1)
+emission_shape_scale = Vector3(2, 2, 1)
 emission_shape = 6
 emission_ring_axis = Vector3(0, 0, 1)
 emission_ring_height = 0.5
 emission_ring_radius = 32.0
-emission_ring_inner_radius = 20.0
+emission_ring_inner_radius = 26.0
 emission_ring_cone_angle = 90.0
 spread = 180.0
-initial_velocity_min = 64.0
-initial_velocity_max = 128.0
+initial_velocity_min = 12.0
+initial_velocity_max = 64.0
 orbit_velocity_min = 9.49949e-08
-orbit_velocity_max = 3.0000002
-radial_velocity_min = 239.99997
-radial_velocity_max = 299.99997
+orbit_velocity_max = 2.0000002
+radial_velocity_min = 88.0
+radial_velocity_max = 88.0
 gravity = Vector3(0, 0, 0)
-scale_min = 0.19999999
-scale_max = 0.39999998
-color = Color(0.74617904, 0.16607645, 0.77232105, 1)
+scale_min = 0.049999997
+scale_max = 0.14999999
+color = Color(0.81427044, 0.23232263, 0.39151037, 1)
 color_ramp = SubResource("GradientTexture_ring_fade")

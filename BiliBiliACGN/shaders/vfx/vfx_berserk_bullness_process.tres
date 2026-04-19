@@ -1,7 +1,7 @@
 [gd_resource type="ParticleProcessMaterial" load_steps=5 format=3 uid="uid://87tld07k2ue5"]
 
 [sub_resource type="Gradient" id="Gradient_color"]
-colors = PackedColorArray(0.46443564, 0.06352926, 0.1289469, 0.25490198, 0, 0, 0, 0.02745098)
+colors = PackedColorArray(0.4627451, 0.0627451, 0.12941177, 0.12156863, 0, 0, 0, 0.02745098)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture_color"]
 gradient = SubResource("Gradient_color")

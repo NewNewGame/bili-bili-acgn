@@ -1,12 +1,12 @@
 [gd_scene load_steps=5 format=3 uid="uid://78h2x1u0jx8b"]
 
 [ext_resource type="Script" uid="uid://cup634cqbnqfx" path="res://BiliBiliACGNCode/Nodes/SNInfiniteBullnessVfx.cs" id="1_0kiqw"]
-[ext_resource type="Material" uid="uid://87tld07k2ue5" path="res://BiliBiliACGN/shaders/vfx/vfx_infinite_bullness_process.tres" id="3_burst"]
+[ext_resource type="Material" uid="uid://d0gc0o80ctald" path="res://BiliBiliACGN/shaders/vfx/vfx_infinite_process.tres" id="3_3vh63"]
 [ext_resource type="Material" uid="uid://m46qu0d2ivpm" path="res://BiliBiliACGN/shaders/vfx/vfx_infinite_bullness_ring_process.tres" id="4_ring"]
 [ext_resource type="Texture2D" uid="uid://bo0x5nnrrn5h4" path="res://BiliBiliACGN/images/vfx/dot.png" id="5_tex"]
 
 [node name="VfxInfiniteBullness" type="Node2D"]
-z_index = 1
+z_index = 2
 script = ExtResource("1_0kiqw")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
@@ -17,7 +17,7 @@ lifetime = 1.2
 one_shot = true
 explosiveness = 1.0
 fixed_fps = 0
-process_material = ExtResource("3_burst")
+process_material = ExtResource("3_3vh63")
 
 [node name="GPUParticles2DRing" type="GPUParticles2D" parent="."]
 emitting = false
