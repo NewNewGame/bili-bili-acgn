@@ -20,6 +20,9 @@ public sealed class FunShikiCharacter : PlaceholderCharacterModel
 {
 	public override string PlaceholderID => "funshiki";
 	public override Color NameColor => new Color("E02D16");
+	public override Color MapDrawingColor => new Color("E02D16");
+	public override Color DialogueColor => new Color("99160c");
+	public override Color EnergyLabelOutlineColor => new Color("99160c");
 	public override CharacterGender Gender => CharacterGender.Feminine;
 	public override int StartingHp => 62;
 	public override int BaseOrbSlotCount => 4;
