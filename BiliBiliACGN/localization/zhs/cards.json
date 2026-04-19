@@ -256,7 +256,7 @@
   "BILIBILIACGN-HALF_FRUIT.title": "0.5果",
   "BILIBILIACGN-HALF_FRUIT.description": "每当女儿攻击敌人时，给予敌人本回合{HalfFruit:diff()}层[gold]变唐[/gold]。",
   "BILIBILIACGN-CHUUNIBYOU_NOTE.title": "中二笔记",
-  "BILIBILIACGN-CHUUNIBYOU_NOTE.description": "给予{Morbid:diff()}层[gold]病态[/gold]。\n每有10层[gold]病态[/gold]，额外给予{CalculationExtra:diff()}层[gold]病态[/gold]。{InCombat:\n(给予{CalculatedMorbid:diff()}层[gold]病态[/gold]。)|}",
+  "BILIBILIACGN-CHUUNIBYOU_NOTE.description": "给予{CalculationBase:diff()}层[gold]病态[/gold]。\n每有10层[gold]病态[/gold]，额外给予{CalculationExtra:diff()}层[gold]病态[/gold]。{InCombat:\n(给予{CalculatedMorbid:diff()}层[gold]病态[/gold]。)|}",
   "BILIBILIACGN-CUTE_NE.title": "可爱捏",
   "BILIBILIACGN-CUTE_NE.description": "女儿提升[gold]最大生命值[/gold]时，给予你一半的[gold]格挡[/gold]。",
   "BILIBILIACGN-ANIME_MASTER.title": "动漫高手",

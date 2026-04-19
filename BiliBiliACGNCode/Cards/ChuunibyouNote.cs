@@ -30,7 +30,7 @@ public sealed class ChuunibyouNote : CardBaseModel
         new CalculationBaseVar(10m),
         new CalculationExtraVar(3m),
         new CalculatedVar("CalculatedMorbid").WithMultiplier((_, target) => 
-        target.GetPowerAmount<MorbidPower>()/10m)
+        target?.GetPowerAmount<MorbidPower>()/10m ?? 0m)
     ];
 
     public ChuunibyouNote() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
