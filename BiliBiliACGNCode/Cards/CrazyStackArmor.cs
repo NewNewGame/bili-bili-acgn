@@ -65,6 +65,7 @@ public sealed class CrazyStackArmor : CardBaseModel
 
     protected override void OnUpgrade()
     {
-        base.DynamicVars["BlockOrbs"].UpgradeValueBy(1m);
+        // 加1伤害
+        base.DynamicVars.Damage.UpgradeValueBy(3m);
     }
 }

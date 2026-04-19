@@ -41,13 +41,9 @@ public sealed class NewSeasonTimeMachine : CardBaseModel
     {
         var rightOrb = base.Owner.PlayerCombatState?.OrbQueue.Orbs.First();
         if(rightOrb == null) return;
-        int times = base.DynamicVars["Times"].IntValue;
-        // [gold]激发[/gold]你最右侧的充能球{Times:diff()}次，然后复制[gold]生成[/gold]1个刚才被[gold]激发[/gold]的充能球。
-        for(int i = 0; i < times; i++)
-        {
-            await OrbCmd.EvokeNext(choiceContext, base.Owner, i == times -1);
-            await OrbUtils.OrbEvokeWait();
-        }
+        // [gold]激发[/gold]你最右侧的充能球，然后复制[gold]生成[/gold]1个刚才被[gold]激发[/gold]的充能球。
+        await OrbCmd.EvokeNext(choiceContext, base.Owner);
+        await OrbUtils.OrbEvokeWait();
         // 复制[gold]生成[/gold]1个刚才被[gold]激发[/gold]的充能球。
         await OrbCmd.Channel(choiceContext, rightOrb, base.Owner);
 
@@ -55,6 +51,7 @@ public sealed class NewSeasonTimeMachine : CardBaseModel
 
     protected override void OnUpgrade()
     {
-        base.DynamicVars["Times"].UpgradeValueBy(1m);
+        // 减1费用
+        base.EnergyCost.UpgradeBy(-1);
     }
 }

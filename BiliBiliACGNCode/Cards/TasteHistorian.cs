@@ -19,7 +19,7 @@ namespace BiliBiliACGN.BiliBiliACGNCode.Cards;
 [Pool(typeof(FunShikiCardPool))]
 public sealed class TasteHistorian : CardBaseModel
 {
-    private const int energyCost = 1;
+    private const int energyCost = 2;
     private const CardType type = CardType.Power;
     private const CardRarity rarity = CardRarity.Uncommon;
     private const TargetType targetType = TargetType.Self;
@@ -44,6 +44,7 @@ public sealed class TasteHistorian : CardBaseModel
 
     protected override void OnUpgrade()
     {
-        base.DynamicVars["Cards"].UpgradeValueBy(1m);
+        // 减1费用
+        base.EnergyCost.UpgradeBy(-1);
     }
 }
