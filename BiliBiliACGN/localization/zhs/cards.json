@@ -254,7 +254,7 @@
   "BILIBILIACGN-NTR_GODFATHER.title": "NTR教父",
   "BILIBILIACGN-NTR_GODFATHER.description": "获得{Energy:energyIcons()}，抽{Cards:diff()}张牌。在你的回合开始时，给予自身{MorbidSelf:diff()}层[gold]病态[/gold]。",
   "BILIBILIACGN-HALF_FRUIT.title": "0.5果",
-  "BILIBILIACGN-HALF_FRUIT.description": "每当女儿攻击敌人时，给予敌人本回合{Tang:diff()}层[gold]变唐[/gold]。",
+  "BILIBILIACGN-HALF_FRUIT.description": "每当女儿攻击敌人时，给予敌人本回合{HalfFruit:diff()}层[gold]变唐[/gold]。",
   "BILIBILIACGN-CHUUNIBYOU_NOTE.title": "中二笔记",
   "BILIBILIACGN-CHUUNIBYOU_NOTE.description": "每当你打出能力牌时，抽{Cards:diff()}张牌。",
   "BILIBILIACGN-CUTE_NE.title": "可爱捏",

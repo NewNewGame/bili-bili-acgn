@@ -2,7 +2,7 @@
 //* 文件：HalfFruit(0.5果)
 //* 作者：wheat
 //* 创建时间：2026/04/08
-//* 描述：每当女儿攻击敌人时，给予敌人{StrengthLoss:diff()}点变唐。
+//* 描述：每当女儿攻击敌人时，给予敌人{HalfFruit:diff()}点变唐。
 //*******************************************************
 
 using BaseLib.Utils;
@@ -27,7 +27,7 @@ public sealed class HalfFruit : CardBaseModel
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<GetTangPower>()];
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new DynamicVar("Tang", 2m),
+        new DynamicVar("HalfFruit", 2m),
     ];
 
     public HalfFruit() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
@@ -37,7 +37,7 @@ public sealed class HalfFruit : CardBaseModel
         // 播放动画
         await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
         // 施加能力：女儿攻击敌人时，该敌人在本回合失去力量
-        await PowerCmd.Apply<HalfFruitPower>(base.Owner.Creature, base.DynamicVars["StrengthLoss"].BaseValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<HalfFruitPower>(base.Owner.Creature, base.DynamicVars["HalfFruit"].BaseValue, base.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()
