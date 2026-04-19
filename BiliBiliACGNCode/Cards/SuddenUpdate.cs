@@ -2,18 +2,17 @@
 //* 文件：SuddenUpdate(突然更新)
 //* 作者：wheat
 //* 创建时间：2026/04/11
-//* 描述：获得{Block:diff()}点[gold]格挡[/gold]。下回合，随机[gold]生成[/gold]{OrbCount:diff()}个充能球。
+//* 描述：获得{Block:diff()}点[gold]格挡[/gold]。随机[gold]生成[/gold]{OrbCount:diff()}个充能球。
 //*******************************************************
 
 using BaseLib.Utils;
 using BiliBiliACGN.BiliBiliACGNCode.Cards.CardPool;
-using BiliBiliACGN.BiliBiliACGNCode.Powers;
+using BiliBiliACGN.BiliBiliACGNCode.Utils;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
-using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.ValueProps;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Cards;
@@ -22,7 +21,7 @@ namespace BiliBiliACGN.BiliBiliACGNCode.Cards;
 public sealed class SuddenUpdate : CardBaseModel
 {
     #region 卡牌关键词与悬停
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.Static(StaticHoverTip.Block), HoverTipFactory.FromPower<StrengthPower>()];
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.Static(StaticHoverTip.Block),HoverTipFactory.Static(StaticHoverTip.Channeling)];
     #endregion
     #region 卡牌属性配置
     private const int energyCost = 2;
@@ -43,9 +42,17 @@ public sealed class SuddenUpdate : CardBaseModel
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        // 获得{Block:diff()}点[gold]格挡[/gold]。女儿获得{Strength:diff()}点[gold]力量[/gold]。
+        // 获得{Block:diff()}点[gold]格挡[/gold]。
         await CreatureCmd.GainBlock(base.Owner.Creature, base.DynamicVars.Block.BaseValue, base.DynamicVars.Block.Props, cardPlay);
-        await PowerCmd.Apply<DelayOrbPower>(base.Owner.Creature, base.DynamicVars["OrbCount"].BaseValue, base.Owner.Creature, this);
+        // 随机生成{OrbCount:diff()}个充能球
+        int num = (int)base.DynamicVars["OrbCount"].BaseValue;
+        for(int i = 0; i < num; i++){
+            await OrbCmd.Channel(choiceContext, OrbUtils.GetRandomFunShikiOrb(this),base.Owner);
+            if(i < num - 1)
+            {
+                await OrbUtils.OrbChannelingWait();
+            }
+        }
     }
 
     protected override void OnUpgrade()
