@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://c67d8c5biuv6u"
-path="res://.godot/imported/勇敢牛牛不怕困难.wav-0023f98c03a7caf78e17e0b441dc6086.sample"
+path="res://.godot/imported/勇敢牛牛不怕困难.wav-f09ab90d642033926c291f246e4f6c89.sample"
 
 [deps]
 
-source_file="res://BiliBiliACGN/sfx/nzh-old/勇敢牛牛不怕困难.wav"
-dest_files=["res://.godot/imported/勇敢牛牛不怕困难.wav-0023f98c03a7caf78e17e0b441dc6086.sample"]
+source_file="res://BiliBiliACGN/sfx/not_used/nzh-old/勇敢牛牛不怕困难.wav"
+dest_files=["res://.godot/imported/勇敢牛牛不怕困难.wav-f09ab90d642033926c291f246e4f6c89.sample"]
 
 [params]
 

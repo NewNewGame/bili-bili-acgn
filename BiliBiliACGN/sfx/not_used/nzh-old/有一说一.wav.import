@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://ch3di7rh0ivmg"
-path="res://.godot/imported/有一说一.wav-364c13cca1e6921ab96f4eb4ad516aec.sample"
+path="res://.godot/imported/有一说一.wav-91833bf20c9df48fc93ac11711593781.sample"
 
 [deps]
 
-source_file="res://BiliBiliACGN/sfx/nzh-old/有一说一.wav"
-dest_files=["res://.godot/imported/有一说一.wav-364c13cca1e6921ab96f4eb4ad516aec.sample"]
+source_file="res://BiliBiliACGN/sfx/not_used/nzh-old/有一说一.wav"
+dest_files=["res://.godot/imported/有一说一.wav-91833bf20c9df48fc93ac11711593781.sample"]
 
 [params]
 

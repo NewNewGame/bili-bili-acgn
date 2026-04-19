@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://drjhrv5f0uv71"
-path="res://.godot/imported/来手秀的.wav-fee8091ec5f8dc269a027dc87f8f2c05.sample"
+path="res://.godot/imported/来手秀的.wav-49c72ffaad354187076b135d87d3e723.sample"
 
 [deps]
 
-source_file="res://BiliBiliACGN/sfx/nzh-old/来手秀的.wav"
-dest_files=["res://.godot/imported/来手秀的.wav-fee8091ec5f8dc269a027dc87f8f2c05.sample"]
+source_file="res://BiliBiliACGN/sfx/not_used/nzh-old/来手秀的.wav"
+dest_files=["res://.godot/imported/来手秀的.wav-49c72ffaad354187076b135d87d3e723.sample"]
 
 [params]
 

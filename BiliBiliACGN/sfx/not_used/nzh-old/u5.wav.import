@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://d13ur1028ldpu"
-path="res://.godot/imported/u5.wav-7bb2dca41b93df9ee0608612a04888dc.sample"
+path="res://.godot/imported/u5.wav-05a424d93d8b8d30938bc0cfeaed00c9.sample"
 
 [deps]
 
-source_file="res://BiliBiliACGN/sfx/nzh-old/u5.wav"
-dest_files=["res://.godot/imported/u5.wav-7bb2dca41b93df9ee0608612a04888dc.sample"]
+source_file="res://BiliBiliACGN/sfx/not_used/nzh-old/u5.wav"
+dest_files=["res://.godot/imported/u5.wav-05a424d93d8b8d30938bc0cfeaed00c9.sample"]
 
 [params]
 

@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://4xh01cr2f12o"
-path="res://.godot/imported/吔 shit.wav-8ae7e1558cfebd196644992bc3f00feb.sample"
+path="res://.godot/imported/吔 shit.wav-bff4102af4eff6aac0c4535376223b08.sample"
 
 [deps]
 
-source_file="res://BiliBiliACGN/sfx/nzh-old/吔 shit.wav"
-dest_files=["res://.godot/imported/吔 shit.wav-8ae7e1558cfebd196644992bc3f00feb.sample"]
+source_file="res://BiliBiliACGN/sfx/not_used/nzh-old/吔 shit.wav"
+dest_files=["res://.godot/imported/吔 shit.wav-bff4102af4eff6aac0c4535376223b08.sample"]
 
 [params]
 

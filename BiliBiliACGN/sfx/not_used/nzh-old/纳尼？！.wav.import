@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://cre73ujeh4s4g"
-path="res://.godot/imported/纳尼？！.wav-4eb8cfdbdd187e6b39eb43c2dc984970.sample"
+path="res://.godot/imported/纳尼？！.wav-845b49ee8dcaa89f2edd0f0d32114e2a.sample"
 
 [deps]
 
-source_file="res://BiliBiliACGN/sfx/nzh-old/纳尼？！.wav"
-dest_files=["res://.godot/imported/纳尼？！.wav-4eb8cfdbdd187e6b39eb43c2dc984970.sample"]
+source_file="res://BiliBiliACGN/sfx/not_used/nzh-old/纳尼？！.wav"
+dest_files=["res://.godot/imported/纳尼？！.wav-845b49ee8dcaa89f2edd0f0d32114e2a.sample"]
 
 [params]
 

@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://bl5cjfo72ycok"
-path="res://.godot/imported/牛笑2.wav-4f33ef0b32573042c48ef5346fd83af3.sample"
+path="res://.godot/imported/牛笑2.wav-bd30713f50a4038bab3a1ab4a6960ac1.sample"
 
 [deps]
 
-source_file="res://BiliBiliACGN/sfx/nzh-old/牛笑2.wav"
-dest_files=["res://.godot/imported/牛笑2.wav-4f33ef0b32573042c48ef5346fd83af3.sample"]
+source_file="res://BiliBiliACGN/sfx/not_used/nzh-old/牛笑2.wav"
+dest_files=["res://.godot/imported/牛笑2.wav-bd30713f50a4038bab3a1ab4a6960ac1.sample"]
 
 [params]
 

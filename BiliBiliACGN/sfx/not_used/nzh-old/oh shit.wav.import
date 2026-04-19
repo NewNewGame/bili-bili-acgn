@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://de3qj877qjk55"
-path="res://.godot/imported/oh shit.wav-56390431a5ca7f523cdbcb0b036266ea.sample"
+path="res://.godot/imported/oh shit.wav-e704c2af7ccb0613a7e3dd29bdcd0b90.sample"
 
 [deps]
 
-source_file="res://BiliBiliACGN/sfx/nzh-old/oh shit.wav"
-dest_files=["res://.godot/imported/oh shit.wav-56390431a5ca7f523cdbcb0b036266ea.sample"]
+source_file="res://BiliBiliACGN/sfx/not_used/nzh-old/oh shit.wav"
+dest_files=["res://.godot/imported/oh shit.wav-e704c2af7ccb0613a7e3dd29bdcd0b90.sample"]
 
 [params]
 

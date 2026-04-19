@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://3emf0nvbncru"
-path="res://.godot/imported/咔嚓一刀.wav-fcbe81ae96fd6a466c6b67dc76b6a2b5.sample"
+path="res://.godot/imported/咔嚓一刀.wav-7160a79420a9e71ab2668b989b7572c8.sample"
 
 [deps]
 
-source_file="res://BiliBiliACGN/sfx/nzh-old/咔嚓一刀.wav"
-dest_files=["res://.godot/imported/咔嚓一刀.wav-fcbe81ae96fd6a466c6b67dc76b6a2b5.sample"]
+source_file="res://BiliBiliACGN/sfx/not_used/nzh-old/咔嚓一刀.wav"
+dest_files=["res://.godot/imported/咔嚓一刀.wav-7160a79420a9e71ab2668b989b7572c8.sample"]
 
 [params]
 

@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://b5gu7fghj5j3s"
-path="res://.godot/imported/u1s1合集.wav-41433b24aa59b240d4c124d5708f9bfc.sample"
+path="res://.godot/imported/u1s1合集.wav-5a37842bef4f7f649c065fc053cf2157.sample"
 
 [deps]
 
-source_file="res://BiliBiliACGN/sfx/nzh-old/u1s1合集.wav"
-dest_files=["res://.godot/imported/u1s1合集.wav-41433b24aa59b240d4c124d5708f9bfc.sample"]
+source_file="res://BiliBiliACGN/sfx/not_used/nzh-old/u1s1合集.wav"
+dest_files=["res://.godot/imported/u1s1合集.wav-5a37842bef4f7f649c065fc053cf2157.sample"]
 
 [params]
 

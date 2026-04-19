@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://dy412nubauvh0"
-path="res://.godot/imported/快他妈跑！.wav-07ff668f8575b3ee9b5cf12c47b2e981.sample"
+path="res://.godot/imported/快他妈跑！.wav-9f442e955330149bb2993cf72dead279.sample"
 
 [deps]
 
-source_file="res://BiliBiliACGN/sfx/nzh-old/快他妈跑！.wav"
-dest_files=["res://.godot/imported/快他妈跑！.wav-07ff668f8575b3ee9b5cf12c47b2e981.sample"]
+source_file="res://BiliBiliACGN/sfx/not_used/nzh-old/快他妈跑！.wav"
+dest_files=["res://.godot/imported/快他妈跑！.wav-9f442e955330149bb2993cf72dead279.sample"]
 
 [params]
 

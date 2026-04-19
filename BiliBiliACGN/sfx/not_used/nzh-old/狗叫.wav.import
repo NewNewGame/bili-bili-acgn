@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://bndr1tj7dng76"
-path="res://.godot/imported/狗叫.wav-5f8141f692f83a260d7cf90b68de48c2.sample"
+path="res://.godot/imported/狗叫.wav-50cc17b563f27b99ab04c415fcb8fdf8.sample"
 
 [deps]
 
-source_file="res://BiliBiliACGN/sfx/nzh-old/狗叫.wav"
-dest_files=["res://.godot/imported/狗叫.wav-5f8141f692f83a260d7cf90b68de48c2.sample"]
+source_file="res://BiliBiliACGN/sfx/not_used/nzh-old/狗叫.wav"
+dest_files=["res://.godot/imported/狗叫.wav-50cc17b563f27b99ab04c415fcb8fdf8.sample"]
 
 [params]
 
