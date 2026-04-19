@@ -286,7 +286,7 @@
   "BILIBILIACGN-ONE_COLOR_ORB.title": "一色股",
   "BILIBILIACGN-ONE_COLOR_ORB.description": "生成1个[gold]力量[/gold]充能球。\n触发所有[gold]力量[/gold]充能球的被动{PassiveTriggers:diff()}次。",
   "BILIBILIACGN-MINUS_EIGHT_THOUSAND.title": "减8000",
-  "BILIBILIACGN-MINUS_EIGHT_THOUSAND.description": "[gold]生成[/gold]{RandomOrbs:diff()}个随机充能球。",
+  "BILIBILIACGN-MINUS_EIGHT_THOUSAND.description": "{IfUpgraded:show:本|下}回合，[gold]生成[/gold]{RandomOrbs:diff()}个随机充能球。",
   "BILIBILIACGN-MARRIED_MAN.title": "已婚男士",
   "BILIBILIACGN-MARRIED_MAN.description": "抽{Cards:diff()}张牌。",
   "BILIBILIACGN-KNEEL_TO_BAI_DA.title": "给百大跪下！",

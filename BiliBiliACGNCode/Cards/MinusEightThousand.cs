@@ -2,11 +2,12 @@
 //* 文件：MinusEightThousand(减8000)
 //* 作者：wheat
 //* 创建时间：2026/04/11
-//* 描述：生成1/2个随机充能球。
+//* 描述：下/本回合，生成2个随机充能球。
 //*******************************************************
 
 using BaseLib.Utils;
 using BiliBiliACGN.BiliBiliACGNCode.Cards.CardPool;
+using BiliBiliACGN.BiliBiliACGNCode.Powers;
 using BiliBiliACGN.BiliBiliACGNCode.Utils;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -35,20 +36,24 @@ public sealed class MinusEightThousand : CardBaseModel
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        // 生成1/2个随机充能球
+        // 生成2个随机充能球
         int num = (int)base.DynamicVars["RandomOrbs"].BaseValue;
-        if(base.IsUpgraded)++num;
-        for(int i = 0; i < num; i++){
-            await OrbCmd.Channel(choiceContext, OrbUtils.GetRandomFunShikiOrb(this),base.Owner);
-            if(i < num - 1)
-            {
-                await OrbUtils.OrbChannelingWait();
+        // 如果升级了，则生成2个随机充能球
+        if(base.IsUpgraded){
+            for(int i = 0; i < num; i++){
+                await OrbCmd.Channel(choiceContext, OrbUtils.GetRandomFunShikiOrb(this),base.Owner);
+                if(i < num - 1)
+                {
+                    await OrbUtils.OrbChannelingWait();
+                }
             }
+        }else{
+            // 下回合生成2个随机充能球
+            await PowerCmd.Apply<DelayOrbPower>(base.Owner.Creature, num, base.Owner.Creature, this);
         }
     }
 
     protected override void OnUpgrade()
     {
-        base.DynamicVars["RandomOrbs"].UpgradeValueBy(1m);
     }
 }
