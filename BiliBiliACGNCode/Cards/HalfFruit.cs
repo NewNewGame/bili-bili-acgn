@@ -7,6 +7,7 @@
 
 using BaseLib.Utils;
 using BiliBiliACGN.BiliBiliACGNCode.Cards.CardPool;
+using BiliBiliACGN.BiliBiliACGNCode.Core.Commands;
 using BiliBiliACGN.BiliBiliACGNCode.Powers;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -37,7 +38,7 @@ public sealed class HalfFruit : CardBaseModel
         // 播放动画
         await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
         // 施加能力：女儿攻击敌人时，该敌人在本回合失去力量
-        await PowerCmd.Apply<HalfFruitPower>(base.Owner.Creature, base.DynamicVars["HalfFruit"].BaseValue, base.Owner.Creature, this);
+        await DaughterCmd.ApplyPower<HalfFruitPower>(base.Owner.Creature, base.DynamicVars["HalfFruit"].BaseValue, this);
     }
 
     protected override void OnUpgrade()
