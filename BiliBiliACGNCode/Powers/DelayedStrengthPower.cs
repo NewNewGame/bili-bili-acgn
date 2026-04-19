@@ -24,7 +24,7 @@ public sealed class DelayedStrengthPower : PowerBaseModel
 
     public override async Task AfterPlayerTurnStart(PlayerChoiceContext choiceContext, Player player)
     {
-        if(player != base.Owner.Player)
+        if(player != base.Owner.Player || base.Owner?.PetOwner != player)
         {
             return;
         }
