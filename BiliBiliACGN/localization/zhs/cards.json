@@ -73,7 +73,7 @@
   "BILIBILIACGN-ALREADY_REPORTED.title": "已报备",
   "BILIBILIACGN-ALREADY_REPORTED.description": "获得{Block:diff()}点格挡。\n抽取{Cards:diff()}张牌。",
   "BILIBILIACGN-STREAM_END_MANHWA.title": "下播搞点韩漫",
-  "BILIBILIACGN-STREAM_END_MANHWA.description": "在下回合获得能量{Power:diff()}点[gold]红温[/gold]和{Energy:energyIcons()}。",
+  "BILIBILIACGN-STREAM_END_MANHWA.description": "在下回合获得{Power:diff()}点[gold]红温[/gold]和{Energy:energyIcons()}。",
   "BILIBILIACGN-HEAD_FLASH_GLARE.title": "头放闪光",
   "BILIBILIACGN-HEAD_FLASH_GLARE.description": "获得{Block:diff()}点格挡，获得{Power:diff()}层[gold]红温[/gold]。",
   "BILIBILIACGN-ELBOW_STRIKE.title": "肘击",
