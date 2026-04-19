@@ -25,7 +25,7 @@ public sealed class UncleStrike : CardBaseModel
     protected override HashSet<CardTag> CanonicalTags => [CardTag.Strike];
     #endregion
     #region 卡牌属性配置
-    private const int energyCost = 1;
+    private const int energyCost = 0;
     private const CardType type = CardType.Attack;
     private const CardRarity rarity = CardRarity.Common;
     private const TargetType targetType = TargetType.AnyEnemy;
@@ -33,7 +33,7 @@ public sealed class UncleStrike : CardBaseModel
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new DamageVar(8m, ValueProp.Move),
+        new DamageVar(4m, ValueProp.Move),
         new DynamicVar("Weak", 1m)
     ];
 
@@ -53,7 +53,7 @@ public sealed class UncleStrike : CardBaseModel
 
     protected override void OnUpgrade()
     {
-        base.DynamicVars["Damage"].UpgradeValueBy(3m);
+        base.DynamicVars["Damage"].UpgradeValueBy(2m);
         base.DynamicVars["Weak"].UpgradeValueBy(1m);
     }
 }
