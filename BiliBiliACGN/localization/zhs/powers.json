@@ -147,10 +147,6 @@
   "BILIBILIACGN-HALF_FRUIT_POWER.description": "每当女儿攻击敌人时，给予敌人本回合[blue]1[/blue]层[gold]变唐[/gold]。",
   "BILIBILIACGN-HALF_FRUIT_POWER.smartDescription": "每当女儿攻击敌人时，给予敌人本回合[blue]{Amount}[/blue]层[gold]变唐[/gold]。",
 
-  "BILIBILIACGN-CHUUNIBYOU_NOTE_POWER.title": "中二笔记",
-  "BILIBILIACGN-CHUUNIBYOU_NOTE_POWER.description": "每当你打出能力牌时，抽[blue]1[/blue]张牌。",
-  "BILIBILIACGN-CHUUNIBYOU_NOTE_POWER.smartDescription": "每当你打出能力牌时，抽[blue]{Amount}[/blue]张牌。",
-
   "BILIBILIACGN-CUTE_NE_POWER.title": "可爱捏",
   "BILIBILIACGN-CUTE_NE_POWER.description": "女儿获得[gold]格挡[/gold]时，给予你一半的[gold]格挡[/gold][blue]1[/blue]次。",
   "BILIBILIACGN-CUTE_NE_POWER.smartDescription": "女儿获得[gold]格挡[/gold]时，给予你一半的[gold]格挡[/gold][blue]{Amount}[/blue]次。",
