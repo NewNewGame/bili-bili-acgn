@@ -5,11 +5,8 @@
 //* 描述：为你而战 女儿会[gold]保护[/gold]你，帮会吸收所有未被格挡的攻击伤害，为你而战，但不会为了你去死，过量伤害返还。
 //*******************************************************
 
-
 using BaseLib.Extensions;
-using BiliBiliACGN.BiliBiliACGNCode.Utils;
 using MegaCrit.Sts2.Core.Commands;
-using MegaCrit.Sts2.Core.Logging;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.Models;
