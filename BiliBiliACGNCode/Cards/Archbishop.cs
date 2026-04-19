@@ -30,7 +30,6 @@ public sealed class Archbishop : CardBaseModel
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
     [
         HoverTipFactory.FromPower<StrengthPower>(),
-        HoverTipFactory.FromPower<ArchbishopPower>(),
     ];
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [

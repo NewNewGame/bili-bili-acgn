@@ -1,5 +1,5 @@
 //****************** 代码文件申明 ***********************
-//* 文件：Distort(扭曲)
+//* 文件：SuKi(大好き)
 //* 作者：wheat
 //* 创建时间：2026/04/08
 //* 描述：给予女儿3/4层力量，并对随机敌人发动4/5次进攻。
@@ -17,10 +17,13 @@ using MegaCrit.Sts2.Core.Models.Powers;
 namespace BiliBiliACGN.BiliBiliACGNCode.Cards;
 
 [Pool(typeof(FunShikiCardPool))]
-public sealed class Distort : CardBaseModel
+public sealed class SuKi : CardBaseModel
 {
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.Static(CustomeHoverTips.AttackOrb)];
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => [
+        HoverTipFactory.FromPower<StrengthPower>(),
+        HoverTipFactory.Static(CustomeHoverTips.AttackOrb),
+    ];
 
 
     private const int energyCost = 2;
@@ -35,7 +38,7 @@ public sealed class Distort : CardBaseModel
         new DynamicVar("Attacks", 4m),
     ];
 
-    public Distort() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
+    public SuKi() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {

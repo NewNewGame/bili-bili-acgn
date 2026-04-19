@@ -28,7 +28,6 @@ public sealed class SailorUniform : CardBaseModel
 
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
     [
-        HoverTipFactory.Static(StaticHoverTip.Block),
     ];
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>

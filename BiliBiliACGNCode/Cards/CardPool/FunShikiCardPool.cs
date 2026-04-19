@@ -66,7 +66,7 @@ public sealed class FunShikiCardPool : CustomCardPoolModel
             ModelDb.Card<Vector>(),
             ModelDb.Card<BrainWife>(),
             ModelDb.Card<Transference>(),
-            ModelDb.Card<Distort>(),
+            ModelDb.Card<SuKi>(),
             ModelDb.Card<RedStone>(),
             ModelDb.Card<BigNose>(),
             ModelDb.Card<RainyProtocol>(),

@@ -27,7 +27,6 @@ public sealed class NewSeasonGuide : CardBaseModel
 
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
     [
-        HoverTipFactory.Static(StaticHoverTip.Evoke),
     ];
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>

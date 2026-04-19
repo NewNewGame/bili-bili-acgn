@@ -26,8 +26,8 @@ public sealed class NewSeasonTimeMachine : CardBaseModel
     private const bool shouldShowInCardLibrary = true;
 
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [
+        HoverTipFactory.Static(StaticHoverTip.Evoke),
         HoverTipFactory.Static(StaticHoverTip.Channeling),
-        HoverTipFactory.Static(StaticHoverTip.Evoke)
     ];
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>

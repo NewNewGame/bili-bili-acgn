@@ -25,7 +25,9 @@ public sealed class BlackRabbit : CardBaseModel
     private const TargetType targetType = TargetType.Self;
     private const bool shouldShowInCardLibrary = true;
     protected override IEnumerable<DynamicVar> CanonicalVars => [new DynamicVar("EvokeCount", 3m)];
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.Static(StaticHoverTip.Block), HoverTipFactory.Static(CustomeHoverTips.AttackOrb)];
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => [
+        HoverTipFactory.Static(StaticHoverTip.Evoke),
+    ];
 
     public BlackRabbit() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
 

@@ -27,7 +27,6 @@ public sealed class LuckyHit : CardBaseModel
     private const bool shouldShowInCardLibrary = true;
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
     [
-        HoverTipFactory.Static(StaticHoverTip.Evoke),
         HoverTipFactory.FromOrb<AttackOrb>(),
         HoverTipFactory.Static(CustomeHoverTips.AttackOrb),
     ];
