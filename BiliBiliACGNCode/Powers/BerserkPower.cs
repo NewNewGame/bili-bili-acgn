@@ -17,6 +17,8 @@ using MegaCrit.Sts2.Core.Combat;
 using BiliBiliACGN.BiliBiliACGNCode.Utils;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using BiliBiliACGN.BiliBiliACGNCode.Nodes;
+using MegaCrit.Sts2.Core.HoverTips;
+using MegaCrit.Sts2.Core.Models.Powers;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Powers;
 
@@ -26,7 +28,14 @@ public sealed class BerserkPower : PowerBaseModel
 
     public override PowerStackType StackType => PowerStackType.Single;
     public override bool IsInstanced => true;
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new DynamicVar("DamageMultiplier", 150m), new EnergyVar(2), new CardsVar(2)];
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<StrengthPower>()];
+
+    protected override IEnumerable<DynamicVar> CanonicalVars => [
+        new DynamicVar("DamageMultiplier", 170m),
+        new DynamicVar("Strength", 2m),
+        new EnergyVar(2),
+        new CardsVar(2)
+    ];
     /// <summary>
     /// 应用前
     /// </summary>
@@ -95,6 +104,8 @@ public sealed class BerserkPower : PowerBaseModel
     {
         // 如果旧所有者不是当前所有者，则返回
         if(oldOwner != base.Owner) return;
+        // 获得力量
+        await PowerCmd.Apply<StrengthPower>(base.Owner, base.DynamicVars["Strength"].BaseValue, oldOwner, null);
         // 如果有开始享受能力，并且是玩家
         int num = oldOwner.GetPowerAmount<EnjoyPower>();
         if(num > 0 && oldOwner.Player != null){
