@@ -35,8 +35,8 @@ public sealed class NewYearGalaDeathSong : CardBaseModel
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new CalculationBaseVar(15m),
-        new ExtraDamageVar(4m),
+        new CalculationBaseVar(16m),
+        new ExtraDamageVar(5m),
         new CalculatedDamageVar(ValueProp.Move).WithMultiplier((card, _) => card.Owner.Creature.HasPower<BerserkPower>() ? 1 : 0)
     ];
 
@@ -55,6 +55,7 @@ public sealed class NewYearGalaDeathSong : CardBaseModel
 
     protected override void OnUpgrade()
     {
-        base.DynamicVars["CalculationBase"].UpgradeValueBy(5m);
+        base.DynamicVars["CalculationBase"].UpgradeValueBy(6m);
+        base.DynamicVars["ExtraDamage"].UpgradeValueBy(1m);
     }
 }
