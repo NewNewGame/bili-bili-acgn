@@ -135,7 +135,7 @@
   "BILIBILIACGN-ROAR.title": "怒吼",
   "BILIBILIACGN-ROAR.description": "获得{Block:diff()}点[gold]格挡[/gold]。",
   "BILIBILIACGN-ONLY_TWO_YEARS_OLDER.title": "他才比我大两岁",
-  "BILIBILIACGN-ONLY_TWO_YEARS_OLDER.description": "给予{VulnerablePower:diff()}层[gold]易伤[/gold]。{IfUpgraded:show:抽取1张牌|}}",
+  "BILIBILIACGN-ONLY_TWO_YEARS_OLDER.description": "给予{VulnerablePower:diff()}层[gold]易伤[/gold]。\n抽取1张牌。",
   "BILIBILIACGN-SHERRYS_WHISPER.title": "雪莉的轻语",
   "BILIBILIACGN-SHERRYS_WHISPER.description": "[gold]消耗[/gold]你的[gold]红温[/gold]，每[gold]消耗[/gold]{AngerPerEnergy:diff()}点[gold]红温[/gold]抽取1张牌，至多{Cards:diff()}张。",
   "BILIBILIACGN-HONEST_PICK_UP.title": "这是俺拾嘞",
