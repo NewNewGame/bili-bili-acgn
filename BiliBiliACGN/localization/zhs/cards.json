@@ -63,7 +63,7 @@
   "BILIBILIACGN-COIN_OPERATION.title": "铸币操作",
   "BILIBILIACGN-COIN_OPERATION.description": "失去{HpLoss:diff()}点生命。获得{Anger:diff()}点[gold]红温[/gold]。",
   "BILIBILIACGN-EMERGENCY_OXYGEN.title": "紧急吸氧",
-  "BILIBILIACGN-EMERGENCY_OXYGEN.description": "丢弃{Cards:diff()}张牌。\n自动打出{Cards:diff()}张带有[gold]有一说一[/gold]的牌。",
+  "BILIBILIACGN-EMERGENCY_OXYGEN.description": "自动打出{Cards:diff()}张带有[gold]有一说一[/gold]的牌。\n丢弃{Cards:diff()}张牌。",
   "BILIBILIACGN-ONLY_TAILWIND_GAMES.title": "只打顺风局",
   "BILIBILIACGN-ONLY_TAILWIND_GAMES.description": "获得{Powers:diff()}层[gold]忍气吞声[/gold]。进入[gold]红怒[/gold]时获得{Energy:energyIcons()}，并获得{Powers:diff()}点[gold]红温[/gold]。",
   "BILIBILIACGN-DIDNT_PAD.title": "我没垫！",

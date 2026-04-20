@@ -2,7 +2,7 @@
 //* 文件：EmergencyOxygen(紧急吸氧)
 //* 作者：wheat
 //* 创建时间：2026/04/03
-//* 描述：丢弃1/2张牌，打出1/2张有一说一。
+//* 描述：打出1/2张有一说一,丢弃1/2张牌。
 //*******************************************************
 
 using BaseLib.Utils;
@@ -43,15 +43,14 @@ public sealed class EmergencyOxygen : CardBaseModel
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        // 丢弃1/2张牌，打出1/2张有一说一
-        int cardCount = (int)base.DynamicVars.Cards.BaseValue;
-        // 丢弃1/2张牌
-        await CardCmd.Discard(choiceContext, await CardSelectCmd.FromHandForDiscard(choiceContext, base.Owner, new CardSelectorPrefs(CardSelectorPrefs.DiscardSelectionPrompt, cardCount), null, this));
         // 打出1/2张有一说一
+        int cardCount = (int)base.DynamicVars.Cards.BaseValue;
         var cards = await CardSelectCmd.FromHand(choiceContext, base.Owner, new CardSelectorPrefs(MCardSelectorPrefs.TO_YYSY, cardCount), MCardSelectorPrefs.YYSYFilter, this);
         foreach(var card in cards){
             await AutoPlayUtils.AutoPlaySafely(choiceContext, card);
         }
+        // 丢弃1/2张牌
+        await CardCmd.Discard(choiceContext, await CardSelectCmd.FromHandForDiscard(choiceContext, base.Owner, new CardSelectorPrefs(CardSelectorPrefs.DiscardSelectionPrompt, cardCount), null, this));
     }
 
     protected override void OnUpgrade()
