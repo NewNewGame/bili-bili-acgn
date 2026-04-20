@@ -50,8 +50,8 @@ public sealed class NiulangVillage : CardBaseModel
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
         new CalculationBaseVar(0m),
-        new CalculationExtraVar(1m),
-        new CalculatedVar("Anger").WithMultiplier((CardModel card, Creature? _) => {
+        new ExtraDamageVar(1m),
+        new CalculatedDamageVar(ValueProp.Move).WithMultiplier((CardModel card, Creature? _) => {
             return card.Owner.Creature.GetPowerAmount<AngerPower>();
         }),
     ];
@@ -63,16 +63,11 @@ public sealed class NiulangVillage : CardBaseModel
     {
         int x = base.ResolveEnergyXValue();
         if(base.IsUpgraded) x++;
-        int anger = (int)((CalculatedVar)base.DynamicVars["Anger"]).Calculate(null);
+        int anger = (int)((CalculatedDamageVar)base.DynamicVars["CalculatedDamage"]).Calculate(cardPlay.Target);
         await DamageCmd.Attack(anger * x)
             .FromCard(this)
             .Targeting(cardPlay.Target)
             .Execute(choiceContext);
-    }
-
-    protected override void OnUpgrade()
-    {
-        base.AddKeyword(CardKeyword.Retain);
     }
 
 }
