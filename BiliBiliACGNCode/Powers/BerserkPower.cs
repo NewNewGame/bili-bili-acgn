@@ -31,7 +31,7 @@ public sealed class BerserkPower : PowerBaseModel
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<StrengthPower>()];
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new DynamicVar("DamageMultiplier", 200m),
+        new DynamicVar("DamageMultiplier", 170m),
         new DynamicVar("Strength", 2m),
         new EnergyVar(2),
         new CardsVar(2)
