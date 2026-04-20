@@ -1,5 +1,5 @@
 //****************** 代码文件申明 ***********************
-//* 文件：MawaluMawaluPower(马瓦鲁马瓦鲁)
+//* 文件：MawaruMawaruPower(马瓦鲁马瓦鲁)
 //* 作者：wheat
 //* 创建时间：2026/04/08
 //* 描述：当这名敌人死亡时，对其他敌人造成等同于它最大生命值的伤害。
@@ -17,7 +17,7 @@ using MegaCrit.Sts2.Core.ValueProps;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Powers;
 
-public sealed class MawaluMawaluPower : PowerBaseModel
+public sealed class MawaruMawaruPower : PowerBaseModel
 {
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Single;
