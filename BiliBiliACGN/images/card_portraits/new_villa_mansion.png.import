@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://daarrer8kvi4i"
-path="res://.godot/imported/big_villa_mansion.png-1930eadcf118e604141f4b46b4be2317.ctex"
+uid="uid://2vsd6s8jb60o"
+path="res://.godot/imported/new_villa_mansion.png-87d1d1c2bcca1f17e855bfaad5314d34.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://BiliBiliACGN/images/card_portraits/big_villa_mansion.png"
-dest_files=["res://.godot/imported/big_villa_mansion.png-1930eadcf118e604141f4b46b4be2317.ctex"]
+source_file="res://BiliBiliACGN/images/card_portraits/new_villa_mansion.png"
+dest_files=["res://.godot/imported/new_villa_mansion.png-87d1d1c2bcca1f17e855bfaad5314d34.ctex"]
 
 [params]
 
