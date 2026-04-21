@@ -15,6 +15,9 @@ namespace BiliBiliACGN.BiliBiliACGNCode.Core.Models.Orbs;
 public sealed class AttackOrb : OrbBaseModel
 {
 	protected override string ChannelSfx => "event:/sfx/characters/defect/defect_plasma_channel";
+	protected override string EvokeSfx => "event:/sfx/characters/defect/defect_plasma_evoke";
+    protected override string PassiveSfx => "event:/sfx/characters/defect/defect_plasma_passive";
+
     public override Color DarkenedColor => new Color("008585");
     public override decimal PassiveVal => ModifyOrbValue(0m);
 
@@ -46,7 +49,7 @@ public sealed class AttackOrb : OrbBaseModel
 		}
 		IReadOnlyList<Creature> targets = (allEnemies) ? list : ((target == null) ? new List<Creature>(){base.Owner.RunState.Rng.CombatTargets.NextItem(list)} : new List<Creature>{target});
 
-		//PlayEvokeSfx();
+		PlayEvokeSfx();
         await DaughterCmd.ApplyAttack(base.Owner.Creature, value, choiceContext, targets);
 		return targets;
 	}
