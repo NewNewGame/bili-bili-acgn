@@ -15,7 +15,7 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 namespace BiliBiliACGN.BiliBiliACGNCode.Cards;
 
 [Pool(typeof(FunShikiCardPool))]
-public sealed class Diary : CardBaseModel
+public sealed class Dress : CardBaseModel
 {
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
 
@@ -30,7 +30,7 @@ public sealed class Diary : CardBaseModel
         new CardsVar(3),
     ];
 
-    public Diary() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
+    public Dress() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {

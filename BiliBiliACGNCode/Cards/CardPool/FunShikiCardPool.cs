@@ -49,7 +49,7 @@ public sealed class FunShikiCardPool : CustomCardPoolModel
             ModelDb.Card<ChampionPowder>(),
             ModelDb.Card<FunTuan>(),
             ModelDb.Card<Penguin>(),
-            ModelDb.Card<Diary>(),
+            ModelDb.Card<Dress>(),
             ModelDb.Card<TrackPlayer>(),
             ModelDb.Card<OhHoHoHo>(),
             ModelDb.Card<MemeMailBox>(),
