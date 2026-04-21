@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://blk5q1wv8olgw"
-path="res://.godot/imported/green_tea_fan.png-c5622c8916f66c1cc5e80b5d5ff18007.ctex"
+uid="uid://cu6whxnfq8rg3"
+path="res://.godot/imported/consecutive_bai_da.png-a152e80923970869b0d6794f2907bf6a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://BiliBiliACGN/images/card_portraits/green_tea_fan.png"
-dest_files=["res://.godot/imported/green_tea_fan.png-c5622c8916f66c1cc5e80b5d5ff18007.ctex"]
+source_file="res://BiliBiliACGN/images/card_portraits/consecutive_bai_da.png"
+dest_files=["res://.godot/imported/consecutive_bai_da.png-a152e80923970869b0d6794f2907bf6a.ctex"]
 
 [params]
 
