@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://mco8mxpg80ly"
-path="res://.godot/imported/anime_master.png-72580fdb9d5cfd3d8765b245ea2539e5.ctex"
+uid="uid://dnursx7kqs8q7"
+path="res://.godot/imported/yandere_form.png-a54894978e4cf25fe79160d280e4fd1e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://BiliBiliACGN/images/card_portraits/anime_master.png"
-dest_files=["res://.godot/imported/anime_master.png-72580fdb9d5cfd3d8765b245ea2539e5.ctex"]
+source_file="res://BiliBiliACGN/images/card_portraits/yandere_form.png"
+dest_files=["res://.godot/imported/yandere_form.png-a54894978e4cf25fe79160d280e4fd1e.ctex"]
 
 [params]
 
