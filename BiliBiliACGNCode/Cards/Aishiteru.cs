@@ -1,5 +1,5 @@
 //****************** 代码文件申明 ***********************
-//* 文件：AishiteruRailway(爱洗铁路)
+//* 文件：Aishiteru(爱洗铁路)
 //* 作者：wheat
 //* 创建时间：2026/04/11
 //* 描述：每打出1张[gold]能力[/gold]牌，给予随机敌人{Morbid:diff()}层[gold]病态[/gold]。
@@ -17,7 +17,7 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 namespace BiliBiliACGN.BiliBiliACGNCode.Cards;
 
 [Pool(typeof(FunShikiCardPool))]
-public sealed class AishiteruRailway : CardBaseModel
+public sealed class Aishiteru : CardBaseModel
 {
     #region 卡牌关键词与悬停
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<MorbidPower>()];
@@ -34,7 +34,7 @@ public sealed class AishiteruRailway : CardBaseModel
         new DynamicVar("Morbid", 2m)
     ];
 
-    public AishiteruRailway() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
+    public Aishiteru() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
 
     #endregion
 

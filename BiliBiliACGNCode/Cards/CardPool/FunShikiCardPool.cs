@@ -118,7 +118,7 @@ public sealed class FunShikiCardPool : CustomCardPoolModel
             ModelDb.Card<ZeroFruit>(),
             ModelDb.Card<MangaArtistKirito>(),
             ModelDb.Card<MinusTwentyMillionFruit>(),
-            ModelDb.Card<AishiteruRailway>(),
+            ModelDb.Card<Aishiteru>(),
             ModelDb.Card<DoZatan>(),
             ModelDb.Card<BuyVideo>(),
             ModelDb.Card<BoostVideo>(),
