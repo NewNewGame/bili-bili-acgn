@@ -1,5 +1,5 @@
 //****************** 代码文件申明 ***********************
-//* 文件：MinusEightThousand(减8000)
+//* 文件：Birthday(生日)
 //* 作者：wheat
 //* 创建时间：2026/04/11
 //* 描述：下/本回合，生成2个随机充能球。
@@ -18,7 +18,7 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 namespace BiliBiliACGN.BiliBiliACGNCode.Cards;
 
 [Pool(typeof(FunShikiCardPool))]
-public sealed class MinusEightThousand : CardBaseModel
+public sealed class Birthday : CardBaseModel
 {
     private const int energyCost = 1;
     private const CardType type = CardType.Skill;
@@ -32,7 +32,7 @@ public sealed class MinusEightThousand : CardBaseModel
         new DynamicVar("RandomOrbs", 2m),
     ];
 
-    public MinusEightThousand() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
+    public Birthday() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {

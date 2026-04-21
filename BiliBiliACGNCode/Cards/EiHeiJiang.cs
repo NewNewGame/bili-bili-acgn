@@ -17,7 +17,7 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 namespace BiliBiliACGN.BiliBiliACGNCode.Cards;
 
 [Pool(typeof(FunShikiCardPool))]
-public sealed class FunShikiWasher : CardBaseModel
+public sealed class EiHeiJiang : CardBaseModel
 {
     private const int energyCost = 2;
     private const CardType type = CardType.Skill;
@@ -31,7 +31,7 @@ public sealed class FunShikiWasher : CardBaseModel
         new DynamicVar("Hits", 3m),
     ];
 
-    public FunShikiWasher() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
+    public EiHeiJiang() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
