@@ -1,5 +1,5 @@
 //****************** 代码文件申明 ***********************
-//* 文件：BigVillaMansion(大别墅！)
+//* 文件：NewVillaMansion(新别墅！)
 //* 作者：wheat
 //* 创建时间：2026/04/11
 //* 描述：多人：所有人抽3/5张牌。消耗。
@@ -15,7 +15,7 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 namespace BiliBiliACGN.BiliBiliACGNCode.Cards;
 
 [Pool(typeof(FunShikiCardPool))]
-public sealed class BigVillaMansion : CardBaseModel
+public sealed class NewVillaMansion : CardBaseModel
 {
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
 
@@ -32,7 +32,7 @@ public sealed class BigVillaMansion : CardBaseModel
         new CardsVar(3),
     ];
 
-    public BigVillaMansion() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
+    public NewVillaMansion() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
