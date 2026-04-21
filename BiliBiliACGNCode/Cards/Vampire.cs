@@ -18,7 +18,7 @@ using MegaCrit.Sts2.Core.ValueProps;
 namespace BiliBiliACGN.BiliBiliACGNCode.Cards;
 
 [Pool(typeof(FunShikiCardPool))]
-public sealed class BuyVideo : CardBaseModel
+public sealed class Vampire : CardBaseModel
 {
     #region 卡牌属性配置
     private const int energyCost = 1;
@@ -33,7 +33,7 @@ public sealed class BuyVideo : CardBaseModel
         new CardsVar(2)
     ];
 
-    public BuyVideo() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
+    public Vampire() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
 
     #endregion
 
