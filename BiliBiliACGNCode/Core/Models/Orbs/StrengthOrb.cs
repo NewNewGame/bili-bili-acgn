@@ -20,8 +20,6 @@ public sealed class StrengthOrb : OrbBaseModel
 {
     private decimal _evokeVal = 3m;
 	protected override string ChannelSfx => "event:/sfx/characters/defect/defect_dark_channel";
-	protected override string EvokeSfx => "event:/sfx/characters/defect/defect_dark_evoke";
-	protected override string PassiveSfx => "event:/sfx/characters/defect/defect_dark_passive";
 	public override Color DarkenedColor => new Color("9001d3");
 
 	public override decimal PassiveVal => ModifyOrbValue(5m);
@@ -47,7 +45,6 @@ public sealed class StrengthOrb : OrbBaseModel
 
 	public override async Task<IEnumerable<Creature>> Evoke(PlayerChoiceContext playerChoiceContext)
 	{
-		PlayEvokeSfx();
 		await DaughterCmd.ApplyPower<StrengthPower>(base.Owner.Creature, (int)EvokeVal/3m, null);
 		return new List<Creature>(){base.Owner.Creature};
 	}

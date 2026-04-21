@@ -15,8 +15,6 @@ namespace BiliBiliACGN.BiliBiliACGNCode.Core.Models.Orbs;
 public sealed class LifeOrb : OrbBaseModel
 {
 	protected override string ChannelSfx => "event:/sfx/characters/defect/defect_frost_channel";
-	protected override string EvokeSfx => "event:/sfx/characters/defect/defect_frost_evoke";
-	protected override string PassiveSfx => "event:/sfx/characters/defect/defect_frost_passive";
 
 	public override Color DarkenedColor => new Color("7860a7");
 
@@ -36,7 +34,6 @@ public sealed class LifeOrb : OrbBaseModel
 			throw new InvalidOperationException("Block orbs cannot target creatures.");
 		}
 		Trigger();
-		PlayPassiveSfx();
 		await DaughterCmd.AddTempHp(base.Owner.Creature, PassiveVal, choiceContext);
 	}
 
