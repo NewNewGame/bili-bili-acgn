@@ -35,7 +35,7 @@ public sealed class MyConfession : CardBaseModel
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new DamageVar(4m, ValueProp.Unblockable|ValueProp.Unpowered),
+        new DamageVar(4m, ValueProp.Unblockable|ValueProp.Unpowered|ValueProp.Move),
         new CalculationBaseVar(0m),
         new CalculationExtraVar(1m),
         new CalculatedVar("CalculatedTimes").WithMultiplier((card, creature) => card.Owner.Creature.GetPowerAmount<AngerPower>())
