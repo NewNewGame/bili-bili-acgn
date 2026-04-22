@@ -52,7 +52,7 @@
     "BILIBILIACGN-CALM_PIPI.description": "本场战斗中，每当你[gold]完美格挡[/gold]一回合攻击，获得[blue]{Amount}[/blue]点[gold]临时敏捷[/gold]，每次[gold]完美格挡[/gold]叠加。",
     "BILIBILIACGN-CALM_PIPI.flavor": "还没想好",
     "BILIBILIACGN-ULTIMATE_SHIT_ANIME_COMMITTEE.title": "究极粪动画制作委员会",
-    "BILIBILIACGN-ULTIMATE_SHIT_ANIME_COMMITTEE.description": "在每场战斗开始时，随机复制一张手牌，这张卡牌本回合可以[gold]免费[/gold]打出。",
+    "BILIBILIACGN-ULTIMATE_SHIT_ANIME_COMMITTEE.description": "在每场战斗开始时，随机复制一张手牌，这张卡牌本回合可以[gold]免费[/gold]打出，为这张牌添加[gold]消耗[/gold]。",
     "BILIBILIACGN-ULTIMATE_SHIT_ANIME_COMMITTEE.flavor": "还没想好",
     "BILIBILIACGN-QIAN_HU_DIARY.title": "千户的日记",
     "BILIBILIACGN-QIAN_HU_DIARY.description": "每当你跳过一次卡牌奖励，回合结束时获得等同于[blue]跳过次数×{Amount}[/blue]的[gold]格挡[/gold]。",
