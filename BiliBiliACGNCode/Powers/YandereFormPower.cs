@@ -27,6 +27,8 @@ public sealed class YandereFormPower : PowerBaseModel
         // 如果攻击者是女儿或你自身，则施加病态
         if(dealer == base.Owner)
         {
+            // 如果伤害来源为病态，则返回
+            if(props == MorbidPower.MORBID_VALUE_PROP && cardSource == null) return;
             await PowerCmd.Apply<MorbidPower>(target, Amount * result.TotalDamage, dealer, cardSource);
         }else if(dealer.PetOwner != null && dealer.PetOwner == base.Owner.Player){
             await PowerCmd.Apply<MorbidPower>(target, Amount * result.TotalDamage, dealer.PetOwner.Creature, cardSource);
