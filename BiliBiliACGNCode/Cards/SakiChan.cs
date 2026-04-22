@@ -2,7 +2,7 @@
 //* 文件：SakiChan(Saki酱)
 //* 作者：wheat
 //* 创建时间：2026/04/05
-//* 描述：造成{Damage:diff()}点伤害，打出后将此牌复制加入抽牌堆。
+//* 描述：造成{Damage:diff()}点伤害，所有的Saki酱伤害加3/4。打出后将此牌复制加入抽牌堆。
 //*******************************************************
 using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Commands;
@@ -27,6 +27,7 @@ public sealed class SakiChan : CardBaseModel
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
         new DamageVar(6m, ValueProp.Move)
+        
     ];
 
     public SakiChan() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }

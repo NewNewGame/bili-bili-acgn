@@ -2,7 +2,7 @@
 //* 文件：DeathNoteT(死亡笔记T)
 //* 作者：wheat
 //* 创建时间：2026/04/05
-//* 描述：死亡笔记链 T：缩小、弃牌堆加入 H。消耗。
+//* 描述：死亡笔记链 T：缩小、抽牌堆加入 H。消耗。
 //*******************************************************
 using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Commands;
@@ -46,7 +46,7 @@ public sealed class DeathNoteT : CardBaseModel
         // 弃牌堆加入 DeathNoteH
         CardModel card = base.CombatState.CreateCard<DeathNoteH>(base.Owner);
         await Task.CompletedTask;
-        CardCmd.PreviewCardPileAdd(await CardPileCmd.AddGeneratedCardToCombat(card, PileType.Discard, addedByPlayer: true));
+        CardCmd.PreviewCardPileAdd(await CardPileCmd.AddGeneratedCardToCombat(card, PileType.Draw, addedByPlayer: true));
 		await Cmd.Wait(0.5f);
     }
 

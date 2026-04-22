@@ -2,7 +2,7 @@
 //* 文件：DeathNoteD(死亡笔记D)
 //* 作者：wheat
 //* 创建时间：2026/04/05
-//* 描述：倒计时与胜利、移除 AI、脆弱；向弃牌堆加入死亡笔记E。消耗。
+//* 描述：倒计时与胜利、移除 AI、虚弱；向弃牌堆加入死亡笔记E。消耗。
 //*******************************************************
 using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Commands;
@@ -21,7 +21,7 @@ public sealed class DeathNoteD : CardBaseModel
 {
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
 
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<FrailPower>(), HoverTipFactory.FromPower<ArtifactPower>(),HoverTipFactory.FromCard<DeathNoteE>()];
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<WeakPower>(), HoverTipFactory.FromPower<ArtifactPower>(),HoverTipFactory.FromCard<DeathNoteE>()];
 
     private const int energyCost = 1;
     private const CardType type = CardType.Skill;
@@ -31,18 +31,18 @@ public sealed class DeathNoteD : CardBaseModel
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new DynamicVar("Fragile", 99m),
+        new DynamicVar("Weak", 99m),
     ];
 
     public DeathNoteD() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        // 移除 AI；施加脆弱；弃牌堆加入 DeathNoteE
+        // 移除 AI；施加虚弱；弃牌堆加入 DeathNoteE
         ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
         await PowerCmd.Remove<ArtifactPower>(cardPlay.Target);
-        // 施加脆弱
-        await PowerCmd.Apply<FrailPower>(cardPlay.Target, base.DynamicVars["Fragile"].BaseValue, base.Owner.Creature, this);
+        // 施加虚弱
+        await PowerCmd.Apply<WeakPower>(cardPlay.Target, base.DynamicVars["Weak"].BaseValue, base.Owner.Creature, this);
         // 弃牌堆加入 DeathNoteE
         CardModel card = base.CombatState.CreateCard<DeathNoteE>(base.Owner);
 		CardCmd.PreviewCardPileAdd(await CardPileCmd.AddGeneratedCardToCombat(card, PileType.Discard, addedByPlayer: true));
