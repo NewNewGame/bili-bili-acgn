@@ -26,7 +26,7 @@ public sealed class EiHeiJiangMask : RelicBaseModel
     protected override IEnumerable<DynamicVar> CanonicalVars => [
 		new DynamicVar("Power", 3), 
 		new DynamicVar("AttackOrb", 1),
-		new DynamicVar("Hp", 10m),
+		new DynamicVar("Hp", 5m),
 	];
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [
 		HoverTipFactory.FromPower<StrengthPower>(),

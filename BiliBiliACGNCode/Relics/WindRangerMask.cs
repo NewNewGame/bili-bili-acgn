@@ -27,7 +27,7 @@ public sealed class WindRangerMask : RelicBaseModel
 	protected override IEnumerable<DynamicVar> CanonicalVars => [
 		new DynamicVar("Power", 5m), 
 		new DynamicVar("AttackOrb", 2),
-		new DynamicVar("Hp", 15m),
+		new DynamicVar("Hp", 10m),
 	];
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [
 		HoverTipFactory.FromPower<StrengthPower>(),
