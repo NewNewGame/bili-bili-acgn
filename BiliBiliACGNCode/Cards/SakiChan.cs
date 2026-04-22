@@ -59,7 +59,7 @@ public sealed class SakiChan : CardBaseModel
         await Cmd.Wait(0.2f);
         // 所有的Saki酱伤害加3/4
         IEnumerable<SakiChan> enumerable = base.Owner.PlayerCombatState.AllCards.OfType<SakiChan>();
-		decimal baseValue = base.DynamicVars["Increase"].BaseValue;
+		decimal baseValue = base.DynamicVars["IncreaseSakiChanDamage"].BaseValue;
 		foreach (SakiChan item in enumerable)
 		{
 			item.BuffFromClawPlay(baseValue);
