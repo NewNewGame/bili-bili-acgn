@@ -3,6 +3,8 @@
     "POP_PIPI.moves.READY.title": "准备就绪",
     "POP_PIPI.moves.STRONG_PUNCH.title": "没生气哟~",
     "POP_PIPI.name": "Pop子与Pipi美",
-    "ITSUKA.moves.NOTHING_MOVE.title": "可爱捏",
-    "ITSUKA.name": "雪平一果"
+    "GUI_GUI.moves.READY.title": "我很抱歉",
+    "GUI_GUI.moves.BLOCK.title": "别打我~",
+    "GUI_GUI.moves.STRONG_PUNCH.title": "龟壳撞击",
+    "GUI_GUI.name": "龟"
 }
