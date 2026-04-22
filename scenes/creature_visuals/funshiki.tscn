@@ -23,8 +23,8 @@ scale = Vector2(0.8063455, 1.0813091)
 
 [node name="IntentPos" type="Marker2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(0, -200)
+position = Vector2(0, -412)
 
 [node name="CenterPos" type="Marker2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(0, -200)
+position = Vector2(0, -256)

@@ -5,13 +5,13 @@
 //* 描述：泛式角色
 //*******************************************************
 
+using Godot;
 using BaseLib.Abstracts;
 using BiliBiliACGN.BiliBiliACGNCode.Cards;
 using BiliBiliACGN.BiliBiliACGNCode.Cards.CardPool;
 using BiliBiliACGN.BiliBiliACGNCode.Potions.PotionPool;
 using BiliBiliACGN.BiliBiliACGNCode.Relics;
 using BiliBiliACGN.BiliBiliACGNCode.Relics.RelicPool;
-using Godot;
 using MegaCrit.Sts2.Core.Entities.Characters;
 using MegaCrit.Sts2.Core.Models;
 
@@ -25,7 +25,7 @@ public sealed class FunShikiCharacter : PlaceholderCharacterModel
 	public override Color EnergyLabelOutlineColor => new Color("99160c");
 	public override CharacterGender Gender => CharacterGender.Feminine;
 	public override int StartingHp => 62;
-	public override int BaseOrbSlotCount => 4;
+	public override int BaseOrbSlotCount => 3;
 	public override CardPoolModel CardPool => ModelDb.CardPool<FunShikiCardPool>();
 
 	public override RelicPoolModel RelicPool => ModelDb.RelicPool<FunShikiRelicPool>();
