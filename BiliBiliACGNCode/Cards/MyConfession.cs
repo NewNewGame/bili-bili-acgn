@@ -28,7 +28,7 @@ public sealed class MyConfession : CardBaseModel
 
     #region 卡牌属性配置
     private const int energyCost = 1;
-    private const CardType type = CardType.Attack;
+    private const CardType type = CardType.Skill;
     private const CardRarity rarity = CardRarity.Rare;
     private const TargetType targetType = TargetType.AnyEnemy;
     private const bool shouldShowInCardLibrary = true;
