@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://561ehs0vt3c5"
-path="res://.godot/imported/add_yysy_temp_power.png-e06582cf13ccdd69472506d5d25a85c1.ctex"
+uid="uid://cthbwe6hp5eeh"
+path="res://.godot/imported/add_yy_sy_temp_power.png-475e021e18cc46a7866471e47ec67094.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://BiliBiliACGN/images/powers/add_yysy_temp_power.png"
-dest_files=["res://.godot/imported/add_yysy_temp_power.png-e06582cf13ccdd69472506d5d25a85c1.ctex"]
+source_file="res://BiliBiliACGN/images/powers/big/add_yy_sy_temp_power.png"
+dest_files=["res://.godot/imported/add_yy_sy_temp_power.png-475e021e18cc46a7866471e47ec67094.ctex"]
 
 [params]
 

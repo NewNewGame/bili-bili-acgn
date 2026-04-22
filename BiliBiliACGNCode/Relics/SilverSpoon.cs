@@ -2,13 +2,12 @@
 //* 文件：SilverSpoon(银勺)
 //* 作者：wheat
 //* 创建时间：2026/04/06
-//* 描述：当你打出消耗牌后，复制一张进入弃牌堆。
+//* 描述：你的[gold]消耗牌[/gold]不在被[gold]消耗[/gold]，而是进入[gold]弃牌堆[/gold]。
 //*******************************************************
 using BaseLib.Utils;
-using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Relics;
-using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.RelicPools;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Relics;
@@ -17,20 +16,19 @@ namespace BiliBiliACGN.BiliBiliACGNCode.Relics;
 public sealed class SilverSpoon : RelicBaseModel
 {
     public override RelicRarity Rarity => RelicRarity.Rare;
+    /// <summary>
+    /// 你的[gold]消耗牌[/gold]不在被[gold]消耗[/gold]，而是进入[gold]弃牌堆[/gold]。
+    /// </summary>
+    public override (PileType, CardPilePosition) ModifyCardPlayResultPileTypeAndPosition(CardModel card, bool isAutoPlay, ResourceInfo resources, PileType pileType, CardPilePosition position)
+	{
+		if (card.Owner != base.Owner)
+		{
+			return (pileType, position);
+		}
+        if(!card.Keywords.Contains(CardKeyword.Exhaust)){
+            return (pileType, position);
+        }
+		return (PileType.Discard, CardPilePosition.Bottom);
+	}
 
-    public override async Task AfterCardPlayed(PlayerChoiceContext context, CardPlay cardPlay)
-    {
-        // 如果不是自己的牌，则不执行
-        if(cardPlay.Card.Owner != base.Owner){
-            return;
-        }
-        // 如果不是消耗牌，则不执行
-        if(!cardPlay.Card.Keywords.Contains(CardKeyword.Exhaust)){
-            return;
-        }
-        // 复制一张进入弃牌堆
-        var copy = cardPlay.Card.CreateClone();
-        CardCmd.PreviewCardPileAdd(await CardPileCmd.AddGeneratedCardToCombat(copy, PileType.Discard, addedByPlayer: true));
-        await Cmd.Wait(0.5f);
-    }
 }
