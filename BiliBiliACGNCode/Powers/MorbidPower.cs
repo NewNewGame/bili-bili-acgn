@@ -5,6 +5,7 @@
 //* 描述：每当你对敌方造成伤害时，自身受到病态层数的伤害。
 //*******************************************************
 
+using BiliBiliACGN.BiliBiliACGNCode.GameActions.Multiplayer;
 using Godot;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Creatures;
@@ -147,7 +148,7 @@ public sealed class MorbidPower : PowerBaseModel
         int atkTimes = Mathf.Min(Amount, 1 + base.Owner.GetPowerAmount<MadlyLovePower>());
         while(atkTimes > 0){
             // 造成伤害
-            await CreatureCmd.Damage(choiceContext, dealer, Amount * (100m - mitigation) / 100m, MORBID_VALUE_PROP, target);
+            await CreatureCmd.Damage(new MorbidPlayerChoiceContext(), dealer, Amount * (100m - mitigation) / 100m, MORBID_VALUE_PROP, target);
             // 如果病态持有者死亡，则退出循环
             if(dealer.IsDead) return;
             // 减少一层病态

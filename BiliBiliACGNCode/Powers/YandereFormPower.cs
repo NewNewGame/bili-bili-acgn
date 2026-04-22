@@ -5,6 +5,7 @@
 //* 描述：每当你或女儿造成伤害时，同时给予等量的病态。
 //*******************************************************
 
+using BiliBiliACGN.BiliBiliACGNCode.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
@@ -23,12 +24,13 @@ public sealed class YandereFormPower : PowerBaseModel
     {
         // 如果攻击者为空，则返回
         if(dealer == null) return;
-
+        // 如果攻击目标为自身，则返回
+        if(target == base.Owner) return;
         // 如果攻击者是女儿或你自身，则施加病态
         if(dealer == base.Owner)
         {
             // 如果伤害来源为病态，则返回
-            if(props == MorbidPower.MORBID_VALUE_PROP && cardSource == null) return;
+            if(choiceContext is MorbidPlayerChoiceContext) return;
             await PowerCmd.Apply<MorbidPower>(target, Amount * result.TotalDamage, dealer, cardSource);
         }else if(dealer.PetOwner != null && dealer.PetOwner == base.Owner.Player){
             await PowerCmd.Apply<MorbidPower>(target, Amount * result.TotalDamage, dealer.PetOwner.Creature, cardSource);
