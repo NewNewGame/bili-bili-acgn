@@ -10,6 +10,7 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
 using BiliBiliACGN.BiliBiliACGNCode.Cards;
 using MegaCrit.Sts2.Core.Commands;
+using MegaCrit.Sts2.Core.Entities.Cards;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Powers;
 
@@ -30,5 +31,12 @@ public sealed class AddYYSYTempPower : PowerBaseModel
             return;
         }
         card.AddKeyword(CustomKeyWords.YYSY);
+    }
+    public override async Task AfterCardPlayedLate(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+    {
+        if(cardPlay.Card.Owner.Creature != base.Owner){
+            return;
+        }
+        await PowerCmd.Remove(this);
     }
 }
