@@ -32,7 +32,10 @@ public sealed class TwistPower : PowerBaseModel
 
     public override decimal ModifyPowerAmountGiven(PowerModel power, Creature giver, decimal amount, Creature? target, CardModel? cardSource)
     {
+        // 如果不是自己给的power，或者不是debuff，则返回
         if(giver != base.Owner || power.Type != PowerType.Debuff) return amount;
+        // 如果目标是友军，则返回
+        if(target != null && target.Side == base.Owner.Side) return amount;
         Data internalData = GetInternalData<Data>();
         if(internalData.cardSource != null && internalData.cardSource != cardSource) return amount;
         internalData.cardSource = cardSource;
