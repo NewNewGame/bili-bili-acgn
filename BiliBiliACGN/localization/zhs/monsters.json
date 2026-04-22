@@ -6,5 +6,7 @@
     "GUI_GUI.moves.READY.title": "我很抱歉",
     "GUI_GUI.moves.BLOCK.title": "别打我~",
     "GUI_GUI.moves.STRONG_PUNCH.title": "龟壳撞击",
-    "GUI_GUI.name": "龟"
+    "GUI_GUI.name": "龟",
+    "ITSUKA.moves.NOTHING.title": "可爱捏",
+    "ITSUKA.name": "雪平一果"
 }
