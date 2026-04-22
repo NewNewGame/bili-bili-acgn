@@ -23,11 +23,24 @@ public sealed class SakiChan : CardBaseModel
     private const CardRarity rarity = CardRarity.Event;
     private const TargetType targetType = TargetType.AnyEnemy;
     private const bool shouldShowInCardLibrary = true;
+    private decimal _extraDamageFromClawPlays;
+	private decimal ExtraDamageFromClawPlays
+	{
+		get
+		{
+			return _extraDamageFromClawPlays;
+		}
+		set
+		{
+			AssertMutable();
+			_extraDamageFromClawPlays = value;
+		}
+	}
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new DamageVar(6m, ValueProp.Move)
-        
+        new DamageVar(6m, ValueProp.Move),
+        new DynamicVar("IncreaseSakiChanDamage", 3m)
     ];
 
     public SakiChan() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
@@ -43,10 +56,30 @@ public sealed class SakiChan : CardBaseModel
         // 将本牌复制置入抽牌堆
         CardModel card = CreateClone();
 		CardCmd.PreviewCardPileAdd(await CardPileCmd.AddGeneratedCardToCombat(card, PileType.Draw, true), 0.2f);
+        await Cmd.Wait(0.2f);
+        // 所有的Saki酱伤害加3/4
+        IEnumerable<SakiChan> enumerable = base.Owner.PlayerCombatState.AllCards.OfType<SakiChan>();
+		decimal baseValue = base.DynamicVars["Increase"].BaseValue;
+		foreach (SakiChan item in enumerable)
+		{
+			item.BuffFromClawPlay(baseValue);
+		}
     }
 
     protected override void OnUpgrade()
     {
         base.DynamicVars["Damage"].UpgradeValueBy(3m);
+        base.DynamicVars["IncreaseSakiChanDamage"].UpgradeValueBy(1m);
     }
+    protected override void AfterDowngraded()
+	{
+		base.AfterDowngraded();
+		base.DynamicVars.Damage.BaseValue += ExtraDamageFromClawPlays;
+	}
+
+	private void BuffFromClawPlay(decimal extraDamage)
+	{
+		base.DynamicVars.Damage.BaseValue += extraDamage;
+		ExtraDamageFromClawPlays += extraDamage;
+	}
 }
