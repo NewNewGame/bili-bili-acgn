@@ -10,6 +10,7 @@ using Godot;
 using HarmonyLib;
 using BiliBiliACGN.BiliBiliACGNCode.Utils;
 using MegaCrit.Sts2.Core.Nodes.Audio;
+using System.Collections.Generic;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Core.Patches;
 
@@ -29,20 +30,17 @@ public static class NAudioManagerPatch
 
         AudioUtils.SetDefaultAudioManagerParent(node);
     }
-    /// <summary>
-    /// 在 NAudioManager PlayOneShot 时使用 AudioUtils 播放音效
-    /// </summary>
-    /// <param name="__instance"></param>
-    /// <param name="path"></param>
-    /// <param name="parameters"></param>
-    /// <param name="volume"></param>
-    [HarmonyPostfix]
-    [HarmonyPatch("PlayOneShot")]
-    private static void PlayOneShot_Postfix(object __instance, string path, System.Collections.Generic.Dictionary<string, float> parameters, float volume = 1f)
-    {
-        if (__instance is not Node node)
-            return;
 
+    /// <summary>
+    /// 在 NAudioManager PlayOneShot 时，转发到自定义 AudioUtils（对象池版本）。
+    /// </summary>
+    [HarmonyPostfix]
+    [HarmonyPatch(
+        "PlayOneShot",
+        new[] { typeof(string), typeof(Dictionary<string, float>), typeof(float) }
+    )]
+    private static void PlayOneShot_Postfix(string path, Dictionary<string, float> parameters, float volume = 1f)
+    {
         AudioUtils.PlayOneShotSfx(path, volume);
     }
 }

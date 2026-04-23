@@ -26,11 +26,15 @@ public static class AudioUtils
     private static PackedScene? _sfxPlayerPrefab;
 
     private const string SfxPlayerPrefabPath = "res://BiliBiliACGN/scenes/sfxPrefab/SfxPlayer.tscn";
-    private static readonly StringName BottleAttackEventPath = new StringName("event:/sfx/bottle_attack");
-
+    private static readonly StringName BottleAttackEventPath = new StringName("event:/sfx/characters/bottle/bottle_attack");
+    public static readonly StringName BersekEnterEventPath = new StringName("res://BiliBiliACGN/sfx/powers/berserk_enter.ogg");
     #endregion
 
     #region 初始化
+    private static string[] _sfxPaths = new string[]
+    {
+        BersekEnterEventPath,
+    };
     /// <summary>
     /// 音效路径集合
     /// 初始化的时候加载这些音效到缓存
@@ -51,6 +55,7 @@ public static class AudioUtils
     /// </summary>
     private static HashSet<StringName> pathSets = new HashSet<StringName>(){
         BottleAttackEventPath,
+        BersekEnterEventPath,
     };
     private static bool _initialized = false;
     /// <summary>
@@ -68,6 +73,10 @@ public static class AudioUtils
         GetSfxPlayerPrefab();
         // 加载音效缓存
         foreach (var path in _bottleAttackSfxPaths)
+        {
+            LoadSfxCached(path);
+        }
+        foreach (var path in _sfxPaths)
         {
             LoadSfxCached(path);
         }
@@ -257,32 +266,25 @@ public static class AudioUtils
         if(resourcePath == BottleAttackEventPath){
             resourcePath = GetRandomBottleAttackSfxPath();
         }
-        LogUtils.LogInfo($"路径资源转换: {resourcePath}");
         if (string.IsNullOrWhiteSpace(resourcePath))
             return null;
-        LogUtils.LogInfo($"音频管理父节点: {audioManagerParent}");
         if (!GodotObject.IsInstanceValid(audioManagerParent))
             return null;
-        LogUtils.LogInfo($"加载音效: {resourcePath}");
         var stream = LoadSfxCached(resourcePath);
         if (stream == null)
             return null;
-        LogUtils.LogInfo($"确保池父节点: {resourcePath}");
         var actualPoolParent = EnsurePoolParent(audioManagerParent, poolParent);
         if (actualPoolParent == null)
             return null;
-        LogUtils.LogInfo($"租用音效节点: {resourcePath}");
         var node = RentSfxPlayer(actualPoolParent);
         if (node == null)
             return null;
-        LogUtils.LogInfo($"播放音效: {resourcePath}");
         // 播放时挂在 AudioManager 下；空闲时可回收到 poolParent（默认同一个）
         if (node.GetParent() != audioManagerParent)
         {
             node.GetParent()?.RemoveChild(node);
             audioManagerParent.AddChild(node);
         }
-        LogUtils.LogInfo($"PlayOneShotSfxPooledInternal8: {resourcePath}");
         node.Play(
             stream,
             p => ReturnSfxPlayer(p, actualPoolParent),
@@ -329,7 +331,7 @@ public static class AudioUtils
         Node? poolParent = null
     )
     {
-        LogUtils.LogInfo($"PlayOneShotSfx: {resourcePath}");
+        LogUtils.LogInfo($"尝试播放音效: {resourcePath}, 音量: {volumeDb}");
         // 不在集合里的不处理
         if(!pathSets.Contains(resourcePath))
             return null;
