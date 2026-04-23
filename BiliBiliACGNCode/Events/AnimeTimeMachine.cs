@@ -53,7 +53,10 @@ public sealed class AnimeTimeMachine : EventBaseModel
     {
         // 随机获得一个特殊遗物
         RelicModel relic = null;
-        switch(base.Owner.RunState.Rng.Niche.NextInt(0, 3)){
+        // 获取随机数，随机2次和卡牌结果免得一样
+        int random = base.Owner.RunState.Rng.Niche.NextInt(0, 3);
+        random = base.Owner.RunState.Rng.Niche.NextInt(0, 3);
+        switch(random){
             case 0:
                 relic = ModelDb.Relic<ElainasBroom>();
                 break;
