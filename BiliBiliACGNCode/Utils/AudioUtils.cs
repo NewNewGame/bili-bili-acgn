@@ -6,9 +6,7 @@
 //*******************************************************
 
 using Godot;
-using System.Collections.Generic;
 using BiliBiliACGN.BiliBiliACGNCode.Nodes;
-using System;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Utils;
 
@@ -81,8 +79,9 @@ public static class AudioUtils
         {
             LoadSfxCached(path);
         }
-
-        LogUtils.LogInfo("音效相关初始化完成");
+        // Log
+        int cnt = _bottleAttackSfxPaths.Length + _sfxPaths.Length;
+        LogUtils.LogInfo($"音效相关初始化完成，共加载{cnt}个音效");
     }
     #endregion
     
@@ -235,7 +234,7 @@ public static class AudioUtils
             _sfxCache[resourcePath] = stream;
         }
 
-        LogUtils.LogInfo($"Sfx已缓存: {resourcePath}");
+        //LogUtils.LogInfo($"Sfx已缓存: {resourcePath}");
 
         return stream;
     }
@@ -250,7 +249,7 @@ public static class AudioUtils
         {
             while (_sfxPlayerPool.Count > 0)
             {
-                LogUtils.LogInfo($"从对象池中取出音效节点: {_sfxPlayerPool.Count}");
+                //LogUtils.LogInfo($"从对象池中取出音效节点: {_sfxPlayerPool.Count}");
                 var n = _sfxPlayerPool.Pop();
                 if (GodotObject.IsInstanceValid(n))
                     return n;
@@ -301,7 +300,7 @@ public static class AudioUtils
         Node? poolParent = null
     )
     {
-        LogUtils.LogInfo($"播放音效开始: {resourcePath}");
+        //LogUtils.LogInfo($"播放音效开始: {resourcePath}");
         // 路径资源转换
         if(resourcePath == BottleAttackEventPath){
             resourcePath = GetRandomBottleAttackSfxPath();
@@ -371,7 +370,7 @@ public static class AudioUtils
         string resourcePath,
         float volumeDb = 1f,
         float pitchScale = 1f,
-        string? bus = null,
+        string? bus = "SFX",
         Node? poolParent = null
     )
     {
