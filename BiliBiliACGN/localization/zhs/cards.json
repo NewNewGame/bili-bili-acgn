@@ -120,7 +120,7 @@
   "BILIBILIACGN-SM_NIU_GE.title": "sm牛哥",
   "BILIBILIACGN-SM_NIU_GE.description": "将你的[gold]唐氏[/gold]层数翻倍。",
   "BILIBILIACGN-NO_RIGHT_TO_KNIGHT_ME.title": "无权为我授勋",
-  "BILIBILIACGN-NO_RIGHT_TO_KNIGHT_ME.description": "进入[gold]红怒[/gold]。\n获得{Strength:diff()}点[gold]力量[/gold]。下一回合[red]死亡[/red]。",
+  "BILIBILIACGN-NO_RIGHT_TO_KNIGHT_ME.description": "进入[gold]红怒[/gold]。\n获得{Strength:diff()}点[gold]力量[/gold]。\n下一回合[red]死亡[/red]。",
   "BILIBILIACGN-SHOWBIZ_EFFECT.title": "节目效果",
   "BILIBILIACGN-SHOWBIZ_EFFECT.description": "消耗1张手牌。获得{Anger:diff()}点[gold]红温[/gold]。",
   "BILIBILIACGN-POISON_MILK_MEDUSA.title": "毒奶美杜莎",

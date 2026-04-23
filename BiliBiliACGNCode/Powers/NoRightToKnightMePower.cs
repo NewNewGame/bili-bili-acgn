@@ -21,7 +21,7 @@ public sealed class NoRightToKnightMePower : PowerBaseModel
         if(side == CombatSide.Enemy)
         {
             Flash();
-            await CreatureCmd.Kill(base.Owner, true);
+            await CreatureCmd.Kill(base.Owner, false);
         }
     }
     
