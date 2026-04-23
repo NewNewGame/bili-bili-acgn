@@ -9,8 +9,8 @@ metadata/_edit_vertical_guides_ = [-1036.0]
 
 [node name="Visuals" type="Sprite2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(10.999992, -258)
-scale = Vector2(0.4, 0.4)
+position = Vector2(-17.999998, -186.00002)
+scale = Vector2(0.3, 0.3)
 texture = ExtResource("2_7ll8t")
 flip_h = true
 
@@ -18,16 +18,16 @@ flip_h = true
 unique_name_in_owner = true
 layout_mode = 3
 anchors_preset = 0
-offset_left = -159.0
-offset_top = -467.99997
-offset_right = 65.0
-offset_bottom = -167.99997
-scale = Vector2(1.44, 1.44)
+offset_left = -148.0
+offset_top = -366.0
+offset_right = 76.0
+offset_bottom = -66.0
+scale = Vector2(1.2490408, 1.275472)
 
 [node name="IntentPos" type="Marker2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(0, -614)
+position = Vector2(-29, -437)
 
 [node name="CenterPos" type="Marker2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(0, -265)
+position = Vector2(0, -171)
