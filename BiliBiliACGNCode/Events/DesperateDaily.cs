@@ -26,13 +26,14 @@ public sealed class DesperateDaily : EventBaseModel
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new StringVar("CurseTitle", ModelDb.Card<DespairSense>().Title),
         new StringVar("CurseTitle2", ModelDb.Card<EmptyStomach>().Title),
+        new StringVar("Relic", ModelDb.Relic<QianHuDiary>().Title.GetFormattedText()),
     ];
     protected override IReadOnlyList<EventOption> GenerateInitialOptions()
     {
         return
         [
             new EventOption(this, Eat, "DESPERATE_DAILY.pages.INITIAL.options.EAT", HoverTipFactory.FromCard<DespairSense>()),
-            new EventOption(this, Leave, "DESPERATE_DAILY.pages.INITIAL.options.LEAVE", HoverTipFactory.FromCard<EmptyStomach>())
+            new EventOption(this, Leave, "DESPERATE_DAILY.pages.INITIAL.options.LEAVE", new IHoverTip[]{HoverTipFactory.FromCard<EmptyStomach>()}.Concat(HoverTipFactory.FromRelic<QianHuDiary>()).ToArray())
         ];
     }
     /// <summary>
