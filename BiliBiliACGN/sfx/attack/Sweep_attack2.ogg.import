@@ -2,12 +2,13 @@
 
 importer="oggvorbisstr"
 type="AudioStreamOggVorbis"
-uid="uid://lpu6wg1xcm0o"
-valid=false
+uid="uid://n40hu4t1xagy"
+path="res://.godot/imported/Sweep_attack2.ogg-e45353a9878e3d30727edaeb9ce6ac18.oggvorbisstr"
 
 [deps]
 
 source_file="res://BiliBiliACGN/sfx/attack/Sweep_attack2.ogg"
+dest_files=["res://.godot/imported/Sweep_attack2.ogg-e45353a9878e3d30727edaeb9ce6ac18.oggvorbisstr"]
 
 [params]
 

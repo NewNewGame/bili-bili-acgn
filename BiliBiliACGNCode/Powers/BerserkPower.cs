@@ -55,6 +55,8 @@ public sealed class BerserkPower : PowerBaseModel
         {
             vfx.GetParent().MoveChild(vfx, 0);
         }
+        // 播放红怒音效
+        SfxCmd.Play(AudioUtils.BersekEnterEventPath);
         return Task.CompletedTask;
     }
     public override async Task AfterPowerAmountChanged(PowerModel power, decimal amount, Creature? applier, CardModel? cardSource)
