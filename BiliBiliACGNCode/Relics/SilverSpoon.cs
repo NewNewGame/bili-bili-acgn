@@ -25,7 +25,8 @@ public sealed class SilverSpoon : RelicBaseModel
 		{
 			return (pileType, position);
 		}
-        if(!card.Keywords.Contains(CardKeyword.Exhaust)){
+        // 不是消耗牌或着是诅咒牌的话不进入弃牌堆
+        if(!card.Keywords.Contains(CardKeyword.Exhaust) || card.Rarity == CardRarity.Curse){
             return (pileType, position);
         }
 		return (PileType.Discard, CardPilePosition.Bottom);

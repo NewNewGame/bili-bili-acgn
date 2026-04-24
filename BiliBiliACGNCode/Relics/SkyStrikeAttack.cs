@@ -22,17 +22,8 @@ public sealed class SkyStrikeAttack : RelicBaseModel
 {
     public override RelicRarity Rarity => RelicRarity.Rare;
     public override bool ShowCounter => CombatManager.Instance.IsInProgress;
-    public override int DisplayAmount {
-        get
-        {
-            var combatState = base.Owner.Creature.CombatState;
-            if(combatState != null)
-            {
-                return Mathf.Max(0, (int)base.DynamicVars["Turn"].BaseValue - combatState.RoundNumber);
-            }
-            return 0;
-        }
-    }
+    private int _displayAmount;
+    public override int DisplayAmount => _displayAmount;
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
@@ -61,6 +52,7 @@ public sealed class SkyStrikeAttack : RelicBaseModel
                     await CreatureCmd.Damage(choiceContext, enemy, base.DynamicVars.Damage, base.Owner.Creature);
                 }
             }
+            _displayAmount = combatState.RoundNumber;
         }
     }
 }
