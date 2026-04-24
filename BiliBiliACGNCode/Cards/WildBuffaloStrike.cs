@@ -22,6 +22,8 @@ public sealed class WildBuffaloStrike : CardBaseModel
 {
     protected override HashSet<CardTag> CanonicalTags => [CardTag.Strike];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CustomKeyWords.YYSY];
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<TangShiPower>()];
+
     #region 卡牌属性配置
     private const int energyCost = 1;
     private const CardType type = CardType.Attack;
