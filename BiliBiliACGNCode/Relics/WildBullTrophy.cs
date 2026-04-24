@@ -27,7 +27,7 @@ public sealed class WildBullTrophy : RelicBaseModel
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new DynamicVar("YYSYCount", 3m),
+        new DynamicVar("YYSYCount", 2m),
         new DynamicVar("Tang", 1m)
     ];
 	protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromKeyword(CustomKeyWords.YYSY), HoverTipFactory.FromPower<TangShiPower>()];

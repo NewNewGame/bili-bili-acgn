@@ -25,7 +25,10 @@ namespace BiliBiliACGN.BiliBiliACGNCode.Cards;
 public sealed class BlowWithThemAll : CardBaseModel
 {
     #region 卡牌关键词与悬停
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<AngerPower>()];
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => [
+        HoverTipFactory.FromPower<AngerPower>(),
+        HoverTipFactory.FromPower<BerserkPower>()
+    ];
     protected override bool ShouldGlowGoldInternal => base.Owner.Creature.GetPowerAmount<AngerPower>() >= base.DynamicVars["Anger"].BaseValue;
     protected override bool IsPlayable => base.Owner.Creature.GetPowerAmount<AngerPower>() >= base.DynamicVars["Anger"].BaseValue;
 

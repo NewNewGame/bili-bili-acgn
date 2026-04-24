@@ -30,8 +30,12 @@ public sealed class HaKaSeSneezingMachine : RelicBaseModel
         new DynamicVar("FragileChance", 20m),
         new DynamicVar("FragileAmount", 1m),
     ];
-    // 虚弱和脆弱Hover
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<WeakPower>(), HoverTipFactory.FromPower<FrailPower>()];
+    // Hover
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => [
+        HoverTipFactory.FromPower<ArtifactPower>(),
+        HoverTipFactory.FromPower<WeakPower>(),
+        HoverTipFactory.FromPower<FrailPower>()
+    ];
     
     public override async Task AfterPlayerTurnStart(PlayerChoiceContext choiceContext, Player player)
 	{
