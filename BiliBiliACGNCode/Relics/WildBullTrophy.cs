@@ -7,6 +7,7 @@
 using BaseLib.Utils;
 using BiliBiliACGN.BiliBiliACGNCode.Cards;
 using BiliBiliACGN.BiliBiliACGNCode.Powers;
+using BiliBiliACGN.BiliBiliACGNCode.Relics.RelicPool;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -15,12 +16,11 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
-using MegaCrit.Sts2.Core.Models.RelicPools;
 using MegaCrit.Sts2.Core.Rooms;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Relics;
 
-[Pool(typeof(SharedRelicPool))]
+[Pool(typeof(BottleRelicPool))]
 public sealed class WildBullTrophy : RelicBaseModel
 {
     public override RelicRarity Rarity => RelicRarity.Rare;
