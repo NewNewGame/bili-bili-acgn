@@ -21,12 +21,15 @@ public sealed class BullDemonPower : PowerBaseModel
     // 每打出一张有一说一获得 Amount 点「唐氏」
     public override async Task AfterCardPlayed(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        if(cardPlay.Card.Keywords.Contains(CustomKeyWords.YYSY) && cardPlay.Card.Owner == base.Owner.Player){
+        // 不是自己打的牌，不处理
+        if(cardPlay.Card.Owner != base.Owner.Player) return;
+        // 如果有有一说一，那就添加唐氏
+        if(cardPlay.Card.Keywords.Contains(CustomKeyWords.YYSY)){
             await PowerCmd.Apply<TangShiPower>(base.Owner, base.Amount, base.Owner, null);
-        }
-        // 如果没有有一说一，那就添加
-        if(!cardPlay.Card.Keywords.Contains(CustomKeyWords.YYSY)){
+        }else{
+            // 如果没有有一说一，那就添加有一说一
             cardPlay.Card.AddKeyword(CustomKeyWords.YYSY);
         }
+        
     }
 }
