@@ -2,7 +2,7 @@
 //* 文件：AnimeMaster(动漫高手)
 //* 作者：wheat
 //* 创建时间：2026/04/08
-//* 描述：给予女儿{Strength:diff()}点[gold]力量[/gold]，女儿现在会攻击所有敌人。
+//* 描述：每当你激发1个充能球时，给予女儿2点力量。
 //*******************************************************
 
 using BaseLib.Utils;
@@ -20,7 +20,7 @@ namespace BiliBiliACGN.BiliBiliACGNCode.Cards;
 [Pool(typeof(FunShikiCardPool))]
 public sealed class AnimeMaster : CardBaseModel
 {
-    private const int energyCost = 1;
+    private const int energyCost = 2;
     private const CardType type = CardType.Power;
     private const CardRarity rarity = CardRarity.Rare;
     private const TargetType targetType = TargetType.Self;
@@ -28,22 +28,21 @@ public sealed class AnimeMaster : CardBaseModel
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new DynamicVar("Strength", 3m),
+        new DynamicVar("Strength", 1m),
     ];
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<StrengthPower>()];
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.Static(StaticHoverTip.Evoke),HoverTipFactory.FromPower<StrengthPower>()];
 
     public AnimeMaster() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
-        // 给予女儿{Strength:diff()}点[gold]力量[/gold]，女儿现在会攻击所有敌人。
-        await PowerCmd.Apply<StrengthPower>(base.Owner.Creature, base.DynamicVars["Strength"].BaseValue, base.Owner.Creature, this);
-        await PowerCmd.Apply<AnimeMasterPower>(base.Owner.Creature, 1m, base.Owner.Creature, this);
+        // 施加能力：每当你激发 1 个充能球时，给予女儿力量
+        await PowerCmd.Apply<AnimeMasterPower>(base.Owner.Creature, base.DynamicVars["Strength"].BaseValue, base.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()
     {
-        base.DynamicVars["Strength"].UpgradeValueBy(2m);
+        base.EnergyCost.UpgradeBy(-1);
     }
 }
