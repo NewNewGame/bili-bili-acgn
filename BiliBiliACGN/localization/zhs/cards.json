@@ -260,7 +260,7 @@
   "BILIBILIACGN-CUTE_NE.title": "可爱捏",
   "BILIBILIACGN-CUTE_NE.description": "女儿提升[gold]最大生命值[/gold]时，给予你一半的[gold]格挡[/gold]。",
   "BILIBILIACGN-ANIME_MASTER.title": "动漫高手",
-  "BILIBILIACGN-ANIME_MASTER.description": "每当你[gold]激发[/gold]1个充能球时，给予女儿{Strength:diff()}点[gold]力量[/gold]。",
+  "BILIBILIACGN-ANIME_MASTER.description": "给予女儿{Strength:diff()}点[gold]力量[/gold]，女儿现在会攻击所有敌人。",
   "BILIBILIACGN-MAD_IS_DEAD_END.title": "做mad死路一条",
   "BILIBILIACGN-MAD_IS_DEAD_END.description": "对所有敌人造成本场战斗你[gold]生成[/gold]过的充能球{Multiplier:diff()}倍的伤害。{InCombat:\n(已[gold]生成[/gold]{CalculatedChannels:diff()}个充能球。)|}",
   "BILIBILIACGN-VECTOR.title": "Vector",

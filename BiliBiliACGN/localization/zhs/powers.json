@@ -152,8 +152,8 @@
   "BILIBILIACGN-CUTE_NE_POWER.smartDescription": "女儿获得[gold]格挡[/gold]时，给予你一半的[gold]格挡[/gold][blue]{Amount}[/blue]次。",
 
   "BILIBILIACGN-ANIME_MASTER_POWER.title": "动漫高手",
-  "BILIBILIACGN-ANIME_MASTER_POWER.description": "每当你[gold]激发[/gold][blue]1[/blue]个充能球时，给予女儿[blue]1[/blue]点力量。",
-  "BILIBILIACGN-ANIME_MASTER_POWER.smartDescription": "每当你[gold]激发[/gold][blue]1[/blue]个充能球时，给予女儿[blue]{Amount}[/blue]点力量。",
+  "BILIBILIACGN-ANIME_MASTER_POWER.description": "女儿现在会攻击所有敌人。",
+  "BILIBILIACGN-ANIME_MASTER_POWER.smartDescription": "女儿现在会攻击所有敌人。",
 
   "BILIBILIACGN-LOVE_RAILWAY_POWER.title": "爱洗铁路",
   "BILIBILIACGN-LOVE_RAILWAY_POWER.description": "每打出[blue]1[/blue]张能力牌，给予随机敌人[blue]1[/blue]层[gold]病态[/gold]。",
