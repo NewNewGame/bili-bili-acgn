@@ -4,7 +4,7 @@
 //* 创建时间：2026/03/26 10:51:22 星期四
 //* 描述：主文件，用于初始化Mod
 //*******************************************************
-using BiliBiliACGN.BiliBiliACGNCode.Utils;
+using BaseLib.Config;
 using Godot.Bridge;
 using HarmonyLib;
 using MegaCrit.Sts2.Core.Logging;
@@ -25,6 +25,7 @@ public class MainFile
 		harmony.PatchAll();
 		// 使得tscn可以加载自定义脚本
 		ScriptManagerBridge.LookupScriptsInAssembly(typeof(MainFile).Assembly);
+		ModConfigRegistry.Register(ModId, new BiliBiliACGN.BiliBiliACGNCode.Core.ACGNModConfig());
 		Log.Debug("Mod initialized!");
 	}
 }
