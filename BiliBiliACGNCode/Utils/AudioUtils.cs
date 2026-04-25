@@ -6,9 +6,7 @@
 //*******************************************************
 
 using Godot;
-using System.Collections.Generic;
 using BiliBiliACGN.BiliBiliACGNCode.Nodes;
-using System;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Utils;
 
@@ -71,6 +69,7 @@ public static class AudioUtils
         ClearSfxCache();
         ClearSfxNodePool();
         GetSfxPlayerPrefab();
+        CreateSfxPlayerCache();
         // 加载音效缓存
         foreach (var path in _bottleAttackSfxPaths)
         {
@@ -80,6 +79,9 @@ public static class AudioUtils
         {
             LoadSfxCached(path);
         }
+        // Log
+        int cnt = _bottleAttackSfxPaths.Length + _sfxPaths.Length;
+        LogUtils.LogInfo($"音效相关初始化完成，共加载{cnt}个音效");
     }
     #endregion
     
@@ -91,11 +93,15 @@ public static class AudioUtils
     {
         if (parent != null && !GodotObject.IsInstanceValid(parent))
             parent = null;
-
+        // 设置默认音效父节点
         lock (_defaultParentLock)
         {
             _defaultAudioManagerParent = parent;
         }
+        // 创建音效节点缓存父节点
+        EnsurePoolParent(_defaultAudioManagerParent, null);
+        // 初始化
+        Initialize();
     }
 
     /// <summary>
@@ -172,6 +178,10 @@ public static class AudioUtils
         }
     }
 
+    /// <summary>
+    /// 获取音效节点预制体
+    /// </summary>
+    /// <returns></returns>
     private static PackedScene? GetSfxPlayerPrefab()
     {
         if (_sfxPlayerPrefab != null)
@@ -183,7 +193,27 @@ public static class AudioUtils
         _sfxPlayerPrefab = ResourceLoader.Load<PackedScene>(SfxPlayerPrefabPath);
         return _sfxPlayerPrefab;
     }
-
+    /// <summary>
+    /// 创建音效节点缓存
+    /// </summary>
+    /// <param name="num"></param>
+    private static void CreateSfxPlayerCache(int num = 5)
+    {
+        // 获取音效节点预制体
+        var prefab = GetSfxPlayerPrefab();
+        if(prefab == null)
+            return;
+        // 创建音效节点并放入对象池
+        for(int i = 0; i < num; i++){
+            var inst = prefab.Instantiate<SNSfxPooledPlayer>(PackedScene.GenEditState.Disabled);
+            ReturnSfxPlayer(inst, _defaultPoolParent);
+        }
+    }
+    /// <summary>
+    /// 加载音效资源到缓存
+    /// </summary>
+    /// <param name="resourcePath"></param>
+    /// <returns></returns>
     private static AudioStream? LoadSfxCached(string resourcePath)
     {
         lock (_sfxCacheLock)
@@ -204,17 +234,22 @@ public static class AudioUtils
             _sfxCache[resourcePath] = stream;
         }
 
-        LogUtils.LogInfo($"Sfx已缓存: {resourcePath}");
+        //LogUtils.LogInfo($"Sfx已缓存: {resourcePath}");
 
         return stream;
     }
-
+    /// <summary>
+    /// 从对象池中取出音效节点
+    /// </summary>
+    /// <param name="poolParent"></param>
+    /// <returns></returns>
     private static SNSfxPooledPlayer? RentSfxPlayer(Node poolParent)
     {
         lock (_sfxPoolLock)
         {
             while (_sfxPlayerPool.Count > 0)
             {
+                //LogUtils.LogInfo($"从对象池中取出音效节点: {_sfxPlayerPool.Count}");
                 var n = _sfxPlayerPool.Pop();
                 if (GodotObject.IsInstanceValid(n))
                     return n;
@@ -228,8 +263,12 @@ public static class AudioUtils
         var inst = prefab.Instantiate<SNSfxPooledPlayer>(PackedScene.GenEditState.Disabled);
         return inst;
     }
-
-    private static void ReturnSfxPlayer(SNSfxPooledPlayer player, Node poolParent)
+    /// <summary>
+    /// 将音效节点放回对象池
+    /// </summary>
+    /// <param name="player"></param>
+    /// <param name="poolParent"></param>
+    private static void ReturnSfxPlayer(SNSfxPooledPlayer player, Node? poolParent)
     {
         if (!GodotObject.IsInstanceValid(player))
             return;
@@ -261,7 +300,7 @@ public static class AudioUtils
         Node? poolParent = null
     )
     {
-        LogUtils.LogInfo($"播放音效开始: {resourcePath}");
+        //LogUtils.LogInfo($"播放音效开始: {resourcePath}");
         // 路径资源转换
         if(resourcePath == BottleAttackEventPath){
             resourcePath = GetRandomBottleAttackSfxPath();
@@ -302,9 +341,13 @@ public static class AudioUtils
     /// </summary>
     private static Node? EnsurePoolParent(Node audioManagerParent, Node? poolParent)
     {
+        // 如果poolParent不为空且有效，则直接返回
+        if(poolParent != null && GodotObject.IsInstanceValid(poolParent))
+            return poolParent;
+        // 如果默认池父节点不为空且有效，则直接返回
         if(_defaultPoolParent != null && GodotObject.IsInstanceValid(_defaultPoolParent))
             return _defaultPoolParent;
-
+        // 如果audioManagerParent无效，则返回null
         if (!GodotObject.IsInstanceValid(audioManagerParent))
             return null;
 
@@ -325,13 +368,12 @@ public static class AudioUtils
     /// </summary>
     public static SNSfxPooledPlayer? PlayOneShotSfx(
         string resourcePath,
-        float volumeDb = 0f,
+        float volumeDb = 1f,
         float pitchScale = 1f,
-        string? bus = null,
+        string? bus = "SFX",
         Node? poolParent = null
     )
     {
-        LogUtils.LogInfo($"尝试播放音效: {resourcePath}, 音量: {volumeDb}");
         // 不在集合里的不处理
         if(!pathSets.Contains(resourcePath))
             return null;

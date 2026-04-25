@@ -10,6 +10,7 @@ using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Relics;
+using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.RelicPools;
 
@@ -19,6 +20,8 @@ namespace BiliBiliACGN.BiliBiliACGNCode.Relics;
 public sealed class MillenniumPuzzle : RelicBaseModel
 {
     public override RelicRarity Rarity => RelicRarity.Uncommon;
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromKeyword(CardKeyword.Innate)];
+
     public override async Task AfterObtained()
     {
         CardModel cardModel = (await CardSelectCmd.FromDeckGeneric(prefs: new CardSelectorPrefs(base.SelectionScreenPrompt, 1), player: base.Owner, filter: Filter)).FirstOrDefault();

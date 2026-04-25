@@ -111,7 +111,7 @@ public static class EventRegister
                 Register(ev, poolType);
         }
 
-        Log.Info($"[B站动画区Mod] 事件注册完成：专属事件池={ExtraEventsByActType.Sum(x => x.Value.Count)}，共享事件池={ExtraSharedEvents.Count}");
+        LogUtils.LogInfo($"事件注册完成：专属事件池={ExtraEventsByActType.Sum(x => x.Value.Count)}，共享事件池={ExtraSharedEvents.Count}");
     }
 
     private static void Register(EventModel eventModel, Type poolType)

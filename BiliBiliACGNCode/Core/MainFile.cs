@@ -25,8 +25,6 @@ public class MainFile
 		harmony.PatchAll();
 		// 使得tscn可以加载自定义脚本
 		ScriptManagerBridge.LookupScriptsInAssembly(typeof(MainFile).Assembly);
-		// 初始化音效
-		AudioUtils.Initialize();
 		Log.Debug("Mod initialized!");
 	}
 }
