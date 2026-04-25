@@ -15,7 +15,7 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 namespace BiliBiliACGN.BiliBiliACGNCode.Cards;
 
 [Pool(typeof(FunShikiCardPool))]
-public sealed class NewVillaMansion : CardBaseModel
+public sealed class BigVillaMansion : CardBaseModel
 {
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
 
@@ -32,7 +32,7 @@ public sealed class NewVillaMansion : CardBaseModel
         new CardsVar(3),
     ];
 
-    public NewVillaMansion() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
+    public BigVillaMansion() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
