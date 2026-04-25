@@ -32,7 +32,7 @@ public sealed class FanStyleDiva : CardBaseModel
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new DamageVar(6m, ValueProp.Move),
+        new DamageVar(7m, ValueProp.Move),
         new DynamicVar("Morbid", 3m)
     ];
 
@@ -53,6 +53,6 @@ public sealed class FanStyleDiva : CardBaseModel
     protected override void OnUpgrade()
     {
         base.DynamicVars["Damage"].UpgradeValueBy(2m);
-        base.DynamicVars["Morbid"].UpgradeValueBy(1m);
+        base.DynamicVars["Morbid"].UpgradeValueBy(2m);
     }
 }

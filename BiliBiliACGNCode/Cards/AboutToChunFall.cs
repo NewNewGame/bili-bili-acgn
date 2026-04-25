@@ -32,8 +32,8 @@ public sealed class AboutToChunFall : CardBaseModel
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new BlockVar(10m, ValueProp.Move),
-        new DynamicVar("Morbid", 5m)
+        new BlockVar(12m, ValueProp.Move),
+        new DynamicVar("Morbid", 3m)
     ];
 
     public AboutToChunFall() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
@@ -53,7 +53,7 @@ public sealed class AboutToChunFall : CardBaseModel
 
     protected override void OnUpgrade()
     {
-        base.DynamicVars["Block"].UpgradeValueBy(5m);
-        base.DynamicVars["Morbid"].UpgradeValueBy(3m);
+        base.DynamicVars["Block"].UpgradeValueBy(3m);
+        base.DynamicVars["Morbid"].UpgradeValueBy(2m);
     }
 }

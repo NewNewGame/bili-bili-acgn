@@ -29,7 +29,7 @@ public sealed class ManManEel : CardBaseModel
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.Static(StaticHoverTip.Block),HoverTipFactory.Static(StaticHoverTip.Channeling),HoverTipFactory.FromOrb<LifeOrb>(),];
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new BlockVar(8m, ValueProp.Move),
+        new BlockVar(7m, ValueProp.Move),
         new DynamicVar("BlockOrbs", 2m),
     ];
 
@@ -51,7 +51,7 @@ public sealed class ManManEel : CardBaseModel
 
     protected override void OnUpgrade() 
     { 
-        base.DynamicVars["BlockOrbs"].UpgradeValueBy(1m);
-        base.DynamicVars["Block"].UpgradeValueBy(1m);
+        //base.DynamicVars["BlockOrbs"].UpgradeValueBy(1m);
+        base.DynamicVars["Block"].UpgradeValueBy(3m);
     }
 }

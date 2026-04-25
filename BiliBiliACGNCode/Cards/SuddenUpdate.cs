@@ -32,7 +32,7 @@ public sealed class SuddenUpdate : CardBaseModel
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new BlockVar(13m, ValueProp.Move),
+        new BlockVar(10m, ValueProp.Move),
         new DynamicVar("OrbCount", 1m)
     ];
 

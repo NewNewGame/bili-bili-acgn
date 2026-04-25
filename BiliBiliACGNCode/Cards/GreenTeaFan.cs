@@ -31,7 +31,7 @@ public sealed class GreenTeaFan : CardBaseModel
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new DynamicVar("Morbid", 5m)
+        new DynamicVar("Morbid", 6m)
     ];
 
     public GreenTeaFan() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
@@ -46,6 +46,6 @@ public sealed class GreenTeaFan : CardBaseModel
 
     protected override void OnUpgrade()
     {
-        base.DynamicVars["Morbid"].UpgradeValueBy(2m);
+        base.DynamicVars["Morbid"].UpgradeValueBy(3m);
     }
 }

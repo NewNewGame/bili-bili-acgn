@@ -379,7 +379,7 @@
   "BILIBILIACGN-DO_ZATAN.title": "做杂谈",
   "BILIBILIACGN-DO_ZATAN.description": "造成{Damage:diff()}点伤害2次。\n随机打出你的[gold]抽牌堆[/gold]中的1张牌。",
   "BILIBILIACGN-VAMPIRE.title": "吸血鬼",
-  "BILIBILIACGN-VAMPIRE.description": "造成{Damage:diff()}点伤害。\n随机升级你[gold]抽牌堆[/gold]中{Cards:diff()}张牌。",
+  "BILIBILIACGN-VAMPIRE.description": "造成{Damage:diff()}点伤害。\n随机升级你[gold]弃牌堆[/gold]中{Cards:diff()}张牌。",
   "BILIBILIACGN-BOOST_VIDEO.title": "捞捞视频",
   "BILIBILIACGN-BOOST_VIDEO.description": "[gold]生成[/gold]{BlockOrbs:diff()}个[gold]生命[/gold]充能球。\n抽{Cards:diff()}张牌。",
   "BILIBILIACGN-FUN_CAPTAIN.title": "泛式队长",
