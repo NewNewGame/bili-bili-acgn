@@ -8,7 +8,12 @@ using BaseLib.Config;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Core;
 
-public class ModConfig : SimpleModConfig
+[HoverTipsByDefault]
+public sealed class ACGNModConfig : SimpleModConfig
 {
-    public static bool Test1 { get; set; } = true;
+    /// <summary>
+    /// 是否使用角色语音
+    /// </summary>
+    [ConfigSection("启用角色语音")]
+    public static bool UseCharacterVoice { get; set; } = false;
 }
