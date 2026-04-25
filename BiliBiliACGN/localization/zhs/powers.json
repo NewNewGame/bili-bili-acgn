@@ -112,7 +112,7 @@
   "BILIBILIACGN-INFATUATION_TARGET_POWER.smartDescription": "[gold]病态[/gold]持有者攻击你会触发[gold]病态[/gold]伤害。\n如果你死亡了，将[gold]痴迷对象[/gold]转让给下一个玩家。",
 
   "BILIBILIACGN-ADD_MAX_HP_TEMP_POWER.title": "临时提升生命值",
-  "BILIBILIACGN-ADD_MAX_HP_TEMP_POWER.description": "这其实是红色[gold]格挡值[/gold]，本回合提升[blue]1[/blue]点最大生命值。\n[thinky_dots]代码限制，只能这么写了：（[/thinky_dots]",
+  "BILIBILIACGN-ADD_MAX_HP_TEMP_POWER.description": "这其实是红色[gold]格挡值[/gold]，本回合提升[blue]1[/blue]点最大生命值。\n[thinky_dots]代码限制，只能这么写了:([/thinky_dots]",
   "BILIBILIACGN-ADD_MAX_HP_TEMP_POWER.smartDescription": "这其实是红色[gold]格挡值[/gold]，本回合提升[blue]{Amount}[/blue]点最大生命值。\n[thinky_dots][purple]代码限制，只能这么写了:([/purple][/thinky_dots]",
 
   "BILIBILIACGN-MAWARU_MAWARU_POWER.title": "马瓦鲁马瓦鲁",
