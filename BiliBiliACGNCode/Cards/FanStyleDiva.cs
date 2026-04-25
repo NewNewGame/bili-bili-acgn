@@ -25,7 +25,7 @@ public sealed class FanStyleDiva : CardBaseModel
     private const int energyCost = 1;
     private const CardType type = CardType.Skill;
     private const CardRarity rarity = CardRarity.Basic;
-    private const TargetType targetType = TargetType.AnyEnemy;
+    private const TargetType targetType = TargetType.Self;
     private const bool shouldShowInCardLibrary = true;
 
     public FanStyleDiva() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }

@@ -35,7 +35,7 @@ public sealed class ZeroFruit : CardBaseModel
         new CalculationBaseVar(0m),
 		new ExtraDamageVar(1m),
         new CalculatedDamageVar(ValueProp.Move).WithMultiplier((CardModel card, Creature? _) => 
-        card.Owner?.Creature.GetDaughter()?.MaxHp ?? 0m)
+        card.Owner?.Creature.GetDaughter()?.MaxHp -1 ?? 0m)
     ];
 
     public ZeroFruit() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
