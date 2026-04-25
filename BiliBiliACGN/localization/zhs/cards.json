@@ -399,7 +399,7 @@
   "BILIBILIACGN-FAN_REMIX_ATELIER.title": "泛式二创屋",
   "BILIBILIACGN-FAN_REMIX_ATELIER.description": "获得{Block:diff()}点[gold]格挡[/gold]。\n在接下来{Rounds:diff()}个回合开始时，[gold]生成[/gold]1个[gold]进攻[/gold]充能球。",
   "BILIBILIACGN-FRENCH_ACCENT.title": "法国口音",
-  "BILIBILIACGN-FRENCH_ACCENT.description": "造成{Damage:diff()}点伤害。\n给予女儿{Strength:diff()}点[gold]力量[/gold]。",
+  "BILIBILIACGN-FRENCH_ACCENT.description": "造成{Damage:diff()}点伤害。\n给予{Morbid:diff()}层[gold]病态[/gold]。",
   "BILIBILIACGN-SUDDEN_UPDATE.title": "突然更新",
   "BILIBILIACGN-SUDDEN_UPDATE.description": "获得{Block:diff()}点[gold]格挡[/gold]。\n随机[gold]生成[/gold]{OrbCount:diff()}个充能球。"
 }

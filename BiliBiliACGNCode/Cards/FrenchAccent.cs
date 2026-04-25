@@ -2,18 +2,17 @@
 //* 文件：FrenchAccent(法国口音)
 //* 作者：wheat
 //* 创建时间：2026/04/11
-//* 描述：造成{Damage:diff()}点伤害。\n给予女儿{Strength:diff()}点[gold]力量[/gold]。
+//* 描述：造成{Damage:diff()}点伤害。\n给予目标{Morbid:diff()}层[gold]病态[/gold]。
 //*******************************************************
 
 using BaseLib.Utils;
 using BiliBiliACGN.BiliBiliACGNCode.Cards.CardPool;
-using BiliBiliACGN.BiliBiliACGNCode.Core.Commands;
+using BiliBiliACGN.BiliBiliACGNCode.Powers;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
-using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.ValueProps;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Cards;
@@ -22,7 +21,7 @@ namespace BiliBiliACGN.BiliBiliACGNCode.Cards;
 public sealed class FrenchAccent : CardBaseModel
 {
     #region 卡牌关键词与悬停
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<StrengthPower>()];
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<MorbidPower>()];
     #endregion
     #region 卡牌属性配置
     private const int energyCost = 1;
@@ -33,8 +32,8 @@ public sealed class FrenchAccent : CardBaseModel
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new DynamicVar("Strength", 1m),
-        new DamageVar(8m, ValueProp.Move),
+        new DynamicVar("Morbid", 4m),
+        new DamageVar(6m, ValueProp.Move),
     ];
 
     public FrenchAccent() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
@@ -43,17 +42,17 @@ public sealed class FrenchAccent : CardBaseModel
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        // 造成伤害，给予女儿{Strength:diff()}点[gold]力量[/gold]。
+        // 造成伤害，给予目标{Morbid:diff()}层[gold]病态[/gold]。
         await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue)
             .FromCard(this)
             .Targeting(cardPlay.Target)
             .Execute(choiceContext);
-        await DaughterCmd.ApplyPower<StrengthPower>(base.Owner.Creature, base.DynamicVars["Strength"].BaseValue, this);
+        await PowerCmd.Apply<MorbidPower>(cardPlay.Target, base.DynamicVars["Morbid"].BaseValue, base.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()
     {
-        base.DynamicVars["Strength"].UpgradeValueBy(1m);
         base.DynamicVars["Damage"].UpgradeValueBy(3m);
+        base.DynamicVars["Morbid"].UpgradeValueBy(2m);
     }
 }
