@@ -6,7 +6,6 @@
 //*******************************************************
 
 using BiliBiliACGN.BiliBiliACGNCode.Core.Commands;
-using BiliBiliACGN.BiliBiliACGNCode.Powers;
 using Godot;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -19,7 +18,7 @@ public sealed class AttackOrb : OrbBaseModel
 
     public override Color DarkenedColor => new Color("008585");
     public override decimal PassiveVal => ModifyOrbValue(0m);
-    public override decimal EvokeVal => ModifyOrbValue(5m);
+    public override decimal EvokeVal => ModifyOrbValue(3m);
 
 	public override async Task BeforeTurnEndOrbTrigger(PlayerChoiceContext choiceContext)
 	{
@@ -29,14 +28,14 @@ public sealed class AttackOrb : OrbBaseModel
 	public override async Task Passive(PlayerChoiceContext choiceContext, Creature? target)
 	{
 		Trigger();
-		await ApplyAttack(PassiveVal, target, choiceContext);
+		await ApplyAttack(PassiveVal, target, choiceContext, false);
 	}
 
 	public override async Task<IEnumerable<Creature>> Evoke(PlayerChoiceContext playerChoiceContext)
 	{
-		return await ApplyAttack(EvokeVal, null, playerChoiceContext);
+		return await ApplyAttack(EvokeVal, null, playerChoiceContext, true);
 	}
-   	private async Task<IEnumerable<Creature>> ApplyAttack(decimal value, Creature? target, PlayerChoiceContext choiceContext)
+   	private async Task<IEnumerable<Creature>> ApplyAttack(decimal value, Creature? target, PlayerChoiceContext choiceContext, bool allEnemies)
 	{
 		List<Creature> list = (from e in base.CombatState.GetOpponentsOf(base.Owner.Creature)
 			where e.IsHittable
@@ -45,7 +44,6 @@ public sealed class AttackOrb : OrbBaseModel
 		{
 			return Array.Empty<Creature>();
 		}
-		bool allEnemies = base.Owner.Creature.HasPower<AnimeMasterPower>();
 		IReadOnlyList<Creature> targets = (allEnemies) ? list : ((target == null) ? new List<Creature>(){base.Owner.RunState.Rng.CombatTargets.NextItem(list)} : new List<Creature>{target});
 
         await DaughterCmd.ApplyAttack(base.Owner.Creature, value, choiceContext, targets);
