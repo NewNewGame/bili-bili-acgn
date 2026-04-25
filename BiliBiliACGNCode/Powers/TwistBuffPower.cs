@@ -2,9 +2,10 @@
 //* 文件：TwistPower(扭曲)
 //* 作者：wheat
 //* 创建时间：2026/04/11
-//* 描述：你的下一次给予 debuff 额外给予 1 点（层数由 Amount 表示，具体结算 TODO）
+//* 描述：你下一次卡牌给予的 debuff 额外给予 1 点
 //*******************************************************
 
+using BiliBiliACGN.BiliBiliACGNCode.Utils;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
@@ -32,8 +33,10 @@ public sealed class TwistPower : PowerBaseModel
 
     public override decimal ModifyPowerAmountGiven(PowerModel power, Creature giver, decimal amount, Creature? target, CardModel? cardSource)
     {
-        // 如果不是自己给的power，或者不是debuff，则返回
-        if(giver != base.Owner || power.Type != PowerType.Debuff) return amount;
+        // 如果卡牌来源为空，则返回
+        if(cardSource == null) return amount;
+        // 如果不是自己给的debuff，则返回
+        if(cardSource.Owner.Creature != base.Owner || power.Type != PowerType.Debuff) return amount;
         // 如果目标是友军，则返回
         if(target != null && target.Side == base.Owner.Side) return amount;
         Data internalData = GetInternalData<Data>();
@@ -44,6 +47,7 @@ public sealed class TwistPower : PowerBaseModel
     public override async Task AfterCardPlayedLate(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         if(cardPlay.Card.Owner != base.Owner.Player) return;
+        LogUtils.LogInfo($"TwistBuffPower: {cardPlay.PlayCount}");
         Data internalData = GetInternalData<Data>();
         if(internalData.cardSource != null && internalData.cardSource != cardPlay.Card) return;
         if(internalData.cardSource == cardPlay.Card && cardPlay.IsLastInSeries){
