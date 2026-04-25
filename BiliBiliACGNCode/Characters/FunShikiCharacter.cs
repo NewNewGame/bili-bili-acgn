@@ -55,7 +55,7 @@ public sealed class FunShikiCharacter : PlaceholderCharacterModel
 		ModelDb.Card<FunShikiDefend>(),
 		ModelDb.Card<FunShikiDefend>(),
 		ModelDb.Card<FunShikiDefend>(),
-		ModelDb.Card<ZeroFruit>(),
+		ModelDb.Card<FanStyleDiva>(),
 		ModelDb.Card<MangaArtistKirito>(),
 	];
 
