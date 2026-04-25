@@ -105,7 +105,7 @@ public sealed class FunShikiCardPool : CustomCardPoolModel
             ModelDb.Card<NewSeasonGuide>(),
             ModelDb.Card<ThreePointEight>(),
             ModelDb.Card<AnimeEmperor>(),
-            ModelDb.Card<BigVillaMansion>(),
+            ModelDb.Card<NewVillaMansion>(),
             ModelDb.Card<CrazyStackArmor>(),
             ModelDb.Card<UtterMadness>(),
             ModelDb.Card<TataKai>(),

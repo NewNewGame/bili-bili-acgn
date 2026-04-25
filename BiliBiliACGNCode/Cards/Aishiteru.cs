@@ -23,7 +23,7 @@ public sealed class Aishiteru : CardBaseModel
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<MorbidPower>()];
     #endregion
     #region 卡牌属性配置
-    private const int energyCost = 2;
+    private const int energyCost = 1;
     private const CardType type = CardType.Power;
     private const CardRarity rarity = CardRarity.Ancient;
     private const TargetType targetType = TargetType.Self;
@@ -31,7 +31,7 @@ public sealed class Aishiteru : CardBaseModel
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new DynamicVar("Morbid", 2m)
+        new DynamicVar("Morbid", 3m)
     ];
 
     public Aishiteru() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
@@ -47,6 +47,5 @@ public sealed class Aishiteru : CardBaseModel
     protected override void OnUpgrade()
     {
         base.DynamicVars["Morbid"].UpgradeValueBy(1m);
-        base.EnergyCost.UpgradeBy(-1);
     }
 }
