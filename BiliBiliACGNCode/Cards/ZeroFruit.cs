@@ -2,17 +2,20 @@
 //* 文件：ZeroFruit(0果)
 //* 作者：wheat
 //* 创建时间：2026/04/11
-//* 描述：造成{Damage:diff()}点伤害。给予{Morbid:diff()}层[gold]病态[/gold]。
+//* 描述：造成等同于女儿最大生命值的伤害。
 //*******************************************************
 
 using BaseLib.Utils;
 using BiliBiliACGN.BiliBiliACGNCode.Cards.CardPool;
+using BiliBiliACGN.BiliBiliACGNCode.Core.Commands;
 using BiliBiliACGN.BiliBiliACGNCode.Powers;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.ValueProps;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Cards;
@@ -32,8 +35,10 @@ public sealed class ZeroFruit : CardBaseModel
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new DamageVar(7m, ValueProp.Move),
-        new DynamicVar("Morbid", 3m),
+        new CalculationBaseVar(0m),
+		new ExtraDamageVar(1m),
+        new CalculatedDamageVar(ValueProp.Move).WithMultiplier((CardModel card, Creature? _) => 
+        card.Owner?.Creature.GetDaughter()?.MaxHp ?? 0m)
     ];
 
     public ZeroFruit() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
@@ -42,16 +47,14 @@ public sealed class ZeroFruit : CardBaseModel
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        // 造成{Damage:diff()}点伤害。给予{Morbid:diff()}层[gold]病态[/gold]。
-        await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue)
+        // 造成等同于女儿最大生命值的伤害。
+        await DamageCmd.Attack(base.DynamicVars.CalculatedDamage)
             .FromCard(this)
             .Targeting(cardPlay.Target)
             .Execute(choiceContext);
-        await PowerCmd.Apply<MorbidPower>(cardPlay.Target, base.DynamicVars["Morbid"].BaseValue, base.Owner.Creature, this);
     }
     protected override void OnUpgrade()
     {
-        base.DynamicVars["Damage"].UpgradeValueBy(2m);
-        base.DynamicVars["Morbid"].UpgradeValueBy(2m);
+        base.EnergyCost.UpgradeBy(-1);
     }
 }
