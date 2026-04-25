@@ -30,8 +30,10 @@ public sealed class CuteNePower : PowerBaseModel
     /// <returns></returns>
     public override async Task AfterPowerAmountChanged(PowerModel power, decimal amount, Creature? applier, CardModel? cardSource)
     {
+        // 如果数量小于等于0，或者不是AddMaxHpTempPower，则返回
         if(amount <= 0 || power is not AddMaxHpTempPower) return;
-        if(applier != base.Owner || base.Owner.PetOwner == null) return;
+        // 如果对象不是自己，或者女儿没有主人，则返回
+        if(power.Owner != base.Owner || base.Owner.PetOwner == null) return;
         // 给予你一半的格挡值
         await CreatureCmd.GainBlock(base.Owner.PetOwner.Creature, amount * Amount / 2, ValueProp.Unpowered, null);
     }
