@@ -6,17 +6,9 @@
 //*******************************************************
 
 using BiliBiliACGN.BiliBiliACGNCode.Cards;
-using BiliBiliACGN.BiliBiliACGNCode.Core.Models.Monsters;
-using MegaCrit.Sts2.Core.Commands;
-using MegaCrit.Sts2.Core.Entities.Creatures;
-using MegaCrit.Sts2.Core.Entities.Multiplayer;
 using MegaCrit.Sts2.Core.Entities.Powers;
-using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
-using MegaCrit.Sts2.Core.Models;
-using MegaCrit.Sts2.Core.Models.Powers;
-using MegaCrit.Sts2.Core.Runs;
-using MegaCrit.Sts2.Core.ValueProps;
+
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Powers;
 
@@ -27,6 +19,7 @@ public sealed class AloftThronePower : PowerBaseModel
 
     public override PowerStackType StackType => PowerStackType.Counter;
 
+    /*已经转移至 DaughterCmd.AfterDamageGiven，AOE攻击的时候会多次抽取
     // 每当女儿发动进攻时，抽 Amount 张牌
     public override async Task AfterDamageGiven(PlayerChoiceContext choiceContext, Creature? dealer, DamageResult result, ValueProp props, Creature target, CardModel? cardSource)
     {
@@ -39,5 +32,6 @@ public sealed class AloftThronePower : PowerBaseModel
             await CardPileCmd.Draw(choiceContext, base.Amount, base.Owner.Player);
         }
     }
+    */
 
 }

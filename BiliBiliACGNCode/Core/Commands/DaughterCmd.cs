@@ -13,6 +13,9 @@ using MegaCrit.Sts2.Core.ValueProps;
 using MegaCrit.Sts2.Core.Models;
 using BiliBiliACGN.BiliBiliACGNCode.Powers;
 using BiliBiliACGN.BiliBiliACGNCode.Cards;
+using MegaCrit.Sts2.Core.Runs;
+using MegaCrit.Sts2.Core.Entities.Multiplayer;
+using MegaCrit.Sts2.Core.Models.Powers;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Core.Commands;
 
@@ -78,6 +81,7 @@ public static class DaughterCmd
 		}
         */
 		await CreatureCmd.Damage(choiceContext, targets, value, ValueProp.Move, daughter);
+        await AfterDamageGiven(choiceContext, daughter);
     }
     /// <summary>
     /// 女儿攻击指令
@@ -92,7 +96,9 @@ public static class DaughterCmd
 			VfxCmd.PlayOnCreature(item, "vfx/vfx_attack_lightning");
 		}
         */
-		return await CreatureCmd.Damage(choiceContext, target, value, ValueProp.Move, daughter);
+		var results = await CreatureCmd.Damage(choiceContext, target, value, ValueProp.Move, daughter);
+        await AfterDamageGiven(choiceContext, daughter);
+        return results;
     }
     /// <summary>
     /// 女儿提升最大生命值指令
@@ -123,6 +129,25 @@ public static class DaughterCmd
         var daughter = creature.GetDaughter();
         if(daughter == null) return 0;
         return daughter.GetPowerAmount<TPower>();
+    }
+    /// <summary>
+    /// 伤害后处理
+    /// </summary>
+    private static async Task AfterDamageGiven(PlayerChoiceContext choiceContext, Creature? daughter){
+        if(daughter == null) return;
+        var player = daughter.PetOwner;
+        if(player == null) return;
+        // 处理高高在上的抽卡逻辑
+        int drawCards = player.Creature.GetPowerAmount<AloftThronePower>();
+        if(drawCards > 0){
+            // 如果不是在出牌阶段，则下回合抽牌
+            if(RunManager.Instance.ActionQueueSynchronizer.CombatState != ActionSynchronizerCombatState.PlayPhase){
+                await PowerCmd.Apply<DrawCardsNextTurnPower>(player.Creature, drawCards, player.Creature, null);
+            }else{
+                await CardPileCmd.Draw(choiceContext, drawCards, player);
+            }
+        }
+        
     }
 
 }
