@@ -15,5 +15,5 @@ public sealed class ACGNModConfig : SimpleModConfig
     /// 是否使用角色语音
     /// </summary>
     [ConfigSection("启用角色语音")]
-    public static bool UseCharacterVoice { get; set; } = false;
+    public static bool UseCharacterVoice { get; set; } = true;
 }
