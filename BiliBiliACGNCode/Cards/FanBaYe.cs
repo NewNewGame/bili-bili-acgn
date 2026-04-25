@@ -9,8 +9,10 @@ using BaseLib.Utils;
 using BiliBiliACGN.BiliBiliACGNCode.Cards.CardPool;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.ValueProps;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Cards;
@@ -31,7 +33,10 @@ public sealed class FanBaYe : CardBaseModel
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
         new DamageVar(7m, ValueProp.Move),
-        new CardsVar(1)
+        new CardsVar(1),
+        new CalculationBaseVar(0m),
+        new CalculationExtraVar(1m),
+        new CalculatedVar("CalculatedOrbs").WithMultiplier((CardModel card, Creature? _) => card.Owner?.PlayerCombatState?.OrbQueue.Orbs.GroupBy(o => o.Id).Count() ?? 0)
     ];
 
     public FanBaYe() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
@@ -45,8 +50,7 @@ public sealed class FanBaYe : CardBaseModel
             .FromCard(this)
             .Targeting(cardPlay.Target)
             .Execute(choiceContext);
-        int num = (from orb in base.Owner.PlayerCombatState.OrbQueue.Orbs
-				group orb by orb.Id).Count();
+        int num = (int)((CalculatedVar)base.DynamicVars["CalculatedOrbs"]).Calculate(cardPlay.Target);
         await CardPileCmd.Draw(choiceContext, base.DynamicVars["Cards"].BaseValue * num, base.Owner);
     }
 
