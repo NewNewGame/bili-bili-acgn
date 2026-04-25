@@ -2,7 +2,7 @@
 //* 文件：Dress(礼服)
 //* 作者：wheat
 //* 创建时间：2026/04/08
-//* 描述：将你弃牌堆所有卡牌重新洗牌放入抽牌堆，然后抽取3/5张牌。
+//* 描述：在这个回合，你打出的下{Cards:diff()}张技能牌，会被额外打出一次。
 //*******************************************************
 
 using BaseLib.Utils;
@@ -11,6 +11,7 @@ using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.Models.Powers;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Cards;
 
@@ -27,20 +28,19 @@ public sealed class Dress : CardBaseModel
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new CardsVar(3),
+        new CardsVar(1),
     ];
 
     public Dress() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        // 将弃牌堆洗入抽牌堆，然后抽牌
-        await CardPileCmd.Shuffle(choiceContext, base.Owner);
-        await CardPileCmd.Draw(choiceContext, base.DynamicVars.Cards.IntValue, base.Owner);
+        // 在这个回合，你打出的下{Cards:diff()}张技能牌，会被额外打出一次。
+        await PowerCmd.Apply<BurstPower>(base.Owner.Creature, base.DynamicVars.Cards.BaseValue, base.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()
     {
-        base.DynamicVars.Cards.UpgradeValueBy(2m);
+        base.DynamicVars.Cards.UpgradeValueBy(1m);
     }
 }
