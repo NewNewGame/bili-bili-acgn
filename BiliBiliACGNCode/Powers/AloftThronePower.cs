@@ -19,7 +19,6 @@ public sealed class AloftThronePower : PowerBaseModel
 
     public override PowerStackType StackType => PowerStackType.Counter;
 
-    /*已经转移至 DaughterCmd.AfterDamageGiven，AOE攻击的时候会多次抽取
     // 每当女儿发动进攻时，抽 Amount 张牌
     public override async Task AfterDamageGiven(PlayerChoiceContext choiceContext, Creature? dealer, DamageResult result, ValueProp props, Creature target, CardModel? cardSource)
     {
@@ -32,7 +31,6 @@ public sealed class AloftThronePower : PowerBaseModel
             await CardPileCmd.Draw(choiceContext, base.Amount, base.Owner.Player);
         }
     }
-    */
 
 }
 */
