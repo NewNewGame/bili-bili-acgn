@@ -4,7 +4,7 @@
 //* 创建时间：2026/04/11 10:00:00 星期四
 //* 描述：游戏结束修复补丁
 //*******************************************************
-
+/*弃用，已经都用Spine了
 using BaseLib.Abstracts;
 using BiliBiliACGN.BiliBiliACGNCode.Characters;
 using HarmonyLib;
@@ -42,3 +42,4 @@ public static class GameOverFixPatch
         return true;
     }
 }
+*/
