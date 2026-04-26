@@ -27,7 +27,7 @@ public sealed class SelfHistoryLeak : CardBaseModel
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<MorbidPower>()];
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new DynamicVar("MorbidSelf", 3m),
+        new DynamicVar("MorbidSelf", 2m),
         new EnergyVar(1),
     ];
 
