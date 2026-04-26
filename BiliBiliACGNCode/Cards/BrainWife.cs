@@ -29,7 +29,7 @@ public sealed class BrainWife : CardBaseModel
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new DamageVar(26m, ValueProp.Move),
+        new DamageVar(28m, ValueProp.Move),
         new DynamicVar("MorbidSelf", 3m),
     ];
 
@@ -48,5 +48,6 @@ public sealed class BrainWife : CardBaseModel
     protected override void OnUpgrade()
     {
         base.DynamicVars.Damage.UpgradeValueBy(8m);
+        base.DynamicVars["MorbidSelf"].UpgradeValueBy(-1m);
     }
 }
