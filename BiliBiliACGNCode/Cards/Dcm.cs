@@ -33,7 +33,8 @@ public sealed class Dcm : CardBaseModel
     ];
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new BlockVar(10m, ValueProp.Move),
+        new DamageVar(10m, ValueProp.Move),
+        new DynamicVar("Weak", 2m),
         new DynamicVar("StrengthOrb", 1m)
     ];
 
