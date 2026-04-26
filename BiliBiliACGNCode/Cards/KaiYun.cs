@@ -31,7 +31,7 @@ public sealed class KaiYun : CardBaseModel
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new DynamicVar("KaiYun", 2m)
+        new DynamicVar("KaiYun", 3m)
     ];
 
     public KaiYun() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
