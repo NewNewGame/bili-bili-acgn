@@ -401,5 +401,5 @@
   "BILIBILIACGN-FRENCH_ACCENT.title": "法国口音",
   "BILIBILIACGN-FRENCH_ACCENT.description": "造成{Damage:diff()}点伤害。\n给予{Morbid:diff()}层[gold]病态[/gold]。",
   "BILIBILIACGN-SUDDEN_UPDATE.title": "突然更新",
-  "BILIBILIACGN-SUDDEN_UPDATE.description": "获得{Block:diff()}点[gold]格挡[/gold]。\n随机[gold]生成[/gold]{OrbCount:diff()}个充能球。"
+  "BILIBILIACGN-SUDDEN_UPDATE.description": "获得与你当前[gold]弃牌堆[/gold]牌数{IfUpgraded:show:+3|相等}的[gold]格挡[/gold]。{InCombat:\n(获得{CalculatedBlock:diff()}点[gold]格挡[/gold]。)|}"
 }
