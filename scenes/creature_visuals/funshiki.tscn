@@ -12,7 +12,7 @@ preview_animation = "-- Empty --"
 preview_frame = false
 preview_time = 0.0
 unique_name_in_owner = true
-scale = Vector2(0.17, 0.17)
+scale = Vector2(0.18, 0.18)
 
 [node name="Bounds" type="Control" parent="."]
 unique_name_in_owner = true
