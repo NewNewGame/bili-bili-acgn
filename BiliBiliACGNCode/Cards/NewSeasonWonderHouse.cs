@@ -26,18 +26,19 @@ public sealed class NewSeasonWonderHouse : CardBaseModel
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new EnergyVar(1),
+        new DynamicVar("OrbCount", 1m),
     ];
 
     public NewSeasonWonderHouse() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        await PowerCmd.Apply<NewSeasonWonderHousePower>(base.Owner.Creature, base.DynamicVars.Energy.BaseValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<NewSeasonWonderHousePower>(base.Owner.Creature, base.DynamicVars["OrbCount"].BaseValue, base.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()
     {
-        base.EnergyCost.UpgradeBy(-1);
+        // 添加固有
+        base.AddKeyword(CardKeyword.Innate);
     }
 }
