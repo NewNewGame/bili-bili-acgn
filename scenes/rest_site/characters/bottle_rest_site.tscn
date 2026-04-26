@@ -9,10 +9,11 @@ scale = Vector2(0.760006, 0.760006)
 script = ExtResource("1_awmq8")
 
 [node name="SpineSprite" type="TextureRect" parent="."]
-offset_left = -142.10413
-offset_top = -436.83865
-offset_right = 113.895874
-offset_bottom = 75.16135
+offset_left = -90.78875
+offset_top = -480.25937
+offset_right = 539.21124
+offset_bottom = 1026.7406
+scale = Vector2(0.33, 0.33)
 texture = ExtResource("2_qkqdf")
 expand_mode = 1
 flip_h = true

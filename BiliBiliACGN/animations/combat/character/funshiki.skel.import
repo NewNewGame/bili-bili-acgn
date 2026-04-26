@@ -1,0 +1,14 @@
+[remap]
+
+importer="spine.skel"
+type="SpineSkeletonFileResource"
+uid="uid://tbve7n4gyny4"
+path="res://.godot/imported/funshiki.skel-20569dce113237b19725bdf43b46e6e4.spskel"
+
+[deps]
+
+source_file="res://BiliBiliACGN/animations/combat/character/funshiki.skel"
+dest_files=["res://.godot/imported/funshiki.skel-20569dce113237b19725bdf43b46e6e4.spskel"]
+
+[params]
+

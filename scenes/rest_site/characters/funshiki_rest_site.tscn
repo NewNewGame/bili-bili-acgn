@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://bgb2cnq1rsnpf"]
 
 [ext_resource type="Script" uid="uid://bllvg4nxopi4a" path="res://BiliBiliACGNCode/Nodes/SNRestSiteCharacter.cs" id="1_awmq8"]
-[ext_resource type="Texture2D" uid="uid://bm2vgursn7xp8" path="res://BiliBiliACGN/images/characters/funshiki_character.png" id="2_k0a1h"]
+[ext_resource type="Texture2D" uid="uid://clpo72qcpme4m" path="res://BiliBiliACGN/images/characters/funshiki_reset_site.png" id="2_k0a1h"]
 [ext_resource type="PackedScene" uid="uid://bgy88bk44xxvk" path="res://BiliBiliACGN/scenes/selection_reticle.tscn" id="3_evojs"]
 
 [node name="FunShikiRestSite" type="Node2D"]
@@ -9,10 +9,11 @@ scale = Vector2(0.760006, 0.760006)
 script = ExtResource("1_awmq8")
 
 [node name="SpineSprite" type="TextureRect" parent="."]
-offset_left = -132.89369
-offset_top = -446.04913
-offset_right = 123.10631
-offset_bottom = 65.95087
+offset_left = -211.84041
+offset_top = -355.26038
+offset_right = 133.15959
+offset_bottom = -73.260376
+scale = Vector2(1.2, 1.2)
 texture = ExtResource("2_k0a1h")
 expand_mode = 1
 flip_h = true

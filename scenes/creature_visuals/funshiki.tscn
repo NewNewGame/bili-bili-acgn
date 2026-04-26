@@ -1,15 +1,18 @@
 [gd_scene load_steps=2 format=3 uid="uid://cl431atbevn22"]
 
-[ext_resource type="Texture2D" uid="uid://bm2vgursn7xp8" path="res://BiliBiliACGN/images/characters/funshiki_character.png" id="1_4msbd"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://djp2vh4e5ksaf" path="res://BiliBiliACGN/animations/combat/character/funshiki.tres" id="1_5byyw"]
 
 [node name="funshiki" type="Node2D"]
 metadata/_edit_vertical_guides_ = [-1036.0]
 
-[node name="Visuals" type="Sprite2D" parent="."]
+[node name="Visuals" type="SpineSprite" parent="."]
+skeleton_data_res = ExtResource("1_5byyw")
+preview_skin = "Default"
+preview_animation = "-- Empty --"
+preview_frame = false
+preview_time = 0.0
 unique_name_in_owner = true
-position = Vector2(0, -176.99998)
-scale = Vector2(0.1, 0.1)
-texture = ExtResource("1_4msbd")
+scale = Vector2(0.17, 0.17)
 
 [node name="Bounds" type="Control" parent="."]
 unique_name_in_owner = true

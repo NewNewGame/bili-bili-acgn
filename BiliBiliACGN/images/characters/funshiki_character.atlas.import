@@ -1,0 +1,16 @@
+[remap]
+
+importer="spine.atlas"
+type="SpineAtlasResource"
+uid="uid://b5o6f75ygtxyk"
+path="res://.godot/imported/funshiki_character.atlas-04986fe379bd36feaf6fb72f422e581b.spatlas"
+
+[deps]
+
+source_file="res://BiliBiliACGN/images/characters/funshiki_character.atlas"
+dest_files=["res://.godot/imported/funshiki_character.atlas-04986fe379bd36feaf6fb72f422e581b.spatlas"]
+
+[params]
+
+normal_map_prefix="n"
+specular_map_prefix="s"

@@ -1,0 +1,8 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=3 format=3 uid="uid://djp2vh4e5ksaf"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://b5o6f75ygtxyk" path="res://BiliBiliACGN/images/characters/funshiki_character.atlas" id="1_55u4e"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://tbve7n4gyny4" path="res://BiliBiliACGN/animations/combat/character/funshiki.skel" id="2_6tvr2"]
+
+[resource]
+atlas_res = ExtResource("1_55u4e")
+skeleton_file_res = ExtResource("2_6tvr2")

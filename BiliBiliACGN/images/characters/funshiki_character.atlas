@@ -1,0 +1,13 @@
+
+funshiki_character.png
+size: 517,1083
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+funshiki_character
+  rotate: false
+  xy: 2, 2
+  size: 513, 1079
+  orig: 640, 1170
+  offset: 57, 53
+  index: -1
