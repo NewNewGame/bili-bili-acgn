@@ -2,13 +2,12 @@
 //* 文件：Dcm(DCM)
 //* 作者：wheat
 //* 创建时间：2026/04/11
-//* 描述：获得10/12点格挡，生成{StrengthOrb:diff()}个力量充能球。
+//* 描述：造成{Damage:diff()}点伤害。\n给予{Weak:diff()}层[gold]虚弱[/gold]。\n[gold]生成[/gold]{StrengthOrb:diff()}个[gold]力量[/gold]充能球。
 //*******************************************************
 
 using BaseLib.Utils;
 using BiliBiliACGN.BiliBiliACGNCode.Cards.CardPool;
 using BiliBiliACGN.BiliBiliACGNCode.Core.Models.Orbs;
-using BiliBiliACGN.BiliBiliACGNCode.Utils;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
