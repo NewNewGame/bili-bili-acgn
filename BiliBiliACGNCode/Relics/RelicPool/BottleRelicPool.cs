@@ -13,6 +13,7 @@ namespace BiliBiliACGN.BiliBiliACGNCode.Relics.RelicPool;
 
 public sealed class BottleRelicPool : CustomRelicPoolModel
 {
+    public override Color LabOutlineColor => new Color("789ccd");
     public override string? TextEnergyIconPath{
         get
         {
