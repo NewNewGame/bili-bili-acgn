@@ -60,7 +60,8 @@ public sealed class Dcm : CardBaseModel
 
     protected override void OnUpgrade()
     {
-        base.DynamicVars.Block.UpgradeValueBy(2m);
+        base.DynamicVars["Damage"].UpgradeValueBy(3m);
+        base.DynamicVars["Weak"].UpgradeValueBy(1m);
         base.DynamicVars["StrengthOrb"].UpgradeValueBy(1m);
     }
 }
