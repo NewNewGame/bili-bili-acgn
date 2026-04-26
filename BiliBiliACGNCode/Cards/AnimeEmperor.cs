@@ -33,7 +33,7 @@ public sealed class AnimeEmperor : CardBaseModel
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new DynamicVar("EvokesPerOrb", 4m),
+        new DynamicVar("EvokesPerOrb", 3m),
     ];
 
     public AnimeEmperor() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
