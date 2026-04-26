@@ -373,7 +373,7 @@
   "BILIBILIACGN-MANGA_ARTIST_KIRITO.title": "漫画家桐人",
   "BILIBILIACGN-MANGA_ARTIST_KIRITO.description": "[gold]生成[/gold]{Channeling:diff()}个[gold]进攻[/gold]充能球。",
   "BILIBILIACGN-MINUS_TWENTY_MILLION_FRUIT.title": "负2000万果",
-  "BILIBILIACGN-MINUS_TWENTY_MILLION_FRUIT.description": "女儿向敌人发动{Hits:diff()}次[gold]进攻[/gold]。\n给予{Weak:diff()}层[gold]虚弱[/gold]。",
+  "BILIBILIACGN-MINUS_TWENTY_MILLION_FRUIT.description": "[gold]生成[/gold]{OrbCount:diff()}个[gold]力量[/gold]充能球。",
   "BILIBILIACGN-AISHITERU.title": "阿姨洗铁路",
   "BILIBILIACGN-AISHITERU.description": "每打出1张牌，给予随机敌人{Morbid:diff()}层[gold]病态[/gold]。",
   "BILIBILIACGN-DO_ZATAN.title": "做杂谈",

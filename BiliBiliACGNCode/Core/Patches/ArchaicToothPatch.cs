@@ -24,6 +24,6 @@ public static class ArchaicToothPatch
         if(__result.ContainsKey(ModelDb.Card<PowerlessAngry>().Id))
             return;
         __result[ModelDb.Card<PowerlessAngry>().Id] = ModelDb.Card<Meditation>();
-        __result[ModelDb.Card<ZeroFruit>().Id] = ModelDb.Card<MinusTwentyMillionFruit>();
+        __result[ModelDb.Card<MangaArtistKirito>().Id] = ModelDb.Card<MinusTwentyMillionFruit>();
     }
 }

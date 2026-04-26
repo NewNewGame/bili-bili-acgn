@@ -2,19 +2,18 @@
 //* 文件：MinusTwentyMillionFruit(负2000万果)
 //* 作者：wheat
 //* 创建时间：2026/04/11
-//* 描述：女儿向敌人发动{Hits:diff()}次[gold]进攻[/gold]。给予{Weak:diff()}层[gold]虚弱[/gold]。
+//* 描述：生成3/4个力量充能球。
 //*******************************************************
 
 using BaseLib.Utils;
 using BiliBiliACGN.BiliBiliACGNCode.Cards.CardPool;
-using BiliBiliACGN.BiliBiliACGNCode.Core.Commands;
+using BiliBiliACGN.BiliBiliACGNCode.Core.Models.Orbs;
 using BiliBiliACGN.BiliBiliACGNCode.Utils;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
-using MegaCrit.Sts2.Core.Models.Powers;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Cards;
 
@@ -22,20 +21,18 @@ namespace BiliBiliACGN.BiliBiliACGNCode.Cards;
 public sealed class MinusTwentyMillionFruit : CardBaseModel
 {
     #region 卡牌关键词与悬停
-    public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Innate];
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<WeakPower>(), HoverTipFactory.Static(CustomeHoverTips.AttackOrb)];
-    #endregion
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.Static(StaticHoverTip.Channeling),HoverTipFactory.FromOrb<StrengthOrb>()];
+    #endregion  
     #region 卡牌属性配置
-    private const int energyCost = 0;
-    private const CardType type = CardType.Attack;
+    private const int energyCost = 1;
+    private const CardType type = CardType.Skill;
     private const CardRarity rarity = CardRarity.Ancient;
-    private const TargetType targetType = TargetType.AnyEnemy;
+    private const TargetType targetType = TargetType.Self;
     private const bool shouldShowInCardLibrary = true;
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new DynamicVar("Hits", 3m),
-        new DynamicVar("Weak", 3m)
+        new DynamicVar("OrbCount", 3)
     ];
 
     public MinusTwentyMillionFruit() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
@@ -44,19 +41,20 @@ public sealed class MinusTwentyMillionFruit : CardBaseModel
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        // 女儿向敌人发动{Hits:diff()}次[gold]进攻[/gold]。给予{Weak:diff()}层[gold]虚弱[/gold]。
-        int attackCount = base.DynamicVars["Hits"].IntValue;
-        for(int i = 0; i < attackCount; i++)
+        // 随机生成{OrbCount:diff()}个力量充能球
+        int orbCount = base.DynamicVars["OrbCount"].IntValue;
+        for(int i = 0; i < orbCount; i++)
         {
-            await DaughterCmd.ApplyAttack(base.Owner.Creature, 0m, choiceContext, cardPlay.Target);
-            await OrbUtils.OrbEvokeWait();
+            await OrbCmd.Channel<StrengthOrb>(choiceContext, base.Owner);
+            if(i < orbCount - 1)
+            {
+                await OrbUtils.OrbChannelingWait();
+            }
         }
-        await PowerCmd.Apply<WeakPower>(cardPlay.Target, base.DynamicVars["Weak"].BaseValue, base.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()
     {
-        base.DynamicVars["Hits"].UpgradeValueBy(1m);
-        base.DynamicVars["Weak"].UpgradeValueBy(2m);
+        base.DynamicVars["OrbCount"].UpgradeValueBy(1m);
     }
 }
