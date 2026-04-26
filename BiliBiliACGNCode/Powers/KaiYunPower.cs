@@ -27,9 +27,9 @@ public sealed class KaiYunPower : PowerBaseModel
     }
     public override async Task AfterTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)
     {
-        if (side == CombatSide.Enemy)
+        if (side == CombatSide.Player)
         {
-            await PowerCmd.TickDownDuration(this);
+            await PowerCmd.Remove(this);
         }
     }
 }
