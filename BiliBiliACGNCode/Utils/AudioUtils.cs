@@ -25,6 +25,7 @@ public static class AudioUtils
 
     private const string SfxPlayerPrefabPath = "res://BiliBiliACGN/scenes/sfxPrefab/SfxPlayer.tscn";
     private static readonly StringName BottleAttackEventPath = new StringName("event:/sfx/characters/bottle/bottle_attack");
+    private static readonly StringName FunShikiAttackEventPath = new StringName("event:/sfx/characters/funshiki/funshiki_attack");
     public static readonly StringName BersekEnterEventPath = new StringName("res://BiliBiliACGN/sfx/powers/berserk_enter.ogg");
     public static readonly StringName BottleVoiceEventPath = new StringName("event:/sfx/characters/bottle/bottle_voice");
     #endregion
@@ -38,7 +39,7 @@ public static class AudioUtils
     /// 音效路径集合
     /// 初始化的时候加载这些音效到缓存
     /// </summary>
-    private static string[] _bottleAttackSfxPaths = new string[]
+    private static string[] _attackSfxPaths = new string[]
     {
         "res://BiliBiliACGN/sfx/attack/Sweep_attack0.ogg",
         "res://BiliBiliACGN/sfx/attack/Sweep_attack1.ogg",
@@ -66,6 +67,7 @@ public static class AudioUtils
     /// </summary>
     private static HashSet<StringName> pathSets = new HashSet<StringName>(){
         BottleAttackEventPath,
+        FunShikiAttackEventPath,
         BersekEnterEventPath,
         BottleVoiceEventPath,
     };
@@ -87,14 +89,14 @@ public static class AudioUtils
         // 加载音效缓存
         LoadSfxCaches();
         // Log
-        int cnt = _bottleAttackSfxPaths.Length + _sfxPaths.Length + _bottleVoiceSfxPaths.Length;
+        int cnt = _attackSfxPaths.Length + _sfxPaths.Length + _bottleVoiceSfxPaths.Length;
         LogUtils.LogInfo($"音效相关初始化完成，共加载{cnt}个音效");
     }
     /// <summary>
     /// 加载音效缓存
     /// </summary>
     private static void LoadSfxCaches(){
-        foreach (var path in _bottleAttackSfxPaths)
+        foreach (var path in _attackSfxPaths)
         {
             LoadSfxCached(path);
         }
@@ -326,8 +328,8 @@ public static class AudioUtils
     {
         //LogUtils.LogInfo($"播放音效开始: {resourcePath}");
         // 路径资源转换
-        if(resourcePath == BottleAttackEventPath){
-            resourcePath = GetRandomBottleAttackSfxPath();
+        if(resourcePath == BottleAttackEventPath || resourcePath == FunShikiAttackEventPath){
+            resourcePath = GetRandomAttackSfxPath();
         }else if(resourcePath == BottleVoiceEventPath){
             resourcePath = GetRandomBottleVoiceSfxPath();
         }
@@ -412,12 +414,12 @@ public static class AudioUtils
 
     #region 音效事件
     /// <summary>
-    /// 获取随机瓶子攻击音效路径
+    /// 获取随机攻击音效路径
     /// </summary>
     /// <returns></returns>
-    private static string GetRandomBottleAttackSfxPath()
+    private static string GetRandomAttackSfxPath()
     {
-        return _bottleAttackSfxPaths[Random.Shared.Next(0, _bottleAttackSfxPaths.Length - 1)];
+        return _attackSfxPaths[Random.Shared.Next(0, _attackSfxPaths.Length - 1)];
     }
     /// <summary>
     /// 获取随机瓶子君语音音效路径
