@@ -13,6 +13,7 @@ namespace BiliBiliACGN.BiliBiliACGNCode.Relics.RelicPool;
 
 public sealed class FunShikiRelicPool : CustomRelicPoolModel
 {
+    public override Color LabOutlineColor => new Color("E02D16");
     public override string? TextEnergyIconPath{
         get
         {
