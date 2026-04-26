@@ -244,7 +244,7 @@
   "BILIBILIACGN-MEME_MAIL_BOX.title": "偷梗优香",
   "BILIBILIACGN-MEME_MAIL_BOX.description": "在下个回合，抽{Cards:diff()}张牌，获得{Energy:energyIcons()}。",
   "BILIBILIACGN-IM_SO_DESPAIR.title": "我好绝望啊",
-  "BILIBILIACGN-IM_SO_DESPAIR.description": "获得{Block:diff()}点[gold]格挡[/gold]。\n本回合，拥有[gold]病态[/gold]的敌人对你造成伤害减半。",
+  "BILIBILIACGN-IM_SO_DESPAIR.description": "丢弃你的所有[gold]手牌[/gold]。\n然后抽取相同数量的牌。",
   "BILIBILIACGN-YANDERE_FORM.title": "病娇形态",
   "BILIBILIACGN-YANDERE_FORM.description": "每当你或女儿造成伤害时，同时给予等量的[gold]病态[/gold]。",
   "BILIBILIACGN-DISTORTION_SCHOLAR.title": "扭曲学家",
