@@ -22,6 +22,8 @@ public sealed class FunCaptain : CardBaseModel
 {
     #region 卡牌关键词与悬停
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<FocusPower>()];
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
+
     #endregion
     #region 卡牌属性配置
     private const int energyCost = 0;
@@ -49,5 +51,6 @@ public sealed class FunCaptain : CardBaseModel
     protected override void OnUpgrade()
     {
         base.DynamicVars["Focus"].UpgradeValueBy(1m);
+        base.RemoveKeyword(CardKeyword.Exhaust);
     }
 }
