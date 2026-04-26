@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b680umno0ek"
-path="res://.godot/imported/bottle_character.png-423923dfb9735027520fa21430f50dbe.ctex"
+uid="uid://des8y0ydd2rcp"
+path="res://.godot/imported/funshiki_rest_site.png-a220f5059fbec564f1ff4d1720a77114.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://BiliBiliACGN/images/bottle_character.png"
-dest_files=["res://.godot/imported/bottle_character.png-423923dfb9735027520fa21430f50dbe.ctex"]
+source_file="res://BiliBiliACGN/images/characters/funshiki_rest_site.png"
+dest_files=["res://.godot/imported/funshiki_rest_site.png-a220f5059fbec564f1ff4d1720a77114.ctex"]
 
 [params]
 
