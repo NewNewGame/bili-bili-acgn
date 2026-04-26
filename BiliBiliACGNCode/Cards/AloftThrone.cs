@@ -13,6 +13,7 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.Models.Powers;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Cards;
 
@@ -27,20 +28,31 @@ public sealed class AloftThrone : CardBaseModel
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new CardsVar(1),
+        new DynamicVar("Strength", 2m),
+        new DynamicVar("Dexterity", 2m),
     ];
 
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.Static(CustomeHoverTips.AttackOrb)];
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => [
+        HoverTipFactory.FromPower<StrengthPower>(),
+        HoverTipFactory.FromPower<DexterityPower>(),
+    ];
 
     public AloftThrone() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        await PowerCmd.Apply<AloftThronePower>(base.Owner.Creature, base.DynamicVars["Cards"].BaseValue, base.Owner.Creature, this);
+        // 播放动画
+        await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
+        // 失去1个充能球栏位
+        OrbCmd.RemoveSlots(base.Owner, 1);
+        // 获得力量和敏捷
+        await PowerCmd.Apply<StrengthPower>(base.Owner.Creature, base.DynamicVars["Strength"].BaseValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<DexterityPower>(base.Owner.Creature, base.DynamicVars["Dexterity"].BaseValue, base.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()
     {
-        base.EnergyCost.UpgradeBy(-1);
+        base.DynamicVars["Strength"].UpgradeValueBy(1m);
+        base.DynamicVars["Dexterity"].UpgradeValueBy(1m);
     }
 }

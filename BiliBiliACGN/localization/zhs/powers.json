@@ -179,10 +179,6 @@
   "BILIBILIACGN-NEW_SEASON_WONDER_HOUSE_POWER.description": "当你打出1张[gold]能力[/gold]牌时，获得[blue]1[/blue]点{energyPrefix:energyIcons(1)}。",
   "BILIBILIACGN-NEW_SEASON_WONDER_HOUSE_POWER.smartDescription": "当你打出1张[gold]能力[/gold]牌时，获得{Amount:energyIcons()}。",
 
-  "BILIBILIACGN-ALOFT_THRONE_POWER.title": "高高在上",
-  "BILIBILIACGN-ALOFT_THRONE_POWER.description": "每当女儿发动[gold]进攻[/gold]时，抽[blue]1[/blue]张牌。",
-  "BILIBILIACGN-ALOFT_THRONE_POWER.smartDescription": "每当女儿发动[gold]进攻[/gold]时，抽[blue]{Amount}[/blue]张牌。",
-
   "BILIBILIACGN-LOVE_BRAIN_POWER.title": "恋爱脑",
   "BILIBILIACGN-LOVE_BRAIN_POWER.description": "每当你给予[blue]3[/blue]次[gold]病态[/gold]，获得[blue]1[/blue]点{energyPrefix:energyIcons(1)}。",
   "BILIBILIACGN-LOVE_BRAIN_POWER.smartDescription": "每当你给予[blue]{Amount}[/blue]次[gold]病态[/gold]，获得[blue]1[/blue]点{energyPrefix:energyIcons(1)}。",

@@ -4,6 +4,7 @@
 //* 创建时间：2026/04/11
 //* 描述：每当女儿发动进攻时，抽 Amount 张牌
 //*******************************************************
+/* 弃用
 
 using BiliBiliACGN.BiliBiliACGNCode.Cards;
 using MegaCrit.Sts2.Core.Entities.Powers;
@@ -11,7 +12,6 @@ using MegaCrit.Sts2.Core.HoverTips;
 
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Powers;
-
 public sealed class AloftThronePower : PowerBaseModel
 {
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.Static(CustomeHoverTips.AttackOrb)];
@@ -35,3 +35,4 @@ public sealed class AloftThronePower : PowerBaseModel
     */
 
 }
+*/
