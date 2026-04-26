@@ -2,7 +2,7 @@
 //* 文件：FunShikiEcstasy(泛式狂喜)
 //* 作者：wheat
 //* 创建时间：2026/04/11
-//* 描述：向敌人施加病态5点X/X+1次。
+//* 描述：向敌人施加[gold]病态[/gold]{MorbidAmount:diff()}点X次。
 //*******************************************************
 
 using BaseLib.Utils;
@@ -40,11 +40,13 @@ public sealed class FunShikiEcstasy : CardBaseModel
             return;
         }
         int num = ResolveEnergyXValue();
-        if(base.IsUpgraded)++num;
         for(int i = 0; i < num; i++){
             await PowerCmd.Apply<MorbidPower>(cardPlay.Target, base.DynamicVars["MorbidAmount"].BaseValue, base.Owner.Creature, this);
         }
     }
 
-    protected override void OnUpgrade() { }
+    protected override void OnUpgrade() 
+    { 
+        base.DynamicVars["MorbidAmount"].UpgradeValueBy(2m);
+    }
 }
