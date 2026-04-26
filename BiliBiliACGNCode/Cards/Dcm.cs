@@ -52,9 +52,6 @@ public sealed class Dcm : CardBaseModel
         int cnt = (int)base.DynamicVars["StrengthOrb"].BaseValue;
         for(int i = 0; i < cnt; i++){
             await OrbCmd.Channel<StrengthOrb>(choiceContext, base.Owner);
-            if(i < cnt - 1){
-                await OrbUtils.OrbChannelingWait();
-            }
         }
     }
 
@@ -62,6 +59,5 @@ public sealed class Dcm : CardBaseModel
     {
         base.DynamicVars["Damage"].UpgradeValueBy(3m);
         base.DynamicVars["Weak"].UpgradeValueBy(1m);
-        base.DynamicVars["StrengthOrb"].UpgradeValueBy(1m);
     }
 }
