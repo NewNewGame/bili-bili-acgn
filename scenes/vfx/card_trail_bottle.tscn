@@ -39,7 +39,7 @@ script = ExtResource("1_j4dle")
 [node name="Trails" type="Node2D" parent="."]
 
 [node name="OuterTrail" type="Line2D" parent="Trails"]
-modulate = Color(0.86767584, 0.0010916054, 0.9374961, 0.7529412)
+modulate = Color(0.055928975, 0.6020491, 0.78607327, 0.7529412)
 material = ExtResource("2_rb1vy")
 width = 96.0
 width_curve = SubResource("Curve_0ojw2")
@@ -51,7 +51,7 @@ joint_mode = 2
 script = ExtResource("4_oasf2")
 
 [node name="InnerTrail" type="Line2D" parent="Trails"]
-modulate = Color(0.9779224, 0.7912807, 1, 0.5019608)
+modulate = Color(0.6222109, 0.931397, 0.9218434, 0.5019608)
 material = ExtResource("2_rb1vy")
 width = 64.0
 width_curve = SubResource("Curve_eaky7")
