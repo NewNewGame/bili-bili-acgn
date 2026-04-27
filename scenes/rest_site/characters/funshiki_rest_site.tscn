@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://bgb2cnq1rsnpf"]
 
 [ext_resource type="Script" uid="uid://bllvg4nxopi4a" path="res://BiliBiliACGNCode/Nodes/SNRestSiteCharacter.cs" id="1_awmq8"]
-[ext_resource type="Texture2D" uid="uid://clpo72qcpme4m" path="res://BiliBiliACGN/images/characters/funshiki_reset_site.png" id="2_k0a1h"]
+[ext_resource type="Texture2D" uid="uid://des8y0ydd2rcp" path="res://BiliBiliACGN/images/characters/funshiki_rest_site.png" id="2_k0a1h"]
 [ext_resource type="PackedScene" uid="uid://bgy88bk44xxvk" path="res://BiliBiliACGN/scenes/selection_reticle.tscn" id="3_evojs"]
 
 [node name="FunShikiRestSite" type="Node2D"]
