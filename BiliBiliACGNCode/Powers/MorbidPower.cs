@@ -100,24 +100,26 @@ public sealed class MorbidPower : PowerBaseModel
 	}
 
     /// <summary>
-    /// 施加者为玩家时，设置施加者名称
+    /// 施加者为玩家时，设置施加痴迷对象
     /// </summary>
+    /// <param name="power"></param>
+    /// <param name="amount"></param>
     /// <param name="applier"></param>
     /// <param name="cardSource"></param>
     /// <returns></returns>
-    public override async Task AfterApplied(Creature? applier, CardModel? cardSource)
-	{
-        // 如果施加者为空，则返回
-        if(applier == null) return;
-        // 如果施加者为玩家
-        if(applier.IsPlayer){
-            // 如果施加者没有痴迷对象，则给予痴迷对象
-            if(!applier.HasPower<InfatuationTargetPower>())
-            {
-                await PowerCmd.Apply<InfatuationTargetPower>(applier, 1, applier, null);
-            }
+    public override async Task AfterPowerAmountChanged(PowerModel power, decimal amount, Creature? applier, CardModel? cardSource)
+    {
+        // 如果对象不是病态，则返回
+        if(power is not MorbidPower) return;
+        // 如果施加者为空，或者施加者不是玩家，则返回
+        if(applier == null || applier.Player == null) return;
+        // 如果施加者没有痴迷对象，则给予痴迷对象
+        if(!applier.HasPower<InfatuationTargetPower>())
+        {
+            await PowerCmd.Apply<InfatuationTargetPower>(applier, 1, applier, null);
         }
-	}
+    }
+
     public override async Task BeforeDamageReceived(PlayerChoiceContext choiceContext, Creature target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource)
     {
         // 如果攻击目标或者攻击者为空，则返回
