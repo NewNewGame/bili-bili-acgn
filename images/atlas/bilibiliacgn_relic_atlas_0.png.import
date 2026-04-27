@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dflm3c1s0yuhp"
-path="res://.godot/imported/yummy_cookie_bottle.png-dc93482d5dcd89ea06f3c2ef957f0be0.ctex"
+uid="uid://cfjses7j3ff8n"
+path="res://.godot/imported/bilibiliacgn_relic_atlas_0.png-1d1e6bfb42b2d69c32da027675c70cfa.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://BiliBiliACGN/images/relics/big/yummy_cookie_bottle.png"
-dest_files=["res://.godot/imported/yummy_cookie_bottle.png-dc93482d5dcd89ea06f3c2ef957f0be0.ctex"]
+source_file="res://images/atlas/bilibiliacgn_relic_atlas_0.png"
+dest_files=["res://.godot/imported/bilibiliacgn_relic_atlas_0.png-1d1e6bfb42b2d69c32da027675c70cfa.ctex"]
 
 [params]
 

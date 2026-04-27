@@ -15,19 +15,26 @@ namespace BiliBiliACGN.BiliBiliACGNCode.Core.Patches;
 [HarmonyPatch(typeof(AtlasResourceLoader))]
 public static class AtlasResourceLoaderPatch
 {
-    [HarmonyPostfix]
+    [HarmonyPrefix]
     [HarmonyPatch("_Load")]
-    public static void _Load_Postfix(string path, string originalPath, bool useSubThreads, int cacheMode, ref Variant __result)
+    public static bool _Load_Prefix(string path, string originalPath, bool useSubThreads, int cacheMode, ref Variant __result)
     {
         // 为自定义角色提供图标
-        if(path.EndsWith("yummy_cookie_funshiki.tres") || path.EndsWith("yummy_cookie_bottle.tres"))
+        if(path.EndsWith("yummy_cookie_funshiki.tres"))
         {
-            __result = GetYummyCookieTexture(path);
+            __result = GetYummyCookieTexture("yummy_cookie_funshiki.tres");
+            return false;
+        }else if(path.EndsWith("yummy_cookie_bottle.tres"))
+        {
+            __result = GetYummyCookieTexture("yummy_cookie_bottle.tres");
+            return false;
         }
+        // 其他情况继续加载
+        return true;
     }
     private static Variant GetYummyCookieTexture(string originalPath)
     {
-        string path = $"res://BiliBiliACGN/images/relics/big/{originalPath}.tres";
+        string path = $"res://images/atlas/bilibiliacgn_relic_atlas.sprites/{originalPath}";
         if (ResourceLoader.Exists(path))
 		{
 			Texture2D texture2D = ResourceLoader.Load<Texture2D>(path, null, ResourceLoader.CacheMode.Reuse);

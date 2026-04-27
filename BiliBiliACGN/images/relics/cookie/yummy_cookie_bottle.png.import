@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ctu4ma1131tu6"
-path="res://.godot/imported/yummy_cookie_funshiki.png-2ce92c8f48be3d19b73c03c8261dcba8.ctex"
+uid="uid://djuuqgorp2pvj"
+path="res://.godot/imported/yummy_cookie_bottle.png-06db83bffc50ba8f78e436738a1afa06.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://BiliBiliACGN/images/relics/yummy_cookie_funshiki.png"
-dest_files=["res://.godot/imported/yummy_cookie_funshiki.png-2ce92c8f48be3d19b73c03c8261dcba8.ctex"]
+source_file="res://BiliBiliACGN/images/relics/cookie/yummy_cookie_bottle.png"
+dest_files=["res://.godot/imported/yummy_cookie_bottle.png-06db83bffc50ba8f78e436738a1afa06.ctex"]
 
 [params]
 

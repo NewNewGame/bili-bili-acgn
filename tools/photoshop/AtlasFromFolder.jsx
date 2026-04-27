@@ -1,7 +1,11 @@
 /**
  * AtlasFromFolder.jsx
- * Photoshop (ExtendScript): pack equal-sized images from a folder into atlas PNGs (max 4096×4096 each)
+ * Photoshop (ExtendScript): pack images from a folder into atlas PNGs (max 4096×4096 each)
  * and emit one .tpsheet JSON compatible with Godot / TexturePacker-style loaders (see card_atlas.tpsheet).
+ *
+ * When every image has the same width and height, layout uses a fixed square grid (row-major,
+ * ceil(sqrt(n)) columns) so e.g. four 64×64 sprites with pad 0 become 2×2 on a 256×256 page — not
+ * shelf packing that would place them in one row to “tightly” fill width first.
  *
  * Usage: File > Scripts > Browse… → select this file.
  *
@@ -99,67 +103,82 @@ function main() {
         }
     }
 
-    // Packing order: larger first, then deterministic by path.
-    items.sort(function (a, b) {
-        if (a.h !== b.h) return b.h - a.h;
-        if (a.w !== b.w) return b.w - a.w;
-        return a.rel.toLowerCase().localeCompare(b.rel.toLowerCase());
-    });
-
-    var pageSize = choosePageSize_(items);
-    if (!pageSize) {
-        alert("无法选择合适的方形图集尺寸（请检查是否存在超大图片）。");
-        return;
-    }
-
-    var pages = [];
-    var page = newPage_();
-    var cx = EDGE_PAD;
-    var cy = EDGE_PAD;
-    var rowH = 0;
-
-    for (var j = 0; j < items.length; j++) {
-        var iw = items[j].w;
-        var ih = items[j].h;
-
-        // New row if doesn't fit horizontally.
-        if (cx + iw > pageSize) {
-            cx = EDGE_PAD;
-            cy += rowH + CELL_GAP;
-            rowH = 0;
-        }
-
-        // New page if doesn't fit vertically (at current row position).
-        if (cy + ih > pageSize) {
-            pages.push(page);
-            page = newPage_();
-            cx = EDGE_PAD;
-            cy = EDGE_PAD;
-            rowH = 0;
-        }
-
-        // Retry new row on a fresh page if still doesn't fit horizontally (very wide sprites).
-        if (cx + iw > pageSize) {
-            cx = EDGE_PAD;
-            cy += rowH + CELL_GAP;
-            rowH = 0;
-        }
-
-        page.sprites.push({
-            file: items[j].file,
-            rel: items[j].rel,
-            x: cx,
-            y: cy,
-            w: iw,
-            h: ih,
+    // Deterministic order: mixed sizes = larger first; uniform grid = path only.
+    if (sizes.length !== 1) {
+        items.sort(function (a, b) {
+            if (a.h !== b.h) return b.h - a.h;
+            if (a.w !== b.w) return b.w - a.w;
+            return a.rel.toLowerCase().localeCompare(b.rel.toLowerCase());
         });
-        page.maxX = Math.max(page.maxX, cx + iw);
-        page.maxY = Math.max(page.maxY, cy + ih);
-        rowH = Math.max(rowH, ih);
-
-        cx += iw + CELL_GAP;
+    } else {
+        items.sort(function (a, b) {
+            return a.rel.toLowerCase().localeCompare(b.rel.toLowerCase());
+        });
     }
-    pages.push(page);
+
+    var pageSize;
+    var pages;
+    if (sizes.length === 1) {
+        var sw = sizes[0].w;
+        var sh = sizes[0].h;
+        pageSize = chooseUniformPageSize_(items.length, sw, sh);
+        if (!pageSize) {
+            alert("无法选择合适的方形图集尺寸（请检查是否存在超大图片）。");
+            return;
+        }
+        pages = packUniformGridPages_(items, sw, sh, pageSize);
+    } else {
+        pageSize = choosePageSize_(items);
+        if (!pageSize) {
+            alert("无法选择合适的方形图集尺寸（请检查是否存在超大图片）。");
+            return;
+        }
+        pages = [];
+        var page = newPage_();
+        var cx = EDGE_PAD;
+        var cy = EDGE_PAD;
+        var rowH = 0;
+
+        for (var j = 0; j < items.length; j++) {
+            var iw = items[j].w;
+            var ih = items[j].h;
+
+            if (cx + iw > pageSize) {
+                cx = EDGE_PAD;
+                cy += rowH + CELL_GAP;
+                rowH = 0;
+            }
+
+            if (cy + ih > pageSize) {
+                pages.push(page);
+                page = newPage_();
+                cx = EDGE_PAD;
+                cy = EDGE_PAD;
+                rowH = 0;
+            }
+
+            if (cx + iw > pageSize) {
+                cx = EDGE_PAD;
+                cy += rowH + CELL_GAP;
+                rowH = 0;
+            }
+
+            page.sprites.push({
+                file: items[j].file,
+                rel: items[j].rel,
+                x: cx,
+                y: cy,
+                w: iw,
+                h: ih,
+            });
+            page.maxX = Math.max(page.maxX, cx + iw);
+            page.maxY = Math.max(page.maxY, cy + ih);
+            rowH = Math.max(rowH, ih);
+
+            cx += iw + CELL_GAP;
+        }
+        pages.push(page);
+    }
 
     var textureBlocks = [];
     for (var p = 0; p < pages.length; p++) {
@@ -187,6 +206,135 @@ function main() {
 
 function newPage_() {
     return { sprites: [], maxX: EDGE_PAD, maxY: EDGE_PAD };
+}
+
+/** How many grid columns fit in pageSize (with EDGE_PAD on both sides). */
+function maxUniformCols_(pageSize, cellW) {
+    var inner = pageSize - 2 * EDGE_PAD;
+    if (inner < cellW) return 0;
+    return Math.floor((inner + CELL_GAP) / (cellW + CELL_GAP));
+}
+
+function maxUniformRows_(pageSize, cellH) {
+    var inner = pageSize - 2 * EDGE_PAD;
+    if (inner < cellH) return 0;
+    return Math.floor((inner + CELL_GAP) / (cellH + CELL_GAP));
+}
+
+/**
+ * For n sprites (n >= 1), choose cols ≈ ceil(sqrt(n)) and rows = ceil(n/cols), clamped to maxCol×maxRow.
+ * If the ideal grid exceeds maxRow, reduce n to maxCol*maxRow (caller should pass n <= maxCol*maxRow).
+ */
+function computeUniformGridLayout_(n, maxCol, maxRow) {
+    if (n <= 0) {
+        return { n: 0, cols: 1, rows: 1 };
+    }
+    var cols = Math.ceil(Math.sqrt(n));
+    if (cols > maxCol) {
+        cols = maxCol;
+    }
+    if (cols < 1) {
+        cols = 1;
+    }
+    var rows = Math.ceil(n / cols);
+    while (rows > maxRow && cols < maxCol) {
+        cols++;
+        rows = Math.ceil(n / cols);
+    }
+    if (rows > maxRow) {
+        n = maxCol * maxRow;
+        cols = maxCol;
+        rows = maxRow;
+    }
+    return { n: n, cols: cols, rows: rows };
+}
+
+/** Number of atlas pages needed for totalCount same-size sprites at given square pageSize. */
+function countUniformPages_(totalCount, sw, sh, pageSize) {
+    var maxCol = maxUniformCols_(pageSize, sw);
+    var maxRow = maxUniformRows_(pageSize, sh);
+    if (maxCol < 1 || maxRow < 1) {
+        return -1;
+    }
+    var maxPer = maxCol * maxRow;
+    var idx = 0;
+    var pages = 0;
+    while (idx < totalCount) {
+        var rem = totalCount - idx;
+        var nPage = rem < maxPer ? rem : maxPer;
+        var layout = computeUniformGridLayout_(nPage, maxCol, maxRow);
+        idx += layout.n;
+        pages++;
+        if (layout.n <= 0) {
+            return -1;
+        }
+    }
+    return pages;
+}
+
+/** Smallest candidate square that can pack all items with uniform grid (may use multiple pages). */
+function chooseUniformPageSize_(totalCount, sw, sh) {
+    var cellW = sw + CELL_GAP;
+    var cellH = sh + CELL_GAP;
+    if (cellW <= 0 || cellH <= 0) {
+        return null;
+    }
+    var best = null;
+    for (var c = 0; c < CANDIDATE_PAGE_SIZES.length; c++) {
+        var s = CANDIDATE_PAGE_SIZES[c];
+        if (s > MAX_ATLAS) {
+            continue;
+        }
+        var pc = countUniformPages_(totalCount, sw, sh, s);
+        if (pc < 0) {
+            continue;
+        }
+        var waste = s * s * pc - totalCount * sw * sh;
+        if (best === null) {
+            best = { size: s, pages: pc, waste: waste };
+            continue;
+        }
+        if (pc < best.pages || (pc === best.pages && waste < best.waste) || (pc === best.pages && waste === best.waste && s < best.size)) {
+            best = { size: s, pages: pc, waste: waste };
+        }
+    }
+    return best ? best.size : null;
+}
+
+/** Build page list: fixed grid, row-major (path order), no shelf packing. */
+function packUniformGridPages_(items, sw, sh, pageSize) {
+    var maxCol = maxUniformCols_(pageSize, sw);
+    var maxRow = maxUniformRows_(pageSize, sh);
+    var maxPer = maxCol * maxRow;
+    var outPages = [];
+    var idx = 0;
+    while (idx < items.length) {
+        var rem = items.length - idx;
+        var nPage = rem < maxPer ? rem : maxPer;
+        var layout = computeUniformGridLayout_(nPage, maxCol, maxRow);
+        nPage = layout.n;
+        var page = newPage_();
+        for (var k = 0; k < nPage; k++) {
+            var col = k % layout.cols;
+            var row = Math.floor(k / layout.cols);
+            var x = EDGE_PAD + col * (sw + CELL_GAP);
+            var y = EDGE_PAD + row * (sh + CELL_GAP);
+            var it = items[idx + k];
+            page.sprites.push({
+                file: it.file,
+                rel: it.rel,
+                x: x,
+                y: y,
+                w: sw,
+                h: sh,
+            });
+            page.maxX = Math.max(page.maxX, x + sw);
+            page.maxY = Math.max(page.maxY, y + sh);
+        }
+        idx += nPage;
+        outPages.push(page);
+    }
+    return outPages;
 }
 
 function choosePageSize_(items) {

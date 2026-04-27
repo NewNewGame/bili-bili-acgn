@@ -1,0 +1,43 @@
+{
+  "textures": [
+    {
+      "image": "bilibiliacgn_relic_atlas_0.png",
+      "size": {
+        "w": 256,
+        "h": 256
+      },
+      "sprites": [
+        {
+          "filename": "yummy_cookie_bottle.png",
+          "region": {
+            "x": 0,
+            "y": 0,
+            "w": 94,
+            "h": 94
+          },
+          "margin": {
+            "x": 0,
+            "y": 0,
+            "w": 0,
+            "h": 0
+          }
+        },
+        {
+          "filename": "yummy_cookie_funshiki.png",
+          "region": {
+            "x": 94,
+            "y": 0,
+            "w": 94,
+            "h": 94
+          },
+          "margin": {
+            "x": 0,
+            "y": 0,
+            "w": 0,
+            "h": 0
+          }
+        }
+      ]
+    }
+  ]
+}
