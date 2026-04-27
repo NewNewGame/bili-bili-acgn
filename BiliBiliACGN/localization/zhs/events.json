@@ -127,7 +127,7 @@
     "WOODEN_DOOR.loss": "你不会右键开门嘛？",
     "WOODEN_DOOR.pages.INITIAL.description": "你不小心闯入了一个奇怪的地下城，这里仿佛一个巨大的迷宫将你困在其中。\n此时在你前方出现一个木门，而木门的后面正是你梦寐以求的宝物。\n你试图打开扇门时，却发现这门被施了魔法无法用正常的方式打开。",
     "WOODEN_DOOR.pages.INITIAL.options.TRY.title": "暴打打破",
-    "WOODEN_DOOR.pages.INITIAL.options.TRY.description": "失去[red]{HpLoss}[/red]点生命值，有{Chance}%的几率获得[blue]1[/blue]个随机[gold]遗物[/gold]",
+    "WOODEN_DOOR.pages.INITIAL.options.TRY.description": "失去[red]{HpLoss}[/red]点生命值，有[blue]{Chance}[/blue]%的几率获得[blue]1[/blue]个随机[gold]遗物[/gold]",
     "WOODEN_DOOR.pages.TRY.END.description": "恭喜你，经过你的疯狂输出，木门终于被你打破了。",
     "WOODEN_DOOR.pages.INITIAL.options.BREAKWALL.title": "打破墙壁",
     "WOODEN_DOOR.pages.INITIAL.options.BREAKWALL.description": "失去[red]{HpLoss2}[/red]点生命值，获得[blue]1[/blue]个随机[gold]遗物[/gold]",
