@@ -40,8 +40,8 @@ public sealed class PenguinPajamas : RelicBaseModel
             return;
         }
 
-        Turns++;
-        if (Turns % 2 == 0)
+        Turns = (Turns + 1) % 2;
+        if (Turns == 0)
         {
             Flash();
             await OrbCmd.AddSlots(base.Owner, 1);
