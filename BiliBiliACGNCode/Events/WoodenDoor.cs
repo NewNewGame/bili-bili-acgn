@@ -49,7 +49,7 @@ public sealed class WoodenDoor : EventBaseModel
     private async Task TryBreak()
     {
         await CreatureCmd.Damage(new ThrowingPlayerChoiceContext(), base.Owner.Creature, (DamageVar)base.DynamicVars["HpLoss"], null, null);
-        if(Rng.NextInt(0, 100) < base.DynamicVars["Chance"].IntValue)
+        if(base.Owner.RunState.Rng.Niche.NextInt(0, 100) < base.DynamicVars["Chance"].IntValue)
         {
             RelicModel relic = RelicFactory.PullNextRelicFromFront(base.Owner).ToMutable();
             await RelicCmd.Obtain(relic, base.Owner);
