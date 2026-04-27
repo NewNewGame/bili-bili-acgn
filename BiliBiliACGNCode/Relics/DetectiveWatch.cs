@@ -10,6 +10,7 @@ using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Relics;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Models.RelicPools;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Relics;
@@ -18,6 +19,7 @@ namespace BiliBiliACGN.BiliBiliACGNCode.Relics;
 public sealed class DetectiveWatch : RelicBaseModel
 {
     public override RelicRarity Rarity => RelicRarity.Rare;
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.Static(StaticHoverTip.Stun)];
 
     public override async Task AfterPlayerTurnStart(PlayerChoiceContext choiceContext, Player player)
     {

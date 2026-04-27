@@ -20,7 +20,10 @@ namespace BiliBiliACGN.BiliBiliACGNCode.Relics;
 public sealed class SecretaryBowtie : RelicBaseModel
 {
     public override RelicRarity Rarity => RelicRarity.Uncommon;
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new DynamicVar("Turns", 3m)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [
+        new DynamicVar("Turns", 3m),
+        new EnergyVar(2)
+    ];
     private int _shuffleCount = 0;
     [SavedProperty]
     public int BILIBILIACGN_SB_ShuffleCount
@@ -36,6 +39,7 @@ public sealed class SecretaryBowtie : RelicBaseModel
             InvokeDisplayAmountChanged();
         }
     }
+    public override bool ShowCounter => true;
     public override int DisplayAmount => BILIBILIACGN_SB_ShuffleCount;
 
     public override async Task AfterShuffle(PlayerChoiceContext choiceContext, Player shuffler)
@@ -47,7 +51,7 @@ public sealed class SecretaryBowtie : RelicBaseModel
             {
                 Flash();
                 BILIBILIACGN_SB_ShuffleCount = 0;
-                await PlayerCmd.GainEnergy(2, base.Owner);
+                await PlayerCmd.GainEnergy(base.DynamicVars.Energy.BaseValue, base.Owner);
             }
         }
     }
