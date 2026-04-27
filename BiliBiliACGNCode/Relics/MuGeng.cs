@@ -43,7 +43,7 @@ public sealed class MuGeng : RelicBaseModel
         }
 
         // 给予敌人1层病态
-        await PowerCmd.Apply<MorbidPower>(power.Owner, base.DynamicVars["Morbid"].BaseValue, base.Owner.Creature, cardSource);
+        await PowerCmd.Apply<MorbidPower>(power.Owner, base.DynamicVars["Morbid"].BaseValue, base.Owner.Creature, null);
     }
 
 }
