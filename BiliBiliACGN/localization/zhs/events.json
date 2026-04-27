@@ -111,7 +111,27 @@
     "O_KUO_DA.pages.INITIAL.options.NAIYO.description": "你选择了另一边，获得遗物[gold]{Relic2}[/gold]",
     "O_KUO_DA.pages.NAIYO.END.description": "“没有——”\n“没有——”\n“没有——”\n“没有——”\n.......。",
     "O_KUO_DA.pages.INITIAL.options.COMBAT.title": "那就全都揍一顿",
-    "O_KUO_DA.pages.INITIAL.options.COMBAT.description": "你受不了了，获得遗物[gold]{Relic3}[/gold]"
+    "O_KUO_DA.pages.INITIAL.options.COMBAT.description": "你受不了了，获得遗物[gold]{Relic3}[/gold]",
+
+    "DA_CHENG_GUILLOTINE.title": "大呈断头台",
+    "DA_CHENG_GUILLOTINE.pages.INITIAL.description": "你来到一个‌巨大广场，此时这里充满了人，他们欢呼着似乎在庆祝名为h萌拜年祭的活动。\n“想要我的财宝吗？想要的话可以全部给你，去找吧！我把一切都放在那里了！”",
+    "DA_CHENG_GUILLOTINE.pages.INITIAL.options.TRY.title": "试图窃取藏宝图",
+    "DA_CHENG_GUILLOTINE.pages.INITIAL.options.TRY.description": "获得[gold]{CardTitle}[/gold]",
+    "DA_CHENG_GUILLOTINE.pages.INITIAL.options.CELEBRATE.title": "和众人一起庆祝",
+    "DA_CHENG_GUILLOTINE.pages.INITIAL.options.CELEBRATE.description": "从[blue]{FromCardChoiceCount}[/blue]张随机牌中选择[blue]{CardChoiceCount}[/blue]张牌加入你的牌组",
+    "DA_CHENG_GUILLOTINE.pages.CELEBRATE.selectionScreenPrompt": "选择一张牌加入你的牌组",
+    "DA_CHENG_GUILLOTINE.pages.CELEBRATE.END.description": "你决定和众人一起庆祝，你们玩的很嗨。\n还有一个名叫天堂？大呈？人王？ノ土？的人？\n他说下次不早点准备拜年祭我就是XX！",
+    "DA_CHENG_GUILLOTINE.pages.TRY.END.description": "你趁着他们玩的很嗨，偷偷摸摸的把藏宝图塞进了口袋。\n还有一个名叫天堂？大呈？人王？ノ土？的人？\n他说下次不早点准备拜年祭我就是XX！",
+
+    "WOODEN_DOOR.title": "打不开的木门",
+    "WOODEN_DOOR.loss": "你不会右键开门嘛？",
+    "WOODEN_DOOR.pages.INITIAL.description": "你不小心闯入了一个奇怪的地下城，这里仿佛一个巨大的迷宫将你困在其中。\n此时在你前方出现一个木门，而木门的后面正是你梦寐以求的宝物。\n你试图打开扇门时，却发现这门被施了魔法无法用正常的方式打开。",
+    "WOODEN_DOOR.pages.INITIAL.options.TRY.title": "暴打打破",
+    "WOODEN_DOOR.pages.INITIAL.options.TRY.description": "失去[red]{HpLoss}[/red]点生命值，有{Chance}%的几率获得[blue]1[/blue]个随机[gold]遗物[/gold]",
+    "WOODEN_DOOR.pages.TRY.END.description": "恭喜你，经过你的疯狂输出，木门终于被你打破了。",
+    "WOODEN_DOOR.pages.INITIAL.options.BREAKWALL.title": "打破墙壁",
+    "WOODEN_DOOR.pages.INITIAL.options.BREAKWALL.description": "失去[red]{HpLoss2}[/red]点生命值，获得[blue]1[/blue]个随机[gold]遗物[/gold]",
+    "WOODEN_DOOR.pages.BREAKWALL.END.description": "恭喜你，经过你的天才操作，不去开门直接撞碎了墙壁，你成功进入了地下城。"
 
 
 }

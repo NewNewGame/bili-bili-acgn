@@ -40,7 +40,7 @@ public sealed class Nuke : EventBaseModel
     }
     public override bool IsAllowed(IRunState runState){
         // 第二层限定
-        return runState.TotalFloor <= EventUtils.SecondFloorMaxLevel && runState.TotalFloor >= EventUtils.FirstFloorMaxLevel;
+        return runState.CurrentActIndex == 1;
     }
 
     private async Task Follow()

@@ -43,7 +43,7 @@ public sealed class PureGoldCardEvent : EventBaseModel
     }
     public override bool IsAllowed(IRunState runState){
         // 第二三层限定
-        return runState.TotalFloor > EventUtils.FirstFloorMaxLevel;
+        return runState.CurrentActIndex >= 1;
     }
 
     /// <summary>

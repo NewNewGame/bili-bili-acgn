@@ -26,7 +26,7 @@ public sealed class EHeiJiang : EventBaseModel
     public override bool IsAllowed(IRunState runState)
     {
         // 第一层限定
-        return runState.TotalFloor <= EventUtils.FirstFloorMaxLevel;
+        return runState.CurrentActIndex == 0;
     } 
     protected override IReadOnlyList<EventOption> GenerateInitialOptions()
     {
