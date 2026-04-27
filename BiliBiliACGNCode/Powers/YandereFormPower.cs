@@ -31,9 +31,9 @@ public sealed class YandereFormPower : PowerBaseModel
         {
             // 如果伤害来源为病态，则返回
             if(choiceContext is MorbidPlayerChoiceContext) return;
-            await PowerCmd.Apply<MorbidPower>(target, Amount * result.TotalDamage, dealer, cardSource);
+            await PowerCmd.Apply<MorbidPower>(target, Amount * result.TotalDamage, dealer, null);
         }else if(dealer.PetOwner != null && dealer.PetOwner == base.Owner.Player){
-            await PowerCmd.Apply<MorbidPower>(target, Amount * result.TotalDamage, dealer.PetOwner.Creature, cardSource);
+            await PowerCmd.Apply<MorbidPower>(target, Amount * result.TotalDamage, dealer.PetOwner.Creature, null);
         }
 
     }
