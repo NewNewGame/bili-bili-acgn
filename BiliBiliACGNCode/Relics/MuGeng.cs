@@ -34,7 +34,7 @@ public sealed class MuGeng : RelicBaseModel
             return;
         }
         // 如果不是自己给的，则返回
-        if(applier == base.Owner.Creature){
+        if(applier != base.Owner.Creature){
             return;
         }
         // 如果层数小于等于0，则返回
