@@ -4,7 +4,7 @@
 //* 创建时间：2026/04/02
 //* 描述：欸嘿酱的面具 对精英造成伤害+20%
 //*******************************************************
-
+/* 弃用
 using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Relics;
@@ -43,3 +43,4 @@ public sealed class EiHeiMask : RelicBaseModel
         return 0m;
     }
 }
+*/
