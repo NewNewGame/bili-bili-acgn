@@ -36,7 +36,7 @@ public sealed class Vlog : RelicBaseModel
         // 如果攻击者不是敌人，则返回
         if(dealer == null || dealer.Side != CombatSide.Enemy) return 1m;
         // 如果敌人的病态层数小于其生命值，则返回
-        if(target.GetPowerAmount<MorbidPower>() < target.CurrentHp) return 1m;
+        if(dealer.GetPowerAmount<MorbidPower>() < target.CurrentHp) return 1m;
         return 1m - base.DynamicVars["Decrease"].BaseValue / 100m;
     }
 
