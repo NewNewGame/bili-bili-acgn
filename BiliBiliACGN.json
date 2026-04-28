@@ -3,7 +3,7 @@
   "name": "B站动画区",
   "author": "牛国游戏制作组",
   "description": "本Mod基于b站动画区制作，纯属娱乐。",
-  "version": "0.6.1",
+  "version": "0.6.2",
   "has_pck": true,         
   "has_dll": true,       
   "dependencies": ["BaseLib"],    
