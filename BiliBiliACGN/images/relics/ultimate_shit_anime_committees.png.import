@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ks7xmtv3h73t"
-path="res://.godot/imported/ultimate_shit_anime_committee.png-928e6dd6eb8ddf301f08ee7d405ac74b.ctex"
+uid="uid://g5dkqxktvqmg"
+path="res://.godot/imported/ultimate_shit_anime_committees.png-8fd988803cef9e7a07c6bfec9aba040f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://BiliBiliACGN/images/relics/big/ultimate_shit_anime_committee.png"
-dest_files=["res://.godot/imported/ultimate_shit_anime_committee.png-928e6dd6eb8ddf301f08ee7d405ac74b.ctex"]
+source_file="res://BiliBiliACGN/images/relics/ultimate_shit_anime_committees.png"
+dest_files=["res://.godot/imported/ultimate_shit_anime_committees.png-8fd988803cef9e7a07c6bfec9aba040f.ctex"]
 
 [params]
 
