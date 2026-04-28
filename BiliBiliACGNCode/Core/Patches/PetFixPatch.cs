@@ -37,7 +37,6 @@ public static class PetFixPatch
     public static void AddCreature_Postfix(NCombatRoom __instance, Creature creature)
     {
         if(__instance == null) return;
-        LogUtils.LogInfo($"AddCreature_Postfix creature: {creature.Name}");
         // 只处理宠物
         if (creature?.PetOwner == null) return;
 
@@ -66,7 +65,6 @@ public static class PetFixPatch
             }
             return;
         }
-        LogUtils.LogInfo($"AddCreature_Postfix 打开血条: {nCreature.Name}");
         // 强制打开交互（会显示血条 + 可点选 + 进手柄导航）
         nCreature.ToggleIsInteractable(true);
         nCreature.Position = new Godot.Vector2(creatureNode.Position.X + 240f, creatureNode.Position.Y + 15f);
