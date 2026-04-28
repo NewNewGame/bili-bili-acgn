@@ -26,7 +26,7 @@ public sealed class OKuoDa : EventBaseModel
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new StringVar("Relic", ModelDb.Relic<AngryPop>().Title.GetFormattedText()),
         new StringVar("Relic2", ModelDb.Relic<CalmPipi>().Title.GetFormattedText()),
-        new StringVar("Relic3", ModelDb.Relic<UltimateShitAnimeCommittee>().Title.GetFormattedText()),
+        new StringVar("Relic3", ModelDb.Relic<UltimateShitAnimeCommittees>().Title.GetFormattedText()),
     ];
     protected override IReadOnlyList<EventOption> GenerateInitialOptions()
     {
@@ -34,7 +34,7 @@ public sealed class OKuoDa : EventBaseModel
         [
             new EventOption(this, Oguoda, "O_KUO_DA.pages.INITIAL.options.OGUODA", HoverTipFactory.FromRelic<AngryPop>()),
             new EventOption(this, Naiyo, "O_KUO_DA.pages.INITIAL.options.NAIYO", HoverTipFactory.FromRelic<CalmPipi>()),
-            new EventOption(this, Combat, "O_KUO_DA.pages.INITIAL.options.COMBAT", HoverTipFactory.FromRelic<UltimateShitAnimeCommittee>())
+            new EventOption(this, Combat, "O_KUO_DA.pages.INITIAL.options.COMBAT", HoverTipFactory.FromRelic<UltimateShitAnimeCommittees>())
         ];
     }
     public override bool IsAllowed(IRunState runState){
@@ -60,7 +60,7 @@ public sealed class OKuoDa : EventBaseModel
     {
         // 进入战斗
         EnterCombatWithoutExitingEvent<OKuoDaEncounter>([
-            new RelicReward(ModelDb.Relic<UltimateShitAnimeCommittee>().ToMutable(), base.Owner),
+            new RelicReward(ModelDb.Relic<UltimateShitAnimeCommittees>().ToMutable(), base.Owner),
             new PotionReward(base.Owner)
         ], false);
         
