@@ -2,12 +2,12 @@
 //* 文件：FinaleRoast(完结吐槽)
 //* 作者：wheat
 //* 创建时间：2026/04/11
-//* 描述：获得{Block:diff()}点[gold]格挡[/gold]。[gold]激发[/gold]{Evokes:diff()}个充能球。
+//* 描述：造成{Damage:diff()}点伤害。[gold]生成[/gold]{OrbCount:diff()}个[gold]进攻[/gold]充能球。
 //*******************************************************
 
 using BaseLib.Utils;
 using BiliBiliACGN.BiliBiliACGNCode.Cards.CardPool;
-using BiliBiliACGN.BiliBiliACGNCode.Utils;
+using BiliBiliACGN.BiliBiliACGNCode.Core.Models.Orbs;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -21,19 +21,19 @@ namespace BiliBiliACGN.BiliBiliACGNCode.Cards;
 public sealed class FinaleRoast : CardBaseModel
 {
     #region 卡牌关键词与悬停
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.Static(StaticHoverTip.Block),HoverTipFactory.Static(StaticHoverTip.Evoke)];
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.Static(StaticHoverTip.Channeling),HoverTipFactory.FromOrb<AttackOrb>()];
     #endregion
     #region 卡牌属性配置
     private const int energyCost = 1;
-    private const CardType type = CardType.Skill;
+    private const CardType type = CardType.Attack;
     private const CardRarity rarity = CardRarity.Common;
-    private const TargetType targetType = TargetType.Self;
+    private const TargetType targetType = TargetType.AnyEnemy;
     private const bool shouldShowInCardLibrary = true;
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new BlockVar(7m, ValueProp.Move),
-        new DynamicVar("Evokes", 2m)
+        new DamageVar(7m, ValueProp.Move),
+        new DynamicVar("OrbCount", 2m)
     ];
 
     public FinaleRoast() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
@@ -42,24 +42,17 @@ public sealed class FinaleRoast : CardBaseModel
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        // 获得{Block:diff()}点[gold]格挡[/gold]。[gold]激发[/gold]{Evokes:diff()}个充能球。
-        await CreatureCmd.GainBlock(base.Owner.Creature, base.DynamicVars.Block.BaseValue, base.DynamicVars.Block.Props, cardPlay);
-        // 如果没有充能球就返回
-        if(base.Owner.PlayerCombatState?.OrbQueue.Orbs.Count == 0) return;
-        int cnt = (int)base.DynamicVars["Evokes"].BaseValue;
-        for(int i = 0; i < cnt; i++)
-        {
-            await OrbCmd.EvokeNext(choiceContext, base.Owner);
-            if(i < cnt - 1)
-            {
-                await OrbUtils.OrbEvokeWait();
-            }
-        }
+        // 造成伤害
+        await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue)
+            .FromCard(this)
+            .Targeting(cardPlay.Target)
+            .Execute(choiceContext);
+        // 生成充能球
+        await OrbCmd.Channel<AttackOrb>(choiceContext, base.Owner);
     }
 
     protected override void OnUpgrade()
     {
-        base.DynamicVars["Block"].UpgradeValueBy(3m);
-        base.DynamicVars["Evokes"].UpgradeValueBy(1m);
+        base.DynamicVars["Damage"].UpgradeValueBy(3m);
     }
 }

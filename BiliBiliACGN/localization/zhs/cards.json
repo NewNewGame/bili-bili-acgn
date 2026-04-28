@@ -385,7 +385,7 @@
   "BILIBILIACGN-FUN_CAPTAIN.title": "泛式队长",
   "BILIBILIACGN-FUN_CAPTAIN.description": "在本回合获得{Focus:diff()}点[gold]集中[/gold]。",
   "BILIBILIACGN-FINALE_ROAST.title": "完结吐槽",
-  "BILIBILIACGN-FINALE_ROAST.description": "获得{Block:diff()}点[gold]格挡[/gold]。\n[gold]激发[/gold]{Evokes:diff()}个充能球。",
+  "BILIBILIACGN-FINALE_ROAST.description": "造成{Damage:diff()}点伤害。\n[gold]生成[/gold]{OrbCount:diff()}个[gold]进攻[/gold]充能球。",
   "BILIBILIACGN-KUYA_XI.title": "苦呀西",
   "BILIBILIACGN-KUYA_XI.description": "在下个回合开始时，\n给予女儿{Strength:diff()}点[gold]力量[/gold]，同时获得{Energy:energyIcons()}。",
   "BILIBILIACGN-GREEN_TEA_FAN.title": "绿茶泛",
