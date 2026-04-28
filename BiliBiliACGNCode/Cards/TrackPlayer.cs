@@ -23,6 +23,7 @@ public sealed class TrackPlayer : CardBaseModel
     private const CardRarity rarity = CardRarity.Rare;
     private const TargetType targetType = TargetType.Self;
     private const bool shouldShowInCardLibrary = true;
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
 
     public TrackPlayer() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
 
@@ -43,6 +44,7 @@ public sealed class TrackPlayer : CardBaseModel
 
     protected override void OnUpgrade()
     {
-        base.EnergyCost.UpgradeBy(-1);
+        // 升级移除消耗
+        base.RemoveKeyword(CardKeyword.Exhaust);
     }
 }
