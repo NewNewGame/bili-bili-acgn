@@ -20,15 +20,11 @@ namespace BiliBiliACGN.BiliBiliACGNCode.Cards;
 [Pool(typeof(FunShikiCardPool))]
 public sealed class SailorUniform : CardBaseModel
 {
-    private const int energyCost = 2;
+    private const int energyCost = 1;
     private const CardType type = CardType.Power;
     private const CardRarity rarity = CardRarity.Uncommon;
     private const TargetType targetType = TargetType.Self;
     private const bool shouldShowInCardLibrary = true;
-
-    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-    [
-    ];
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
@@ -45,6 +41,6 @@ public sealed class SailorUniform : CardBaseModel
 
     protected override void OnUpgrade()
     {
-        base.DynamicVars.Damage.UpgradeValueBy(1m);
+        base.DynamicVars.Damage.UpgradeValueBy(2m);
     }
 }
