@@ -34,14 +34,19 @@ public static class NAudioManagerPatch
     /// <summary>
     /// 在 NAudioManager PlayOneShot 时，转发到自定义 AudioUtils（对象池版本）。
     /// </summary>
-    [HarmonyPostfix]
+    [HarmonyPrefix]
     [HarmonyPatch(
         "PlayOneShot",
         new[] { typeof(string), typeof(Dictionary<string, float>), typeof(float) }
     )]
-    private static void PlayOneShot_Postfix(string path, Dictionary<string, float> parameters, float volume = 1f)
+    private static bool PlayOneShot_Prefix(string path, Dictionary<string, float> parameters, float volume = 1f)
     {
-        AudioUtils.PlayOneShotSfx(path, volume);
+        // 如果在集合里，则使用AudioUtils播放，并返回false，不经过原版处理
+        if(AudioUtils.IsSfxPathInPool(path)){
+            AudioUtils.PlayOneShotSfx(path, volume);
+            return false;
+        }
+        return true;
     }
 }
 

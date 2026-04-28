@@ -26,6 +26,7 @@ public static class AudioUtils
     private const string SfxPlayerPrefabPath = "res://BiliBiliACGN/scenes/sfxPrefab/SfxPlayer.tscn";
     private static readonly StringName BottleAttackEventPath = new StringName("event:/sfx/characters/bottle/bottle_attack");
     private static readonly StringName FunShikiAttackEventPath = new StringName("event:/sfx/characters/funshiki/funshiki_attack");
+    public static readonly StringName ItsukaAttackEventPath = new StringName("event:/sfx/characters/itsuka/itsuka_attack");
     public static readonly StringName BersekEnterEventPath = new StringName("res://BiliBiliACGN/sfx/powers/berserk_enter.ogg");
     public static readonly StringName BottleVoiceEventPath = new StringName("event:/sfx/characters/bottle/bottle_voice");
     #endregion
@@ -49,6 +50,17 @@ public static class AudioUtils
         "res://BiliBiliACGN/sfx/attack/Sweep_attack5.ogg",
         "res://BiliBiliACGN/sfx/attack/Sweep_attack6.ogg",
     };
+        /// <summary>
+    /// 一果攻击音效路径集合
+    /// 初始化的时候加载这些音效到缓存
+    /// </summary>
+    private static string[] _itsukaAttackSfxPaths = new string[]
+    {
+        "res://BiliBiliACGN/sfx/itsuka/itsuka_attack0.ogg",
+        "res://BiliBiliACGN/sfx/itsuka/itsuka_attack1.ogg",
+        "res://BiliBiliACGN/sfx/itsuka/itsuka_attack2.ogg",
+        "res://BiliBiliACGN/sfx/itsuka/itsuka_attack3.ogg",
+    };
     /// <summary>
     /// 瓶子君语音路径集合
     /// 初始化的时候加载这些音效到缓存
@@ -70,6 +82,7 @@ public static class AudioUtils
         FunShikiAttackEventPath,
         BersekEnterEventPath,
         BottleVoiceEventPath,
+        ItsukaAttackEventPath,
     };
     private static bool _initialized = false;
     /// <summary>
@@ -89,7 +102,7 @@ public static class AudioUtils
         // 加载音效缓存
         LoadSfxCaches();
         // Log
-        int cnt = _attackSfxPaths.Length + _sfxPaths.Length + _bottleVoiceSfxPaths.Length;
+        int cnt = _attackSfxPaths.Length + _sfxPaths.Length + _bottleVoiceSfxPaths.Length + _itsukaAttackSfxPaths.Length;
         LogUtils.LogInfo($"音效相关初始化完成，共加载{cnt}个音效");
     }
     /// <summary>
@@ -105,6 +118,10 @@ public static class AudioUtils
             LoadSfxCached(path);
         }
         foreach (var path in _bottleVoiceSfxPaths)
+        {
+            LoadSfxCached(path);
+        }
+        foreach (var path in _itsukaAttackSfxPaths)
         {
             LoadSfxCached(path);
         }
@@ -332,6 +349,8 @@ public static class AudioUtils
             resourcePath = GetRandomAttackSfxPath();
         }else if(resourcePath == BottleVoiceEventPath){
             resourcePath = GetRandomBottleVoiceSfxPath();
+        }else if(resourcePath == ItsukaAttackEventPath){
+            resourcePath = GetRandomItsukaAttackSfxPath();
         }
         if (string.IsNullOrWhiteSpace(resourcePath))
             return null;
@@ -390,7 +409,15 @@ public static class AudioUtils
         audioManagerParent.AddChild(created);
         return _defaultPoolParent = created;
     }
-
+    /// <summary>
+    /// 判断音效路径是否在集合里
+    /// </summary>
+    /// <param name="resourcePath"></param>
+    /// <returns></returns>
+    public static bool IsSfxPathInPool(string resourcePath)
+    {
+        return pathSets.Contains(resourcePath);
+    }
     /// <summary>
     /// 对象池版本（使用默认 AudioManager 父节点）。
     /// </summary>
@@ -403,7 +430,7 @@ public static class AudioUtils
     )
     {
         // 不在集合里的不处理
-        if(!pathSets.Contains(resourcePath))
+        if(!IsSfxPathInPool(resourcePath))
             return null;
         var parent = EnsureDefaultAudioManagerParent();
         if (parent == null)
@@ -428,6 +455,14 @@ public static class AudioUtils
     private static string GetRandomBottleVoiceSfxPath()
     {
         return _bottleVoiceSfxPaths[Random.Shared.Next(0, _bottleVoiceSfxPaths.Length - 1)];
+    }
+    /// <summary>
+    /// 获取随机一果攻击音效路径
+    /// </summary>
+    /// <returns></returns>
+    private static string GetRandomItsukaAttackSfxPath()
+    {
+        return _itsukaAttackSfxPaths[Random.Shared.Next(0, _itsukaAttackSfxPaths.Length - 1)];
     }
     #endregion
 }
