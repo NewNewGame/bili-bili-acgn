@@ -262,7 +262,7 @@
   "BILIBILIACGN-ANIME_MASTER.title": "动漫高手",
   "BILIBILIACGN-ANIME_MASTER.description": "女儿的[gold]临时最大生命值[/gold]不再在回合结束后消失。",
   "BILIBILIACGN-MAD_IS_DEAD_END.title": "做mad死路一条",
-  "BILIBILIACGN-MAD_IS_DEAD_END.description": "对所有敌人造成本场战斗你[gold]生成[/gold]过的充能球{Multiplier:diff()}倍的伤害。{InCombat:\n(已[gold]生成[/gold]{CalculatedChannels:diff()}个充能球。)|}",
+  "BILIBILIACGN-MAD_IS_DEAD_END.description": "对所有敌人造成本场战斗你[gold]生成[/gold]过的充能球{ExtraDamage:diff()}倍的伤害。{InCombat:\n(造成{CalculatedDamage:diff()}点伤害。)|}",
   "BILIBILIACGN-VECTOR.title": "Vector",
   "BILIBILIACGN-VECTOR.description": "{IsTargeting:造成{CalculatedMorbid:diff()}点伤害。|造成等量于敌人身上[gold]病态[/gold]层数的伤害。}",
   "BILIBILIACGN-BRAIN_WIFE.title": "脑婆",

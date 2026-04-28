@@ -2,7 +2,7 @@
 //* 文件：MadIsDeadEnd(做mad死路一条)
 //* 作者：wheat
 //* 创建时间：2026/04/08
-//* 描述：对所有敌人造成本场战斗你生成过的充能球2/3倍的伤害。
+//* 描述：对所有敌人造成本场战斗你生成过的充能球3/4倍的伤害。
 //*******************************************************
 
 using BaseLib.Utils;
@@ -16,6 +16,7 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.ValueProps;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Cards;
 
@@ -33,19 +34,17 @@ public sealed class MadIsDeadEnd : CardBaseModel
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new DynamicVar("Multiplier", 2m),
         new CalculationBaseVar(0m),
-        new CalculationExtraVar(1m),
-        new CalculatedVar("CalculatedChannels").WithMultiplier((CardModel card, Creature? _) => CombatManager.Instance.History.Entries.OfType<OrbChanneledEntry>().Count((OrbChanneledEntry e) => e.Actor.Player == card.Owner))
+        new ExtraDamageVar(3m),
+        new CalculatedDamageVar(ValueProp.Move).WithMultiplier((CardModel card, Creature? _) => CombatManager.Instance.History.Entries.OfType<OrbChanneledEntry>().Count((OrbChanneledEntry e) => e.Actor.Player == card.Owner))
     ];
 
     public MadIsDeadEnd() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        // 按“本场战斗已生成的充能球数量 * 倍率”对所有敌人造成伤害
-        int channels = (int)((CalculatedVar)base.DynamicVars["CalculatedChannels"]).Calculate(cardPlay.Target);
-        await DamageCmd.Attack(channels * base.DynamicVars["Multiplier"].BaseValue)
+        // 伤害 = Damage + 本场战斗已生成的充能球数量 * ExtraDamage
+        await DamageCmd.Attack(base.DynamicVars.CalculatedDamage)
             .FromCard(this)
             .TargetingAllOpponents(base.CombatState)
             .Execute(choiceContext);
@@ -53,6 +52,6 @@ public sealed class MadIsDeadEnd : CardBaseModel
 
     protected override void OnUpgrade()
     {
-        base.DynamicVars["Multiplier"].UpgradeValueBy(1m);
+        base.DynamicVars.ExtraDamage.UpgradeValueBy(1m);
     }
 }
