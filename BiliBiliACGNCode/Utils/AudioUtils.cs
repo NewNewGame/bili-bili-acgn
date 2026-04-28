@@ -60,6 +60,8 @@ public static class AudioUtils
         "res://BiliBiliACGN/sfx/itsuka/itsuka_attack1.ogg",
         "res://BiliBiliACGN/sfx/itsuka/itsuka_attack2.ogg",
         "res://BiliBiliACGN/sfx/itsuka/itsuka_attack3.ogg",
+        "res://BiliBiliACGN/sfx/itsuka/itsuka_attack4.ogg",
+        "res://BiliBiliACGN/sfx/itsuka/itsuka_attack5.ogg",
     };
     /// <summary>
     /// 瓶子君语音路径集合
