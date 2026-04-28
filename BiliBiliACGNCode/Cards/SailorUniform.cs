@@ -28,7 +28,7 @@ public sealed class SailorUniform : CardBaseModel
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new DamageVar(4m, ValueProp.Move),
+        new DamageVar(3m, ValueProp.Move),
     ];
 
     public SailorUniform() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
