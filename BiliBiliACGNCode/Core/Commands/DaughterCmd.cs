@@ -12,10 +12,6 @@ using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.ValueProps;
 using MegaCrit.Sts2.Core.Models;
 using BiliBiliACGN.BiliBiliACGNCode.Powers;
-using BiliBiliACGN.BiliBiliACGNCode.Cards;
-using MegaCrit.Sts2.Core.Runs;
-using MegaCrit.Sts2.Core.Entities.Multiplayer;
-using MegaCrit.Sts2.Core.Models.Powers;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Core.Commands;
 
@@ -80,6 +76,8 @@ public static class DaughterCmd
 			VfxCmd.PlayOnCreature(item, "vfx/vfx_attack_lightning");
 		}
         */
+        // 播放动画
+        await CreatureCmd.TriggerAnim(daughter, "Attack", 0.15f);
 		await CreatureCmd.Damage(choiceContext, targets, value, ValueProp.Move, daughter);
     }
     /// <summary>
@@ -95,6 +93,8 @@ public static class DaughterCmd
 			VfxCmd.PlayOnCreature(item, "vfx/vfx_attack_lightning");
 		}
         */
+        // 播放动画
+        await CreatureCmd.TriggerAnim(daughter, "Attack", 0.15f);
 		var results = await CreatureCmd.Damage(choiceContext, target, value, ValueProp.Move, daughter);
         return results;
     }
