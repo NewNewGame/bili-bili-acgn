@@ -63,7 +63,7 @@ public static class NOrbUpdateVisualsPatch
 		{
 			passiveLabel.Visible = true;
 			evokeLabel.Visible = true;
-			passiveLabel.SetTextAutoSize(model.PassiveVal.ToString("0"));
+			passiveLabel.SetTextAutoSize(model.PassiveVal.ToString("0") + "/3");
 			evokeLabel.SetTextAutoSize((model.EvokeVal / 3m).ToString("0"));
 		}
 	}
