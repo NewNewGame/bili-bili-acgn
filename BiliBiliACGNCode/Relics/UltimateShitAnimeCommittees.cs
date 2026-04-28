@@ -1,5 +1,5 @@
 //****************** 代码文件申明 ***********************
-//* 文件：UltimateShitAnimeCommittee
+//* 文件：UltimateShitAnimeCommittees
 //* 作者：wheat
 //* 创建时间：2026/04/02
 //* 描述：究极粪动画制作委员会 在每场战斗开始时，随机复制一张手牌（0费，消耗）
@@ -17,7 +17,7 @@ using MegaCrit.Sts2.Core.Models.RelicPools;
 namespace BiliBiliACGN.BiliBiliACGNCode.Relics;
 
 [Pool(typeof(EventRelicPool))]
-public sealed class UltimateShitAnimeCommittee : RelicBaseModel
+public sealed class UltimateShitAnimeCommittees : RelicBaseModel
 {
     public override RelicRarity Rarity => RelicRarity.Event;
 
