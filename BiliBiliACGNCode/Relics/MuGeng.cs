@@ -45,7 +45,7 @@ public sealed class MuGeng : RelicBaseModel
         if(amount <= 0){
             return;
         }
-
+        Flash();
         // 给予敌人1层病态
         await PowerCmd.Apply<MorbidPower>(power.Owner, base.DynamicVars["Morbid"].BaseValue, null, null);
     }
