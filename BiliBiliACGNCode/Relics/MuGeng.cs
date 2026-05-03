@@ -28,6 +28,10 @@ public sealed class MuGeng : RelicBaseModel
     ];
     public override async Task AfterPowerAmountChanged(PowerModel power, decimal amount, Creature? applier, CardModel? cardSource)
     {
+        // 如果对象不是病态，则返回
+        if(power is not MorbidPower){
+            return;
+        }
         // 如果对象不是敌人，则返回
         if(power.Owner.Side != CombatSide.Enemy)
         {
@@ -43,7 +47,7 @@ public sealed class MuGeng : RelicBaseModel
         }
 
         // 给予敌人1层病态
-        await PowerCmd.Apply<MorbidPower>(power.Owner, base.DynamicVars["Morbid"].BaseValue, base.Owner.Creature, null);
+        await PowerCmd.Apply<MorbidPower>(power.Owner, base.DynamicVars["Morbid"].BaseValue, null, null);
     }
 
 }
