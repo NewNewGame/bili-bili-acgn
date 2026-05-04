@@ -4,7 +4,6 @@
 //* 创建时间：2026/05/04 12:00:00 星期一
 //* 描述：夜之城义体医生黑市事件（斯安威斯坦 / 赛博精神病分支占位）
 //*******************************************************
-using System.Linq;
 using BiliBiliACGN.BiliBiliACGNCode.Relics;
 using BiliBiliACGN.BiliBiliACGNCode.Utils;
 using MegaCrit.Sts2.Core.Commands;
@@ -18,7 +17,7 @@ namespace BiliBiliACGN.BiliBiliACGNCode.Events;
 [EventPool(typeof(SharedEventPool))]
 public sealed class CyberBlackMarket : EventBaseModel
 {
-    public override bool IsShared => true;
+    public override bool IsShared => false;
 
     public override EventLayoutType LayoutType => EventLayoutType.Default;
 
