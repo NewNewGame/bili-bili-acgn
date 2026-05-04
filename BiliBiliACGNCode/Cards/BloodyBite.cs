@@ -57,7 +57,7 @@ public sealed class BloodyBite : CardBaseModel
     /// </summary>
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new HealVar(2m),
+        new HealVar(1m),
         new DamageVar(6m, ValueProp.Move),
         new DynamicVar("IncreaseDamage", 3m),
         new DynamicVar("IncreaseHeal", 1m),
