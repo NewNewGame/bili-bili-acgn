@@ -8,5 +8,10 @@
     "GUI_GUI.moves.STRONG_PUNCH.title": "龟壳撞击",
     "GUI_GUI.name": "龟",
     "ITSUKA.moves.NOTHING.title": "可爱捏",
-    "ITSUKA.name": "雪平一果"
+    "ITSUKA.name": "雪平一果",
+    "DIO.moves.READY.title": "The World!",
+    "DIO.moves.BLOOD_BITE.title": "别打我~",
+    "DIO.moves.MUDAMUDA_ATTACK.title": "無駄無駄無駄",
+    "DIO.moves.BUFF.title": "buff",
+    "DIO.name": "Dio"
 }

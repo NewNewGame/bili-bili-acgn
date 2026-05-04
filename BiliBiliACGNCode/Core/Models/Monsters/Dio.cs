@@ -30,11 +30,11 @@ public sealed class Dio : MonsterBaseModel
     /// <summary>
     /// 连击伤害
     /// </summary>
-	private int DoubleAttackDamage => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 3, 2);
+	private int MudaMudaAttackDamage => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 3, 2);
     /// <summary>
     /// 连击次数
     /// </summary>
-    private int DoubleAttackCount => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 5, 4);
+    private int MudaMudaAttackCount => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 5, 4);
 	/// <summary>
     /// buff值
     /// </summary>
@@ -65,7 +65,7 @@ public sealed class Dio : MonsterBaseModel
         // 嗜血啃咬
 		MoveState moveState2 = new MoveState("BLOOD_BITE_MOVE", BloodBiteMove, new SingleAttackIntent(BloodBiteDamage));
         // 连击
-		MoveState moveState3 = new MoveState("DOUBLE_ATTACK_MOVE", DoubleAttackMove, new MultiAttackIntent(DoubleAttackDamage, DoubleAttackCount));
+		MoveState moveState3 = new MoveState("MUDAMUDA_ATTACK_MOVE", MudaMudaAttackMove, new MultiAttackIntent(MudaMudaAttackDamage, MudaMudaAttackCount));
         // 施加buff
 		MoveState moveState4 = new MoveState("BUFF_MOVE", BuffMove, new BuffIntent());
         // 施加Debuff -> 嗜血啃咬 -> 连击 -> 施加buff -> 嗜血啃咬循环
@@ -128,9 +128,9 @@ public sealed class Dio : MonsterBaseModel
     /// </summary>
     /// <param name="targets"></param>
     /// <returns></returns>
-	private async Task DoubleAttackMove(IReadOnlyList<Creature> targets)
+	private async Task MudaMudaAttackMove(IReadOnlyList<Creature> targets)
 	{
-		await DamageCmd.Attack(DoubleAttackDamage).WithHitCount(DoubleAttackCount).FromMonster(this)
+		await DamageCmd.Attack(MudaMudaAttackDamage).WithHitCount(MudaMudaAttackCount).FromMonster(this)
 			.WithAttackerAnim("DoubleAttack", 0.2f)
 			.OnlyPlayAnimOnce()
 			.WithHitFx("vfx/vfx_attack_blunt")
