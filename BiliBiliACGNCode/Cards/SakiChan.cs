@@ -23,17 +23,17 @@ public sealed class SakiChan : CardBaseModel
     private const CardRarity rarity = CardRarity.Event;
     private const TargetType targetType = TargetType.AnyEnemy;
     private const bool shouldShowInCardLibrary = true;
-    private decimal _extraDamageFromClawPlays;
-	private decimal ExtraDamageFromClawPlays
+    private decimal _extraDamageFromSakiPlays;
+	private decimal ExtraDamageFromSakiPlays
 	{
 		get
 		{
-			return _extraDamageFromClawPlays;
+			return _extraDamageFromSakiPlays;
 		}
 		set
 		{
 			AssertMutable();
-			_extraDamageFromClawPlays = value;
+			_extraDamageFromSakiPlays = value;
 		}
 	}
 
@@ -74,12 +74,12 @@ public sealed class SakiChan : CardBaseModel
     protected override void AfterDowngraded()
 	{
 		base.AfterDowngraded();
-		base.DynamicVars.Damage.BaseValue += ExtraDamageFromClawPlays;
+		base.DynamicVars.Damage.BaseValue += ExtraDamageFromSakiPlays;
 	}
 
 	private void BuffFromClawPlay(decimal extraDamage)
 	{
 		base.DynamicVars.Damage.BaseValue += extraDamage;
-		ExtraDamageFromClawPlays += extraDamage;
+		ExtraDamageFromSakiPlays += extraDamage;
 	}
 }

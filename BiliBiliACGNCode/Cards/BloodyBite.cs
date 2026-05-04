@@ -2,7 +2,7 @@
 //* 文件：BloodyBite
 //* 作者：wheat
 //* 创建时间：2026/04/02
-//* 描述：嗜血啃咬
+//* 描述：嗜血啃咬 
 //*******************************************************
 
 using BaseLib.Utils;
@@ -26,14 +26,41 @@ public sealed class BloodyBite : CardBaseModel
     private const CardRarity rarity = CardRarity.Event;
     private const TargetType targetType = TargetType.AnyEnemy;
     private const bool shouldShowInCardLibrary = true;
-
+    private decimal _extraDamageFromBBPlays;
+	private decimal ExtraDamageFromBBPlays
+	{
+		get
+		{
+			return _extraDamageFromBBPlays;
+		}
+		set
+		{
+			AssertMutable();
+			_extraDamageFromBBPlays = value;
+		}
+	}
+    private decimal _extraHealFromBBPlays;
+	private decimal ExtraHealFromBBPlays
+	{
+		get
+		{
+			return _extraHealFromBBPlays;
+		}
+		set
+		{
+			AssertMutable();
+			_extraHealFromBBPlays = value;
+		}
+	}
     /// <summary>
     /// 牌面动态变量配置。
     /// </summary>
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
         new HealVar(2m),
-        new DamageVar(6m, ValueProp.Move)
+        new DamageVar(6m, ValueProp.Move),
+        new DynamicVar("IncreaseDamage", 3m),
+        new DynamicVar("IncreaseHeal", 1m),
     ];
 
     public BloodyBite() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
@@ -53,6 +80,14 @@ public sealed class BloodyBite : CardBaseModel
             .Execute(choiceContext);
         await CreatureCmd.Heal(base.Owner.Creature, base.DynamicVars["Heal"].BaseValue, true);
         #endregion
+        // 所有的嗜血啃咬伤害加3/4吸血+1
+        IEnumerable<BloodyBite> enumerable = base.Owner.PlayerCombatState.AllCards.OfType<BloodyBite>();
+		decimal baseValue = base.DynamicVars["IncreaseDamage"].BaseValue;
+        decimal healValue = base.DynamicVars["IncreaseHeal"].BaseValue;
+		foreach (BloodyBite item in enumerable)
+		{
+			item.BuffFromBBPlay(baseValue, healValue);
+		}
 
     }
 
@@ -63,7 +98,22 @@ public sealed class BloodyBite : CardBaseModel
     {
         #region 升级效果
         base.DynamicVars["Heal"].UpgradeValueBy(1m);
-        base.DynamicVars["Damage"].UpgradeValueBy(3m);
+        base.DynamicVars["Damage"].UpgradeValueBy(2m);
+        base.DynamicVars["IncreaseDamage"].UpgradeValueBy(2m);
         #endregion
     }
+    protected override void AfterDowngraded()
+	{
+		base.AfterDowngraded();
+		base.DynamicVars.Damage.BaseValue += ExtraDamageFromBBPlays;
+        base.DynamicVars.Heal.BaseValue += ExtraHealFromBBPlays;
+	}
+
+	private void BuffFromBBPlay(decimal extraDamage, decimal extraHeal)
+	{
+		base.DynamicVars.Damage.BaseValue += extraDamage;
+        base.DynamicVars.Heal.BaseValue += extraHeal;
+		ExtraDamageFromBBPlays += extraDamage;
+        ExtraHealFromBBPlays += extraHeal;
+	}
 }
