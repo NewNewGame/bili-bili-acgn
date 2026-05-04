@@ -233,5 +233,9 @@
 
   "BILIBILIACGN-EXTRA_PLAY_CARD_POWER.title": "额外打出",
   "BILIBILIACGN-EXTRA_PLAY_CARD_POWER.description": "在这个回合，你的下[blue]1[/blue]张牌会被额外打出[blue]1[/blue]次。",
-  "BILIBILIACGN-EXTRA_PLAY_CARD_POWER.smartDescription": "在这个回合，你的下[blue]1[/blue]张牌会被额外打出[blue]{Amount}[/blue]次。"
+  "BILIBILIACGN-EXTRA_PLAY_CARD_POWER.smartDescription": "在这个回合，你的下[blue]1[/blue]张牌会被额外打出[blue]{Amount}[/blue]次。",
+
+  "BILIBILIACGN-THE_WORLD_POWER.title": "世界",
+  "BILIBILIACGN-THE_WORLD_POWER.description": "每回合你只能打出X张牌。",
+  "BILIBILIACGN-THE_WORLD_POWER.smartDescription": "每回合你只能打出[blue]{Amount}[/blue]张牌。"
 }
