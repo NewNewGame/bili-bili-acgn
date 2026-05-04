@@ -140,7 +140,20 @@
     "CYBER_BLACK_MARKET.pages.TEMPT.END.description": "你接过了那套烫手的系统。医生咧嘴一笑，手术灯在你视网膜上炸成一片惨白——义体接口的嗡鸣声里，你听见自己心跳得像要撞穿胸腔。",
     "CYBER_BLACK_MARKET.pages.INITIAL.options.DELIVER.title": "交付委托",
     "CYBER_BLACK_MARKET.pages.INITIAL.options.DELIVER.description": "按约定交出箱子。获得[gold]{Gold}[/gold]–[gold]{Gold2}[/gold]金币。",
-    "CYBER_BLACK_MARKET.pages.DELIVER.END.description": "医生数完报酬，把加密手提箱锁进柜台下的合金格。你转身没入后巷的机油味里，霓虹在积水里碎成一片片冷光。"
+    "CYBER_BLACK_MARKET.pages.DELIVER.END.description": "医生数完报酬，把加密手提箱锁进柜台下的合金格。你转身没入后巷的机油味里，霓虹在积水里碎成一片片冷光。",
+
+    "BREAD_MEMORY_MANSION.title": "你还记得你吃过多少片面包吗",
+    "BREAD_MEMORY_MANSION.loss": "無駄無駄無駄——Wryyyyyyyyyyyyyyyyyyyyy！！",
+    "BREAD_MEMORY_MANSION.pages.INITIAL.description": "你追寻一路瘦干的尸体来到了一座宏伟但阴森的石造洋馆前，月光被浓重的乌云遮蔽。一个穿着华丽金边羽织、满头金发的男人背对着你坐在高高的石椅上，手里摇晃着一杯不知名的红色液体。\n「为了治好你的伤，你到底吸取了多少人的生命？」你大声质问。\n男人轻笑一声，缓缓转过头，那双充满压迫感的红瞳锁定在你身上：\n\n「你会记得你至今为止吃过多少片面包吗？」",
+    "BREAD_MEMORY_MANSION.pages.INITIAL.options.FORGET.title": "我确实不记得",
+    "BREAD_MEMORY_MANSION.pages.INITIAL.options.FORGET.description": "激怒他。进入与 Dio 的战斗；获胜获得遗物[gold]{Relic}[/gold]。",
+    "BREAD_MEMORY_MANSION.pages.INITIAL.options.EXACT.title": "说出准确数字：114514",
+    "BREAD_MEMORY_MANSION.pages.INITIAL.options.EXACT.description": "「哈哈哈哈，你真是一个有趣的家伙，吃一顿饭再走吧。」回复[green]20[/green]点生命。",
+    "BREAD_MEMORY_MANSION.pages.DIO_SCORN.description": "「正是如此，蝼蚁的性命于我而言，不过是维持高贵的养料。」\n金边羽织在穿堂风里猎猎作响，他放下酒杯，指节捏得发白。",
+    "BREAD_MEMORY_MANSION.pages.DIO_SCORN.options.COMBAT.title": "迎战",
+    "BREAD_MEMORY_MANSION.pages.DIO_SCORN.options.COMBAT.description": "与 Dio 战斗；获胜获得[gold]{Relic}[/gold]。",
+    "BREAD_MEMORY_MANSION.pages.COMBAT.END.description": "石厅里的空气凝固成刃。你知道接下来只能用刀锋与他对答——而这场问答的代价，尚未写进结局。",
+    "BREAD_MEMORY_MANSION.pages.MEAL.END.description": "「哈哈哈哈，你真是一个有趣的家伙，吃一顿饭再走吧。」\n长桌摆上了热气腾腾的菜肴，你咽下一口，胸口的闷痛竟真的松动了些。"
 
 
 }
