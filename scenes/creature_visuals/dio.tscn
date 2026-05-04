@@ -1,0 +1,33 @@
+[gd_scene load_steps=3 format=3 uid="uid://c1sm3pxgu3ick"]
+
+[ext_resource type="Script" uid="uid://cp1h2s6onqcyh" path="res://BiliBiliACGNCode/Nodes/Combat/SNCreatureVisuals.cs" id="1_htqon"]
+[ext_resource type="Texture2D" uid="uid://bau5inhd2deqn" path="res://BiliBiliACGN/images/monsters/dio.png" id="2_k5h72"]
+
+[node name="dio" type="Node2D"]
+script = ExtResource("1_htqon")
+metadata/_edit_vertical_guides_ = [-1036.0]
+
+[node name="Visuals" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(-17.999998, -186.00002)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("2_k5h72")
+flip_h = true
+
+[node name="Bounds" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+offset_left = -148.0
+offset_top = -366.0
+offset_right = 76.0
+offset_bottom = -66.0
+scale = Vector2(1.2490408, 1.275472)
+
+[node name="IntentPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(-29, -437)
+
+[node name="CenterPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -171)
