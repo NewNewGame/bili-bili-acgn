@@ -22,12 +22,12 @@ namespace BiliBiliACGN.BiliBiliACGNCode.Core.Models.Monsters;
 
 public sealed class Dio : MonsterBaseModel
 {
-    public override int MinInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 250, 200);
+    public override int MinInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 175, 155);
     public override int MaxInitialHp => MinInitialHp;
     /// <summary>
     /// 嗜血啃咬伤害
     /// </summary>
-	private int BloodBiteDamage => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 13, 9);
+	private int BloodBiteDamage => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 12, 9);
     /// <summary>
     /// 连击伤害
     /// </summary>
