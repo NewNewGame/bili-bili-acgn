@@ -237,5 +237,9 @@
 
   "BILIBILIACGN-THE_WORLD_POWER.title": "世界",
   "BILIBILIACGN-THE_WORLD_POWER.description": "每回合你只能打出X张牌。",
-  "BILIBILIACGN-THE_WORLD_POWER.smartDescription": "每回合你只能打出[blue]{Amount}[/blue]张牌。"
+  "BILIBILIACGN-THE_WORLD_POWER.smartDescription": "每回合你只能打出[blue]{Amount}[/blue]张牌。",
+
+  "BILIBILIACGN-CYBERPSYCHOSIS_POWER.title": "赛博精神病",
+  "BILIBILIACGN-CYBERPSYCHOSIS_POWER.description": "本回合你抽到的卡牌费用都会被随机化。",
+  "BILIBILIACGN-CYBERPSYCHOSIS_POWER.smartDescription": "本回合你抽到的卡牌费用都会被随机化。"
 }

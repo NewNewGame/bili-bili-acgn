@@ -5,6 +5,8 @@
 //* 描述：赛博精神病 当这张卡牌抽入你的手牌时，在本回合随机化你[gold]手牌[/gold]中所有牌的耗能。
 //*******************************************************
 using BaseLib.Utils;
+using BiliBiliACGN.BiliBiliACGNCode.Powers;
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
@@ -41,7 +43,7 @@ public sealed class Cyberpsychosis : CardBaseModel
 
     public Cyberpsychosis() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
 
-    public override Task AfterCardDrawn(PlayerChoiceContext choiceContext, CardModel card, bool fromHandDraw)
+    public override async Task AfterCardDrawn(PlayerChoiceContext choiceContext, CardModel card, bool fromHandDraw)
     {
         if(card == this){
             // 获取所有非X费卡牌然后随机
@@ -54,8 +56,9 @@ public sealed class Cyberpsychosis : CardBaseModel
                     NCard.FindOnTable(item)?.PlayRandomizeCostAnim();
                 }
             }
+            // 获得赛博精神病
+            await PowerCmd.Apply<CyberpsychosisPower>(base.Owner.Creature, 1m, base.Owner.Creature, this);
         }
-        return Task.CompletedTask;
     }
     private int NextEnergyCost()
 	{
