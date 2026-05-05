@@ -43,6 +43,7 @@ process_material = ExtResource("3_ring_pm")
 [node name="RingWave2" type="GPUParticles2D" parent="."]
 z_index = 2
 material = ExtResource("5_add")
+emitting = false
 amount = 44
 texture = ExtResource("4_2wcan")
 lifetime = 0.82

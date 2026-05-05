@@ -98,8 +98,8 @@ public sealed class Dio : MonsterBaseModel
         foreach(var player in base.CombatState.Players){
             await PowerCmd.Apply<TheWorldPower>(player.Creature, WorldValue, base.Creature, null);
         }
-        // 等待1s
-        await Cmd.Wait(1f);
+        // 等待2s
+        await Cmd.Wait(2f);
 	}
     /// <summary>
     /// 施加buff
@@ -124,6 +124,7 @@ public sealed class Dio : MonsterBaseModel
         int heal = 0;
         foreach(var result in dmgCommand.Results){
             heal += result.UnblockedDamage;
+            heal -= result.OverkillDamage;
         }
         if(heal > 0){
             // 治疗
