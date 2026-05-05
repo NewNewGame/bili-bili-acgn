@@ -37,6 +37,7 @@ public sealed class CyberpsychosisPower : PowerBaseModel
     public override Task AfterCardDrawn(PlayerChoiceContext choiceContext, CardModel card, bool fromHandDraw)
     {
         if(card.Owner.Creature != base.Owner) return Task.CompletedTask;
+        if(card.EnergyCost.CostsX) return Task.CompletedTask;
         card.EnergyCost.SetThisTurnOrUntilPlayed(NextEnergyCost());
         NCard.FindOnTable(card)?.PlayRandomizeCostAnim();
         return Task.CompletedTask;
