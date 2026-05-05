@@ -17,7 +17,7 @@ namespace BiliBiliACGN.BiliBiliACGNCode.Powers;
 
 public sealed class CyberpsychosisPower : PowerBaseModel
 {
-    public override PowerType Type => PowerType.Buff;
+    public override PowerType Type => PowerType.Debuff;
     public override PowerStackType StackType => PowerStackType.Counter;
     private int _testEnergyCostOverride = -1;
     public int TestEnergyCostOverride
