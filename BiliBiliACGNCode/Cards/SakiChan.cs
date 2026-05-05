@@ -62,7 +62,7 @@ public sealed class SakiChan : CardBaseModel
 		decimal baseValue = base.DynamicVars["IncreaseSakiChanDamage"].BaseValue;
 		foreach (SakiChan item in enumerable)
 		{
-			item.BuffFromClawPlay(baseValue);
+			item.BuffFromSakiPlay(baseValue);
 		}
     }
 
@@ -77,7 +77,7 @@ public sealed class SakiChan : CardBaseModel
 		base.DynamicVars.Damage.BaseValue += ExtraDamageFromSakiPlays;
 	}
 
-	private void BuffFromClawPlay(decimal extraDamage)
+	private void BuffFromSakiPlay(decimal extraDamage)
 	{
 		base.DynamicVars.Damage.BaseValue += extraDamage;
 		ExtraDamageFromSakiPlays += extraDamage;

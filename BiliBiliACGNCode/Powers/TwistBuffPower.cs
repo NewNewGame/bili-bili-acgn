@@ -5,7 +5,6 @@
 //* 描述：你下一次卡牌给予的 debuff 额外给予 1 点
 //*******************************************************
 
-using BiliBiliACGN.BiliBiliACGNCode.Utils;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;

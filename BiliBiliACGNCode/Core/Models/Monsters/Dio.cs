@@ -89,11 +89,15 @@ public sealed class Dio : MonsterBaseModel
 	{
         // 播放The World音效
 		SfxCmd.Play(AudioUtils.TheWorldEventPath);
+        // 生成The World特效
+        CustomVfxCmd.AddVfxOnCenter(base.Creature, CustomVfxCmd.TheWorldPath);
 		await CreatureCmd.TriggerAnim(base.Creature, "Cast", 2f);
         // 给予所有玩家世界
         foreach(var player in base.CombatState.Players){
             await PowerCmd.Apply<TheWorldPower>(player.Creature, WorldValue, base.Creature, null);
         }
+        // 等待1s
+        await Cmd.Wait(1f);
 	}
     /// <summary>
     /// 施加buff

@@ -1,0 +1,13 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://du5tits744jsr"]
+
+[ext_resource type="Shader" uid="uid://cwtyxh2xlmt4g" path="res://BiliBiliACGN/shaders/vfx/vfx_the_world_field.gdshader" id="1_sh"]
+
+[resource]
+shader = ExtResource("1_sh")
+shader_parameter/u_viewport_size = Vector2(1920, 1080)
+shader_parameter/u_center_px = Vector2(960, 540)
+shader_parameter/u_sphere_radius_px = 400.0
+shader_parameter/u_edge_soft_px = 140.0
+shader_parameter/u_distort_strength = 0.4650000220875
+shader_parameter/u_invert_strength = 1.0
+shader_parameter/u_gold_tint = 0.12

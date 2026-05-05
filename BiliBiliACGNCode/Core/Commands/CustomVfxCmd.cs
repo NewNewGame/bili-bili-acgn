@@ -22,6 +22,7 @@ public static class CustomVfxCmd
     public static readonly string BerserkPath = "vfx/vfx_berserk";
     public static readonly string InfiniteBullnessPath = "vfx/vfx_infinite_bullness";
     public static readonly string NoRightToKnightMePath = "vfx/vfx_no_right_to_knight_me";
+    public static readonly string TheWorldPath = "vfx/vfx_the_world";
     /// <summary>
     /// 添加指定目标的VFX
     /// </summary>

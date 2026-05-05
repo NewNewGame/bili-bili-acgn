@@ -1,0 +1,76 @@
+[gd_scene load_steps=6 format=3 uid="uid://bj7gxm401vdop"]
+
+[ext_resource type="Script" uid="uid://bhlfligv711hg" path="res://BiliBiliACGNCode/Nodes/SNTheWorldVfx.cs" id="1_script"]
+[ext_resource type="Material" uid="uid://du5tits744jsr" path="res://BiliBiliACGN/shaders/vfx/vfx_the_world_field_material.tres" id="2_field_mat"]
+[ext_resource type="Material" uid="uid://m0e73gg3esv5" path="res://BiliBiliACGN/shaders/vfx/vfx_the_world_ring_process.tres" id="3_ring_pm"]
+[ext_resource type="Texture2D" uid="uid://bo0x5nnrrn5h4" path="res://BiliBiliACGN/images/vfx/dot.png" id="4_2wcan"]
+[ext_resource type="Material" uid="uid://c4ycqv0gdxvmr" path="res://BiliBiliACGN/images/vfx/canvas_item_material_additive_shared.tres" id="5_add"]
+
+[node name="VfxTheWorld" type="Node2D"]
+z_index = 4
+script = ExtResource("1_script")
+
+[node name="TheWorldField" type="Polygon2D" parent="."]
+z_index = -2
+material = ExtResource("2_field_mat")
+polygon = PackedVector2Array(-2048, -2048, 2048, -2048, 2048, 2048, -2048, 2048)
+uv = PackedVector2Array(0, 0, 1, 0, 1, 1, 0, 1)
+
+[node name="RingWave0" type="GPUParticles2D" parent="."]
+z_index = 2
+material = ExtResource("5_add")
+emitting = false
+amount = 44
+texture = ExtResource("4_2wcan")
+lifetime = 0.82
+one_shot = true
+explosiveness = 1.0
+randomness = 0.08
+process_material = ExtResource("3_ring_pm")
+
+[node name="RingWave1" type="GPUParticles2D" parent="."]
+z_index = 2
+material = ExtResource("5_add")
+emitting = false
+amount = 44
+texture = ExtResource("4_2wcan")
+lifetime = 0.82
+one_shot = true
+explosiveness = 1.0
+randomness = 0.08
+process_material = ExtResource("3_ring_pm")
+
+[node name="RingWave2" type="GPUParticles2D" parent="."]
+z_index = 2
+material = ExtResource("5_add")
+amount = 44
+texture = ExtResource("4_2wcan")
+lifetime = 0.82
+one_shot = true
+explosiveness = 1.0
+randomness = 0.08
+process_material = ExtResource("3_ring_pm")
+
+[node name="RingWave3" type="GPUParticles2D" parent="."]
+z_index = 2
+material = ExtResource("5_add")
+emitting = false
+amount = 44
+texture = ExtResource("4_2wcan")
+lifetime = 0.82
+one_shot = true
+explosiveness = 1.0
+randomness = 0.08
+process_material = ExtResource("3_ring_pm")
+
+[node name="RingWave4" type="GPUParticles2D" parent="."]
+z_index = 2
+material = ExtResource("5_add")
+emitting = false
+amount = 44
+texture = ExtResource("4_2wcan")
+lifetime = 0.82
+one_shot = true
+explosiveness = 1.0
+randomness = 0.08
+process_material = ExtResource("3_ring_pm")
