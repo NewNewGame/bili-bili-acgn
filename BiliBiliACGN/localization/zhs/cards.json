@@ -401,5 +401,8 @@
   "BILIBILIACGN-FRENCH_ACCENT.title": "法国口音",
   "BILIBILIACGN-FRENCH_ACCENT.description": "造成{Damage:diff()}点伤害。\n给予{Morbid:diff()}层[gold]病态[/gold]。",
   "BILIBILIACGN-SUDDEN_UPDATE.title": "突然更新",
-  "BILIBILIACGN-SUDDEN_UPDATE.description": "获得与你当前[gold]弃牌堆[/gold]牌数{IfUpgraded:show:+3|相等}的[gold]格挡[/gold]。{InCombat:\n(获得{CalculatedBlock:diff()}点[gold]格挡[/gold]。)|}"
+  "BILIBILIACGN-SUDDEN_UPDATE.description": "获得与你当前[gold]弃牌堆[/gold]牌数{IfUpgraded:show:+3|相等}的[gold]格挡[/gold]。{InCombat:\n(获得{CalculatedBlock:diff()}点[gold]格挡[/gold]。)|}",
+  "BILIBILIACGN-CYBERPSYCHOSIS.title": "赛博精神病",
+  "BILIBILIACGN-CYBERPSYCHOSIS.description": "当这张牌抽入你的[gold]手牌[/gold]时，\n在本回合随机化你[gold]手牌[/gold]中所有牌的耗能。"
+
 }

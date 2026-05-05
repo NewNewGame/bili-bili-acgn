@@ -5,7 +5,6 @@
 //* 描述：赛博精神病 当这张卡牌抽入你的手牌时，在本回合随机化你[gold]手牌[/gold]中所有牌的耗能。
 //*******************************************************
 using BaseLib.Utils;
-using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
