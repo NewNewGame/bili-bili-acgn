@@ -51,7 +51,7 @@
   "BILIBILIACGN-FOURTH_BLUE_EYES_WHITE_DRAGON.title": "第四张青眼白龙",
   "BILIBILIACGN-FOURTH_BLUE_EYES_WHITE_DRAGON.description": "对所有敌人造成{Damage:diff()}点伤害。",
   "BILIBILIACGN-BLOODY_BITE.title": "嗜血啃咬",
-  "BILIBILIACGN-BLOODY_BITE.description": "造成{Damage:diff()}点伤害。\n回复[green]{Heal:diff()}[/green]点生命。\n\n本场战斗中所有嗜血啃咬卡牌的伤害增加{IncreaseDamage:diff()}点，回复生命增加[green]{IncreaseHeal}[/green]点",
+  "BILIBILIACGN-BLOODY_BITE.description": "造成{Damage:diff()}点伤害。\n回复[green]{Heal:diff()}[/green]点生命。\n本场战斗中所有嗜血啃咬卡牌的伤害增加{IncreaseDamage:diff()}点，回复生命增加[green]{IncreaseHeal}[/green]点",
   "BILIBILIACGN-DESPAIR_SENSE.title": "绝望感",
   "BILIBILIACGN-DESPAIR_SENSE.description": "",
   "BILIBILIACGN-EMPTY_STOMACH.title": "空腹",
