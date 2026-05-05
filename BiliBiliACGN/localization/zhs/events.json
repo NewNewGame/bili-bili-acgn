@@ -136,7 +136,7 @@
     "CYBER_BLACK_MARKET.title": "赛博精神病",
     "CYBER_BLACK_MARKET.pages.INITIAL.description": "你隐入夜之城的霓虹洪流，周遭喧闹的平民是你甩掉公司「狗腿子」最好的数字迷彩。\n闪身进了一条弥漫着合成机油味的后巷，推开那扇锈迹斑斑的铁门。\n在这家连招牌都狂闪不止的义体医生黑店里，你正打算交出那个还带着余温的加密手提箱，完成这次委托。\n老练的医生一边给手术刀消毒，一边斜眼盯着箱子里的顶级操作系统，声音沙哑地抛来一个诱饵：\n「对这家伙感兴趣吗，我的朋友？」",
     "CYBER_BLACK_MARKET.pages.INITIAL.options.TEMPT.title": "受蛊惑",
-    "CYBER_BLACK_MARKET.pages.INITIAL.options.TEMPT.description": "接受交易。获得遗物[gold]{Relic}[/gold]，并有概率额外获得[red]{Relic2}[/red]。",
+    "CYBER_BLACK_MARKET.pages.INITIAL.options.TEMPT.description": "接受交易。获得遗物[gold]{Relic}[/gold]，并有概率额外获得[red]{CardTitle}[/red]。",
     "CYBER_BLACK_MARKET.pages.TEMPT.END.description": "你接过了那套烫手的系统。医生咧嘴一笑，手术灯在你视网膜上炸成一片惨白——义体接口的嗡鸣声里，你听见自己心跳得像要撞穿胸腔。",
     "CYBER_BLACK_MARKET.pages.INITIAL.options.DELIVER.title": "交付委托",
     "CYBER_BLACK_MARKET.pages.INITIAL.options.DELIVER.description": "按约定交出箱子。获得[gold]{Gold}[/gold]–[gold]{Gold2}[/gold]金币。",
