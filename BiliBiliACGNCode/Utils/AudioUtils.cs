@@ -28,6 +28,7 @@ public static class AudioUtils
     private static readonly StringName FunShikiAttackEventPath = new StringName("event:/sfx/characters/funshiki/funshiki_attack");
     public static readonly StringName ItsukaAttackEventPath = new StringName("event:/sfx/characters/itsuka/itsuka_attack");
     public static readonly StringName BersekEnterEventPath = new StringName("res://BiliBiliACGN/sfx/powers/berserk_enter.ogg");
+    public static readonly StringName TheWorldEventPath = new StringName("res://BiliBiliACGN/sfx/powers/the_world.ogg");
     public static readonly StringName BottleVoiceEventPath = new StringName("event:/sfx/characters/bottle/bottle_voice");
     #endregion
 
@@ -35,6 +36,7 @@ public static class AudioUtils
     private static string[] _sfxPaths = new string[]
     {
         BersekEnterEventPath,
+        TheWorldEventPath,
     };
     /// <summary>
     /// 音效路径集合
@@ -83,6 +85,7 @@ public static class AudioUtils
         BottleAttackEventPath,
         FunShikiAttackEventPath,
         BersekEnterEventPath,
+        TheWorldEventPath,
         BottleVoiceEventPath,
         ItsukaAttackEventPath,
     };

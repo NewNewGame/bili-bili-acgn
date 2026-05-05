@@ -6,6 +6,7 @@
 //*******************************************************
 
 using BiliBiliACGN.BiliBiliACGNCode.Powers;
+using BiliBiliACGN.BiliBiliACGNCode.Utils;
 using MegaCrit.Sts2.Core.Animation;
 using MegaCrit.Sts2.Core.Audio;
 using MegaCrit.Sts2.Core.Bindings.MegaSpine;
@@ -87,8 +88,8 @@ public sealed class Dio : MonsterBaseModel
     private async Task ReadyMove(IReadOnlyList<Creature> targets)
 	{
         // 播放The World音效
-		SfxCmd.Play("event:/sfx/enemy/enemy_attacks/punch_construct/punch_construct_buff");
-		await CreatureCmd.TriggerAnim(base.Creature, "Cast", 0.8f);
+		SfxCmd.Play(AudioUtils.TheWorldEventPath);
+		await CreatureCmd.TriggerAnim(base.Creature, "Cast", 2f);
         // 给予所有玩家世界
         foreach(var player in base.CombatState.Players){
             await PowerCmd.Apply<TheWorldPower>(player.Creature, WorldValue, base.Creature, null);
