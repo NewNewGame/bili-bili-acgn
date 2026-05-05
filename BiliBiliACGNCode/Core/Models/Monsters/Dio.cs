@@ -48,6 +48,8 @@ public sealed class Dio : MonsterBaseModel
     /// 受到伤害音效类型
     /// </summary>
     public override DamageSfxType TakeDamageSfxType => DamageSfxType.Magic;
+    // 特效资源
+    public override IEnumerable<string> AssetPaths => [CustomVfxCmd.TheWorldPath]; 
 
 	public override async Task AfterAddedToRoom()
 	{
