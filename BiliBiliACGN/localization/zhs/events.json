@@ -146,12 +146,12 @@
     "BREAD_MEMORY_MANSION.loss": "無駄無駄無駄——Wryyyyyyyyyyyyyyyyyyyyy！！",
     "BREAD_MEMORY_MANSION.pages.INITIAL.description": "你追寻一路瘦干的尸体来到了一座宏伟但阴森的石造洋馆前，月光被浓重的乌云遮蔽。一个穿着华丽金边羽织、满头金发的男人背对着你坐在高高的石椅上，手里摇晃着一杯不知名的红色液体。\n「为了治好你的伤，你到底吸取了多少人的生命？」你大声质问。\n男人轻笑一声，缓缓转过头，那双充满压迫感的红瞳锁定在你身上：\n\n「你会记得你至今为止吃过多少片面包吗？」",
     "BREAD_MEMORY_MANSION.pages.INITIAL.options.FORGET.title": "我确实不记得",
-    "BREAD_MEMORY_MANSION.pages.INITIAL.options.FORGET.description": "激怒他。进入与 Dio 的战斗；获胜获得遗物[gold]{Relic}[/gold]。",
+    "BREAD_MEMORY_MANSION.pages.INITIAL.options.FORGET.description": "激怒他。进入与 Dio 的战斗。获胜获得遗物[gold]{Relic}[/gold]。",
     "BREAD_MEMORY_MANSION.pages.INITIAL.options.EXACT.title": "说出准确数字：114514",
     "BREAD_MEMORY_MANSION.pages.INITIAL.options.EXACT.description": "「哈哈哈哈，你真是一个有趣的家伙，吃一顿饭再走吧。」回复[green]20[/green]点生命。",
     "BREAD_MEMORY_MANSION.pages.DIO_SCORN.description": "「正是如此，蝼蚁的性命于我而言，不过是维持高贵的养料。」\n金边羽织在穿堂风里猎猎作响，他放下酒杯，指节捏得发白。",
     "BREAD_MEMORY_MANSION.pages.DIO_SCORN.options.COMBAT.title": "迎战",
-    "BREAD_MEMORY_MANSION.pages.DIO_SCORN.options.COMBAT.description": "与 Dio 战斗；获胜获得[gold]{Relic}[/gold]。",
+    "BREAD_MEMORY_MANSION.pages.DIO_SCORN.options.COMBAT.description": "与 Dio 战斗。获胜获得[gold]{Relic}[/gold]。",
     "BREAD_MEMORY_MANSION.pages.COMBAT.END.description": "石厅里的空气凝固成刃。你知道接下来只能用刀锋与他对答——而这场问答的代价，尚未写进结局。",
     "BREAD_MEMORY_MANSION.pages.MEAL.END.description": "「哈哈哈哈，你真是一个有趣的家伙，吃一顿饭再走吧。」\n长桌摆上了热气腾腾的菜肴，你咽下一口，胸口的闷痛竟真的松动了些。"
 
