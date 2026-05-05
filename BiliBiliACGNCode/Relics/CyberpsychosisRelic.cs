@@ -4,6 +4,7 @@
 //* 创建时间：2026/04/06
 //* 描述：每场战斗开始时获得{Strength:diff()}点力量，回合结束时失去等量力量。
 //*******************************************************
+/*弃用
 using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
@@ -40,3 +41,4 @@ public sealed class CyberpsychosisRelic : RelicBaseModel
         }
     }
 }
+*/
