@@ -236,8 +236,8 @@
   "BILIBILIACGN-EXTRA_PLAY_CARD_POWER.smartDescription": "在这个回合，你的下[blue]1[/blue]张牌会被额外打出[blue]{Amount}[/blue]次。",
 
   "BILIBILIACGN-THE_WORLD_POWER.title": "世界",
-  "BILIBILIACGN-THE_WORLD_POWER.description": "每回合你只能打出X张牌。",
-  "BILIBILIACGN-THE_WORLD_POWER.smartDescription": "每回合你只能打出[blue]{Amount}[/blue]张牌。",
+  "BILIBILIACGN-THE_WORLD_POWER.description": "每回合你只能打出X张牌。\n[orange][sine]時よ止まれ！[/sine][/orange]",
+  "BILIBILIACGN-THE_WORLD_POWER.smartDescription": "每回合你只能打出[blue]{Amount}[/blue]张牌。\n[orange][sine]時よ止まれ！[/sine][/orange]",
 
   "BILIBILIACGN-CYBERPSYCHOSIS_POWER.title": "赛博精神病",
   "BILIBILIACGN-CYBERPSYCHOSIS_POWER.description": "本回合你抽到的卡牌费用都会被随机化。",
