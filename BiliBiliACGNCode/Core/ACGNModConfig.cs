@@ -8,7 +8,7 @@ using BaseLib.Config;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Core;
 
-[HoverTipsByDefault]
+[ConfigHoverTipsByDefault]
 public sealed class ACGNModConfig : SimpleModConfig
 {
     /// <summary>
