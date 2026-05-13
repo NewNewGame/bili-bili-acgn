@@ -50,8 +50,8 @@ public sealed class RefutationalPersonality : CardBaseModel
     {
         await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
         // 添加荆棘BUFF
-        await PowerCmd.Apply<ThornsPower>(base.Owner.Creature, base.DynamicVars["Thorns"].BaseValue, base.Owner.Creature, this);
-        await PowerCmd.Apply<AngerPower>(base.Owner.Creature, base.DynamicVars["Anger"].BaseValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<ThornsPower>(choiceContext, base.Owner.Creature, base.DynamicVars["Thorns"].BaseValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<AngerPower>(choiceContext, base.Owner.Creature, base.DynamicVars["Anger"].BaseValue, base.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()

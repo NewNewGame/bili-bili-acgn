@@ -38,7 +38,7 @@ public sealed class NewSeasonGuide : CardBaseModel
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        await PowerCmd.Apply<NewSeasonGuidePower>(base.Owner.Creature, base.DynamicVars["PassiveTriggers"].BaseValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<NewSeasonGuidePower>(choiceContext, base.Owner.Creature, base.DynamicVars["PassiveTriggers"].BaseValue, base.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()

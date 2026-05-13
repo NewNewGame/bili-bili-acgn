@@ -8,6 +8,7 @@
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
+using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.ValueProps;
@@ -28,7 +29,7 @@ public sealed class CuteNePower : PowerBaseModel
     /// <param name="props"></param>
     /// <param name="cardSource"></param>
     /// <returns></returns>
-    public override async Task AfterPowerAmountChanged(PowerModel power, decimal amount, Creature? applier, CardModel? cardSource)
+    public override async Task AfterPowerAmountChanged(PlayerChoiceContext choiceContext, PowerModel power, decimal amount, Creature? applier, CardModel? cardSource)
     {
         // 如果数量小于等于0，或者不是AddMaxHpTempPower，则返回
         if(amount <= 0 || power is not AddMaxHpTempPower) return;

@@ -21,8 +21,8 @@ public sealed class KaiYunPower : PowerBaseModel
     {
         if(cardPlay.Card.Owner == base.Owner.Player)
         {
-            await PowerCmd.Apply<TangShiPower>(base.Owner, 1m, base.Owner, null);
-            await PowerCmd.Apply<TangShiLossPower>(base.Owner, 1m, base.Owner, null);
+            await PowerCmd.Apply<TangShiPower>(choiceContext, base.Owner, 1m, base.Owner, null);
+            await PowerCmd.Apply<TangShiLossPower>(choiceContext, base.Owner, 1m, base.Owner, null);
         }
     }
     public override async Task AfterTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)

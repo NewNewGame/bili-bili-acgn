@@ -48,11 +48,11 @@ public sealed class Alzheimer : RelicBaseModel
 		// 每场战斗开始时获得2点红温
 		if (player == base.Owner)
 		{
-			CombatState combatState = player.Creature.CombatState;
+			var combatState = player.Creature.CombatState;
 			if (combatState.RoundNumber == 1)
 			{
 				Flash();
-				await PowerCmd.Apply<AngerPower>(base.Owner.Creature, (int)base.DynamicVars["AngerAmount"].BaseValue, base.Owner.Creature, null);
+				await PowerCmd.Apply<AngerPower>(choiceContext, base.Owner.Creature, (int)base.DynamicVars["AngerAmount"].BaseValue, base.Owner.Creature, null);
 			}
 		}
 	}

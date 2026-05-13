@@ -23,7 +23,7 @@ public sealed class StartUp : EnchantmentBaseModel
 		return true;
 	}
 
-	public override async Task BeforePlayPhaseStart(PlayerChoiceContext choiceContext, Player player)
+	public override async Task AfterAutoPrePlayPhaseEntered(PlayerChoiceContext choiceContext, Player player)
 	{
 		if (player == base.Card.Owner && base.Card.CombatState.RoundNumber == 1)
 		{

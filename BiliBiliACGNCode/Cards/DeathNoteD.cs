@@ -42,10 +42,10 @@ public sealed class DeathNoteD : CardBaseModel
         ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
         await PowerCmd.Remove<ArtifactPower>(cardPlay.Target);
         // 施加虚弱
-        await PowerCmd.Apply<WeakPower>(cardPlay.Target, base.DynamicVars["Weak"].BaseValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<WeakPower>(choiceContext, cardPlay.Target, base.DynamicVars["Weak"].BaseValue, base.Owner.Creature, this);
         // 弃牌堆加入 DeathNoteE
         CardModel card = base.CombatState.CreateCard<DeathNoteE>(base.Owner);
-		CardCmd.PreviewCardPileAdd(await CardPileCmd.AddGeneratedCardToCombat(card, PileType.Discard, addedByPlayer: true));
+		CardCmd.PreviewCardPileAdd(await CardPileCmd.AddGeneratedCardToCombat(card, PileType.Discard, base.Owner));
 		await Cmd.Wait(0.5f);
     }
 

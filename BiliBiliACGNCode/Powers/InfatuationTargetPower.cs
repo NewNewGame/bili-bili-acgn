@@ -35,7 +35,7 @@ public sealed class InfatuationTargetPower : PowerBaseModel
         var nextTarget = base.CombatState.Players.FirstOrDefault(p => p.Creature != creature && !p.Creature.HasPower<InfatuationTargetPower>() && p.Creature.IsAlive);
         // 如果下一个目标不为空，则转让给下一个目标
         if(nextTarget != null){
-            await PowerCmd.Apply<InfatuationTargetPower>(nextTarget.Creature, 1, nextTarget.Creature, null);
+            await PowerCmd.Apply<InfatuationTargetPower>(choiceContext, nextTarget.Creature, 1, nextTarget.Creature, null);
         }
     }
 }

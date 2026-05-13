@@ -42,7 +42,7 @@ public sealed class BrainWife : CardBaseModel
             .FromCard(this)
             .TargetingAllOpponents(base.CombatState)
             .Execute(choiceContext);
-        await PowerCmd.Apply<MorbidPower>(base.Owner.Creature, base.DynamicVars["MorbidSelf"].BaseValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<MorbidPower>(choiceContext, base.Owner.Creature, base.DynamicVars["MorbidSelf"].BaseValue, base.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()

@@ -41,7 +41,7 @@ public sealed class RainyProtocol : CardBaseModel
         foreach(var teammate in base.CombatState.Players)
         {
             if(teammate == base.Owner || teammate.Creature.IsDead) continue;
-            await PowerCmd.Apply<FlexPotionPower>(teammate.Creature, strength, base.Owner.Creature, this);
+            await PowerCmd.Apply<FlexPotionPower>(choiceContext, teammate.Creature, strength, base.Owner.Creature, this);
         }
     }
 

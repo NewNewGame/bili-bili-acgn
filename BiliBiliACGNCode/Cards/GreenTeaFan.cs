@@ -41,7 +41,7 @@ public sealed class GreenTeaFan : CardBaseModel
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         // 给予{Morbid:diff()}层[gold]病态[/gold]。
-        await PowerCmd.Apply<MorbidPower>(cardPlay.Target, base.DynamicVars["Morbid"].BaseValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<MorbidPower>(choiceContext, cardPlay.Target, base.DynamicVars["Morbid"].BaseValue, base.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()

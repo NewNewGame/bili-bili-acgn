@@ -27,7 +27,7 @@ public sealed class WhereSecondFloorPower : PowerBaseModel
         {
             return;
         }
-        await PowerCmd.Apply<AngerDelayPower>(base.Owner, Amount, base.Owner, null);
+        await PowerCmd.Apply<AngerDelayPower>(choiceContext, base.Owner, Amount, base.Owner, null);
     }
     public override async Task AfterTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)
     {

@@ -22,7 +22,7 @@ public sealed class SecondRateCommentatorPower : PowerBaseModel
     {
         if(player == base.Owner.Player)
         {
-            await PowerCmd.Apply<AngerPower>(base.Owner, base.Amount, base.Owner, null);
+            await PowerCmd.Apply<AngerPower>(choiceContext, base.Owner, base.Amount, base.Owner, null);
         }
     }
 }

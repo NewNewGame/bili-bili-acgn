@@ -39,7 +39,7 @@ public sealed class DistortionScholar : CardBaseModel
             await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
             // 施加能力：病态额外触发次数
              foreach(var enemy in base.CombatState.HittableEnemies){
-                await PowerCmd.Apply<MadlyLovePower>(enemy, base.DynamicVars["ExtraTriggers"].BaseValue, base.Owner.Creature, this);
+                await PowerCmd.Apply<MadlyLovePower>(choiceContext, enemy, base.DynamicVars["ExtraTriggers"].BaseValue, base.Owner.Creature, this);
             }
         }
     }

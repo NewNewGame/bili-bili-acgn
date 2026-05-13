@@ -47,7 +47,7 @@ public sealed class ConfessionRadio : CardBaseModel
             .FromCard(this)
             .Targeting(cardPlay.Target)
             .Execute(choiceContext);
-		await CreatureCmd.GainBlock(base.Owner.Creature, attackCommand.Results.Sum((DamageResult r) => r.TotalDamage + r.OverkillDamage), ValueProp.Move, cardPlay);
+		await CreatureCmd.GainBlock(base.Owner.Creature, attackCommand.Results.SelectMany((List<DamageResult> res)=> res).Sum((DamageResult r) => r.TotalDamage + r.OverkillDamage), ValueProp.Move, cardPlay);
     }
 
     protected override void OnUpgrade()

@@ -96,7 +96,7 @@ public sealed class Dio : MonsterBaseModel
 		await CreatureCmd.TriggerAnim(base.Creature, "Cast", 2f);
         // 给予所有玩家世界
         foreach(var player in base.CombatState.Players){
-            await PowerCmd.Apply<TheWorldPower>(player.Creature, WorldValue, base.Creature, null);
+            await PowerCmd.Apply<TheWorldPower>(CombatUtils.GetTemporaryPlayerChoiceContext(), player.Creature, WorldValue, base.Creature, null);
         }
         // 等待2s
         await Cmd.Wait(2f);
@@ -108,7 +108,7 @@ public sealed class Dio : MonsterBaseModel
     /// <returns></returns>
 	private async Task BuffMove(IReadOnlyList<Creature> targets)
 	{
-		await PowerCmd.Apply<StrengthPower>(base.Creature, PowerValue, base.Creature, null);
+		await PowerCmd.Apply<StrengthPower>(CombatUtils.GetTemporaryPlayerChoiceContext(), base.Creature, PowerValue, base.Creature, null);
 	}
 
     /// <summary>
@@ -123,8 +123,10 @@ public sealed class Dio : MonsterBaseModel
 			.Execute(null);
         int heal = 0;
         foreach(var result in dmgCommand.Results){
-            heal += result.UnblockedDamage;
-            heal -= result.OverkillDamage;
+            foreach(var res in result){
+                heal += res.UnblockedDamage;
+                heal -= res.OverkillDamage;
+            }
         }
         if(heal > 0){
             // 治疗

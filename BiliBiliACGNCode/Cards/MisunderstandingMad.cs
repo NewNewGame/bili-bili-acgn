@@ -32,7 +32,7 @@ public sealed class MisunderstandingMad : CardBaseModel
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         if(cardPlay.Target == null) return;
-        await PowerCmd.Apply<MorbidPower>(cardPlay.Target, cardPlay.Target.GetPowerAmount<MorbidPower>(), base.Owner.Creature, this);
+        await PowerCmd.Apply<MorbidPower>(choiceContext, cardPlay.Target, cardPlay.Target.GetPowerAmount<MorbidPower>(), base.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()

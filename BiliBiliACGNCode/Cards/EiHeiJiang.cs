@@ -39,7 +39,7 @@ public sealed class EiHeiJiang : CardBaseModel
         int hitCount = (int)base.DynamicVars["Hits"].BaseValue;
         var enemies = base.CombatState.HittableEnemies;
         for(int i = 0; i < hitCount; i++){
-            await PowerCmd.Apply<MorbidPower>(base.CombatState.RunState.Rng.CombatTargets.NextItem(enemies), base.DynamicVars["MorbidPerHit"].BaseValue, base.Owner.Creature, this);
+            await PowerCmd.Apply<MorbidPower>(choiceContext, base.CombatState.RunState.Rng.CombatTargets.NextItem(enemies), base.DynamicVars["MorbidPerHit"].BaseValue, base.Owner.Creature, this);
         }
     }
 

@@ -51,7 +51,7 @@ public sealed class WanCeJin : CardBaseModel
                 await OrbUtils.OrbEvokeWait();
             }
         }
-        await PowerCmd.Apply<FocusPower>(base.Owner.Creature, base.DynamicVars["FocusPerOrb"].BaseValue * cnt, base.Owner.Creature, this);
+        await PowerCmd.Apply<FocusPower>(choiceContext, base.Owner.Creature, base.DynamicVars["FocusPerOrb"].BaseValue * cnt, base.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()

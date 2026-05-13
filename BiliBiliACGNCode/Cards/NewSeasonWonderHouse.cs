@@ -37,7 +37,7 @@ public sealed class NewSeasonWonderHouse : CardBaseModel
         // 播放动画
         await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
         // 添加新番妙妙屋BUFF
-        await PowerCmd.Apply<NewSeasonWonderHousePower>(base.Owner.Creature, base.DynamicVars["OrbCount"].BaseValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<NewSeasonWonderHousePower>(choiceContext, base.Owner.Creature, base.DynamicVars["OrbCount"].BaseValue, base.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()

@@ -6,6 +6,7 @@
 //*******************************************************
 
 using BaseLib.Extensions;
+using BiliBiliACGN.BiliBiliACGNCode.Utils;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
@@ -93,7 +94,7 @@ public sealed class CombatForYouPower : PowerBaseModel
     public override async Task AfterBlockGained(Creature creature, decimal amount, ValueProp props, CardModel? cardSource)
     {
 		if(creature != base.Owner) return;
-        await PowerCmd.Apply<AddMaxHpTempPower>(base.Owner, amount, base.Owner, null);
+        await PowerCmd.Apply<AddMaxHpTempPower>(CombatUtils.GetTemporaryPlayerChoiceContext(), base.Owner, amount, base.Owner, null);
     }
 	/// <summary>
 	/// 修改伤害计算

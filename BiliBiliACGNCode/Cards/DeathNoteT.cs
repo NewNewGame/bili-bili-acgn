@@ -42,11 +42,11 @@ public sealed class DeathNoteT : CardBaseModel
         ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
         await PowerCmd.Remove<ArtifactPower>(cardPlay.Target);
         // 施加缩小
-        await PowerCmd.Apply<ShrinkPower>(cardPlay.Target, base.DynamicVars["Shrink"].BaseValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<ShrinkPower>(choiceContext, cardPlay.Target, base.DynamicVars["Shrink"].BaseValue, base.Owner.Creature, this);
         // 弃牌堆加入 DeathNoteH
         CardModel card = base.CombatState.CreateCard<DeathNoteH>(base.Owner);
         await Task.CompletedTask;
-        CardCmd.PreviewCardPileAdd(await CardPileCmd.AddGeneratedCardToCombat(card, PileType.Draw, addedByPlayer: true));
+        CardCmd.PreviewCardPileAdd(await CardPileCmd.AddGeneratedCardToCombat(card, PileType.Draw, base.Owner));
 		await Cmd.Wait(0.5f);
     }
 

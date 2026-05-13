@@ -39,7 +39,7 @@ public sealed class SmNiuGe : CardBaseModel
     {
         // 将你的[gold]唐氏[/gold]层数翻倍
         await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
-        await PowerCmd.Apply<TangShiPower>(base.Owner.Creature, base.Owner.Creature.GetPower<TangShiPower>()?.Amount ?? 0m, base.Owner.Creature, null);
+        await PowerCmd.Apply<TangShiPower>(choiceContext, base.Owner.Creature, base.Owner.Creature.GetPower<TangShiPower>()?.Amount ?? 0m, base.Owner.Creature, null);
     }
 
     protected override void OnUpgrade()

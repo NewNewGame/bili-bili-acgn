@@ -63,7 +63,7 @@ public sealed class QianHuDiary : RelicBaseModel
 		{
 			return false;
 		}
-		alternatives.Add(new CardRewardAlternative("KEEP_DIARY", OnSacrificeSynchronized, PostAlternateCardRewardAction.DismissScreenAndRemoveReward));
+		alternatives.Add(new CardRewardAlternative("KEEP_DIARY", OnSacrificeSynchronized, PostAlternateCardRewardAction.EndSelectionAndCompleteReward));
 		return true;
 	}
 

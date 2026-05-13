@@ -16,6 +16,7 @@ using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.MonsterMoves.Intents;
 using MegaCrit.Sts2.Core.MonsterMoves.MonsterMoveStateMachine;
 using MegaCrit.Sts2.Core.ValueProps;
+using BiliBiliACGN.BiliBiliACGNCode.Utils;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Core.Models.Monsters;
 
@@ -77,8 +78,8 @@ public sealed class GuiGui : MonsterBaseModel
 	{
 		SfxCmd.Play("event:/sfx/enemy/enemy_attacks/punch_construct/punch_construct_buff");
 		await CreatureCmd.TriggerAnim(base.Creature, "Cast", 0.8f);
-		await PowerCmd.Apply<StrengthPower>(base.Creature, PowerValue, base.Creature, null);
-		await PowerCmd.Apply<PlatingPower>(base.Creature, PowerValue + 2m, base.Creature, null);
+		await PowerCmd.Apply<StrengthPower>(CombatUtils.GetTemporaryPlayerChoiceContext(), base.Creature, PowerValue, base.Creature, null);
+		await PowerCmd.Apply<PlatingPower>(CombatUtils.GetTemporaryPlayerChoiceContext(), base.Creature, PowerValue + 2m, base.Creature, null);
 	}
 
     /// <summary>

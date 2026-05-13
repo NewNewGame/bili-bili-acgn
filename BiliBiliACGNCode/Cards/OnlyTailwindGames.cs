@@ -49,7 +49,7 @@ public sealed class OnlyTailwindGames : CardBaseModel
     {
         await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
         // 获得 SwallowPride 层忍气吞声
-        await PowerCmd.Apply<SwallowPridePower>(base.Owner.Creature, base.DynamicVars["Powers"].BaseValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<SwallowPridePower>(choiceContext, base.Owner.Creature, base.DynamicVars["Powers"].BaseValue, base.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()

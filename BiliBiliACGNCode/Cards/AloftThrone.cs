@@ -45,8 +45,8 @@ public sealed class AloftThrone : CardBaseModel
         // 失去1个充能球栏位
         OrbCmd.RemoveSlots(base.Owner, 1);
         // 获得集中和敏捷
-        await PowerCmd.Apply<FocusPower>(base.Owner.Creature, base.DynamicVars["Focus"].BaseValue, base.Owner.Creature, this);
-        await PowerCmd.Apply<DexterityPower>(base.Owner.Creature, base.DynamicVars["Dexterity"].BaseValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<FocusPower>(choiceContext, base.Owner.Creature, base.DynamicVars["Focus"].BaseValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<DexterityPower>(choiceContext, base.Owner.Creature, base.DynamicVars["Dexterity"].BaseValue, base.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()

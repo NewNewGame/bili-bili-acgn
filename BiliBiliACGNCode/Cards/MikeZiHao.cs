@@ -48,7 +48,7 @@ public sealed class MikeZiHao : CardBaseModel
     {
         await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
         // 添加麦克子豪BUFF
-        await PowerCmd.Apply<MikeZiHaoPower>(base.Owner.Creature, base.DynamicVars["Strength"].BaseValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<MikeZiHaoPower>(choiceContext, base.Owner.Creature, base.DynamicVars["Strength"].BaseValue, base.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()

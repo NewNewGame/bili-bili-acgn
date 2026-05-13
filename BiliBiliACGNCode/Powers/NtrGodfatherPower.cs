@@ -31,7 +31,7 @@ public sealed class NtrGodfatherPower : PowerBaseModel
     {
         if(player == base.Owner.Player)
         {
-            await PowerCmd.Apply<MorbidPower>(base.Owner, Amount, base.Owner, null);
+            await PowerCmd.Apply<MorbidPower>(choiceContext, base.Owner, Amount, base.Owner, null);
         }
     }
 }

@@ -57,11 +57,11 @@ public sealed class AquasBlessing : CardBaseModel
         // 有30/20%几率你获得1层脆弱和易伤
         if (base.CombatState.RunState.Rng.CombatPotionGeneration.NextInt(0, 100) < base.DynamicVars["Probility"].BaseValue)
         {
-            await PowerCmd.Apply<FrailPower>(base.Owner.Creature, 1m, base.Owner.Creature, this);
-            await PowerCmd.Apply<VulnerablePower>(base.Owner.Creature, 1m, base.Owner.Creature, this);
+            await PowerCmd.Apply<FrailPower>(choiceContext, base.Owner.Creature, 1m, base.Owner.Creature, this);
+            await PowerCmd.Apply<VulnerablePower>(choiceContext, base.Owner.Creature, 1m, base.Owner.Creature, this);
         }else{
-            await PowerCmd.Apply<StrengthPower>(base.Owner.Creature, base.DynamicVars["Power"].BaseValue, base.Owner.Creature, this);
-            await PowerCmd.Apply<DexterityPower>(base.Owner.Creature, base.DynamicVars["Power"].BaseValue, base.Owner.Creature, this);
+            await PowerCmd.Apply<StrengthPower>(choiceContext, base.Owner.Creature, base.DynamicVars["Power"].BaseValue, base.Owner.Creature, this);
+            await PowerCmd.Apply<DexterityPower>(choiceContext, base.Owner.Creature, base.DynamicVars["Power"].BaseValue, base.Owner.Creature, this);
         }
     }
 

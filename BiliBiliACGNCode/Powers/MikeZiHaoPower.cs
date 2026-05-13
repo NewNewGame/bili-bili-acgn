@@ -7,6 +7,7 @@
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
+using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Powers;
 
@@ -19,10 +20,10 @@ public sealed class MikeZiHaoPower : PowerBaseModel
     public override PowerStackType StackType => PowerStackType.Counter;
 
     // 进入红怒时获得 Amount 点力量
-    public override async Task AfterPowerAmountChanged(PowerModel power, decimal amount, Creature? applier, CardModel? cardSource)
+    public override async Task AfterPowerAmountChanged(PlayerChoiceContext choiceContext, PowerModel power, decimal amount, Creature? applier, CardModel? cardSource)
     {
         if(power.Owner == base.Owner && power is BerserkPower && amount > 0){
-            await PowerCmd.Apply<StrengthPower>(base.Owner, base.Amount, base.Owner, null);
+            await PowerCmd.Apply<StrengthPower>(choiceContext, base.Owner, base.Amount, base.Owner, null);
         }
     }
 

@@ -39,7 +39,7 @@ public sealed class BlueTamago : CardBaseModel
     {
         await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
         // 添加蓝色团子BUFF
-        await PowerCmd.Apply<BlueTamagoPower>(base.Owner.Creature, base.DynamicVars["Cards"].BaseValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<BlueTamagoPower>(choiceContext, base.Owner.Creature, base.DynamicVars["Cards"].BaseValue, base.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()

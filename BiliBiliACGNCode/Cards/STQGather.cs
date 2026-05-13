@@ -46,7 +46,7 @@ public sealed class STQGather : CardBaseModel
     {
         await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
         // 添加7tq集合BUFF
-        await PowerCmd.Apply<STQGatherPower>(base.Owner.Creature, base.DynamicVars["Strength"].BaseValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<STQGatherPower>(choiceContext, base.Owner.Creature, base.DynamicVars["Strength"].BaseValue, base.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()

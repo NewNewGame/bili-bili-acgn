@@ -39,7 +39,7 @@ public sealed class ChuunibyouNote : CardBaseModel
     {
         await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
         // 施加能力：给予10层病态。每有10层病态，额外给予3层病态。
-        await PowerCmd.Apply<MorbidPower>(cardPlay.Target, ((CalculatedVar)base.DynamicVars["CalculatedMorbid"]).Calculate(cardPlay.Target), base.Owner.Creature, this);
+        await PowerCmd.Apply<MorbidPower>(choiceContext, cardPlay.Target, ((CalculatedVar)base.DynamicVars["CalculatedMorbid"]).Calculate(cardPlay.Target), base.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()

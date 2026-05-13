@@ -41,7 +41,7 @@ public sealed class FunShikiEcstasy : CardBaseModel
         }
         int num = ResolveEnergyXValue();
         for(int i = 0; i < num; i++){
-            await PowerCmd.Apply<MorbidPower>(cardPlay.Target, base.DynamicVars["MorbidAmount"].BaseValue, base.Owner.Creature, this);
+            await PowerCmd.Apply<MorbidPower>(choiceContext, cardPlay.Target, base.DynamicVars["MorbidAmount"].BaseValue, base.Owner.Creature, this);
         }
     }
 

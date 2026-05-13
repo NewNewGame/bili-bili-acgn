@@ -59,8 +59,8 @@ public sealed class EvaFormStrike : CardBaseModel
         // 对所有敌人赋予虚弱和易伤
         foreach (Creature hittableEnemy in base.CombatState.HittableEnemies)
 		{
-			await PowerCmd.Apply<WeakPower>(hittableEnemy, base.DynamicVars["Power"].BaseValue, base.Owner.Creature, this);
-			await PowerCmd.Apply<VulnerablePower>(hittableEnemy, base.DynamicVars["Power"].BaseValue, base.Owner.Creature, this);
+			await PowerCmd.Apply<WeakPower>(choiceContext, hittableEnemy, base.DynamicVars["Power"].BaseValue, base.Owner.Creature, this);
+			await PowerCmd.Apply<VulnerablePower>(choiceContext, hittableEnemy, base.DynamicVars["Power"].BaseValue, base.Owner.Creature, this);
 		}
     }
 

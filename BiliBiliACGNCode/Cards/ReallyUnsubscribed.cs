@@ -60,7 +60,7 @@ public sealed class ReallyUnsubscribed : CardBaseModel
         if(base.Owner.Creature.HasPower<BottleRagePower>()){
             addValue += base.DynamicVars["VulnerableRage"].BaseValue;
         }
-        await PowerCmd.Apply<VulnerablePower>(cardPlay.Target, addValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<VulnerablePower>(choiceContext, cardPlay.Target, addValue, base.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()

@@ -46,7 +46,7 @@ public sealed class NeverDie : CardBaseModel
     {
         #region 卡牌打出效果
         await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
-        await PowerCmd.Apply<BufferPower>(base.Owner.Creature, base.DynamicVars["Power"].BaseValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<BufferPower>(choiceContext, base.Owner.Creature, base.DynamicVars["Power"].BaseValue, base.Owner.Creature, this);
         #endregion
     }
 

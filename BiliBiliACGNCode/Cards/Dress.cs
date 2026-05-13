@@ -34,7 +34,7 @@ public sealed class Dress : CardBaseModel
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         // 在这个回合，你打出的下{Cards:diff()}张技能牌，会被额外打出一次。
-        await PowerCmd.Apply<BurstPower>(base.Owner.Creature, base.DynamicVars.Cards.BaseValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<BurstPower>(choiceContext, base.Owner.Creature, base.DynamicVars.Cards.BaseValue, base.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()

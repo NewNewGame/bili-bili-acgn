@@ -59,7 +59,7 @@ public sealed class NeedAKill : CardBaseModel
         }
 		AttackCommand attackCommand = await DamageCmd.Attack(dmg).FromCard(this).Targeting(cardPlay.Target)
 			.Execute(choiceContext);
-		if (shouldTriggerFatal && attackCommand.Results.Any((DamageResult r) => r.WasTargetKilled))
+		if (shouldTriggerFatal && attackCommand.Results.SelectMany((List<DamageResult> r) => r).Any((DamageResult r) => r.WasTargetKilled))
 		{
 			await PlayerCmd.GainGold(base.DynamicVars.Gold.BaseValue, base.Owner);
 		}

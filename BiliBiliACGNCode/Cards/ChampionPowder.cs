@@ -52,7 +52,7 @@ public sealed class ChampionPowder : CardBaseModel
 		CardModel? card = (await CardSelectCmd.FromHand(choiceContext, base.Owner, prefs, (CardModel c) => hashSet.Contains(c) &!c.Keywords.Contains(CardKeyword.Unplayable), this)).FirstOrDefault();
 		if (card != null)
 		{
-			await PowerCmd.Apply<ExtraPlayCardPower>(base.Owner.Creature, base.DynamicVars["PlayTimes"].IntValue-1, base.Owner.Creature, this);
+			await PowerCmd.Apply<ExtraPlayCardPower>(choiceContext, base.Owner.Creature, base.DynamicVars["PlayTimes"].IntValue-1, base.Owner.Creature, this);
 			await AutoPlayUtils.AutoPlaySafely(choiceContext, card);
 		}
     }

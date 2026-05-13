@@ -45,10 +45,10 @@ public sealed class DeathNoteE : CardBaseModel
             await PowerCmd.Remove<ArtifactPower>(cardPlay.Target);
         }
         // 施加脆弱
-        await PowerCmd.Apply<FrailPower>(cardPlay.Target, base.DynamicVars["Fragile"].BaseValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<FrailPower>(choiceContext, cardPlay.Target, base.DynamicVars["Fragile"].BaseValue, base.Owner.Creature, this);
         // 弃牌堆加入 DeathNoteA
         CardModel card = base.CombatState.CreateCard<DeathNoteA>(base.Owner);
-		CardCmd.PreviewCardPileAdd(await CardPileCmd.AddGeneratedCardToCombat(card, PileType.Draw, addedByPlayer: true));
+		CardCmd.PreviewCardPileAdd(await CardPileCmd.AddGeneratedCardToCombat(card, PileType.Draw, base.Owner));
 		await Cmd.Wait(0.5f);
     }
 

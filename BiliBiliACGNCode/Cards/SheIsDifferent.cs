@@ -43,8 +43,8 @@ public sealed class SheIsDifferent : CardBaseModel
         if(base.CombatState == null) return;
         var enemies = base.CombatState.HittableEnemies;
         foreach(var enemy in enemies){
-            await PowerCmd.Apply<MorbidPower>(enemy, base.DynamicVars["MorbidStacks"].BaseValue, base.Owner.Creature, this);
-            await PowerCmd.Apply<WeakPower>(enemy, base.DynamicVars["WeakStacks"].BaseValue, base.Owner.Creature, this);
+            await PowerCmd.Apply<MorbidPower>(choiceContext, enemy, base.DynamicVars["MorbidStacks"].BaseValue, base.Owner.Creature, this);
+            await PowerCmd.Apply<WeakPower>(choiceContext, enemy, base.DynamicVars["WeakStacks"].BaseValue, base.Owner.Creature, this);
         }
     }
 

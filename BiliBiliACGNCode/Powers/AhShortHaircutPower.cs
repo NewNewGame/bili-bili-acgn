@@ -25,7 +25,7 @@ public sealed class AhShortHaircutPower : PowerBaseModel
     {
         if(player == null || player != base.Owner.Player || player.Creature.CombatState == null) return;
         foreach(var enemy in player.Creature.CombatState.HittableEnemies){
-            await PowerCmd.Apply<MorbidPower>(enemy, base.Amount, base.Owner, null);
+            await PowerCmd.Apply<MorbidPower>(choiceContext, enemy, base.Amount, base.Owner, null);
         }
     }
 

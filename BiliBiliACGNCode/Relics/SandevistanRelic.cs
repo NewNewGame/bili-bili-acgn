@@ -89,7 +89,7 @@ public sealed class SandevistanRelic : RelicBaseModel
 		InvokeDisplayAmountChanged();
 	}
 
-	public override Task BeforeSideTurnStart(PlayerChoiceContext choiceContext, CombatSide side, CombatState combatState)
+	public override Task BeforeSideTurnStart(PlayerChoiceContext choiceContext, CombatSide side, ICombatState combatState)
 	{
 		if (side != base.Owner.Creature.Side)
 		{

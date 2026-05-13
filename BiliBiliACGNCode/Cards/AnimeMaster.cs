@@ -32,7 +32,7 @@ public sealed class AnimeMaster : CardBaseModel
     {
         await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
         // 女儿的临时最大生命值不再在回合结束后消失
-        await DaughterCmd.ApplyPower<AnimeMasterPower>(base.Owner.Creature, 1m, this);
+        await DaughterCmd.ApplyPower<AnimeMasterPower>(base.Owner.Creature, choiceContext, 1m, this);
     }
 
     protected override void OnUpgrade()

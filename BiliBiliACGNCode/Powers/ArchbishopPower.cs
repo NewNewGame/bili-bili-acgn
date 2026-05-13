@@ -34,7 +34,7 @@ public sealed class ArchbishopPower : PowerBaseModel
     {
         if(target != base.Owner) return;
         if(dealer == null || dealer.Monster is not Itsuka) return;
-        await PowerCmd.Apply<StrengthPower>(dealer, base.Amount, null, null);
+        await PowerCmd.Apply<StrengthPower>(choiceContext, dealer, base.Amount, null, null);
     }
     public override async Task AfterTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)
     {

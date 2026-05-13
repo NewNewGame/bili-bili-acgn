@@ -39,7 +39,7 @@ public sealed class CorrectTeam : CardBaseModel
     {
         await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
         // 添加正确车队BUFF
-        await PowerCmd.Apply<CorrectTeamPower>(base.Owner.Creature, 2, base.Owner.Creature, this);
+        await PowerCmd.Apply<CorrectTeamPower>(choiceContext, base.Owner.Creature, 2, base.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()

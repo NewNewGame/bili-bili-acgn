@@ -25,7 +25,7 @@ public sealed class BullDemonPower : PowerBaseModel
         if(cardPlay.Card.Owner != base.Owner.Player) return;
         // 如果有有一说一，那就添加唐氏
         if(cardPlay.Card.Keywords.Contains(CustomKeyWords.YYSY)){
-            await PowerCmd.Apply<TangShiPower>(base.Owner, base.Amount, base.Owner, null);
+            await PowerCmd.Apply<TangShiPower>(choiceContext, base.Owner, base.Amount, base.Owner, null);
         }else{
             // 如果没有有一说一，那就添加有一说一
             cardPlay.Card.AddKeyword(CustomKeyWords.YYSY);

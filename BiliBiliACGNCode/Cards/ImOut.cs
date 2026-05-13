@@ -50,7 +50,7 @@ public sealed class ImOut : CardBaseModel
             .Execute(choiceContext);
         await CardPileCmd.Draw(choiceContext, base.DynamicVars.Cards.BaseValue, base.Owner);
     }
-    public override async Task AfterPowerAmountChanged(PowerModel power, decimal amount, Creature? applier, CardModel? cardSource)
+    public override async Task AfterPowerAmountChanged(PlayerChoiceContext choiceContext, PowerModel power, decimal amount, Creature? applier, CardModel? cardSource)
     {
         // 如果对象不是自己，则返回
         if(power.Owner != base.Owner.Creature) return;

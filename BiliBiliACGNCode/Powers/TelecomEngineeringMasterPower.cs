@@ -22,7 +22,7 @@ public sealed class TelecomEngineeringMasterPower : PowerBaseModel
     }
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
-    public override bool IsInstanced => true;
+    public override PowerInstanceType InstanceType => PowerInstanceType.Instanced;
     public override int DisplayAmount => Amount - GetInternalData<Data>().EvokeCount;
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.Static(StaticHoverTip.Evoke),HoverTipFactory.FromPower<FocusPower>()];
     protected override object? InitInternalData()
@@ -45,7 +45,7 @@ public sealed class TelecomEngineeringMasterPower : PowerBaseModel
         if(data.EvokeCount >= Amount){
             data.EvokeCount = 0;
             // 获得集中
-            await PowerCmd.Apply<FocusPower>(base.Owner, 1, base.Owner, null);
+            await PowerCmd.Apply<FocusPower>(choiceContext, base.Owner, 1, base.Owner, null);
         }
         InvokeDisplayAmountChanged();
     }

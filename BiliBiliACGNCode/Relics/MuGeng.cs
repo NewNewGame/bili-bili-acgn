@@ -15,6 +15,7 @@ using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Relics;
 
@@ -26,7 +27,7 @@ public sealed class MuGeng : RelicBaseModel
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new DynamicVar("Morbid", 1m),
     ];
-    public override async Task AfterPowerAmountChanged(PowerModel power, decimal amount, Creature? applier, CardModel? cardSource)
+    public override async Task AfterPowerAmountChanged(PlayerChoiceContext choiceContext, PowerModel power, decimal amount, Creature? applier, CardModel? cardSource)
     {
         // 如果对象不是病态，则返回
         if(power is not MorbidPower){
@@ -47,7 +48,7 @@ public sealed class MuGeng : RelicBaseModel
         }
         Flash();
         // 给予敌人1层病态
-        await PowerCmd.Apply<MorbidPower>(power.Owner, base.DynamicVars["Morbid"].BaseValue, null, null);
+        await PowerCmd.Apply<MorbidPower>(choiceContext, power.Owner, base.DynamicVars["Morbid"].BaseValue, null, null);
     }
 
 }

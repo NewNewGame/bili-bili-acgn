@@ -55,8 +55,8 @@ public sealed class WildBuffaloStrike : CardBaseModel
             .Targeting(cardPlay.Target)
             .Execute(choiceContext);
 
-        await PowerCmd.Apply<TangShiPower>(base.Owner.Creature, base.DynamicVars["Power"].BaseValue, base.Owner.Creature, this);
-        await PowerCmd.Apply<TangShiLossPower>(base.Owner.Creature, base.DynamicVars["Power"].BaseValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<TangShiPower>(choiceContext, base.Owner.Creature, base.DynamicVars["Power"].BaseValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<TangShiLossPower>(choiceContext, base.Owner.Creature, base.DynamicVars["Power"].BaseValue, base.Owner.Creature, this);
 
         #endregion
     }

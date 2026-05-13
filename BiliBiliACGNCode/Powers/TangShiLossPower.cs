@@ -23,7 +23,7 @@ public sealed class TangShiLossPower : PowerBaseModel
 		{
 			Flash();
 			await PowerCmd.Remove(this);
-			await PowerCmd.Apply<TangShiPower>(base.Owner, -base.Amount, base.Owner, null);
+			await PowerCmd.Apply<TangShiPower>(choiceContext, base.Owner, -base.Amount, base.Owner, null);
 		}
     }
 

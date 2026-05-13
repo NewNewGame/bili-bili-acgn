@@ -56,9 +56,9 @@ public sealed class NoRightToKnightMe : CardBaseModel
         // 添加VFX
         CustomVfxCmd.AddVfx(base.Owner.Creature, CustomVfxCmd.NoRightToKnightMePath);
         // 添加NoRightToKnightMe BUFF
-        await PowerCmd.Apply<NoRightToKnightMePower>(base.Owner.Creature, 1, base.Owner.Creature, this);
-        await PowerCmd.Apply<BottleRagePower>(base.Owner.Creature,1, base.Owner.Creature, this);
-        await PowerCmd.Apply<StrengthPower>(base.Owner.Creature, base.DynamicVars["Strength"].BaseValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<NoRightToKnightMePower>(choiceContext, base.Owner.Creature, 1, base.Owner.Creature, this);
+        await PowerCmd.Apply<BottleRagePower>(choiceContext, base.Owner.Creature,1, base.Owner.Creature, this);
+        await PowerCmd.Apply<StrengthPower>(choiceContext, base.Owner.Creature, base.DynamicVars["Strength"].BaseValue, base.Owner.Creature, this);
 
     }
 

@@ -45,7 +45,7 @@ public sealed class MagicalPoweredArmor : RelicBaseModel
         if(player == base.Owner){
             var combatState = player.Creature.CombatState;
             if(combatState.RoundNumber == base.DynamicVars["Turn"].BaseValue){
-                await PowerCmd.Apply<StrengthPower>(base.Owner.Creature, base.DynamicVars["Strength"].BaseValue, base.Owner.Creature, null);
+                await PowerCmd.Apply<StrengthPower>(choiceContext, base.Owner.Creature, base.DynamicVars["Strength"].BaseValue, base.Owner.Creature, null);
                 await CreatureCmd.GainBlock(base.Owner.Creature, base.DynamicVars["Block"].BaseValue, base.DynamicVars.Block.Props, null);
             }
         }

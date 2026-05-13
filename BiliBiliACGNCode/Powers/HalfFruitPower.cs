@@ -35,7 +35,7 @@ public sealed class HalfFruitPower : PowerBaseModel
     {
         if(dealer != base.Owner || target == null) return;
         // 使目标本回合变唐
-        await PowerCmd.Apply<GetTangPower>(target, Amount, dealer, null);
+        await PowerCmd.Apply<GetTangPower>(choiceContext, target, Amount, dealer, null);
     }
 
 }

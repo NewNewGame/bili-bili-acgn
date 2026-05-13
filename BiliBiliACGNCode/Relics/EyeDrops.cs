@@ -11,6 +11,7 @@ using BiliBiliACGN.BiliBiliACGNCode.Relics.RelicPool;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Relics;
+using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Rooms;
@@ -26,7 +27,7 @@ public sealed class EyeDrops : RelicBaseModel
     /// <summary>
     /// 当唐氏层数增加时，触发
     /// </summary>
-    public override async Task AfterPowerAmountChanged(PowerModel power, decimal amount, Creature? applier, CardModel? cardSource)
+    public override async Task AfterPowerAmountChanged(PlayerChoiceContext choiceContext, PowerModel power, decimal amount, Creature? applier, CardModel? cardSource)
     {
         if(power is TangShiPower && amount > 0 && power.Owner == base.Owner.Creature)
         {
@@ -36,7 +37,7 @@ public sealed class EyeDrops : RelicBaseModel
             }
             _wasUsedThisCombat = true;
             Flash();
-            await PowerCmd.Apply<TangShiPower>(base.Owner.Creature, amount, base.Owner.Creature, cardSource);
+            await PowerCmd.Apply<TangShiPower>(choiceContext, base.Owner.Creature, amount, base.Owner.Creature, cardSource);
         }
     }
     public override Task AfterRoomEntered(AbstractRoom room)

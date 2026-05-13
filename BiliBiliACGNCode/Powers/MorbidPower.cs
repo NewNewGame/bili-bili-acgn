@@ -107,7 +107,7 @@ public sealed class MorbidPower : PowerBaseModel
     /// <param name="applier"></param>
     /// <param name="cardSource"></param>
     /// <returns></returns>
-    public override async Task AfterPowerAmountChanged(PowerModel power, decimal amount, Creature? applier, CardModel? cardSource)
+    public override async Task AfterPowerAmountChanged(PlayerChoiceContext choiceContext, PowerModel power, decimal amount, Creature? applier, CardModel? cardSource)
     {
         // 如果对象不是病态，则返回
         if(power is not MorbidPower) return;
@@ -116,7 +116,7 @@ public sealed class MorbidPower : PowerBaseModel
         // 如果施加者没有痴迷对象，则给予痴迷对象
         if(!applier.HasPower<InfatuationTargetPower>())
         {
-            await PowerCmd.Apply<InfatuationTargetPower>(applier, 1, applier, null);
+            await PowerCmd.Apply<InfatuationTargetPower>(choiceContext, applier, 1, applier, null);
         }
     }
 
@@ -158,7 +158,7 @@ public sealed class MorbidPower : PowerBaseModel
             atkTimes--;
         }
         // 给予免疫
-        await PowerCmd.Apply<MorbidMitigationPower>(dealer, base.DynamicVars["DamageReductionPercent"].BaseValue, null, null);
+        await PowerCmd.Apply<MorbidMitigationPower>(choiceContext, dealer, base.DynamicVars["DamageReductionPercent"].BaseValue, null, null);
     }
 
 }

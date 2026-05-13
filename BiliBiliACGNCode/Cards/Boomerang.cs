@@ -43,7 +43,7 @@ public sealed class Boomerang : CardBaseModel
             .FromCard(this)
             .Targeting(cardPlay.Target)
             .Execute(choiceContext);
-        await PowerCmd.Apply<ReboundPower>(base.Owner.Creature, base.DynamicVars["NextPlays"].BaseValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<ReboundPower>(choiceContext, base.Owner.Creature, base.DynamicVars["NextPlays"].BaseValue, base.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()

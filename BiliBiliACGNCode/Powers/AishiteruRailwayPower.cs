@@ -65,6 +65,6 @@ public sealed class AishiteruRailwayPower : PowerBaseModel
             return;
         }
 
-        await PowerCmd.Apply<MorbidPower>(target, value, base.Owner, null);
+        await PowerCmd.Apply<MorbidPower>(choiceContext, target, value, base.Owner, null);
     }
 }

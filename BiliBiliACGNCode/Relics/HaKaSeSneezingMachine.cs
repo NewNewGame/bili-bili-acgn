@@ -41,7 +41,7 @@ public sealed class HaKaSeSneezingMachine : RelicBaseModel
 	{
 		if (player == base.Owner)
 		{
-			CombatState combatState = player.Creature.CombatState;
+			var combatState = player.Creature.CombatState;
 			if (combatState.RoundNumber == 1)
 			{
                 Flash();
@@ -49,12 +49,12 @@ public sealed class HaKaSeSneezingMachine : RelicBaseModel
                 foreach(var enemy in combatState.HittableEnemies)
                 {
                     await PowerCmd.Remove<ArtifactPower>(enemy);
-                    await PowerCmd.Apply<WeakPower>(enemy, (int)base.DynamicVars["WeakAmount"].BaseValue, enemy, null);
+                    await PowerCmd.Apply<WeakPower>(choiceContext, enemy, (int)base.DynamicVars["WeakAmount"].BaseValue, enemy, null);
                 }
                 // 有20%几率获得1层脆弱
                 if(combatState.RunState.Rng.CombatPotionGeneration.NextInt(0, 100) < (int)base.DynamicVars["FragileChance"].BaseValue)
                 {
-                    await PowerCmd.Apply<FrailPower>(base.Owner.Creature, (int)base.DynamicVars["FragileAmount"].BaseValue, base.Owner.Creature, null);
+                    await PowerCmd.Apply<FrailPower>(choiceContext, base.Owner.Creature, (int)base.DynamicVars["FragileAmount"].BaseValue, base.Owner.Creature, null);
                 }
 
 			}

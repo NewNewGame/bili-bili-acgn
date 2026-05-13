@@ -43,7 +43,7 @@ public sealed class MaiMaiProtect : CardBaseModel
     {
         await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
         // 添加脉脉庇护BUFF
-        await PowerCmd.Apply<MaiMaiProtectPower>(base.Owner.Creature, base.DynamicVars["AngerLoss"].BaseValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<MaiMaiProtectPower>(choiceContext, base.Owner.Creature, base.DynamicVars["AngerLoss"].BaseValue, base.Owner.Creature, this);
     }
     protected override void OnUpgrade()
     {

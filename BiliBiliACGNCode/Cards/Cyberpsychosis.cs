@@ -57,7 +57,7 @@ public sealed class Cyberpsychosis : CardBaseModel
                 }
             }
             // 获得赛博精神病
-            await PowerCmd.Apply<CyberpsychosisPower>(base.Owner.Creature, 1m, base.Owner.Creature, this);
+            await PowerCmd.Apply<CyberpsychosisPower>(choiceContext, base.Owner.Creature, 1m, base.Owner.Creature, this);
         }
     }
     private int NextEnergyCost()

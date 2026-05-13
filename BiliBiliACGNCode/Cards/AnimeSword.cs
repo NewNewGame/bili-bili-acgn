@@ -41,7 +41,7 @@ public sealed class AnimeSword : CardBaseModel
     {
         await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
         // 获得动漫区的剑BUFF
-        await PowerCmd.Apply<AnimeSwordPower>(base.Owner.Creature, base.DynamicVars["Damage"].BaseValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<AnimeSwordPower>(choiceContext, base.Owner.Creature, base.DynamicVars["Damage"].BaseValue, base.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()

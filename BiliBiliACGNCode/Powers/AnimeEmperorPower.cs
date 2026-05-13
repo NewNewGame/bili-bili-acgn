@@ -24,7 +24,7 @@ public sealed class AnimeEmperorPower : PowerBaseModel
     public override PowerType Type => PowerType.Buff;
 
     public override PowerStackType StackType => PowerStackType.Counter;
-    public override bool IsInstanced => true;
+    public override PowerInstanceType InstanceType => PowerInstanceType.Instanced;
     public override int DisplayAmount => base.Amount - GetInternalData<Data>().triggerCount;
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
     [
@@ -53,7 +53,7 @@ public sealed class AnimeEmperorPower : PowerBaseModel
         // 如果计数器大于等于Amount，则获得1个延迟充能球
         if(data.triggerCount >= base.Amount){
             data.triggerCount = 0;
-            await PowerCmd.Apply<DelayOrbPower>(base.Owner, 1, base.Owner, null);
+            await PowerCmd.Apply<DelayOrbPower>(choiceContext, base.Owner, 1, base.Owner, null);
         }
         InvokeDisplayAmountChanged();
     }

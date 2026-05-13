@@ -42,7 +42,7 @@ public sealed class BullAngel : CardBaseModel
     {
         await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
         // 添加牛天使BUFF
-        await PowerCmd.Apply<AngelCowPower>(base.Owner.Creature, base.DynamicVars["Cards"].BaseValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<AngelCowPower>(choiceContext, base.Owner.Creature, base.DynamicVars["Cards"].BaseValue, base.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()

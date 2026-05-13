@@ -87,17 +87,16 @@ public sealed class IScream : RelicBaseModel
 		}
 		InvokeDisplayAmountChanged();
 	}
-
-	public override Task BeforeSideTurnStart(PlayerChoiceContext choiceContext, CombatSide side, CombatState combatState)
-	{
-		if (side != base.Owner.Creature.Side)
+    public override Task BeforeSideTurnStart(PlayerChoiceContext choiceContext, CombatSide side, ICombatState combatState)
+    {
+        if (side != base.Owner.Creature.Side)
 		{
 			return Task.CompletedTask;
 		}
 		SkillCountThisTurn = 0;
 		base.Status = RelicStatus.Normal;
 		return Task.CompletedTask;
-	}
+    }
 
 	public override async Task AfterCardPlayed(PlayerChoiceContext context, CardPlay cardPlay)
 	{

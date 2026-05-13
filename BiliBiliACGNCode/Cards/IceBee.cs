@@ -55,7 +55,7 @@ public sealed class IceBee : CardBaseModel
             .Targeting(cardPlay.Target)
             .Execute(choiceContext);
 
-        await PowerCmd.Apply<GetTangPower>(cardPlay.Target, base.DynamicVars["Power"].BaseValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<GetTangPower>(choiceContext, cardPlay.Target, base.DynamicVars["Power"].BaseValue, base.Owner.Creature, this);
         #endregion
     }
 

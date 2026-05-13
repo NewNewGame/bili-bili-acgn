@@ -27,7 +27,7 @@ public static class DaughterCmd
     {
         var daughter = await PlayerCmd.AddPet<Itsuka>(creature.Player);
         if(daughter == null) return null;
-        await PowerCmd.Apply<CombatForYouPower>(daughter, 1, daughter, null);
+        await PowerCmd.Apply<CombatForYouPower>(CombatUtils.GetTemporaryPlayerChoiceContext(), daughter, 1, daughter, null);
         return daughter;
     }
     /// <summary>
@@ -110,16 +110,16 @@ public static class DaughterCmd
     {
         var daughter = creature.GetDaughter();
         if(daughter == null) return;
-        await PowerCmd.Apply<AddMaxHpTempPower>(daughter, value, creature, null);
+        await PowerCmd.Apply<AddMaxHpTempPower>(choiceContext, daughter, value, creature, null);
     }
     /// <summary>
     /// 女儿能力指令
     /// </summary>
-    public static async Task ApplyPower<TPower>(this Creature creature, decimal value, CardModel? cardSource) where TPower : PowerModel
+    public static async Task ApplyPower<TPower>(this Creature creature, PlayerChoiceContext choiceContext, decimal value, CardModel? cardSource) where TPower : PowerModel
     {
         var daughter = creature.GetDaughter();
         if(daughter == null) return;
-        await PowerCmd.Apply<TPower>(daughter, value, creature, cardSource);
+        await PowerCmd.Apply<TPower>(choiceContext, daughter, value, creature, cardSource);
     }
     /// <summary>
     /// 获取女儿的某个能力层数

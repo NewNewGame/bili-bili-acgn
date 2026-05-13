@@ -47,7 +47,7 @@ public sealed class Dcm : CardBaseModel
             .FromCard(this)
             .Targeting(cardPlay.Target)
             .Execute(choiceContext);
-        await PowerCmd.Apply<WeakPower>(cardPlay.Target, base.DynamicVars["Weak"].BaseValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<WeakPower>(choiceContext, cardPlay.Target, base.DynamicVars["Weak"].BaseValue, base.Owner.Creature, this);
         // 生成{StrengthOrb:diff()}个力量充能球
         int cnt = (int)base.DynamicVars["StrengthOrb"].BaseValue;
         for(int i = 0; i < cnt; i++){

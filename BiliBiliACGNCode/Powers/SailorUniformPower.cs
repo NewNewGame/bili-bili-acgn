@@ -9,6 +9,7 @@ using BiliBiliACGN.BiliBiliACGNCode.Utils;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
+using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.ValueProps;
 
@@ -28,13 +29,13 @@ public sealed class SailorUniformPower : PowerBaseModel
     /// <param name="props"></param>
     /// <param name="cardSource"></param>
     /// <returns></returns>
-    public override async Task AfterPowerAmountChanged(PowerModel power, decimal amount, Creature? applier, CardModel? cardSource)
+    public override async Task AfterPowerAmountChanged(PlayerChoiceContext choiceContext, PowerModel power, decimal amount, Creature? applier, CardModel? cardSource)
     {
         if(amount <= 0 || power is not AddMaxHpTempPower || power.Owner != base.Owner) return;
         if(base.CombatState == null) return;
         // 随机获得一个敌人
         var enemy = base.CombatState.RunState.Rng.CombatTargets.NextItem(base.CombatState.HittableEnemies);
         if(enemy == null) return;
-        await CreatureCmd.Damage(CombatUtils.GetTemporaryPlayerChoiceContext(), enemy, base.Amount, ValueProp.Unpowered,base.Owner);
+        await CreatureCmd.Damage(choiceContext, enemy, base.Amount, ValueProp.Unpowered,base.Owner);
     }
 }

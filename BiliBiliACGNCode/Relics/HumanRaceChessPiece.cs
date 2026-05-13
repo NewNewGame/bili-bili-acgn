@@ -31,8 +31,9 @@ public sealed class HumanRaceChessPiece : RelicBaseModel
 		{
 			return false;
 		}
+        
         // 新增一个备选项，将本次卡牌奖励替换为「+2 最大生命值」。
-		alternatives.Add(new CardRewardAlternative("HUMAN_RACE_CHESS_PIECE", OnSacrificeSynchronized, PostAlternateCardRewardAction.DismissScreenAndRemoveReward));
+		alternatives.Add(new CardRewardAlternative("HUMAN_RACE_CHESS_PIECE", OnSacrificeSynchronized, PostAlternateCardRewardAction.EndSelectionAndCompleteReward));
         return true;
     }
     private async Task OnSacrificeSynchronized()

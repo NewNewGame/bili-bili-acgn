@@ -28,13 +28,14 @@ public sealed class ArcadeCabinet : RelicBaseModel
     [
         new DamageVar(20m, ValueProp.Unpowered)
     ];
+
     /// <summary>
     /// 回合开始时重置计数器
     /// </summary>
     /// <param name="side"></param>
     /// <param name="combatState"></param>
     /// <returns></returns>
-    public override Task AfterSideTurnStart(CombatSide side, CombatState combatState)
+    public override Task AfterSideTurnStart(CombatSide side, ICombatState combatState)
     {
         // 回合开始时重置计数器
         if(side == base.Owner.Creature.Side)

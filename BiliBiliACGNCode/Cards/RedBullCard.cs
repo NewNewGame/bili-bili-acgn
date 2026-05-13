@@ -42,7 +42,7 @@ public sealed class RedBullCard : CardBaseModel
     {
         await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
         // 添加红牛BUFF
-        await PowerCmd.Apply<RedBullPower>(base.Owner.Creature, base.DynamicVars["AngerPerEnergy"].BaseValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<RedBullPower>(choiceContext, base.Owner.Creature, base.DynamicVars["AngerPerEnergy"].BaseValue, base.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()

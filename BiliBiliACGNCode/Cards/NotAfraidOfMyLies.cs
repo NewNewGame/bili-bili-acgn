@@ -55,7 +55,7 @@ public sealed class NotAfraidOfMyLies : CardBaseModel
     {
         // 若敌人意图为攻击，获得{Power:diff()}层唐氏
         if(cardPlay.Target.Monster?.IntendsToAttack ?? false){
-            await PowerCmd.Apply<TangShiPower>(base.Owner.Creature, base.DynamicVars["Power"].BaseValue, base.Owner.Creature, this);
+            await PowerCmd.Apply<TangShiPower>(choiceContext, base.Owner.Creature, base.DynamicVars["Power"].BaseValue, base.Owner.Creature, this);
         }
     }
 

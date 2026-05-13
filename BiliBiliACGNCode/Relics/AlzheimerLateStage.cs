@@ -49,12 +49,12 @@ public sealed class AlzheimerLateStage : RelicBaseModel
 		if (player == base.Owner)
 		{
 			Flash();
-			CombatState combatState = player.Creature.CombatState;
+			var combatState = player.Creature.CombatState;
 			if (combatState.RoundNumber == 1)
 			{
-				await PowerCmd.Apply<AngerPower>(base.Owner.Creature, (int)base.DynamicVars["AngerAmount"].BaseValue, base.Owner.Creature, null);
+				await PowerCmd.Apply<AngerPower>(choiceContext, base.Owner.Creature, (int)base.DynamicVars["AngerAmount"].BaseValue, base.Owner.Creature, null);
 			}
-            await PowerCmd.Apply<AngerPower>(base.Owner.Creature, (int)base.DynamicVars["AngerAmountPerTurn"].BaseValue, base.Owner.Creature, null);
+            await PowerCmd.Apply<AngerPower>(choiceContext, base.Owner.Creature, (int)base.DynamicVars["AngerAmountPerTurn"].BaseValue, base.Owner.Creature, null);
 		}
 	}
 	/// <summary>

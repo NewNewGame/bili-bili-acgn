@@ -42,7 +42,7 @@ public sealed class OnlyTwoYearsOlder : CardBaseModel
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         // 对目标施加{VulnerablePower:diff()}层易伤
-        await PowerCmd.Apply<VulnerablePower>(cardPlay.Target, base.DynamicVars["VulnerablePower"].BaseValue, base.Owner.Creature, cardPlay.Card);
+        await PowerCmd.Apply<VulnerablePower>(choiceContext, cardPlay.Target, base.DynamicVars["VulnerablePower"].BaseValue, base.Owner.Creature, cardPlay.Card);
         // 抽取一张牌
         await CardPileCmd.Draw(choiceContext, base.DynamicVars.Cards.BaseValue, base.Owner);
     }

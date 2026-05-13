@@ -44,8 +44,8 @@ public sealed class KuyaXi : CardBaseModel
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         // 在下个回合获得{NextEnergy:diff()}点能量并给予女儿{Strength:diff()}点[gold]力量[/gold]。
-        await PowerCmd.Apply<EnergyNextTurnPower>(base.Owner.Creature, base.DynamicVars.Energy.BaseValue, base.Owner.Creature, this);
-        await DaughterCmd.ApplyPower<DelayedStrengthPower>(base.Owner.Creature, base.DynamicVars["Strength"].BaseValue, this);
+        await PowerCmd.Apply<EnergyNextTurnPower>(choiceContext, base.Owner.Creature, base.DynamicVars.Energy.BaseValue, base.Owner.Creature, this);
+        await DaughterCmd.ApplyPower<DelayedStrengthPower>(base.Owner.Creature, choiceContext, base.DynamicVars["Strength"].BaseValue, this);
     }
     protected override void OnUpgrade()
     {

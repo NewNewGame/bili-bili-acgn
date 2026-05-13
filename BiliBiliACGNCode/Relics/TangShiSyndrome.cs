@@ -38,11 +38,11 @@ public sealed class TangShiSyndrome : RelicBaseModel
         }
         // 闪烁
         Flash();
-        await PowerCmd.Apply<TangShiPower>(base.Owner.Creature, base.DynamicVars["Tang"].BaseValue, base.Owner.Creature, null);
+        await PowerCmd.Apply<TangShiPower>(choiceContext, base.Owner.Creature, base.DynamicVars["Tang"].BaseValue, base.Owner.Creature, null);
         // 给予所有敌人1层变唐
         foreach (var enemy in player.Creature.CombatState.HittableEnemies)
         {
-            await PowerCmd.Apply<GetTangPower>(enemy, base.DynamicVars["GetTang"].BaseValue, base.Owner.Creature, null);
+            await PowerCmd.Apply<GetTangPower>(choiceContext, enemy, base.DynamicVars["GetTang"].BaseValue, base.Owner.Creature, null);
         }
     }
 

@@ -49,7 +49,7 @@ public sealed class InfiniteBullness : CardBaseModel
         .TargetingAllOpponents(base.CombatState)
         .WithAttackerFx("vfx/vfx_infinite_bullness")
         .Execute(choiceContext);
-        await PowerCmd.Apply<TangShiPower>(base.Owner.Creature, base.DynamicVars["Power"].BaseValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<TangShiPower>(choiceContext, base.Owner.Creature, base.DynamicVars["Power"].BaseValue, base.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()

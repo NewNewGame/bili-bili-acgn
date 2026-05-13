@@ -37,7 +37,7 @@ public sealed class EiHeiJiangMask : RelicBaseModel
 	{
 		await SummonPet();
 	}
-	public override async Task AfterSideTurnStart(CombatSide side, CombatState combatState)
+	public override async Task AfterSideTurnStart(CombatSide side, ICombatState combatState)
 	{
 		// 回合开始时，召唤充能球
 		if (side == base.Owner.Creature.Side && combatState.RoundNumber <= 1)
@@ -53,7 +53,7 @@ public sealed class EiHeiJiangMask : RelicBaseModel
 		var daughter = await DaughterCmd.SummonDaughter(base.Owner.Creature);
 		daughter.SetMaxHpInternal(base.DynamicVars["Hp"].BaseValue + 1);
 		daughter.SetCurrentHpInternal(base.DynamicVars["Hp"].BaseValue + 1);
-		await DaughterCmd.ApplyPower<StrengthPower>(base.Owner.Creature, base.DynamicVars["Power"].BaseValue, null);
+		await DaughterCmd.ApplyPower<StrengthPower>(base.Owner.Creature, CombatUtils.GetTemporaryPlayerChoiceContext(), base.DynamicVars["Power"].BaseValue, null);
 	}
 
 }

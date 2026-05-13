@@ -34,10 +34,10 @@ public sealed class DeathNote : RelicBaseModel
     {
         if(player == base.Owner)
         {
-            CombatState combatState = player.Creature.CombatState;
+            var combatState = player.Creature.CombatState;
             if (combatState.RoundNumber == 1){
                 Flash();
-                await CardPileCmd.AddGeneratedCardToCombat(combatState.CreateCard<DeathNoteD>(player), PileType.Hand, true);
+                await CardPileCmd.AddGeneratedCardToCombat(combatState.CreateCard<DeathNoteD>(player), PileType.Hand, base.Owner);
             }
         }
     }

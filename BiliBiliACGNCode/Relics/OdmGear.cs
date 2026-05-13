@@ -32,11 +32,11 @@ public sealed class OdmGear : RelicBaseModel
     {
         if(player == base.Owner)
         {
-            CombatState combatState = player.Creature.CombatState;
+            var combatState = player.Creature.CombatState;
             if(combatState.RoundNumber == 1)
             {
                 Flash();
-                await PowerCmd.Apply<SpeedPotionPower>(base.Owner.Creature, base.DynamicVars["Dexterity"].BaseValue, base.Owner.Creature, null);
+                await PowerCmd.Apply<SpeedPotionPower>(choiceContext, base.Owner.Creature, base.DynamicVars["Dexterity"].BaseValue, base.Owner.Creature, null);
             }
         }
     }

@@ -53,7 +53,7 @@ public sealed class CalmPipi : RelicBaseModel
         }else{
             Flash();
             UpdateValue(base.DynamicVars["Amount"].BaseValue + 1m);
-            await PowerCmd.Apply<SpeedPotionPower>(base.Owner.Creature, base.DynamicVars["Amount"].BaseValue, base.Owner.Creature, null);
+            await PowerCmd.Apply<SpeedPotionPower>(choiceContext, base.Owner.Creature, base.DynamicVars["Amount"].BaseValue, base.Owner.Creature, null);
         }
         dmg = 0;
 	}

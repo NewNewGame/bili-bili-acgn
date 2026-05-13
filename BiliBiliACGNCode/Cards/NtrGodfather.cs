@@ -40,7 +40,7 @@ public sealed class NtrGodfather : CardBaseModel
         // 获得能量并抽牌；施加能力：回合开始时给予自身病态
         await PlayerCmd.GainEnergy(base.DynamicVars.Energy.BaseValue, base.Owner);
         await CardPileCmd.Draw(choiceContext, base.DynamicVars.Cards.BaseValue, base.Owner);
-        await PowerCmd.Apply<NtrGodfatherPower>(base.Owner.Creature, base.DynamicVars["MorbidSelf"].BaseValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<NtrGodfatherPower>(choiceContext, base.Owner.Creature, base.DynamicVars["MorbidSelf"].BaseValue, base.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()

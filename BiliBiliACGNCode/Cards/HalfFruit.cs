@@ -38,7 +38,7 @@ public sealed class HalfFruit : CardBaseModel
         // 播放动画
         await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
         // 施加能力：女儿攻击敌人时，该敌人在本回合失去力量
-        await DaughterCmd.ApplyPower<HalfFruitPower>(base.Owner.Creature, base.DynamicVars["HalfFruit"].BaseValue, this);
+        await DaughterCmd.ApplyPower<HalfFruitPower>(base.Owner.Creature, choiceContext, base.DynamicVars["HalfFruit"].BaseValue, this);
     }
 
     protected override void OnUpgrade()

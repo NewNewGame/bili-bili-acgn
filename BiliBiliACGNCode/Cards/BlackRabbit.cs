@@ -33,7 +33,7 @@ public sealed class BlackRabbit : CardBaseModel
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        await PowerCmd.Apply<BlackRabbitPower>(base.Owner.Creature, base.DynamicVars["EvokeCount"].BaseValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<BlackRabbitPower>(choiceContext, base.Owner.Creature, base.DynamicVars["EvokeCount"].BaseValue, base.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()

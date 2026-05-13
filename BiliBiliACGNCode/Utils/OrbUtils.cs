@@ -49,7 +49,7 @@ public static class OrbUtils
     /// </summary>
     /// <param name="card"></param>
     /// <returns></returns>
-    public static OrbModel GetRandomFunShikiOrb(this CombatState combatState)
+    public static OrbModel GetRandomFunShikiOrb(this ICombatState? combatState)
     {
         return GetRandomFunShikiOrb(combatState.RunState.Rng.CombatOrbGeneration);
     }

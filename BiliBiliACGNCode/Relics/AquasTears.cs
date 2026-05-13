@@ -6,6 +6,7 @@
 //*******************************************************
 
 using BaseLib.Utils;
+using BiliBiliACGN.BiliBiliACGNCode.Utils;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Creatures;
@@ -31,7 +32,7 @@ public sealed class AquasTears : RelicBaseModel
         if (power.Type == PowerType.Debuff && amount > 0m && target == base.Owner.Creature)
 		{
             Flash();
-			await PowerCmd.Apply<FlexPotionPower>(base.Owner.Creature, base.DynamicVars["Amount"].BaseValue, base.Owner.Creature, null);
+			await PowerCmd.Apply<FlexPotionPower>(CombatUtils.GetTemporaryPlayerChoiceContext(), base.Owner.Creature, base.DynamicVars["Amount"].BaseValue, base.Owner.Creature, null);
 		}
     }
 }

@@ -48,7 +48,7 @@ public sealed class GuguGaga : CardBaseModel
         foreach(var enemy in base.CombatState.HittableEnemies){
             await CreatureCmd.LoseBlock(enemy, enemy.Block);
             await PowerCmd.Remove<ArtifactPower>(enemy);
-            await PowerCmd.Apply<VulnerablePower>(enemy, amount, base.Owner.Creature, this);
+            await PowerCmd.Apply<VulnerablePower>(choiceContext, enemy, amount, base.Owner.Creature, this);
         }
     }
 

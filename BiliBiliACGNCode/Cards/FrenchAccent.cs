@@ -47,7 +47,7 @@ public sealed class FrenchAccent : CardBaseModel
             .FromCard(this)
             .Targeting(cardPlay.Target)
             .Execute(choiceContext);
-        await PowerCmd.Apply<MorbidPower>(cardPlay.Target, base.DynamicVars["Morbid"].BaseValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<MorbidPower>(choiceContext, cardPlay.Target, base.DynamicVars["Morbid"].BaseValue, base.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()

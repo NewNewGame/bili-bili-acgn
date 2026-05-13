@@ -40,7 +40,7 @@ public sealed class AnimeEmperor : CardBaseModel
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        await PowerCmd.Apply<AnimeEmperorPower>(base.Owner.Creature, base.DynamicVars["EvokesPerOrb"].BaseValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<AnimeEmperorPower>(choiceContext, base.Owner.Creature, base.DynamicVars["EvokesPerOrb"].BaseValue, base.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()

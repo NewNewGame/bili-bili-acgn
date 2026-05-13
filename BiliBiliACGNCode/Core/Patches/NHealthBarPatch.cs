@@ -106,7 +106,7 @@ public static class NHealthBarPatch
 
 		var creature = GetCreature(__instance);
 		// 死亡、无限血与原版一致：不显示毒/末日，病态条也隐藏
-		if (creature == null || creature.CurrentHp <= 0 || creature.ShowsInfiniteHp)
+		if (creature == null || creature.CurrentHp <= 0 || creature.HpDisplay.IsInfinite())
 		{
 			morbid.Visible = false;
 			return;
@@ -169,7 +169,7 @@ public static class NHealthBarPatch
             return;
         }
 		// 无限血与原版一致：不显示毒/末日，病态条也隐藏
-        if (creature.ShowsInfiniteHp)
+        if (creature.HpDisplay.IsInfinite())
         {
             return;
         }

@@ -15,6 +15,7 @@ using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.MonsterMoves.Intents;
 using MegaCrit.Sts2.Core.MonsterMoves.MonsterMoveStateMachine;
+using BiliBiliACGN.BiliBiliACGNCode.Utils;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Core.Models.Monsters;
 
@@ -87,7 +88,7 @@ public sealed class PopPipi : MonsterBaseModel
 	public override async Task AfterAddedToRoom()
 	{
 		await base.AfterAddedToRoom();
-		await PowerCmd.Apply<ArtifactPower>(base.Creature, 3m, base.Creature, null);
+		await PowerCmd.Apply<ArtifactPower>(CombatUtils.GetTemporaryPlayerChoiceContext(), base.Creature, 3m, base.Creature, null);
 		if (StartingHpReduction > 0)
 		{
 			base.Creature.SetCurrentHpInternal(Math.Max(1, base.Creature.CurrentHp - StartingHpReduction));
@@ -125,7 +126,7 @@ public sealed class PopPipi : MonsterBaseModel
 	{
 		SfxCmd.Play("event:/sfx/enemy/enemy_attacks/punch_construct/punch_construct_buff");
 		await CreatureCmd.TriggerAnim(base.Creature, "Cast", 0.8f);
-		await PowerCmd.Apply<StrengthPower>(base.Creature, PowerValue, base.Creature, null);
+		await PowerCmd.Apply<StrengthPower>(CombatUtils.GetTemporaryPlayerChoiceContext(), base.Creature, PowerValue, base.Creature, null);
 	}
 
     /// <summary>
@@ -154,7 +155,7 @@ public sealed class PopPipi : MonsterBaseModel
 			.WithAttackerFx(null, "event:/sfx/enemy/enemy_attacks/punch_construct/punch_construct_attack_double")
 			.WithHitFx("vfx/vfx_attack_blunt")
 			.Execute(null);
-		await PowerCmd.Apply<WeakPower>(targets, 1m, base.Creature, null);
+		await PowerCmd.Apply<WeakPower>(CombatUtils.GetTemporaryPlayerChoiceContext(), targets, 1m, base.Creature, null);
 	}
 
 	public override CreatureAnimator GenerateAnimator(MegaSprite controller)

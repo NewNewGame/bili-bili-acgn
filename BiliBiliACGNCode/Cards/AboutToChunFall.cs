@@ -47,7 +47,7 @@ public sealed class AboutToChunFall : CardBaseModel
         if(base.CombatState == null) return;
         // 给予所有敌人{Morbid:diff()}层[gold]病态[/gold]。
         foreach(var enemy in base.CombatState.HittableEnemies){
-            await PowerCmd.Apply<MorbidPower>(enemy, base.DynamicVars["Morbid"].BaseValue, base.Owner.Creature, this);
+            await PowerCmd.Apply<MorbidPower>(choiceContext, enemy, base.DynamicVars["Morbid"].BaseValue, base.Owner.Creature, this);
         }
     }
 

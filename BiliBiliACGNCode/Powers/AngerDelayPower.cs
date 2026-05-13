@@ -21,7 +21,7 @@ public sealed class AngerDelayPower : PowerBaseModel
     {
         // 如果当前回合是玩家回合，则施加红温，然后移除自身
         if(player == base.Owner.Player){
-            await PowerCmd.Apply<AngerPower>(base.Owner, base.Amount, base.Owner, null);
+            await PowerCmd.Apply<AngerPower>(choiceContext, base.Owner, base.Amount, base.Owner, null);
             await PowerCmd.Remove<AngerDelayPower>(base.Owner);
         }
     }

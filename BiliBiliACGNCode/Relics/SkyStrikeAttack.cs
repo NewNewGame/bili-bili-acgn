@@ -42,7 +42,7 @@ public sealed class SkyStrikeAttack : RelicBaseModel
     {
         if(player == base.Owner)
         {
-            CombatState combatState = player.Creature.CombatState;
+            var combatState = player.Creature.CombatState;
             if(combatState.RoundNumber == base.DynamicVars["Turn"].BaseValue)
             {
                 Flash();

@@ -43,7 +43,7 @@ public sealed class Archbishop : CardBaseModel
     {
         ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
         await CreatureCmd.Damage(choiceContext, cardPlay.Target, base.DynamicVars.Damage.BaseValue, base.DynamicVars.Damage.Props, this);
-        await PowerCmd.Apply<ArchbishopPower>(cardPlay.Target, base.DynamicVars["StrengthOnHit"].BaseValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<ArchbishopPower>(choiceContext, cardPlay.Target, base.DynamicVars["StrengthOnHit"].BaseValue, base.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()

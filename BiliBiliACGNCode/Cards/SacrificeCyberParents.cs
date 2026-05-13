@@ -61,7 +61,7 @@ public sealed class SacrificeCyberParents : CardBaseModel
             .TargetingAllOpponents(base.CombatState)
             .Execute(choiceContext);
         // 消耗2点红温
-        await PowerCmd.Apply<AngerPower>(base.Owner.Creature, -base.DynamicVars["AngerNeed"].BaseValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<AngerPower>(choiceContext, base.Owner.Creature, -base.DynamicVars["AngerNeed"].BaseValue, base.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()

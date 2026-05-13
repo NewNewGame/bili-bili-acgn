@@ -38,7 +38,7 @@ public sealed class GravityCircle : CardBaseModel
     {
         // 如果选取目标有病态，则给予9/12层病态
         if(cardPlay.Target?.HasPower<MorbidPower>() ?? false){
-            await PowerCmd.Apply<MorbidPower>(cardPlay.Target, base.DynamicVars["MorbidStacks"].BaseValue, base.Owner.Creature, this);
+            await PowerCmd.Apply<MorbidPower>(choiceContext, cardPlay.Target, base.DynamicVars["MorbidStacks"].BaseValue, base.Owner.Creature, this);
         }
     }
 

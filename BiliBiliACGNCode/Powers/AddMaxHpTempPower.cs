@@ -19,8 +19,7 @@ public sealed class AddMaxHpTempPower : PowerBaseModel
 {
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
-
-    public override async Task AfterPowerAmountChanged(PowerModel power, decimal amount, Creature? applier, CardModel? cardSource)
+    public override async Task AfterPowerAmountChanged(PlayerChoiceContext choiceContext, PowerModel power, decimal amount, Creature? applier, CardModel? cardSource)
     {
         // 如果不是本能力，对象不是自己，则返回
         if(power != this || power.Owner != base.Owner) return;
@@ -36,6 +35,7 @@ public sealed class AddMaxHpTempPower : PowerBaseModel
         // 治疗生命值
         await CreatureCmd.Heal(base.Owner, amount, true);
     }
+
     /// <summary>
     /// 受到伤害时，移除给予的最大生命值
     /// </summary>
@@ -43,7 +43,7 @@ public sealed class AddMaxHpTempPower : PowerBaseModel
     {
         if(target != base.Owner) return;
         int amount = Mathf.Min(this.Amount, result.TotalDamage);
-        await PowerCmd.Apply<AddMaxHpTempPower>(base.Owner, -amount, base.Owner, null);
+        await PowerCmd.Apply<AddMaxHpTempPower>(choiceContext, base.Owner, -amount, base.Owner, null);
         await CreatureCmd.SetMaxHp(base.Owner, Mathf.Max(base.Owner.MaxHp - amount, 1));
     }
 

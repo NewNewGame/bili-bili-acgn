@@ -27,7 +27,7 @@ public sealed class BerserkPower : PowerBaseModel
     public override PowerType Type => PowerType.Buff;
 
     public override PowerStackType StackType => PowerStackType.Single;
-    public override bool IsInstanced => true;
+    public override PowerInstanceType InstanceType => PowerInstanceType.Instanced;
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<StrengthPower>()];
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [
@@ -59,7 +59,7 @@ public sealed class BerserkPower : PowerBaseModel
         SfxCmd.Play(AudioUtils.BersekEnterEventPath);
         return Task.CompletedTask;
     }
-    public override async Task AfterPowerAmountChanged(PowerModel power, decimal amount, Creature? applier, CardModel? cardSource)
+    public override async Task AfterPowerAmountChanged(PlayerChoiceContext choiceContext, PowerModel power, decimal amount, Creature? applier, CardModel? cardSource)
     {
         // 如果施加者不是玩家，则返回
         if(base.Owner.Player == null) return;
@@ -107,7 +107,7 @@ public sealed class BerserkPower : PowerBaseModel
         // 如果旧所有者不是当前所有者，则返回
         if(oldOwner != base.Owner) return;
         // 获得力量
-        await PowerCmd.Apply<StrengthPower>(base.Owner, base.DynamicVars["Strength"].BaseValue, oldOwner, null);
+        await PowerCmd.Apply<StrengthPower>(CombatUtils.GetTemporaryPlayerChoiceContext(), base.Owner, base.DynamicVars["Strength"].BaseValue, oldOwner, null);
         // 如果有开始享受能力，并且是玩家
         int num = oldOwner.GetPowerAmount<EnjoyPower>();
         if(num > 0 && oldOwner.Player != null){

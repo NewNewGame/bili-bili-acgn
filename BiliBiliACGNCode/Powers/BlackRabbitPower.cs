@@ -30,7 +30,7 @@ public sealed class BlackRabbitPower : PowerBaseModel
     }
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
-    public override bool IsInstanced => true;
+    public override PowerInstanceType InstanceType => PowerInstanceType.Instanced;
     public override int DisplayAmount => base.Amount - GetInternalData<Data>().EvokeCount;
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.Static(StaticHoverTip.Evoke)];
     protected override object? InitInternalData()

@@ -49,7 +49,7 @@ public sealed class Birthday : CardBaseModel
             }
         }else{
             // 下回合生成2个随机充能球
-            await PowerCmd.Apply<DelayOrbPower>(base.Owner.Creature, num, base.Owner.Creature, this);
+            await PowerCmd.Apply<DelayOrbPower>(choiceContext, base.Owner.Creature, num, base.Owner.Creature, this);
         }
     }
 

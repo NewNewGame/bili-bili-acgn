@@ -7,6 +7,7 @@
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
+using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Powers;
@@ -17,7 +18,7 @@ public sealed class SwallowPridePower : PowerBaseModel
 
     public override PowerStackType StackType => PowerStackType.Counter;
     //进入红怒时获得能量与红温
-    public override async Task AfterPowerAmountChanged(PowerModel power, decimal amount, Creature? applier, CardModel? cardSource)
+    public override async Task AfterPowerAmountChanged(PlayerChoiceContext choiceContext, PowerModel power, decimal amount, Creature? applier, CardModel? cardSource)
     {
         if(base.Owner.Player == null) return;
         if(power.Owner == base.Owner && power is BerserkPower && amount > 0){
@@ -25,7 +26,7 @@ public sealed class SwallowPridePower : PowerBaseModel
             int amt = (int)base.Amount;
             await PowerCmd.Remove<SwallowPridePower>(base.Owner);
             await PlayerCmd.GainEnergy(amt, base.Owner.Player);
-            await PowerCmd.Apply<AngerPower>(base.Owner, amt, base.Owner, cardSource);
+            await PowerCmd.Apply<AngerPower>(choiceContext, base.Owner, amt, base.Owner, cardSource);
         }
     }
 }

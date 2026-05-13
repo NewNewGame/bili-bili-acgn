@@ -29,7 +29,7 @@ public sealed class FocusLossPower : PowerBaseModel
     public override async Task AfterTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)
     {
         if(side == CombatSide.Enemy){
-            await PowerCmd.Apply<FocusPower>(base.Owner, -base.Amount, base.Owner, null);
+            await PowerCmd.Apply<FocusPower>(choiceContext, base.Owner, -base.Amount, base.Owner, null);
             await PowerCmd.Remove(this);
         }
     }

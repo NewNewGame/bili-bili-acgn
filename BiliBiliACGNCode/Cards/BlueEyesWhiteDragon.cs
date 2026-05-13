@@ -34,12 +34,12 @@ public sealed class BlueEyesWhiteDragon : CardBaseModel
 
     public BlueEyesWhiteDragon() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
 
-    public override async Task OnTurnEndInHand(PlayerChoiceContext choiceContext)
+    protected override async Task OnTurnEndInHand(PlayerChoiceContext choiceContext)
     {
         // 给予对面所有敌人2点力量Buff
         foreach(var enemy in base.CombatState.HittableEnemies)
         {
-            await PowerCmd.Apply<StrengthPower>(enemy, base.DynamicVars["Power"].BaseValue, base.Owner.Creature, this);
+            await PowerCmd.Apply<StrengthPower>(choiceContext, enemy, base.DynamicVars["Power"].BaseValue, base.Owner.Creature, this);
         }
     }
     public override async Task BeforeCardRemoved(CardModel card)

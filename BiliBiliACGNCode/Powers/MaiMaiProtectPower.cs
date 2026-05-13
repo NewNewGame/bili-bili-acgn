@@ -23,7 +23,7 @@ public sealed class MaiMaiProtectPower : PowerBaseModel
         if(player == base.Owner.Player){
             if(player.Creature.HasPower<AngerPower>())
             {
-                await PowerCmd.Apply<AngerPower>(base.Owner, -1m, base.Owner, null);
+                await PowerCmd.Apply<AngerPower>(choiceContext, base.Owner, -1m, base.Owner, null);
             }
             await PlayerCmd.GainEnergy(base.Amount, player);
         }

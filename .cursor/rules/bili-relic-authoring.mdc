@@ -44,7 +44,7 @@ alwaysApply: false
 	{
 		if (player == base.Owner)
 		{
-			CombatState combatState = player.Creature.CombatState;
+			var combatState = player.Creature.CombatState;
 			if (combatState.RoundNumber == X回合)
 			{
                 //执行操作

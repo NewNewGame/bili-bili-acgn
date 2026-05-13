@@ -65,7 +65,7 @@ public sealed class BlowWithThemAll : CardBaseModel
         await DamageCmd.Attack(base.DynamicVars.CalculatedDamage).FromCard(this).TargetingAllOpponents(base.CombatState)
             .Execute(choiceContext);
         // 消耗3点红温
-        await PowerCmd.Apply<AngerPower>(base.Owner.Creature, -base.DynamicVars["Anger"].BaseValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<AngerPower>(choiceContext, base.Owner.Creature, -base.DynamicVars["Anger"].BaseValue, base.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()

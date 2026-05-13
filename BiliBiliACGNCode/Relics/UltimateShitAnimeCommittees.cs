@@ -48,7 +48,7 @@ public sealed class UltimateShitAnimeCommittees : RelicBaseModel
                         card2.AddKeyword(CardKeyword.Exhaust);
                     }
                     card2.EnergyCost.SetCustomBaseCost(0);
-                    await CardPileCmd.AddGeneratedCardToCombat(card2, PileType.Hand, true);
+                    await CardPileCmd.AddGeneratedCardToCombat(card2, PileType.Hand, base.Owner);
                 }
             }
         }

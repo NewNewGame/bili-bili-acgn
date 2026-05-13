@@ -20,7 +20,7 @@ public sealed class BuffCardPlayActionCodeEmitter : CardPlayActionCodeEmitterBas
         var v = CardPlayActionEmitSyntax.ValueExpression(action);
         var inner =
             $"{indent}await CreatureCmd.TriggerAnim(base.Owner.Creature, \"Cast\", base.Owner.Character.CastAnimDelay);\n" +
-            $"{indent}await PowerCmd.Apply<{buff}>(base.Owner.Creature, {v}, base.Owner.Creature, this);";
+            $"{indent}await PowerCmd.Apply<{buff}>(choiceContext, base.Owner.Creature, {v}, base.Owner.Creature, this);";
         return CardPlayActionEmitSyntax.WrapWithRepeatLoop(action, inner, indent);
     }
 }

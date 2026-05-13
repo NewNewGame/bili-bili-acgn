@@ -92,7 +92,7 @@ public sealed class WildBullTrophy : RelicBaseModel
 		InvokeDisplayAmountChanged();
 	}
 
-	public override Task BeforeSideTurnStart(PlayerChoiceContext choiceContext, CombatSide side, CombatState combatState)
+	public override Task BeforeSideTurnStart(PlayerChoiceContext choiceContext, CombatSide side, ICombatState combatState)
 	{
 		if (side != base.Owner.Creature.Side)
 		{
@@ -112,7 +112,7 @@ public sealed class WildBullTrophy : RelicBaseModel
 			if (YysyPlayedThisTurn % intValue == 0)
 			{
 				TaskHelper.RunSafely(DoActivateVisuals());
-				await PowerCmd.Apply<TangShiPower>(base.Owner.Creature, base.DynamicVars["Tang"].BaseValue, base.Owner.Creature, null);
+				await PowerCmd.Apply<TangShiPower>(context, base.Owner.Creature, base.DynamicVars["Tang"].BaseValue, base.Owner.Creature, null);
 			}
 		}
 	}

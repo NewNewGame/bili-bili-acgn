@@ -49,9 +49,9 @@ public sealed class Meditation : CardBaseModel
         // 播放动画
         await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
         // 获得[gold]红温[/gold]
-        await PowerCmd.Apply<AngerPower>(base.Owner.Creature, base.DynamicVars["Power"].BaseValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<AngerPower>(choiceContext, base.Owner.Creature, base.DynamicVars["Power"].BaseValue, base.Owner.Creature, this);
         foreach(var enemy in base.CombatState.HittableEnemies){
-            await PowerCmd.Apply<GetTangPower>(enemy, base.DynamicVars["Tang"].BaseValue, base.Owner.Creature, this);
+            await PowerCmd.Apply<GetTangPower>(choiceContext, enemy, base.DynamicVars["Tang"].BaseValue, base.Owner.Creature, this);
         }
     }
 

@@ -42,7 +42,7 @@ public sealed class UnreachableFlower : CardBaseModel
         // 抽1张牌
         await CardPileCmd.Draw(choiceContext, base.DynamicVars.Cards.BaseValue, base.Owner);
         // 下回合抽1张牌
-        await PowerCmd.Apply<DrawCardsNextTurnPower>(base.Owner.Creature, base.DynamicVars.Cards.BaseValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<DrawCardsNextTurnPower>(choiceContext, base.Owner.Creature, base.DynamicVars.Cards.BaseValue, base.Owner.Creature, this);
     }
 
     protected override void OnUpgrade() { 

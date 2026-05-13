@@ -41,7 +41,7 @@ public sealed class Aishiteru : CardBaseModel
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
-        await PowerCmd.Apply<AishiteruRailwayPower>(base.Owner.Creature, base.DynamicVars["Morbid"].BaseValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<AishiteruRailwayPower>(choiceContext, base.Owner.Creature, base.DynamicVars["Morbid"].BaseValue, base.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()

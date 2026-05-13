@@ -53,9 +53,10 @@ public sealed class SakiChan : CardBaseModel
         .FromCard(this)
         .Targeting(cardPlay.Target)
         .Execute(choiceContext);
+        
         // 将本牌复制置入抽牌堆
         CardModel card = CreateClone();
-		CardCmd.PreviewCardPileAdd(await CardPileCmd.AddGeneratedCardToCombat(card, PileType.Draw, true), 0.2f);
+		CardCmd.PreviewCardPileAdd(await CardPileCmd.AddGeneratedCardToCombat(card, PileType.Draw, base.Owner), 0.2f);
         await Cmd.Wait(0.2f);
         // 所有的Saki酱伤害加3/4
         IEnumerable<SakiChan> enumerable = base.Owner.PlayerCombatState.AllCards.OfType<SakiChan>();

@@ -5,6 +5,7 @@
 //* 描述：在你下一个回合开始时，获得力量（数值见 Amount / CanonicalVars）。
 //*******************************************************
 
+using BiliBiliACGN.BiliBiliACGNCode.Utils;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Powers;
@@ -21,11 +22,11 @@ public sealed class DelayedStrengthPower : PowerBaseModel
 
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<StrengthPower>()];
 
-    public override async Task AfterSideTurnStart(CombatSide side, CombatState combatState)
+    public override async Task AfterSideTurnStart(CombatSide side, ICombatState combatState)
     {
         if(side == CombatSide.Player)
         {
-            await PowerCmd.Apply<StrengthPower>(base.Owner, Amount, base.Owner, null);
+            await PowerCmd.Apply<StrengthPower>(CombatUtils.GetTemporaryPlayerChoiceContext(), base.Owner, Amount, base.Owner, null);
             await PowerCmd.Remove(this);
         }
     }

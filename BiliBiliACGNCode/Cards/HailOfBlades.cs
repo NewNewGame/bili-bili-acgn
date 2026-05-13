@@ -42,7 +42,7 @@ public sealed class HailOfBlades : CardBaseModel
     {
         await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
         // 添加丛刃BUFF
-        await PowerCmd.Apply<HailOfBladesPower>(base.Owner.Creature, base.DynamicVars["Cards"].BaseValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<HailOfBladesPower>(choiceContext, base.Owner.Creature, base.DynamicVars["Cards"].BaseValue, base.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()

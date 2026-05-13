@@ -44,7 +44,7 @@ public sealed class BottlesNewYearWish : CardBaseModel
 		{
             cardModel.AddKeyword(CustomKeyWords.YYSY);
 			cardModel.SetToFreeThisTurn();
-			await CardPileCmd.AddGeneratedCardToCombat(cardModel, PileType.Hand, addedByPlayer: true);
+			await CardPileCmd.AddGeneratedCardToCombat(cardModel, PileType.Hand, base.Owner);
 		}
     }
 

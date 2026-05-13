@@ -29,13 +29,13 @@ public sealed class GreenOnionMiku : RelicBaseModel
     {
         if(player == base.Owner)
         {
-            CombatState combatState = player.Creature.CombatState;
+            var combatState = player.Creature.CombatState;
             if(combatState.RoundNumber == 1){
                 Flash();
                 foreach(var p in combatState.Players)
                 {
-                    await PowerCmd.Apply<StrengthPower>(p.Creature, base.DynamicVars["Amount"].BaseValue, base.Owner.Creature, null);
-                    await PowerCmd.Apply<DexterityPower>(p.Creature, base.DynamicVars["Amount"].BaseValue, base.Owner.Creature, null);
+                    await PowerCmd.Apply<StrengthPower>(choiceContext, p.Creature, base.DynamicVars["Amount"].BaseValue, base.Owner.Creature, null);
+                    await PowerCmd.Apply<DexterityPower>(choiceContext, p.Creature, base.DynamicVars["Amount"].BaseValue, base.Owner.Creature, null);
                 }
             }
         }

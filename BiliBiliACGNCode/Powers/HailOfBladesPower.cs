@@ -62,7 +62,7 @@ public sealed class HailOfBladesPower : PowerBaseModel
         return Task.CompletedTask;
     }
 
-    public override Task BeforeSideTurnStart(PlayerChoiceContext choiceContext, CombatSide side, CombatState combatState)
+    public override Task BeforeSideTurnStart(PlayerChoiceContext choiceContext, CombatSide side, ICombatState combatState)
     {
         if (side == base.Owner.Side)
         {

@@ -42,7 +42,7 @@ public sealed class NewConceptLove : CardBaseModel
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         // 添加新概念恋爱BUFF
-        await PowerCmd.Apply<NewConceptLovePower>(base.Owner.Creature, base.DynamicVars["Plays"].BaseValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<NewConceptLovePower>(choiceContext, base.Owner.Creature, base.DynamicVars["Plays"].BaseValue, base.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()

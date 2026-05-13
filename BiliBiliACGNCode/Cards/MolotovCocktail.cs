@@ -44,7 +44,7 @@ public sealed class MolotovCocktail : CardBaseModel
             .Targeting(cardPlay.Target)
             .Execute(choiceContext);
         // 获得 Anger 点红温
-        await PowerCmd.Apply<AngerPower>(base.Owner.Creature, base.DynamicVars["Anger"].BaseValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<AngerPower>(choiceContext, base.Owner.Creature, base.DynamicVars["Anger"].BaseValue, base.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()

@@ -54,7 +54,7 @@ public sealed class CloseDoorReleaseSa : CardBaseModel
             .Execute(choiceContext);
         // 消耗一半红温
         int amount = Mathf.Max(1, base.Owner.Creature.GetPowerAmount<AngerPower>() / 2);
-        await PowerCmd.Apply<AngerPower>(base.Owner.Creature, -amount, base.Owner.Creature, this);
+        await PowerCmd.Apply<AngerPower>(choiceContext, base.Owner.Creature, -amount, base.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()

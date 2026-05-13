@@ -34,7 +34,7 @@ public sealed class AhShortHaircut : CardBaseModel
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        await PowerCmd.Apply<AhShortHaircutPower>(base.Owner.Creature, base.DynamicVars["MorbidStacks"].BaseValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<AhShortHaircutPower>(choiceContext, base.Owner.Creature, base.DynamicVars["MorbidStacks"].BaseValue, base.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()

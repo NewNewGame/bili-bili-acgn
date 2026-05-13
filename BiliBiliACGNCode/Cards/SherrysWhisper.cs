@@ -54,7 +54,7 @@ public sealed class SherrysWhisper : CardBaseModel
         if(cardsToDraw > 0){
             await CardPileCmd.Draw(choiceContext, cardsToDraw, base.Owner);
             // 消耗红温
-            await PowerCmd.Apply<AngerPower>(base.Owner.Creature, -cardsToDraw * (int)base.DynamicVars["AngerPerEnergy"].BaseValue, base.Owner.Creature, null);
+            await PowerCmd.Apply<AngerPower>(choiceContext, base.Owner.Creature, -cardsToDraw * (int)base.DynamicVars["AngerPerEnergy"].BaseValue, base.Owner.Creature, null);
         }
     }
 

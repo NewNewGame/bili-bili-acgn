@@ -32,11 +32,11 @@ public sealed class CyberpsychosisRelic : RelicBaseModel
     {
         if(player == base.Owner)
         {
-            CombatState combatState = player.Creature.CombatState;
+            var combatState = player.Creature.CombatState;
             if(combatState.RoundNumber == 1)
             {
                 Flash();
-                await PowerCmd.Apply<FlexPotionPower>(base.Owner.Creature, base.DynamicVars["Strength"].BaseValue, base.Owner.Creature, null);
+                await PowerCmd.Apply<FlexPotionPower>(choiceContext, base.Owner.Creature, base.DynamicVars["Strength"].BaseValue, base.Owner.Creature, null);
             }
         }
     }

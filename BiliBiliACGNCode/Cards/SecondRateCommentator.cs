@@ -43,7 +43,7 @@ public sealed class SecondRateCommentator : CardBaseModel
     {
         await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
         // 获得二路解说BUFF
-        await PowerCmd.Apply<SecondRateCommentatorPower>(base.Owner.Creature, base.DynamicVars["Anger"].BaseValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<SecondRateCommentatorPower>(choiceContext, base.Owner.Creature, base.DynamicVars["Anger"].BaseValue, base.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()

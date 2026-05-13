@@ -41,7 +41,7 @@ public sealed class StartEnjoying : CardBaseModel
     {
         await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
         // 添加开始享受BUFF
-        await PowerCmd.Apply<EnjoyPower>(base.Owner.Creature, base.DynamicVars["Cards"].BaseValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<EnjoyPower>(choiceContext, base.Owner.Creature, base.DynamicVars["Cards"].BaseValue, base.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()

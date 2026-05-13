@@ -36,7 +36,7 @@ public sealed class LoveBrain : CardBaseModel
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        await PowerCmd.Apply<LoveBrainPower>(base.Owner.Creature, base.DynamicVars["MorbidTriggers"].BaseValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<LoveBrainPower>(choiceContext, base.Owner.Creature, base.DynamicVars["MorbidTriggers"].BaseValue, base.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()

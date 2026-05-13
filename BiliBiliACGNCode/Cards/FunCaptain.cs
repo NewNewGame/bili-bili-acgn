@@ -44,8 +44,8 @@ public sealed class FunCaptain : CardBaseModel
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         // 在本回合获得{Focus:diff()}点[gold]集中[/gold]。
-        await PowerCmd.Apply<FocusPower>(base.Owner.Creature, base.DynamicVars["Focus"].BaseValue, base.Owner.Creature, this);
-        await PowerCmd.Apply<FocusLossPower>(base.Owner.Creature, base.DynamicVars["Focus"].BaseValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<FocusPower>(choiceContext, base.Owner.Creature, base.DynamicVars["Focus"].BaseValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<FocusLossPower>(choiceContext, base.Owner.Creature, base.DynamicVars["Focus"].BaseValue, base.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()

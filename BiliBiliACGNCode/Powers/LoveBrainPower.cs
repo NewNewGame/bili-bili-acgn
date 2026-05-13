@@ -8,6 +8,7 @@
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
+using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Models;
 
@@ -21,7 +22,7 @@ public sealed class LoveBrainPower : PowerBaseModel
     }
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
-	public override bool IsInstanced => true;
+	public override PowerInstanceType InstanceType => PowerInstanceType.Instanced;
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<MorbidPower>()];
     public override int DisplayAmount => base.Amount - GetInternalData<Data>().appliedTime;
     protected override object InitInternalData()
@@ -29,7 +30,7 @@ public sealed class LoveBrainPower : PowerBaseModel
         return new Data();
     }
     // 每当你给予 Amount 次病态后，获得 1 点能量
-    public override async Task AfterPowerAmountChanged(PowerModel power, decimal amount, Creature? applier, CardModel? cardSource)
+    public override async Task AfterPowerAmountChanged(PlayerChoiceContext choiceContext, PowerModel power, decimal amount, Creature? applier, CardModel? cardSource)
     {
         if(applier == null || base.Owner.Player == null) return;
         if(amount > 0 && power is MorbidPower && (applier == base.Owner || applier.PetOwner == base.Owner.Player)){

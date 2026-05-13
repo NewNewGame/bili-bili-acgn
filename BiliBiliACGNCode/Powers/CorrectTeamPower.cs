@@ -10,6 +10,7 @@ using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Powers;
+using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Powers;
@@ -36,7 +37,7 @@ public sealed class CorrectTeamPower : PowerBaseModel
 	}
 
     // 红怒状态下额外抽 Amount 张牌
-    public override async Task AfterPowerAmountChanged(PowerModel power, decimal amount, Creature? applier, CardModel? cardSource)
+    public override async Task AfterPowerAmountChanged(PlayerChoiceContext choiceContext, PowerModel power, decimal amount, Creature? applier, CardModel? cardSource)
     {
         if(power is BerserkPower && amount > 0 && power.Owner == base.Owner){
             // 抽牌

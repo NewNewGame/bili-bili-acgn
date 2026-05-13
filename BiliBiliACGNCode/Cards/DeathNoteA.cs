@@ -43,10 +43,10 @@ public sealed class DeathNoteA : CardBaseModel
         // 移除 AI
         await PowerCmd.Remove<ArtifactPower>(cardPlay.Target);
         // 施加易伤
-        await PowerCmd.Apply<VulnerablePower>(cardPlay.Target, base.DynamicVars["Vulnerable"].BaseValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<VulnerablePower>(choiceContext, cardPlay.Target, base.DynamicVars["Vulnerable"].BaseValue, base.Owner.Creature, this);
         // 弃牌堆加入 DeathNoteT
         CardModel card = base.CombatState.CreateCard<DeathNoteT>(base.Owner);
-		CardCmd.PreviewCardPileAdd(await CardPileCmd.AddGeneratedCardToCombat(card, PileType.Discard, addedByPlayer: true));
+		CardCmd.PreviewCardPileAdd(await CardPileCmd.AddGeneratedCardToCombat(card, PileType.Discard, base.Owner));
 		await Cmd.Wait(0.5f);
     }
 

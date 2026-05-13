@@ -48,7 +48,7 @@ public sealed class ChairTuber : CardBaseModel
     {
         #region 卡牌打出效果
         await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
-        await PowerCmd.Apply<ChairTuberPower>(base.Owner.Creature, base.DynamicVars["Cards"].BaseValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<ChairTuberPower>(choiceContext, base.Owner.Creature, base.DynamicVars["Cards"].BaseValue, base.Owner.Creature, this);
         #endregion
     }
 

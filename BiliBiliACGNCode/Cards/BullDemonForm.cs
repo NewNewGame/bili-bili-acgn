@@ -43,7 +43,7 @@ public sealed class BullDemonForm : CardBaseModel
     {
         await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
         // 获得牛魔形态BUFF
-        await PowerCmd.Apply<BullDemonPower>(base.Owner.Creature, base.DynamicVars["Powers"].IntValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<BullDemonPower>(choiceContext, base.Owner.Creature, base.DynamicVars["Powers"].IntValue, base.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()

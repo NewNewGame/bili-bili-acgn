@@ -26,7 +26,7 @@ public sealed class AddYYSYTempPower : PowerBaseModel
         if(card.Owner.Creature != base.Owner){
             return;
         }
-		await PowerCmd.Apply<AddYYSYTempPower>(base.Owner, -1, base.Owner, null);
+		await PowerCmd.Apply<AddYYSYTempPower>(choiceContext, base.Owner, -1, base.Owner, null);
         if(card.Keywords.Contains(CustomKeyWords.YYSY)){
             return;
         }

@@ -31,7 +31,7 @@ public sealed class AngryPop : RelicBaseModel
         if (target == base.Owner.Creature && result.UnblockedDamage > 0)
 		{
             Flash();
-			await PowerCmd.Apply<FlexPotionPower>(base.Owner.Creature, base.DynamicVars["Amount"].BaseValue, base.Owner.Creature, null);
+			await PowerCmd.Apply<FlexPotionPower>(choiceContext, base.Owner.Creature, base.DynamicVars["Amount"].BaseValue, base.Owner.Creature, null);
 		}
     }
 }

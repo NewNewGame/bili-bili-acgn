@@ -28,7 +28,7 @@ public sealed class LoveRailwayPower : PowerBaseModel
     {
         if(cardPlay.Card.Owner == base.Owner.Player && cardPlay.Card.Type == CardType.Power)
         {
-            await PowerCmd.Apply<MorbidPower>(base.Owner, Amount, base.Owner, null);
+            await PowerCmd.Apply<MorbidPower>(choiceContext, base.Owner, Amount, base.Owner, null);
         }
     }
 }

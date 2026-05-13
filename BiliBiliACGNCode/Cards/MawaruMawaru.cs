@@ -36,8 +36,8 @@ public sealed class MawaruMawaru : CardBaseModel
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         // 施加病态，并设置“死亡时按最大生命值对其它敌人造成伤害”的效果
-        await PowerCmd.Apply<MorbidPower>(cardPlay.Target, base.DynamicVars["Morbid"].BaseValue, base.Owner.Creature, this);
-        await PowerCmd.Apply<MawaruMawaruPower>(cardPlay.Target, 1, base.Owner.Creature, this);
+        await PowerCmd.Apply<MorbidPower>(choiceContext, cardPlay.Target, base.DynamicVars["Morbid"].BaseValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<MawaruMawaruPower>(choiceContext, cardPlay.Target, 1, base.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()

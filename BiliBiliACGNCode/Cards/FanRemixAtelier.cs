@@ -50,7 +50,7 @@ public sealed class FanRemixAtelier : CardBaseModel
     {
         // 获得{Block:diff()}点[gold]格挡[/gold]。在接下来{Rounds:diff()}个回合开始时，生成1个[gold]攻击[/gold]充能球。
         await CreatureCmd.GainBlock(base.Owner.Creature, base.DynamicVars.Block.BaseValue, base.DynamicVars.Block.Props, cardPlay);
-        await PowerCmd.Apply<FanRemixAtelierPower>(base.Owner.Creature, base.DynamicVars["Rounds"].BaseValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<FanRemixAtelierPower>(choiceContext, base.Owner.Creature, base.DynamicVars["Rounds"].BaseValue, base.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()

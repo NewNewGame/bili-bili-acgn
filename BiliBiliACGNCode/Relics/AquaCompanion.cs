@@ -54,7 +54,7 @@ public sealed class AquaCompanion : RelicBaseModel
 	{
 		if (player == base.Owner)
 		{
-			CombatState combatState = player.Creature.CombatState;
+			var combatState = player.Creature.CombatState;
 			if (combatState.RoundNumber == 1)
 			{
                 // 随机对敌人造成0-20点伤害

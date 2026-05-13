@@ -35,7 +35,7 @@ public sealed class SelfHistoryLeak : CardBaseModel
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        await PowerCmd.Apply<MorbidPower>(base.Owner.Creature, base.DynamicVars["MorbidSelf"].BaseValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<MorbidPower>(choiceContext, base.Owner.Creature, base.DynamicVars["MorbidSelf"].BaseValue, base.Owner.Creature, this);
         await PlayerCmd.GainEnergy(base.DynamicVars.Energy.BaseValue, base.Owner);
     }
 
