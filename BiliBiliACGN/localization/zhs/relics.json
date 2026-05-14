@@ -1,4 +1,6 @@
 {
+    "SEA_GLASS.BILIBILIACGN-BOTTLE_CHARACTER.title": "野牛卡组",
+    "SEA_GLASS.BILIBILIACGN-FUNSHIKI_CHARACTER.title": "泛式卡组",
     "BILIBILIACGN-ALZHEIMER.title": "阿尔茨海默症",
     "BILIBILIACGN-ALZHEIMER.description": "在每场战斗开始时获得[blue]{AngerAmount:diff()}[/blue]点[gold]红温[/gold]，你可以在[gold]休息处[/gold]选择[gold]移除[/gold]1张牌",
     "BILIBILIACGN-ALZHEIMER.flavor": "啊？！我忘了~\n12345678910",
