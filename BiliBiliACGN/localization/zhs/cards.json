@@ -377,7 +377,7 @@
   "BILIBILIACGN-AISHITERU.title": "阿姨洗铁路",
   "BILIBILIACGN-AISHITERU.description": "每打出1张牌，给予随机敌人{Morbid:diff()}层[gold]病态[/gold]。",
   "BILIBILIACGN-DO_ZATAN.title": "做杂谈",
-  "BILIBILIACGN-DO_ZATAN.description": "造成{Damage:diff()}点伤害2次。\n随机打出你的[gold]抽牌堆[/gold]中的1张牌。",
+  "BILIBILIACGN-DO_ZATAN.description": "造成{Damage:diff()}点伤害2次。\n随机打出你的[gold]抽牌堆[/gold]中的{Cards:diff()}张牌。",
   "BILIBILIACGN-VAMPIRE.title": "吸血鬼",
   "BILIBILIACGN-VAMPIRE.description": "造成{Damage:diff()}点伤害。\n随机升级你[gold]弃牌堆[/gold]中{Cards:diff()}张牌。",
   "BILIBILIACGN-BOOST_VIDEO.title": "捞捞视频",

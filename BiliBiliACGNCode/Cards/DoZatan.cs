@@ -32,7 +32,8 @@ public sealed class DoZatan : CardBaseModel
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new DamageVar(5m, ValueProp.Move),
+        new DamageVar(6m, ValueProp.Move),
+        new CardsVar(1),
     ];
 
     public DoZatan() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
@@ -48,15 +49,20 @@ public sealed class DoZatan : CardBaseModel
             .WithHitCount(2)
             .Execute(choiceContext);
         // 随机打出你的[gold]抽牌堆[/gold]中的1张牌。
-        var drawCards = PileType.Draw.GetPile(base.Owner).Cards;
-        var randomCard = base.Owner.RunState.Rng.CombatCardSelection.NextItem(drawCards);
-        if(randomCard != null){
-            await AutoPlayUtils.AutoPlaySafely(choiceContext, randomCard);
+        int cnt = base.DynamicVars.Cards.IntValue;
+        for(int i = 0;i<cnt;++i){
+            var drawCards = PileType.Draw.GetPile(base.Owner).Cards;
+            var randomCard = base.Owner.RunState.Rng.CombatCardSelection.NextItem(drawCards);
+            if(randomCard != null){
+                await AutoPlayUtils.AutoPlaySafely(choiceContext, randomCard);
+            }
         }
+        
     }
 
     protected override void OnUpgrade()
     {
-        base.DynamicVars["Damage"].UpgradeValueBy(3m);
+        base.DynamicVars["Damage"].UpgradeValueBy(1m);
+        base.DynamicVars.Cards.UpgradeValueBy(1m);
     }
 }
