@@ -22,7 +22,7 @@ namespace BiliBiliACGN.BiliBiliACGNCode.Events;
 [EventPool(typeof(SharedEventPool))]
 public sealed class EvaEvents : EventBaseModel
 {
-    public override bool IsShared => true;
+    public override bool IsShared => false;
     public override EventLayoutType LayoutType => EventLayoutType.Default;
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new DynamicVar("Hp", 40m),

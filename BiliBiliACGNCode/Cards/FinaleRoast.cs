@@ -33,7 +33,7 @@ public sealed class FinaleRoast : CardBaseModel
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
         new DamageVar(7m, ValueProp.Move),
-        new DynamicVar("OrbCount", 2m)
+        new DynamicVar("OrbCount", 1m)
     ];
 
     public FinaleRoast() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }

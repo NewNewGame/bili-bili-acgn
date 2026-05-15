@@ -38,10 +38,10 @@ public sealed class RainyProtocol : CardBaseModel
         int strength = daughter.GetPowerAmount<StrengthPower>();
         if(strength == 0) return;
         // 给予所有盟友女儿拥有的力量相同层数
-        foreach(var teammate in base.CombatState.Players)
+        foreach(var teammate in base.CombatState.Allies)
         {
-            if(teammate == base.Owner || teammate.Creature.IsDead) continue;
-            await PowerCmd.Apply<FlexPotionPower>(choiceContext, teammate.Creature, strength, base.Owner.Creature, this);
+            if(teammate == base.Owner.Creature || teammate.IsDead || teammate.Side != base.Owner.Creature.Side) continue;
+            await PowerCmd.Apply<FlexPotionPower>(choiceContext, teammate, strength, base.Owner.Creature, this);
         }
     }
 

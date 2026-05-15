@@ -7,6 +7,8 @@
 
 using BiliBiliACGN.BiliBiliACGNCode.Cards;
 using BiliBiliACGN.BiliBiliACGNCode.Core.Commands;
+using MegaCrit.Sts2.Core.Combat;
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -21,7 +23,6 @@ namespace BiliBiliACGN.BiliBiliACGNCode.Powers;
 public sealed class NobleLadyPower : PowerBaseModel
 {
     public override PowerType Type => PowerType.Buff;
-
     public override PowerStackType StackType => PowerStackType.Counter;
     public override PowerInstanceType InstanceType => PowerInstanceType.Instanced;
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.Static(StaticHoverTip.Evoke), HoverTipFactory.Static(CustomeHoverTips.AttackOrb)];
@@ -34,6 +35,17 @@ public sealed class NobleLadyPower : PowerBaseModel
     public override async Task AfterOrbEvoked(PlayerChoiceContext choiceContext, OrbModel orb, IEnumerable<Creature> targets)
     {
         if(orb.Owner != base.Applier?.Player) return;
-        await DaughterCmd.ApplyAttack(base.Applier, 0m, choiceContext, base.Owner);
+        int cnt = base.Amount;
+        while(cnt>0){
+            --cnt;
+            await DaughterCmd.ApplyAttack(base.Applier, 0m, choiceContext, base.Owner);
+        }
     }
+    public override async Task AfterTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)
+    {
+        if(side == CombatSide.Enemy){
+            await PowerCmd.Remove(this);
+        }
+    }
+
 }
