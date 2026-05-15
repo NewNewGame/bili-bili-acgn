@@ -12,6 +12,8 @@ using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
+using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.Models.Powers;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Cards;
 
@@ -27,7 +29,13 @@ public sealed class UtterMadness : CardBaseModel
     private const CardRarity rarity = CardRarity.Common;
     private const TargetType targetType = TargetType.AnyEnemy;
     private const bool shouldShowInCardLibrary = true;
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.Static(CustomeHoverTips.AttackOrb)];
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => [
+        HoverTipFactory.Static(CustomeHoverTips.AttackOrb),
+        HoverTipFactory.FromPower<VulnerablePower>()
+    ];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [
+        new DynamicVar("VulnerablePower", 1m)
+    ];
 
     public UtterMadness() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
 
@@ -36,12 +44,18 @@ public sealed class UtterMadness : CardBaseModel
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         // 女儿向敌人发动{Hits:diff()}次[gold]进攻[/gold]。
-        int num = base.IsUpgraded ? base.Owner.PlayerCombatState.OrbQueue.Orbs.Count() : (from orb in base.Owner.PlayerCombatState.OrbQueue.Orbs
-				group orb by orb.Id).Count();
+        int num = base.Owner.PlayerCombatState.OrbQueue.Orbs.Count();
         for(int i = 0; i < num; i++)
         {
             await DaughterCmd.ApplyAttack(base.Owner.Creature, 0, choiceContext, cardPlay.Target);
             await Cmd.Wait(0.25f);
+            if(cardPlay.Target.IsDead) return;
         }
+        await PowerCmd.Apply<VulnerablePower>(cardPlay.Target, base.DynamicVars["VulnerablePower"].BaseValue, base.Owner.Creature, this);
     }
+    protected override void OnUpgrade()
+    {
+        base.DynamicVars["VulnerablePower"].UpgradeValueBy(1m);
+    }
+
 }

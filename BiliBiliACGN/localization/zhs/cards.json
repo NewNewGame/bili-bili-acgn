@@ -353,7 +353,7 @@
   "BILIBILIACGN-CRAZY_STACK_ARMOR.title": "疯狂叠甲",
   "BILIBILIACGN-CRAZY_STACK_ARMOR.description": "造成{Damage:diff()}点伤害。\n[gold]生成[/gold]{BlockOrbs:diff()}个[gold]生命[/gold]充能球。",
   "BILIBILIACGN-UTTER_MADNESS.title": "彻底疯狂",
-  "BILIBILIACGN-UTTER_MADNESS.description": "你每有{IfUpgraded:show:1个|1种不同的}充能球，女儿向该敌人发动1次[gold]进攻[/gold]。",
+  "BILIBILIACGN-UTTER_MADNESS.description": "你每有1个充能球，\n女儿向该敌人发动1次[gold]进攻[/gold]。\n给予{VulnerablePower}层[gold]易伤[/gold]。",
   "BILIBILIACGN-TATA_KAI.title": "塔塔开",
   "BILIBILIACGN-TATA_KAI.description": "女儿向敌人发动{Hits:diff()}次[gold]进攻[/gold]。",
   "BILIBILIACGN-FAN_BA_YE.title": "泛八爷",
