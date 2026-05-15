@@ -122,6 +122,8 @@ public sealed class MorbidPower : PowerBaseModel
 
     public override async Task BeforeDamageReceived(PlayerChoiceContext choiceContext, Creature target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource)
     {
+        // 病态伤害不会再出发病态
+        if(choiceContext is MorbidPlayerChoiceContext) return;
         // 如果攻击目标或者攻击者为空，则返回
         if(target == null || dealer == null) return;
         // 如果攻击者不是病态持有者，则返回
