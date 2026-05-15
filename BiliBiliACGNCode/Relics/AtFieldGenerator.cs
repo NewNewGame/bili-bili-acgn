@@ -47,7 +47,7 @@ public sealed class AtFieldGenerator : RelicBaseModel
     public override Task AfterDamageReceived(PlayerChoiceContext choiceContext, Creature target, DamageResult result, ValueProp props, Creature? dealer, CardModel? cardSource)
     {
         if(Cooldown > 0) return Task.CompletedTask;
-        
+        if(result.UnblockedDamage <= 0) return Task.CompletedTask;
         if (target == base.Owner.Creature && dealer != null && dealer != base.Owner.Creature)
 		{
             Cooldown = base.DynamicVars["Turns"].IntValue;
