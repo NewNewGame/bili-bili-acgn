@@ -44,14 +44,15 @@ public sealed class AtFieldGenerator : RelicBaseModel
 		base.Status = IsActivating ? RelicStatus.Normal : RelicStatus.Disabled;
 	}
 
-    public override async Task AfterDamageReceived(PlayerChoiceContext choiceContext, Creature target, DamageResult result, ValueProp props, Creature? dealer, CardModel? cardSource)
+    public override Task AfterDamageReceived(PlayerChoiceContext choiceContext, Creature target, DamageResult result, ValueProp props, Creature? dealer, CardModel? cardSource)
     {
         if (target == base.Owner.Creature)
 		{
             IsActivating = result.UnblockedDamage <= 0;
 		}
+        return Task.CompletedTask;
     }
-    public override async Task AfterTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)
+    public override async Task BeforeTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)
     {
         if (side == base.Owner.Creature.Side)
 		{
