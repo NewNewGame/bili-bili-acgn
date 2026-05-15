@@ -15,6 +15,7 @@ using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.RelicPools;
+using MegaCrit.Sts2.Core.Rooms;
 using MegaCrit.Sts2.Core.ValueProps;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Relics;
@@ -23,46 +24,62 @@ namespace BiliBiliACGN.BiliBiliACGNCode.Relics;
 public sealed class AtFieldGenerator : RelicBaseModel
 {
     public override RelicRarity Rarity => RelicRarity.Event;
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new DynamicVar("Amount", 5m)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new DynamicVar("Amount", 5m), new DynamicVar("Turns",2m)];
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.Static(StaticHoverTip.Block)];
-    private bool _isActivating = true;
-    private bool IsActivating
-	{
-		get
-		{
-			return _isActivating;
-		}
-		set
-		{
-			AssertMutable();
-			_isActivating = value;
-			UpdateDisplay();
-		}
-	}
+    private int _cooldown;
+    private int Cooldown
+    {
+        get
+        {
+            return _cooldown;
+        }
+        set
+        {
+            AssertMutable();
+            _cooldown = value;
+            UpdateDisplay();
+        }
+    }
     private void UpdateDisplay()
 	{
-		base.Status = IsActivating ? RelicStatus.Normal : RelicStatus.Disabled;
+		base.Status = Cooldown == 0 ? RelicStatus.Normal : RelicStatus.Disabled;
 	}
-
     public override Task AfterDamageReceived(PlayerChoiceContext choiceContext, Creature target, DamageResult result, ValueProp props, Creature? dealer, CardModel? cardSource)
     {
-        if (target == base.Owner.Creature)
+        if(Cooldown > 0) return Task.CompletedTask;
+        
+        if (target == base.Owner.Creature && dealer != null && dealer != base.Owner.Creature)
 		{
-            IsActivating = result.UnblockedDamage <= 0;
+            Cooldown = base.DynamicVars["Turns"].IntValue;
 		}
         return Task.CompletedTask;
     }
+    public override Task AfterSideTurnStart(CombatSide side, CombatState combatState)
+    {
+        if(side == base.Owner.Creature.Side){
+            if(Cooldown > 0){
+                --Cooldown;
+            }
+        }
+        return base.AfterSideTurnStart(side, combatState);
+    }
+
     public override async Task BeforeTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)
     {
         if (side == base.Owner.Creature.Side)
 		{
             // 如果力场正在激活，给予玩家护盾
-            if(IsActivating)
+            if(Cooldown == 0)
             {
                 Flash();
                 await CreatureCmd.GainBlock(base.Owner.Creature, base.DynamicVars["Amount"].BaseValue, ValueProp.Unpowered, null);
             }
 		}
+    }
+    public override Task AfterCombatEnd(CombatRoom _)
+    {
+        Cooldown = 0;
+        return Task.CompletedTask;
     }
 
 }
