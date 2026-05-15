@@ -33,6 +33,7 @@ public sealed class LuckyHit : CardBaseModel
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
         new DamageVar(3m, ValueProp.Move),
+        new DynamicVar("Hits", 1m),
     ];
 
     public LuckyHit() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary) { }
@@ -44,14 +45,18 @@ public sealed class LuckyHit : CardBaseModel
             .FromCard(this)
             .Targeting(cardPlay.Target)
             .Execute(choiceContext);
+        int cnt = base.DynamicVars["Hits"].IntValue;
         // 激发你的所有攻击充能球
         foreach(var orb in base.Owner.PlayerCombatState.OrbQueue.Orbs.OfType<AttackOrb>()){
-            await OrbCmd.Passive(choiceContext, orb, cardPlay.Target);
+            for(int i = 0;i<cnt;++i){
+                await OrbCmd.Passive(choiceContext, orb, cardPlay.Target);
+            }
         }
     }
 
     protected override void OnUpgrade()
     {
         base.DynamicVars.Damage.UpgradeValueBy(3m);
+        base.DynamicVars["Hits"].UpgradeValueBy(1m);
     }
 }
