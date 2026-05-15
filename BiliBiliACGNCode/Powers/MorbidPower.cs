@@ -21,7 +21,7 @@ namespace BiliBiliACGN.BiliBiliACGNCode.Powers;
 
 public sealed class MorbidPower : PowerBaseModel
 {
-    public const ValueProp MORBID_VALUE_PROP = ValueProp.Unpowered | ValueProp.Unblockable;
+    public const ValueProp MORBID_VALUE_PROP = ValueProp.Unpowered | ValueProp.Unblockable | ValueProp.SkipHurtAnim;
     public override PowerType Type => PowerType.Debuff;
     public override PowerStackType StackType => PowerStackType.Counter;
 
