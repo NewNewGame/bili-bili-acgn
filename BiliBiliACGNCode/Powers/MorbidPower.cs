@@ -76,10 +76,11 @@ public sealed class MorbidPower : PowerBaseModel
         foreach(var creature in source){
             // 如果敌人有痴迷对象，则计算伤害
             if(creature.HasPower<InfatuationTargetPower>()){
+                int num3 = num2 + creature.GetPowerAmount<MadlyLovePower>();
                 // 每次攻击叠加计算
                 for(int _ = 0; _ < atkTimes; _++){
                     // 单次伤害触发次数
-                    for(int __ = 0; __ < num2; __++){
+                    for(int __ = 0; __ < num3; __++){
                         // 计算伤害，累加减免
                         num += Mathf.Min(limit, (int)((100m - reduction) / 100m * amt));
                         // 如果触发次数用完了，则退出循环
@@ -149,7 +150,7 @@ public sealed class MorbidPower : PowerBaseModel
         // 如果减免大于等于100，则不造成伤害
         if(mitigation >= 100) return;
         // 计算攻击次数
-        int atkTimes = Mathf.Min(Amount, 1 + base.Owner.GetPowerAmount<MadlyLovePower>());
+        int atkTimes = Mathf.Min(base.Amount, 1 + target.GetPowerAmount<MadlyLovePower>());
         while(atkTimes > 0){
             // 造成伤害
             await CreatureCmd.Damage(new MorbidPlayerChoiceContext(), dealer, Amount * (100m - mitigation) / 100m, MORBID_VALUE_PROP, target);
