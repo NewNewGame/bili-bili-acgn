@@ -25,7 +25,6 @@ public sealed class NobleLadyPower : PowerBaseModel
     public override PowerType Type => PowerType.Buff;
 
     public override PowerStackType StackType => PowerStackType.Counter;
-    public override bool IsInstanced => true;
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.Static(StaticHoverTip.Evoke), HoverTipFactory.Static(CustomeHoverTips.AttackOrb)];
     protected override IEnumerable<DynamicVar> CanonicalVars => [new StringVar("Applier")];
     public override Task AfterApplied(Creature? applier, CardModel? cardSource)
