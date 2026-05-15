@@ -2,7 +2,7 @@
 //* 文件：YandereFormPower(病娇形态)
 //* 作者：wheat
 //* 创建时间：2026/04/08
-//* 描述：每当你或女儿造成伤害时，同时给予等量的病态。
+//* 描述：每当你或女儿造成伤害时，同时给予一半的病态。
 //*******************************************************
 
 using BiliBiliACGN.BiliBiliACGNCode.GameActions.Multiplayer;
@@ -31,9 +31,9 @@ public sealed class YandereFormPower : PowerBaseModel
         {
             // 如果伤害来源为病态，则返回
             if(choiceContext is MorbidPlayerChoiceContext) return;
-            await PowerCmd.Apply<MorbidPower>(target, Amount * result.TotalDamage, dealer, null);
+            await PowerCmd.Apply<MorbidPower>(target, Amount * result.TotalDamage / 2, dealer, null);
         }else if(dealer.PetOwner != null && dealer.PetOwner == base.Owner.Player){
-            await PowerCmd.Apply<MorbidPower>(target, Amount * result.TotalDamage, dealer.PetOwner.Creature, null);
+            await PowerCmd.Apply<MorbidPower>(target, Amount * result.TotalDamage / 2, dealer.PetOwner.Creature, null);
         }
 
     }
