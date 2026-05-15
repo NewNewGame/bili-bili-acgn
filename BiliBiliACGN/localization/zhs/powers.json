@@ -13,7 +13,7 @@
   "BILIBILIACGN-ANGER_POWER.smartDescription": "每获得[blue]10[/blue]层[gold]红温[/gold]，进入[gold]红怒[/gold]状态，进入[gold]红怒[/gold]状态时，伤害乘算[blue]150%[/blue]，获得{energyPrefix:energyIcons(2)}，并抽取[blue]2[/blue]张牌。\n退出后获得[blue]2[/blue]点[gold]力量[/gold]。",
   "BILIBILIACGN-ANGER_CHARGE_POWER.title": "红温充能",
   "BILIBILIACGN-ANGER_CHARGE_POWER.description": "每获得[blue]10[/blue]层[gold]红温[/gold]，进入[gold]红怒[/gold]状态，进入[gold]红怒[/gold]状态时，伤害乘算[blue]150%[/blue]，获得{energyPrefix:energyIcons(2)}，并抽取[blue]2[/blue]张牌。\n退出后获得[blue]2[/blue]点[gold]力量[/gold]。",
-  "BILIBILIACGN-ANGER_CHARGE_POWER.smartDescription": "每获得[blue]10[/blue]层[gold]红温[/gold]进入[gold]红怒[/gold]状态，进入后伤害乘算[blue]200%[/blue]，获得{energyPrefix:energyIcons(2)}，并抽取[blue]2[/blue]张牌。\n退出后获得[blue]2[/blue]点[gold]力量[/gold]。",
+  "BILIBILIACGN-ANGER_CHARGE_POWER.smartDescription": "每获得[blue]10[/blue]层[gold]红温[/gold]进入[gold]红怒[/gold]状态，进入后伤害乘算[blue]150%[/blue]，获得{energyPrefix:energyIcons(2)}，并抽取[blue]2[/blue]张牌。\n退出后获得[blue]2[/blue]点[gold]力量[/gold]。",
   "BILIBILIACGN-BERSERK_POWER.title": "红怒",
   "BILIBILIACGN-BERSERK_POWER.description": "进入[gold]红怒[/gold]状态时，伤害乘算[blue]150%[/blue]，获得{energyPrefix:energyIcons(2)}，并抽取[blue]2[/blue]张牌。\n退出后获得[blue]2[/blue]点[gold]力量[/gold]。",
   "BILIBILIACGN-BERSERK_POWER.smartDescription": "进入[gold]红怒[/gold]状态时，伤害乘算[blue]{DamageMultiplier}%[/blue]，获得{Energy:energyIcons()}，并抽取[blue]{Cards}[/blue]张牌。\n退出后获得[blue]{Strength}[/blue]点[gold]力量[/gold]。",
