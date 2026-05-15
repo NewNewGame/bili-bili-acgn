@@ -39,8 +39,9 @@ public sealed class NewSeasonTimeMachine : CardBaseModel
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
+        // 如果没有球就返回
+        if(base.Owner.PlayerCombatState?.OrbQueue.Orbs.Count == 0) return;
         var rightOrb = base.Owner.PlayerCombatState?.OrbQueue.Orbs.First();
-        if(rightOrb == null) return;
         // [gold]激发[/gold]你最右侧的充能球，然后复制[gold]生成[/gold]1个刚才被[gold]激发[/gold]的充能球。
         await OrbCmd.EvokeNext(choiceContext, base.Owner);
         await OrbUtils.OrbEvokeWait();
