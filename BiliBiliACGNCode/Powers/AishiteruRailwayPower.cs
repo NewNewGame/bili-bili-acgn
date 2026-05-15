@@ -2,7 +2,7 @@
 //* 文件：AishiteruRailwayPower(爱洗铁路)
 //* 作者：wheat
 //* 创建时间：2026/04/11
-//* 描述：每打出1张能力牌，对随机敌人施加 Amount 层病态。
+//* 描述：每打出1张牌，对随机敌人施加 Amount 层病态。
 //*******************************************************
 
 using MegaCrit.Sts2.Core.Commands;
@@ -32,12 +32,11 @@ public sealed class AishiteruRailwayPower : PowerBaseModel
     public override Task BeforeCardPlayed(CardPlay cardPlay)
     {
         if(cardPlay.Card.Owner != base.Owner.Player) return Task.CompletedTask;
-        if(cardPlay.Card.Type != CardType.Power) return Task.CompletedTask;
         GetInternalData<Data>().amountsForPlayedCards.Add(cardPlay.Card, base.Amount);
         return Task.CompletedTask;
     }
     /// <summary>
-    /// Amount：每次打出能力牌时，向随机敌人叠加的病态层数（由卡牌 <see cref="AishiteruRailway"/> 施加时写入）。
+    /// Amount：每次打出1张牌时，向随机敌人叠加的病态层数（由卡牌 <see cref="AishiteruRailway"/> 施加时写入）。
     /// </summary>
     public override async Task AfterCardPlayedLate(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
