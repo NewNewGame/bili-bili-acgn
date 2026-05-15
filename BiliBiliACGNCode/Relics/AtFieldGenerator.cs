@@ -54,14 +54,14 @@ public sealed class AtFieldGenerator : RelicBaseModel
 		}
         return Task.CompletedTask;
     }
-    public override Task AfterSideTurnStart(CombatSide side, CombatState combatState)
+    public override Task BeforeSideTurnStart(PlayerChoiceContext choiceContext, CombatSide side, ICombatState combatState)
     {
         if(side == base.Owner.Creature.Side){
             if(Cooldown > 0){
                 --Cooldown;
             }
         }
-        return base.AfterSideTurnStart(side, combatState);
+        return base.BeforeSideTurnStart(choiceContext, side, combatState);
     }
 
     public override async Task BeforeTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)
