@@ -43,6 +43,8 @@ public sealed class KneelToBaiDa : CardBaseModel
         if(base.Owner.PlayerCombatState.OrbQueue.Orbs.Count > 0){
             await OrbCmd.EvokeNext(choiceContext, base.Owner, false);
             await OrbUtils.OrbEvokeWait();
+            await OrbCmd.EvokeNext(choiceContext, base.Owner, false);
+            await OrbUtils.OrbEvokeWait();
             await OrbCmd.EvokeNext(choiceContext, base.Owner, true);
         }
     }
