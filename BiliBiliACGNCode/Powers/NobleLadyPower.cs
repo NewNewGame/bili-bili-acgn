@@ -7,6 +7,8 @@
 
 using BiliBiliACGN.BiliBiliACGNCode.Cards;
 using BiliBiliACGN.BiliBiliACGNCode.Core.Commands;
+using MegaCrit.Sts2.Core.Combat;
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -34,6 +36,17 @@ public sealed class NobleLadyPower : PowerBaseModel
     public override async Task AfterOrbEvoked(PlayerChoiceContext choiceContext, OrbModel orb, IEnumerable<Creature> targets)
     {
         if(orb.Owner != base.Applier?.Player) return;
-        await DaughterCmd.ApplyAttack(base.Applier, 0m, choiceContext, base.Owner);
+        int cnt = base.Amount;
+        while(cnt>0){
+            --cnt;
+            await DaughterCmd.ApplyAttack(base.Applier, 0m, choiceContext, base.Owner);
+        }
     }
+    public override async Task AfterTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)
+    {
+        if(side == CombatSide.Enemy){
+            await PowerCmd.Remove(this);
+        }
+    }
+
 }
