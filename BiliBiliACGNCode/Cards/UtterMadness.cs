@@ -51,7 +51,7 @@ public sealed class UtterMadness : CardBaseModel
             await Cmd.Wait(0.25f);
             if(cardPlay.Target.IsDead) return;
         }
-        await PowerCmd.Apply<VulnerablePower>(cardPlay.Target, base.DynamicVars["VulnerablePower"].BaseValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<VulnerablePower>(choiceContext, cardPlay.Target, base.DynamicVars["VulnerablePower"].BaseValue, base.Owner.Creature, this);
     }
     protected override void OnUpgrade()
     {
