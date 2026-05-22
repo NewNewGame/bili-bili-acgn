@@ -6,6 +6,7 @@
 
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
@@ -61,8 +62,7 @@ public sealed class HailOfBladesPower : PowerBaseModel
 
         return Task.CompletedTask;
     }
-
-    public override Task BeforeSideTurnStart(PlayerChoiceContext choiceContext, CombatSide side, ICombatState combatState)
+    public override Task BeforeSideTurnStart(PlayerChoiceContext choiceContext, CombatSide side, IReadOnlyList<Creature> participants, ICombatState combatState)
     {
         if (side == base.Owner.Side)
         {
@@ -71,7 +71,6 @@ public sealed class HailOfBladesPower : PowerBaseModel
 
         return Task.CompletedTask;
     }
-
     private bool ShouldSkip(CardModel card)
     {
 		// 如果卡牌不是自己的，则跳过

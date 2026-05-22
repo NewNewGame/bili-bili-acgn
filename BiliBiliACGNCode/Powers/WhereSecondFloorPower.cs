@@ -29,7 +29,7 @@ public sealed class WhereSecondFloorPower : PowerBaseModel
         }
         await PowerCmd.Apply<AngerDelayPower>(choiceContext, base.Owner, Amount, base.Owner, null);
     }
-    public override async Task AfterTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)
+    public override async Task AfterSideTurnEnd(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)
     {
         if(side == CombatSide.Enemy)
         {

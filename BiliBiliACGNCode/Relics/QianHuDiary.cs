@@ -9,6 +9,7 @@ using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.CardRewardAlternatives;
+using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Relics;
 using MegaCrit.Sts2.Core.Entities.Rewards;
@@ -78,7 +79,7 @@ public sealed class QianHuDiary : RelicBaseModel
     /// <param name="choiceContext"></param>
     /// <param name="side"></param>
     /// <returns></returns>
-    public override async Task AfterTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)
+    public override async Task AfterSideTurnEnd(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)
     {
         if(side == base.Owner.Creature.Side && BILIBILIACGN_QHD_KeepDiary > 0)
         {

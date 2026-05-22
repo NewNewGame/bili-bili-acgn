@@ -95,7 +95,7 @@ public sealed class BerserkPower : PowerBaseModel
         return damageMultiplier;
     }
     // 回合结束后失去红怒
-    public override async Task AfterTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)
+    public override async Task AfterSideTurnEnd(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)
     {
         if (side == CombatSide.Enemy)
         {

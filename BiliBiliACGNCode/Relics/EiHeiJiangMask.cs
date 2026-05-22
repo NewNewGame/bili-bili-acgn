@@ -10,6 +10,7 @@ using BiliBiliACGN.BiliBiliACGNCode.Core.Models.Orbs;
 using BiliBiliACGN.BiliBiliACGNCode.Utils;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
+using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Relics;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
@@ -37,7 +38,7 @@ public sealed class EiHeiJiangMask : RelicBaseModel
 	{
 		await SummonPet();
 	}
-	public override async Task AfterSideTurnStart(CombatSide side, ICombatState combatState)
+	public override async Task AfterSideTurnStart(CombatSide side, IReadOnlyList<Creature> participants, ICombatState combatState)
 	{
 		// 回合开始时，召唤充能球
 		if (side == base.Owner.Creature.Side && combatState.RoundNumber <= 1)

@@ -12,6 +12,7 @@ using BiliBiliACGN.BiliBiliACGNCode.Cards;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using BiliBiliACGN.BiliBiliACGNCode.Utils;
+using MegaCrit.Sts2.Core.Entities.Creatures;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Powers;
 
@@ -40,7 +41,7 @@ public sealed class MacroDomainPower : PowerBaseModel
 		}
 	}
 
-    public override async Task AfterTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)
+    public override async Task AfterSideTurnEnd(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)
     {
         // 每回合结束时，减少1点
         if (side == CombatSide.Enemy)

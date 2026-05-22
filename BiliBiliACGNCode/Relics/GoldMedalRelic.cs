@@ -8,6 +8,7 @@ using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Relics;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
@@ -31,9 +32,9 @@ public sealed class GoldMedalRelic : RelicBaseModel
     /// <param name="choiceContext"></param>
     /// <param name="side"></param>
     /// <returns></returns>
-    public override async Task BeforeTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)
+    public override async Task BeforeSideTurnEnd(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)
     {
-        if(side == base.Owner.Creature.Side)
+         if(side == base.Owner.Creature.Side)
         {
             var combatState = base.Owner.Creature.CombatState;
             if(combatState != null){

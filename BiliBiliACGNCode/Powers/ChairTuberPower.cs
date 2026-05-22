@@ -12,6 +12,7 @@ using BiliBiliACGN.BiliBiliACGNCode.Cards;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using BiliBiliACGN.BiliBiliACGNCode.Utils;
+using MegaCrit.Sts2.Core.Entities.Creatures;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Powers;
 
@@ -42,9 +43,10 @@ public sealed class ChairTuberPower : PowerBaseModel
 		}
 	}
 
-    public override async Task AfterTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)
+    public override Task AfterSideTurnEnd(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)
     {
         currentAmount = 0;
+        return Task.CompletedTask;
     }
     public override async Task AfterCardDrawn(PlayerChoiceContext choiceContext, CardModel card, bool fromHandDraw)
     {

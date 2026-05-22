@@ -100,22 +100,22 @@ public sealed class SaberScabbard : RelicBaseModel
 		}
 		InvokeDisplayAmountChanged();
 	}
-    /// <summary>
+	/// <summary>
     /// 回合开始时，重置攻击次数
     /// </summary>
     /// <param name="choiceContext"></param>
     /// <param name="side"></param>
     /// <param name="combatState"></param>
     /// <returns></returns>
-	public override Task BeforeSideTurnStart(PlayerChoiceContext choiceContext, CombatSide side, ICombatState combatState)
-	{
-		if (side != base.Owner.Creature.Side)
+    public override Task BeforeSideTurnStart(PlayerChoiceContext choiceContext, CombatSide side, IReadOnlyList<Creature> participants, ICombatState combatState)
+    {
+        if (side != base.Owner.Creature.Side)
 		{
 			return Task.CompletedTask;
 		}
 		Reset();
 		return Task.CompletedTask;
-	}
+    }
     /// <summary>
     /// 通知攻击牌打出，增加攻击次数
     /// </summary>

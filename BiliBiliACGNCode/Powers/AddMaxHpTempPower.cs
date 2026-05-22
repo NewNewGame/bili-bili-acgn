@@ -46,8 +46,7 @@ public sealed class AddMaxHpTempPower : PowerBaseModel
         await PowerCmd.Apply<AddMaxHpTempPower>(choiceContext, base.Owner, -amount, base.Owner, null);
         await CreatureCmd.SetMaxHp(base.Owner, Mathf.Max(base.Owner.MaxHp - amount, 1));
     }
-
-    public override async Task AfterTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)
+    public override async Task AfterSideTurnEnd(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)
     {
         if(side == CombatSide.Enemy){
             // 如果女儿有动漫高手能力，则不移除给予的最大生命值

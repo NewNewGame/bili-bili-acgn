@@ -8,6 +8,7 @@ using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Relics;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Helpers;
@@ -88,17 +89,16 @@ public sealed class SandevistanRelic : RelicBaseModel
 		}
 		InvokeDisplayAmountChanged();
 	}
-
-	public override Task BeforeSideTurnStart(PlayerChoiceContext choiceContext, CombatSide side, ICombatState combatState)
-	{
-		if (side != base.Owner.Creature.Side)
+    public override Task BeforeSideTurnStart(PlayerChoiceContext choiceContext, CombatSide side, IReadOnlyList<Creature> participants, ICombatState combatState)
+    {
+        if (side != base.Owner.Creature.Side)
 		{
 			return Task.CompletedTask;
 		}
 		CardsPlayedThisTurn = 0;
 		base.Status = RelicStatus.Normal;
 		return Task.CompletedTask;
-	}
+    }
 
 	public override async Task AfterCardPlayed(PlayerChoiceContext context, CardPlay cardPlay)
 	{
