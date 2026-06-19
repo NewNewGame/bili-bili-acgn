@@ -29,24 +29,24 @@ public sealed class TwistPower : PowerBaseModel
 	{
 		return new Data();
 	}
-
-    public override decimal ModifyPowerAmountGiven(PowerModel power, Creature giver, decimal amount, Creature? target, CardModel? cardSource)
+    public override decimal ModifyPowerAmountGivenAdditive(PowerModel power, Creature giver, decimal amount, Creature? target, CardModel? cardSource)
     {
         // 如果目标为空，则返回
-        if(target == null) return amount;
+        if(target == null) return 0;
         // 如果卡牌来源为空，则返回
-        if(cardSource == null) return amount;
+        if(cardSource == null) return 0;
         // 如果卡牌来源为诅咒或者状态牌，则返回（免得卡牌信息变了）
-        if(cardSource.Type == CardType.Curse || cardSource.Type == CardType.Status) return amount;
+        if(cardSource.Type == CardType.Curse || cardSource.Type == CardType.Status) return 0;
         // 如果不是自己给的debuff，则返回
-        if(cardSource.Owner.Creature != base.Owner || power.Type != PowerType.Debuff) return amount;
+        if(cardSource.Owner.Creature != base.Owner || power.Type != PowerType.Debuff) return 0;
         // 如果目标是友军，则返回
-        if(target.Side == base.Owner.Side) return amount;
+        if(target.Side == base.Owner.Side) return 0;
         Data internalData = GetInternalData<Data>();
-        if(internalData.cardSource != null && internalData.cardSource != cardSource) return amount;
+        if(internalData.cardSource != null && internalData.cardSource != cardSource) return 0;
         internalData.cardSource = cardSource;
-        return amount + base.Amount;
+        return base.Amount;
     }
+
     public override async Task AfterCardPlayedLate(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         if(cardPlay.Card.Owner != base.Owner.Player) return;

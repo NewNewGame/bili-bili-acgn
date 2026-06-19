@@ -18,9 +18,9 @@ public sealed class AlzheimerRestSiteOption : RestSiteOption
 {
     private const int _cardsToRemove = 1;
     public override string OptionId => "Alzheimer";
+	public override bool IsEnabled => GetRemovableCardCount(base.Owner) >= _cardsToRemove;
 
     public AlzheimerRestSiteOption(Player owner) : base(owner){
-        base.IsEnabled = GetRemovableCardCount(owner) >= _cardsToRemove;
     }
 	public override async Task<bool> OnSelect()
 	{
