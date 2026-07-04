@@ -49,7 +49,7 @@ public sealed class CrazyStackArmor : CardBaseModel
     {
         // 造成{Damage:diff()}点伤害。生成{BlockOrbs:diff()}个[gold]格挡[/gold]充能球。
         await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue)
-            .FromCard(this)
+            .FromCard(this, cardPlay)
             .Targeting(cardPlay.Target)
             .Execute(choiceContext);
         int blockOrbCount = base.DynamicVars["BlockOrbs"].IntValue;

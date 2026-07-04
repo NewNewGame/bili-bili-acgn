@@ -40,7 +40,7 @@ public sealed class MolotovCocktail : CardBaseModel
     {
         // 造成伤害，若上一张打出的牌是攻击牌，打出后获得 Energy
         await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue)
-            .FromCard(this)
+            .FromCard(this, cardPlay)
             .Targeting(cardPlay.Target)
             .Execute(choiceContext);
         // 获得 Anger 点红温

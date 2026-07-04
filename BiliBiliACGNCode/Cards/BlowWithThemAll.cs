@@ -62,7 +62,7 @@ public sealed class BlowWithThemAll : CardBaseModel
 		}
 		await Cmd.CustomScaledWait(0.2f, 0.3f);
         // 造成伤害
-        await DamageCmd.Attack(base.DynamicVars.CalculatedDamage).FromCard(this).TargetingAllOpponents(base.CombatState)
+        await DamageCmd.Attack(base.DynamicVars.CalculatedDamage).FromCard(this, cardPlay).TargetingAllOpponents(base.CombatState)
             .Execute(choiceContext);
         // 消耗3点红温
         await PowerCmd.Apply<AngerPower>(choiceContext, base.Owner.Creature, -base.DynamicVars["Anger"].BaseValue, base.Owner.Creature, this);

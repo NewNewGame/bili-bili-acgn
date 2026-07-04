@@ -39,7 +39,7 @@ public sealed class HeartGraspOverlord : CardBaseModel
     {
         // 直接生命移除/不可格挡伤害 + 易伤层数
         ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
-        await CreatureCmd.Damage(choiceContext, cardPlay.Target, base.DynamicVars["Damage"].BaseValue, base.DynamicVars.Damage.Props, this);
+        await CreatureCmd.Damage(choiceContext, cardPlay.Target, base.DynamicVars["Damage"].BaseValue, base.DynamicVars.Damage.Props, this, cardPlay);
         await PowerCmd.Apply<VulnerablePower>(choiceContext, cardPlay.Target, base.DynamicVars["Vulnerable"].BaseValue, base.Owner.Creature, this);
     }
 

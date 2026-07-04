@@ -44,7 +44,7 @@ public sealed class FinaleRoast : CardBaseModel
     {
         // 造成伤害
         await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue)
-            .FromCard(this)
+            .FromCard(this, cardPlay)
             .Targeting(cardPlay.Target)
             .Execute(choiceContext);
         // 生成充能球

@@ -57,7 +57,7 @@ public sealed class NeedAKill : CardBaseModel
         {
             dmg += base.DynamicVars["RageDamage"].BaseValue;
         }
-		AttackCommand attackCommand = await DamageCmd.Attack(dmg).FromCard(this).Targeting(cardPlay.Target)
+		AttackCommand attackCommand = await DamageCmd.Attack(dmg).FromCard(this, cardPlay).Targeting(cardPlay.Target)
 			.Execute(choiceContext);
 		if (shouldTriggerFatal && attackCommand.Results.SelectMany((List<DamageResult> r) => r).Any((DamageResult r) => r.WasTargetKilled))
 		{

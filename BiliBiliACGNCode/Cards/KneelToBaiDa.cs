@@ -37,7 +37,7 @@ public sealed class KneelToBaiDa : CardBaseModel
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue)
-            .FromCard(this)
+            .FromCard(this, cardPlay)
             .Targeting(cardPlay.Target)
             .Execute(choiceContext);
         if(base.Owner.PlayerCombatState.OrbQueue.Orbs.Count > 0){

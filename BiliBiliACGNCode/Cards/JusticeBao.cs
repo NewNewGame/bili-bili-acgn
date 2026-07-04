@@ -46,7 +46,7 @@ public sealed class JusticeBao : CardBaseModel
     {
         // 造成伤害，若 RagePower 存在则打出抽牌堆顶牌
         await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue)
-            .FromCard(this)
+            .FromCard(this, cardPlay)
             .Targeting(cardPlay.Target)
             .Execute(choiceContext);
         // 若 RagePower 存在则打出抽牌堆顶牌

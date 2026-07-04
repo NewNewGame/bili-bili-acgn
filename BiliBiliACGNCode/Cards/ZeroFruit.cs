@@ -46,7 +46,7 @@ public sealed class ZeroFruit : CardBaseModel
     {
         // 造成等同于女儿最大生命值的伤害。
         await DamageCmd.Attack(base.DynamicVars.CalculatedDamage)
-            .FromCard(this)
+            .FromCard(this, cardPlay)
             .Targeting(cardPlay.Target)
             .Execute(choiceContext);
     }

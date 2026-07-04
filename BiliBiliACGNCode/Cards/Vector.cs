@@ -43,7 +43,7 @@ public sealed class Vector : CardBaseModel
     {
         // 造成等同于目标“病态”层数的伤害
         await DamageCmd.Attack(((CalculatedVar)base.DynamicVars["CalculatedMorbid"]).Calculate(cardPlay.Target))
-            .FromCard(this)
+            .FromCard(this, cardPlay)
             .Targeting(cardPlay.Target)
             .Execute(choiceContext);
     }

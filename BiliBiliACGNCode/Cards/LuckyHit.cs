@@ -42,7 +42,7 @@ public sealed class LuckyHit : CardBaseModel
     {
         // 造成伤害，你的所有攻击充能球触发被动
         await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue)
-            .FromCard(this)
+            .FromCard(this, cardPlay)
             .Targeting(cardPlay.Target)
             .Execute(choiceContext);
         int cnt = base.DynamicVars["Hits"].IntValue;

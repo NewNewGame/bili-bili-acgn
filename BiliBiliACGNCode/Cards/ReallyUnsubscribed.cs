@@ -52,7 +52,7 @@ public sealed class ReallyUnsubscribed : CardBaseModel
     {
         // 造成伤害，给予易伤
         await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue)
-            .FromCard(this)
+            .FromCard(this, cardPlay)
             .Targeting(cardPlay.Target)
             .Execute(choiceContext);
         // 给予易伤

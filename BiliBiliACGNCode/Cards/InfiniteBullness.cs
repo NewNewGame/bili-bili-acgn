@@ -45,7 +45,7 @@ public sealed class InfiniteBullness : CardBaseModel
     {
         // 造成伤害
         await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue)
-        .FromCard(this)
+        .FromCard(this, cardPlay)
         .TargetingAllOpponents(base.CombatState)
         .WithAttackerFx("vfx/vfx_infinite_bullness")
         .Execute(choiceContext);

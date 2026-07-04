@@ -45,7 +45,7 @@ public sealed class MadIsDeadEnd : CardBaseModel
     {
         // 伤害 = Damage + 本场战斗已生成的充能球数量 * ExtraDamage
         await DamageCmd.Attack(base.DynamicVars.CalculatedDamage)
-            .FromCard(this)
+            .FromCard(this, cardPlay)
             .TargetingAllOpponents(base.CombatState)
             .Execute(choiceContext);
     }

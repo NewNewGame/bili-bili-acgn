@@ -39,7 +39,7 @@ public sealed class RedStone : CardBaseModel
     {
         // 对所有敌人造成伤害
         await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue)
-            .FromCard(this)
+            .FromCard(this, cardPlay)
             .TargetingAllOpponents(base.CombatState)
             .Execute(choiceContext);
     }

@@ -73,9 +73,9 @@ public sealed class BerserkPower : PowerBaseModel
             await CardPileCmd.Draw(CombatUtils.GetTemporaryPlayerChoiceContext(), base.DynamicVars.Cards.BaseValue, base.Owner.Player);
         }
     }
-    public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource)
+    public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource, CardPlay? cardPlay)
     {
-		if (dealer != base.Owner)
+        if (dealer != base.Owner)
 		{
 			return 1m;
 		}
@@ -94,6 +94,7 @@ public sealed class BerserkPower : PowerBaseModel
         }
         return damageMultiplier;
     }
+
     // 回合结束后失去红怒
     public override async Task AfterSideTurnEnd(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)
     {

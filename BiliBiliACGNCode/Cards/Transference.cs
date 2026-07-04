@@ -38,49 +38,51 @@ public sealed class Transference : CardBaseModel
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         // 造成伤害；将目标身上所有负面效果复制给其它敌人
-		await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue).FromCard(this).Targeting(cardPlay.Target)
-			.WithHitFx("vfx/vfx_attack_slash")
-			.Execute(choiceContext);
+		ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
+        Dictionary<PowerModel, int> debuffAmounts = (from p in cardPlay.Target.Powers
+                                                     where p.TypeForCurrentAmount == PowerType.Debuff
+                                                     select ((PowerModel)p.ClonePreservingMutability(), Amount: p.Amount)).ToDictionary();
+        foreach (KeyValuePair<PowerModel, int> item in debuffAmounts)
+        {
+            PowerModel key = item.Key;
+            ITemporaryPower temporaryPower = key as ITemporaryPower;
+            if (temporaryPower != null)
+            {
+                KeyValuePair<PowerModel, int> keyValuePair = debuffAmounts.FirstOrDefault<KeyValuePair<PowerModel, int>>((KeyValuePair<PowerModel, int> p) => p.Key.Id == temporaryPower.InternallyAppliedPower.Id);
+                if (keyValuePair.Key != null)
+                {
+                    debuffAmounts[keyValuePair.Key] += item.Value;
+                }
+            }
+        }
 
-        // 如果只有1个敌人那就返回
-        if(base.CombatState?.HittableEnemies.Count() == 1) return;
-		List<PowerModel> originalDebuffs = (from p in cardPlay.Target.Powers
-			where p.TypeForCurrentAmount == PowerType.Debuff
-			select (PowerModel)p.ClonePreservingMutability()).ToList();
-        // 将目标身上所有负面效果复制给其它敌人
-		foreach (Creature enemy in base.CombatState.HittableEnemies)
+        await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue).FromCard(this, cardPlay).Targeting(cardPlay.Target)
+            .WithHitFx("vfx/vfx_attack_slash")
+            .Execute(choiceContext);
+        foreach (Creature enemy in base.CombatState.HittableEnemies)
         {
             if (enemy == cardPlay.Target)
             {
                 continue;
             }
 
-            foreach (PowerModel item in originalDebuffs)
+            foreach (KeyValuePair<PowerModel, int> item2 in debuffAmounts)
             {
-                PowerModel powerModel = PowerCmd.FindExistingInstanceForStacking(item, enemy, item.Applier);
-                if (powerModel != null)
+                if (item2.Value != 0)
                 {
-                    DoHackyThingsForSpecificPowers(powerModel);
-                    await PowerCmd.ModifyAmount(choiceContext, powerModel, item.Amount, item.Applier, this);
-                }
-                else
-                {
-                    PowerModel power = (PowerModel)item.ClonePreservingMutability();
-                    DoHackyThingsForSpecificPowers(power);
-                    await PowerCmd.Apply(choiceContext, power, enemy, item.Amount, item.Applier, this);
+                    PowerModel powerModel = PowerCmd.FindExistingInstanceForStacking(item2.Key, enemy, item2.Key.Applier);
+                    if (powerModel != null)
+                    {
+                        await PowerCmd.ModifyAmount(choiceContext, powerModel, item2.Value, item2.Key.Applier, this);
+                        continue;
+                    }
+
+                    PowerModel power = (PowerModel)item2.Key.ClonePreservingMutability();
+                    await PowerCmd.Apply(choiceContext, power, enemy, item2.Value, item2.Key.Applier, this);
                 }
             }
         }
     }
-
-    private void DoHackyThingsForSpecificPowers(PowerModel power)
-    {
-        if (power is ITemporaryPower temporaryPower)
-		{
-			temporaryPower.IgnoreNextInstance();
-		}
-    }
-
 
     protected override void OnUpgrade()
     {

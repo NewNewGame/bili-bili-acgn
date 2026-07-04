@@ -33,7 +33,7 @@ public sealed class EiHeiMask : RelicBaseModel
             base.Status = RelicStatus.Normal;
         }
     }
-    public override decimal ModifyDamageAdditive(Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource)
+    public override decimal ModifyDamageAdditive(Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource, CardPlay? cardPlay)
     {
         if (cardSource?.Owner == base.Owner && base.Status == RelicStatus.Active)
         {

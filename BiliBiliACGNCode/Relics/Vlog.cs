@@ -10,6 +10,7 @@ using BaseLib.Utils;
 using BiliBiliACGN.BiliBiliACGNCode.Powers;
 using BiliBiliACGN.BiliBiliACGNCode.Relics.RelicPool;
 using MegaCrit.Sts2.Core.Combat;
+using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Relics;
 using MegaCrit.Sts2.Core.HoverTips;
@@ -27,7 +28,7 @@ public sealed class Vlog : RelicBaseModel
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new DynamicVar("Decrease", 60m),
     ];
-    public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource)
+    public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource, CardPlay? cardPlay)
     {
         // 如果目标不是自己，则返回
         if(target != base.Owner.Creature) return 1m;

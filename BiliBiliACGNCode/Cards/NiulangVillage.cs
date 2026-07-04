@@ -65,7 +65,7 @@ public sealed class NiulangVillage : CardBaseModel
         if(base.IsUpgraded) x++;
         int anger = (int)((CalculatedDamageVar)base.DynamicVars["CalculatedDamage"]).Calculate(cardPlay.Target);
         await DamageCmd.Attack(anger * x)
-            .FromCard(this)
+            .FromCard(this, cardPlay)
             .Targeting(cardPlay.Target)
             .Execute(choiceContext);
     }

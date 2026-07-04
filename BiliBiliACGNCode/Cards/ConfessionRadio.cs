@@ -44,7 +44,7 @@ public sealed class ConfessionRadio : CardBaseModel
     {
         // 造成伤害，获得格挡
         var attackCommand = await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue)
-            .FromCard(this)
+            .FromCard(this, cardPlay)
             .Targeting(cardPlay.Target)
             .Execute(choiceContext);
 		await CreatureCmd.GainBlock(base.Owner.Creature, attackCommand.Results.SelectMany((List<DamageResult> res)=> res).Sum((DamageResult r) => r.TotalDamage + r.OverkillDamage), ValueProp.Move, cardPlay);

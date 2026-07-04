@@ -35,7 +35,7 @@ public sealed class SatokoCleaver : RelicBaseModel
     /// <param name="dealer"></param>
     /// <param name="cardSource"></param>
     /// <returns></returns>
-    public override decimal ModifyDamageAdditive(Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource)
+    public override decimal ModifyDamageAdditive(Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource, CardPlay? cardPlay)
     {
         // 只有攻击牌且已升级的牌才能触发
         if(dealer != base.Owner.Creature || cardSource == null || !cardSource.IsUpgraded || cardSource.Type != CardType.Attack || !props.IsPoweredAttack_()) return 0m;

@@ -42,7 +42,7 @@ public sealed class MawaruMawaruPower : PowerBaseModel
         var enemies = base.Owner.CombatState.Enemies.ToList();
         foreach(var enemy in enemies){
             if(enemy == base.Owner || enemy.IsDead) continue;
-            await CreatureCmd.Damage(choiceContext, enemy, base.Owner.MaxHp, ValueProp.Unpowered, base.Applier);
+            await CreatureCmd.Damage(choiceContext, enemy, base.Owner.MaxHp, ValueProp.Unpowered, base.Applier, null, null);
         }
     }
 }

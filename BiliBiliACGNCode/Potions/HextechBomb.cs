@@ -49,6 +49,6 @@ public sealed class HextechBomb : PotionBaseModel
 			NCombatRoom.Instance?.CombatVfxContainer.AddChildSafely(NFireSmokePuffVfx.Create(item));
 		}
 		await Cmd.CustomScaledWait(0.2f, 0.3f);
-		await CreatureCmd.Damage(choiceContext, targets, damage.BaseValue, damage.Props, player, null);
+		await CreatureCmd.Damage(choiceContext, targets, damage.BaseValue, damage.Props, player, null, null);
 	}
 }

@@ -49,7 +49,7 @@ public sealed class CloseDoorReleaseSa : CardBaseModel
     {
         // 伤害 = Damage + floor(Anger层数 / PerAnger) * AngerBonus（Anger 来自 AngerPower）
         await DamageCmd.Attack(base.DynamicVars.CalculatedDamage)
-            .FromCard(this)
+            .FromCard(this, cardPlay)
             .Targeting(cardPlay.Target)
             .Execute(choiceContext);
         // 消耗一半红温

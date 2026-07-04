@@ -43,7 +43,7 @@ public sealed class WhirlwindRangerCloak : RelicBaseModel
         Flash();
         foreach (var enemy in combatState.HittableEnemies)
         {
-            await CreatureCmd.Damage(choiceContext, enemy, energyLeft, ValueProp.Unpowered, base.Owner.Creature);
+            await CreatureCmd.Damage(choiceContext, enemy, energyLeft, ValueProp.Unpowered, base.Owner.Creature, null, null);
         }
     }
 

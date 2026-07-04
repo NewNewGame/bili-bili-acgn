@@ -42,7 +42,7 @@ public sealed class Archbishop : CardBaseModel
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
-        await CreatureCmd.Damage(choiceContext, cardPlay.Target, base.DynamicVars.Damage.BaseValue, base.DynamicVars.Damage.Props, this);
+        await CreatureCmd.Damage(choiceContext, cardPlay.Target, base.DynamicVars.Damage.BaseValue, base.DynamicVars.Damage.Props, this, cardPlay);
         await PowerCmd.Apply<ArchbishopPower>(choiceContext, cardPlay.Target, base.DynamicVars["StrengthOnHit"].BaseValue, base.Owner.Creature, this);
     }
 

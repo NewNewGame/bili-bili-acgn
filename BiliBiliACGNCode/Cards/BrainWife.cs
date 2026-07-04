@@ -39,7 +39,7 @@ public sealed class BrainWife : CardBaseModel
     {
         // 对所有敌人造成伤害；并给予自身病态
         await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue)
-            .FromCard(this)
+            .FromCard(this, cardPlay)
             .TargetingAllOpponents(base.CombatState)
             .Execute(choiceContext);
         await PowerCmd.Apply<MorbidPower>(choiceContext, base.Owner.Creature, base.DynamicVars["MorbidSelf"].BaseValue, base.Owner.Creature, this);

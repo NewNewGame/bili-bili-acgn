@@ -163,7 +163,7 @@ public sealed class SaberScabbard : RelicBaseModel
 		AttackToDouble = null;
 		return Task.CompletedTask;
 	}
-    public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource)
+    public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource, CardPlay? cardPlay)
 	{
 		if (!props.IsPoweredAttack_())
 		{

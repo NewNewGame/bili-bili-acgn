@@ -37,7 +37,7 @@ public sealed class StrengthOrb : OrbBaseModel
 		{
 			throw new InvalidOperationException("Strength orbs cannot target creatures.");
 		}
-		Trigger();
+		ActivatePassive();
 		_evokeVal += PassiveVal;
 		NCombatRoom.Instance?.GetCreatureNode(base.Owner.Creature)?.OrbManager?.UpdateVisuals(OrbEvokeType.None);
 		return Task.CompletedTask;

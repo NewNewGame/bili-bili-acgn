@@ -27,7 +27,7 @@ public sealed class AttackOrb : OrbBaseModel
 
 	public override async Task Passive(PlayerChoiceContext choiceContext, Creature? target)
 	{
-		Trigger();
+		ActivatePassive();
 		await ApplyAttack(PassiveVal, target, choiceContext, false);
 	}
 

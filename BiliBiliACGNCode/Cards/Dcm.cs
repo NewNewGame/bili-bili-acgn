@@ -44,7 +44,7 @@ public sealed class Dcm : CardBaseModel
     {
         // 对目标敌人造成伤害，给予{Weak:diff()}层虚弱
         await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue)
-            .FromCard(this)
+            .FromCard(this, cardPlay)
             .Targeting(cardPlay.Target)
             .Execute(choiceContext);
         await PowerCmd.Apply<WeakPower>(choiceContext, cardPlay.Target, base.DynamicVars["Weak"].BaseValue, base.Owner.Creature, this);

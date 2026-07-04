@@ -35,7 +35,7 @@ public sealed class RocketHeavyRam : CardBaseModel
     {
         // 对所有敌人造成伤害；抽取{Cards:diff()}张牌
         await DamageCmd.Attack(base.DynamicVars["Damage"].BaseValue)
-            .FromCard(this)
+            .FromCard(this, cardPlay)
             .TargetingAllOpponents(base.CombatState)
             .Execute(choiceContext);
         await CardPileCmd.Draw(choiceContext, base.DynamicVars["Cards"].BaseValue, base.Owner);

@@ -36,6 +36,6 @@ public sealed class SailorUniformPower : PowerBaseModel
         // 随机获得一个敌人
         var enemy = base.CombatState.RunState.Rng.CombatTargets.NextItem(base.CombatState.HittableEnemies);
         if(enemy == null) return;
-        await CreatureCmd.Damage(choiceContext, enemy, base.Amount, ValueProp.Unpowered,base.Owner);
+        await CreatureCmd.Damage(choiceContext, enemy, base.Amount, ValueProp.Unpowered, base.Owner, null, null);
     }
 }

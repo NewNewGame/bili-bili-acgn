@@ -44,7 +44,7 @@ public sealed class GoldMedalRelic : RelicBaseModel
                     var damage = base.DynamicVars.Damage.BaseValue * handCount;
                     foreach(var enemy in combatState.HittableEnemies)
                     {
-                        await CreatureCmd.Damage(choiceContext, enemy, damage, ValueProp.Unpowered, base.Owner.Creature);
+                        await CreatureCmd.Damage(choiceContext, enemy, damage, ValueProp.Unpowered, base.Owner.Creature, null, null);
                     }
                 }
             }

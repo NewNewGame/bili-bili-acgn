@@ -48,7 +48,7 @@ public sealed class NewYearGalaDeathSong : CardBaseModel
     {
         // 对目标敌人造成伤害
         await DamageCmd.Attack(base.DynamicVars.CalculatedDamage)
-            .FromCard(this)
+            .FromCard(this, cardPlay)
             .Targeting(cardPlay.Target)
             .Execute(choiceContext);
     }

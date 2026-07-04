@@ -44,7 +44,7 @@ public sealed class FrenchAccent : CardBaseModel
     {
         // 造成伤害，给予目标{Morbid:diff()}层[gold]病态[/gold]。
         await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue)
-            .FromCard(this)
+            .FromCard(this, cardPlay)
             .Targeting(cardPlay.Target)
             .Execute(choiceContext);
         await PowerCmd.Apply<MorbidPower>(choiceContext, cardPlay.Target, base.DynamicVars["Morbid"].BaseValue, base.Owner.Creature, this);

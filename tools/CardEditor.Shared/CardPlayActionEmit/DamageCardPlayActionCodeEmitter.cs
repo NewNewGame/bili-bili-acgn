@@ -36,7 +36,7 @@ public sealed class DamageCardPlayActionCodeEmitter : CardPlayActionCodeEmitterB
         if(repeatCount != "1"){
             inner.AppendLine($"{indent}.WithHitCount({repeatCount})");
         }
-        inner.AppendLine($"{indent}    .FromCard(this)");
+        inner.AppendLine($"{indent}    .FromCard(this, cardPlay)");
         inner.AppendLine($"{indent}    .Targeting(cardPlay.Target)");
         inner.AppendLine($"{indent}    .Execute(choiceContext);");
         return inner.ToString();
@@ -55,7 +55,7 @@ public sealed class DamageCardPlayActionCodeEmitter : CardPlayActionCodeEmitterB
         if(repeatCount != "1"){
             inner.AppendLine($"{indent}    .WithHitCount({repeatCount})");
         }
-        inner.AppendLine($"{indent}    .FromCard(this)");
+        inner.AppendLine($"{indent}    .FromCard(this, cardPlay)");
         inner.AppendLine($"{indent}    .TargetingAllOpponents(base.CombatState)");
         inner.AppendLine($"{indent}    .Execute(choiceContext);");
         return inner.ToString();
@@ -74,7 +74,7 @@ public sealed class DamageCardPlayActionCodeEmitter : CardPlayActionCodeEmitterB
         if(repeatCount != "1"){
             inner.AppendLine($"{indent}    .WithHitCount({repeatCount})");
         }
-        inner.AppendLine($"{indent}    .FromCard(this)");
+        inner.AppendLine($"{indent}    .FromCard(this, cardPlay)");
         inner.AppendLine($"{indent}    .TargetingRandomOpponents(base.CombatState, true)");
         inner.AppendLine($"{indent}    .Execute(choiceContext);");
         return inner.ToString();

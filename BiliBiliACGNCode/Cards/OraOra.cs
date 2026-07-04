@@ -47,7 +47,7 @@ public sealed class OraOra : CardBaseModel
         
         // 造成伤害 X 次
         await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue)
-            .WithHitCount(num).FromCard(this)
+            .WithHitCount(num).FromCard(this, cardPlay)
 			.Targeting(cardPlay.Target)
 			.Execute(choiceContext);
     }

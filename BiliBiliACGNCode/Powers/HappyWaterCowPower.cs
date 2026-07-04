@@ -7,6 +7,7 @@
 using BaseLib.Extensions;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
+using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 
 //****************** 代码文件申明 ***********************
@@ -29,7 +30,7 @@ public sealed class HappyWaterCowPower : PowerBaseModel
 
     public override PowerStackType StackType => PowerStackType.Counter;
 
-	public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource)
+	public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource, CardPlay? cardPlay)
 	{
 		if (target != base.Owner)
 		{

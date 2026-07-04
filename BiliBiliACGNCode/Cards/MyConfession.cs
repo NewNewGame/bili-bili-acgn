@@ -51,7 +51,7 @@ public sealed class MyConfession : CardBaseModel
             // 按当前 AngerPower 层数重复造成 Damage 次攻击；最后移除 RagePower（退出红怒）
             int atkTimes = (int)((CalculatedVar)base.DynamicVars["CalculatedTimes"]).Calculate(cardPlay.Target);
             for(int i = 0; i < atkTimes; i++){
-                await CreatureCmd.Damage(choiceContext, cardPlay.Target, base.DynamicVars.Damage, base.Owner.Creature, this);
+                await CreatureCmd.Damage(choiceContext, cardPlay.Target, base.DynamicVars.Damage, base.Owner.Creature, this, cardPlay);
                 if(cardPlay.Target.IsDead) break;
             }
         }

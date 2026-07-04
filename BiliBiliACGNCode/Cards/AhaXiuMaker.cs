@@ -57,7 +57,7 @@ public sealed class AhaXiuMaker : CardBaseModel
 		NRun.Instance?.GlobalUi.AddChildSafely(NSmokyVignetteVfx.Create(color, color));
         // 造成伤害 X 次
         await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue)
-            .FromCard(this)
+            .FromCard(this, cardPlay)
             .TargetingAllOpponents(base.CombatState)
             .WithHitFx("vfx/vfx_giant_horizontal_slash")
             .WithHitCount(num)

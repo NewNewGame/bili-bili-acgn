@@ -43,7 +43,7 @@ public sealed class ChampagnePop : CardBaseModel
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         // 造成伤害
-        await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue).FromCard(this).Targeting(cardPlay.Target)
+        await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue).FromCard(this, cardPlay).Targeting(cardPlay.Target)
         .Execute(choiceContext);
         // 施加BUFF
         await PowerCmd.Apply<ChampagnePopPower>(choiceContext, base.Owner.Creature, 1, base.Owner.Creature, this);

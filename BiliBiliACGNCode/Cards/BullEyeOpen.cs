@@ -53,7 +53,7 @@ public sealed class BullEyeOpen : CardBaseModel
     {
         #region 卡牌打出效果
         await DamageCmd.Attack(base.DynamicVars.CalculatedDamage)
-            .FromCard(this)
+            .FromCard(this, cardPlay)
             .Targeting(cardPlay.Target)
             .WithHitFx("vfx/vfx_attack_slash")
             .Execute(choiceContext);

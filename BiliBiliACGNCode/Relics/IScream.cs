@@ -111,7 +111,7 @@ public sealed class IScream : RelicBaseModel
                 if(combatState != null){
                     var randomEnemy = combatState.RunState.Rng.CombatTargets.NextItem(combatState.HittableEnemies);
                     if(randomEnemy != null){
-                        await CreatureCmd.Damage(context, randomEnemy, base.DynamicVars.Damage, base.Owner.Creature);
+                        await CreatureCmd.Damage(context, randomEnemy, base.DynamicVars.Damage, base.Owner.Creature, null, cardPlay);
                     }
                 }
 			}

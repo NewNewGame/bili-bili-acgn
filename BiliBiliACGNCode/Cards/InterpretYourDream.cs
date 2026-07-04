@@ -47,7 +47,7 @@ public sealed class InterpretYourDream : CardBaseModel
     {
         // 造成伤害；按 Owner 当前红温层数对目标施加本回合变唐
         await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue)
-            .FromCard(this)
+            .FromCard(this, cardPlay)
             .Targeting(cardPlay.Target)
             .Execute(choiceContext);
         await PowerCmd.Apply<GetTangPower>(choiceContext, cardPlay.Target, ((CalculatedVar)base.DynamicVars["CalculatedValue"]).Calculate(cardPlay.Target), base.Owner.Creature, this);

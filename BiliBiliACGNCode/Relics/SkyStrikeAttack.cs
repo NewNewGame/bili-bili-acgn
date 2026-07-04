@@ -49,7 +49,7 @@ public sealed class SkyStrikeAttack : RelicBaseModel
                 var dmg = base.DynamicVars.Damage.BaseValue + base.DynamicVars["MultiDamage"].BaseValue * (combatState.Players.Count - 1);
                 foreach(var enemy in combatState.HittableEnemies)
                 {
-                    await CreatureCmd.Damage(choiceContext, enemy, base.DynamicVars.Damage, base.Owner.Creature);
+                    await CreatureCmd.Damage(choiceContext, enemy, base.DynamicVars.Damage, base.Owner.Creature, null, null);
                 }
             }
             _displayAmount = combatState.RoundNumber;

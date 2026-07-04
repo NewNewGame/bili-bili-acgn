@@ -65,7 +65,7 @@ public sealed class AquaCompanion : RelicBaseModel
                     Flash();
                     base.DynamicVars["RandomDamage"].BaseValue = damage;
 				    VfxCmd.PlayOnCreatureCenters(combatState.HittableEnemies, "vfx/vfx_attack_slash");
-				    await CreatureCmd.Damage(choiceContext, combatState.HittableEnemies, (DamageVar)base.DynamicVars["RandomDamage"], base.Owner.Creature);
+				    await CreatureCmd.Damage(choiceContext, combatState.HittableEnemies, (DamageVar)base.DynamicVars["RandomDamage"], base.Owner.Creature, null, null);
                 }
 			}
 		}

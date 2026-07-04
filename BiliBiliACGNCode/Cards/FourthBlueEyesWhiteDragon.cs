@@ -47,7 +47,7 @@ public sealed class FourthBlueEyesWhiteDragon : CardBaseModel
     {
         #region 卡牌打出效果
         await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue)
-            .FromCard(this)
+            .FromCard(this, cardPlay)
             .TargetingAllOpponents(base.CombatState)
             .Execute(choiceContext);
         #endregion

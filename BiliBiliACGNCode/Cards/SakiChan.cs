@@ -50,7 +50,7 @@ public sealed class SakiChan : CardBaseModel
         // 造成伤害；将本牌复制置入抽牌堆
         ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
         await DamageCmd.Attack(base.DynamicVars["Damage"].BaseValue)
-        .FromCard(this)
+        .FromCard(this, cardPlay)
         .Targeting(cardPlay.Target)
         .Execute(choiceContext);
         

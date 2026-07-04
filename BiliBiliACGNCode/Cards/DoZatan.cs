@@ -44,7 +44,7 @@ public sealed class DoZatan : CardBaseModel
     {
         // 造成{Damage:diff()}点伤害2次。随机打出你的[gold]抽牌堆[/gold]中的{Cards:diff()}张牌。
         await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue)
-            .FromCard(this)
+            .FromCard(this, cardPlay)
             .Targeting(cardPlay.Target)
             .WithHitCount(2)
             .Execute(choiceContext);

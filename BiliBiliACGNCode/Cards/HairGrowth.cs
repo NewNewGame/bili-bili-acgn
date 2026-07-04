@@ -48,7 +48,7 @@ public sealed class HairGrowth : CardBaseModel
     {
         #region 卡牌打出效果
         await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue)
-            .FromCard(this)
+            .FromCard(this, cardPlay)
             .Targeting(cardPlay.Target)
             .WithHitCount(2)
             .Execute(choiceContext);

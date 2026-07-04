@@ -33,7 +33,7 @@ public sealed class LifeOrb : OrbBaseModel
 		{
 			throw new InvalidOperationException("Block orbs cannot target creatures.");
 		}
-		Trigger();
+		ActivatePassive();
 		await DaughterCmd.AddTempHp(base.Owner.Creature, PassiveVal, choiceContext);
 	}
 

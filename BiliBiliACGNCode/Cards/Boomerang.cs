@@ -40,7 +40,7 @@ public sealed class Boomerang : CardBaseModel
     {
         // 造成{Damage:diff()}点伤害。本回合下{NextPlays:diff()}张打出的牌会回到抽牌堆顶部。
         await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue)
-            .FromCard(this)
+            .FromCard(this, cardPlay)
             .Targeting(cardPlay.Target)
             .Execute(choiceContext);
         await PowerCmd.Apply<ReboundPower>(choiceContext, base.Owner.Creature, base.DynamicVars["NextPlays"].BaseValue, base.Owner.Creature, this);

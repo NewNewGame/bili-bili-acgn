@@ -40,7 +40,7 @@ public sealed class BigNose : CardBaseModel
     {
         // 对所有敌人造成伤害
         await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue)
-            .FromCard(this)
+            .FromCard(this, cardPlay)
             .TargetingAllOpponents(base.CombatState)
             .Execute(choiceContext);
         // 激发所有充能球

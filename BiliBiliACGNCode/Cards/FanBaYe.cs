@@ -47,7 +47,7 @@ public sealed class FanBaYe : CardBaseModel
     {
         // 造成{Damage:diff()}点伤害。你每有一种不同的充能球，抽{Cards:diff()}张牌。
         await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue)
-            .FromCard(this)
+            .FromCard(this, cardPlay)
             .Targeting(cardPlay.Target)
             .Execute(choiceContext);
         int num = (int)((CalculatedVar)base.DynamicVars["CalculatedOrbs"]).Calculate(cardPlay.Target);

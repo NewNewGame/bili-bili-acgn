@@ -39,7 +39,7 @@ public sealed class WhirlwindStrike : CardBaseModel
     {
         // 造成{Damage:diff()}点伤害。
         await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue)
-            .FromCard(this)
+            .FromCard(this, cardPlay)
             .Targeting(cardPlay.Target)
             .Execute(choiceContext);
     }

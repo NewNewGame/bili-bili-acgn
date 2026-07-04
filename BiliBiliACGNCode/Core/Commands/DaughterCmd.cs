@@ -81,7 +81,7 @@ public static class DaughterCmd
         SfxCmd.Play(AudioUtils.ItsukaAttackEventPath);
         // 播放动画
         await CreatureCmd.TriggerAnim(daughter, "Attack", 0.15f);
-		await CreatureCmd.Damage(choiceContext, targets, value, ValueProp.Move, daughter);
+		await CreatureCmd.Damage(choiceContext, targets, value, ValueProp.Move, daughter, null, null);
     }
     /// <summary>
     /// 女儿攻击指令
@@ -100,7 +100,7 @@ public static class DaughterCmd
         SfxCmd.Play(AudioUtils.ItsukaAttackEventPath);
         // 播放动画
         await CreatureCmd.TriggerAnim(daughter, "Attack", 0.15f);
-		var results = await CreatureCmd.Damage(choiceContext, target, value, ValueProp.Move, daughter);
+		var results = await CreatureCmd.Damage(choiceContext, target, value, ValueProp.Move, daughter, null, null);
         return results;
     }
     /// <summary>

@@ -45,7 +45,7 @@ public sealed class UncleStrike : CardBaseModel
     {
         // 造成{Damage:diff()}点伤害。给予{Weak:diff()}层[gold]虚弱[/gold]。
         await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue)
-            .FromCard(this)
+            .FromCard(this, cardPlay)
             .Targeting(cardPlay.Target)
             .Execute(choiceContext);
         await PowerCmd.Apply<WeakPower>(choiceContext, cardPlay.Target, base.DynamicVars["Weak"].BaseValue, base.Owner.Creature, this);

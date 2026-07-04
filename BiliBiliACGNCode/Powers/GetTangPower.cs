@@ -24,7 +24,7 @@ public sealed class GetTangPower : PowerBaseModel
     public override PowerStackType StackType => PowerStackType.Counter;
 
     // 攻击与格挡数值按 Amount 减少
-    public override decimal ModifyDamageAdditive(Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource)
+    public override decimal ModifyDamageAdditive(Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource, CardPlay? cardPlay)
     {
         if (base.Owner != dealer)
 		{

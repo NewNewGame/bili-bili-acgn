@@ -35,7 +35,7 @@ alwaysApply: false
 ## 实现与命令
 
 - 出牌： `protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)`；
-- 伤害 `DamageCmd.Attack(...).FromCard(this)`+ (如果是单目标`.Targeting(...)`/全体`.TargetingAllOpponents(base.CombatState)`/随机`.TargetingRandomOpponents(base.CombatState)`)+(如果有攻击次数.WithHitCount(int))；
+- 伤害 `DamageCmd.Attack(...).FromCard(this, cardPlay)`+ (如果是单目标`.Targeting(...)`/全体`.TargetingAllOpponents(base.CombatState)`/随机`.TargetingRandomOpponents(base.CombatState)`)+(如果有攻击次数.WithHitCount(int))；
 - 格挡 `CreatureCmd.GainBlock(choiceContext, cardPlay.Target(目标), base.DynamicVars.Block.BaseValue, base.DynamicVars.Block.Props, base.Owner(给予者), null);`
 - 能力 `PowerCmd.Apply<T>()`；
 - 抽牌 `CardPileCmd.Draw` 等（与同目录已实现牌一致）。

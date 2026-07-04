@@ -75,7 +75,7 @@ public sealed class BloodyBite : CardBaseModel
         // 造成伤害，然后回血
         #region 卡牌打出效果
         await DamageCmd.Attack(base.DynamicVars["Damage"].BaseValue)
-            .FromCard(this)
+            .FromCard(this, cardPlay)
             .Targeting(cardPlay.Target)
             .Execute(choiceContext);
         await CreatureCmd.Heal(base.Owner.Creature, base.DynamicVars["Heal"].BaseValue, true);

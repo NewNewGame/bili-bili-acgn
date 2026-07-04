@@ -6,6 +6,7 @@
 //*******************************************************
 
 using BaseLib.Utils;
+using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Relics;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
@@ -20,7 +21,7 @@ public sealed class FengYouJing : RelicBaseModel
 {
     public override RelicRarity Rarity => RelicRarity.Uncommon;
     protected override IEnumerable<DynamicVar> CanonicalVars => [new DynamicVar("Amount", 2m)];
-    public override decimal ModifyDamageAdditive(Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource)
+    public override decimal ModifyDamageAdditive(Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource, CardPlay? cardPlay)
     {
         if(cardSource?.Owner == base.Owner && props.HasFlag(ValueProp.Move))
         {

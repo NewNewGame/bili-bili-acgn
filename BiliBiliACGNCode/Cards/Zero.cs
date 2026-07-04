@@ -40,7 +40,7 @@ public sealed class Zero : CardBaseModel
     {
         // 造成伤害，从弃牌堆选择一张牌放到抽牌堆顶部
         await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue)
-            .FromCard(this)
+            .FromCard(this, cardPlay)
             .Targeting(cardPlay.Target)
             .Execute(choiceContext);
         // 从弃牌堆选择一张牌放到抽牌堆顶部

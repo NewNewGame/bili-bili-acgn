@@ -77,7 +77,7 @@ public sealed class ArcadeCabinet : RelicBaseModel
             if(combatState != null){
                 foreach(var enemy in combatState.HittableEnemies)
                 {
-                    await CreatureCmd.Damage(choiceContext, enemy, base.DynamicVars.Damage, base.Owner.Creature);
+                    await CreatureCmd.Damage(choiceContext, enemy, base.DynamicVars.Damage, base.Owner.Creature, null, cardPlay);
                 }
             }
         }

@@ -37,7 +37,7 @@ public sealed class Geass : CardBaseModel
         // 造成伤害；使目标跳过下一回合行动（对接 STS2 跳过回合 API）
         ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
         await DamageCmd.Attack(base.DynamicVars["Damage"].BaseValue)
-        .FromCard(this)
+        .FromCard(this, cardPlay)
         .Targeting(cardPlay.Target)
         .Execute(choiceContext);
         await CreatureCmd.Stun(cardPlay.Target);

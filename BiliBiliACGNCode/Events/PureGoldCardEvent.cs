@@ -79,11 +79,13 @@ public sealed class PureGoldCardEvent : EventBaseModel
     }
     private async Task AcceptDuel()
     {
+        var rewards = new List<Reward>(){
+            new PotionReward(base.Owner),
+            new SpecialCardReward(base.Owner.RunState.CreateCard<FourthBlueEyesWhiteDragon>(base.Owner), base.Owner),
+        };
+
         // 接受决斗
-        EnterCombatWithoutExitingEvent<PureGoldCardEncounter>([
-            new CardReward(new CardCreationOptions(new List<CardModel> { ModelDb.Card<FourthBlueEyesWhiteDragon>() }, CardCreationSource.Encounter, CardRarityOddsType.Uniform), 1, base.Owner),
-            new PotionReward(base.Owner)
-        ], false);
+        EnterCombatWithoutExitingEvent<PureGoldCardEncounter>(rewards ,false);
     }
     private async Task RefuseDuel()
     {
