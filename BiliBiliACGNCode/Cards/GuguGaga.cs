@@ -46,7 +46,7 @@ public sealed class GuguGaga : CardBaseModel
 		VfxCmd.PlayOnCreatureCenter(base.Owner.Creature, "vfx/vfx_flying_slash");
 		var amount = base.DynamicVars["Vulnerable"].BaseValue;
         foreach(var enemy in base.CombatState.HittableEnemies){
-            await CreatureCmd.LoseBlock(enemy, enemy.Block);
+            await CreatureCmd.LoseBlock(choiceContext, enemy, enemy.Block, base.Owner.Creature);
             await PowerCmd.Remove<ArtifactPower>(enemy);
             await PowerCmd.Apply<VulnerablePower>(choiceContext, enemy, amount, base.Owner.Creature, this);
         }

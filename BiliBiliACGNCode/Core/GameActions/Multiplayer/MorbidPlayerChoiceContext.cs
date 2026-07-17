@@ -6,13 +6,16 @@
 //*******************************************************
 
 using MegaCrit.Sts2.Core.Entities.Multiplayer;
+using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.GameActions.Multiplayer;
 
 public sealed class MorbidPlayerChoiceContext : PlayerChoiceContext
 {
-    public override Task SignalPlayerChoiceBegun(PlayerChoiceOptions options)
+    public override ulong? OwnerId => null;
+
+    public override Task SignalPlayerChoiceBegun(Player chooser, PlayerChoiceOptions options)
     {
         throw new NotImplementedException();
     }

@@ -3,7 +3,7 @@
   "name": "B站动画区",
   "author": "牛国游戏制作组",
   "description": "本Mod基于b站动画区制作，纯属娱乐。\n制作：牛国游戏制作组\n作者：小麦Komugi、安静、风鹰侠",
-  "version": "0.6.7",
+  "version": "0.6.8",
   "has_pck": true,         
   "has_dll": true,       
   "dependencies": [

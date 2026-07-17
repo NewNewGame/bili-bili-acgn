@@ -6,9 +6,11 @@
 //*******************************************************
 using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Relics;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.RelicPools;
+using MegaCrit.Sts2.Core.Runs;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Relics;
 
@@ -16,20 +18,23 @@ namespace BiliBiliACGN.BiliBiliACGNCode.Relics;
 public sealed class SilverSpoon : RelicBaseModel
 {
     public override RelicRarity Rarity => RelicRarity.Rare;
+
     /// <summary>
     /// 你的[gold]消耗牌[/gold]不在被[gold]消耗[/gold]，而是进入[gold]弃牌堆[/gold]。
     /// </summary>
-    public override (PileType, CardPilePosition) ModifyCardPlayResultPileTypeAndPosition(CardModel card, bool isAutoPlay, ResourceInfo resources, PileType pileType, CardPilePosition position)
-	{
-		if (card.Owner != base.Owner)
+    public override CardLocation ModifyCardPlayResultLocation(CardModel card, bool isAutoPlay, ResourceInfo resources, CardLocation cardLocation)
+    {
+        if (card.Owner != base.Owner)
 		{
-			return (pileType, position);
+			return cardLocation;
 		}
         // 不是消耗牌或着是诅咒牌的话不进入弃牌堆
         if(!card.Keywords.Contains(CardKeyword.Exhaust) || card.Rarity == CardRarity.Curse){
-            return (pileType, position);
+            return cardLocation;
         }
-		return (PileType.Discard, CardPilePosition.Bottom);
-	}
+        // 进入弃牌堆
+		return new CardLocation(cardLocation.player, PileType.Discard, CardPilePosition.Bottom);
+    }
+
 
 }
