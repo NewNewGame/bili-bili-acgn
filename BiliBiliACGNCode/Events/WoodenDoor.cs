@@ -51,7 +51,7 @@ public sealed class WoodenDoor : EventBaseModel
         await CreatureCmd.Damage(new ThrowingPlayerChoiceContext(), base.Owner.Creature, (DamageVar)base.DynamicVars["HpLoss"], null, null);
         if(base.Owner.RunState.Rng.Niche.NextInt(0, 100) < base.DynamicVars["Chance"].IntValue)
         {
-            RelicModel relic = RelicFactory.PullNextRelicFromFront(base.Owner).ToMutable();
+            RelicModel relic = RelicFactory.PullNextRelicFromFront(base.Owner, Rng).ToMutable();
             await RelicCmd.Obtain(relic, base.Owner);
         }
         SetEventFinished(L10NLookup("WOODEN_DOOR.pages.TRY.END.description"));
@@ -60,7 +60,7 @@ public sealed class WoodenDoor : EventBaseModel
     private async Task BreakWall()
     {
         await CreatureCmd.Damage(new ThrowingPlayerChoiceContext(), base.Owner.Creature, (DamageVar)base.DynamicVars["HpLoss2"], null, null);
-        RelicModel relic = RelicFactory.PullNextRelicFromFront(base.Owner).ToMutable();
+        RelicModel relic = RelicFactory.PullNextRelicFromFront(base.Owner, Rng).ToMutable();
 		await RelicCmd.Obtain(relic, base.Owner);
         SetEventFinished(L10NLookup("WOODEN_DOOR.pages.BREAKWALL.END.description"));
     }

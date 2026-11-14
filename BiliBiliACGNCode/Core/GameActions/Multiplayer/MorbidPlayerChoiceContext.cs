@@ -15,6 +15,8 @@ public sealed class MorbidPlayerChoiceContext : PlayerChoiceContext
 {
     public override ulong? OwnerId => null;
 
+    public override GameActionType? GameActionType => MegaCrit.Sts2.Core.Entities.Multiplayer.GameActionType.Combat;
+
     public override Task SignalPlayerChoiceBegun(Player chooser, PlayerChoiceOptions options)
     {
         throw new NotImplementedException();

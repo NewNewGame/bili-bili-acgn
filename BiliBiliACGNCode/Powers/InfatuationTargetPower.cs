@@ -9,6 +9,7 @@ using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.Models;
 
 namespace BiliBiliACGN.BiliBiliACGNCode.Powers;
 
@@ -25,7 +26,7 @@ public sealed class InfatuationTargetPower : PowerBaseModel
     /// <param name="wasRemovalPrevented"></param>
     /// <param name="deathAnimLength"></param>
     /// <returns></returns>
-    public override async Task AfterDeath(PlayerChoiceContext choiceContext, Creature creature, bool wasRemovalPrevented, float deathAnimLength)
+    public override async Task AfterDeath(PlayerChoiceContext choiceContext, Creature creature, CardModel? source, bool wasRemovalPrevented, float deathAnimLength)
     {
         // 如果死亡被阻止，则不转让
         if(wasRemovalPrevented) return;

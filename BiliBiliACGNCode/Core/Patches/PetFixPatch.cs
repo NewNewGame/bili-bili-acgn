@@ -47,6 +47,7 @@ public static class PetFixPatch
         NCreature? creatureNode = __instance.GetCreatureNode(creature.PetOwner.Creature);
         // 如果节点不存在，则返回
         if(nCreature == null || creatureNode == null) return;
+
         // 如果不是一果，需要把一果的血条重新打开（原版会全部关闭）
         if (creature.Monster is not Itsuka) {
             Player player = creatureNode.Entity.Player;
@@ -59,14 +60,14 @@ public static class PetFixPatch
                 NCreature node = list[i];
                 if(node.Entity.Monster is Itsuka){
                     // 打开交互
-                    node.ToggleIsInteractable(true);
+                    //node.ToggleIsInteractable(true);
                     node.Position = new Godot.Vector2(creatureNode.Position.X + 240f, creatureNode.Position.Y + 15f);
                 }
             }
             return;
         }
         // 强制打开交互（会显示血条 + 可点选 + 进手柄导航）
-        nCreature.ToggleIsInteractable(true);
+        //nCreature.ToggleIsInteractable(true);
         nCreature.Position = new Godot.Vector2(creatureNode.Position.X + 240f, creatureNode.Position.Y + 15f);
     }
     

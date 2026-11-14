@@ -15,8 +15,6 @@ public sealed class Itsuka : MonsterBaseModel
 
     public override int MaxInitialHp => 1;
 
-    public override bool IsHealthBarVisible => base.Creature.IsAlive;
-
     /* 皮肤暂时不打算做
     public override void SetupSkins(NCreatureVisuals visuals)
     {

@@ -121,7 +121,7 @@ public sealed class BerserkPower : PowerBaseModel
             CustomVfxCmd.RemoveVfx<SNBerserkVfx>(oldOwner);
         }
     }
-    public override Task AfterDeath(PlayerChoiceContext choiceContext, Creature creature, bool wasRemovalPrevented, float deathAnimLength)
+    public override Task AfterDeath(PlayerChoiceContext choiceContext, Creature creature, CardModel? source, bool wasRemovalPrevented, float deathAnimLength)
     {
         // 如果旧所有者不是当前所有者，则返回
         if(creature != base.Owner) return Task.CompletedTask;

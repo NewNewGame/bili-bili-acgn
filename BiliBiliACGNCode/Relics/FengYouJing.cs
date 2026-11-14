@@ -23,7 +23,10 @@ public sealed class FengYouJing : RelicBaseModel
     protected override IEnumerable<DynamicVar> CanonicalVars => [new DynamicVar("Amount", 2m)];
     public override decimal ModifyDamageAdditive(Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource, CardPlay? cardPlay)
     {
-        if(cardSource?.Owner == base.Owner && props.HasFlag(ValueProp.Move))
+        // 不是自己的牌或者不是攻击牌不处理或者攻击目标是自己
+        if(cardSource == null || cardSource.Owner != base.Owner || cardSource.Type != CardType.Attack || (target != null && target == base.Owner.Creature)) return 0m;
+        // 只能为受到攻击加成的牌添加伤害
+        if(props.HasFlag(ValueProp.Move))
         {
             return base.DynamicVars["Amount"].BaseValue;
         }

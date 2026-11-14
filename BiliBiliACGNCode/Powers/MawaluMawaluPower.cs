@@ -33,10 +33,10 @@ public sealed class MawaruMawaruPower : PowerBaseModel
         return base.AfterApplied(applier, cardSource);
     }
 
-    public override async Task AfterDeath(PlayerChoiceContext choiceContext, Creature target, bool wasRemovalPrevented, float deathAnimLength)
+    public override async Task AfterDeath(PlayerChoiceContext choiceContext, Creature creature, CardModel? source, bool wasRemovalPrevented, float deathAnimLength)
     {
         // 当 base.Owner 死亡时，对其它敌人造成等同于 base.Owner 最大生命值的伤害。
-        if(target != base.Owner) return;
+        if(creature != base.Owner) return;
 
         // 对其它敌人造成等同于 base.Owner 最大生命值的伤害。
         var enemies = base.Owner.CombatState.Enemies.ToList();
